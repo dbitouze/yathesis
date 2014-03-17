@@ -27,6 +27,7 @@
 *.maf
 *.mtc
 *.mtc0
+*.mw
 *.nav
 *.nlo
 *.out
@@ -34,6 +35,9 @@
 *.ps
 *.run
 *.run.xml
+*.slg
+*.slo
+*.sls
 *.snm
 *.synctex
 *.tcbtemp
