@@ -1,0 +1,154 @@
+\chapter{Packages (non) chargés par la \yatcl{}}\label{cha:packages-charges}
+
+\begin{dbremark*}{Chapitre à passer en 1\iere{} lecture}
+  Ce chapitre est à passer en 1\iere{} lecture : il n'est utile qu'en cas de
+  package chargé manuellement incompatible avec la \yatcl ou, éventuellement,
+  pour s'épargner le chargement d'un package qui l'est déjà par la classe.
+\end{dbremark*}
+
+Ci-dessous, les packages qui peuvent être utiles dans le cadre d'un usage
+standard de la \yatcl{} sont des hyperliens vers leur page sur le \gls{ctan}.
+
+\section{Packages chargés par la \yatcl{}}
+
+Pour plusieurs de ses fonctionnalités, la \yatcl s'appuie sur des packages
+qu'elle charge explicitement. La liste suivante répertorie ces packages dans
+l'ordre de chargement, en indiquant les raisons de leur emploi et les options
+avec lesquelles ils sont appelés.
+
+\begin{description}
+\item[\package{xkvltxp} :] extension du \Package{xkeyval} ci-dessous ;
+\item[\package{xkeyval} :] gestion d'options sous la forme
+  \meta{clé}×=×\meta{valeur} ;
+\item[\package{etoolbox} :] outils de programmation ;
+\item[\package{xpatch} :] extension du package précédent ;
+\item[\package{filehook} :] \enquote{hameçons} (\foreignquote{english}{hooks})
+  pour fichiers importés ;
+\item[\package{hopatch} :] emballage de \enquote{hameçons} pour packages et classes ;
+\item[\package{xifthen} :] tests conditionnels ;
+\item[\package*{geometry} :] gestion de la géométrie de la page.
+  Option par défaut : \docAuxKey{a4paper} ;
+\item[\package{textcomp} :] accès à certains caractères. Option par défaut :
+  \docAuxKey{warn} ;
+\item[\package*{graphicx} :] inclusion d'images, notamment des logos.
+  Option par défaut : \docAuxKey{final} ;
+\item[\package*{array} :] mise en forme automatique de colonnes (notamment) ;
+\item[\package{xstring} :] manipulation de chaînes ;
+\item[\package{translator} :] traduction d'expressions ;
+\item[\package{fixltx2e} :] corrections de bogues de \hologo{LaTeX2e}
+  ;
+\item[\package*{epigraph} :] gestion des épigraphes ;
+\item[\package{marvosym} :] accès à des symboles spéciaux ;
+\item[\package*{setspace} :] gestion de l'espace interligne ;
+\item[\package{shorttoc} :] création de sommaire ;
+\item[\package{tocvsec2} :] gestion des profondeurs de numérotation des
+  sections et de la table des matières ;
+\item[\package{tocbibind} :] table des matières et index dans la
+  table des matières ;
+\item[\package*{xcolor} :] gestion des couleurs ;
+\item[\package{nonumonpart} :] suppression des numéros de pages sur
+  les pages de garde des parties ;
+\item[\package{datatool} :] gestion de bases de données (membres du
+  jury, etc.) ;
+\item[\package{fncychap} :] têtes de chapitres améliorées. Option par défaut :
+  \docAuxKey{PetersLenny} ;
+\item[\package{titleps} :] gestion des styles de pages ;
+\item[\package{ifdraft} :] test conditionnel du mode brouillon ;
+\item[\package{draftwatermark} :] texte en filigrane\footnote{Chargé
+    seulement si l'une ou l'autre des options de classe
+    \refKey{draft} ou \refKey{intermediate} est utilisée.} ;
+\item[\package*{index} :] gestion du ou des index\footnote{Pour la gestion
+    d'index, le \Package{makeidx} est plus courant mais le \Package*{index}
+    l'améliore et offre des fonctionnalités supplémentaires, notamment pour
+    produire des index multiples. Les deux ont des syntaxes très voisines. Le
+    chargement du \Package{index} par la classe est nécessaire pour des raisons
+    techniques.} ;
+\item[\package*{idxlayout} :] correction d'un bogue affichant trop haut
+  l'intitulé \enquote{Index} de l'index. Option par défaut
+  \docAuxKey{columns=1}\footnote{Il suffit de le spécifier au moyen de
+    \protect\lstinline+\\idxlayout\{columns=+\meta{n}\protect\lstinline+\}+ si
+    on souhaite un index, non pas sur $1$, mais sur \meta{n} colonnes.} ;
+\item[\package*{babel} :] gestion des langues ;
+\item[\package{datetime} :] gestion de la date. Option par défaut :
+  \docAuxKey{nodayofweek} ;
+\item[\package{datenumber} :] comparaison de dates ;
+\item[\package*{hyperref} :] liens hypertextes. Options par défaut :
+  \begin{itemize}
+  \item \docAuxKey{final} ;
+  \item \docAuxKey{unicode} ;
+  \item \docAuxKey{breaklinks} ;
+  \item ×hyperfootnotes=false× ;
+  \item ×hyperindex=false×\footnote{Sans quoi certaines fonctionnalités sont
+      ignorées, par exemple \protect\lstinline|see| pour les index.} ;
+  \item ×plainpages=false× ;
+  \item ×pdfpagemode=UseOutlines× ;
+  \item ×pdfpagelayout=TwoPageRight× ;
+  \end{itemize}
+\item[\package{hypcap} :] liens hypertextes pointant au début des
+  flottants\ifnoprinted. Option par défaut : \docAuxKey{all} ;
+\item[\package{bookmark} :] gestion des signets\ifnoprinted. Option par défaut
+  : \docAuxKey{numbered}.
+\end{description}
+
+\section{Packages non chargés par la \yatcl{}}
+
+La liste suivante répertorie des packages non chargés par la \yatcl{} mais
+pouvant se révéler très utiles, notamment aux doctorants.
+
+Cette liste est loin d'être exhaustive et ne mentionne notamment pas les
+packages nécessaires :
+\begin{itemize}
+\item \package{inputenc} et \package{fontenc}, si on utilise \hologo{LaTeX} ou
+  \hologo{pdfLaTeX} ;
+\item \package{fontspec} et \package{xunicode}, si on utilise \hologo{XeLaTeX}
+  ou \hologo{LuaLaTeX}.
+\end{itemize}
+Elle ne mentionne pas non plus les packages de fontes PostScript tels que
+\package{lmodern}, \package*{kpfonts}, \package*{fourier}, \package*{libertine},
+etc. \phrase*{presque indispensables si on utilise \hologo{LaTeX} ou
+  \hologo{pdfLaTeX}}. Des exemples de préambules complets figurent
+\vref{cha:canevas}.
+
+En outre, lorsqu'ils sont chargés manuellement par l'utilisateur, certains des
+packages suivants se voient fixés par la \yatcl{} des options ou réglages dont
+les plus notables sont précisés.
+
+\begin{description}
+\item[\package*{varioref} :] références croisées améliorées ;
+\item[\package*{booktabs} :] tableaux plus professionnels ;
+\item[\package*{siunitx} :] gestion des nombres, angles et unités. Réglages par
+  défaut opérés par la \yatcl : \docAuxKey{detect-all} et \docAuxKey{locale=FR} ou
+  \docAuxKey{locale=UK}\selonlangue{} ;
+\item[\package*{pgfplots} :] graphiques plus professionnels,
+  notamment de données expérimentales ;
+\item[\package*{listings} :] insertion de listings informatiques ;
+\item[\package*{microtype} :] raffinements typographiques
+  automatiques (et subliminaux) ;
+  % ^^A \footnote{Ce package peut poser problème s'il est déjà présent alors qu'une
+  % ^^A fonte est utilisée pour la première fois. Il est donc à charger plutôt en
+  % ^^A fin de rédaction, lors de la finition de la mise en page.}
+\item[\package*{floatrow} :] gestion puissante (mais complexe) des
+  flottants ;
+\item[\package*{caption} :] personnalisation des légendes ;
+\item[\package*{todonotes} :] insertion de
+  \foreignquote{english}{TODOs}\footnote{De rappels pour les choses qu'il ne
+    faut pas oublier d'ajouter, de compléter, de réviser, etc.} ;
+\item[\package*{csquotes} :] pour les citations informelles et formelles (avec
+  citation des sources). Réglage par défaut opéré par la \yatcl (si le
+  \package*{biblatex} est chargé) : ×\SetCiteCommand{\autocite}× ;
+\item[\package*{biblatex} :] gestion puissante de la bibliographie ;
+\item[\package*{glossaries} :] gestion puissante des glossaires,
+  acronymes et liste de symboles ;
+\item[\package*{cleveref} :] puissante gestion des références croisées.
+\end{description}
+
+%
+\iffalse
+%%% Local Variables:
+%%% mode: latex
+%%% eval: (latex-mode)
+%%% ispell-local-dictionary: "fr_FR"
+%%% TeX-engine: xetex
+%%% TeX-master: "../yathesis.dtx"
+%%% End:
+\fi

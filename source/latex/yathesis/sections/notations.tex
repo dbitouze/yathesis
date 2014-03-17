@@ -1,0 +1,240 @@
+
+\chapter{Notations, syntaxe, terminologie et codes couleurs}\label{cha:synt-term-notat}
+
+Ce chapitre précise les syntaxes, terminologie, notations et codes couleurs de
+la présente documentation.
+
+
+\section{Commandes, environnements, clés, valeurs}\label{sec:comm-envir-cles}
+
+Les commandes, environnements, clés et valeurs de clés sont systématiquement
+composés en fonte à chasse fixe. En outre, pour plus facilement les
+distinguer, ils figurent avec des couleurs propres :
+\begin{itemize}
+\item les commandes en bleu : \docAuxCommand*{commande} ;
+\item les environnements en \enquote{sarcelle} :
+  \docAuxEnvironment*{environnement} ;
+\item les clés en pourpre : \docAuxKey*{clé} ;
+\item les valeurs des clés en violet : \docValue*{valeur}.
+\end{itemize}
+
+\section{Arguments génériques}
+\label{sec:arguments-generiques}
+
+Pour expliquer le rôle d'une commande, il est parfois nécessaire d'indiquer
+à quoi celle-ci s'appliquera, autrement dit quel en sera l'argument générique.
+Un tel argument est composé :
+\begin{itemize}
+\item en fonte à chasse fixe ;
+\item en italique ;
+\item entre chevrons simples ;
+\end{itemize}
+le tout en marron, ainsi : \meta{argument générique}.
+
+\section{Liens hypertextes}
+\label{sec:liens-hypertextes}
+
+Les liens hypertextes figurent en couleur, ainsi :
+\href{http://gte.univ-littoral.fr/members/dbitouze/pub/latex}{lien hypertexte}.
+Toute référence à une commande, un environnement ou une clé, défini dans la
+présente documentation, est un lien hypertexte (surmonté de la page où se
+trouve sa cible, sauf si elle se situe sur la même page) :
+\begin{itemize}
+\item \refCom{author} ;
+\item \refEnv{abstract} ;
+\item \refKey{professor}.
+\end{itemize}
+
+
+\section{Éléments \enquote{obligatoires}}
+\label{sec:comm-oblig}
+
+L'icône \mandatory{}, figurant en regard de certaines éléments (commandes ou
+environnements), indique que ceux-ci sont \enquote{obligatoires} et ils peuvent
+l'être pour différentes raisons :
+\begin{itemize}
+\item parce que les objets correspondants sont requis :
+  \begin{itemize}
+  \item de façon évidente dans une thèse, par exemple l'auteur, le titre,
+    l'institut, la table des matières, etc. (commandes \refCom{author},
+    \refCom{title}, \refCom{institute}, \refCom{tableofcontents}, etc.) ;
+  \item selon le \textcite{guidoct}, par exemple le champ
+    disciplinaire, l'école doctorale, les mots clés, le résumé, etc. (commandes
+    \refCom{academicfield}, \refCom{doctoralschool}, \refCom{keywords},
+    \refEnv{abstract}, etc.) ;
+  \end{itemize}
+\item parce qu'ils sont :
+  \begin{itemize}
+  \item nécessaires au (bon) fonctionnement par défaut de la \yatcl{}, par
+    exemple \refCom{maketitle} ;
+  \item fortement conseillés par l'auteur de la présente classe, par
+    exemple\footnote{Une liste des références bibliographiques est de toute
+      façon requise de façon évidente dans une thèse mais on peut souhaiter
+      recourir à un autre système de gestion de bibliographie que celui que
+      fournit le \Package{biblatex}.}  \refCom{printbibliography}, etc.
+  \end{itemize}
+\end{itemize}
+
+\begin{dbremark}{Éléments (modérément) \enquote{obligatoires}}{}
+  Si un élément \enquote{obligatoire} est omis :
+  \begin{itemize}
+  \item aucune erreur de compilation n'est provoquée mais un avertissement
+    \enquote{personnalisé}, affiché dans le fichier de \enquote{log}, en
+    rappelle le caractère obligatoire (sauf si la désactivation de cet
+    affichage a été demandée, cf. \vref{sec:non-affichage-des}) ;
+  \item un texte générique est en général affiché à sa place (si cet élément
+    est conçu pour produire du texte).
+  \end{itemize}
+\end{dbremark}
+
+\begin{dbremark}{Tout ce qui n'est pas obligatoire est optionnel}{}
+  Naturellement, tout élément non \enquote{obligatoire} est réputé optionnel.
+\end{dbremark}
+
+\section{Codes sources}
+\label{sec:codes-sources}
+
+Les exemples qui illustrent la présente documentation sont constitués de codes
+sources et, le cas échéant, des \enquote{copies d'écran} correspondantes.
+Ceux-ci proviennent le plus souvent d'un spécimen de document composé avec la
+\yatcl, fourni avec l'ensemble de la classe (cf. \vref{cha:specimen}).
+
+Ces codes sources figurent dans des cadres de couleur bleu :
+\begin{itemize}
+\item non ombrés s'ils doivent être saisis dans le corps du document ;
+\item ombrés s'ils doivent être saisis en préambule du fichier (maître) :
+  \begin{itemize}
+  \item soit directement ;
+  \item soit indirectement \emph{via} un fichier lui-même importé en
+    préambule, ce qui peut être fait :
+    \begin{itemize}
+    \item soit automatiquement par la \yatcl{}, par le biais du
+      \File{\configurationfile} (cf. \vref{rq:configurationfile}) ;
+    \item soit manuellement au moyen de la commande \docAuxCommand{input}.
+    \end{itemize}
+  \end{itemize}
+\end{itemize}
+Ces cadres pourront en outre comporter d'éventuels titres :
+\begin{multicols}{2}
+\begin{bodycode}
+÷\meta{code source}÷
+\end{bodycode}
+\begin{bodycode}[title=\meta{titre}]
+÷\meta{code source}÷
+\end{bodycode}
+\begin{preamblecode}
+÷\meta{code source à insérer en préambule}÷
+\end{preamblecode}
+\begin{preamblecode}[title=\meta{titre}]
+÷\meta{code source à insérer en préambule}÷
+\end{preamblecode}
+\end{multicols}
+
+\section{Espaces dans les codes sources}
+\label{sec:espaces-dans-les}
+
+Pour éviter certaines confusions, les espaces dans les codes sources devant
+être saisis au clavier sont parfois matérialisés au moyen de la marque
+\lstinline[showspaces]+ +.
+
+\section{Options}
+\label{sec:options}
+
+La \yatcl{} ainsi que certaines de ses commandes et certains de ses
+environnements peuvent être modulés au moyen d'options, ou listes d'options
+(séparées par des virgules). Ces options se présentent sous la forme
+\meta{clé}×=×\meta{valeur} et la \meta{valeur} passée à une \meta{clé} peut
+être :
+%^^A \begin{description}
+%^^A \item[ne prennent pas de valeur.] Une telle option, par exemple nommée
+%^^A   \refKey{option}, est alors documentée selon la syntaxe suivante:
+%^^A     \begin{docKey*}{option}{}{\meta{précisions}}
+%^^A       \meta{Description de \refKey{option}}
+%^^A     \end{docKey*}
+%^^A \item[prennent des valeurs.] Une telle option se présente alors sous la forme
+%^^A   \meta{clé}×=×\meta{valeur}. Les valeurs passées à une clé peuvent être :
+\begin{description}
+\item[libre.] Une telle \meta{clé}, par exemple nommée \refKey{freekey}, est
+  alors documentée selon la syntaxe suivante :
+  \begin{docKey*}{freekey}{=\meta{valeur}}{\meta{précisions}}
+    \meta{Description de \refKey{freekey}}
+  \end{docKey*}
+\item[imposée parmi une liste de valeurs possibles.] Une telle \meta{clé}, par
+  exemple nommée \refKey{choicekey} et de valeurs imposées \docValue*{valeur1},
+  \docValue*{valeur2}, ..., \docValue*{valeurN}, est alors documentée selon la
+  syntaxe suivante (les barres verticales séparant les valeurs possibles
+  signifient \enquote{ou}) :
+  \begin{docKey*}{choicekey}{=\docValue*{valeur1}\textbar\docValue*{valeur2}\textbar...\textbar\docValue*{valeurN}}{\meta{précisions}}
+    \meta{Description de \refKey{choicekey} et de ses valeurs possibles}
+  \end{docKey*}
+\end{description}
+%^^A \end{description}
+
+Les \meta{précisions} figurant entre parenthèses en fin de ligne portent
+généralement sur les valeurs \emph{initiale} et \emph{par défaut} de la clé. Ce
+sont les valeurs passées en sous-main par la \yatcl{} lorsque la clé,
+respectivement :
+\begin{itemize}
+\item est employée mais sans qu'une valeur lui soit passée ;
+\item n'est pas employée.
+\end{itemize}
+%^^A
+Ainsi certaines clés, appelées booléennes parce qu'elles ne peuvent prendre que
+deux valeurs (\docValue*{true} et \docValue*{false}), portent la précision par
+exemple \enquote{par défaut \lstinline|true|, initialement \lstinline|false|}
+car elles valent :
+\begin{enumerate}
+\item \docValue*{true} si elles sont employées mais sans qu'une valeur leur
+  soit passée ;
+\item \docValue*{false} si elles ne sont pas employées ;
+\item la valeur \docValue*{true} ou \docValue*{false} qui leur est passée le
+  cas échéant.
+\end{enumerate}
+Une telle clé, par exemple nommée \refKey{booleankey}, est alors documentée selon la
+syntaxe suivante :
+\begin{docKey*}{booleankey}{=\docValue*{true}\textbar\docValue*{false}}{par
+    défaut \lstinline|true|, initialement \lstinline|false|}
+  \meta{Description de \refKey{booleankey}}
+\end{docKey*}
+
+Illustrons ceci au moyen de la clé \refKey{printed} qui peut être passée en
+option de la \yatcl. C'est une clé booléenne valant par défaut \lstinline|true|
+et initialement \lstinline|false|, c'est-à-dire :
+\begin{enumerate}
+\item \docValue*{true} si l'utilisateur l'emploie en option de la \yatcl mais
+  sans lui passer de valeur :
+\begin{preamblecode}
+\documentclass[printed,÷\meta{autres options}÷]{yathesis}
+\end{preamblecode}
+\item \docValue*{false} si l'utilisateur ne l'emploie pas en option de la \yatcl :
+\begin{preamblecode}
+\documentclass[÷\meta{toutes options sauf \refKey*{printed}}÷]{yathesis}
+\end{preamblecode}
+\item la valeur \docValue*{true} ou \docValue*{false} que l'utilisateur lui
+  passe le cas échéant en option de la \yatcl :
+\begin{preamblecode}
+\documentclass[printed=true,÷\meta{autres options}÷]{yathesis}
+\end{preamblecode}
+ou
+\begin{preamblecode}
+\documentclass[printed=false,÷\meta{autres options}÷]{yathesis}
+\end{preamblecode}
+\end{enumerate}
+
+\section{Faux-texte}
+\label{sec:faux-texte}
+
+Certains exemples comportent des paragraphes de faux-texte\footnote{Cf.
+  \url{http://fr.wikipedia.org/wiki/Faux-texte}.} obtenus au moyen de la
+commande ×\lipsum× du \Package*{lipsum}.
+
+%
+\iffalse
+%%% Local Variables:
+%%% mode: latex
+%%% eval: (latex-mode)
+%%% ispell-local-dictionary: "fr_FR"
+%%% TeX-engine: xetex
+%%% TeX-master: "../yathesis.dtx"
+%%% End:
+\fi

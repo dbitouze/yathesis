@@ -1,0 +1,313 @@
+% Document de classe yathesis, en 12 points et interligne un et demi
+\documentclass[12pt,space=onehalf]{yathesis}
+%
+% Chargement manuel de packages (pas déjà chargés par la classe yathesis)
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{kpfonts}
+\usepackage{varioref}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{pgfplots}
+\usepackage{listings}
+\usepackage{floatrow}
+\usepackage{lipsum}
+\usepackage{caption}
+\usepackage{microtype}
+\usepackage[autostyle]{csquotes}
+\usepackage[backend=biber,safeinputenc]{biblatex}
+\usepackage[xindy,acronyms,symbols,toc]{glossaries}
+%
+% Configuration des styles du glossaire et de la liste d'acronymes
+\setglossarystyle{indexhypergroup}
+\setacronymstyle{long-sc-short}
+%
+% Génération du glossaire
+\makeglossaries
+%
+% Spécification des ressources terminologiques
+\loadglsentries{configuration/glossaire}
+\loadglsentries{configuration/acronymes}
+\loadglsentries{configuration/symboles}
+%
+% Génération de l'index
+\makeindex
+%
+% Spécification des ressources bibliographiques
+\addbibresource{configuration/bibliographie.bib}
+\addbibresource{biblatex-examples.bib} % Fournie par biblatex
+%
+% Commande permettant de lister toutes les références des ressources
+% bibliographiques ci-dessus, même si elles ne sont pas citées
+% explicitement (à proscrire dans un vrai mémoire de thèse !)
+\nocite{*}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Début du document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Page de couverture et page(s) de titre
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Préparation des pages de couverture et de titre
+%
+% Auteur de la thèse : prénom (1er argument), nom (2e argument) et courriel (3e
+% argument). Les éventuels accents devront figurer et le nom /ne/ sera /pas/
+% saisi en capitales.
+\author{Alphonse}{Allais}{aa@zygo.fr}
+%
+% Titre de la thèse dans la langue principale (argument obligatoire) et dans la
+% langue secondaire (argument optionnel).
+\title[Laugh's Chaos]{Le chaos du rire}
+%
+% Sous-titre de la thèse dans la langue principale (argument obligatoire) et
+% dans la langue secondaire (argument optionnel), si souhaité. Sinon, il suffit
+% de commenter ou supprimer la ligne suivante.
+\subtitle[Chaos' laugh]{Le rire du chaos}
+%
+% Champ disciplinaire dans la langue principale (argument obligatoire) et dans
+% la langue secondaire (argument optionnel).
+\academicfield[Mathematics]{Mathématiques}
+%
+% Spécialité dans la langue principale (argument obligatoire) et dans la langue
+% secondaire (argument optionnel) si souhaitée. Sinon, il suffit de commenter
+% ou supprimer la ligne suivante.
+\speciality[Dynamical systems]{Systèmes dynamiques}
+%
+% Date de la soutenance, au format {jour}{mois}{année} donnés sous forme de
+% nombres.
+\date{1}{1}{2015}
+%
+% Sujet pour les méta-données du PDF
+\subject[Chaotic Laugh]{Rire chaotique}
+%
+% (Tous les fichiers images stipulés ci-dessous comme valeurs des clés « logo »
+% se trouvent dans le sous-dossier « images ». Il est conseillé de disposer
+% d'images à un format vectoriel, par exemple PDF.)
+%
+% Logo du PRES, si souhaité. Sinon, il suffit de commenter ou de supprimer la
+% ligne suivante.
+\pres[logo=images/pres]{Université Lille Nord de France}
+%
+% Institut (principal en cas de cotutelle).
+\institute[logo=images/ulco,url=http://www.univ-littoral.fr/]{ULCO}
+%
+% En cas de cotutelle (normalement, seulement dans le cas de cotutelle
+% internationale), second institut. Sinon, il suffit de commenter ou de
+% supprimer la ligne suivante.
+\coinstitute[logo=images/paris13]{Université de Paris~13}
+%
+% Nom de l'école doctorale, si souhaité. Sinon, il suffit de commenter ou
+% supprimer la ligne suivante.
+\doctoralschool[url=http://edspi.univ-lille1.fr/]{ED Régionale SPI 72}
+%
+% Laboratoire (ou de l'unité) où la thèse a été préparée.
+\laboratory[
+logo=images/labo,
+logoheight=1.25cm,
+telephone=(33)(0)3 21 46 55 86,
+fax=(33)(0)3 21 46 55 75,
+email=secretariat@lmpa.univ-littoral.fr,
+url=http://www-lmpa.univ-littoral.fr/
+]{LMPA Joseph Liouville}{%
+  Maison de la Recherche Blaise Pascal \\
+  50, rue Ferdinand Buisson            \\
+  CS 80699                             \\
+  62228 Calais Cedex                   \\
+  France}
+%
+% Les membres du jury sont saisis au moyen des commandes \supervisor,
+% \cosupervisor, \comonitor, \referee, \committeepresident, \examiner, \guest,
+% utilisées /autant de fois que nécessaire/. Toutes basées sur le même modèle,
+% ces commandes ont 2 arguments obligatoires, successivement les prénom et nom
+% de chaque personne. Si besoin est, on peut apporter certaines précisions en
+% argument optionnel, au moyen des clés suivantes :
+%
+% -- « professor », « seniorresearcher », « mcf », « mcf* »,
+% « juniorresearcher », « juniorresearcher* » (qui ne prennent pas de valeur)
+% pour stipuler que la personne appartient au corps des professeurs
+% d'université ;
+%
+% -- « affiliation » pour stipuler l'institut auquel est rattachée la personne.
+%
+\supervisor[professor,affiliation=ULCO]{Michel}{de Montaigne}
+\cosupervisor[mcf*,affiliation=ULCO]{Charles}{Baudelaire}
+\comonitor[mcf,affiliation=ULCO]{Étienne}{de la Boétie}
+\referee[professor,affiliation=IHP]{René}{Descartes}
+\referee[seniorresearcher,affiliation=CNRS]{Denis}{Diderot}
+\committeepresident[professor,affiliation=ENS Lyon]{Victor}{Hugo}
+\examiner[mcf,affiliation=Université de Paris~13]{Sophie}{Germain}
+\examiner[juniorresearcher,affiliation=INRIA]{Joseph}{Fourier}
+\examiner[juniorresearcher*,affiliation=CNRS]{Paul}{Verlaine}
+\guest{George}{Sand}
+%
+% Numéro d'ordre de la thèse
+\ordernumber[42]
+%
+% Production des pages de couverture et de titre
+%
+\maketitle
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Début de la partie liminaire de la thèse
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Production de la page de clause de non-responsabilité, si souhaitée. Sinon,
+% il suffit de commenter ou de supprimer la ligne suivante.
+\makedisclaimer
+%
+% Déclaration des mots clés
+\keywords{chaos, rire}{chaos, laugh}
+% Production de la page de mots clés, si souhaitée. Sinon, il suffit de
+% commenter ou de supprimer la ligne suivante.
+\makekeywords
+%
+% Production de la page affichant les logo, nom et coordonnées du ou des
+% laboratoires (ou unités de recherche) où la thèse a été préparée, si
+% souhaitée. Sinon, il suffit de commenter ou de supprimer la ligne suivante.
+\makelaboratory
+%
+% Dédicace(s), si souhaitée(s). Sinon, il suffit de commenter ou supprimer les
+% lignes suivantes.
+\dedication{Je dédie ce travail\\à tous ceux qui le méritent}
+\dedication{À mon directeur bien-aimé !}
+\dedication{À mon co-directeur bien-co-aimé !}
+% Production de la page de dédicace(s), si souhaitée. Sinon, il suffit de
+% commenter ou supprimer la ligne suivante.
+\makededications
+%
+% Épigraphe(s), si souhaitée(s). Sinon, il suffit de commenter ou supprimer les
+% lignes suivantes.
+\frontepigraph{Science sans conscience n'est que ruine de l'âme.}{François Rabelais}
+\frontepigraph[english]{I can resist everything, except temptation!}{Oscar Wilde}
+\frontepigraph{Il est plus facile de désintégrer un atome qu'un préjugé.}{Albert Einstein}
+% Production de la page d'épigraphe(s), si souhaitée. Sinon, il suffit de commenter ou supprimer
+% la ligne suivante.
+\makefrontepigraphs
+%
+% Remerciements, si souhaités. Sinon, il suffit de commenter ou de supprimer
+% les lignes suivantes.
+\chapter{Remerciements}
+\section{Une section de remerciements}
+\lipsum[1]
+\section{Une autre section de remerciements}
+\lipsum[2-9]
+%
+% Avertissement, si souhaité. Sinon, il suffit de commenter ou de supprimer les
+% lignes suivantes qui s'y rapportent.
+\chapter{Attention !}
+Thèse hilarante, comme le gaz du même nom !
+%
+% Résumés (de 1700 caractères maximum, espaces compris) dans la
+% langue principale (1re occurrence de l'environnement « abstract »)
+% et, facultativement, dans la langue secondaire (2e occurrence de
+% l'environnement « abstract »).
+\begin{abstract}
+  \lipsum[1-2]
+\end{abstract}
+\begin{abstract}
+  \lipsum[3-4]
+\end{abstract}
+% Production de la page de résumés.
+\makeabstract
+%
+% Liste des acronymes, si souhaitée. Sinon, il suffit de commenter ou de
+% supprimer la ligne suivante.
+\printacronyms
+%
+% Liste des symboles, si souhaitée. Sinon, il suffit de commenter ou de
+% supprimer la ligne suivante.
+\printsymbols
+%
+% Avant-propos, si souhaité.  Sinon, il suffit de commenter ou de supprimer les
+% lignes suivantes.
+\chapter{Avant-propos}
+\section{Une section d'avant-propos}
+\lipsum[30-45]
+\section{Une autre section d'avant-propos}
+\lipsum[30-35]
+%
+% Sommaire
+\tableofcontents[depth=chapter,name=Sommaire]
+%
+% Liste des tableaux, si souhaitée. Sinon, il suffit de commenter ou de
+% supprimer la ligne suivante.
+\listoftables
+%
+% Table des figures, si souhaitée. Sinon, il suffit de commenter ou de
+% supprimer la ligne suivante.
+\listoffigures
+%
+% Table des listings, si souhaitée. Sinon, il suffit de commenter ou de
+% supprimer la ligne suivante.
+% \lstlistoflistings
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Début de la partie principale (du « corps ») de la thèse
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mainmatter
+%
+% Chapitre d'introduction générale
+\include{corps/introduction-generale}
+%
+% Chapitres ordinaires (avec parties éventuelles)
+%
+% Première partie
+\part{Le chaos du rire}
+% Insertion du premier chapitre
+\include{corps/position-problemeI}
+% Insertion du deuxième chapitre
+\include{corps/developpementI}
+% Insertion du troisième chapitre
+\include{corps/conclusionI}
+%
+% Deuxième partie
+\part{Le rire du chaos}
+% Insertion du premier chapitre
+\include{corps/position-problemeII}
+% Insertion du deuxième chapitre
+\include{corps/developpementII}
+% Insertion du troisième chapitre
+\include{corps/conclusionII}
+%
+% Chapitre  de conclusion générale
+\include{corps/conclusion-generale}
+%
+% Liste des références bibliographiques (et mention automatique de celle-ci
+% dans les sommaire et table des matières).
+\printbibliography
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Début de la partie annexe
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\appendix
+%
+% Chapitres annexes
+\include{annexes/juridique}
+\include{annexes/listings}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Début de la partie finale
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\backmatter
+%
+% Glossaire, si souhaité, et si souhaité distinct de la liste des
+% acronymes. Sinon, il suffit de commenter ou de supprimer la ligne suivante.
+\printglossary
+%
+% Index, si souhaité. Sinon, il suffit de commenter ou de supprimer la
+% ligne suivante.
+\printindex
+%
+% Table des matières
+\tableofcontents
+%
+% Production de la 4e de couverture, si souhaitée. Sinon, il suffit de
+% commenter ou de supprimer la ligne suivante.
+\makebackcover
+%
+\end{document}

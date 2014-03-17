@@ -1,0 +1,149 @@
+\chapter{Corps}\label{cha:corps}
+
+Le corps de la thèse, c'est-à-dire sa partie principale, comprend :
+\begin{enumerate}
+\item l'introduction (\enquote{générale}) ;
+\item les chapitres \enquote{ordinaires} ;
+\item la conclusion (\enquote{générale}).
+\end{enumerate}
+Les introduction et conclusion peuvent éventuellement être
+\enquote{générales} par exemple si la thèse comporte plusieurs
+parties, chacune introduite par une introduction et conclue par
+une conclusion \enquote{ordinaires}.
+
+\begin{dbremark}{Scission du mémoire en fichiers maître et esclaves}{}
+  Il est vivement recommandé de scinder le mémoire de thèse,
+  notamment son corps, en fichiers maître et esclaves. La procédure
+  pour ce faire, standard, est rappelée \vref{sec:repart-du-memo}.
+\end{dbremark}
+
+\begin{docCommand}[doc description=\mandatory]{mainmatter}{}
+  La partie principale de la thèse doit être manuellement introduite au moyen
+  de la commande usuelle \docAuxCommand{mainmatter} de la
+  \Class{book}\nofrontmatter.
+\end{docCommand}
+
+\section{Chapitres non numérotés}
+\label{sec:chap-non-numer}
+
+Si certains chapitres du corps de la thèse \phrase{notamment d'introduction de
+  conclusion \enquote{générales}} doivent être \emph{non} numérotés, on recourra de
+façon usuelle à la version étoilée de la commande
+\docAuxCommand{chapter}. Celle-ci a toutefois été quelque peu modifiée afin
+d'en simplifier l'usage.
+
+% ^^A  : habituellement, si un chapitre non numéroté est créé
+% ^^A \emph{dans la partie principale} (entre \docAuxCommand{mainmatter} et
+% ^^A \docAuxCommand{backmatter}) avec la commande standard
+% ^^A \docAuxCommand{chapter*} :
+% ^^A \begin{enumerate}
+% ^^A \item des précautions (assez techniques) doivent être prises pour que :
+% ^^A   \begin{enumerate}
+% ^^A   \item le titre correspondant figure dans la table des matières ;
+% ^^A   \item les \glspl{titrecourant} correspondants soient corrects ;
+% ^^A   \end{enumerate}
+% ^^A \item toutes les (sous-(sous-))sections du chapitre, nécessairement non
+% ^^A   numérotées elles aussi, doivent également être créées avec les versions
+% ^^A   étoilées des commandes correspondantes : \docAuxCommand{section*},
+% ^^A   \docAuxCommand{subsection*} et \docAuxCommand{subsubsection*}.
+% ^^A \end{enumerate}
+
+\begin{dbremark}{Variante étoilée de la commande \protect\docAuxCommand*{chapter} modifiée}{}
+  La \yatcl{} modifie la commande \docAuxCommand{chapter*} de sorte que :
+  \begin{enumerate}
+  \item automatiquement :
+    \begin{enumerate}
+    \item le titre correspondant figure dans la table des matières ;
+    \item les \glspl{titrecourant} correspondants sont eux attendus ;
+    \end{enumerate}
+  \item les (sous-(sous-))sections du chapitre sont à créer avec les versions
+    \emph{non} étoilées des commandes correspondantes : \docAuxCommand{section},
+    \docAuxCommand{subsection} et \docAuxCommand{subsubsection}.
+  \end{enumerate}
+\end{dbremark}
+
+\begin{dbexample}{Introduction}{}
+  Le code suivant produit la \vref{fig:introduction} illustrant une
+  introduction (générale) non numérotée. Bien qu'aucun élément de structuration
+  de ce chapitre ne soit numéroté, on constate que seule la commande
+  \docAuxCommand{chapter} figure sous sa forme étoilée.
+  %
+  \bodysample[corps/introduction-generale]{%
+    deletekeywords={[1]introduction},%
+    deletekeywords={[3]section},%
+    deletekeywords={[3]subsection},%
+    deletekeywords={[3]subsubsection},%
+    deletekeywords={[3]paragraph},%
+    deletekeywords={[3]subparagraph}%
+  }{}
+\end{dbexample}
+
+\begin{figure}[p]
+  \centering
+  \screenshot{introduction}
+  \caption{Introduction (non numérotée)}
+  \label{fig:introduction}
+\end{figure}
+
+\section{Chapitres numérotés}
+\label{sec:chapitres-numerotes}
+
+Les chapitres numérotés du corps de la thèse sont introduits par la commande
+usuelle \docAuxCommand{chapter} (cf. \vref{fig:chapitre}).
+
+\begin{figure}[ht]
+  \centering
+  \screenshot{chapter}
+  \caption[Chapitre ordinaire]{(Première) Page de chapitre
+    ordinaire}
+  \label{fig:chapitre}
+\end{figure}
+
+\begin{dbremark}{Style des têtes de chapitres numérotés personnalisable}{}
+  Les chapitres numérotés voient leurs têtes par défaut composées avec le style
+  ×PetersLenny× du \Package*{fncychap}. La \vref{sec:style-des-tetes} explique
+  comment ceci peut être modifié.
+\end{dbremark}
+
+\section{Références bibliographiques}
+
+Les références bibliographiques font partie intégrante du corpsde la thèse.
+
+Tout système de gestion de bibliographie peut théoriquement être mis en œuvre
+avec la \yatcl. Cependant, celle-ci a été conçue plus spécifiquement en vue
+d'un usage du \Package{biblatex} et éventuellement de \package{biber},
+remplaçant fortement conseillé de \hologo{BibTeX}. Leur fonctionnement est,
+dans cette section, supposé connu du lecteur\footnote{Sinon, cf. par exemple
+  \cite{en-ligne6}.}.
+
+\begin{docCommand}[doc description=\mandatory]{printbibliography}{\oarg{options}}
+  Cette commande, fournie par \package{biblatex}, produit la liste des
+  références bibliographiques saisies selon la syntaxe de ce package (cf.
+  \vref{fig:printbibliography}). Mais elle a été légèrement redéfinie de sorte
+  que la bibliographie figure automatiquement dans les sommaire, table des
+  matières et signets du document.
+\end{docCommand}
+
+\begin{figure}[htbp]
+  \centering
+  \screenshot{printbibliography}
+  \caption[Bibliographie]{Bibliographie (ici composée avec le style
+    bibliographique par défaut)}
+  \label{fig:printbibliography}
+\end{figure}
+
+\begin{dbwarning}{Package \package{biblatex} non chargé par défaut}{}
+  Le \Package{biblatex} \emph{n'étant pas} chargé par la \yatcl, on veillera
+  à le charger manuellement si on souhaite l'utiliser.
+\end{dbwarning}
+
+%
+\iffalse
+%%% Local Variables:
+%%% mode: latex
+%%% eval: (latex-mode)
+%%% ispell-local-dictionary: "fr_FR"
+%%% TeX-engine: xetex
+%%% TeX-master: "../yathesis.dtx"
+%%% End:
+\fi

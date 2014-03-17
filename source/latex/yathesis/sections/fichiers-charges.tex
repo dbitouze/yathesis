@@ -1,0 +1,40 @@
+\chapter{Fichiers automatiquement importés par la \yatcl{}}
+\label{cha:fichiers-importes-par}
+
+Pour faciliter son utilisation, la \yatcl{} importe automatiquement certains
+fichiers (s'ils existent et sont situés dans le répertoire \emph{ad hoc},
+cf. \vref{wa:import-sous-cond}) :
+\begin{itemize}
+\item un fichier nommé \file{\titlefile} dédié aux données amenées à figurer
+  sur les pages de titre ;
+\item un fichier nommé \file{\configurationfile} dédié à la configuration du
+  document, où stocker notamment les réglages :
+  \begin{itemize}
+  \item de la classe \yatcl (cf. \vref{cha:configuration}) ;
+  \item des différents packages chargés soit par la classe, soit manuellement
+    (cf. \vref{cha:packages-charges}) ;
+  \end{itemize}
+\item un fichier nommé \file{\macrosfile} dédié aux macros personnelles créées
+  pour le document.
+\end{itemize}
+\begin{dbwarning}{Fichiers automatiquement importés sous conditions}{import-sous-cond}
+  Pour que ces fichiers soient automatiquement importés, il est donc
+  nécessaire :
+  \begin{enumerate}
+  \item qu'ils existent ;
+  \item qu'ils soient situés dans le répertoire \emph{ad hoc}, à savoir un
+    sous-répertoire nommé \directory{\configurationdirectory} du répertoire où
+    se trouve le fichier (maître) du document.
+  \end{enumerate}
+\end{dbwarning}
+Ces fichiers et sous-répertoire sont à créer au besoin mais le canevas de thèse
+\enquote{en relief} livré avec la classe, décrit \vref{sec:canevas-relief}, les
+fournit d'emblée.
+%^^A
+\begin{dbwarning}{Fichiers à ne pas importer}{}
+  Si les fichiers ci-dessus vérifient les conditions de
+  l'\vref{wa:import-sous-cond}, la \yatcl{} les importe
+  \emph{automatiquement} : ils doivent donc \emph{ne pas} être explicitement
+  importés \phrase*{au moyen d'une commande \docAuxCommand{input} ou
+    assimilée}.
+\end{dbwarning}

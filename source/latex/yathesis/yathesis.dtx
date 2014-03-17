@@ -1,0 +1,5907 @@
+% \iffalse meta-comment
+%
+% Copyright (C) 2012, 2013, 2014 by Denis Bitouz'e <denis.bitouze@lmpa.univ-littoral.fr>
+% ---------------------------------------------------------------------------
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.3 or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% This work has the LPPL maintenance status `maintained'.
+%
+% The Current Maintainer of this work is Denis Bitouz'e.
+%
+% This work consists of the files yathesis.dtx and yathesis.ins
+% and the derived filebase yathesis.cls.
+%
+%<*internal>
+\iffalse
+%</internal>
+%<*readme>
+-----------------------------------------------------------------------
+yathesis --- Yet Another Thesis Class
+E-mail: denis.bitouze@lmpa.univ-littoral.fr
+Released under the LaTeX Project Public License v1.3c or later
+See http://www.latex-project.org/lppl.txt
+-----------------------------------------------------------------------
+
+The yathesis bundle provides a LaTeX class file to help to write a
+thesis following French rules.
+
+Installation
+------------
+
+The class is supplied in dtx format and as a pre-extracted zip file,
+yathesis.tds.zip. The later is most convenient for most users: simply unzip
+this in your local texmf directory (and, if needed, run `texhash' to
+update the database of file locations). If you want to unpack the dtx
+yourself, running 'xetex yathesis.dtx' will extract the class whereas
+'xelatex yathesis.dtx will extract it and also typeset the documentation.
+
+             ******************************
+             *                            *
+             * Both require XeTeX engine! *
+             *                            *
+             ******************************
+
+Typesetting the documentation also requires:
+
+1. a number of packages in addition to those needed to use the yathesis class.
+To compile the documentation without error, you will need the packages:
+
+- afterpage
+- amsthm
+- biblatex
+- booktabs
+- calc
+- cleveref
+- csquotes
+- enumitem
+- fixfoot
+- floatrow
+- footmisc
+- glossaries
+- hologo
+- letltxmacro
+- libertine
+- listings
+- marginnote
+- multicol
+- nameref
+- parskip
+- pdflscape
+- rotating
+- siunitx
+- subcaption
+- tabulary
+- tcolorbox
+- thmtools
+- varioref
+- xifthen
+- xpatch
+- xspace
+- zref
+
+2. a complete pdflatex run of these.tex to be found in the 'sample'
+subdirectory of the current directory, with 'demo-yathesis' load at first
+place. If latexmk is available, it is easier to run:
+
+  latexmk -f -pdf -jobname=these -pdflatex="pdflatex %O '\RequirePackage{demo-yathesis}\input{%S}'" these.tex
+
+3. to run xelatex on yathesis.dtx. If latexmk is available, it is easier to
+run:
+
+  latexmk yathesis.dtx
+%</readme>
+%<*internal>
+\fi
+\def\nameofplainTeX{plain}
+\ifx\fmtname\nameofplainTeX\else
+  \expandafter\begingroup
+\fi
+%</internal>
+%<*install>
+\input docstrip.tex
+\keepsilent
+\askforoverwritefalse
+\preamble
+-----------------------------------------------------------------------
+yathesis --- Yet Another Thesis Class
+E-mail: denis.bitouze@lmpa.univ-littoral.fr
+Released under the LaTeX Project Public License v1.3c or later
+See http://www.latex-project.org/lppl.txt
+-----------------------------------------------------------------------
+\endpreamble
+\postamble
+% Copyright (C) 2012, 2013, 2014 by Denis Bitouz'e <denis.bitouze@lmpa.univ-littoral.fr>
+----------------------------------------------------------------------------------
+This work may be distributed and/or modified under the
+conditions of the LaTeX Project Public License, either version 1.3
+of this license or (at your option) any later version.
+The latest version of this license is in
+  http://www.latex-project.org/lppl.txt
+and version 1.3 or later is part of all distributions of LaTeX
+version 2005/12/01 or later.
+
+This work has the LPPL maintenance status `maintained'.
+
+The Current Maintainer of this work is Denis Bitouz'e.
+
+This work consists of the file  yathesis.dtx
+          and the derived files yathesis.cls,
+                                yathesis.ins,
+                                yathesis.pdf,
+                                yathesisdoc.sty,
+                                and a number of configuration files.
+\endpostamble
+%
+\def\classname{\jobname}
+\def\packagename{\classname doc}
+\def\addons{addons}
+\def\caracteristiquesthesesample{caracteristiques-these}
+\usedir{tex/latex/\classname}
+\generate{%
+  \file{\classname.cls}{\from{\jobname.dtx}{class}}
+  \file{demo-\classname.sty}{\from{\jobname.dtx}{demopkg}}
+  \file{demo-\classname.tex}{\from{\jobname.dtx}{demopkg}}
+  \nopreamble\nopostamble
+  % \file{\caracteristiquesthesesample.tex}{\from{\jobname.dtx}{caracteristiques-these-sample}}
+}%
+%</install>
+%<install>\endbatchfile
+%<*internal>
+\usedir{source/latex/\classname}
+\generate{
+  \file{\classname.ins}{\from{\jobname.dtx}{install}}
+  \file{lstlang0.sty}{\from{\jobname.dtx}{class-lstlang0}}
+  \file{\packagename.sty}{\from{\jobname.dtx}{class-doc-package}}
+  \file{\packagename.cfg}{\from{\jobname.dtx}{class-doc-cfg}}
+  \nopreamble\nopostamble
+  \file{translations.tex}{\from{\jobname.dtx}{translations}}
+}%
+\usedir{tex/latex/\classname/\addons/completion}
+\generate{%
+  \nopreamble\nopostamble
+  \file{\classname.cwl}{\from{\jobname.dtx}{class-cwl}}
+}%
+\nopreamble\nopostamble
+\usedir{doc/latex/\classname}
+\generate{
+  \file{README}{\from{\jobname.dtx}{readme}}
+}%
+\ifx\fmtname\nameofplainTeX
+  \expandafter\endbatchfile
+\else
+  \expandafter\endgroup
+\fi
+%</internal>
+%<*driver>
+% \ProvidesFile{yathesis.dtx}
+%</driver>
+% \fi
+% \def\YADnblastversion{0.95}
+% \def\YADdatelastversion{\today}
+% \def\fileversion{v\YADnblastversion}
+% \def\filedate{\YADdatelastversion}
+% \iffalse
+%<*class>
+\def\fileversion{v0.95}
+\def\filedate{2014/01/01}
+%
+\NeedsTeXFormat{LaTeX2e}[1999/12/01]
+%</class>
+%<*driver>
+\RequirePackage{scrlfile}
+\ReplaceClass{article}{report}
+\BeforePackage{doc}{\let\oldmaketitle\maketitle}
+\documentclass[english,french]{ltxdoc}
+\usepackage{yathesisdoc}
+\let\maketitle\oldmaketitle
+%
+\DeclareFixedFootnote{\syntaxeoptions}{Le sens de la syntaxe décrivant les options est
+  explicité \vref{sec:options}.}
+%
+\DeclareFixedFootnote{\selonlangue}{Selon que la langue principale de la
+  thèse est le français ou l'anglais.}
+%
+\DeclareFixedFootnote{\nofrontmatter}{Au contraire, la commande analogue
+  \protect\docAuxCommand{frontmatter} pour les \protect\glspl{liminaire} ne
+  doit pas être utilisée car elle l'est déjà en sous-main par la classe
+  \yatcl{}.}
+%
+\DeclareFixedFootnote{\termesdefinisutilises}{Ne figurent dans ces listes que
+  les termes, acronymes et symboles qui sont à la fois \emph{définis} et
+  \emph{employés dans le texte}.}
+%
+\DeclareFixedFootnote{\redefexprcle}{Une autre manière de modifier cet intitulé
+  est de recourir à la commande \protect\refCom{expression} pour redéfinir
+  l'expression qui lui est attachée (cf. \vref{sec:expressions-standard}).}
+%
+\DeclareFixedFootnote{\hauteurpage}{Dans la limite de la hauteur de page.}
+%
+\DeclareFixedFootnote{\sepcorpaffil}{Selon l'initiale de l'institut :
+  %
+  \protect\lstinline[showspaces]+\ à l'+
+  %
+  ou
+  %
+  \protect\lstinline[showspaces]+\ au\ +.%
+}
+%
+% \DeclareFixedFootnote{\noillustration}{Cette commande n'est pas illustrée car
+%   elle est analogue aux commandes \protect\refCom{acknowledgements} et
+%   \protect\refCom{caution}, illustrées
+%   \vref{fig:acknowledgements,fig:caution}.}
+%
+\DeclareFixedFootnote{\nochapter}{Le contenu de ce chapitre doit donc \emph{ne
+    pas} comporter d'occurrence de la commande \protect\docAuxCommand{chapter}.
+  Il peut cependant contenir une ou plusieurs occurrences des autres commandes
+  usuelles de structuration : \protect\docAuxCommand{section},
+  \protect\docAuxCommand{subsection}, etc.}
+%
+\DeclareFixedFootnote{\fichierconfig}{Ceci peut être saisi directement dans le
+  préambule du fichier (maître) de la thèse mais, pour optimiser l'usage de la
+  \yatcl, il est conseillé de l'insérer dans un fichier nommé
+  \file{\configurationfile} à placer dans un dossier nommé
+  \directory{\configurationdirectory}. Le canevas de thèse livré avec la
+  classe, décrit \vref{sec:canevas}, fournit ce dossier et ce fichier.}
+%
+\DeclareFixedFootnote{\ifnoprinted}{Chargé seulement si aucune des options
+  \protect\refKey{printed} et \protect\refKey{printed*} n'est utilisée.}
+%
+\DeclareFixedFootnote{\noframe}{Sans le cadre.}
+%
+\newcommand{\includeall}{%
+  \renewcommand\includeonly[1]{}%
+  % \let\include\input%
+}%
+%
+\includeall
+\includeonly{%
+  % sections/titre,
+  sections/pages-titre,
+  % sections/introduction,
+  % sections/notations,
+  sections/pages-liminaires,
+  % sections/pages-corps,
+  % sections/pages-annexes,
+  % sections/pages-finales,
+  % sections/personnalisation,
+  % sections/recommandations,
+  % sections/aspects,
+  % sections/faq,
+  % sections/packages-charges,
+  % sections/developpements,
+  % sections/usage-avance,
+  % sections/specimen,
+  % sections/canevas
+}%
+\begin{document}
+\DocInput{\jobname.dtx}
+\end{document}
+%</driver>
+% \fi
+%
+% \CheckSum{0}
+%
+% \CharacterTable
+%  {Upper-case    \A\B\C\D\E\F\G\H\I\J\K\L\M\N\O\P\Q\R\S\T\U\V\W\X\Y\Z
+%   Lower-case    \a\b\c\d\e\f\g\h\i\j\k\l\m\n\o\p\q\r\s\t\u\v\w\x\y\z
+%   Digits        \0\1\2\3\4\5\6\7\8\9
+%   Exclamation   \!     Double quote  \"     Hash (number) \#
+%   Dollar        \$     Percent       \%     Ampersand     \&
+%   Acute accent  \'     Left paren    \(     Right paren   \)
+%   Asterisk      \*     Plus          \+     Comma         \,
+%   Minus         \-     Point         \.     Solidus       \/
+%   Colon         \:     Semicolon     \;     Less than     \<
+%   Equals        \=     Greater than  \>     Question mark \?
+%   Commercial at \@     Left bracket  \[     Backslash     \\
+%   Right bracket \]     Circumflex    \^     Underscore    \_
+%   Grave accent  \`     Left brace    \{     Vertical bar  \|
+%   Right brace   \}     Tilde         \~}
+%
+% ^^A\changes{0.1}{2012/11/11}{Initial version}
+%
+% \DoNotIndex{%
+% \newcommand,\newenvironment,\begin,\end,\acrpluralsuffix,\acrshort,\active,\addlinespace,\advance,\AtEndDocument,\begingroup,\caption,\catcode,\ClassInfo,\color,\colorlet,\cr,\DeclareGraphicsExtensions,\declaretheorem,\declaretheoremstyle,\def,\definecolor,\do,\edef,\else,\emph,\endgroup,\endVerbatimOut,\expandafter,\fi,\floatsetup,\footnotesize,\gls,\glsentrylong,\glspluralsuffix,\glsshorttok,\graphicspath,\hide,\ifluatex,\includegraphics,\InputIfFileExists,\intertitle,\killienc,\label,\LaTeX,\linewidth,\LoadClass,\loadglsentries,\lstinputlisting,\lstMakeShortInline,\lstset,\LTXtable,\makeglossaries,\mdfdefinestyle,\mdfsetup,\medskipamount,\meta,\multicolumn,\noexpand,\normalfont,\nothing,\PassOptionsToClass,\PassOptionsToPackage,\ProcessOptions,\protect,\raisebox,\relax,\renewcommand,\RequirePackage,\temp,\TeX,\textbf,\textlangle,\textrangle,\textsc,\textsf,\texttt,\textup,\the,\tmp,\to,\todoformat,\todos,\ttdefault,\ttfamily,\typeout,\uccode,\uppercase,\VerbatimOut,\WithSuffix,\LoadClassWithOptions,\DeclareOption,\xspace,\undefined,\newif,\nothtfalse,\nothttrue,\HCode,\ifnotht,\ifx,\@bsphack}
+% \DoNotIndex{%
+% \@documentclasshook,\@empty,\@esphack,\@tempa,\\,\actualchar,\baselineskip,\boolean,\c@CodelineNo,\c@HD@hypercount,\count@,\Describe@Option,\Describe@ShortCut,\encapchar,\endoption,\endshortcut .,\endtrivlist,\equal,\fvset,\g@addto@macro,\global,\hbox,\HD@target,\HDorg@encapchar,\hologo,\if@inlabel,\ignorespaces,\index,\input,\item,\leavevmode,\let,\levelchar,\llap,\long,\loop,\Lsmcp,\lstdefinestyle,\lstnewenvironment,\m@cro@YT,\m@ne,\macro@cnt,\MacroTopsep,\makelabel,\MakePrivateLetters,\marginnote,\marginpar,\newboolean,\nobreak,\or,\PackageWarning,\PrintDescribeEnv,\PrintDescribeOption,\PrintDescribeShortCut,\PrintEnvName,\PrintOptionName,\PrintShortCutName,\ProvidesFile,\raggedleft,\repeat,\reversedvideodbend,\saved@macroname,\setboolean,\sffamily,\shortcut,\space,\special@index,\SpecialMainOptionIndex,\SpecialMainShortCutIndex,\SpecialOptionIndex,\SpecialShortCutIndex,\string,\strut,\textbelow,\textsl,\topsep,\trivlist,\VerbatimEnvironment,\vss,\vtop,\xspaceaddexceptions,\par}
+%
+% \DoNotIndex{\@cclvi,\@ne,\@tempcnta,\@whilenum,\toks@,\z@}
+%
+% \DoNotIndex{\addbibresource,\biolinumKeyGlyph,\DeclareRobustCommand,\ClassWarning,\DescribeOption,\DescribeShortCut,\ifcase,\ifnum,\ifthenelse,\option,\pagestyle}
+%
+% \selectlanguage{french}
+% \settocdepth{subparagraph}
+% \include{sections/titre}
+% \include{sections/abstract}
+% \tableofcontents
+% \begingroup
+% \setlength{\parskip}{0pt plus .1pt}
+% \listoffigures
+% \listoftables
+% \endgroup
+% \tcblistof[\chapter*]{dbwarninglist}{Table des avertissements\addcontentsline{toc}{chapter}{Table des avertissements}}
+% \tcblistof[\chapter*]{dbremarklist}{Table des remarques\addcontentsline{toc}{chapter}{Table des remarques}}
+% \tcblistof[\chapter*]{dbexamplelist}{Table des exemples\addcontentsline{toc}{chapter}{Table des exemples}}
+% \setsecnumdepth{none}
+% \include{sections/introduction}
+% \setsecnumdepth{subsection}
+% \include{sections/pages-titre}
+% \include{sections/pages-liminaires}
+% \include{sections/pages-corps}
+% \include{sections/pages-annexes}
+% \include{sections/pages-finales}
+% \include{sections/personnalisation}
+% \include{sections/faq}
+% \include{sections/fichiers-charges}
+% \appendix
+% \include{sections/recommandations}
+% \include{sections/specimen}
+% \include{sections/canevas}
+% \include{sections/aspects}
+% \include{sections/packages-charges}
+% \include{sections/usage-avance}
+% \include{sections/developpements}
+% \include{sections/notations}
+% \printbibliography[heading=bibintoc]
+% \printglossaries\label{glossaire}
+% \printindex
+%
+% \StopEventually{}
+%
+% \chapter{Implementation}
+%
+%^^A The following implementation is for both \yatcl and for \yatpa (the
+%^^A latter just used for documenting the former). Code concerning:
+%^^A \begin{description}
+%^^A \item[\yatcl only] is between \metaimplementation{*class} and
+%^^A   \metaimplementation{/class} tags,
+%^^A \item[\yatpa only] is between \metaimplementation{*package} and
+%^^A   \metaimplementation{/package} tags,
+%^^A \item[both \yatcl and \yatpa] is between
+%^^A \metaimplementation{*package\textbar class} and
+%^^A   \metaimplementation{/package\textbar class} tags.
+%^^A \end{description}
+%
+%^^A Please note that the following implementation is far from being well
+%^^A documented. This may be improved in the future.
+%
+% \section{Declaration of options}
+%
+%    \begin{macrocode}
+%<*class>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\ProvidesClass{yathesis}[\filedate\space\fileversion\space Yet another class for writing thesis (DB)]
+%    \end{macrocode}
+%
+% Pour pouvoir définir des macros dont les arguments puissent être spécifiés
+% sous la forme ×clé=×\meta{valeur}, sans erreur si \meta{valeur} est
+% passée entre paire d'accolades
+%    \begin{macrocode}
+\RequirePackage{xkvltxp}%
+%    \end{macrocode}
+% Pour pouvoir définir des macros dont les arguments puissent être
+% spécifiés sous la forme ×clé=×\meta{valeur}
+%    \begin{macrocode}
+\RequirePackage{xkeyval}%
+%    \end{macrocode}
+% Pour disposer d'une boîte à outils de programmation
+%    \begin{macrocode}
+\RequirePackage{etoolbox}%
+%    \end{macrocode}
+% Extension de \package{etoolbox} permettant de patcher des
+% commandes à argument(s) optionnel
+%    \begin{macrocode}
+\RequirePackage{xpatch}%
+%    \end{macrocode}
+% Pour pouvoir patcher des commandes à argument(s) optionnel(s)
+%    \begin{macrocode}
+\RequirePackage{filehook}%
+\RequirePackage{hopatch}%
+%    \end{macrocode}
+% Pour la gestion des tests conditionnels
+%    \begin{macrocode}
+\RequirePackage{xifthen}%
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\newif\if@nolink\@nolinkfalse
+\newtoggle{YAD@work@inprogress}
+% \newtoggle{YAD@frenchabstract@used}
+\newtoggle{YAD@printed@on@paper}
+\newtoggle{YAD@printed@on@paper@star}
+\newtoggle{YAD@in@footnote}
+\newtoggle{YAD@second@title}
+\newtoggle{YAD@second@abstract}
+\newtoggle{YAD@maketitle@used}
+\newtoggle{YAD@keywords@used}
+\newtoggle{YAD@introduction@used}
+\newtoggle{YAD@introduction@empty}
+\newtoggle{YAD@conclusion@used}
+\newtoggle{YAD@conclusion@empty}
+\newtoggle{YAD@makeabstract@used}
+\newtoggle{YAD@second@abstract@used}
+\newtoggle{YAD@abstract@used}
+\newtoggle{YAD@main@abstract@empty}
+\newtoggle{YAD@second@abstract@empty}
+\newtoggle{YAD@tableofcontents@used}
+\newtoggle{YAD@printbibliography@used}
+\newtoggle{YAD@two@titles}
+\newtoggle{YAD@cover@page}
+\newtoggle{YAD@supervisor@specified}
+\newtoggle{YAD@symbols@isolated}
+\newtoggle{YAD@logo@before}
+\newtoggle{YAD@valid@day}
+\newtoggle{YAD@valid@month}
+\newtoggle{YAD@valid@year}
+\newlength{\YAD@logo@height}
+\def\YAD@mainlanguage{french}%
+\def\YAD@secondarylanguage{english}%
+\def\YAD@tocdepth{subsection}%
+\def\YAD@secnumdepth{subsection}%
+\def\YAD@mainkeywords{\YAD@generic@argument@translate{keywords}}%
+\def\YAD@secondarykeywords{\YAD@generic@argument@translate{keywords}}%
+%    \end{macrocode}
+%    \begin{macrocode}
+\def\YAD@global@sepcorpaffil@french{}%
+\def\YAD@global@sepcorpaffil@english{}%
+\DeclareOption{nolink}{\YAD@nolinktrue}%
+\DeclareOption{link}{\YAD@nolinkfalse}%
+\newcommand{\YAD@create@boolean}[1]{%
+  \define@boolkey+{yathesis.cls}[YAD@]{#1}[true]{%
+  }{%
+    \ClassWarningNoLine{yathesis}{%
+      Valeur pass\'ee \`a la cl\'e `#1' non valide :\MessageBreak%
+      cette valeur ne peut \^etre que `true' ou `false'%
+    }%
+  }%
+}%
+\YAD@create@boolean{nowarning}%
+\YAD@create@boolean{noauthor}%
+\YAD@create@boolean{notitle}%
+\YAD@create@boolean{noacademicfield}%
+\YAD@create@boolean{nodate}%
+\YAD@create@boolean{noinstitute}%
+\YAD@create@boolean{nodoctoralschool}%
+\YAD@create@boolean{nolaboratory}%
+\YAD@create@boolean{nolaboratoryadress}%
+\YAD@create@boolean{nosupervisor}%
+\YAD@create@boolean{nomaketitle}%
+\YAD@create@boolean{nokeywords}%
+\YAD@create@boolean{noabstract}%
+\YAD@create@boolean{nomakeabstract}%
+\YAD@create@boolean{notableofcontents}%
+\YAD@create@boolean{noprintbibliography}%
+\YAD@create@boolean{nofrontcover}%
+%
+\define@boolkey+{yathesis.cls}[YAD@]{draft}[true]{%
+  \ifYAD@draft
+  \ifthenelse{\equal{\@classoptionslist}{}}{%
+    \edef\@classoptionslist{draft}%
+  }{%
+    \edef\@classoptionslist{\@classoptionslist,draft}%
+  }%
+  \fi
+}{%
+  \YAD@ClassWarningNoLine{%
+    Valeur de la cl\'e `draft' non valide :\MessageBreak%
+    elle ne peut \^etre que `true' ou `false'%
+  }%
+}%
+\define@boolkey+{yathesis.cls}[YAD@]{intermediate}[true]{%
+  \ifYAD@intermediate
+  \toggletrue{YAD@work@inprogress}%
+  \fi
+}{%
+  \YAD@ClassWarningNoLine{%
+    Valeur de la cl\'e `intermediate' non valide :\MessageBreak%
+    elle ne peut \^etre que `true' ou `false'%
+  }%
+}%
+\define@boolkey+{yathesis.cls}[YAD@]{printed}[true]{%
+  \ifYAD@printed
+  \toggletrue{YAD@printed@on@paper}%
+  \fi
+}{%
+  \YAD@ClassWarningNoLine{%
+    Valeur de la cl\'e `printed' non valide :\MessageBreak%
+    elle ne peut \^etre que `true' ou `false'%
+  }%
+}%
+\define@boolkey+{yathesis.cls}[YAD@]{printed*}[true]{%
+}{%
+  \YAD@ClassWarningNoLine{%
+    Valeur de la cl\'e `printed*' non valide :\MessageBreak%
+    elle ne peut \^etre que `true' ou `false'%
+  }%
+}%
+\def\YAD@interligne{single}%
+\define@choicekey*{yathesis.cls}{space}%
+{single,onehalf,double}[single]%
+{\def\YAD@interligne{#1}}%
+%
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\DeclareOptionX{mainlanguage}{%
+  \ifthenelse{\isempty{#1}}{%
+  }{%
+    \def\YAD@mainlanguage{#1}%
+  }%
+}%
+\DeclareOptionX{secnumdepth}{%
+  \ifthenelse{\isempty{#1}}{%
+  }{%
+    \def\YAD@secnumdepth{#1}%
+  }%
+}%
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\DeclareOptionX{logoheight}[1.5cm]{\setlength\YAD@logo@height{#1}}%
+\DeclareOptionX{sepcorpaffilfrench}[]{\def\YAD@global@sepcorpaffil@french{#1}}%
+\DeclareOptionX{sepcorpaffilenglish}[ at ]{\def\YAD@global@sepcorpaffil@english{#1}}%
+\DeclareOptionX{chap-style}[PetersLenny]{%
+  \def\YAD@fncychapstyle{#1}%
+  \PassOptionsToPackage{#1}{fncychap}%
+}%
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\DeclareOptionX*{\PassOptionsToClass{\CurrentOption}{book}}%
+%    \end{macrocode}
+%
+% \section{Execution of Options}
+%
+%    \begin{macrocode}
+\ExecuteOptionsX{logoheight}%
+\ExecuteOptionsX{sepcorpaffilfrench}%
+\ExecuteOptionsX{sepcorpaffilenglish}%
+\ExecuteOptionsX{mainlanguage}%
+\ExecuteOptionsX{secnumdepth}%
+\ExecuteOptionsX{chap-style}%
+\ProcessOptionsX\relax%
+\ProcessOptionsX\relax%
+\ifthenelse{\equal{\YAD@mainlanguage}{english}}{%
+  \def\YAD@secondarylanguage{french}%
+}{%
+}%
+\ifthenelse{\equal{\YAD@mainlanguage}{french}}{%
+  \def\YAD@secondarylanguage{english}%
+}{%
+}%
+\ifthenelse{\equal{\@classoptionslist}{}}{%
+  \edef\@classoptionslist{\YAD@secondarylanguage,\YAD@mainlanguage}%
+}{%
+  \edef\@classoptionslist{\@classoptionslist,\YAD@secondarylanguage,\YAD@mainlanguage}%
+}%
+\presetkeys{yathesis.cls}{%
+  screen=false,%
+  draft=false,%
+  intermediate=false,%
+  printed=false,%
+  printed*=false,%
+}{}
+\csuse{ifYAD@printed*}
+\toggletrue{YAD@printed@on@paper}%
+\toggletrue{YAD@printed@on@paper@star}%
+\fi
+%    \end{macrocode}
+%
+% \section{Class Loading}
+%
+% The \yatcl is based upon the standard \class{book} class:
+%
+%    \begin{macrocode}
+\LoadClass{book}%
+%    \end{macrocode}
+%
+% \section{Packages loaded}\label{sec-packages-loaded}
+%
+% All of the following packages are in the standard modern distributions of
+% \LaTeX.
+%
+% Gestion de la géométrie de la page.
+%    \begin{macrocode}
+\RequirePackage[a4paper]{geometry}%
+%    \end{macrocode}
+% Accès à certaines fontes utiles à la composition des \textquote{méta-informations}
+%    \begin{macrocode}
+\AtEndPreamble{%
+  \@ifpackageloaded{kpfonts}{%
+  }{%
+    \@ifpackageloaded{libertine}{%
+    }{%
+      \RequirePackage[full]{textcomp}%
+    }%
+  }%
+}%
+%    \end{macrocode}
+% Pour insérer des images
+%    \begin{macrocode}
+\RequirePackage[final]{graphicx}%
+%    \end{macrocode}
+% Pour stocker le contenu d'un environnement dans une macro.
+%    \begin{macrocode}
+\RequirePackage{environ}%
+%    \end{macrocode}
+% Pour ajuster la position des matériels \LaTeX{}, notamment pour assurer
+% l'alignement vertical des images.
+%    \begin{macrocode}
+\RequirePackage[export]{adjustbox}%
+%    \end{macrocode}
+% Pour disposer d'outils pour les tableaux
+%    \begin{macrocode}
+\RequirePackage{array}%
+%    \end{macrocode}
+% Pour effectuer des manipulations sur des chaîne de caractères
+%    \begin{macrocode}
+\RequirePackage{xstring}%
+%    \end{macrocode}
+% Pour facilement changer la casse
+%    \begin{macrocode}
+\RequirePackage{textcase}%
+%    \end{macrocode}
+% Pour pouvoir assurer facilement les traductions de certains mots ou
+% expressions clés du canevas de thèse (notamment dans les pages de titre)
+%    \begin{macrocode}
+\RequirePackage{translator}%
+%    \end{macrocode}
+% Pour fixer quelques bugs (en général sans conséquence) de \hologo{LaTeX2e}
+%    \begin{macrocode}
+\RequirePackage{fixltx2e}%
+%    \end{macrocode}
+% Pour les épigraphes
+%    \begin{macrocode}
+\RequirePackage{epigraph}%
+%    \end{macrocode}
+% Pour insérer des petits symboles rigolos (téléphone, fax, etc.)
+%    \begin{macrocode}
+\RequirePackage{marvosym}%
+%    \end{macrocode}
+% Pour la gestion des interlignes
+%    \begin{macrocode}
+\RequirePackage{setspace}%
+%    \end{macrocode}
+% Pour pouvoir disposer disposer d'autant de \enquote{flots} d'écriture dans
+% des fichiers annexes que nécessaire. Il est chargé en fin de préambule sans
+% quoi la compilation s'arrête longuement à la ligne
+% ×(/usr/local/texlive/2013/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg)×
+% (problème rapporté à  l'auteur du package).
+%    \begin{macrocode}
+\AtEndPreamble{\RequirePackage{morewrites}}%
+%    \end{macrocode}
+% Pour pouvoir afficher un sommaire c-à-d une table des matières réduite
+%    \begin{macrocode}
+\RequirePackage{shorttoc}%
+%    \end{macrocode}
+% Pour régler finement la profondeur de la table des matières et de la
+% numérotation
+%    \begin{macrocode}
+\RequirePackage{tocvsec2}%
+%    \end{macrocode}
+% Pour faire figurer les table des matières, bibliographie et index
+% dans la table des matières
+%    \begin{macrocode}
+\RequirePackage{tocbibind}%
+%    \end{macrocode}
+% Pour déboguer
+%    \begin{macrocode}
+% \RequirePackage{trace}%
+%    \end{macrocode}
+% Pour supprimer le numéro de page sur la page de titre d'une partie
+%    \begin{macrocode}
+\RequirePackage{nonumonpart}%
+%    \end{macrocode}
+% Pour les couleurs
+%    \begin{macrocode}
+\RequirePackage{xcolor}%
+%    \end{macrocode}
+% Pour manipuler des bases de données
+%    \begin{macrocode}
+\RequirePackage{datatool}%
+%    \end{macrocode}
+% Pour des titres de chapitres améliorés
+%    \begin{macrocode}
+\ifthenelse{\equal{\YAD@fncychapstyle}{none}}{%
+}{%
+  \RequirePackage{fncychap}%
+}%
+%    \end{macrocode}
+% Pour gérer les titres courants (entêtes) et bas de page
+%    \begin{macrocode}
+\RequirePackage{titleps}%
+%    \end{macrocode}
+% Pour distinguer le mode \enquote{draft} des autres modes.
+%    \begin{macrocode}
+\RequirePackage{ifdraft}%
+%    \end{macrocode}
+% Pour insérer du texte en filigrane
+%    \begin{macrocode}
+\ifdraft{%
+  \RequirePackage{draftwatermark}%
+%    \end{macrocode}
+% Si on est en mode \enquote{draft}, des cadres matérialisant la
+% page et la zone de texte ainsi que, sur la première page, des
+% lignes matérialisant l'emplacement des titres courants sont
+% affichés.
+%    \begin{macrocode}
+  \geometry{showframe}%
+}{%
+  \iftoggle{YAD@work@inprogress}{%
+    \RequirePackage{draftwatermark}%
+  }{%
+  }%
+}%
+%    \end{macrocode}
+% Pour la gestion du ou des index. Ce package est préféré au
+% \Package{makeidx} historique car plus robuste. Cependant, pour que
+% les numéros de pages soient des hyperliens, il doit être chargé
+% \emph{avant} le \Package{hyperref}, ce qui nécessite de le faire
+% dans la classe et non pas dans le document.
+%    \begin{macrocode}
+\RequirePackage{index}%
+%    \end{macrocode}
+% Pour corriger un bug qui fait que l'intitulé \enquote{Index} est situé plus
+% haut que les intitulés standard tels que \enquote{Table des matières} ou
+% \enquote{Liste des figures}.
+%    \begin{macrocode}
+\RequirePackage[columns=1]{idxlayout}%
+%    \end{macrocode}
+% Les packages qui suivent doivent être les derniers chargés du préambule
+%    \begin{macrocode}
+% \AtEndPreamble{%
+%    \end{macrocode}
+% Pour un document à dominante en français, mais dont certains
+% passages sont en anglais (cf. options \lstinline|english|,
+% \lstinline|french| passées à la classe de document)
+%    \begin{macrocode}
+\RequirePackage{babel}%
+%    \end{macrocode}
+% Pour générer les dates (sans affichage du jour de la semaine)
+%    \begin{macrocode}
+\RequirePackage[nodayofweek]{datetime}%
+%    \end{macrocode}
+% Pour comparer des dates
+%    \begin{macrocode}
+\RequirePackage{datenumber}%
+%    \end{macrocode}
+% Pour la gestion des hyperliens. L'option ×final× assure que les
+% hyperliens seront présents même en mode brouillon ; l'option
+% ×unicode× assure que les accents sont composés de façon conforme
+% dans les signets. D'autres option peuvent être fixées dans le(s)
+% fichier(s) de configuration de \yatcl)
+%    \begin{macrocode}
+\RequirePackage[final,unicode,hyperfootnotes=false,hyperindex=false,plainpages=false,breaklinks,pdfpagemode=UseOutlines,pdfpagelayout=TwoPageRight]{hyperref}%
+%    \end{macrocode}
+% Les packages suivants ne sont à activer qu'en version \enquote{non imprimée}.
+%    \begin{macrocode}
+\iftoggle{YAD@printed@on@paper}{%
+}{%
+%    \end{macrocode}
+% Pour faire pointer les hyperliens au début des flottants plutôt qu'au
+% début des légendes
+%    \begin{macrocode}
+  \RequirePackage[all]{hypcap}%
+%    \end{macrocode}
+% Pour la gestion des signets
+%    \begin{macrocode}
+  \RequirePackage[numbered]{bookmark}%
+}
+%    \end{macrocode}
+% Les packages qui précèdent ont été les derniers chargés du préambule
+%    \begin{macrocode}
+% }%
+%    \end{macrocode}
+%
+% On définit la macro ×\YAD@ifemptyorundef× qui teste si le nom passé est celui
+% d'une macro inexistante ou dont le texte de remplacement est vide (ou
+% constitué d'espaces seulement).
+%    \begin{macrocode}
+\newcommand{\YAD@ifemptyorundef}[3]{%
+  \ifboolexpr{%
+    test {\ifundef{#1}} or %
+    test {\ifdefempty{#1}}%
+  }{%
+    #2%
+  }{%
+    #3%
+  }%
+}%
+%    \end{macrocode}
+%
+% On définit la macro ×\YAD@ClassWarningNoLine× qui est essentiellement
+% identique à ×\ClassWarningNoLine×, sauf que les messages de warnings :
+% \begin{itemize}
+% \item apparaissent en fin de log ;
+% \item sont désactivés si l'une ou l'autre des options ×nowarning×, ×draft× ou
+%   ×intermediate× est passée à la \yatcl{}.
+% \end{itemize}
+%
+%    \begin{macrocode}
+% \newwrite\YAD@file%
+% \immediate\openout\YAD@file=\jobname.yad%
+\newcounter{YAD@warnings}%
+\setcounter{YAD@warnings}{0}%
+\newcommand{\YAD@ClassWarningNoLine}[1]{%
+  \ifYAD@nowarning%
+  \ifboolexpr{%
+    togl {YAD@work@inprogress}%
+    or bool {YAD@draft}%
+  }{%
+  }{%
+    \stepcounter{YAD@warnings}%
+  }%
+  \else%
+  \ClassWarningNoLine{yathesis}{%
+    #1%
+  }%
+  % \AfterEndDocument{%
+  % \immediate\write\YAD@file{%
+  \ClassWarningNoLine{yathesis}{%
+    #1%
+  }%
+  % }%
+  % }%
+  \fi
+}%
+\AfterEndDocument{%
+  \ifYAD@nowarning%
+    \ifboolexpr{%
+      togl {YAD@work@inprogress}%
+      or bool {YAD@draft}%
+    }{%
+    }{%
+      \ifnumgreater{\value{YAD@warnings}}{0}{%
+        % \immediate\write\YAD@file{%
+          \ClassWarningNoLine{yathesis}{%
+            L'option `nowarning' ayant \'et\'e employ\'ee,\MessageBreak%
+            \theYAD@warnings\space warning%
+            \ifnumequal{\value{YAD@warnings}}{1}{%
+              \space propre%
+            }{%
+              s propres%
+            }
+            %
+            \`a la classe `yathesis'\MessageBreak%
+            \ifnumequal{\value{YAD@warnings}}{1}{%
+              a \'et\'e masqu\'e%
+            }{%
+              ont \'et\'e masqu\'es%
+            }
+            %
+            dans ce fichier de log.\MessageBreak%
+            Il est fortement conseill\'e de r\'eactiver\MessageBreak%
+            l'affichage de ce%
+            \ifnumequal{\value{YAD@warnings}}{1}{%
+              \space warning%
+            }{%
+              s warnings%
+            }
+            %
+            en supprimant\MessageBreak%
+            l'option `nowarning'%
+          }%
+        % }%
+      }{%
+      }%
+    }%
+  \fi%
+}%
+% \AtEndDocument{%
+%   \immediate\closeout\YAD@file%
+% }%
+% \InputIfFileExists{\jobname.yad}{}{}%
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%</class>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%<*class-doc-package>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\RequirePackage{xpatch}%
+\let\YAD@ORI@task\task
+\let\task\relax
+\RequirePackage{exsheets}
+\let\task\YAD@ORI@task
+\RequirePackage{parskip}%
+\RequirePackage{amsthm}%
+\RequirePackage{thmtools}%
+\RequirePackage{fixfoot}%
+\RequirePackage[inline]{enumitem}%
+\RequirePackage{afterpage}%
+\RequirePackage{tabulary}%
+\RequirePackage{calc}%
+\RequirePackage[lining]{libertine}%
+\RequirePackage[a4paper]{geometry}%
+\RequirePackage{siunitx}%
+\RequirePackage[notindex]{tocbibind}%
+\RequirePackage[backend=biber,style=authortitle,autopunct=false,useprefix=true,backref,dashed=false]{biblatex}%
+\RequirePackage{listings}%
+\RequirePackage{varioref}%
+\RequirePackage{marginnote}%
+\RequirePackage{xspace}%
+\RequirePackage{booktabs}%
+\RequirePackage[xr]{zref}%
+\RequirePackage[multiple,bottom]{footmisc}%
+\RequirePackage{rotating}%
+\RequirePackage{pdflscape}%
+\RequirePackage{hologo}%
+\RequirePackage{xifthen}%
+\RequirePackage{tocvsec2}%
+\RequirePackage[autostyle=once]{csquotes}%
+\RequirePackage{tcolorbox}%
+\RequirePackage{fontawesome}%
+\RequirePackage{textcase}%
+\RequirePackage{multicol}%
+\RequirePackage{babel}%
+\RequirePackage[nodayofweek]{datetime}%
+\RequirePackage{floatrow}%
+\RequirePackage{subcaption}%
+\RequirePackage{hyperref}%
+\RequirePackage{nameref}%
+\RequirePackage[all]{hypcap}%
+\RequirePackage[numbered]{bookmark}%
+\RequirePackage[xindy,toc,hyperfirst=false]{glossaries}%
+\RequirePackage{cleveref}%
+%
+\setlength\bibinitsep{1.25\baselineskip}
+%
+\setglossarystyle{indexhypergroup}
+\setacronymstyle{long-sc-short}
+%
+\SetupExSheets[question]{type=exam}
+\SetupExSheets[solution]{print=true}
+%
+\SetCiteCommand{\autocite}
+%
+\renewcommand{\ttdefault}{lmtt}
+%
+\xapptocmd{\@chapter}{%
+  \addtocontents{dbwarninglist}{\protect\addvspace{10\p@}}%
+  \addtocontents{dbremarklist}{\protect\addvspace{10\p@}}%
+  \addtocontents{dbexamplelist}{\protect\addvspace{10\p@}}%
+}{}{}
+%
+\sisetup{locale=FR,detect-all}
+\floatsetup[table]{style=plaintop}
+%
+% \DeclareRobustCommand*{\package}{\textsf}
+% \DeclareRobustCommand*{\Package}[1]{%
+%   \iflanguage{french}{package }{}%
+%   \package{#1}%
+%   \iflanguage{english}{ package}{}%
+%   \xspace%
+% }%
+\DeclareRobustCommand*{\package}{%
+  \texorpdfstring{%
+    \@ifstar{\package@star}{\package@nostar}%
+  }{%
+    \package@nostar%
+  }%
+}
+\DeclareRobustCommand*{\package@star}[2][]{%
+  \ifthenelse{\isempty{#1}}{%
+    \href{http://www.ctan.org/pkg/#2}{\textsf{#2}}%
+  }{%
+    \href{#1}{\textsf{#2}}%
+  }%
+}
+\DeclareRobustCommand*{\package@nostar}[2][]{%
+  \textsf{#2}%
+}
+\DeclareRobustCommand*{\Package}{%
+  \iflanguage{french}{package }{}%
+  \@ifstar{\package@star}{\package@nostar}%
+  % \iflanguage{english}{ package}{}%
+  % \xspace%
+}
+%
+\DeclareRobustCommand*{\class}{\package}
+\DeclareRobustCommand*{\Class}{%
+  \texorpdfstring{%
+    \iflanguage{french}{classe }{}%
+    \@ifstar{\package@star}{\package@nostar}%
+  }{%
+    \iflanguage{french}{classe }{}%
+    \package@nostar%
+  }%
+  % \@ifstar{\package@star}{\package@nostar}%
+  % \iflanguage{english}{ class}{}%
+  % \xspace%
+}%
+%
+\DeclareRobustCommand*{\file}[1]{\bgroup% \color{magenta}
+  \texttt{#1}\egroup}
+\DeclareRobustCommand*{\File}[1]{%
+  \iflanguage{french}{fichier }{}%
+  \file{#1}%
+  \iflanguage{english}{ file}{}%
+  \xspace%
+}%
+\DeclareRobustCommand*{\directory}{\file}
+\DeclareRobustCommand*{\Directory}[1]{%
+  \iflanguage{french}{répertoire }{}%
+  \directory{#1}%
+  \iflanguage{english}{ directory}{}%
+  \xspace%
+}%
+\DeclareRobustCommand*{\program}{\file}
+%
+\AtBeginDocument{%
+  \renewcommand*{\meta}[2][meta]{%
+    \bgroup%
+    \normalfont
+    \ttfamily%
+    \textcolor{#1}{\textlangle\emph{#2}\textrangle}%
+    \egroup%
+  }%
+}%
+%
+\hypersetup{colorlinks}%
+%
+\colorlet{texcs}{blue}
+\colorlet{environment}{teal}
+\colorlet{key}{purple}
+\colorlet{value}{violet}
+\colorlet{keyword4}{key}
+\colorlet{keyword5}{magenta}
+\colorlet{comment}{gray}
+\colorlet{string}{cyan}
+\colorlet{meta}{brown}
+\colorlet{preamble}{violet}
+\lstset{%
+  escapeinside=÷÷,
+  breaklines=true,
+  basicstyle=\normalfont\ttfamily,
+  commentstyle=\color{comment},
+  keywordstyle=\color{environment},
+  keywordstyle=[2]\color{key},
+  keywordstyle=[3]\color{value},
+  keywordstyle=[4]\color{keyword4},
+  keywordstyle=[5]\color{keyword5},
+  stringstyle=\color{string},
+  columns=flexible,
+  % prebreak={\space\Righttorque},
+  % postbreak={\space\Lefttorque}
+}%
+\lstdefinestyle{dbtex}{%
+  language=[LaTeX]TeX,
+  alsolanguage=[extLaTeX]TeX,
+  alsolanguage=[yad]TeX,
+  alsolanguage=[glossaries]TeX,
+  alsolanguage=[biblatex]TeX,
+  texcsstyle=*\color{texcs},
+  % numbers=left,
+  numberstyle=\small,
+}%
+\lstset{style=dbtex}
+\lstMakeShortInline[style=dbtex]×
+%
+\tcbuselibrary{documentation,theorems,breakable,skins}
+\tcbset{dbtcb/.style={%
+    breakable,
+    fonttitle=\bfseries,
+    enlarge top by=1mm,
+    separator sign dash
+  }%
+}%
+%
+\newtcbtheorem[list inside=dbwarninglist,number within=chapter]{dbwarning}{Avertissement}{%
+  colback=red!5!white,
+  colframe=red!75!black,
+  dbtcb
+}{wa}
+%
+\newtcbtheorem[list inside=dbexamplelist,number within=chapter]{dbexample}{Exemple}{%
+  colback=lime!5!white,
+  colframe=lime!75!black,
+  dbtcb
+}{ex}
+%
+\newtcbtheorem[list inside=dbremarklist,number within=chapter]{dbremark}{Remarque}{%
+  colback=cyan!5!white,
+  colframe=cyan!75!black,
+  dbtcb
+}{rq}
+%
+% Déclaration des nouveaux noms de \enquote{théorèmes} en vue d'en faciliter le
+% référencement grâce au \Package{cleveref}.
+\AtEndPreamble{%
+  \crefname{tcb@cnt@dbexample}{exemple}{exemples}%
+  \crefname{tcb@cnt@dbremark}{remarque}{remarques}%
+  \crefname{tcb@cnt@dbwarning}{avertissement}{avertissements}%
+}%
+%
+\tcbset{%
+  /tcb/doclang/environment content=contenu de l'environnement,
+  /tcb/doclang/color= (couleur),
+  /tcb/doclang/colors=Couleurs,
+  /tcb/doclang/environments=Environnements,
+  /tcb/doclang/keys=Clés,
+  /tcb/doclang/values=Valeurs,
+  /tcb/doclang/pageshort=p.,
+  /tcb/documentation listing style=dbtex,
+  /tcb/color command=texcs,
+  /tcb/color environment=environment,
+  /tcb/color key=key,
+  /tcb/color value=value,
+  index format=pgfchapter,
+  index colorize,
+  index annotate=false,
+  enhanced,
+  % index actual={},
+  every box/.style={documentation listing style=dbtex},
+  % doc left indent=-15mm,
+  % doc right indent=-15mm+2em
+}%
+\tcbset{codes/.style={%
+    listing only,
+    colframe=ExampleFrame,
+    colback=ExampleBack,
+    fonttitle=\bfseries,
+    fontupper=\small,
+    enhanced,
+    listing options={style=dbtex}
+  }%
+}%
+\newtcblisting{origpreamblecode}[1][]{%
+  codes,
+  drop shadow,
+  #1
+}%
+\newtcblisting{origbodycode}[1][]{%
+  codes,
+  #1
+}%
+\begingroup%
+\catcode`\^^M\active%
+\global\def\activeeol{^^M}%
+\endgroup%
+\newenvironment{preamblecode}{%
+  \@ifnextchar[\YAD@preamblecode@\YAD@preamblecode@noargs%
+}{%
+  \endorigpreamblecode%
+}%
+\def\YAD@preamblecode@[#1]{%
+  \origpreamblecode[#1]%
+}%
+\def\YAD@preamblecode@noargs#1{%
+  \edef\temp{[]\activeeol\string#1}%
+  \expandafter\YAD@preamblecode@\temp%
+}%
+\newenvironment{bodycode}{%
+  \@ifnextchar[\YAD@bodycode@\YAD@bodycode@noargs%
+}{%
+  \endorigbodycode%
+}%
+\def\YAD@bodycode@[#1]{%
+  \origbodycode[#1]%
+}%
+\def\YAD@bodycode@noargs#1{%
+  \edef\temp{[]\activeeol\string#1}%
+  \expandafter\YAD@bodycode@\temp%
+}%
+\tcbset{samples/.style={%
+    codes,
+    % listing options={rangebeginprefix=\\,rangeendsuffix=\}}
+  }%
+}%
+\newtcbinputlisting{\preamblesample}[3][these.tex]{%
+  samples,
+  drop shadow,
+  listing file={sample/#1},
+  listing options={rangebeginprefix=\\,rangeendsuffix=\},#2},
+  #3,
+}%
+\newtcbinputlisting{\bodysample}[3][these.tex]{%
+  samples,
+  listing file={sample/#1},
+  listing options={rangebeginprefix=\\,rangeendsuffix=\},#2},
+  #3,
+}%
+\newcommand{\obligatoire}{%
+  \marginpar{%
+    \scriptsize%
+    \raggedleft%
+    % \bfseries%
+    \hyperref[sec:comm-oblig]{%
+      % \colorbox{red!75!black}{%
+        % \textcolor{white}{%
+        \textcolor{red!75!black}{\faLock}%
+          \ifnum\getpagerefnumber{sec:comm-oblig}=\thepage%
+          \else%
+          \textsuperscript{\ding{213}\,\kvtcb@text@pageshort\,\pageref*{sec:comm-oblig}}%
+          \fi%
+          % Obligatoire%
+        % }%
+      % }%
+    }%
+  }%
+}%
+\newcommand{\mandatory}{%
+  \hyperref[sec:comm-oblig]{%
+    \textcolor{red!75!black}{\faLock}%
+    \ifnum\getpagerefnumber{sec:comm-oblig}=\thepage%
+    \else%
+    \textsuperscript{\ding{213}\,\kvtcb@text@pageshort\,\pageref*{sec:comm-oblig}}%
+    \fi%
+  }%
+}%
+%
+% Suppression du gras dans la commande ×\docAuxCommand× :
+\def\disp@com#1{\colDef{\ttfamily#1}}
+%
+\DeclareRobustCommand*{\yat}{\textsl{yathesis}}
+\DeclareRobustCommand*{\yatpa}{package \textsl{yathesisdoc}\xspace}
+\DeclareRobustCommand*{\yatcl}{classe \yat\xspace}
+%
+\newcommand{\phrase}{%
+  \@ifstar{\phrase@star}{\phrase@nostar}%
+}
+\newcommand{\phrase@star}[1]{---~#1}
+\newcommand{\phrase@nostar}[1]{---~#1~---}
+%
+\makeglossaries
+\loadglsentries{glossaries/glossary}
+\loadglsentries{glossaries/acronyms}
+\addbibresource{\jobname.bib}
+%
+\def\findrootlanguage{%
+   \def\rootlanguagename{\languagename}%
+}%
+\newcommand{\pdf}{\acrshort{pdf}\xspace}
+%    \end{macrocode}
+% For the \yatcl' documentation, using \Class{ltxdoc}, we need to
+% perform some changes in \Package{glossaries} provided by its author.
+%    \begin{macrocode}
+\renewcommand*{\newacronymhook}{%
+\edef\tmp{\noexpand\textsc{\the\glsshorttok}}%
+\expandafter\glsshorttok\expandafter{\tmp}%
+}%
+\renewcommand*{\acrpluralsuffix}{\textup{\glspluralsuffix}}
+%    \end{macrocode}
+%    \begin{macrocode}
+\declaretheoremstyle[headfont=\sffamily\itshape\bfseries,bodyfont=\itshape,notefont=\sffamily\itshape\bfseries]{mystyle}
+\declaretheorem[style=mystyle,numbered=unless unique]{remarque}
+\AtEndPreamble{\crefname{remarque}{remarque}{remarques}}
+\declaretheorem[style=mystyle]{exemple}
+\AtEndPreamble{\crefname{exemple}{exemple}{exemples}}
+\DeclareRobustCommand*{\dossier}{\path}
+%    \end{macrocode}
+% On définit une nouvelle clé pour la commande ×\includegraphics× de
+% sorte à pouvoir inclure les pages d'un \File{.pdf} externe en
+% indiquant non pas des numéros de pages absolus, mais plutôt des
+% références qui devront être labellisées au moyen de la commande
+% ×\zlabel× du \Package{zref} (ce dernier devant être chargé dans le
+% \File{.tex} externe du \File{.pdf} avec les options ×user× et
+% ×abspage×).
+%    \begin{macrocode}
+\define@key{Gin}{bylabel}{%
+    \edef\@tempa{{Gin}{page=\zref@extract{#1}{abspage}}}%
+    \expandafter\setkeys\@tempa%
+}%
+%    \end{macrocode}
+% On définit une commande d'inclusion de \enquote{copie d'écran} qui
+% inclut une page d'un \File{.pdf} externe en indiquant non pas des
+% numéros de pages absolus, mais plutôt des références stipulées au
+% moyen de la clé ×bylabel× ci-dessus. Ceci nécessite de charger le
+% \Package{zref} avec l'option ×xr× dans le \File{.tex} où sont
+% incluses les pages du \File{.pdf} externe.
+%    \begin{macrocode}
+\zexternaldocument{sample/these}
+\newcommand{\screenshot}[2][.45]{%
+  \fbox{\includegraphics[bylabel=#2,width=#1\linewidth-2\fboxsep-2\fboxrule]{sample/these}}%
+}%
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%</class-doc-package>
+%    \end{macrocode}
+%
+% \section{Main Code}
+%
+%    \begin{macrocode}
+%<*class>
+%    \end{macrocode}
+%
+% \begin{macro}{\tc@errorwarn}
+%
+% Hack permettant de ne pas faire figurer les warnings de la
+% forme:
+% \begin{verbatim}
+%   Package textcomp Warning: Symbol \textlangle not provided by
+%   (textcomp)                font family futs in TS1 encoding.
+%   (textcomp)                Default family used instead on input line 1.
+% \end{verbatim}
+% émis par le package textcomp pour les commandes ×\textlangle× et
+% ×\textrangle×
+%   %    \begin{macrocode}
+% \gdef\tc@errorwarn#1#2#3{}
+%    \end{macrocode}
+% \end{macro}
+%
+% Par défaut, les listings sont composés en fonte à châsse fixe
+%    \begin{macrocode}
+% \lstset{basicstyle=\ttfamily}
+%    \end{macrocode}
+%
+% \begin{macro}{\YAD@clearspread}
+%
+% Commande permettant de débuter sur une page paire (pour la 4\ieme{}
+% de couverture)
+%    \begin{macrocode}
+\def\YAD@clearspread{\clearpage\if@twoside \ifodd\c@page
+  \hbox{}\newpage\if@twocolumn\hbox{}\newpage\fi\fi\fi}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{environment}{titlepage}
+% Redéfinition de l'environnement \lstinline|titlepage| pour que la numérotation
+% des pages n'y soit pas fixée à $1$.
+%    \begin{macrocode}
+\renewenvironment{titlepage}
+{%
+  \cleardoublepage
+  \if@twocolumn
+  \@restonecoltrue\onecolumn
+  \else
+  \@restonecolfalse\newpage
+  \fi
+  \thispagestyle{empty}%
+}%
+{\if@restonecol\twocolumn \else \newpage \fi
+}%
+%    \end{macrocode}
+% \end{environment}
+%
+% Patch permettant que chaque première page des chapitres (et objets dérivés :
+% table des matières, index, etc.) ne comportent pas de numéros de page.
+%    \begin{macrocode}
+\patchcmd{\chapter}{plain}{empty}{}{}%
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%</class>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%<*class|class-doc-package>
+%    \end{macrocode}
+%
+% On définit les macros (privée et publique) où est stocké le nom du répertoire des
+% \enquote{réglages} où se trouvent les divers fichiers de configuration.
+% \begin{macro}{\YAD@configuration@directory}
+% \begin{macro}{\configurationdirectory}
+%    \begin{macrocode}
+\newcommand*{\YAD@configuration@directory}{configuration}
+\newcommand*{\configurationdirectory}{\YAD@configuration@directory}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% On définit les macros (privée et publique) où est stocké le nom du fichier
+% de configuration \emph{local} de la thèse.
+% \begin{macro}{\YAD@configuration@file}
+% \begin{macro}{\configurationfile}
+%    \begin{macrocode}
+\newcommand*{\YAD@configuration@file}{these.cfg}
+\newcommand*{\configurationfile}{\YAD@configuration@file}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% On définit les macros (privée et publique) où est stocké le nom du fichier
+% esclave contenant ce qui doit figurer sur les pages de couverture et de
+% titre.
+% \begin{macro}{\YAD@title@file}
+% \begin{macro}{\titlefile}
+%    \begin{macrocode}
+\newcommand*{\YAD@title@file}{yadtitle.tex}
+\newcommand*{\titlefile}{\YAD@title@file}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% On définit les macros (privée et publique) où est stocké le nom du fichier
+% esclave dédiées aux macros personnelles.
+% \begin{macro}{\YAD@macros@file}
+% \begin{macro}{\macrosfile}
+%    \begin{macrocode}
+\newcommand*{\YAD@macros@file}{yadmacros.tex}
+\newcommand*{\macrosfile}{\YAD@macros@file}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% On définit les macros (privée et publique) où est stocké le nom du fichier
+% esclave contenant ce qui doit figurer sur les pages de la partie liminaire du
+% document.
+% \begin{macro}{\YAD@preliminary@file}
+% \begin{macro}{\preliminaryfile}
+%    \begin{macrocode}
+% \newcommand*{\YAD@preliminary@file}{preliminary.tex}
+% \newcommand*{\preliminaryfile}{\YAD@preliminary@file}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% On définit les macros (privée et publique) où est stocké le nom du fichier
+% esclave contenant ce qui doit figurer sur les pages de la partie principale
+% du document.
+% \begin{macro}{\YAD@main@file}
+% \begin{macro}{\mainfile}
+%    \begin{macrocode}
+% \newcommand*{\YAD@main@file}{main.tex}
+% \newcommand*{\mainfile}{\YAD@main@file}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% On définit les macros (privée et publique) où est stocké le nom du fichier esclave
+% contenant ce qui doit figurer sur les pages de la partie annexe du
+% document.
+% \begin{macro}{\YAD@appendix@file}
+% \begin{macro}{\appendixfile}
+%    \begin{macrocode}
+% \newcommand*{\YAD@appendix@file}{appendix.tex}
+% \newcommand*{\appendixfile}{\YAD@appendix@file}
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+%
+% On définit la macro (publique) où est stocké le nom du fichier contenant les
+% définitions des termes du glossaire.
+% \begin{macro}{\glossaryfile}
+%    \begin{macrocode}
+\newcommand*{\glossaryfile}{glossary.tex}
+%    \end{macrocode}
+% \end{macro}
+%
+% On définit la macro (publique) où est stocké le nom du fichier contenant les
+% définitions des acronymes.
+% \begin{macro}{\acronymsfile}
+%    \begin{macrocode}
+\newcommand*{\acronymsfile}{acronyms.tex}
+%    \end{macrocode}
+% \end{macro}
+%
+% On définit la macro (publique) où est stocké le nom du fichier contenant les
+% définitions des acronymes.
+% \begin{macro}{\symbolsfile}
+%    \begin{macrocode}
+\newcommand*{\symbolsfile}{symbols.tex}
+%    \end{macrocode}
+% \end{macro}
+%
+% On définit la macro (publique) où est stocké le nom du répertoire des images
+% de la thèse.
+% \begin{macro}{\imagesdirectory}
+%    \begin{macrocode}
+\newcommand*{\imagesdirectory}{images}
+%    \end{macrocode}
+% \end{macro}
+%
+% On définit la macro (publique) où est stocké le nom du fichier maître de la
+% thèse.
+% \begin{macro}{\thesismasterfile}
+%    \begin{macrocode}
+\newcommand*{\thesismasterfile}{these}
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
+%</class|class-doc-package>
+%<*class>
+%    \end{macrocode}
+%
+% Recherche automatique des fichiers images dans le répertoire \path{images}.
+% Ceci permet de ne pas spécifier le chemin des images qui s'y trouvent.
+%
+%    \begin{macrocode}
+% \graphicspath{{\imagesdirectory/}}
+%    \end{macrocode}
+%
+% Réglages propres au \Package{siunitx} (nombres composés avec la
+% fonte courante et adoption des conventions typographiques
+% françaises, notamment la virgule en guise de séparateur décimal).
+%    \begin{macrocode}
+\AtEndPreamble{%
+  \@ifpackageloaded{siunitx}{%
+    \sisetup{detect-all}%
+    \ifthenelse{\equal{\YAD@mainlanguage}{french}}{%
+      \sisetup{locale=FR}%
+    }{%
+      \sisetup{locale=UK}%
+    }%
+  }{%
+  }%
+}%
+%    \end{macrocode}
+%
+% \begin{macro}{\YAD@reach@file}
+% Macro offrant la possibilité de cliquer sur un hyperlien pour ouvrir
+% les fichier permettant de modifier les mots et expressions clés du
+% canevas de thèse et les données de la thèse
+%    \begin{macrocode}
+\newcommand*{\YAD@reach@file}[2][\titlefile]{%
+  \ifdraft{%
+    \ifthenelse{\equal{\titlefile}{#1}}{%
+      \hypersetup{urlbordercolor={0.5 0 0.5}}%
+    }{%
+      \hypersetup{urlbordercolor={1 0.5 0}}%
+    }%
+    \IfFileExists{\configurationdirectory/#1}{%
+       \YAD@href{\configurationdirectory/#1}{#2}%
+    }{%
+      \YAD@href{\jobname.tex}{#2}%
+    }
+  }{%
+    #2%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+% On définit la macro ×\YAD@href× identique à la macro ×\href× du
+% \Package{hyperref} pour les pages de titre(s) et du laboratoire.
+%    \begin{macrocode}
+  \newcommand{\YAD@href}[3][]{%
+    \href[#1]{#2}{#3}%
+  }%
+%    \end{macrocode}
+%
+% Si on est en mode ×printed× (impression sur papier) la macro
+% ×\YAD@href×\meta{\acrshort*{url}}×}{×\meta{texte}×}× n'affiche que le
+% \meta{texte} et les hyperliens des macros
+% ×\url× sont supprimés. En outre, les commandes
+% ×\href{×\meta{\acrshort*{url}}×}{×\meta{texte}×}× du \Package{hyperref} sont
+% automatiquement remplacées par :
+% \begin{itemize}
+% \item \meta{texte}×\footnote{×\meta{\acrshort*{url}}×}× ;
+% \item \meta{texte} ×(×\meta{\acrshort*{url}}×)× ;
+% \end{itemize}
+% selon que ×\href{×\meta{\acrshort*{url}}×}{×\meta{texte}×}× est dans le texte
+% ordinaire ou elle-même en note de bas de page.
+%    \begin{macrocode}
+\iftoggle{YAD@printed@on@paper}{%
+  \hypersetup{draft}%
+  \renewcommand{\YAD@href}[3][]{%
+    #3%
+  }%
+  \let\YAD@ori@footnote\footnote%
+  \renewcommand{\footnote}[1]{\toggletrue{YAD@in@footnote}\YAD@ori@footnote{#1}\togglefalse{YAD@in@footnote}}%
+  \renewcommand*\url[1]{\nolinkurl{#1}}%
+  \renewcommand*\href[3][]{%
+    \iftoggle{YAD@in@footnote}{%
+      #3 (\url{#2})
+    }{%
+      #3\footnote{\url{#2}}
+    }%
+  }%
+}{%
+}%
+%    \end{macrocode}
+%
+% On fixe la couleur du filigrane inséré lorsque le
+% \Package{draftwatermark} est chargé.
+%    \begin{macrocode}
+\@ifpackageloaded{draftwatermark}{%
+  \SetWatermarkColor{gray!10}%
+}{%
+}%
+%    \end{macrocode}
+% En cas de travail en cours, on l'indique en filigrane.
+%    \begin{macrocode}
+\iftoggle{YAD@work@inprogress}{%
+  \SetWatermarkFontSize{3cm}%
+  \AfterEndPreamble{\translatelet\YAD@trintermediate{lbl-intermediate}}%
+  \SetWatermarkText{\MakeUppercase{\YAD@trintermediate}}%
+}{%
+}%
+%    \end{macrocode}
+% Si l'option ×draft× est activée, on indique clairement qu'on est en
+% mode brouillon au moyen d'un texte en filigrane
+%    \begin{macrocode}
+\ifdraft{%
+  \AfterEndPreamble{\translatelet\YAD@trdraft{lbl-draft}}%
+  \SetWatermarkText{\MakeUppercase{\YAD@trdraft}}%
+}{%
+}%
+%    \end{macrocode}
+%
+% Commande permettant de composer les arguments génériques
+% \begin{macro}{\YAD@generic@argument@}
+%    \begin{macrocode}
+\newcommand*{\YAD@generic@argument}[1]{%
+  \bgroup\color{brown}{\normalfont\textlangle}\textit{\texttt{#1}}{\normalfont\textrangle}\egroup%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\YAD@translation}
+%   Commande adjoignant à ×\translate× les hyperliens vers le fichier
+%   de configuration où peuvent être surchargées les traductions
+%    \begin{macrocode}
+\newcommand*{\YAD@translation}[1]{%
+  \ifthenelse{\isempty{#1}}{%
+  }{%
+    \ifdraft{%
+      \scriptsize%
+      \begin{tabular}{l}
+        {%
+          \normalfont\ttfamily\tiny%
+          (lbl-#1)%
+        }%
+        \\[-.3\baselineskip]
+        \YAD@reach@file[\configurationfile]{%
+          \translate{lbl-#1}%
+        }%
+      \end{tabular}
+    }{%
+    \translate{lbl-#1}%
+    }%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\YAD@astuce@expressioncle}
+%    \begin{macrocode}
+\newcommand{\YAD@astuce@expressioncle}{%
+  \ifdraft{%
+    \begin{center}
+      \footnotesize%
+      \fboxrule4pt%
+      \fcolorbox{red}{white}{%
+        \begin{minipage}{.9\linewidth}
+          \selectlanguage{french}%
+          Sur cette page, il est simple de (re)d\'efinir\ifundef{\Fcolonspace}{\FBcolonspace}{\Fcolonspace}:
+          \begin{enumerate}
+          \item une
+            \YAD@reach@file[\configurationfile]{expression
+              cl\'e}\ifundef{\Fcolonspace}{\FBcolonspace}{\Fcolonspace}:
+            il suffit de cliquer sur le cadre de couleur orange qui
+            l'entoure pour atteindre le fichier
+            \YAD@reach@file[\configurationfile]{\texttt{\configurationfile}}
+            et d'y ins\'erer
+            \begin{center}
+              \lstinline[morekeywords=expression]|\\expression\{|%
+              \YAD@meta{label}%
+              \lstinline|\}\{|%
+              \YAD@meta{valeur (en fran\c cais)}%
+              \lstinline|\}\{|%
+              \YAD@meta{valeur (en anglais)}%
+              \lstinline|\}|
+            \end{center}
+            pour lui donner une (nouvelle) \YAD@meta{valeur} (\'eventuellement
+            vide), \YAD@meta{label} \'etant son identifiant indiqu\'e au-dessus et
+            entre parenth\`eses\ifundef{\Fcolonspace}{\FBcolonspace}{\Fcolonspace};
+          \item une \YAD@reach@file{donn\'ee}\ifundef{\Fcolonspace}{\FBcolonspace}{\Fcolonspace}: il
+            suffit de cliquer sur le cadre de couleur pourpre qui l'entoure
+            pour atteindre le fichier
+            \YAD@reach@file{\texttt{\titlefile}} o\`u elle est
+            d\'efinie.
+          \end{enumerate}
+          Pour plus de d\'etails, consulter la documentation de la
+          classe \textsl{yathesis}.%
+        \end{minipage}
+      }%
+    \end{center}
+  }{%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\expression}
+%   On offre la possibilité de (re)définir les expressions clés de la thèse.
+%   Le 1\ier{} argument est le label de l'expression et les 2\ieme{} et
+%   3\ieme{} arguments permettent de stipuler les (nouvelles) valeurs
+%   (éventuellement vides) de l'expresion respectivement en français et en
+%   anglais.
+%    \begin{macrocode}
+\newcommand{\expression}[3]{%
+  \AtBeginDocument{%
+    \deftranslation[to=French]{#1}{#2}%
+    \deftranslation[to=English]{#1}{#3}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\YAD@generic@argument@translate}
+%    \begin{macrocode}
+\newcommand*{\YAD@generic@argument@translate}[1]{%
+  \texorpdfstring{\YAD@generic@argument{\translate{meta-#1}}}{<#1>}%
+%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+% Déclarations permettant de définir des macros des directeurs (dont
+% d'éventuels co-directeurs), rapporteurs et examinateurs (dont le président du
+% jury) dont les arguments puissent être spécifiés sous la forme \meta{clé} =
+% \meta{valeur} (grâce au package \package{xkeyval}). La famille est nommée
+% \lstinline|YAD| (comme \foreignquote{english}{yet antoher document}).
+%    \begin{macrocode}
+\define@cmdkeys{YAD}{%
+  role,%
+  corporation,%
+  url,%
+  logoheight,%
+  logo,%
+  address,%
+  telephone,%
+  fax,%
+  email,%
+  % distinction,%
+  % award,%
+  affiliation,%
+  sepcorpaffilfrench,%
+  affiliationsecondary,%
+  sepcorpaffilenglish,%
+  name,%
+  depth%
+}[]%
+\define@boolkeys{YAD}{%
+  nologo,%
+  professor,%
+  mcf,%
+  mcf*,%
+  juniorresearcher,%
+  juniorresearcher*,%
+  seniorresearcher,%
+}[true]%
+\newcommand*{\yatsetup}[1]{%
+  \presetkeys{YAD}{#1}{}%
+}%
+\presetkeys{YAD}{%
+  role=,%
+  corporation=,%
+  url=,%
+  logoheight=\YAD@logo@height,%
+  logo=,%
+  address=,%
+  telephone=,%
+  fax=,%
+  email=,%
+  % distinction=,%
+  % award=,%
+  affiliation=,%
+  sepcorpaffilfrench=\YAD@global@sepcorpaffil@french,%
+  affiliationsecondary=,%
+  sepcorpaffilenglish=\YAD@global@sepcorpaffil@english,%
+  name=\contentsname,%
+  depth=subsubsection,%
+  nologo=false,%
+  professor=false,%
+  mcf=false,%
+  mcf*=false,%
+  juniorresearcher=false,%
+  juniorresearcher*=false,%
+  seniorresearcher=false,%
+}{}%
+%    \end{macrocode}
+% Définition de nouvelles bases de données
+%    \begin{macrocode}
+\DTLnewdb{YAD@staffs}%
+\DTLnewrow{YAD@staffs}%
+\DTLnewdbentry{YAD@staffs}{YAD@the@staff}{referees}%
+\DTLnewrow{YAD@staffs}%
+\DTLnewdbentry{YAD@staffs}{YAD@the@staff}{examiners}%
+\DTLnewrow{YAD@staffs}%
+\DTLnewdbentry{YAD@staffs}{YAD@the@staff}{guests}%
+\DTLnewrow{YAD@staffs}%
+\DTLnewdbentry{YAD@staffs}{YAD@the@staff}{supervisors}%
+%
+\DTLforeach{YAD@staffs}{%
+  \YAD@the@staff=YAD@the@staff}{%
+  \DTLnewdb{\YAD@the@staff}%
+}%
+%
+\DTLnewdb{dedications}%
+\DTLnewdb{frontepigraphs}%
+%    \end{macrocode}
+%
+% \begin{macro}{\YAD@staff}
+%    \begin{macrocode}
+\newcommand*{\YAD@staff}[4][]{%
+  \dtlexpandnewvalue%
+  \setkeys{YAD}{#1}%
+  \ifKV@YAD@professor%
+  \setkeys{YAD}{#1,corporation=professor}%
+  \fi%
+  \ifKV@YAD@mcf%
+  \setkeys{YAD}{#1,corporation=mcf}%
+  \fi%
+  \csuse{ifKV@YAD@mcf*}%
+  \setkeys{YAD}{#1,corporation=mcf*}%
+  \fi%
+  \ifKV@YAD@juniorresearcher%
+  \setkeys{YAD}{#1,corporation=juniorresearcher}%
+  \fi%
+  \csuse{ifKV@YAD@juniorresearcher*}%
+  \setkeys{YAD}{#1,corporation=juniorresearcher*}%
+  \fi%
+  \ifKV@YAD@seniorresearcher%
+  \setkeys{YAD}{#1,corporation=seniorresearcher}%
+  \fi%
+  \DTLnewrow{#4}%
+  \DTLnewdbentry{#4}{firstname}{#2}%
+  \DTLnewdbentry{#4}{lastname}{#3}%
+  \ifthenelse{\equal{\cmdKV@YAD@role}{}}{%
+    \DTLnewdbentry{#4}{role}{}%
+  }{%
+    \DTLnewdbentry{#4}{role}{\cmdKV@YAD@role}%
+  }%
+  \ifthenelse{\equal{\cmdKV@YAD@corporation}{}}{%
+    \DTLnewdbentry{#4}{corporation}{}%
+  }{%
+    \DTLnewdbentry{#4}{corporation}{\cmdKV@YAD@corporation}%
+  }%
+  \ifthenelse{\equal{\cmdKV@YAD@sepcorpaffilfrench}{}}{%
+    \DTLnewdbentry{#4}{sepcorpaffilfrench}{\YAD@global@sepcorpaffil@french}%
+  }{%
+    \DTLnewdbentry{#4}{sepcorpaffilfrench}{\cmdKV@YAD@sepcorpaffilfrench}%
+  }%
+  \ifthenelse{\equal{\cmdKV@YAD@sepcorpaffilenglish}{}}{%
+    \DTLnewdbentry{#4}{sepcorpaffilenglish}{\YAD@global@sepcorpaffil@english}%
+  }{%
+    \DTLnewdbentry{#4}{sepcorpaffilenglish}{\cmdKV@YAD@sepcorpaffilenglish}%
+  }%
+  \ifthenelse{\equal{\cmdKV@YAD@affiliation}{}}{%
+    \DTLnewdbentry{#4}{affiliation}{}%
+  }{%
+    \DTLnewdbentry{#4}{affiliation}{\cmdKV@YAD@affiliation}%
+  }%
+  \ifthenelse{\equal{\cmdKV@YAD@affiliationsecondary}{}}{%
+    \DTLnewdbentry{#4}{affiliationsecondary}{\cmdKV@YAD@affiliation}%
+  }{%
+    \DTLnewdbentry{#4}{affiliationsecondary}{\cmdKV@YAD@affiliationsecondary}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\YAD@supervisors}
+%    \begin{macrocode}
+\newcommand*{\YAD@supervisors}[3][]{%
+  \YAD@staff[#1]{#2}{#3}{supervisors}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\supervisor}
+%    \begin{macrocode}
+\newcommand*{\supervisor}[3][]{%
+  \YAD@supervisors[#1,role=supervisor]{#2}{#3}%
+  \toggletrue{YAD@supervisor@specified}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\cosupervisor}
+%    \begin{macrocode}
+\newcommand*{\cosupervisor}[3][]{%
+  \YAD@supervisors[#1,role=cosupervisor]{#2}{#3}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\comonitor}
+%    \begin{macrocode}
+\newcommand*{\comonitor}[3][]{%
+  \YAD@supervisors[#1,role=comonitor]{#2}{#3}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\guest}
+%    \begin{macrocode}
+\newcommand*{\guest}[3][]{%
+  \YAD@staff[#1]{#2}{#3}{guests}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\referee}
+%    \begin{macrocode}
+\newcommand*{\referee}[3][]{%
+  \YAD@staff[#1]{#2}{#3}{referees}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\examiner}
+%    \begin{macrocode}
+\newcommand*{\examiner}[3][]{%
+  \YAD@staff[#1]{#2}{#3}{examiners}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\committeepresident}
+%    \begin{macrocode}
+\newcommand*{\committeepresident}[3][]{%
+  \examiner[#1,role=committeepresident]{#2}{#3}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
+\newcommand*{\YAD@al}{ \`a l'}%
+\newcommand*{\YAD@au}{ au }%
+\newcommand*{\YAD@del}{ de l'}%
+\newcommand*{\YAD@du}{ du }%
+%
+\newcommand*{\YAD@alaudeldu}[3]{%
+  \ifboolexpr{%
+    test {\IfBeginWith{#3}{a}} or %
+    test {\IfBeginWith{#3}{e}} or %
+    test {\IfBeginWith{#3}{i}} or %
+    test {\IfBeginWith{#3}{o}} or %
+    test {\IfBeginWith{#3}{u}} or %
+    test {\IfBeginWith{#3}{y}} or %
+    test {\IfBeginWith{#3}{\`a}} or %
+    test {\IfBeginWith{#3}{\^a}} or %
+    test {\IfBeginWith{#3}{\"a}} or %
+    test {\IfBeginWith{#3}{\'e}} or %
+    test {\IfBeginWith{#3}{\`e}} or %
+    test {\IfBeginWith{#3}{\^e}} or %
+    test {\IfBeginWith{#3}{\"e}} or %
+    test {\IfBeginWith{#3}{\^i}} or %
+    test {\IfBeginWith{#3}{\"i}} or %
+    test {\IfBeginWith{#3}{\^o}} or %
+    test {\IfBeginWith{#3}{\"o}} or %
+    test {\IfBeginWith{#3}{\`u}} or %
+    test {\IfBeginWith{#3}{\^u}} or %
+    test {\IfBeginWith{#3}{\"u}} or %
+    test {\IfBeginWith{#3}{\"y}} or %
+    test {\IfBeginWith{#3}{A}} or %
+    test {\IfBeginWith{#3}{E}} or %
+    test {\IfBeginWith{#3}{I}} or %
+    test {\IfBeginWith{#3}{O}} or %
+    test {\IfBeginWith{#3}{U}} or %
+    test {\IfBeginWith{#3}{Y}} or %
+    test {\IfBeginWith{#3}{\`A}} or %
+    test {\IfBeginWith{#3}{\^A}} or %
+    test {\IfBeginWith{#3}{\"A}} or %
+    test {\IfBeginWith{#3}{\'E}} or %
+    test {\IfBeginWith{#3}{\`E}} or %
+    test {\IfBeginWith{#3}{\^E}} or %
+    test {\IfBeginWith{#3}{\"E}} or %
+    test {\IfBeginWith{#3}{\^I}} or %
+    test {\IfBeginWith{#3}{\"I}} or %
+    test {\IfBeginWith{#3}{\^O}} or %
+    test {\IfBeginWith{#3}{\"O}} or %
+    test {\IfBeginWith{#3}{\`U}} or %
+    test {\IfBeginWith{#3}{\^U}} or %
+    test {\IfBeginWith{#3}{\"U}} or %
+    test {\IfBeginWith{#3}{\"Y}} or %
+    test {\IfBeginWith{#3}{\ae}} or %
+    test {\IfBeginWith{#3}{\oe}} or %
+    test {\IfBeginWith{#3}{\AE}} or %
+    test {\IfBeginWith{#3}{\OE}}%
+  }%
+  {#1}{#2}%
+  #3%
+}%
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\newcommand*{\YAD@committee@tabular}{%
+  {%
+    \small%
+    \DTLifdbempty{\YAD@the@staff}{}{%
+      \vspace{\stretch{1}}%
+      \begin{tabular}[t]{>{\itshape}lllll}
+        \multicolumn{5}{@{}l}{\bfseries\YAD@translation{committeemembers}}%
+        \\[.25cm]
+        \DTLforeach*{YAD@staffs}{%
+          \YAD@the@staff=YAD@the@staff%
+        }{%
+          \DTLforeach*{\YAD@the@staff}{%
+            \YAD@committeemember@lastname=lastname,%
+            \YAD@committeemember@fistname=firstname,%
+            \YAD@committeemember@role=role,%
+            \YAD@committeemember@corporation=corporation,%
+            \YAD@committeemember@sepcorpaffil=%
+            \expandafter\iflanguage{french}{%
+              sepcorpaffilfrench%
+            }{%
+              sepcorpaffilenglish%
+            }%
+            ,%
+            \YAD@committeemember@affiliation=%
+            \iflanguage{french}{%
+              affiliation%
+            }{%
+              affiliationsecondary%
+            }%
+          }{%
+            % Nature des membres du jury
+            \DTLiffirstrow{%
+              \ifthenelse{\DTLrowcount{\YAD@the@staff}>1}{%
+                \YAD@translation{\YAD@the@staff-pl}%
+              }{%
+                \YAD@translation{\YAD@the@staff}%
+              }%
+            }{%
+            }%
+            &
+            % Prénom
+            \YAD@reach@file{%
+              %
+              \ifthenelse{\DTLiseq{\YAD@committeemember@fistname}{}}{%
+                \YAD@generic@argument@translate{firstname}%
+              }{%
+                \YAD@committeemember@fistname%
+              }%
+%    \end{macrocode}
+% L'accolade suivante ne doit pas être suivie d'un ×%× sans quoi il
+% n'y aura pas d'espace entre le prénom et le nom.
+%    \begin{macrocode}
+            }
+            % Nom
+            \YAD@reach@file{%
+              \ifthenelse{\DTLiseq{\YAD@committeemember@lastname}{}}{%
+                \YAD@generic@argument@translate{lastname}%
+              }{%
+                \textsc{\YAD@committeemember@lastname}%
+              }%
+            }%
+            &
+            % Fonction
+            \YAD@reach@file{%
+              \ifthenelse{\DTLiseq{\YAD@committeemember@role}{}}{%
+                \ifdraft{%
+                  \YAD@generic@argument@translate{role}%
+                }{%
+                }%
+              }{%
+                \ifthenelse{\equal{\YAD@the@staff}{supervisors}}{%
+                  \ifthenelse{\DTLrowcount{supervisors}>1}{%
+                    \YAD@translation{%
+                      \YAD@committeemember@role%
+                    }%
+                  }{%
+                  }%
+                }{%
+                  \YAD@translation{%
+                    \YAD@committeemember@role%
+                  }%
+                }%
+              }%
+            }%
+            &
+            % Corporation
+            \YAD@reach@file{%
+              \ifthenelse{\DTLiseq{\YAD@committeemember@corporation}{}}{%
+                \ifdraft{%
+                  \YAD@generic@argument@translate{corporation}%
+                }{%
+                }%
+              }{%
+                \YAD@translation{%
+                  \YAD@committeemember@corporation%
+                }%
+              }%
+            }%
+            % Établissement
+            \YAD@reach@file{%
+              \ifthenelse{\DTLiseq{\YAD@committeemember@affiliation}{}}{%
+                \ifdraft{%
+                  \YAD@generic@argument@translate{affiliation}%
+                }{%
+                }%
+              }{%
+                \ifthenelse{\DTLiseq{\YAD@committeemember@corporation}{}}{%
+                  \YAD@committeemember@affiliation%
+                }{%
+                  \ifthenelse{\equal{\YAD@committeemember@sepcorpaffil}{}}{%
+                    \YAD@alaudeldu{\YAD@al}{\YAD@au}{\YAD@committeemember@affiliation}%
+                  }{%
+                    \YAD@committeemember@sepcorpaffil\YAD@committeemember@affiliation%
+                  }%
+                }%
+              }%
+            }%
+            \DTLiflastrow{%
+              \\[.25cm]
+            }{%
+              \\
+            }%
+          }%
+        }%
+      \end{tabular}
+    }%
+  }%
+}%
+%    \end{macrocode}
+%
+% \begin{macro}{\YAD@meta}
+%    \begin{macrocode}
+\DeclareRobustCommand*\YAD@meta{\YAD@generic@argument}%
+%    \end{macrocode}
+% \end{macro}
+%
+% Commande où seront stockés les logos (avec écrasement à chaque
+% nouveau logo).
+%    \begin{macrocode}
+        \newcommand*\YAD@logo{}%
+%    \end{macrocode}
+%
+% On crée une commande créant des commandes.
+%
+%    \begin{macrocode}
+\newcommand*{\YAD@create@macro}[2][]{%
+%    \end{macrocode}
+% Création d'une commande standard
+%    \begin{macrocode}
+  \ifthenelse{\isempty{#1}}{%
+    \csdef{#2}##1{%
+%    \end{macrocode}
+% Création de la commande affichant le résultat de la commande standard
+%    \begin{macrocode}
+      \csdef{print#2}{%
+        \YAD@reach@file{%
+          \ifthenelse{\isempty{##1}}{%
+            \YAD@generic@argument@translate{#2}%
+          }{%
+            ##1%
+          }%
+        }%
+      }%
+    }%
+  }{%
+  }%
+%    \end{macrocode}
+% Création d'une commande de type email
+%    \begin{macrocode}
+  \ifthenelse{\equal{#1}{email}}{%
+    \csdef{#1#2}##1{%
+%    \end{macrocode}
+% Création de la commande affichant le résultat de la commande
+% de type email
+%    \begin{macrocode}
+      \csdef{print#1#2}{%
+        \YAD@reach@file{%
+          \ifthenelse{\isempty{##1}}{%
+            \if@nolink%
+            \YAD@generic@argument@translate{#1#2}%
+            \else%
+            \YAD@href{mailto:#1.#2@institute.fr}{\YAD@generic@argument@translate{#1#2}}%
+            \fi%
+          }{%
+            \if@nolink%
+            \nolinkurl{##1}%
+            \else%
+            \YAD@href{mailto:##1}{\nolinkurl{##1}}%
+            \fi%
+          }%
+        }%
+      }%
+    }%
+  }{%
+  }%
+%    \end{macrocode}
+% Création d'une commande de type URL
+%    \begin{macrocode}
+  \ifthenelse{\equal{#1}{url}}{%
+    \csdef{#1#2}##1{%
+%    \end{macrocode}
+% Création de la commande affichant le résultat de type URL
+%    \begin{macrocode}
+      \csdef{print#1#2}{%
+        \YAD@reach@file{%
+          \ifthenelse{\isempty{##1}}{%
+            \if@nolink%
+            \YAD@generic@argument@translate{#1#2}%
+            \else%
+            \url{%
+              \YAD@generic@argument@translate{#1#2}%
+            }%
+            \fi%
+          }{%
+            \if@nolink%
+            \nolinkurl{##1}%
+            \else%
+            \url{%
+              ##1%
+            }%
+            \fi%
+          }%
+        }%
+      }%
+    }%
+  }{%
+  }%
+%    \end{macrocode}
+% Création d'une commande pour une entité (école doctorale,
+% établissement, laboratoire, etc.)
+%    \begin{macrocode}
+  \ifthenelse{\equal{#1}{entite}}{%
+    \expandafter\newcommand\expandafter{\csname #2\endcsname}[2][]{%
+%    \end{macrocode}
+% Création de la commande affichant l'entité.
+%    \begin{macrocode}
+\csdef{print#2}{%
+  \@ifstar{\csuse{YAD@print#2@star}}{\csuse{YAD@print#2@nostar}}%
+}%
+\csdef{YAD@print#2@star}{%
+  \ifthenelse{\isempty{##2}}{%
+    \YAD@ClassWarningNoLine{%
+      La commande \csuse{#2}\space a \'et\'e employ\'ee\MessageBreak%
+      mais avec un argument obligatoire vide.\MessageBreak%
+      Un texte g\'en\'erique va \^etre affich\'e\MessageBreak%
+      \`a la place%
+    }%
+    \YAD@reach@file{\YAD@generic@argument@translate{#2}}%
+  }{%
+    \YAD@reach@file{##2}%
+  }%
+}%
+\csdef{YAD@print#2@nostar}{%
+  \let\YAD@texte\relax%
+  \csdef{YAD@texte}{%
+    \ifthenelse{\isempty{##2}}{%
+      \YAD@ClassWarningNoLine{%
+        La commande \csuse{#2}\space a \'et\'e employ\'ee\MessageBreak%
+        mais avec un argument obligatoire vide.\MessageBreak%
+        Un texte g\'en\'erique va \^etre affich\'e\MessageBreak%
+        \`a la place%
+      }%
+      \YAD@reach@file{\YAD@generic@argument@translate{#2}}%
+    }{%
+      ##2%
+    }%
+  }%
+  \setkeys{YAD}{##1}%
+  \ifthenelse{\equal{\cmdKV@YAD@url}{}}{%
+    \ifdraft{%
+      \YAD@reach@file{%
+        \YAD@texte%
+      }%
+    }{%
+      \if@nolink%
+      \YAD@texte%
+      \else%
+      \YAD@href{www.#2.fr}{\YAD@texte}%
+      \fi%
+    }%
+  }{%
+    \ifdraft{%
+      \YAD@reach@file{%
+        \YAD@texte%
+      }%
+    }{%
+      \if@nolink%
+      \YAD@texte%
+      \else%
+      \YAD@href{\cmdKV@YAD@url}{\YAD@texte}%
+      \fi%
+    }%
+  }%
+}%
+%    \end{macrocode}
+% Création de la commande affichant l'URL de l'entité
+%    \begin{macrocode}
+% \csdef{print#2url}{%
+% \setkeys{YAD}{##1}%
+% \newcommand*\YAD@texteurl{%
+% \ifthenelse{\equal{\cmdKV@YAD@url}{}}{%
+% \YAD@reach@file{\YAD@generic@argument@translate{url#2}}%
+% }{%
+% \YAD@reach@file{\nolinkurl{\cmdKV@YAD@url}}%
+% }%
+% }%
+% \ifthenelse{\equal{\cmdKV@YAD@url}{}}{%
+% \if@nolink%
+% \YAD@texteurl%
+% \else%
+% \YAD@href{www.#2.fr}{\YAD@texteurl}%
+% \fi%
+% }{%
+% \ifdraft{%
+% \YAD@texteurl%
+% }{%
+% \if@nolink%
+% \nolinkurl{\cmdKV@YAD@url}%
+% \else%
+% \url{%
+% \cmdKV@YAD@url%
+% }%
+% \fi%
+% }%
+% }%
+% }%
+%    \end{macrocode}
+% Création de la commande affichant l'adresse de l'entité
+%    \begin{macrocode}
+      \csdef{print#2address}{%
+        \setkeys{YAD}{##1}%
+        \ifthenelse{\equal{\cmdKV@YAD@address}{}}{%
+          \YAD@reach@file{\YAD@generic@argument@translate{address#2}}%
+        }{%
+          \YAD@reach@file{\cmdKV@YAD@address}%
+        }%
+        %
+      }%
+%    \end{macrocode}
+% Création de la commande affichant le téléphone de l'entité
+%    \begin{macrocode}
+      \csdef{print#2telephone}{%
+        \setkeys{YAD}{##1}%
+        \ifthenelse{\equal{\cmdKV@YAD@telephone}{}}{%
+          \YAD@reach@file{\YAD@generic@argument@translate{telephone#2}}%
+        }{%
+          \YAD@reach@file{\cmdKV@YAD@telephone}%
+        }%
+        %
+      }%
+%    \end{macrocode}
+% Création de la commande affichant le fax de l'entité
+%    \begin{macrocode}
+      \csdef{print#2fax}{%
+        \setkeys{YAD}{##1}%
+        \ifthenelse{\equal{\cmdKV@YAD@fax}{}}{%
+          \YAD@reach@file{\YAD@generic@argument@translate{fax#2}}%
+        }{%
+          \YAD@reach@file{\cmdKV@YAD@fax}%
+        }%
+        %
+      }%
+%    \end{macrocode}
+% Création de la commande affichant le résultat de la commande
+% de type email
+%    \begin{macrocode}
+\csdef{print#2email}{%
+  \YAD@reach@file{%
+    \ifthenelse{\equal{\cmdKV@YAD@email}{}}{%
+      \if@nolink%
+      \YAD@generic@argument@translate{#2email}%
+      \else%
+      \YAD@href{mailto:#2@institute.fr}{\YAD@generic@argument@translate{#2email}}%
+      \fi%
+    }{%
+      \if@nolink%
+      \nolinkurl{\cmdKV@YAD@email}%
+      \else%
+      \YAD@href{mailto:\cmdKV@YAD@email}{\nolinkurl{\cmdKV@YAD@email}}%
+      \fi%
+    }%
+  }%
+}%
+%    \end{macrocode}
+% Création de la commande affichant le logo de l'entité (sauf si ×nologo× est demandé).
+%    \begin{macrocode}
+      \setkeys{YAD}{##1}%
+      \ifKV@YAD@nologo%
+      \else%
+      \csdef{print#2logo}{%
+%    \end{macrocode}
+% Un avertissement est émis si le logo de l'école doctorale est fourni car
+% celui-ci n'apparaîtra nulle part.
+%    \begin{macrocode}
+        \ifthenelse{\equal{#2}{doctoralschool}}{%
+          \YAD@ClassWarningNoLine{%
+            Le logo de l'\'ecole doctorale a \'et\'e fourni mais\MessageBreak%
+            il n'appara\^itra nulle part. Veuillez le supprimer%
+          }%
+        }{%
+        }%
+        \@ifstar{\@tempswatrue\csuse{YAD@starnostar@print#2logo}}{\@tempswafalse\csuse{YAD@starnostar@print#2logo}}%
+      }%
+      \csdef{YAD@starnostar@print#2logo}{%
+        \setkeys{YAD}{##1}%
+        \renewcommand*\YAD@logo{%
+          \ifthenelse{\equal{\cmdKV@YAD@logo}{}}{%
+            \YAD@reach@file{\YAD@generic@argument@translate{logo#2}}%
+          }{%
+            \YAD@reach@file{%
+              \includegraphics[height=\cmdKV@YAD@logoheight]{\cmdKV@YAD@logo}%
+            }%
+          }%
+        }%
+        \if@tempswa%
+        \else%
+        \if@nolink%
+        \YAD@logo%
+        \else%
+        \ifthenelse{\equal{\cmdKV@YAD@url}{}}{%
+          \YAD@href{www.#2.fr}{\YAD@logo}%
+        }{%
+          \YAD@href{\cmdKV@YAD@url}{\YAD@logo}%
+        }%
+        \fi%
+        \fi%
+      }%
+      \fi%
+      %
+    }%
+  }{%
+  }%
+%    \end{macrocode}
+% Création d'une commande bilingue
+%    \begin{macrocode}
+\ifthenelse{\equal{#1}{bilingue}}{%
+  \ifthenelse{\isnamedefined{#2}}{%
+  }{%
+    \csdef{#2}{}%
+  }%
+  \expandafter\renewcommand\expandafter{\csname #2\endcsname}[2][]{%
+%    \end{macrocode}
+% Création des commandes pour les méta-données du PDF
+%    \begin{macrocode}
+\ifthenelse{\isempty{##1}}{%
+  \csdef{YAD@meta#2}{%
+    ##2%
+  }%
+}{%
+  \csdef{YAD@meta#2}{%
+    ##2 (##1)%
+  }%
+}%
+\ifthenelse{\equal{#2}{title}}{%
+  \hypersetup{pdftitle=\YAD@metatitle}%
+}{%
+}%
+\ifundef{\YAD@metakeywords}{%
+}{%
+  \hypersetup{pdfkeywords=\YAD@metakeywords}%
+}%
+\ifundef{\YAD@metasubject}{%
+  \ifundef{\YAD@metaacademicfield}{%
+  }{%
+    \hypersetup{pdfsubject=\YAD@metaacademicfield}%
+  }%
+}{%
+  \hypersetup{pdfsubject=\YAD@metasubject}%
+}%
+%    \end{macrocode}
+% Création de la commande affichant le résultat de la commande bilingue
+%    \begin{macrocode}
+\csdef{print#2}{%
+        \YAD@reach@file{%
+          \expandafter\iflanguage{\YAD@mainlanguage}{%
+%    \end{macrocode}
+% En langue principale
+%    \begin{macrocode}
+            \ifthenelse{\isempty{##2}}{%
+              \YAD@ClassWarningNoLine{%
+                La commande \csuse{#2}\space a \'et\'e employ\'ee\MessageBreak%
+                mais avec un argument obligatoire vide.\MessageBreak%
+                Un texte g\'en\'erique va \^etre affich\'e\MessageBreak%
+                \`a la place%
+              }%
+              \YAD@reach@file{\YAD@generic@argument@translate{#2}}%
+            }{%
+              \YAD@reach@file{##2}%
+            }%
+          }{%
+%    \end{macrocode}
+% En langue secondaire
+%    \begin{macrocode}
+            \ifthenelse{\isempty{##1}}{%
+              \iftoggle{YAD@two@titles}{%
+                \YAD@ClassWarningNoLine{%
+                  La commande \csuse{#2}\space a \'et\'e employ\'ee\MessageBreak%
+                  mais avec un argument optionnel vide.\MessageBreak%
+                  Un texte g\'en\'erique va \^etre affich\'e\MessageBreak%
+                  \`a la place%
+                }%
+                \YAD@reach@file{\YAD@generic@argument@translate{#2}}%
+                }{%
+                }%
+            }{%
+              \YAD@reach@file{##1}%
+            }%
+          }%
+        }%
+      }%
+      \ifthenelse{\isempty{##1}}{%
+      }{%
+        \ifthenelse{\equal{#2}{subject}}{%
+        }{%
+          \toggletrue{YAD@two@titles}%
+        }%
+      }%
+    }%
+  }{%
+  }%
+}%
+%    \end{macrocode}
+%
+% Définition des commandes des données de la thèse
+%
+%    \begin{macrocode}
+\YAD@create@macro[entite]{pres}
+\YAD@create@macro[entite]{institute}
+\YAD@create@macro[entite]{coinstitute}
+\YAD@create@macro[entite]{company}
+\YAD@create@macro[entite]{cocompany}
+\YAD@create@macro[entite]{doctoralschool}
+\YAD@create@macro[bilingue]{academicfield}
+\YAD@create@macro[bilingue]{speciality}
+\YAD@create@macro[bilingue]{title}
+\YAD@create@macro[bilingue]{subtitle}
+\YAD@create@macro[bilingue]{subject}
+\YAD@create@macro{disclaimer}
+%    \end{macrocode}
+% Commande définissant le numéro d'ordre de la thèse, tel qu'exigé par certains
+% instituts.
+% \begin{macro}{\ordernumber}
+%    \begin{macrocode}
+\newcommand{\ordernumber}{%
+  \@ifnextchar[{%
+    \YAD@ordernumber@with@argument%
+  }{%
+    \YAD@ordernumber@without@argument%
+  }%
+}%
+\newcommand{\YAD@ordernumber@with@argument}[1][]{%
+  \csdef{printordernumber}{%
+    \ifthenelse{\isempty{#1}}{%
+      \YAD@reach@file{%
+        \YAD@generic@argument@translate{ordernumber}%
+      }%
+      \YAD@ClassWarningNoLine{%
+        La commande \protect\ordernumber\space a \'et\'e
+        employ\'ee\MessageBreak%
+        mais avec un argument optionnel vide.\MessageBreak%
+        Un texte g\'en\'erique va \^etre affich\'e\MessageBreak%
+        \`a la place%
+      }%
+    }{%
+      #1%
+    }%
+  }%
+}%
+\newcommand{\YAD@ordernumber@without@argument}{%
+  \csdef{printordernumber}{%
+    \hspace{2cm}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+% Commande définissant l'auteur.
+% \begin{macro}{\author}
+%    \begin{macrocode}
+\renewcommand*{\author}[3]{%
+  \ifthenelse{\isempty{#1}}{%
+    \newcommand*\YAD@firstname@author{%
+      \YAD@generic@argument@translate{firstname}%
+    }%
+    \YAD@ClassWarningNoLine{%
+      Pr\'enom de l'auteur de la th\`ese non sp\'ecifi\'e :\MessageBreak%
+      le 1er argument obligatoire de la commande \string\author\MessageBreak%
+      est vide (celui-ci doit \^etre renseign\'e)%
+    }%
+  }{%
+    \newcommand*\YAD@firstname@author{%
+      #1%
+    }%
+  }%
+  \ifthenelse{\isempty{#2}}{%
+    \newcommand*\YAD@lastname@author{%
+      \YAD@generic@argument@translate{lastname}%
+    }%
+    \YAD@ClassWarningNoLine{%
+      Nom de l'auteur de la th\`ese non sp\'ecifi\'e :\MessageBreak%
+      Le 2e argument obligatoire de la commande \protect\author\MessageBreak%
+      est vide (celui-ci doit \^etre renseign\'e)%
+    }%
+  }{%
+    \newcommand*\YAD@lastname@author{%
+      #2%
+    }%
+  }%
+  \hypersetup{pdfauthor=\YAD@firstname@author{} \YAD@lastname@author}%
+  \ifthenelse{\isempty{#3}}{%
+    \newcommand*\YAD@email@author{%
+      prenom.nom@laboratoire.institut.fr%
+    }%
+  }{%
+    \newcommand*\YAD@email@author{%
+      #3%
+    }%
+  }%
+  \ifthenelse{\isempty{#1}\AND\isempty{#2}}{%
+    \newcommand*{\printauthor}{%
+      \ifdraft{%
+        \YAD@reach@file{%
+          \YAD@generic@argument@translate{firstname}
+          \YAD@generic@argument@translate{lastname}%
+        }%
+      }{%
+        \if@nolink%
+          \YAD@generic@argument@translate{firstname}
+          \YAD@generic@argument@translate{lastname}%
+        \else%
+        \YAD@href{mailto:\YAD@email@author}{%
+          \YAD@generic@argument@translate{firstname}
+          \YAD@generic@argument@translate{lastname}%
+        }%
+        \fi%
+      }%
+      %
+    }%
+  }{%
+    \newcommand*{\printauthor}{%
+      \ifdraft{%
+        \YAD@reach@file{\YAD@firstname@author{} \bsc{\YAD@lastname@author}}%
+      }{%
+        \if@nolink%
+        \YAD@firstname@author{} \bsc{\YAD@lastname@author}%
+        \else%
+        \YAD@href{mailto:\YAD@email@author}{\YAD@firstname@author{} \bsc{\YAD@lastname@author}}%
+        \fi%
+      }%
+      %
+    }%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\date}
+%   Définition d'un compteur permettant de comparer à la date du jour.
+%    \begin{macrocode}
+\newcounter{datetoday}
+\setmydatenumber{datetoday}{\the\year}{\the\month}{\the\day}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\csdef{date}#1#2#3{%
+  \csxdef{YAD@daydate}{#1}%
+  \csxdef{YAD@monthdate}{#2}%
+  \csxdef{YAD@yeardate}{#3}%
+  \ifboolexpr{%
+    not (test {\IfInteger{\YAD@daydate}})%
+  }{%
+    \YAD@ClassWarningNoLine{%
+      La commande \protect\date{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
+      n'a pas \'et\'e correctement saisie car le\MessageBreak%
+      jour (\YAD@daydate) n'est pas valide :\MessageBreak%
+      ce doit \^etre un nombre entier entre\MessageBreak%
+      1 et 31%
+    }%
+  }{%
+    \IfDecimal{\YAD@daydate}{%
+      \csxdef{YAD@daydate}{\number\integerpart}%
+    }{%
+    }%
+    \ifboolexpr{%
+      test {\ifnumless{\YAD@daydate}{1}}%
+      or test {\ifnumgreater{\YAD@daydate}{31}}%
+    }{%
+      \YAD@ClassWarningNoLine{%
+        La commande \protect\date{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
+        n'a pas \'et\'e correctement saisie car le\MessageBreak%
+        num\'ero de jour (\YAD@daydate) n'est pas valide :\MessageBreak%
+        ce doit \^etre un nombre entier entre\MessageBreak%
+        1 et 31%
+      }%
+    }{%
+      \toggletrue{YAD@valid@day}%
+    }%
+  }%
+  % month
+  \ifboolexpr{%
+    not (test {\IfInteger{\YAD@monthdate}})%
+  }{%
+    \YAD@ClassWarningNoLine{%
+      La commande \protect\date{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
+      n'a pas \'et\'e correctement saisie car le\MessageBreak%
+      mois (\YAD@monthdate) n'est pas valide :\MessageBreak%
+      ce doit \^etre un nombre entier entre\MessageBreak%
+      1 (janvier) et 12 (d\'ecembre)%
+    }%
+  }{%
+    \IfDecimal{\YAD@monthdate}{%
+      \csxdef{YAD@monthdate}{\number\integerpart}%
+    }{%
+    }%
+    \ifboolexpr{%
+      test {\ifnumless{\YAD@monthdate}{1}}%
+      or test {\ifnumgreater{\YAD@monthdate}{12}}%
+    }{%
+      \YAD@ClassWarningNoLine{%
+        La commande \protect\date{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
+        n'a pas \'et\'e correctement saisie car le\MessageBreak%
+        num\'ero de mois (\YAD@monthdate) n'est pas valide :\MessageBreak%
+        ce doit \^etre un nombre entier entre\MessageBreak%
+        1 (janvier) et 12 (d\'ecembre)%
+      }%
+    }{%
+      \toggletrue{YAD@valid@month}%
+    }%
+  }%
+  % year
+  \ifboolexpr{%
+    not (test {\IfInteger{\YAD@yeardate}})%
+  }{%
+    \YAD@ClassWarningNoLine{%
+      La commande
+      \protect\date{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
+      n'a pas \'et\'e correctement saisie car\MessageBreak%
+      l'ann\'ee (\YAD@yeardate) n'est pas valide :\MessageBreak%
+      ce doit \^etre un nombre entier (sup\'erieur ou \'egal\MessageBreak%
+      \`a \number\year)%
+    }%
+  }{%
+    \IfDecimal{\YAD@yeardate}{%
+      \csxdef{YAD@yeardate}{\number\integerpart}%
+    }{%
+    }%
+    \ifnumless{\YAD@yeardate}{\number\year}{%
+      \YAD@ClassWarningNoLine{%
+        La commande \protect\date{#1}{#2}{#3}\space\MessageBreak%
+        n'a pas \'et\'e correctement saisie car le\MessageBreak%
+        num\'ero de l'ann\'ee (#3) n'est pas valide :\MessageBreak%
+        ce doit \^etre un nombre entier sup\'erieur ou \'egal\MessageBreak%
+        \`a \number\year%
+      }%
+    }{%
+      \toggletrue{YAD@valid@year}%
+    }%
+  }%
+  \ifboolexpr{%
+    togl {YAD@valid@day}%
+    and togl {YAD@valid@month}%
+    and togl {YAD@valid@year}%
+  }{%
+    \csdef{printdate}{%
+      \setdatenumber{\YAD@yeardate}{\YAD@monthdate}{\YAD@daydate}%
+      \ifnumgreater{\value{datetoday}}{\value{datenumber}}{%
+        \YAD@generic@argument@translate{date}%
+        \YAD@ClassWarningNoLine{%
+          La date saisie
+          (\protect\date{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate})\MessageBreak%
+          n'est pas correcte car elle ne doit pas \^etre\MessageBreak%
+          ant\'erieure \`a la date du jour\MessageBreak%
+          (\protect\date{\number\day}{\number\month}{\number\year})%
+        }%
+      }{%
+        \formatdate{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}%
+      }%
+    }%
+  }{%
+    \csdef{printdate}{%
+      \YAD@generic@argument@translate{date}%
+    }%
+  }%
+  \togglefalse{YAD@valid@day}%
+  \togglefalse{YAD@valid@month}%
+  \togglefalse{YAD@valid@year}%
+}%
+\AtEndDocument{%
+  \YAD@ifemptyorundef{\printdate}{%
+    \ifYAD@nodate%
+    \else%
+    \YAD@ClassWarningNoLine{%
+      Date de soutenance de la th\`ese non sp\'ecifi\'ee :\MessageBreak%
+      la commande \protect\date\space n'a pas \'et\'e\MessageBreak%
+      employ\'ee (celle-ci est requise)%
+    }%
+    \fi%
+  }{%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\dedication}
+%    \begin{macrocode}
+\newcommand{\dedication}[1]{%
+  \DTLnewrow{dedications}%
+  \DTLnewdbentry{dedications}{dedication}{#1}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\frontepigraph}
+%    \begin{macrocode}
+\newcommand{\frontepigraph}[3][\YAD@mainlanguage]{%
+  \DTLnewrow{frontepigraphs}%
+  \DTLnewdbentry{frontepigraphs}{epigraphlanguage}{#1}%
+  \DTLnewdbentry{frontepigraphs}{epigraph}{#2}%
+  \DTLnewdbentry{frontepigraphs}{epigraphauthor}{#3}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+% Réglage nécessaire sans quoi le titre courant de la nomenclature (si
+% le \Package{nomencl} est chargé) n'apparaît pas
+%    \begin{macrocode}
+\AtEndPreamble{%
+  \@ifpackageloaded{nomencl}{%
+    \let\YAD@ORI@printnomenclature\printnomenclature%
+    \renewcommand{\printnomenclature}{%
+      \cleardoublepage%
+      \sethead[\thepage][][\nomname]{\nomname}{}{\thepage}\headrule%
+      \YAD@ORI@printnomenclature%
+      \pagestyle{preliminary}%
+    }%
+  }{%
+  }%
+}%
+%    \end{macrocode}
+%
+% Test pour pages blanches
+% \begin{macro}{\YAD@clearemptydoublepage}
+%    \begin{macrocode}
+\let\YAD@ORI@cleardoublepage\cleardoublepage
+\newcommand*{\YAD@clearemptydoublepage}{%
+  \clearpage%
+  {%
+    \pagestyle{empty}%
+    \YAD@ORI@cleardoublepage%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\YAD@setfoot}
+% Définition d'une commande affichant un texte fixe en bas de page
+% en cas de version intermédiaire de la thèse.
+%    \begin{macrocode}
+\iftoggle{YAD@work@inprogress}{%
+  \newcommand*{\YAD@setfoot}{%
+    \footrule%
+    \setfoot{}{\textsc{\translate{lbl-versiondate} \today}}{}%
+    }%
+}{%
+  \newcommand*{\YAD@setfoot}{}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\pagestyle}
+%   Redéfinition permettant d'éviter de devoir ajouter
+%   \lstinline|\cleardoublepage| avant chaque la commande
+%   \lstinline|\pagestyle| fournie par le package \package{titleps}
+%   (cet ajout est pour l'instant nécessaire pour que les entêtes
+%   aux frontières des chapitres non numérotés ne soient pas
+%   erronés).
+%    \begin{macrocode}
+\xpretocmd{\pagestyle}{\cleardoublepage}{}{}%
+% \xapptocmd{\pagestyle}{\YAD@setfoot}{}{}%
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\YAD@starttoc}
+%   On définit la commande ×\YAD@starttoctoc×, analogue à
+%   ×\starttoc× fournie par \file{latex.ltx}, ne concernant que la
+%   table des matières (×toc×), qui génère mais n'importe pas le
+%   \File{.toc}.
+%    \begin{macrocode}
+\newcommand{\YAD@starttoctoc}{%
+  \begingroup
+    \if@filesw
+      \expandafter\newwrite\csname tf@toc\endcsname
+      \immediate\openout \csname tf@toc\endcsname \jobname.toc\relax
+    \fi
+    \@nobreakfalse
+  \endgroup}
+%    \end{macrocode}
+% On fait générer le \File{.toc}, en s'assurant que cela se fera
+% après la commande ×\shorttableofcontents× du \Package{shorttoc}
+% utilisée dans la redéfinition de la commande ×\tableofcontents×
+% ci-après (obligation de ce package).
+%    \begin{macrocode}
+\AtEndDocument{\YAD@starttoctoc}
+%    \end{macrocode}
+% \end{macro}
+%
+% Redéfinition de la commande ×\tableofcontents× de sorte qu'elle
+% admette un argument optionnel permettant d'afficher une table des
+% matières supplémentaire jusqu'à un niveau donné. Cette commande
+% s'appuie sur le \Package{shorttoc}, avec hack de sorte qu'elle
+% soit compatible avec (et exprimée en les même termes que) le
+% \Package{tocvsec2}. On lui applique le style de page propre à la
+% partie liminaire du document, notamment début de la prise en
+% compte des chapitres et sections (numérotés ou pas) dans la table
+% des matières.
+%
+% % Pour commencer, on doit faire en sorte que la commande
+% % ×\shorttableofcontents× utilise la définition originale de la commande
+% % ×\chapter× et pas celle qu'on a patchée dans le but de simplifier l'usage de
+% % sa version étoilée.
+% %    \begin{macrocode}
+% \xpatchcmd{\shorttableofcontents}{\chapter}{\YAD@ORI@chapter}{}{}
+% %    \end{macrocode}
+%
+% \begin{macro}{\tableofcontents}
+%    \begin{macrocode}
+\let\YAD@ORI@setcounter\setcounter%
+\let\YAD@ORI@tableofcontents\tableofcontents%
+\newif\if@YAD@knownsect
+\renewcommand{\tableofcontents}{%
+  \toggletrue{YAD@tableofcontents@used}%
+  \YAD@clearemptydoublepage%
+  \phantomsection%
+  \let\cmdKV@YAD@name\contentsname%
+  \@ifnextchar[{\tableofcontents@YAD@with@argument}{\tableofcontents@YAD@without@argument}%]
+}%
+\newcommand\tableofcontents@YAD@without@argument{%
+  \YAD@ORI@tableofcontents%
+}%
+\newcommand\tableofcontents@YAD@with@argument[1][]{%
+  \setkeys{YAD}{#1}%
+  \renewcommand{\setcounter}[2]{}%
+  %
+  \ifthenelse{\equal{\cmdKV@YAD@depth}{none}}{%
+    \shorttableofcontents{\cmdKV@YAD@name}{-10}%
+    \@YAD@knownsecttrue%
+  }{%
+  }%
+  \ifthenelse{\equal{\cmdKV@YAD@depth}{part}}{%
+    \shorttableofcontents{\cmdKV@YAD@name}{-1}%
+    \@YAD@knownsecttrue%
+  }{%
+  }%
+  \ifthenelse{\equal{\cmdKV@YAD@depth}{chapter}}{%
+    \shorttableofcontents{\cmdKV@YAD@name}{0}%
+    \@YAD@knownsecttrue%
+  }{%
+  }%
+  \ifthenelse{\equal{\cmdKV@YAD@depth}{section}}{%
+    \shorttableofcontents{\cmdKV@YAD@name}{1}%
+    \@YAD@knownsecttrue%
+  }{%
+  }%
+  \ifthenelse{\equal{\cmdKV@YAD@depth}{subsection}}{%
+    \shorttableofcontents{\cmdKV@YAD@name}{2}%
+    \@YAD@knownsecttrue%
+  }{%
+  }%
+  \ifthenelse{\equal{\cmdKV@YAD@depth}{subsubsection}}{%
+    \shorttableofcontents{\cmdKV@YAD@name}{3}%
+    \@YAD@knownsecttrue%
+  }{%
+  }%
+  \ifthenelse{\equal{\cmdKV@YAD@depth}{paragraph}}{%
+    \shorttableofcontents{\cmdKV@YAD@name}{4}%
+    \@YAD@knownsecttrue%
+  }{%
+  }%
+  \ifthenelse{\equal{\cmdKV@YAD@depth}{subparagraph}}{%
+    \shorttableofcontents{\cmdKV@YAD@name}{5}%
+    \@YAD@knownsecttrue%
+  }{%
+  }%
+  \ifthenelse{\equal{\cmdKV@YAD@depth}{all}}{%
+    \shorttableofcontents{\cmdKV@YAD@name}{100}%
+    \@YAD@knownsecttrue%
+  }{%
+  }%
+  \if@YAD@knownsect
+  \else
+  \shorttableofcontents{\cmdKV@YAD@name}{3}%
+  \YAD@ClassWarningNoLine{%
+    Nom de commande de sectionnement (#1) inconnu\MessageBreak%
+    et un par d\'efaut (`subsection') va \^etre utilis\'e \`a la place.\MessageBreak%
+    Les noms de commandes de sectionnement sp\'ecifi\'e doivent\MessageBreak%
+    \^etre l'un des suivants : `part', `chapter', `section', `subsection',\MessageBreak%
+    `subsubsection', `paragraph', `subparagraph' et `all'%
+  }%
+  \fi
+  \let\setcounter\YAD@ORI@setcounter%
+  \resettocdepth*%
+}%
+%
+%    \end{macrocode}
+% \end{macro}
+%
+% Globalement dans le document, la table des matières et la
+% numérotation des paragraphes vont jusqu'aux sous-sections
+%    \begin{macrocode}
+\AtBeginDocument{\maxtocdepth{\YAD@tocdepth}}%
+\AtBeginDocument{\maxsecnumdepth{\YAD@secnumdepth}}%
+%    \end{macrocode}
+%
+% Définition des styles de pages (basées sur le \Package{titleps})
+%
+% \begin{macro}{\YAD@chapter@header}
+% Définition de titres courants
+%    \begin{macrocode}
+\newcommand*{\YAD@chapter@header}{%
+  \ifthenelse{%
+    \value{secnumdepth}>-1
+    \and
+    \value{chapter}>0
+  }{%
+    \MakeUppercase\chaptername{}\ \thechapter.%
+  }{%
+  }
+  \chaptertitle%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%
+% \begin{macro}{\YAD@section@header}
+%    \begin{macrocode}
+\newcommand*{\YAD@section@header}{%
+  \ifthenelse{%
+    \value{secnumdepth}>0
+    \and
+    \value{chapter}>0
+  }{%
+    \thesection.%
+  }{%
+  }
+  \sectiontitle%
+}%
+%    \end{macrocode}
+% \end{macro}
+% Par défaut, rien n'est numéroté au début du document.
+%    \begin{macrocode}
+  \AtBeginDocument{\setsecnumdepth{none}}%
+%    \end{macrocode}
+% Définition du style de page des titres
+%    \begin{macrocode}
+\newpagestyle{titles}[]{%
+%    \end{macrocode}
+% Au début du document, donc à partir de sa ou ses pages de titre,
+% aucun élément de structuration n'est numéroté ni ne figure dans la
+% table des matières
+%    \begin{macrocode}
+  \frontmatter%
+  % \settocdepth{none}%
+  \setsecnumdepth{none}%
+  \ifdraft{%
+    \newgeometry{centering,nomarginpar,bottom=0.1cm,top=0.1cm,headheight=\YAD@logo@height,margin=0.5cm,tmargin=2\YAD@logo@height}%
+  }{%
+    \newgeometry{centering,nomarginpar,bottom=1cm,top=1cm,headheight=\YAD@logo@height,hmargin=2cm,includeall}%
+  }%
+  \sethead[]%
+  []%
+  []%
+  {%
+    \ifdef{\printpreslogo}{%
+      \printpreslogo%
+      \toggletrue{YAD@logo@before}%
+    }{%
+    }%
+    \ifdef{\printinstitutelogo}{%
+      \iftoggle{YAD@logo@before}{%
+        \hspace{\stretch{1}}%
+      }{%
+      }%
+      \printinstitutelogo%
+      \toggletrue{YAD@logo@before}%
+    }{%
+    }%
+    \ifdef{\printcoinstitutelogo}{%
+      \iftoggle{YAD@logo@before}{%
+        \hspace{\stretch{1}}%
+      }{%
+      }%
+      \printcoinstitutelogo%
+      \toggletrue{YAD@logo@before}%
+    }{%
+    }%
+    \ifdef{\printcompanylogo}{%
+      \iftoggle{YAD@logo@before}{%
+        \hspace{\stretch{1}}%
+      }{%
+      }%
+      \printcompanylogo%
+    }{%
+    }%
+  }%
+  {}%
+  {}%
+  \setfootrule{0pt}%
+  \setfoot{}{}{}%
+}%
+%    \end{macrocode}
+%
+% Définition du style de page de la partie pré-préliminaire:
+% géométrie restaurée mais toujours pas de titres courants
+%    \begin{macrocode}
+\newpagestyle{prepreliminary}[]{%
+  \restoregeometry%
+%    \end{macrocode}
+% Dans la partie pré-préliminaire, aucun élément de structuration n'est
+% numéroté, les titres courants sont absents et la profondeur de la table des
+% matières est fixée à son niveau par défaut (sous-sections)
+%    \begin{macrocode}
+  \setsecnumdepth{none}%
+  \resettocdepth*%
+  \YAD@setfoot%
+}%
+%    \end{macrocode}
+% Définition du style de page de la partie préliminaire: début
+% de l'insertion des titres courants
+%    \begin{macrocode}
+\newpagestyle{preliminary}[]{%
+  \sethead[\thepage]%
+  []%
+  [\YAD@chapter@header]%
+  {%
+    \ifthenelse{%
+      \equal{\sectiontitle}{}%
+    }{%
+      \YAD@chapter@header%
+    }{%
+      \YAD@section@header%
+    }%
+  }%
+  {}%
+  {\thepage}%
+  \headrule%
+%    \end{macrocode}
+% Dans la partie préliminaire, aucun élément de structuration n'est
+% numéroté et la profondeur de la table des matières est fixée à son
+% niveau par défaut (sous-sections)
+%    \begin{macrocode}
+  \setsecnumdepth{none}%
+  \resettocdepth*%
+  \YAD@setfoot%
+}%
+%    \end{macrocode}
+% Définition du style de page de la partie liminaire
+%    \begin{macrocode}
+\newpagestyle{ordinary}[]{%
+  \sethead[\thepage]%
+  []%
+  [\YAD@chapter@header]%
+  {%
+    \ifthenelse{%
+      \equal{\sectiontitle}{}%
+    }{%
+      \YAD@chapter@header%
+    }{%
+      \YAD@section@header%
+    }%
+  }%
+  {}%
+  {\thepage}%
+  \headrule%
+%    \end{macrocode}
+% Dans la partie liminaire, aucun élément de structuration n'est
+% numéroté et la profondeur de la table des matières est fixée à son
+% niveau par défaut (sous-sections)
+%    \begin{macrocode}
+  \setsecnumdepth{none}%
+  \resettocdepth*%
+  \YAD@setfoot%
+}%
+%    \end{macrocode}
+% Définition du style de page de la partie principale
+%    \begin{macrocode}
+\newpagestyle{mainmatter}[]{%
+  \ifthenelse{\equal{\YAD@interligne}{single}}{%
+    \singlespacing%
+  }{%
+    \ifthenelse{\equal{\YAD@interligne}{double}}{%
+      \doublespacing%
+    }{%
+      \onehalfspacing%
+    }%
+  }%
+  \sethead[\thepage]%
+  []%
+  [\YAD@chapter@header]%
+  {%
+    \ifthenelse{%
+      \equal{\sectiontitle}{}%
+    }{%
+      \YAD@chapter@header%
+    }{%
+      \YAD@section@header%
+    }%
+  }%
+  {}%
+  {\thepage}%
+  \headrule%
+%    \end{macrocode}
+% Dans la partie principale, la profondeur de la table des matières
+% est fixée à son niveau par défaut (sous-sections).
+%    \begin{macrocode}
+  \resettocdepth*%
+  \setsecnumdepth{\YAD@secnumdepth}%
+  \YAD@setfoot%
+}%
+%    \end{macrocode}
+% Extension de la commande ×\mainmatter× de sorte qu'elle applique le style de
+% page ×mainmatter×.
+%    \begin{macrocode}
+\xapptocmd{\mainmatter}{%
+  \pagestyle{mainmatter}%
+}{}{}%
+%    \end{macrocode}
+% Définition du style de page de la partie annexe
+%    \begin{macrocode}
+\newpagestyle{appendix}[]{%
+  \singlespacing%
+  \sethead[\thepage]%
+  []%
+  [%
+  \ifthenelse{%
+    \value{secnumdepth}>-1
+    \and
+    \value{chapter}>0
+  }{%
+    \MakeUppercase\appendixname{} \thechapter.%
+  }{%
+  }
+  \chaptertitle%
+  ]%
+  {%
+    \ifthenelse{%
+      \equal{\sectiontitle}{}%
+    }{%
+      \ifthenelse{%
+        \value{secnumdepth}>-1
+        \and
+        \value{chapter}>0
+      }{%
+        \MakeUppercase\appendixname{} \thechapter.%
+      }{%
+      }
+    }{%
+      \YAD@section@header%
+    }%
+  }%
+  {}%
+  {\thepage}%
+  \headrule%
+%    \end{macrocode}
+% Dans la partie annexe, la numérotation des paragraphes est fixée à
+% son niveau par défaut (sous-sections)
+%    \begin{macrocode}
+  \phantomsection%
+  \setsecnumdepth{\YAD@secnumdepth}%
+  \iftoggle{YAD@printed@on@paper}{%
+  }{%
+    \bookmarksetup{startatroot}%
+  }%
+  \YAD@setfoot%
+}%
+%    \end{macrocode}
+% Extension de la commande ×\appendix× de sorte qu'elle applique le style de
+% page ×appendix×.
+% \begin{macro}{\appendix}
+%    \begin{macrocode}
+\xapptocmd{\appendix}{%
+  \pagestyle{appendix}%
+}{}{}%
+%    \end{macrocode}
+% \end{macro}
+% Définition du style de page de la partie biblio
+%    \begin{macrocode}
+\newpagestyle{biblio}[]{%
+%    \end{macrocode}
+% Dans la partie biblio, aucun élément de structuration n'est
+% numéroté
+%    \begin{macrocode}
+  \setsecnumdepth{none}%
+%    \end{macrocode}
+%    \begin{macrocode}
+  \singlespacing%
+  \sethead[\thepage]%
+  []%
+  [\YAD@chapter@header]%
+  {\YAD@chapter@header}%
+  {}%
+  {\thepage}%
+  \headrule%
+%    \end{macrocode}
+% On demande que la bibliographie apparaisse au plus haut niveau des
+% signets
+%    \begin{macrocode}
+  \YAD@clearemptydoublepage%
+  \phantomsection%
+  \iftoggle{YAD@printed@on@paper}{%
+  }{%
+    \bookmarksetup{startatroot}%
+  }%
+  \YAD@setfoot%
+}%
+%    \end{macrocode}
+% Définition du style de page de la partie finale
+%    \begin{macrocode}
+\newpagestyle{backmatter}[]{%
+  \singlespacing%
+  \sethead[\thepage]%
+  []%
+  [\YAD@chapter@header]%
+  {%
+    \ifthenelse{%
+      \equal{\sectiontitle}{}%
+    }{%
+      \YAD@chapter@header%
+    }{%
+      \YAD@section@header%
+    }%
+  }%
+  {}%
+  {\thepage}%
+  \headrule%
+%    \end{macrocode}
+% Dans la partie finale, rien n'est numéroté
+%    \begin{macrocode}
+  \phantomsection%
+  \setsecnumdepth{none}%
+  \iftoggle{YAD@printed@on@paper}{%
+  }{%
+    \bookmarksetup{startatroot}%
+  }%
+  \YAD@setfoot%
+}%
+%    \end{macrocode}
+% Extension de la commande ×\backmatter× de sorte qu'elle applique le style de
+% page ×backmatter×.
+% \begin{macro}{\backmatter}
+%    \begin{macrocode}
+\xapptocmd{\backmatter}{%
+  \pagestyle{backmatter}%
+}{}{}%
+%    \end{macrocode}
+% \end{macro}
+% Définition du style de page de la table des matières
+%    \begin{macrocode}
+\newpagestyle{contents}[]{%
+  \YAD@clearemptydoublepage%
+  \phantomsection%
+  \iftoggle{YAD@printed@on@paper}{%
+  }{%
+    \bookmarksetup{startatroot}%
+  }%
+  \singlespacing%
+  \sethead[\thepage]%
+  []%
+  [\cmdKV@YAD@name]%
+  {\cmdKV@YAD@name}%
+  {}%
+  {\thepage}%
+  \headrule%
+%    \end{macrocode}
+% Dans la partie glossaire, aucun élément de structuration n'est
+% numéroté
+%    \begin{macrocode}
+  \setsecnumdepth{none}%
+  \YAD@setfoot%
+}%
+%    \end{macrocode}
+% Définition du style de page de la partie glossaire
+%    \begin{macrocode}
+\newpagestyle{glossaire}[]{%
+  \YAD@clearemptydoublepage%
+  \phantomsection%
+  \iftoggle{YAD@printed@on@paper}{%
+  }{%
+    \bookmarksetup{startatroot}%
+  }%
+  \singlespacing%
+  \sethead[\thepage]%
+  []%
+  [\YAD@chapter@header]%
+  {\YAD@chapter@header}%
+  {}%
+  {\thepage}%
+  \headrule%
+%    \end{macrocode}
+% Dans la partie glossaire, aucun élément de structuration n'est
+% numéroté
+%    \begin{macrocode}
+  \setsecnumdepth{none}%
+  \YAD@setfoot%
+}%
+%    \end{macrocode}
+% Définition du style de page de la partie index
+%    \begin{macrocode}
+\newpagestyle{index}[]{%
+  \singlespacing%
+  \sethead[\thepage]%
+  []%
+  [\YAD@chapter@header]%
+  {\YAD@chapter@header}%
+  {}%
+  {\thepage}%
+  \headrule%
+%    \end{macrocode}
+% Dans la partie index, aucun élément de structuration n'est
+% numéroté
+%    \begin{macrocode}
+  \setsecnumdepth{none}%
+  \YAD@clearemptydoublepage%
+  \phantomsection%
+  \setsecnumdepth{\YAD@secnumdepth}%
+  \iftoggle{YAD@printed@on@paper}{%
+  }{%
+    \bookmarksetup{startatroot}%
+  }%
+  \YAD@setfoot%
+}%
+%    \end{macrocode}
+% Définition du style de page de la partie \textquote{4\ieme{} de
+% couverture} (\emph{blub} en anglais).
+%    \begin{macrocode}
+\newpagestyle{backcover}[]{%
+  \singlespacing%
+  \YAD@clearspread%
+  \setlength{\footskip}{35pt}%
+  \setfootrule{0pt}%
+  \setfoot[%
+  \YAD@laboratory@abstract@page%
+  ][][]{}{}{}%
+  \sethead[]%
+  []%
+  []%
+  {}%
+  {}%
+  {}%
+%    \end{macrocode}
+% Dans la partie \textquote{4\ieme{} de couverture}, aucun élément
+% de structuration n'est numéroté
+%    \begin{macrocode}
+  \setsecnumdepth{none}%
+}%
+%    \end{macrocode}
+%
+% \begin{macro}{\printlaboratory}
+%    \begin{macrocode}
+\newcommand*{\printlaboratory}{\@ifstar{\@tempswatrue\YAD@thelaboratory@temp}{\@tempswafalse\YAD@thelaboratory@temp}}%
+\newcommand*{\YAD@thelaboratory@temp}{%
+  \YAD@ifemptyorundef{\YAD@thelaboratory}{%
+    \YAD@reach@file{\YAD@generic@argument@translate{laboratory}}%
+    \ifYAD@nolaboratory%
+    \else%
+    \YAD@ClassWarningNoLine{%
+      Laboratoire de la th\`ese non sp\'ecifi\'e ou vide :\MessageBreak%
+      la commande \protect\laboratory\space n'a pas \'et\'e\MessageBreak%
+      employ\'ee (celle-ci est requise) ou son 1er argument\MessageBreak%
+      est vide (celui-ci doit \^etre renseign\'e)%
+    }%
+    \fi%
+  }{%
+    \ifdraft{%
+      \YAD@reach@file{%
+        \YAD@thelaboratory%
+      }%
+    }{%
+      \ifboolexpr{ bool {@tempswa} or bool {@nolink} }{%
+        \YAD@thelaboratory%
+      }{%
+        \YAD@ifemptyorundef{\YAD@thelaboratoryurl}{%
+          \YAD@href{www.laboratory.fr}{\YAD@thelaboratory}%
+        }{%
+          \YAD@href{\YAD@thelaboratoryurl}{\YAD@thelaboratory}%
+        }%
+      }%
+    }%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\printlaboratoryaddress}
+%    \begin{macrocode}
+\newcommand*{\printlaboratoryaddress}{%
+  \YAD@ifemptyorundef{\YAD@thelaboratoryaddress}{%
+    \YAD@reach@file{\YAD@generic@argument@translate{laboratoryaddress}}%
+    \ifYAD@nolaboratoryadress%
+    \else%
+    \YAD@ClassWarningNoLine{%
+      Adresse du laboratoire non sp\'ecifi\'ee ou vide :\MessageBreak%
+      la commande \protect\laboratory\space n'a pas \'et\'e\MessageBreak%
+      employ\'ee (celle-ci est requise) ou son 2e argument\MessageBreak%
+      est vide (celui-ci doit \^etre renseign\'e)%
+    }%
+    \fi%
+  }{%
+    \YAD@reach@file{\YAD@thelaboratoryaddress}%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+% Sauf mention contraire (au moyen de l'option ×nofrontcover×), la 1\iere{}
+% page de titre est celle de 1\iere{} de couverture donc le booléen
+% ×YAD@cover@page× est vrai.
+%    \begin{macrocode}
+\ifYAD@nofrontcover%
+\else%
+\toggletrue{YAD@cover@page}%
+\fi%
+%    \end{macrocode}
+%
+% \begin{macro}{\maketitle}
+% Commande de la page de title
+%    \begin{macrocode}
+\newlength{\YAD@titleboxheight}%
+\newlength{\YAD@titleboxwidth}%
+\newlength{\YAD@otherboxheight}%
+\newsavebox{\YAD@titlebox}%
+\newsavebox{\YAD@beforetitlebox}%
+\newsavebox{\YAD@aftertitlebox}%
+\newcounter{YAD@titlepages}%
+\setcounter{YAD@titlepages}{0}%
+\renewcommand{\maketitle}{%
+  \toggletrue{YAD@maketitle@used}%
+  \setlength{\fboxsep}{10pt}%
+  \setlength{\YAD@titleboxwidth}{\linewidth-2\fboxsep-2\fboxrule}%
+  \renewcommand*{\do}[1]{%
+    \stepcounter{YAD@titlepages}%
+%    \end{macrocode}
+% Appel du style de page propre au(x) titre(s)
+%    \begin{macrocode}
+  \pagestyle{titles}%
+%    \end{macrocode}
+% On passe dans la langue choisie en option (en français si rien n'est
+% spécifié).
+%    \begin{macrocode}
+\begingroup%
+\expandafter\selectlanguage\expandafter{##1}%
+  \begin{lrbox}{\YAD@titlebox}
+    \fbox{%
+      \noindent%
+      \begin{minipage}{\linewidth-2\fboxsep-2\fboxrule}
+      \onehalfspacing%
+      \noindent%
+      \YAD@translation{thesistitle}%
+      \par%
+      \centering%
+      \Huge\bfseries%
+      \YAD@ifemptyorundef{\printtitle}{%
+        \YAD@generic@argument@translate{title}%
+        \ifYAD@notitle%
+        \else%
+        \YAD@ClassWarningNoLine{%
+          Titre de la th\`ese non sp\'ecifi\'e :\MessageBreak%
+          la commande \protect\title\space n'a pas \'et\'e\MessageBreak%
+          employ\'ee (celle-ci est requise) ou son argument\MessageBreak%
+          obligatoire est vide (celui-ci doit \^etre renseign\'e)%
+        }%
+        \fi%
+      }{%
+        \printtitle%
+      }%
+      \ifundef{\printsubtitle}{%
+      }{%
+        \ifdraft{}{\vspace*{\stretch{.15}}}%
+        \par%
+        \centering%
+        \Large\printsubtitle%
+      }%
+    \end{minipage}%
+    }%
+  \end{lrbox}
+  \settototalheight{\YAD@titleboxheight}{\YAD@titlebox}%
+  \setlength{\YAD@otherboxheight}{0.5\paperheight-\YAD@titleboxheight-2cm}%
+%    \end{macrocode}
+% On met en page les divers éléments des titres.
+%    \begin{macrocode}
+  %\YAD@astuce@expressioncle%
+  \noindent%
+    \ifcsdef{printordernumber}{%
+%    \end{macrocode}
+% On n'affiche le numéro d'ordre de la thèse que sur la page de 1\iere{} de
+% couverture.
+%    \begin{macrocode}
+      \iftoggle{YAD@cover@page}{%
+        \raggedleft{%
+          \itshape%
+          \sffamily%
+          \YAD@translation{ordernumber}%
+          \iflanguage{french}{%
+            \FBcolonspace%
+          }{%
+          }: \printordernumber%
+        }%
+      }{%
+      }%
+      \ifdraft{}{\vspace*{\stretch{.5}}}%
+      \par%
+    }{%
+    }%
+    % \begin{minipage}[c][\YAD@otherboxheight][c]{\YAD@titleboxwidth}
+    %   \ifdraft{}{\vspace*{\stretch{.25}}}%
+    \begin{center}
+      \YAD@ifemptyorundef{\printinstitute}{%
+        \YAD@generic@argument@translate{institute}%
+        \ifYAD@noinstitute%
+        \else%
+        \YAD@ClassWarningNoLine{%
+          Institut de la th\`ese non sp\'ecifi\'e :\MessageBreak%
+          la commande \protect\institute\space n'a pas \'et\'e\MessageBreak%
+          employ\'ee (celle-ci est requise) ou son argument\MessageBreak%
+          obligatoire est vide (celui-ci doit \^etre\MessageBreak%
+          renseign\'e)%
+        }%
+        \fi%
+      }{%
+        \YAD@translation{institute}
+        \textbf{\textsc{\Large\printinstitute}}%
+      }%
+      \ifundef{\printcoinstitute}{%
+      }{%
+        \ifdraft{}{\vspace*{\stretch{.5}}}%
+        \par%
+        \YAD@translation{coinstitute} \textbf{\textsc{\Large\printcoinstitute}}%
+      }%
+      \ifundef{\printcompany}{%
+      }{%
+        \ifdraft{}{\vspace*{\stretch{.5}}}%
+        \par%
+        \YAD@translation{company} \textbf{\textsc{\Large\printcompany}}%
+      }%
+      \ifdraft{}{\vspace*{\stretch{1.5}}}%
+      \par%
+      \YAD@translation{doctoralschool}
+      \YAD@ifemptyorundef{\printdoctoralschool}{%
+        \YAD@generic@argument@translate{doctoralschool}%
+        \ifYAD@nodoctoralschool%
+        \else%
+        \YAD@ClassWarningNoLine{%
+          \'Ecole doctorale de la th\`ese non sp\'ecifi\'ee :\MessageBreak%
+          la commande \protect\doctoralschool\space n'a pas \'et\'e\MessageBreak%
+          employ\'ee (celle-ci est requise) ou son argument\MessageBreak%
+          obligatoire est vide (celui-ci doit \^etre\MessageBreak%
+          renseign\'e)%
+        }%
+        \fi%
+      }{%
+        \textbf{\printdoctoralschool}%
+      }%
+      \ifdraft{}{\vspace*{\stretch{.5}}}%
+      \par%
+      \YAD@translation{universitydepartment}
+      \textbf{\printlaboratory}%
+      \ifdraft{}{\vspace*{\stretch{1.5}}}%
+      \par%
+      {\large%
+        \YAD@translation{thesisdefendedby}
+        %
+        \YAD@ifemptyorundef{\printauthor}{%
+          \YAD@generic@argument@translate{author}%
+          \ifYAD@noauthor%
+          \else%
+          \YAD@ClassWarningNoLine{%
+            Auteur de la th\`ese non sp\'ecifi\'e :\MessageBreak%
+            la commande \protect\author\space n'a pas \'et\'e\MessageBreak%
+            employ\'ee (celle-ci est requise) ou ses 2 premiers\MessageBreak%
+            arguments obligatoires sont vides (ceux-ci doivent \^etre\MessageBreak%
+            renseign\'es)%
+          }%
+          \fi%
+        }{%
+          \textbf{\printauthor}%
+        }%
+        \ifdraft{}{\vspace*{\stretch{1}}}%
+        \par%
+        \YAD@translation{defendedon}
+        \YAD@ifemptyorundef{\printdate}{%
+          \YAD@generic@argument@translate{date}%
+        }{%
+          \textbf{\printdate}%
+        }%
+      }%
+      \ifdraft{}{\vspace*{\stretch{1}}}%
+      \par%
+      \YAD@translation{aim}%
+      \ifundef{\printinstitute}{%
+        \YAD@generic@argument@translate{institute}%
+      }{%
+        \printinstitute*%
+      }%
+      \ifundef{\printcoinstitute}{%
+      }{%
+        \YAD@translation{aimand}%
+        \printcoinstitute*%
+      }%
+      \ifdraft{}{\vspace*{\stretch{1}}}%
+      \par%
+      \large%
+      \YAD@translation{academicfield}
+      %
+      \YAD@ifemptyorundef{\printacademicfield}{%
+        \YAD@generic@argument@translate{academicfield}%
+        \ifYAD@noacademicfield%
+        \else%
+        \YAD@ClassWarningNoLine{%
+          Champ disciplinaire de la th\`ese non sp\'ecifi\'e :\MessageBreak%
+          la commande \protect\academicfield\space n'a pas \'et\'e\MessageBreak%
+          employ\'ee (celle-ci est requise) ou son argument\MessageBreak%
+          obligatoire est vide (celui-ci doit \^etre renseign\'e)%
+        }%
+        \fi%
+      }{%
+        \textbf{\printacademicfield}%
+      }%
+      \ifundef{\printspeciality}{%
+      }{%
+        \ifdraft{}{\vspace*{\stretch{.5}}}%
+        \par%
+        \large%
+        \YAD@translation{speciality} \textbf{\printspeciality}%
+      }
+    \end{center}
+  \ifdraft{}{\vspace*{\stretch{.25}}}%
+  % \end{minipage}%
+  \begin{center}
+    \usebox{\YAD@titlebox}%
+  \end{center}
+  % \noindent%
+  % \begin{minipage}[c][\YAD@otherboxheight][c]{\YAD@titleboxwidth}
+%    \end{macrocode}
+% Affichage du jury
+%    \begin{macrocode}
+\YAD@committee@tabular%
+\iftoggle{YAD@supervisor@specified}{%
+}{%
+  \ifYAD@nosupervisor%
+  \else%
+  \YAD@ClassWarningNoLine{%
+    Directeur de th\`ese non sp\'ecifi\'e :\MessageBreak%
+    la commande \protect\supervisor\space n'a pas \'et\'e\MessageBreak%
+    employ\'ee (celle-ci est requise) ou ses arguments\MessageBreak%
+    obligatoires sont vides (ceux-ci doivent \^etre\MessageBreak%
+    renseign\'es)%
+  }%
+  \fi%
+}%
+\ifdraft{}{\vspace*{\stretch{.1}}}%
+  % \end{minipage}
+%    \end{macrocode}
+% On fixe la numérotation des pages selon le nombre de pages de titres.
+%    \begin{macrocode}
+\ifnumcomp{\value{YAD@titlepages}}{=}{2}{\addtocounter{page}{2}}{}
+\ifnumcomp{\value{YAD@titlepages}}{=}{3}{\addtocounter{page}{4}}{}
+%    \end{macrocode}
+% On repasse à la langue par défaut
+%    \begin{macrocode}
+\endgroup%
+%    \end{macrocode}
+% Maintenant que la 1\iere{} page de titre (celle de 1\iere{} de couverture)
+% a été créée, le booléen ×YAD@cover@page× est faux.
+%    \begin{macrocode}
+\togglefalse{YAD@cover@page}%
+%    \end{macrocode}
+% On génère une page de titre dans la langue principale puis dans la
+% langue secondaire.
+%    \begin{macrocode}
+}%
+\expandafter\docsvlist{\YAD@mainlanguage}%
+\iftoggle{YAD@two@titles}{%
+  \toggletrue{YAD@second@title}%
+  \ifthenelse{\equal{\YAD@mainlanguage}{french}}{%
+    \ifYAD@nofrontcover%
+    \docsvlist{english}%
+    \else%
+    \docsvlist{french,english}%
+    \fi%
+  }{%
+    \ifYAD@nofrontcover%
+    \docsvlist{french}%
+    \else%
+    \docsvlist{english,french}%
+    \fi%
+  }%
+}{%
+}%
+\expandafter\selectlanguage\expandafter{\YAD@mainlanguage}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+% Si la commande ×\maketitle× n'a pas été utilisée, un warning est émis.
+%    \begin{macrocode}
+\AtEndDocument{%
+  \ifboolexpr{%
+    togl {YAD@maketitle@used}%
+    or bool {YAD@nomaketitle}%
+  }{%
+  }{%
+    \YAD@ClassWarningNoLine{%
+      La commande \protect\maketitle\space n'a pas \'et\'e\MessageBreak%
+      employ\'ee. Celle-ci est requise%
+    }%
+  }%
+}%
+%    \end{macrocode}
+%
+% Définition de ×\keywords×.
+% \begin{macro}{\keywords}
+% \begin{macro}{\YAD@metakeywords}
+% \begin{macro}{\printkeywords}
+%    \begin{macrocode}
+\newcommand{\keywords}[2]{%
+  \toggletrue{YAD@keywords@used}%
+  \def\YAD@mainkeywords{#1}%
+  \def\YAD@secondarykeywords{#2}%
+  \ifthenelse{\isempty{#1}}{%
+  }{%
+    \ifthenelse{\isempty{#2}}{%
+      \hypersetup{pdfkeywords={#1}}%
+    }{%
+      \hypersetup{pdfkeywords={#1} ({#2})}%
+    }%
+  }%
+}%
+%    \end{macrocode}
+% Définition de ×\printkeywords×.
+%    \begin{macrocode}
+\csdef{printkeywords}{%
+  \expandafter\iflanguage{\YAD@mainlanguage}{%
+    \YAD@ifemptyorundef{\YAD@mainkeywords}{%
+      \YAD@generic@argument@translate{keywords}%
+    }{%
+      \MakeTextLowercase{\YAD@mainkeywords}%
+    }%
+  }{%
+    \YAD@ifemptyorundef{\YAD@secondarykeywords}{%
+      \YAD@generic@argument@translate{keywords}%
+    }{%
+      \MakeTextLowercase{\YAD@secondarykeywords}%
+    }%
+  }%
+}%
+%    \end{macrocode}
+% Warnings si les mots sont vides ou non spécifiés.
+%    \begin{macrocode}
+\AtEndDocument{%
+  \nottoggle{YAD@keywords@used}{%
+    \ifYAD@nokeywords%
+    \else%
+    \YAD@ClassWarningNoLine{%
+      La commande \protect\keywords\space n'a pas \'et\'e\MessageBreak%
+      employ\'ee. Celle-ci est requise%
+    }%
+    \fi%
+  }{%
+    \ifdefempty{\YAD@mainkeywords}{%
+      \YAD@ClassWarningNoLine{%
+        Les mots cl\'e dans la langue principale\MessageBreak%
+        (1er argument de la commande \protect\keywords) n'ont\MessageBreak%
+        pas \'et\'e spécifi\'es. Ceux-ci sont requis%
+      }%
+    }{%
+      \csdef{YAD@metakeywords}{\YAD@mainkeywords}
+    }%
+    \ifdefempty{\YAD@secondarykeywords}{%
+      \YAD@ClassWarningNoLine{%
+        Les mots cl\'e dans la langue secondaire\MessageBreak%
+        (2e argument de la commande \protect\keywords) n'ont\MessageBreak%
+        pas \'et\'e spécifi\'es. Ceux-ci sont requis%
+      }%
+    }{%
+      \csdef{YAD@metakeywords}{\YAD@mainkeywords (\YAD@secondarykeywords)}%
+    }%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \end{macro}
+%
+% \begin{macro}{\makekeywords}
+% Commande de la page de mots clés.
+%    \begin{macrocode}
+\csdef{makekeywords}{%
+  \@ifstar{\@tempswatrue\csuse{YAD@starnostar@makekeywords}}{\@tempswafalse\csuse{YAD@starnostar@makekeywords}}%
+}%
+\csdef{YAD@starnostar@makekeywords}{%
+  \YAD@clearemptydoublepage%
+%    \end{macrocode}
+% Appel du style de page propre à la partie préliminaire
+%    \begin{macrocode}
+  \pagestyle{prepreliminary}%
+  % \YAD@astuce@expressioncle%
+  \if@tempswa%
+  \else%
+  \vspace*{\stretch{1}}%
+  \fi
+  \begin{flushleft}
+    \begin{description}
+      \renewcommand*{\do}[1]{%
+        \expandafter\selectlanguage\expandafter{##1}%
+      \item[\YAD@translation{keywords}\iflanguage{french}{\,}{}:]
+        \YAD@ifemptyorundef{\printkeywords}{%
+          \YAD@generic@argument@translate{keywords}%
+        }{%
+          \printkeywords%
+        }%
+      }%
+      \expandafter\docsvlist{\YAD@mainlanguage}%
+      \ifthenelse{\equal{\YAD@mainlanguage}{french}}{%
+        \docsvlist{english}%
+      }{%
+        \docsvlist{french}%
+      }%
+    \end{description}
+  \end{flushleft}
+  \if@tempswa%
+  \else%
+  \vspace*{\stretch{1}}%
+  \fi
+  \expandafter\selectlanguage\expandafter{\YAD@mainlanguage}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\laboratory}
+%    \begin{macrocode}
+\DTLnewdb{laboratories}%
+\newcommand{\laboratory}[3][]{%
+  \DTLnewrow{laboratories}%
+  \dtlexpandnewvalue%
+  \setkeys{YAD}{#1}%
+  \DTLnewdbentry{laboratories}{name}{#2}%
+  \DTLnewdbentry{laboratories}{address}{#3}%
+  \ifthenelse{\equal{\cmdKV@YAD@logo}{}}{%
+    \DTLnewdbentry{laboratories}{logo}{}%
+  }{%
+    \DTLnewdbentry{laboratories}{logo}{\cmdKV@YAD@logo}%
+  }%
+  \ifthenelse{\equal{\cmdKV@YAD@logoheight}{}}{%
+    \DTLnewdbentry{laboratories}{logoheight}{}%
+  }{%
+    \DTLnewdbentry{laboratories}{logoheight}{\cmdKV@YAD@logoheight}%
+  }%
+  \ifthenelse{\equal{\cmdKV@YAD@url}{}}{%
+    \DTLnewdbentry{laboratories}{url}{}%
+  }{%
+    \DTLnewdbentry{laboratories}{url}{\cmdKV@YAD@url}%
+  }%
+  \ifthenelse{\equal{\cmdKV@YAD@telephone}{}}{%
+    \DTLnewdbentry{laboratories}{telephone}{}%
+  }{%
+    \DTLnewdbentry{laboratories}{telephone}{\cmdKV@YAD@telephone}%
+  }%
+  \ifthenelse{\equal{\cmdKV@YAD@fax}{}}{%
+    \DTLnewdbentry{laboratories}{fax}{}%
+  }{%
+    \DTLnewdbentry{laboratories}{fax}{\cmdKV@YAD@fax}%
+  }%
+  \ifthenelse{\equal{\cmdKV@YAD@email}{}}{%
+    \DTLnewdbentry{laboratories}{email}{}%
+  }{%
+    \DTLnewdbentry{laboratories}{email}{\cmdKV@YAD@email}%
+  }%
+  %
+  \DTLgetvalue{\YAD@thelaboratory}{laboratories}{1}{\dtlcolumnindex{laboratories}{name}}%
+  \DTLgetvalue{\YAD@thelaboratoryaddress}{laboratories}{1}{\dtlcolumnindex{laboratories}{address}}%
+  \DTLgetvalue{\YAD@thelaboratoryurl}{laboratories}{1}{\dtlcolumnindex{laboratories}{url}}%
+  %
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\makelaboratory}
+% Commande créant la page dédiée au laboratoire.
+%    \begin{macrocode}
+\csdef{makelaboratory}{%
+  \@ifstar{\@tempswatrue\csuse{YAD@starnostar@makelaboratory}}{\@tempswafalse\csuse{YAD@starnostar@makelaboratory}}%
+}%
+\csdef{YAD@starnostar@makelaboratory}{%
+  \YAD@clearemptydoublepage%
+%    \end{macrocode}
+% Appel du style de page propre à la partie préliminaire
+%    \begin{macrocode}
+  \pagestyle{prepreliminary}%
+% \YAD@astuce@expressioncle%
+  \if@tempswa%
+  \else%
+  \vspace*{\stretch{1}}%
+  \fi
+  \noindent%
+  \ifthenelse{\DTLrowcount{laboratories}>1}{%
+    \YAD@translation{prepared-at-pl}%
+  }{%
+    \YAD@translation{prepared-at}%
+  }%
+  \if@tempswa%
+  \vspace*{\baselineskip}%
+  \else%
+  \vspace*{\stretch{.25}}%
+  \fi
+  \par%
+  \ifthenelse{\DTLrowcount{laboratories}<1}{%
+    \begin{minipage}[t]{\linewidth-\parindent}
+      \YAD@reach@file{\YAD@generic@argument@translate{laboratory}}%
+      \\[.1cm]
+      \YAD@reach@file{\YAD@generic@argument@translate{laboratoryaddress}}%
+    \end{minipage}
+  }{%
+  }%
+  \DTLforeach*{laboratories}{%
+    \YAD@laboratory@name=name,%
+    \YAD@laboratory@address=address,%
+    \YAD@laboratory@logo=logo,%
+    \YAD@laboratory@logoheight=logoheight,%
+    \YAD@laboratory@url=url,%
+    \YAD@laboratory@telephone=telephone,%
+    \YAD@laboratory@fax=fax,%
+    \YAD@laboratory@email=email%
+  }{%
+    \newlength{\YAD@laboratory@width}%
+    \ifthenelse{\DTLiseq{\YAD@laboratory@logo}{}}{%
+      \setlength{\YAD@laboratory@width}{\linewidth-\parindent}%
+    }{%
+      \setlength{\YAD@laboratory@width}{.625\linewidth-\parindent}%
+    }%
+    \begin{minipage}[t]{\YAD@laboratory@width}
+      \textbf{\printlaboratory}%
+      \\[.1cm]
+      \printlaboratoryaddress%
+      \\[.25cm]
+      \begin{tabular}{@{}ll}
+        \ifthenelse{\DTLiseq{\YAD@laboratory@telephone}{}}{%
+        }{%
+          \YAD@translation{phone} & \YAD@reach@file{\YAD@laboratory@telephone} \\%
+        }%
+        \ifthenelse{\DTLiseq{\YAD@laboratory@fax}{}}{%
+        }{%
+          \YAD@translation{fax}  & \YAD@reach@file{\YAD@laboratory@fax}      \\%
+        }%
+        \ifthenelse{\DTLiseq{\YAD@laboratory@email}{}}{%
+        }{%
+          \YAD@translation{email} &
+          \YAD@reach@file{%
+            \ifthenelse{\equal{\YAD@laboratory@email}{}}{%
+              \if@nolink%
+              \YAD@generic@argument@translate{laboratoryemail}%
+              \else%
+              \YAD@href{mailto:laboratory@institute.fr}{\YAD@generic@argument@translate{laboratoryemail}}%
+              \fi%
+            }{%
+              \if@nolink%
+              \nolinkurl{\YAD@laboratory@email}%
+              \else%
+              \YAD@href{mailto:\YAD@laboratory@email}{\nolinkurl{\YAD@laboratory@email}}%
+              \fi%
+            }%
+          }%
+          \\%
+        }%
+        \ifthenelse{\DTLiseq{\YAD@laboratory@url}{}}{%
+        }{%
+          \YAD@translation{website} & % \printlaboratoryurl
+          \def\YAD@texteurl{%
+            \ifthenelse{\equal{\YAD@laboratory@url}{}}{%
+              \YAD@reach@file{\YAD@generic@argument@translate{urllaboratory}}%
+            }{%
+              \YAD@reach@file{\nolinkurl{\YAD@laboratory@url}}%
+            }%
+          }%
+          \ifthenelse{\equal{\YAD@laboratory@url}{}}{%
+            \if@nolink%
+            \YAD@texteurl%
+            \else%
+            \YAD@href{www.laboratory.fr}{\YAD@texteurl}%
+            \fi%
+          }{%
+            \ifdraft{%
+              \YAD@texteurl%
+            }{%
+              \if@nolink%
+              \nolinkurl{\YAD@laboratory@url}%
+              \else%
+              \url{%
+                \YAD@laboratory@url%
+              }%
+              \fi%
+            }%
+          }%
+        }%
+      \end{tabular}%
+    \end{minipage}
+    \ifthenelse{\DTLiseq{\YAD@laboratory@logo}{}}{%
+    }{%
+      \hspace{\stretch{1}}%
+      \begin{minipage}[t]{.325\linewidth}
+        \def\YAD@logo{%
+          \ifthenelse{\equal{\YAD@laboratory@logo}{}}{%
+            \YAD@reach@file{\YAD@generic@argument@translate{logolaboratory}}%
+          }{%
+            \YAD@reach@file{%
+              \includegraphics[height=\YAD@laboratory@logoheight,valign=t]{\YAD@laboratory@logo}%
+            }%
+          }%
+        }%
+        \if@tempswa%
+        \else%
+        \hspace{\stretch{1}}%
+        \if@nolink%
+        \YAD@logo%
+        \else%
+        \ifthenelse{\equal{\cmdKV@YAD@url}{}}{%
+          \YAD@href{www.laboratory.fr}{\YAD@logo}%
+        }{%
+          \YAD@href{\cmdKV@YAD@url}{\YAD@logo}%
+        }%
+        \fi%
+        \fi%
+      \end{minipage}%
+    }%
+    \par%
+    \DTLiflastrow{%
+      \vspace*{\stretch{1}}%
+    }{%
+      \if@tempswa%
+      \vspace*{\baselineskip}%
+      \else%
+      \vspace*{\stretch{.25}}%
+      \fi%
+    }%
+  }%
+  \ifthenelse{\DTLrowcount{laboratories}<1}{%
+    \vspace*{\stretch{1}}%
+  }{%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{environment}{abstract}
+%   Environnement de résumé créant un chapitre non numéroté avec un
+%   intitulé par défaut pouvant être modifié au moyen d'un argument
+%   optionnel. Une seconde occurrence de cet environnement est
+%   similaire, mais compose le contenu dans la langue secondaire.
+%    \begin{macrocode}
+\newsavebox{\YAD@abstract@mainlanguage}%
+\newsavebox{\YAD@abstract@secondarylanguage}%
+\csgdef{YAD@abstractname@mainlanguage}{\abstractname}%
+\csgdef{YAD@abstractname@secondarylanguage}{\abstractname}%
+\newcounter{YAD@abstracts}%
+\setcounter{YAD@abstracts}{0}%
+%
+\newcommand{\YAD@absract}[1]{%
+  \ifthenelse{\isempty{#1}}{
+    \ifnumcomp{\value{YAD@abstracts}}{>}{0}{%
+      \global\toggletrue{YAD@second@abstract@empty}%
+    }{%
+      \global\toggletrue{YAD@main@abstract@empty}%
+    }%
+  }{%
+    \begin{minipage}{\linewidth}
+      \small%
+      #1%
+    \end{minipage}%
+  }%
+}
+\newenvironment{abstract}[1][\abstractname]{%
+  \global\toggletrue{YAD@abstract@used}%
+  \ifnumcomp{\value{YAD@abstracts}}{>}{0}{%
+    \global\toggletrue{YAD@second@abstract@used}%
+    \csgdef{YAD@abstractname@secondarylanguage}{#1}%
+    \lrbox{\YAD@abstract@secondarylanguage}%
+    \expandafter\selectlanguage\expandafter{\YAD@secondarylanguage}%
+  }{%
+    \csgdef{YAD@abstractname@mainlanguage}{#1}%
+    \lrbox{\YAD@abstract@mainlanguage}%
+  }%
+  \Collect@Body\YAD@absract%
+}{%
+  \endlrbox%
+  \stepcounter{YAD@abstracts}%
+}%
+% \end{macrocode}
+% \end{environment}
+%
+% \begin{macro}{\YAD@abstract@page}
+% Éléments communs aux pages de résumé(s)  et de 4\ieme{} de couverture.
+%    \begin{macrocode}
+\newcommand{\YAD@abstract@page}{%
+  \bgroup%
+  \enlargethispage{2cm}%
+  \setlength{\parindent}{0pt}%
+  \begin{minipage}{\linewidth}
+    \small%
+    {%
+      \bfseries%
+      \YAD@ifemptyorundef{\printtitle}{%
+        \YAD@generic@argument@translate{title}%
+      }{%
+        \textsc{\printtitle}%
+      }%
+      \ifundef{\printsubtitle}{%
+      }{%
+        \newline%
+        \printsubtitle%
+      }%
+      \vspace{-.5em}%
+      \vspace{\z@}%
+      \begin{center}%
+        \YAD@abstractname@mainlanguage%
+      \end{center}%
+    }%
+    \par%
+    \ifboolexpr{%
+      togl {YAD@abstract@used}%
+      and not togl {YAD@main@abstract@empty}%
+    }{%
+      \usebox{\YAD@abstract@mainlanguage}%
+    }{%
+      \YAD@generic@argument@translate{abstract}%
+    }%
+    \ifundef{\printkeywords}{%
+    }{%
+      \vspace{.5em}%
+      \begin{description}
+      \item[\YAD@translation{keywords}\iflanguage{french}{\ifundef{\Fcolonspace}{\FBcolonspace}{\Fcolonspace}}{}:]
+        \printkeywords
+      \end{description}
+    }%
+  \end{minipage}%
+  \iftoggle{YAD@second@abstract@used}{%
+    \expandafter\selectlanguage\expandafter{\YAD@secondarylanguage}%
+    \\[.5\baselineskip]%
+    \YAD@abstract@page@rule%
+    \\[.5\baselineskip]%
+    \begin{minipage}{\linewidth}
+      \small%
+      {%
+        \bfseries%
+        \YAD@ifemptyorundef{\printtitle}{%
+          \YAD@generic@argument@translate{title}%
+        }{%
+          \textsc{\printtitle}%
+        }%
+        \ifundef{\printsubtitle}{%
+        }{%
+          \newline%
+          \printsubtitle%
+        }%
+        \vspace{-.5em}%
+        \vspace{\z@}%
+        \begin{center}%
+          \YAD@abstractname@secondarylanguage%
+        \end{center}%
+      }%
+      \par%
+      \ifboolexpr{%
+        togl {YAD@abstract@used}%
+        and not togl {YAD@second@abstract@empty}%
+      }{%
+        \usebox{\YAD@abstract@secondarylanguage}%
+      }{%
+        \YAD@generic@argument@translate{abstract}%
+      }%
+      \ifundef{\printkeywords}{%
+      }{%
+        \vspace{.5em}%
+        \begin{description}
+        \item[\YAD@translation{keywords}\iflanguage{french}{\ifundef{\Fcolonspace}{\FBcolonspace}{\Fcolonspace}}{}:]
+          \textnormal{\printkeywords}
+        \end{description}
+      }%
+    \end{minipage}%
+  }{%
+  }%
+    \\[.5\baselineskip]%
+  \YAD@abstract@page@rule%
+  % \par%
+  % \textbf{\printlaboratory*}%
+  % \\%
+  % \let\YAD@ORI@doublebackslash\\%
+  % \renewcommand{\\}{ -- }%
+  % \printlaboratoryaddress%
+  % \let\\\YAD@ORI@doublebackslash%
+  \egroup%
+}%
+% \newcommand{\YAD@abstract@page}{%
+%   \iftoggle{YAD@work@inprogress}{%
+%     \setfootrule{0pt}%
+%     \setfoot{}{}{}%
+%   }{%
+%   }%
+%   \bgroup%
+%   \enlargethispage{2cm}%
+%   \setlength{\parindent}{0pt}%
+%   \usebox{\YAD@titleabstractkeywords@mainlanguage}%
+%   \par%
+%   \usebox{\YAD@titleabstractkeywords@secondarylanguage}%
+%   \par%
+%   \textbf{\printlaboratory*}%
+%   \\%
+%   \let\YAD@ORI@doublebackslash\\%
+%   \renewcommand{\\}{ -- }%
+%   \printlaboratoryaddress%
+%   \let\\\YAD@ORI@doublebackslash%
+%   \egroup%
+% }%
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\YAD@laboratory@abstract@page}
+%    \begin{macrocode}
+\newcommand{\YAD@laboratory@abstract@page}{%
+  \begin{minipage}[t]{\linewidth}
+    \textbf{\printlaboratory*}%
+    \\%
+    \let\YAD@ORI@doublebackslash\\%
+    \renewcommand{\\}{ -- }%
+    \printlaboratoryaddress%
+    \let\\\YAD@ORI@doublebackslash%
+  \end{minipage}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\makeabstract}
+% Page de présentation (résumés)
+%    \begin{macrocode}
+\newcommand{\makeabstract}{%
+  \pagestyle{preliminary}%
+  \phantomsection%
+  \addcontentsline{toc}{chapter}{\abstractname}%
+  \toggletrue{YAD@makeabstract@used}%
+  \bgroup%
+  % \setlength{\footskip}{-15pt}%
+  \setfootrule{0pt}%
+  \setfoot[][%
+  \iftoggle{YAD@work@inprogress}{%
+    \textsc{\translate{lbl-versiondate} \today}%
+  }{%
+  }%
+  ][]{%
+    \YAD@laboratory@abstract@page%
+  }{}{}%
+  \YAD@clearemptydoublepage%
+  \renewcommand{\YAD@chapter@header}{\abstractname}%
+  \renewcommand{\YAD@section@header}{\abstractname}%
+  \YAD@abstract@page%
+  \YAD@clearemptydoublepage%
+  \egroup%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\YAD@abstract@page@rule}
+%   Style des filets horizontaux sur la page de présentation.
+%    \begin{macrocode}
+\newcommand{\YAD@abstract@page@rule}[1][black]{\bgroup\color{#1}\noindent\rule[2pt]{\linewidth}{2pt}\egroup}
+%    \end{macrocode}
+% \end{macro}
+%
+% Si la commande ×\makeabstract× n'a pas été utilisée, un warning est émis.
+%    \begin{macrocode}
+\AtEndDocument{%
+  \iftoggle{YAD@makeabstract@used}{%
+  }{%
+    \ifYAD@nomakeabstract%
+    \else%
+    \YAD@ClassWarningNoLine{%
+      La commande \protect\makeabstract\space n'a pas \'et\'e\MessageBreak%
+      employ\'ee. Celle-ci est requise%
+    }%
+    \fi%
+  }%
+}%
+%    \end{macrocode}
+%
+% Si l'environnement ×abstract× n'a pas été utilisé, un warning est émis.
+%    \begin{macrocode}
+\AtEndDocument{%
+  \iftoggle{YAD@abstract@used}{%
+    \iftoggle{YAD@main@abstract@empty}{%
+      \ifnumcomp{\value{YAD@abstracts}}{>}{1}{%
+        \YAD@ClassWarningNoLine{%
+          La 1re occurrence de l'environnement `abstract'\MessageBreak%
+          a \'et\'e employ\'ee avec un contenu est vide.\MessageBreak%
+          Un contenu non vide est requis%
+        }%
+      }{%
+        \YAD@ClassWarningNoLine{%
+          L'environnement `abstract' a \'et\'e\MessageBreak%
+          employ\'e mais avec un contenu est vide.\MessageBreak%
+          Un contenu non vide est requis%
+        }%
+      }%
+    }{%
+    }%
+    \iftoggle{YAD@second@abstract@empty}{%
+      \YAD@ClassWarningNoLine{%
+        La 2e occurrence de l'environnement `abstract'\MessageBreak%
+        a \'et\'e employ\'ee avec un contenu est vide.\MessageBreak%
+        Un contenu non vide est requis%
+      }%
+    }{%
+    }%
+  }{%
+    \ifYAD@noabstract%
+    \else%
+    \YAD@ClassWarningNoLine{%
+      L'environnement `abstract' n'a pas \'et\'e\MessageBreak%
+      employ\'e. Celui-ci est requis%
+    }%
+    \fi%
+  }%
+}%
+%    \end{macrocode}
+%
+% \begin{macro}{\makebackcover}
+% Éléments communs de la page de présentation
+%    \begin{macrocode}
+\newcommand{\makebackcover}{%
+  \YAD@clearemptydoublepage%
+  \pagestyle{backcover}%
+  \YAD@abstract@page%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+% Commande de la page de la ou des dédicaces
+% \begin{macro}{\makededications}
+%    \begin{macrocode}
+\csdef{makededications}{%
+  \@ifstar{\@tempswatrue\csuse{YAD@starnostar@makededications}}{\@tempswafalse\csuse{YAD@starnostar@makededications}}%
+}%
+\csdef{YAD@starnostar@makededications}{%
+  \YAD@clearemptydoublepage%
+  \if@tempswa%
+  \else%
+  \vspace*{\stretch{2}}%
+  \fi
+  \DTLifdbempty{dedications}{%
+    \YAD@generic@argument@translate{dedications}%
+    \YAD@ClassWarningNoLine{%
+      La commande \protect\makededications\space est employ\'ee\MessageBreak%
+      alors que la commande
+      \protect\dedication\protect{<d\'edicace>\protect},\MessageBreak%
+      permettant de pr\'eparer des d\'edicaces, n'a pas\MessageBreak%
+      \'et\'e employ\'ee. Veuillez l'employer au moins\MessageBreak%
+      une fois%
+    }%
+  }{%
+%    \end{macrocode}
+% Appel du style de page propre à la partie préliminaire
+%    \begin{macrocode}
+    \begin{flushright}
+      \itshape%
+      \DTLforeach*{dedications}{%
+        \YAD@dedication=dedication%
+      }{%
+        \YAD@ifemptyorundef{\YAD@dedication}{%
+          \YAD@generic@argument@translate{dedication}%
+          \YAD@ClassWarningNoLine{%
+            D\'edicace vide%
+          }%
+        }{%
+          \YAD@dedication%
+        }%
+        \par%
+        \DTLiflastrow{%
+        }{%
+          \if@tempswa%
+          \vspace*{\baselineskip}%
+          \else%
+          \vspace*{\stretch{1}}%
+          \fi
+        }%
+      }%
+    \end{flushright}
+  }%
+  \if@tempswa%
+  \else%
+  \vspace*{\stretch{2}}%
+  \fi
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+% Commande de la page de la ou des dédicaces
+% \begin{macro}{\makefrontepigraphs}
+%    \begin{macrocode}
+\csdef{makefrontepigraphs}{%
+  \@ifstar{\@tempswatrue\csuse{YAD@starnostar@makefrontepigraphs}}{\@tempswafalse\csuse{YAD@starnostar@makefrontepigraphs}}%
+}%
+\csdef{YAD@starnostar@makefrontepigraphs}{%
+  \patchcmd{\epigraphs}{\qitemlabel}{\qitemlabel\itemsep=1.5\baselineskip}{}{}%
+  \YAD@clearemptydoublepage%
+  \if@tempswa%
+  \else%
+  \vspace*{\stretch{2}}%
+  \fi
+  \DTLifdbempty{frontepigraphs}{%
+    \setlength\epigraphrule{0pt}%
+    \begin{epigraphs}
+      \qitem{\YAD@generic@argument@translate{epigraphs}}{}%
+    \end{epigraphs}
+    \YAD@ClassWarningNoLine{%
+      La commande \protect\makefrontepigraphs\space est employ\'ee\MessageBreak%
+      alors que la commande
+      \protect\frontepigraph\protect{<\'epigraphe>\protect},\MessageBreak%
+      permettant de pr\'eparer des \'epigraphes, n'a pas\MessageBreak%
+      \'et\'e employ\'ee. Veuillez l'employer au moins\MessageBreak%
+      une fois%
+    }%
+  }{%
+%    \end{macrocode}
+% Appel du style de page propre à la partie préliminaire
+%    \begin{macrocode}
+    \begin{epigraphs}
+    \DTLforeach*{frontepigraphs}{%
+      \YAD@epigraphlanguage=epigraphlanguage,%
+      \YAD@epigraph=epigraph,%
+      \YAD@epigraphauthor=epigraphauthor%
+    }{%
+      \YAD@ifemptyorundef{\YAD@epigraph}{%
+        \renewcommand{\YAD@epigraph}{%
+          \YAD@generic@argument@translate{epigraph}%
+        }%
+        \YAD@ClassWarningNoLine{%
+          \'Epigraphe vide%
+        }%
+      }{%
+      }%
+      \ifthenelse{\equal{\YAD@mainlanguage}{\YAD@epigraphlanguage}}{%
+        \qitem{\YAD@epigraph}{\YAD@epigraphauthor}%
+      }{%
+        \bgroup%
+        \expandafter\selectlanguage\expandafter{\YAD@epigraphlanguage}%
+        \qitem{\YAD@epigraph}{\YAD@epigraphauthor}%
+        \egroup%
+      }
+      \DTLiflastrow{%
+      }{%
+        \if@tempswa%
+        % \vspace*{2cm}%
+        \else%
+        % \vspace*{\stretch{1}}%
+        \fi
+      }%
+    }%
+    \end{epigraphs}
+  }%
+  \if@tempswa%
+  \else%
+  \vspace*{\stretch{2}}%
+  \fi
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{environment}{epigraphspage}
+% Environnement de la page des épigraphes globales à la thèse
+%    \begin{macrocode}
+\newenvironment{epigraphspage}{%
+%    \end{macrocode}
+% Redéfinition locale de la commande d'épigraphe
+%    \begin{macrocode}
+  \patchcmd{\epigraphs}{\qitemlabel}{\qitemlabel\itemsep=1.5\baselineskip}{}{}
+  \YAD@clearemptydoublepage%
+  \vspace*{\stretch{1}}%
+}{%
+  \vspace*{\stretch{1}}%
+}%
+%    \end{macrocode}
+% Appel du style de page propre à la partie préliminaire du
+% document, notamment début de l'insertion des titres courants (on
+% ajoute le style de page ×prepreliminary× avant que l'environnement
+% ×epigraphspage× ne débute, de sorte que sa portée ne soit pas
+% limitée à cet environnement).
+%    \begin{macrocode}
+\BeforeBeginEnvironment{epigraphspage}{%
+  \pagestyle{prepreliminary}%
+}%
+%    \end{macrocode}
+% \end{environment}
+% On redéfinit la commande ×\chapter× de sorte que, dans un chapitre non
+% numéroté (×\chapter*×) :
+% \begin{itemize}
+% \item les (sous-(sous-))sections n'aient pas besoin d'être étoilées à leur
+%   tour pour être non numérotées ;
+% \item il ne soit pas nécessaire de faire appel aux commandes cryptiques
+% ×\addcontentsline{toc}{...}{...}× ;
+% \item les titres courants soient corrects (par défaut, les titres courants
+%   des chapitres et sections non numérotés sont ceux des chapitre et section
+%   numérotés précédents).
+% \end{itemize}
+% Pour ce faire, on recourt aux bascules ×\setsecnumdepth{none}× and
+% ×\resetsecnumdepth× du \Package{tocvsec2}.
+% % Mais, avant cela, on redéfinit la
+% % macro ×\resetsecnumdepth× qui souffre de \enquote{spurious spaces} dans les
+% % versions antérieures à celles en date du 2014/03/10.
+% %    \begin{macrocode}
+% \@ifpackagelater{tocvsec2}{2014/03/10}{%
+% }{%
+%   \renewcommand\resetsecnumdepth{%
+%     \@ifstar{%
+%       \setcounter{secnumdepth}{\value{max@secnumdepth}}%
+%       \edef\stack@secnumdepth{\the\c@secnumdepth\relax}%
+%     }{%
+%       \ifx\stack@secnumdepth\@empty%
+%       \PackageWarning{tocvsec2}{There is no previous value for secnumdepth}%
+%       \else%
+%       \afterassignment\gobble@secnumdepth%
+%       \expandafter\c@secnumdepth\expandafter\numexpr\stack@secnumdepth\@nil%
+%       \fi%
+%     }%
+%   }%
+% }%
+\let\YAD@ORI@chapter\chapter%
+\AfterPreamble{% delay the redefinition when titlesec has done its own
+  \renewcommand\chapter{%
+    \YAD@clearemptydoublepage%
+    \phantomsection%
+    \iftoggle{YAD@printed@on@paper}{%
+    }{%
+      \bookmarksetup{startatroot}%
+    }%
+    \@ifstar{\YAD@starred@chapter}{\YAD@unstarred@chapter}%
+  }%
+  \newcommand{\YAD@starred@chapter}{%
+    \setsecnumdepth{none}%
+    \YAD@ORI@chapter%
+  }%
+  \newcommand{\YAD@unstarred@chapter}{%
+%    \end{macrocode}
+% La numérotation des chapitres non étoilés au niveau initial
+% (×\resetsecnumdepth*×) n'est activée qu'à partir de la partie principale
+% (×\mainmatter×), sans quoi les (sous-)sections de la partie ×\frontmatter×
+% sont numérotées, alors que rien ne doit l'être dans cette partie.
+%    \begin{macrocode}
+    \if@mainmatter%
+    \resetsecnumdepth*%
+    \fi%
+    \YAD@ORI@chapter%
+  }%
+  % \newcommand{\YAD@arg@chapter}[2][]{%
+  %   \ifthenelse{\isempty{#1}}{%
+  %     \YAD@ORI@chapter{#2}%
+  %     \def\chaptertitle{#2}%
+  %   }{%
+  %     \YAD@ORI@chapter[#1]{#2}%
+  %     \def\chaptertitle{#1}%
+  %   }%
+  % }%
+  % \newcommand{\YAD@noarg@chapter}[1]{%
+  %   \YAD@ORI@chapter{#1}%
+  %   \def\chaptertitle{#1}%
+  % }%
+%    \end{macrocode}
+% On ne veut pas utiliser cette nouvelle définition de ×\chapter*× pour
+% ×\tableofcontents× et les listes similaires.
+%    \begin{macrocode}
+  % \xpatchcmd{\tableofcontents}{\chapter}{\YAD@ORI@chapter}{}{}%
+  % \xpatchcmd{\shorttableofcontents}{\chapter}{\YAD@ORI@chapter}{}{}%
+  % \xpatchcmd{\listoftables}{\chapter}{\YAD@ORI@chapter}{}{}%
+  % \xpatchcmd{\listoffigures}{\chapter}{\YAD@ORI@chapter}{}{}%
+%    \end{macrocode}
+% Si le \Package{floatrow} est chargé, on doit aussi ne pas utiliser cette
+% nouvelle définition de ×\chapter*× pour les listes de flottants personnalisés
+% qui peuvent être créées.
+%    \begin{macrocode}
+  \@ifpackageloaded{floatrow}{%
+    \xpatchcmd{\float@listhead}{\chapter}{\YAD@ORI@chapter}{}{}%
+  }{%
+  }%
+%    \end{macrocode}
+% On doit modifier la commande ×\toc@chapter× du \Package{tocbibind} sans quoi
+% les éléments qu'il ajoute apparaissent en double.
+%    \begin{macrocode}
+  \@ifpackageloaded{tocbibind}{%
+    \renewcommand{\toc@chapter}[1]{%
+      \chapter*{#1}\prw@mkboth{#1}%
+      % \addcontentsline{toc}{chapter}{#1}% < Suppression par rapport à l'original
+    }%
+  }{%
+  }%
+}%
+%    \end{macrocode}
+% Les parties sont par défaut numérotées.
+%    \begin{macrocode}
+\xpretocmd{\part}{\setsecnumdepth{\YAD@secnumdepth}}{}{}%
+%    \end{macrocode}
+%
+% % On crée une commande créant des chapitres. Celle-ci a un argument optionnel,
+% % par défaut égal à ×preliminary× qui définit le style de page s'appliquant au
+% % chapitre créé.
+% % \begin{macro}{\YAD@create@chapter}
+% %    \begin{macrocode}
+% \newcommand*{\YAD@create@chapter}[2][preliminary]{%
+%   \expandafter\newcommand\expandafter{\csname #2\endcsname}[1][\csuse{YAD@tr#2}]{%
+%     \pagestyle{#1}%
+%     \expandafter\translatelet\expandafter{\csname YAD@tr#2\endcsname}{lbl-#2}%
+%     \chapter[##1]{\YAD@reach@file[\configurationfile]{##1}}%
+%   }%
+% }
+% %    \end{macrocode}
+% % \end{macro}
+% %
+% % Au moyen de cette commande, on crée des commandes de chapitres.
+% %
+% %    \begin{macrocode}
+% \YAD@create@chapter{acknowledgements}%
+% \YAD@create@chapter{caution}%
+% \YAD@create@chapter{foreword}%
+% \YAD@create@chapter{preface}%
+% \YAD@create@chapter{frenchabstract}%
+% %
+% \xapptocmd{\frenchabstract}{\toggletrue{YAD@frenchabstract@used}}{}{}
+% \AtEndDocument{%
+%   \iftoggle{YAD@frenchabstract@used}{%
+%     \ifthenelse{\equal{\YAD@mainlanguage}{french}}{%
+%       \YAD@ClassWarningNoLine{%
+%         R\'esum\'e substantiel en fran\c cais inutile.\MessageBreak%
+%         La langue principale de la th\`ese \'etant le\MessageBreak%
+%         fran\c cais, un r\'esum\'e substantiel en\MessageBreak%
+%         fran\c cais est inutile : vous pouvez supprimer\MessageBreak%
+%         la commande \protect\frenchabstract\space et le texte qui s'y\MessageBreak%
+%         rapporte%
+%       }%
+%     }{%
+%     }%
+%   }{%
+%     \ifthenelse{\equal{\YAD@mainlanguage}{french}}{%
+%     }{%
+%       \YAD@ClassWarningNoLine{%
+%         R\'esum\'e substantiel en fran\c cais recommand\'e.\MessageBreak%
+%         La langue principale de la th\`ese n'\'etant pas le\MessageBreak%
+%         fran\c cais, un r\'esum\'e substantiel en\MessageBreak%
+%         fran\c cais est recommand\'e : vous pouvez en cr\'eer\MessageBreak%
+%         un au moyen de \protect\frenchabstract\space (cf. la\MessageBreak%
+%         documentation de la la classe yat)%
+%       }%
+%     }%
+%   }%
+% }%
+% %    \end{macrocode}
+%
+% On définit la valeur, en anglais et en français, de la macro ×\disclaimer× de
+% clause de non-responsabilité définie précédemment.
+%
+%    \begin{macrocode}
+\disclaimer{%
+  \iflanguage{french}{%
+    L'%
+    \ifundef{\printinstitute}{%
+      \YAD@generic@argument@translate{institute}
+    }{%
+      \printinstitute*
+    }%
+    %
+    \ifundef{\printcoinstitute}{n'entend}{et l'\printcoinstitute*{} n'entendent}
+    %
+    donner aucune approbation ni improbation aux opinions \'emises dans les
+    th\`eses : ces opinions devront \^etre consid\'er\'ees comme propres \`a
+    leurs auteurs.%
+  }{%
+    The \printinstitute{}
+    %
+    \ifundef{\printcoinstitute}{}{and the \printcoinstitute{}}
+    %
+    neither endorse nor censure authors' opinions expressed
+    in the theses: these opinions must be considered to be those of their
+    authors.%
+  }%
+}%
+%    \end{macrocode}
+%
+% \begin{macro}{\makedisclaimer}
+%    \begin{macrocode}
+\csdef{makedisclaimer}{%
+  \@ifstar{\@tempswatrue\csuse{YAD@starnostar@makedisclaimer}}{\@tempswafalse\csuse{YAD@starnostar@makedisclaimer}}%
+}%
+\csdef{YAD@starnostar@makedisclaimer}{%
+%    \end{macrocode}
+% Appel du style de page propre à la partie préliminaire
+%    \begin{macrocode}
+    \pagestyle{prepreliminary}%
+    \if@tempswa%
+    \else%
+    \vspace*{\stretch{1}}%
+    \fi%
+    \printdisclaimer%
+    \if@tempswa%
+    \else%
+    \vspace*{\stretch{1}}%
+    \fi%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+% % Le contenu de l'environnement ×introduction× est collecté dans la macro
+% % ×\YAD@introduction× pour tester s'il est vide.
+% % \begin{macro}{\YAD@introduction}
+% %    \begin{macrocode}
+% \newcommand{\YAD@introduction}[1]{%
+%   \ifthenelse{\isempty{#1}}{%
+%     \global\toggletrue{YAD@introduction@empty}%
+%     \YAD@generic@argument@translate{introduction}%
+%   }{%
+%     #1%
+%   }%
+% }
+% %    \end{macrocode}
+% % \end{macro}
+% %
+% % \begin{environment}{introduction}
+% %   Environnement d'introduction générale numérotée, qui permet de
+% %   masquer l'appel du style de page ×mainmatter× chargé avant
+% %   qu'elle ne commence. La numérotation des paragraphes y est fixée
+% %   à son niveau par défaut (par défaut sous-sections).
+% %    \begin{macrocode}
+% \newenvironment{introduction}[1][\YAD@trintroduction]{%
+%   \setsecnumdepth{\YAD@secnumdepth}%
+%   \YAD@introduction@begin[#1]%
+%   \Collect@Body\YAD@introduction%
+% }{%
+%   \YAD@introduction@end%
+% }%
+% %    \end{macrocode}
+% % \end{environment}
+% % Appel du style de page propre à la partie principale du document,
+% % notamment début de la numérotation des chapitres, chargé avant
+% % l'environnement ×introduction×.
+% %    \begin{macrocode}
+% \BeforeBeginEnvironment{introduction}{\pagestyle{mainmatter}}
+% %    \end{macrocode}
+% %
+% % \begin{environment}{introduction*}
+% %   Environnement d'introduction générale \emph{non} numérotée, qui
+% %   permet de masquer l'appel du style de page ×mainmatter× chargé
+% %   avant qu'elle ne commence.
+% %    \begin{macrocode}
+% \newenvironment{introduction*}[1][\YAD@trintroduction]{%
+%   \setsecnumdepth{none}%
+%   \YAD@introduction@begin[#1]%
+%   \Collect@Body\YAD@introduction%
+% }{%
+%   \YAD@introduction@end%
+% }%
+% %    \end{macrocode}
+% % \end{environment}
+% % Au début de l'environnement, appel du style de page propre à la
+% % partie introductive du document. À la fin de l'environnement,
+% % numérotation des paragraphes est fixée à son niveau par défaut
+% % (sous-sections).
+% %    \begin{macrocode}
+% \BeforeBeginEnvironment{introduction*}{\pagestyle{mainmatter}}
+% \AfterEndEnvironment{introduction*}{%
+%   \setsecnumdepth{\YAD@secnumdepth}%
+% }%
+% %    \end{macrocode}
+% %
+% % \begin{macro}{\@introduction@begin}
+% %   Commande de début d'environnement commune à ×introduction× et à
+% %   ×introduction*×.
+% %    \begin{macrocode}
+% \newcommand{\YAD@introduction@begin}[1][\YAD@trintroduction]{%
+%   \translatelet\YAD@trintroduction{lbl-introduction}%
+%   \global\toggletrue{YAD@introduction@used}%
+%   \chapter[#1]{\YAD@reach@file[\configurationfile]{#1}}
+% }%
+% %    \end{macrocode}
+% % \end{macro}
+% %
+% % \begin{macro}{\@introduction@end}
+% %   Commande de fin d'environnement commune à ×introduction× et à
+% %   ×introduction*×.
+% %    \begin{macrocode}
+% \newcommand{\YAD@introduction@end}{%
+%   \YAD@clearemptydoublepage%
+% }%
+% %    \end{macrocode}
+% % \end{macro}
+% %
+% % Si l'environnement ×introduction× n'a pas été utilisé, un warning est émis
+% % (car la commande ×mainmatter× n'aura alors pas été insérée).
+% %    \begin{macrocode}
+% \AtEndDocument{%
+%   \iftoggle{YAD@introduction@used}{%
+%     \iftoggle{YAD@introduction@empty}{%
+%       \YAD@ClassWarningNoLine{%
+%         L'environnement `introduction' a \'et\'e employ\'e\MessageBreak%
+%         avec un contenu est vide.\MessageBreak%
+%         Un contenu non vide est requis%
+%       }%
+%     }{%
+%     }%
+%   }{%
+%     \ifYAD@nointroduction%
+%     \else%
+%     \YAD@ClassWarningNoLine{%
+%       L'environnement `introduction' n'a pas \'et\'e\MessageBreak%
+%       employ\'e. Celui-ci est requis%
+%     }%
+%     \fi%
+%   }%
+% }
+% %    \end{macrocode}
+% %
+% % Le contenu de l'environnement ×conclusion× est collecté dans la macro
+% % ×\YAD@conclusion× pour tester s'il est vide.
+% % \begin{macro}{\YAD@conclusion}
+% %    \begin{macrocode}
+% \newcommand{\YAD@conclusion}[1]{%
+%   \ifthenelse{\isempty{#1}}{%
+%     \global\toggletrue{YAD@conclusion@empty}%
+%     \YAD@generic@argument@translate{conclusion}%
+%   }{%
+%     #1%
+%   }%
+% }
+% %    \end{macrocode}
+% % \end{macro}
+% %
+% % \begin{environment}{conclusion}
+% %   Environnement de conclusion générale numérotée.
+% %    \begin{macrocode}
+% \newenvironment{conclusion}[1][\YAD@trconclusion]{%
+%   \setsecnumdepth{\YAD@secnumdepth}%
+%   \YAD@conclusion@begin[#1]%
+%   \Collect@Body\YAD@conclusion%
+% }{%
+%   \YAD@conclusion@end%
+% }%
+% %    \end{macrocode}
+% % \end{environment}
+% % Appel du style de page propre à la partie conclusion générale du
+% % document, notamment pour s'assurer que celle-ci va figurer au plus
+% % haut niveau des signets, chargé avant l'environnement
+% % ×conclusion×.
+% %    \begin{macrocode}
+% \BeforeBeginEnvironment{conclusion}{
+%   \phantomsection%
+%   \setsecnumdepth{\YAD@secnumdepth}%
+%   \iftoggle{YAD@printed@on@paper}{%
+%   }{%
+%     \bookmarksetup{startatroot}%
+%   }%
+% }%
+% \AfterEndEnvironment{conclusion}{\appendix}
+% %    \end{macrocode}
+% %
+% % \begin{environment}{conclusion*}
+% %   Environnement d'conclusion générale \emph{non} numérotée, qui
+% %   permet de masquer l'appel du style de page ×conclusion-generale×
+% %   chargé avant qu'elle ne commence.
+% %    \begin{macrocode}
+% \newenvironment{conclusion*}[1][\YAD@trconclusion]{%
+%   \setsecnumdepth{none}%
+%   \YAD@conclusion@begin[#1]%
+%   \Collect@Body\YAD@conclusion%
+% }{%
+%   \YAD@conclusion@end%
+% }%
+% %    \end{macrocode}
+% % \end{environment}
+% % Appel du style de page propre à la partie conclusion générale du
+% % document, notamment pour s'assurer que celle-ci va figurer au plus
+% % haut niveau des signets, chargé avant l'environnement
+% % ×conclusion*×.
+% %    \begin{macrocode}
+% \BeforeBeginEnvironment{conclusion*}{%
+%   \phantomsection%
+%   \setsecnumdepth{\YAD@secnumdepth}%
+%   \iftoggle{YAD@printed@on@paper}{%
+%   }{%
+%     \bookmarksetup{startatroot}%
+%   }%
+% }%
+% \AfterEndEnvironment{conclusion*}{%
+%   \appendix%
+%   \setsecnumdepth{\YAD@secnumdepth}%
+% }%
+% %    \end{macrocode}
+% %
+% % \begin{macro}{\@conclusion@begin}
+% %   Commande de début d'environnement commune à ×conclusion× et à
+% %   ×conclusion*×.
+% %    \begin{macrocode}
+% \newcommand{\YAD@conclusion@begin}[1][\YAD@trconclusion]{%
+%   \translatelet\YAD@trconclusion{lbl-conclusion}%
+%   \global\toggletrue{YAD@conclusion@used}%
+%   \chapter[#1]{\YAD@reach@file[\configurationfile]{#1}}
+% }%
+% %    \end{macrocode}
+% % \end{macro}
+% %
+% % \begin{macro}{\@conclusion@end}
+% %   Commande de fin d'environnement commune à ×conclusion× et à
+% %   ×conclusion*×.
+% %    \begin{macrocode}
+% \newcommand{\YAD@conclusion@end}{%
+%   \YAD@clearemptydoublepage%
+% }%
+% %    \end{macrocode}
+% % \end{macro}
+% %
+% % Si l'environnement ×conclusion× n'a pas été utilisé, un warning est émis
+% % (car la commande ×appendix× n'aura alors pas été insérée).
+% %    \begin{macrocode}
+% \AtEndDocument{%
+%   \iftoggle{YAD@conclusion@used}{%
+%     \iftoggle{YAD@conclusion@empty}{%
+%       \YAD@ClassWarningNoLine{%
+%         L'environnement `conclusion' a \'et\'e employ\'e\MessageBreak%
+%         avec un contenu est vide.\MessageBreak%
+%         Un contenu non vide est requis%
+%       }%
+%     }{%
+%     }%
+%   }{%
+%     \ifYAD@noconclusion%
+%     \else%
+%     \YAD@ClassWarningNoLine{%
+%       L'environnement `conclusion' n'a pas \'et\'e\MessageBreak%
+%       employ\'e. Celui-ci est requis%
+%     }%
+%     \fi%
+%   }%
+% }
+% %    \end{macrocode}
+%
+% On fixe la métadonnée de la langue.
+%    \begin{macrocode}
+\ifthenelse{\equal{\YAD@mainlanguage}{french}}{%
+  \hypersetup{pdflang=fr}%
+}{%
+  \hypersetup{pdflang=en}%
+}%
+%    \end{macrocode}
+%
+% Réglage nécessaire sans quoi le titre courant \textquote{BIBLIOGRAPHIE}
+% apparaît en trop en entête et en pied de page
+%    \begin{macrocode}
+\AtEndPreamble{%
+  \@ifpackageloaded{biblatex}{%
+    \defbibheading{bibintoc}[\bibname]{\chapter*{#1}}%
+    \defbibheading{subbibintoc}[\bibname]{\section{#1}}%
+%    \end{macrocode}
+%
+% Références bibliographiques des citations formelles (cf. \Package{biblatex}):
+%    \begin{macrocode}
+    \@ifpackageloaded{csquotes}{%
+      \SetCiteCommand{\autocite}%
+    }{%
+    }%
+%    \end{macrocode}
+%
+% Redéfinition de la commande d'insertion de la bibliographie et ce,
+% seulement si le \Package{biblatex} est chargé
+% \begin{macro}{\printbibliography}
+%    \begin{macrocode}
+    \let\YAD@printbibliography@ORI\printbibliography%
+    \renewcommand{\printbibliography}[1][]{%
+      \toggletrue{YAD@printbibliography@used}%
+      \pagestyle{biblio}%
+      \YAD@printbibliography@ORI[heading=bibintoc,#1]%
+      \pagestyle{ordinary}%
+    }%
+  }{%
+  }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+% Si la commande ×\printbibliography× n'a pas été utilisée, un warning est émis.
+%    \begin{macrocode}
+\AtEndDocument{%
+  \iftoggle{YAD@printbibliography@used}{%
+  }{%
+    \ifYAD@noprintbibliography%
+    \else%
+    \YAD@ClassWarningNoLine{%
+      La commande \protect\printbibliography\space n'a pas \'et\'e\MessageBreak%
+      employ\'ee. Celle-ci est requise%
+    }%
+    \fi%
+  }%
+}%
+%    \end{macrocode}
+%
+% Patch du \Package{glossaries}, pour lui appliquer certains
+% réglages s'il est chargé et notamment pour lui adjoindre une liste
+% de symboles.
+%    \begin{macrocode}
+\hopatch@AfterPackage{glossaries}{%
+%    \end{macrocode}
+% Si on est version \enquote{impression sur papier}, on supprime la barre de
+% navigation des glossaires qui ne sert que par ses liens hypertextes et donc
+% pas en version imprimée.
+%    \begin{macrocode}
+  \iftoggle{YAD@printed@on@paper}{%
+    \iftoggle{YAD@printed@on@paper@star}{%
+    }{%
+      \renewcommand{\glsnavigation}{}%
+    }%
+  }{%
+  }%
+%    \end{macrocode}
+% Création d'une commande ×\newglssymbol× pour définir des symboles,
+% dans l'esprit de ×\newacronym× (×\newsymbol× ne peut pas être
+% employée car elle existe déjà dans le \Package{amsfonts})
+%    \begin{macrocode}
+  \newcommand{\newglssymbol}[5][]{%
+    \@ifpackageloaded{glossaries}{%
+%    \end{macrocode}
+% Le tri du symbole dans la liste des symboles se fait par défaut
+% sur la clé...
+%    \begin{macrocode}
+      \ifthenelse{\isempty{#1}}{%
+        \newglossaryentry{#2}{%
+          type=symbols,%
+          symbol={#3},%
+          name={#4},%
+          description={#5},%
+          sort={#2}%
+        }%
+%    \end{macrocode}
+% ... mais peut être forcé par l'argument optionnel de ×\newglssymbol×
+%    \begin{macrocode}
+}{%
+  \newglossaryentry{#2}{%
+    type=symbols,%
+    symbol={#3},%
+    name={#4},%
+    description={#5},%
+    sort={#1}%
+  }%
+}%
+}{%
+  \ClassError{yathesis}{}{%
+    La commande \protect\newglssymbol ne peut \^etre\MessageBreak%
+    employ\'ee que si le package 'glossaries' est charg\'e%
+  }{%
+  }%
+}%
+}%
+%    \end{macrocode}
+% On définit un nouveau type de style de glossaire, ×yadsymbolstyle×.
+% \begin{macro}{\yadsymbolstyle}
+%    \begin{macrocode}
+\newglossarystyle{yadsymbolstyle}{%
+  % put the glossary in the itemize environment:
+  \renewenvironment{theglossary}%
+  {\begin{description}}{\end{description}}%
+  % have nothing after \begin{theglossary}:
+  \renewcommand*{\glossaryheader}{}%
+  % have nothing between glossary groups:
+  \renewcommand*{\glsgroupheading}[1]{}%
+  \renewcommand*{\glsgroupskip}{}%
+  % set how each entry should appear:
+  \renewcommand*{\glossentry}[2]{%
+  \item[\textmd{\glossentrysymbol{##1}}]
+    \glstarget{##1}{\glossentryname{##1}}% the entry name
+    \ifthenelse{\equal{\glossentrydesc{##1}}{}}{%
+    }{%
+      \space (\glossentrydesc{##1})% the description
+    }%
+    \hfill ##2% the number list in square brackets
+  }%
+  % set how sub-entries appear:
+  \renewcommand*{\subglossentry}[3]{%
+    \glossentry{##2}{##3}}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% La commande ×\printsymbols× est redéfinie de sorte que lui soit par défaut
+% appliqué le style ×yadsymbolstyle×.
+% \begin{macro}{\printsymbols}
+%    \begin{macrocode}
+\renewcommand{\printsymbols}[1][]{%
+  \printglossary[type=symbols,style=yadsymbolstyle,#1]%
+}%
+%    \end{macrocode}
+% \end{macro}
+% Hack pour que les signets des glossaires et objets assimilés soient
+% correctement traduits.
+%    \begin{macrocode}
+  \AfterEndPreamble{%
+    \renewcommand*{\glossarysection}[2][]{%
+      \YAD@ORI@chapter*{#2}%
+      \ifglstoc
+      \addcontentsline{toc}{chapter}{#1}%
+      \fi
+    }
+    % \let\glossarysection\YAD@ORI@chapter%
+  }%
+%    \end{macrocode}
+% On termine le patch du \Package{glossaries}.
+%    \begin{macrocode}
+}%
+%    \end{macrocode}
+%
+% \subsection{Fichiers importés par la classe}
+%
+% La \yatcl charge le fichier de configuration \lstinline|\jobname|\file{.cfg}:
+% c'est un fichier de configuration \emph{local}, situé dans le répertoire
+% \file{\configurationdirectory}.
+%
+%    \begin{macrocode}
+\AtEndPreamble{%
+  \InputIfFileExists{\configurationdirectory/\configurationfile}%
+  {\ClassInfo{yathesis}{%
+    Fichier de configuration local \configurationfile\space
+    trouv\'e%
+    }%
+  }{%
+    % \YAD@ClassWarningNoLine{%
+    %   Fichier de configuration local
+    %   \configurationfile\space introuvable%
+    % }%
+  }%
+}%
+%    \end{macrocode}
+%
+% \subsubsection{Macros}
+%
+%    \begin{macrocode}
+\AtEndPreamble{%
+  \InputIfFileExists{\configurationdirectory/\macrosfile}%
+  {\ClassInfo{yathesis}{%
+      Fichier \macrosfile\space trouv\'e%
+    }}%
+  {%
+    % \YAD@ClassWarningNoLine{%
+    %   Fichier \macrosfile\space introuvable.\MessageBreak%
+    %   Le fichier \macrosfile\space n'a pas \'et\'e trouv\'e\MessageBreak%
+    %   dans le dossier `\configurationdirectory'%
+    % }%
+  }%
+}%
+%    \end{macrocode}
+%
+% \subsubsection{Contenu des pages de couverture et de titre du document}
+%
+%    \begin{macrocode}
+\AfterEndPreamble{%
+  \InputIfFileExists{\configurationdirectory/\titlefile}%
+  {%
+    \ClassInfo{yathesis}{%
+      Fichier \titlefile\space des donn\'ees du titre trouv\'e%
+    }%
+  }%
+  {%
+    % \YAD@ClassWarningNoLine{%
+    %   Fichier \titlefile\space des donn\'ees du titre
+    %   introuvable.\MessageBreak%
+    %   Le fichier \titlefile\space n'a pas \'et\'e trouv\'e\MessageBreak%
+    %   dans le dossier `\configurationdirectory'.\MessageBreak Ce fichier
+    %   \titlefile\space peut faciliter l'usage\MessageBreak de la classe%
+    % }%
+  }%
+}%
+%    \end{macrocode}
+%
+% \section{Avertissements}
+% \label{cha:yadr}
+%
+% Si la commande ×\tableofcontents× n'a pas été utilisée, un warning est émis.
+%    \begin{macrocode}
+\AtEndDocument{%
+  \iftoggle{YAD@tableofcontents@used}{%
+  }{%
+    \ifYAD@notableofcontents%
+    \else%
+    \YAD@ClassWarningNoLine{%
+      La commande \protect\tableofcontents\space n'a pas \'et\'e\MessageBreak%
+      employ\'ee. Celle-ci est requise%
+    }%
+    \fi%
+  }%
+}%
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\expression{meta-logopres}{logo PRES}{logo PRES}
+\expression{meta-logoinstitute}{logo de l'institut}{logo de l'institut}
+\expression{meta-institute}{institut principal}{institut principal}
+\expression{meta-coinstitute}{institut de cotutelle}{institut de cotutelle}
+\expression{meta-logocoinstitute}{logo de l'institut de cotutelle}{logo de l'institut de cotutelle}
+\expression{meta-doctoralschool}{\'ecole doctorale}{\'ecole doctorale}
+\expression{meta-laboratory}{nom du laboratoire}{nom du laboratoire}
+\expression{meta-logolaboratory}{logo du laboratoire}{logo du laboratoire}
+\expression{meta-author}{pr\'enom et nom de l'auteur}{pr\'enom et nom de l'auteur}
+\expression{meta-date}{date de la soutenance}{date de la soutenance}
+\expression{meta-academicfield}{discipline}{academic field}
+\expression{meta-speciality}{sp\'ecialit\'e}{speciality}
+\expression{meta-title}{titre du m\'emoire de th\`ese}{thesis title}
+\expression{meta-subtitle}{sous-titre du m\'emoire de th\`ese}{thesis subtitle}
+\expression{meta-firstname}{Pr\'enom}{Pr\'enom}
+\expression{meta-lastname}{Nom}{Nom}
+\expression{meta-role}{fonction}{fonction}
+\expression{meta-corporation}{corporation}{corporation}
+\expression{meta-affiliation}{affiliation}{affiliation}
+\expression{meta-introduction}{introduction}{introduction}%
+\expression{meta-conclusion}{conclusion}{conclusion}%
+\expression{meta-keywords}{mot(s) cl\'e(s) de la th\`ese}{thesis keyword(s)}
+\expression{meta-laboratoryaddress}{adresse du laboratoire}{adresse du laboratoire}
+\expression{meta-laboratorytelephone}{t\'el\'ephone du laboratoire}{t\'el\'ephone du laboratoire}
+\expression{meta-laboratoryfax}{fax du laboratoire}{fax du laboratoire}
+\expression{meta-laboratoryemail}{email du laboratoire}{email du laboratoire}
+\expression{meta-urllaboratory}{URL du laboratoire}{URL du laboratoire}
+\expression{meta-dedication}{d\'edicace}{dedication}
+\expression{meta-dedications}{d\'edicaces}{dedications}
+\expression{meta-epigraph}{\'epigraphe}{epigraph}
+\expression{meta-epigraphs}{\'epigraphes}{epigraphs}
+\expression{meta-abstract}{r\'esum\'e}{abstract}%
+\expression{meta-ordernumber}{num\'ero d'ordre}{order number}%
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%</class>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%<*class|translations>
+%    \end{macrocode}
+% Traduction des expressions clés de la thèse.
+%    \begin{macrocode}
+% \expression{lbl-acknowledgements}{Remerciements}{Acknowledgements}%
+% \expression{lbl-aim}{En vue de l'obtention du grade de docteur}{In order to become Doctor from}%
+\expression{lbl-aim}{En vue de l'obtention du grade de docteur de l'}{In order to
+  become Doctor from }%
+% \expression{lbl-aimand}{ et \YAD@alaudeldu{\YAD@del}{\YAD@du}}{ and from }%
+\expression{lbl-aimand}{ et de l'}{ and from }%
+\expression{lbl-caution}{Avertissement}{Caution}%
+\expression{lbl-coinstitute}{}{}%
+\expression{lbl-committeemembers}{Composition du jury}{Committee members}%
+\expression{lbl-committeepresident}{pr\'esident}{President}%
+\expression{lbl-comonitor}{co-encadrant}{Co-Monitor}%
+\expression{lbl-company}{}{}%
+\expression{lbl-conclusion}{Conclusion}{Conclusion}%
+\expression{lbl-cosupervisor}{co-directeur}{Co-Supervisor}%
+\expression{lbl-defendedon}{Soutenue le}{Defended on}%
+\expression{lbl-doctoralschool}{\'Ecole doctorale}{Doctoral School}%
+\expression{lbl-draft}{brouillon}{draft}%
+\expression{lbl-email}{\Email}{\Email}%
+\expression{lbl-examiners}{Examinateur}{Examiner}%
+\expression{lbl-examiners-pl}{Examinateurs}{Examiners}%
+\expression{lbl-fax}{\fax}{\fax}%
+% \expression{lbl-foreword}{Avant-propos}{Foreword}%
+% \expression{lbl-frenchabstract}{R\'esum\'e en fran\c cais}{French Abstract}%
+\expression{lbl-guests}{Invit\'e}{Guest}%
+\expression{lbl-guests-pl}{Invit\'es}{Guests}%
+\expression{lbl-institute}{}{}%
+\expression{lbl-intermediate}{travail en cours}{work in progress}%
+\expression{lbl-introduction}{Introduction}{Introduction}%
+\expression{lbl-juniorresearcher}{charg\'e de recherche}{Junior Researcher}%
+\expression{lbl-juniorresearcher*}{charg\'e de recherche
+  \textsc{hdr}}{\textsc{hdr} Junior Researcher}%
+\expression{lbl-keywords}{Mots cl\'es}{Keywords}%
+% \expression{lbl-listofsymbols}{Liste des symboles}{List of Symbols}%
+\expression{lbl-mcf}{\textsc{mcf}}{Lecturer}%
+\expression{lbl-mcf*}{\textsc{mcf} \textsc{hdr}}{\textsc{hdr} Lecturer}%
+\expression{lbl-ordernumber}{Num\'ero d'ordre}{Order Number}%
+\expression{lbl-phdthesis}{th\`ese}{Ph. D. Thesis}%
+\expression{lbl-phone}{\Telefon}{\Telefon}%
+\expression{lbl-preface}{Pr\'eface}{Preface}%
+\expression{lbl-prepared-at}{Cette th\`ese a \'et\'e pr\'epar\'ee au}{This thesis has
+  been prepared at}%
+\expression{lbl-prepared-at-pl}{Cette th\`ese a \'et\'e pr\'epar\'ee dans les
+  laboratoires suivants.}{This thesis has
+  been prepared at the following research units.}%
+\expression{lbl-professor}{professeur}{Professor}%
+\expression{lbl-referees}{Rapporteur}{Referee}%
+\expression{lbl-referees-pl}{Rapporteurs}{Referees}%
+\expression{lbl-seniorresearcher}{directeur de recherche}{Senior Researcher}%
+\expression{lbl-academicfield}{Discipline}{Academic Field}%
+\expression{lbl-speciality}{Sp\'ecialit\'e}{Speciality}%
+\expression{lbl-supervisor}{directeur}{Supervisor}%
+\expression{lbl-supervisors}{Directeur de th\`ese}{Supervisor}%
+\expression{lbl-supervisors-pl}{Directeurs de th\`ese}{Supervisors}%
+\expression{lbl-thesisdefendedby}{Th\`ese pr\'esent\'ee par}{Thesis defended by}%
+\expression{lbl-thesistitle}{Titre de la th\`ese}{Thesis Title}%
+\expression{lbl-universitydepartment}{Unit\'e de recherche}{University Department}%
+\expression{lbl-versiondate}{Version interm\'ediaire en date du}{Intermediate
+  version as of}%
+\expression{lbl-website}{Site}{Web Site}%
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%</class|translations>
+%    \end{macrocode}
+%
+% \subsection{Local language definitions for \Package{listings}}
+%
+% Now, we create some \file{lstlang0.sty} files where are extended
+% some (or defined new) languages.
+%
+% \subsubsection{Extension of the \enquote{LaTeX} TeX dialect}
+%
+%    \begin{macrocode}
+%<*class-lstlang0>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\lst@definelanguage[extLaTeX]{TeX}[LaTeX]{TeX}{%
+  moretexcs={%
+    footnotesize,huge,Huge,large,Large,LARGE,large,Large,scriptsize,tiny,%
+    includegraphics,cite,ttwplink,vref,LTXtable,tableofcontents,frontmatter,mainmatter,%
+    part,chapter,section,subsection,subsubsection,paragraph,subparagraph,%
+    listoftables,listoffigures,lstlistingname,si,SI,ohm,num,space,%
+    abstractname,appendixname,contentsname,listfigurename,listtablename,indexname,%
+    figurename,tablename,chaptername,pagename,seename,alsoname,proofname,bibname,glossaryname,%
+    addto,captionsenglish,captionsfrench,lipsum,href,url,partname,refname,idxlayout,%
+    appendix,lstlistoflistings,graphicpath,loadglsentries,hypersetup,detect-all,SetWatermarkColor%
+  },%
+  morekeywords=[1]{% Environments' names
+    tabular,tabulary,math%
+  },%
+  morekeywords=[2]{% Keys of key-value lists
+    bookmarksdepth,columns,see%
+  },%
+  morekeywords=[3]{% Values of key-value lists
+    german,ngerman,french,english,spanish%
+  },
+  alsoletter={-*1234560}%
+}%
+%    \end{macrocode}
+%
+% \subsubsection{Definition of the \enquote{yad} \TeX{} dialect}
+%
+%    \begin{macrocode}
+\lst@definelanguage[yad]{TeX}[LaTeX]{TeX}{%
+  % yathesis% TODO : à mettre ailleurs
+  moretexcs={% Control sequences' names
+    author,title,subtitle,academicfield,speciality,date,supervisor,cosupervisor,comonitor,%
+    referee,guest,examiner,committeepresident,pres,institute,coinstitute,company,doctoralschool,%
+    laboratory,dedication,frontepigraph,keywords,subject,expression,tableofcontents,%
+    maketitle,makedisclaimer,makekeywords,makelaboratory,makeabstract,makededications,makefrontepigraphs,%
+    % acknowledgements,frenchabstract,foreword,preface,caution,
+    makebackcover,ordernumber,chapter*,%
+    disclaimer,newglssymbol,yatsetup%
+  },%
+  morekeywords=[1]{% Environments' names
+    abstract,dedicationspage,epigraphspage,epigraphs,%
+    glossaries,otherlanguage%
+  },%
+  morekeywords=[2]{% Keys of key-value lists
+    professor,seniorresearcher,mcf,juniorresearcher,mcf*,juniorresearcher*,corporation,logoheight,%
+    distinction,award,affiliation,sepcorpaffilfrench,affiliationsecondary,sepcorpaffilenglish,%
+    logo,url,nologo,space,mainlanguage,secnumdepth,tocdepth,depth,%
+    address,telephone,fax,email,type,acronym,heading,nowarning,%
+    hyperfootnotes,hyperindex,plainpages,pdfpagemode,pdfpagelayout,locale,gray%
+  },%
+  morekeywords=[3]{% Values of key-value lists
+    single,onehalf,double,doctor,yadsymbolstyle,%
+    part,chapter,section,subsection,subsubsection,paragraph,subparagraph,%
+    none,true,false,UseOutlines,TwoPageRight,UK,FR,%
+    Sonny,Lenny,Glenn,Conny,Rejne,Bjarne,PetersLenny,Bjornstrup,%
+    screen,draft,intermediate,printed,printed*%
+  },%
+  morekeywords=[4]{% Class and packages options
+    warn,final,nodayofweek,unicode,nostamp,all,numbered,a4paper,leqno,fleqn,10pt,11pt,12pt,%
+    detect-all,breaklinks,oneside%
+  },%
+  morekeywords=[5]{% Translation labels
+    lbl-abstract,lbl-aim,lbl-aimand,lbl-coinstitute,lbl-comonitor,%
+    lbl-cosupervisor,lbl-committee,lbl-committeepresident,lbl-company,lbl-conclusion,lbl-defendedon,%
+    lbl-doctoralschool,lbl-draft,%
+    %lbl-foreword,lbl-frenchabstract,lbl-acknowledgements,lbl-caution,
+    lbl-institute,lbl-intermediate,%
+    lbl-introduction,lbl-keywords,lbl-prepared-at,lbl-prepared-at-pl,lbl-guests,lbl-referees,lbl-seniorresearcher,%
+    lbl-speciality,lbl-supervisor,lbl-thesisdefendedby,lbl-disclaimer,lbl-thesissupervisedby,%
+    lbl-thesistitle,lbl-universitydepartment,lbl-professor,lbl-juniorresearcher*,lbl-mcf*,%
+    lbl-juniorresearcher,lbl-mcf,lbl-versiondate,lbl-website%
+  },%
+  alsoletter={-*1234560}%
+}%
+\lst@definelanguage[glossaries]{TeX}[LaTeX]{TeX}%
+{%
+  % Séquences de contrôles (communément appelées commandes ou macros)
+  moretexcs={%
+    makeglossaries,printglossaries,printglossary,newglossaryentry,gls,Gls,GLS,glspl,Glspl,GLSpl,newacronym,%
+    glsuseri,glsuserii,glsuseriii,glsuseriv,glsuserv,glsuservi,glsshortpluralkey,glslongpluralkey,loadglsentries,%
+    glsadd,glstextformat,glsnamefont,glossarypreamble,glossarypostamble,acrshort,acrshort*,acrlong,acrfull,%
+    Acrshort,ACRshort,Acrlong,ACRlong,Acrfull,ACRfull,acrshortpl,Acrshortpl,acrlongpl,Acrlongpl,acrfullpl,Acrfullpl,%
+    Acrlong*,acronymtype,printacronyms,printsymbols%
+  },%
+  % Environments' names
+  morekeywords={%
+  },%
+  % Mots-clés de niveau 2 : arguments obligatoires et environnements
+  morekeywords=[2]{%
+    first,firstplural,plural,sort,nonumberlist,name,acronym,acronyms,symbols,%
+    user1,user2,user3,user4,user5,user6,hyper,style,xindy,toc,%
+    useri,userii,useriii,useriv,userv,uservi%
+  },%
+  % Mots-clés de niveau 3 : arguments optionnels valeurs de clés dans clé=valeur
+  morekeywords=[3]{%
+    listgroup,listhypergroup,%
+    textrm,textit,textsf,textsl,texttt,textup,textbf,textsc,textmd,emph,%
+    hyperrm,hyperit,hypersf,hypersl,hypertt,hyperup,hyperbf,hypersc,hypermd,hyperemph%
+  },%
+  sensitive%
+}[keywords,tex,comments]%
+%
+\lst@definelanguage[biblatex]{TeX}[LaTeX]{TeX}%
+{%
+  % Séquences de contrôles (communément appelées commandes ou macros)
+  moretexcs={%
+    printbibliography,SetCiteCommand,autocite%
+  },%
+  % Mots-clés de niveau 1 : arguments optionnels
+  morekeywords={%
+  },%
+  % Mots-clés de niveau 2 : arguments obligatoires et environnements
+  morekeywords=[2]{%
+    title,heading%
+  },%
+  % Mots-clés de niveau 3 : arguments optionnels valeurs de clés dans clé=valeur
+  morekeywords=[3]{%
+    bibintoc%
+  },%
+  sensitive%
+}[keywords,tex,comments]%
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%</class-lstlang0>
+%    \end{macrocode}
+%
+% Gabarit de fichier de données de la thèse.
+%    \begin{macrocode}
+%<*caracteristiques-these-sample>
+%    \end{macrocode}
+%    \begin{macrocode}
+%% Auteur de la thèse : prénom (1er argument), nom (2e argument) et
+%% email (3e argument). Les éventuels accents devront figurer et le
+%% nom /ne/ sera /pas/ saisi en capitales.
+\author{}{}{}
+%%
+%% Titre de la thèse en français (argument obligatoire) et en anglais
+%% (argument optionnel).
+\title{}
+%%
+%% Sous-titre de la thèse en français (argument obligatoire) et en
+%% anglais (argument optionnel), si souhaité. Sinon, il suffit de
+%% commenter ou de supprimer la ligne suivante.
+\subtitle{}
+%%
+%% Spécialité en français (argument obligatoire) et en anglais
+%% (argument optionnel), si souhaitée. Sinon, il suffit de commenter ou
+%% de supprimer la ligne suivante.
+\speciality{}
+%%
+%% Sujet figurant comme propriété du PDF, si souhaité. Sinon, il suffit
+%% de commenter ou de supprimer la ligne suivante. S'il est laissé
+%% vide, il est automatiquement remplacé par la spécialité (en
+%% français) renseignée ci-dessus.
+\subject{}
+%%
+%% Mots clés en français (argument obligatoire) et en anglais (argument
+%% optionnel), si souhaités. Sinon, il suffit de commenter ou de
+%% supprimer la ligne suivante.
+\keywords{}
+%%
+%% Date de la soutenance : jour (1er argument), mois (2e argument) et
+%% année (3e argument)
+\date{}{}{}
+%%
+%% Le directeur (et les éventuels les (co-)directeur(s)) de thèse,
+%% les éventuels invités, les rapporteurs et les examinateurs (c-à-d
+%% les membres du jury, y compris le président) sont saisis au moyen
+%% des commandes \supervisor, \cosupervisor, \guest, \referee,
+%% \committeepresident, \examiner, utilisées /autant de fois que
+%% nécessaire/. Toutes basées sur le même modèle, ces commandes ont
+%% 2 arguments obligatoires : prénom (1er argument) et nom (2e
+%% argument) de chaque personne. Les éventuels accents devront
+%% figurer et le nom /ne/ sera /pas/ saisi en capitales. Si besoin
+%% est, on peut apporter certaines précisions en argument optionnel,
+%% au moyen des clés « professor », « seniorresearcher » : --
+%% « professor » (qui ne prend pas de valeur) pour stipuler que la
+%% personne appartient à la corporation des professeurs d'université
+%% ; -- « seniorresearcher » (qui ne prend pas de valeur) pour
+%% stipuler que la personne appartient à la corporation des
+%% directeurs de recherche du CNRS.
+\supervisor{}{}
+\cosupervisor{}{}
+\guest{}{}
+\referee{}{}
+\referee{}{}
+\committeepresident{}{}
+\examiner{}{}
+\examiner{}{}
+\examiner{}{}
+%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% On définit ci-dessous les diverses entités liées à préparation de la
+%% thèse :
+%%    -- le pôle de recherche et d'enseignement supérieur (PRES) ;
+%%    -- l'établissement (principal en cas de cotutelle) ;
+%%    -- l'éventuel établissement de cotutelle, en cas de cotutelle
+%%       internationale (et, normalement, seulement dans ce cas) ;
+%%    -- l'école doctorale ;
+%%    -- le laboratoire.
+%% Pour chacune de ces entités, on spécifie :
+%%   -- en argument obligatoire : son nom ;
+%%   -- éventuellement en argument optionnel :
+%%     -- le fichier image de son logo au moyen de la clé « logo », par
+%%        exemple logo=logo-institute. Tous les fichiers images des
+%%        logos doivent se trouver dans le dossier « images ». Il est
+%%        conseillé de disposer d'images à un format vectoriel, par
+%%        exemple PDF ;
+%%     -- son URL (c-à-d son adresse Web) au moyen de la clé « url »,
+%%        par exemple url=www.institute.fr. Le caractère « # » est
+%%        interdit dans cette URL ;
+%%     -- que le logo ne devra pas figurer au moyen de la clé
+%%        « nologo » (qui ne prend pas de valeur) ;
+%%     -- que les nom et logo (éventuel) ne seront pas des hyperliens
+%%        vers l'URL (éventuelle) au moyen de la clé « nolink » (qui ne
+%%        prend pas de valeur).
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% PRES, si souhaité. Sinon, il suffit de commenter ou de supprimer la
+%% ligne suivante.
+\pres{}
+%%
+%% Établissement (principal en cas de cotutelle).
+\institute{}
+%%
+%% Éventuel établissement de cotutelle, si pertinent. Sinon, il suffit
+%% de commenter ou de supprimer la ligne suivante.
+\coinstitute{}
+%%
+%% École doctorale (son logo ne figurera pas), si souhaité. Sinon, il
+%% suffit de commenter ou de supprimer la ligne suivante.
+\doctoralschool{}
+%%
+%% Laboratoire (ou de l'unité) où la thèse a été préparée.
+\laboratory[logo=,address=,telephone=,fax=,email=,url=]{}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%</caracteristiques-these-sample>
+%    \end{macrocode}
+%
+%
+% \chapter{Fichier de complétion}
+% Now, the \File{yathesis.cwl} for \yatcl commands completion and syntax checking:
+%
+%    \begin{macrocode}
+%<*class-cwl>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+# mode: yathesis.cls
+# denisbitouze, 17.03.2014
+#
+#include:class-book
+#include:babel
+#include:geometry
+#include:babel
+#include:xkvltxp
+#include:xkeyval
+#include:etoolbox
+#include:xpatch
+#include:filehook
+#include:hopatch
+#include:xifthen
+#include:geometry
+#include:graphicx
+#include:environ
+#include:adjustbox
+#include:array
+#include:xstring
+#include:textcase
+#include:translator
+#include:fixltx2e
+#include:epigraph
+#include:marvosym
+#include:setspace
+#include:morewrites
+#include:shorttoc
+#include:tocvsec2
+#include:tocbibind
+#include:nonumonpart
+#include:xcolor
+#include:datatool
+#include:fncychap
+#include:titleps
+#include:ifdraft
+#include:draftwatermark
+#include:index
+#include:idxlayout
+#include:babel
+#include:datetime
+#include:datenumber
+#include:hyperref
+#include:hypcap
+#include:bookmark
+#
+# Cover and title pages
+#
+# Author
+\author{prénom}{nom}{email}#n
+#
+# Title, etc.
+\title[titre dans la langue secondaire]{titre dans la langue principale}#n
+\subtitle[sous-titre dans la langue secondaire]{sous-titre dans la langue principale}#n
+\academicfield[discipline dans la langue secondaire]{discipline dans la langue principale}#n
+\speciality[spécialité dans la langue secondaire]{spécialité dans la langue principale}#n
+\subject[sujet dans la langue secondaire]{sujet dans la langue principale}#n
+#
+\title{titre}#n
+\subtitle{sous-titre}#n
+\academicfield{discipline}#n
+\speciality{spécialité}#n
+\subject{sujet}#n
+\date{jour}{mois}{année}#n
+#
+# Institute and entities
+\pres[logo=%|,url=%|]{nom du PRES}#n
+\institute[logo=%|,url=%|]{nom de l'institut}#n
+\coinstitute[logo=%|,url=%|]{nom de l'institut de cotutelle}#n
+\company[logo=%|,url=%|]{nom de l'entreprise}#n
+\doctoralschool[logo=%|,url=%|]{nom de l'école doctorale}#n
+\laboratory[logo=%|,url=%|,telephone=%|,fax=%|,email=%|]{nom du laboratoire}{adresse du laboratoire}#n
+#
+\pres{nom du PRES}#n
+\institute{nom de l'institut}#n
+\coinstitute{nom de l'institut de cotutelle}#n
+\company{nom de l'entreprise}#n
+\doctoralschool{nom de l'école doctorale}#n
+\laboratory{nom du laboratoire}{adresse du laboratoire}#n
+#
+# Committee
+\supervisor[affiliation=%|]{prénom}{nom}#n
+\cosupervisor[affiliation=%|]{prénom}{nom}#n
+\comonitor[affiliation=%|]{prénom}{nom}#n
+\referee[affiliation=%|]{prénom}{nom}#n
+\examiner[affiliation=%|]{prénom}{nom}#n
+\committeepresident[affiliation=%|]{prénom}{nom}#n
+\guest[affiliation=%|]{prénom}{nom}#n
+#
+\supervisor{prénom}{nom}#n
+\cosupervisor{prénom}{nom}#n
+\comonitor{prénom}{nom}#n
+\referee{prénom}{nom}#n
+\examiner{prénom}{nom}#n
+\committeepresident{prénom}{nom}#n
+\guest{prénom}{nom}#n
+#
+# Misc
+\ordernumber[ordernumber]#n
+\ordernumber#n*
+#
+# Preliminary pages
+#
+\disclaimer{clause}#n
+\makedisclaimer#n
+\makedisclaimer*#n
+\keywords{mots clés dans la langue secondaire}{mots clés dans la langue principale}#n
+\makekeywords#n
+\makekeywords*#n
+\makelaboratory#n
+\makelaboratory*#n
+\dedication{dédicace}#n
+\makededications#n
+\makededications*#n
+\frontepigraph[langue]{épigraphe}{auteur}
+\frontepigraph{épigraphe}{auteur}
+\makefrontepigraphs#n
+\makefrontepigraphs*#n
+\begin{abstract}[intitulé alternatif]#n*
+\begin{abstract}#n
+\end{abstract}#n
+\makeabstract#n
+\newglssymbol[classement]{label}{symbole}{nom}{description}#n
+\newglssymbol{label}{symbole}{nom}{description}#n
+\tableofcontents[depth=%|]#n*
+#
+# Main pages
+#
+# Appendix pages
+#
+# Back matter pages
+#
+\makebackcover
+#
+# Customization
+#
+\expression{label}{valeur (en français)}{valeur (en anglais)}#n*
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%</class-cwl>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%<*demopkg>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\RequirePackage{xpatch}
+\RequirePackage{xstring}
+\RequirePackage{xparse}
+\RequirePackage{letltxmacro}
+\RequirePackage{xifthen}
+\RequirePackage[user,abspage]{zref}
+%
+\AtEndPreamble{%
+  \xpretocmd{\tableofcontents@YAD@with@argument}{\cleardoublepage\zlabel{tableofcontents-withargument}}{}{}
+  \xpretocmd{\tableofcontents@YAD@without@argument}{\cleardoublepage\zlabel{tableofcontents-withoutargument}}{}{}
+}
+%
+\AfterEndPreamble{%
+  \xpretocmd{\maketitle}{\zlabel{fr-title}}{}{}%
+  \xapptocmd{\maketitle}{\zlabel{en-title}}{}{}%
+  \xpretocmd{\makedisclaimer}{\cleardoublepage\zlabel{disclaimer}}{}{}
+  \xpretocmd{\makekeywords}{\cleardoublepage\zlabel{keywords}}{}{}
+  \xpretocmd{\makelaboratory}{\cleardoublepage\zlabel{laboratory}}{}{}
+  \xpretocmd{\makededications}{\cleardoublepage\zlabel{dedications}}{}{}
+  \xpretocmd{\makefrontepigraphs}{\cleardoublepage\zlabel{frontepigraphs}}{}{}
+  \xpretocmd{\acknowledgements}{\cleardoublepage\zlabel{acknowledgements}}{}{}
+  \xpretocmd{\caution}{\cleardoublepage\zlabel{caution}}{}{}
+  \xpretocmd{\makeabstract}{\cleardoublepage\zlabel{abstract}}{}{}
+  \xpretocmd{\foreword}{\cleardoublepage\zlabel{foreword}}{}{}
+  \let\YAD@demo@chapter@ORI\chapter%
+  \RenewDocumentCommand\chapter{som}{%
+    \IfBooleanTF{#1}
+    {
+      \ifthenelse{\equal{#3}{Introduction g\IeC {\'e}n\IeC {\'e}rale}}{%
+        \cleardoublepage\zlabel{introduction}%
+      }{%
+      }%
+      \IfNoValueTF{#2}
+      {\YAD@demo@chapter@ORI*{#3}}
+      {\YAD@demo@chapter@ORI*[#2]{#3}}%
+    }
+    {%
+      \ifthenelse{\equal{#3}{Introduction g\IeC {\'e}n\IeC {\'e}rale}}{%
+        \cleardoublepage\zlabel{introduction}%
+      }{%
+      }%
+      \ifthenelse{\equal{#3}{Contexte du chaos du rire}}{%
+        \cleardoublepage\zlabel{chapter}%
+      }{%
+      }%
+      \ifthenelse{\equal{#3}{Documents juridiques}}{%
+        \cleardoublepage\zlabel{appendix}%
+      }{%
+      }%
+      \IfNoValueTF{#2}
+      {\YAD@demo@chapter@ORI{#3}}
+      {\YAD@demo@chapter@ORI[#2]{#3}}%
+    }
+  }
+  \ifcsdef{printglossary}{%
+    \LetLtxMacro{\YAD@printglossary@ORI}{\printglossary}
+    \renewcommand{\printglossary}[1][]{%
+      \ifthenelse{\isempty{#1}}{%
+        \cleardoublepage\zlabel{printglossary}%
+      }{%
+      }%
+      \YAD@printglossary@ORI[{#1}]%
+    }
+    \xpretocmd{\printacronyms}{\cleardoublepage\zlabel{printacronyms}}{}{}
+    \xpretocmd{\printsymbols}{\cleardoublepage\zlabel{printsymbols}}{}{}
+  }{%
+  }
+  \xpretocmd{\conclusion}{\cleardoublepage\zlabel{conclusion}}{}{}
+  \xpretocmd{\conclusion*}{\cleardoublepage\zlabel{conclusion}}{}{}
+  \xpretocmd{\printbibliography}{\cleardoublepage\zlabel{printbibliography}}{}{}
+  \xpretocmd{\printindex}{\cleardoublepage\zlabel{printindex}}{}{}
+  \xapptocmd{\makebackcover}{\zlabel{makebackcover}}{}{}
+  \let\include\input
+}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%</demopkg>
+%    \end{macrocode}
+%
+% \Finale
+\endinput
+
+%%% Local Variables:
+%%% mode: latex
+%%% eval: (doctex-mode)
+%%% TeX-engine: xetex
+%%% TeX-master: t
+%%% ispell-local-dictionary: "francais"
+%%% End:

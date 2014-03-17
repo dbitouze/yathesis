@@ -1,0 +1,28 @@
+;; This logfile was generated automatically by `xindy'
+;; at 19.12.2013  22:31:53
+;; Indexstyle: "/tmp/96fueMykdY", Rawindex: "/tmp/zCiQHM011_", Output: "these.sls"
+
+
+Building indexentry-tree:
+Hierdepth of index is :TREE
+
+sort-indexentries: (FORWARD BACKWARD FORWARD FORWARD)
+sort-indexentries: (FORWARD BACKWARD FORWARD FORWARD)
+sort-indexentries: (FORWARD BACKWARD FORWARD FORWARD)
+sort-indexentries: (FORWARD BACKWARD FORWARD FORWARD)
+sort-indexentries: (FORWARD BACKWARD FORWARD FORWARD)
+
+Forming letter-groups:
+Letter-group: "Ã¤»" -> "O"
+Letter-group: "€¼ÐÚËÃ»" -> "A"
+Letter-group: "—ë¨ÐÚÐ" -> "E"
+Letter-group: "†Ã¼ÐÚ€¼Ú—È´€¼†®" -> "C"
+Letter-group: "†Ã¼ÐÚ€¼Ú—¨Ë€†" -> "C"
+sort-indexentries: (FORWARD BACKWARD FORWARD FORWARD)
+Letter-group: "€¼ÐÚËÃ»" -> "A"
+sort-indexentries: (FORWARD BACKWARD FORWARD FORWARD)
+Letter-group: "†Ã¼ÐÚ€¼Ú—¨Ë€†" -> "C"
+sort-indexentries: (FORWARD BACKWARD FORWARD FORWARD)
+Letter-group: "—ë¨ÐÚÐ" -> "E"
+sort-indexentries: (FORWARD BACKWARD FORWARD FORWARD)
+Letter-group: "Ã¤»" -> "O"

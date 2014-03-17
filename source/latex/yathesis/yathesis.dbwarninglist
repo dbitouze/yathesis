@@ -1,0 +1,39 @@
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {tcolorbox}{\numberline {1.1}Fichier de données à ne pas importer}{12}{tcb@cnt@dbwarning.1.1}
+\contentsline {tcolorbox}{\numberline {1.2}Format des prénom et nom de l'auteur}{13}{tcb@cnt@dbwarning.1.2}
+\contentsline {tcolorbox}{\numberline {1.3}Format des jour, mois et année de la date de soutenance}{14}{tcb@cnt@dbwarning.1.3}
+\contentsline {tcolorbox}{\numberline {1.4}Caractère \lstinline +\#+ interdit dans les \acrshortpl *{url} d'instituts et entités}{17}{tcb@cnt@dbwarning.1.4}
+\contentsline {tcolorbox}{\numberline {1.5}Usage multiple et facultatif des commandes du jury}{19}{tcb@cnt@dbwarning.1.5}
+\contentsline {tcolorbox}{\numberline {1.6}Format des prénom et nom des membres du jury}{19}{tcb@cnt@dbwarning.1.6}
+\contentsline {tcolorbox}{\numberline {1.7}Virgule(s) dans la valeur d'une clé}{21}{tcb@cnt@dbwarning.1.7}
+\addvspace {10\p@ }
+\contentsline {tcolorbox}{\numberline {2.1}Résumés nécessairement courts dans l'environnement \lstinline +abstract+}{34}{tcb@cnt@dbwarning.2.1}
+\contentsline {tcolorbox}{\numberline {2.2}Résumé en français nécessaire en cas de mémoire en langue étrangère}{35}{tcb@cnt@dbwarning.2.2}
+\contentsline {tcolorbox}{\numberline {2.3}Option \texttt {symbols} nécessitée par la commande \refCom *{newglssymbol}}{36}{tcb@cnt@dbwarning.2.3}
+\contentsline {tcolorbox}{\numberline {2.4}Package \package {glossaries} non chargé par défaut}{36}{tcb@cnt@dbwarning.2.4}
+\addvspace {10\p@ }
+\contentsline {tcolorbox}{\numberline {3.1}Package \package {biblatex} non chargé par défaut}{44}{tcb@cnt@dbwarning.3.1}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {tcolorbox}{\numberline {6.1}Options usuelles de la \Class {book} : à utiliser avec discernement}{53}{tcb@cnt@dbwarning.6.1}
+\contentsline {tcolorbox}{\numberline {6.2}Langues principales et secondaires prises en charge}{53}{tcb@cnt@dbwarning.6.2}
+\contentsline {tcolorbox}{\numberline {6.3}Option d'interligne : seulement dans la partie principale}{54}{tcb@cnt@dbwarning.6.3}
+\contentsline {tcolorbox}{\numberline {6.4}Expressions contextuelles non robustes}{55}{tcb@cnt@dbwarning.6.4}
+\contentsline {tcolorbox}{\numberline {6.5}Expressions séparatrices débutant ou finissant par un espace}{56}{tcb@cnt@dbwarning.6.5}
+\contentsline {tcolorbox}{\numberline {6.6}Fichier de configuration à ne pas importer}{59}{tcb@cnt@dbwarning.6.6}
+\contentsline {tcolorbox}{\numberline {6.7}Chargement de packages : en préambule du fichier maître}{64}{tcb@cnt@dbwarning.6.7}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {tcolorbox}{\numberline {8.1}Fichiers automatiquement importés sous conditions}{67}{tcb@cnt@dbwarning.8.1}
+\contentsline {tcolorbox}{\numberline {8.2}Fichiers à ne pas importer}{67}{tcb@cnt@dbwarning.8.2}
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\addvspace {10\p@ }
+\contentsline {tcolorbox}{\numberline {F.1}Éléments \enquote {obligatoires} de la \yatcl {} fortement conseillés}{78}{tcb@cnt@dbwarning.F.1}
+\addvspace {10\p@ }
+\addvspace {10\p@ }

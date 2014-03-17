@@ -1,0 +1,384 @@
+%%
+%% This is file `yathesisdoc.sty',
+%% generated with the docstrip utility.
+%%
+%% The original source files were:
+%%
+%% yathesis.dtx  (with options: `class-doc-package')
+%% -----------------------------------------------------------------------
+%% yathesis --- Yet Another Thesis Class
+%% E-mail: denis.bitouze@lmpa.univ-littoral.fr
+%% Released under the LaTeX Project Public License v1.3c or later
+%% See http://www.latex-project.org/lppl.txt
+%% -----------------------------------------------------------------------
+\RequirePackage{xpatch}%
+\let\YAD@ORI@task\task
+\let\task\relax
+\RequirePackage{exsheets}
+\let\task\YAD@ORI@task
+\RequirePackage{parskip}%
+\RequirePackage{amsthm}%
+\RequirePackage{thmtools}%
+\RequirePackage{fixfoot}%
+\RequirePackage[inline]{enumitem}%
+\RequirePackage{afterpage}%
+\RequirePackage{tabulary}%
+\RequirePackage{calc}%
+\RequirePackage[lining]{libertine}%
+\RequirePackage[a4paper]{geometry}%
+\RequirePackage{siunitx}%
+\RequirePackage[notindex]{tocbibind}%
+\RequirePackage[backend=biber,style=authortitle,autopunct=false,useprefix=true,backref,dashed=false]{biblatex}%
+\RequirePackage{listings}%
+\RequirePackage{varioref}%
+\RequirePackage{marginnote}%
+\RequirePackage{xspace}%
+\RequirePackage{booktabs}%
+\RequirePackage[xr]{zref}%
+\RequirePackage[multiple,bottom]{footmisc}%
+\RequirePackage{rotating}%
+\RequirePackage{pdflscape}%
+\RequirePackage{hologo}%
+\RequirePackage{xifthen}%
+\RequirePackage{tocvsec2}%
+\RequirePackage[autostyle=once]{csquotes}%
+\RequirePackage{tcolorbox}%
+\RequirePackage{fontawesome}%
+\RequirePackage{textcase}%
+\RequirePackage{multicol}%
+\RequirePackage{babel}%
+\RequirePackage[nodayofweek]{datetime}%
+\RequirePackage{floatrow}%
+\RequirePackage{subcaption}%
+\RequirePackage{hyperref}%
+\RequirePackage{nameref}%
+\RequirePackage[all]{hypcap}%
+\RequirePackage[numbered]{bookmark}%
+\RequirePackage[xindy,toc,hyperfirst=false]{glossaries}%
+\RequirePackage{cleveref}%
+\setlength\bibinitsep{1.25\baselineskip}
+\setglossarystyle{indexhypergroup}
+\setacronymstyle{long-sc-short}
+\SetupExSheets[question]{type=exam}
+\SetupExSheets[solution]{print=true}
+\SetCiteCommand{\autocite}
+\renewcommand{\ttdefault}{lmtt}
+\xapptocmd{\@chapter}{%
+  \addtocontents{dbwarninglist}{\protect\addvspace{10\p@}}%
+  \addtocontents{dbremarklist}{\protect\addvspace{10\p@}}%
+  \addtocontents{dbexamplelist}{\protect\addvspace{10\p@}}%
+}{}{}
+\sisetup{locale=FR,detect-all}
+\floatsetup[table]{style=plaintop}
+\DeclareRobustCommand*{\package}{%
+  \texorpdfstring{%
+    \@ifstar{\package@star}{\package@nostar}%
+  }{%
+    \package@nostar%
+  }%
+}
+\DeclareRobustCommand*{\package@star}[2][]{%
+  \ifthenelse{\isempty{#1}}{%
+    \href{http://www.ctan.org/pkg/#2}{\textsf{#2}}%
+  }{%
+    \href{#1}{\textsf{#2}}%
+  }%
+}
+\DeclareRobustCommand*{\package@nostar}[2][]{%
+  \textsf{#2}%
+}
+\DeclareRobustCommand*{\Package}{%
+  \iflanguage{french}{package }{}%
+  \@ifstar{\package@star}{\package@nostar}%
+  % \iflanguage{english}{ package}{}%
+  % \xspace%
+}
+\DeclareRobustCommand*{\class}{\package}
+\DeclareRobustCommand*{\Class}{%
+  \texorpdfstring{%
+    \iflanguage{french}{classe }{}%
+    \@ifstar{\package@star}{\package@nostar}%
+  }{%
+    \iflanguage{french}{classe }{}%
+    \package@nostar%
+  }%
+  % \@ifstar{\package@star}{\package@nostar}%
+  % \iflanguage{english}{ class}{}%
+  % \xspace%
+}%
+\DeclareRobustCommand*{\file}[1]{\bgroup% \color{magenta}
+  \texttt{#1}\egroup}
+\DeclareRobustCommand*{\File}[1]{%
+  \iflanguage{french}{fichier }{}%
+  \file{#1}%
+  \iflanguage{english}{ file}{}%
+  \xspace%
+}%
+\DeclareRobustCommand*{\directory}{\file}
+\DeclareRobustCommand*{\Directory}[1]{%
+  \iflanguage{french}{répertoire }{}%
+  \directory{#1}%
+  \iflanguage{english}{ directory}{}%
+  \xspace%
+}%
+\DeclareRobustCommand*{\program}{\file}
+\AtBeginDocument{%
+  \renewcommand*{\meta}[2][meta]{%
+    \bgroup%
+    \normalfont
+    \ttfamily%
+    \textcolor{#1}{\textlangle\emph{#2}\textrangle}%
+    \egroup%
+  }%
+}%
+\hypersetup{colorlinks}%
+\colorlet{texcs}{blue}
+\colorlet{environment}{teal}
+\colorlet{key}{purple}
+\colorlet{value}{violet}
+\colorlet{keyword4}{key}
+\colorlet{keyword5}{magenta}
+\colorlet{comment}{gray}
+\colorlet{string}{cyan}
+\colorlet{meta}{brown}
+\colorlet{preamble}{violet}
+\lstset{%
+  escapeinside=÷÷,
+  breaklines=true,
+  basicstyle=\normalfont\ttfamily,
+  commentstyle=\color{comment},
+  keywordstyle=\color{environment},
+  keywordstyle=[2]\color{key},
+  keywordstyle=[3]\color{value},
+  keywordstyle=[4]\color{keyword4},
+  keywordstyle=[5]\color{keyword5},
+  stringstyle=\color{string},
+  columns=flexible,
+  % prebreak={\space\Righttorque},
+  % postbreak={\space\Lefttorque}
+}%
+\lstdefinestyle{dbtex}{%
+  language=[LaTeX]TeX,
+  alsolanguage=[extLaTeX]TeX,
+  alsolanguage=[yad]TeX,
+  alsolanguage=[glossaries]TeX,
+  alsolanguage=[biblatex]TeX,
+  texcsstyle=*\color{texcs},
+  % numbers=left,
+  numberstyle=\small,
+}%
+\lstset{style=dbtex}
+\lstMakeShortInline[style=dbtex]×
+\tcbuselibrary{documentation,theorems,breakable,skins}
+\tcbset{dbtcb/.style={%
+    breakable,
+    fonttitle=\bfseries,
+    enlarge top by=1mm,
+    separator sign dash
+  }%
+}%
+\newtcbtheorem[list inside=dbwarninglist,number within=chapter]{dbwarning}{Avertissement}{%
+  colback=red!5!white,
+  colframe=red!75!black,
+  dbtcb
+}{wa}
+\newtcbtheorem[list inside=dbexamplelist,number within=chapter]{dbexample}{Exemple}{%
+  colback=lime!5!white,
+  colframe=lime!75!black,
+  dbtcb
+}{ex}
+\newtcbtheorem[list inside=dbremarklist,number within=chapter]{dbremark}{Remarque}{%
+  colback=cyan!5!white,
+  colframe=cyan!75!black,
+  dbtcb
+}{rq}
+\AtEndPreamble{%
+  \crefname{tcb@cnt@dbexample}{exemple}{exemples}%
+  \crefname{tcb@cnt@dbremark}{remarque}{remarques}%
+  \crefname{tcb@cnt@dbwarning}{avertissement}{avertissements}%
+}%
+\tcbset{%
+  /tcb/doclang/environment content=contenu de l'environnement,
+  /tcb/doclang/color= (couleur),
+  /tcb/doclang/colors=Couleurs,
+  /tcb/doclang/environments=Environnements,
+  /tcb/doclang/keys=Clés,
+  /tcb/doclang/values=Valeurs,
+  /tcb/doclang/pageshort=p.,
+  /tcb/documentation listing style=dbtex,
+  /tcb/color command=texcs,
+  /tcb/color environment=environment,
+  /tcb/color key=key,
+  /tcb/color value=value,
+  index format=pgfchapter,
+  index colorize,
+  index annotate=false,
+  enhanced,
+  % index actual={},
+  every box/.style={documentation listing style=dbtex},
+  % doc left indent=-15mm,
+  % doc right indent=-15mm+2em
+}%
+\tcbset{codes/.style={%
+    listing only,
+    colframe=ExampleFrame,
+    colback=ExampleBack,
+    fonttitle=\bfseries,
+    fontupper=\small,
+    enhanced,
+    listing options={style=dbtex}
+  }%
+}%
+\newtcblisting{origpreamblecode}[1][]{%
+  codes,
+  drop shadow,
+  #1
+}%
+\newtcblisting{origbodycode}[1][]{%
+  codes,
+  #1
+}%
+\begingroup%
+\catcode`\^^M\active%
+\global\def\activeeol{^^M}%
+\endgroup%
+\newenvironment{preamblecode}{%
+  \@ifnextchar[\YAD@preamblecode@\YAD@preamblecode@noargs%
+}{%
+  \endorigpreamblecode%
+}%
+\def\YAD@preamblecode@[#1]{%
+  \origpreamblecode[#1]%
+}%
+\def\YAD@preamblecode@noargs#1{%
+  \edef\temp{[]\activeeol\string#1}%
+  \expandafter\YAD@preamblecode@\temp%
+}%
+\newenvironment{bodycode}{%
+  \@ifnextchar[\YAD@bodycode@\YAD@bodycode@noargs%
+}{%
+  \endorigbodycode%
+}%
+\def\YAD@bodycode@[#1]{%
+  \origbodycode[#1]%
+}%
+\def\YAD@bodycode@noargs#1{%
+  \edef\temp{[]\activeeol\string#1}%
+  \expandafter\YAD@bodycode@\temp%
+}%
+\tcbset{samples/.style={%
+    codes,
+    % listing options={rangebeginprefix=\\,rangeendsuffix=\}}
+  }%
+}%
+\newtcbinputlisting{\preamblesample}[3][these.tex]{%
+  samples,
+  drop shadow,
+  listing file={sample/#1},
+  listing options={rangebeginprefix=\\,rangeendsuffix=\},#2},
+  #3,
+}%
+\newtcbinputlisting{\bodysample}[3][these.tex]{%
+  samples,
+  listing file={sample/#1},
+  listing options={rangebeginprefix=\\,rangeendsuffix=\},#2},
+  #3,
+}%
+\newcommand{\obligatoire}{%
+  \marginpar{%
+    \scriptsize%
+    \raggedleft%
+    % \bfseries%
+    \hyperref[sec:comm-oblig]{%
+      % \colorbox{red!75!black}{%
+        % \textcolor{white}{%
+        \textcolor{red!75!black}{\faLock}%
+          \ifnum\getpagerefnumber{sec:comm-oblig}=\thepage%
+          \else%
+          \textsuperscript{\ding{213}\,\kvtcb@text@pageshort\,\pageref*{sec:comm-oblig}}%
+          \fi%
+          % Obligatoire%
+        % }%
+      % }%
+    }%
+  }%
+}%
+\newcommand{\mandatory}{%
+  \hyperref[sec:comm-oblig]{%
+    \textcolor{red!75!black}{\faLock}%
+    \ifnum\getpagerefnumber{sec:comm-oblig}=\thepage%
+    \else%
+    \textsuperscript{\ding{213}\,\kvtcb@text@pageshort\,\pageref*{sec:comm-oblig}}%
+    \fi%
+  }%
+}%
+\def\disp@com#1{\colDef{\ttfamily#1}}
+\DeclareRobustCommand*{\yat}{\textsl{yathesis}}
+\DeclareRobustCommand*{\yatpa}{package \textsl{yathesisdoc}\xspace}
+\DeclareRobustCommand*{\yatcl}{classe \yat\xspace}
+\newcommand{\phrase}{%
+  \@ifstar{\phrase@star}{\phrase@nostar}%
+}
+\newcommand{\phrase@star}[1]{---~#1}
+\newcommand{\phrase@nostar}[1]{---~#1~---}
+\makeglossaries
+\loadglsentries{glossaries/glossary}
+\loadglsentries{glossaries/acronyms}
+\addbibresource{\jobname.bib}
+\def\findrootlanguage{%
+   \def\rootlanguagename{\languagename}%
+}%
+\newcommand{\pdf}{\acrshort{pdf}\xspace}
+\renewcommand*{\newacronymhook}{%
+\edef\tmp{\noexpand\textsc{\the\glsshorttok}}%
+\expandafter\glsshorttok\expandafter{\tmp}%
+}%
+\renewcommand*{\acrpluralsuffix}{\textup{\glspluralsuffix}}
+\declaretheoremstyle[headfont=\sffamily\itshape\bfseries,bodyfont=\itshape,notefont=\sffamily\itshape\bfseries]{mystyle}
+\declaretheorem[style=mystyle,numbered=unless unique]{remarque}
+\AtEndPreamble{\crefname{remarque}{remarque}{remarques}}
+\declaretheorem[style=mystyle]{exemple}
+\AtEndPreamble{\crefname{exemple}{exemple}{exemples}}
+\DeclareRobustCommand*{\dossier}{\path}
+\define@key{Gin}{bylabel}{%
+    \edef\@tempa{{Gin}{page=\zref@extract{#1}{abspage}}}%
+    \expandafter\setkeys\@tempa%
+}%
+\zexternaldocument{sample/these}
+\newcommand{\screenshot}[2][.45]{%
+  \fbox{\includegraphics[bylabel=#2,width=#1\linewidth-2\fboxsep-2\fboxrule]{sample/these}}%
+}%
+\newcommand*{\YAD@configuration@directory}{configuration}
+\newcommand*{\configurationdirectory}{\YAD@configuration@directory}
+\newcommand*{\YAD@configuration@file}{these.cfg}
+\newcommand*{\configurationfile}{\YAD@configuration@file}
+\newcommand*{\YAD@title@file}{yadtitle.tex}
+\newcommand*{\titlefile}{\YAD@title@file}
+\newcommand*{\YAD@macros@file}{yadmacros.tex}
+\newcommand*{\macrosfile}{\YAD@macros@file}
+\newcommand*{\glossaryfile}{glossary.tex}
+\newcommand*{\acronymsfile}{acronyms.tex}
+\newcommand*{\symbolsfile}{symbols.tex}
+\newcommand*{\imagesdirectory}{images}
+\newcommand*{\thesismasterfile}{these}
+%% ----------------------------------------------------------------------------------
+%% This work may be distributed and/or modified under the
+%% conditions of the LaTeX Project Public License, either version 1.3
+%% of this license or (at your option) any later version.
+%% The latest version of this license is in
+%%   http://www.latex-project.org/lppl.txt
+%% and version 1.3 or later is part of all distributions of LaTeX
+%% version 2005/12/01 or later.
+%% 
+%% This work has the LPPL maintenance status `maintained'.
+%% 
+%% The Current Maintainer of this work is Denis Bitouz'e.
+%% 
+%% This work consists of the file  yathesis.dtx
+%%           and the derived files yathesis.cls,
+%%                                 yathesis.ins,
+%%                                 yathesis.pdf,
+%%                                 yathesisdoc.sty,
+%%                                 and a number of configuration files.
+%%
+%% End of file `yathesisdoc.sty'.

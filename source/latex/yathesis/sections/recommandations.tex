@@ -1,0 +1,152 @@
+
+\chapter{Recommandations et astuces}
+\label{cha:recomm-et-astuc}
+
+\section{Images}
+
+L'insertion d'images se fait au moyen des commandes du classique
+\Package{graphicx}. On notera qu'il est conseillé, selon qu'il s'agit d'images
+dont :
+\begin{description}
+\item[on \emph{n'}est \emph{pas} le créateur,] de disposer de celles-ci à un
+  format (nativement) vectoriel, par exemple \pdf, afin de réduire la
+  pixellisation ;
+\item[on \emph{est} le créateur,] de :
+  \begin{enumerate}
+  \item si possible faire usage de packages \LaTeX{} spécialisés pour :
+    \begin{itemize}
+    \item des dessins (packages \package*{TikZ}, \package*{PSTricks}, etc.) ;
+    \item des représentations graphiques de fonctions (packages
+      \package*{tkz-fct}, \package*{pst-plot}, etc.) ;
+    \item données expérimentales (packages \package*{pgfplots},
+      \package*{pst-plot}, etc.)
+    \end{itemize}
+  \item sinon :
+    \begin{itemize}
+    \item pour des dessins, de recourir à des logiciels de dessins vectoriels
+      (par exemple \program{Inkscape}) ;
+    \item de manière générale à enregistrer les images créées à un format
+      (nativement) vectoriel, par exemple \pdf.
+    \end{itemize}
+  \end{enumerate}
+\end{description}
+
+\section{Acronymes}\label{acronymes}
+
+On a vu \vref{rq:acronymes} que si un institut (par exemple) doit figurer
+sous la forme d'un acronyme, on aura intérêt à ne pas le saisir tel
+quel, mais à recourir aux fonctionnalités du
+\Package{glossaries}\footnote{Cf. \vref{sec:sigl-gloss-nomencl} pour
+  son usage avec la \yatcl.}. L'exemple suivant illustre la
+procédure.
+%
+\begin{dbexample}{Institut sous forme d'acronymes}{acronyme}
+  Si on créé l'acronyme suivant\footnote{Avec le canevas de thèse \enquote{en
+      relief} fourni avec la présente classe, les acronymes peuvent être
+    définis dans le \File{\acronymsfile} situé dans le
+    \Directory{\configurationdirectory}.} :
+\begin{preamblecode}
+\newacronym{ulco}{ULCO}{université du Littoral Côte d'Opale}
+\end{preamblecode}
+on peut recourir, non pas à ×\institute{ULCO}×, mais à :
+\begin{preamblecode}
+\institute{\acrshort*{ulco}}
+\end{preamblecode}
+\end{dbexample}
+
+\begin{dbremark}{Acronymes et expressions séparatrices contextuelles}{}
+  L'\vref{wa:separateurs} a déjà signalé que, si de telles commandes
+  d'acronymes sont employées pour spécifier les affiliations des
+  membres du jury (clé \refKey{affiliation}), les expressions contextuelles séparant
+  corporations et instituts ne donneront pas toujours le résultat escompté (en
+  français notamment). On pourra alors le cas échéant faire usage des clés
+  \refKey{sepcorpaffilfrench} ou \refKey{sepcorpaffilenglish} pour redéfinir
+  localement ces expressions.
+\end{dbremark}
+
+\section{Scission du mémoire en fichiers maître et esclaves}
+\label{sec:repart-du-memo}
+
+La répartition du mémoire en différents maître et esclaves, hautement
+recommandée, suppose de :
+\begin{enumerate}
+\item créer un fichier \enquote{maître}\footnote{Dans les canevas de thèse
+    fournis avec la classe, décrits \vref{cha:canevas}, le fichier maître est
+    nommé \file{\thesismasterfile}.};
+\item stocker le contenu des chapitres, chacun dans un fichier
+  \enquote{esclave}% ^^A \footnote{Dans le canevas de thèse fourni avec la
+    % ^^A classe, décrit \vref{cha:canevas}, l'inclusion des fichiers
+    % ^^A esclaves, situés dans le \Directory{\dossiercorps}, est gérée dans
+    % ^^A le \File{\fichiercorps} situé dans le même répertoire que le
+    % ^^A fichier maître.}
+  et d'inclure ceux-ci au moyen de la commande
+  standard ×\include×\marg{fichier esclave}, le nom du \meta{fichier
+    esclave} devant le cas échéant être précédé du chemin qui y
+  conduit.
+\end{enumerate}
+%
+Dans ce contexte, et de façon usuelle :
+\begin{itemize}
+\item sauf cas spécifique, chaque fichier de chapitre devrait débuter par une
+  (unique) occurrence de la commande \docAuxCommand{chapter} et en général
+  contenir une ou plusieurs occurrences des autres commandes usuelles de
+  structuration (\docAuxCommand{section}, \docAuxCommand{subsection}, etc.);
+\item si la thèse se présente en plusieurs grandes parties, chacune
+  de celles-ci peut être stipulée au moyen de la commande
+  \docAuxCommand{part} qu'il est alors recommandé de placer à
+  l'extérieur des fichiers de chapitres (cf.
+  \vref{ex:avec-parties}).
+\end{itemize}
+%
+Les \vref{ex:sans-parties,ex:avec-parties} illustrent l'usage de ces commandes
+pour la partie \enquote{corps} de la thèse et ce, dans l'hypothèse où les
+fichiers de chapitres de la thèse sont tous placés dans un sous-répertoire,
+nommé \directory{corps}, situé au même niveau que le fichier
+maître\footnote{C'est-à-dire à la racine du répertoire contenant le fichier
+  maître.}.
+\begin{dbexample}{Structure d'une thèse en une seule partie}{sans-parties}
+\begin{bodycode}
+\include{corps/÷\meta{introduction}÷}
+\include{corps/÷\meta{premier chapitre}÷}
+...
+\include{corps/÷\meta{dernier chapitre}÷}
+\include{corps/÷\meta{conclusion}÷}
+\end{bodycode}
+\end{dbexample}
+%
+\begin{dbexample}{Structure d'une thèse en deux parties}{avec-parties}
+  \lstset{keywordstyle=[3]\color{texcs}}%
+\begin{bodycode}
+\include{corps/÷\meta{introduction générale}÷}
+%
+\part{÷\meta{titre de la partie 1}÷}
+\include{corps/÷\meta{introduction de la partie 1}÷}
+\include{corps/÷\meta{premier chapitre de la partie 1}÷}
+...
+\include{corps/÷\meta{dernier chapitre de la partie 1}÷}
+\include{corps/÷\meta{conclusion de la partie 1}÷}
+%
+\part{÷\meta{titre de la partie 2}÷}
+\include{corps/÷\meta{introduction de la partie 2}÷}
+\include{corps/÷\meta{premier chapitre de la partie 2}÷}
+...
+\include{corps/÷\meta{dernier chapitre de la partie 2}÷}
+\include{corps/÷\meta{conclusion de la partie 2}÷}
+%
+\include{corps/÷\meta{conclusion générale}÷}
+\end{bodycode}
+\end{dbexample}
+%
+Le canevas \enquote{en relief}, détaillé \vref{sec:canevas-relief},
+suit ce type d'organisation.
+
+%
+\iffalse
+%%% Local Variables:
+%%% mode: latex
+%%% eval: (latex-mode)
+%%% ispell-local-dictionary: "fr_FR"
+%%% TeX-engine: xetex
+%%% TeX-master: "../yathesis.dtx"
+%%% End:
+\fi

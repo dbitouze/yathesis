@@ -1,0 +1,23 @@
+\newcommand{\expression}[3]{%^^A
+  #1%^^A
+  &
+  \ifthenelse{\isempty{#2}}{%^^A
+    \meta{vide}%^^A
+  }{%
+    #2%^^A
+  }%
+  &
+  \ifthenelse{\isempty{#3}}{%^^A
+    \meta{vide}%^^A
+  }{%
+    #3%^^A
+  }%
+  \\%^^A
+}
+\bgroup%
+\footnotesize%
+\begin{tabulary}{\linewidth}{>{\ttfamily\color{keyword5}}lLL}
+  \textcolor{black}{Label} & Valeur en français & Valeur en anglais \\\toprule
+  \input{translations}
+\end{tabulary}
+\egroup%

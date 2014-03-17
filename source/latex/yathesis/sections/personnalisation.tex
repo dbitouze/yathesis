@@ -1,0 +1,657 @@
+\chapter{Personnalisation}\label{cha:configuration}
+
+Cette section passe en revue les outils de personnalisation propres
+ou pas à la \yatcl{} :
+\begin{enumerate}
+\item options de classe ;
+\item commandes et options de commandes de la \yatcl;
+\item packages chargés par  la \yatcl ;
+\item packages chargés manuellement.
+\end{enumerate}
+
+\section{Options de classe}\label{options-classe}
+
+Les \meta{options} de la \yatcl sont à passer (exclusivement) selon la syntaxe
+usuelle :
+\begin{preamblecode}
+\documentclass[÷\meta{options}÷]{yathesis}
+\end{preamblecode}
+
+La \yatcl accepte, en sus des options qui lui sont propres, celles de la
+\Class{book} sur laquelle est elle basée.
+
+\subsection{Options de la classe \textsf{book}}\label{sec:options-usuelles-de}
+
+Parmi les \meta{options} de la \yatcl figurent celles de la
+\Class{book}, notamment :
+\begin{itemize}
+\item \docAuxKey{10pt} (défaut), \docAuxKey{11pt}, \docAuxKey{12pt}, pour fixer la taille de base des
+  caractères ;
+\item éventuellement :
+  \begin{itemize}
+  \item \docAuxKey{leqno} pour afficher les numéros d'équations à gauche ;
+  \item \docAuxKey{fleqn} pour afficher les équations toutes alignées à gauche
+    avec un même retrait ;
+  \item \docAuxKey{oneside} pour une pagination en recto seulement.
+  \end{itemize}
+\end{itemize}
+\begin{dbwarning}{Options usuelles de la \Class{book} : à utiliser
+    avec discernement}{}
+  Dans le cadre d'un usage de la \yatcl, il est \emph{fortement}
+  déconseillé de recourir à d'autres options usuelles de la
+  \Class{book} que celles ci-dessus : cela risquerait de produire
+  des résultats non souhaités.
+\end{dbwarning}
+
+\subsection{Options de la \yatcl}\label{sec:options-yatcl}
+
+Les \meta{options} discutées dans cette section, propres à la \yatcl{},
+permettent de contrôler les grandes lignes du document.
+%^^A \begin{itemize}
+%^^A \item \hyperref[sec:langues]{langues (principale, secondaire, supplémentaires)};
+%^^A \item \hyperref[sec:profondeur-de-la]{profondeur de la numérotation des sections};
+%^^A \item \hyperref[sec:interligne]{interligne};
+%^^A \item \hyperref[sec:style-des-tetes]{style des têtes de chapitres};
+%^^A \item \hyperref[sec:expr-separ-les]{expressions} séparant corporations et
+%^^A   instituts des membres du jury figurant sur les pages de titre;
+%^^A \item \hyperref[sec:versions]{versions}: \enquote{brouillon},
+%^^A   \enquote{intermédiaire} ou \enquote{imprimée}.
+%^^A \end{itemize}
+
+
+\subsubsection{Langues (principale, secondaire, supplémentaires)}\label{sec:langues}
+
+Par défaut, un mémoire créé avec la \yatcl est composé :
+\begin{itemize}
+\item en français comme langue principale;
+\item en anglais comme langue secondaire\footnote{Utilisée ponctuellement pour
+    des éléments supplémentaires tels qu'une page de titre, un résumé ou des
+    mots clés.}.
+\end{itemize}
+%
+\begin{docKey}{mainlanguage}{=\docValue{french}\textbar\docValue{english}}{pas de valeur par défaut,
+    initialement \docValue{french}}
+  Pour que la langue principale \phrase{et activée par défaut} du mémoire soit
+  une langue autre que le français, il suffit de le stipuler au moyen de la clé
+  \refKey{mainlanguage}. Le français devient alors automatiquement la langue
+  secondaire de la thèse.
+\end{docKey}
+
+\begin{dbwarning}{Langues principales et secondaires prises en charge}{}
+  Les seules langues \emph{principale} et \emph{secondaire} prises en charge
+  par la \yatcl sont le français (\docValue{french}) et l'anglais
+  (\docValue{english}).
+\end{dbwarning}
+
+\begin{dbremark}{Langues supplémentaires}{languessupplementaires}
+  Il est cependant possible de faire usage de langues \emph{supplémentaires},
+  autres que le français et l'anglais, en les stipulant en option de
+  \docAuxCommand{documentclass}\footnote{Ces langues doivent être l'une de
+    celles supportées par le \Package{babel}.} et en les employant selon la
+  syntaxe du \Package*{babel}.
+\end{dbremark}
+
+\begin{dbexample}{Langue supplémentaire pour thèse
+    multilingue}{these-multilingue}
+  Pour composer un mémoire ayant pour langue principale l'anglais (donc
+  secondaire le français) et supplémentaire l'espagnol \phrase{cas par exemple
+    d'une thèse en linguistique espagnole}, on passera les options suivantes
+  à la \yatcl{}.
+\begin{preamblecode}
+\documentclass[mainlanguage=english,spanish]{yatcl}
+\end{preamblecode}
+\end{dbexample}
+
+\subsubsection{Profondeur de la numérotation}\label{sec:profondeur-de-la}
+
+Par défaut, les numérotation des paragraphes a pour \enquote{niveau de
+  profondeur} les sous-sections. Autrement dit, ne sont numérotés que les
+titres des parties (éventuelles), chapitres, sections et sous-sections.
+L'option \refKey{secnumdepth} suivante permet de spécifier un autre niveau de
+profondeur.
+%
+{%
+  \tcbset{before lower=\vspace*{\baselineskip}\par}
+  \begin{docKey}{secnumdepth}{=\docValue{part}\textbar\docValue{chapter}\textbar\docValue{section}\textbar\docValue{subsection}\textbar\docValue{subsubsection}\textbar\docValue{paragraph}\textbar\docValue{subparagraph}}{pas
+      de valeur par défaut, initialement \docValue{subsection}}
+    Cette clé permet de modifier le \enquote{niveau de profondeur} de la
+    numérotation des paragraphes jusqu'aux, respectivement : parties,
+    chapitres, sections, sous-sections, sous-sous-sections, paragraphes,
+    sous-paragraphes.
+  \end{docKey}
+}
+
+\subsubsection{Espace interligne}\label{sec:interligne}
+
+L'interligne du document est par défaut \enquote{simple} mais, au
+moyen de l'option \refKey{space} suivante, il est possible de
+spécifier un interligne \enquote{un et demi} ou
+\enquote{double}.
+
+\begin{docKey}{space}{=\docValue{single}\textbar\docValue{onehalf}\textbar\docValue{double}}{pas de valeur par défaut,
+    initialement \docValue{single}}
+  Cette clé permet de spécifier un \meta{interligne} \docValue{single}
+  (simple), \docValue{onehalf} (un et demi) ou \docValue{double} (double).
+\end{docKey}
+
+\begin{dbwarning}{Option d'interligne : seulement dans la partie
+    principale}{}
+  L'effet de l'option \refKey{space} ne débute qu'avec la partie principale du
+  document (cf. \vref{cha:corps}) et se termine avec elle, avant la partie
+  annexe (cf. \vref{cha:annexes}). Si on souhaite changer d'interligne ailleurs
+  dans le mémoire, on recourra aux commandes du \Package*{setspace}
+  \phrase*{chargé par la \yatcl}.
+\end{dbwarning}
+
+\subsubsection{Style des têtes de chapitres}\label{sec:style-des-tetes}
+
+Pour gérer les têtes de chapitres, la \yatcl{} s'appuie sur le
+\Package*{fncychap}, par défaut chargé avec le style \docValue{PetersLenny}. La
+clé \refKey{chap-style} suivante permet de spécifier un autre style de ce
+package.
+%
+{%
+  \tcbset{before lower=\vspace*{\baselineskip}\par}
+  \begin{docKey}{chap-style}{=\docValue{Sonny}\textbar\docValue{Lenny}\textbar\docValue{Glenn}\textbar\docValue{Conny}\textbar\docValue{Rejne}\textbar\docValue{Bjarne}\textbar\docValue{PetersLenny}\textbar\docValue{Bjornstrup}\textbar\docValue{none}}{pas de valeur par défaut,
+    initialement \docValue{PetersLenny}}
+  Cette clé permet de spécifier un autre style du \Package{fncychap}.
+
+  Le \enquote{style} supplémentaire \docValue{none} permet de désactiver le
+  chargement de \package{fncychap} pour retrouver les têtes de
+  chapitres usuelles de la \Class{book}.
+\end{docKey}
+}
+
+\subsubsection{(Non-)Production de la page de 1\iere{} de couverture}\label{sec:non-production-de}
+
+Par défaut, la commande \refCom{maketitle} produit une page de 1\iere{} de
+couverture \phrase*{en plus de la ou des pages de titre}. La clé
+\refKey{nofrontcover} suivante permet de s'en affranchir.
+
+\begin{docKey}{nofrontcover}{=\docValue{true}\textbar\docValue{false}}{par défaut
+    \docValue{true}, initialement \docValue{false}}
+  Cette clé permet de désactiver la production de la page de 1\iere{} de
+  couverture.
+\end{docKey}
+
+\subsubsection{Expressions séparant les corporations et instituts des membres du jury}
+\label{sec:expr-separ-les}
+
+Sur les pages de titre, chaque membre du jury peut être précisé notamment par :
+\begin{itemize}
+\item sa corporation, cf. \refKey{professor}, \refKey{mcf}, \refKey{mcf*},
+  \refKey{seniorresearcher}, \refKey{juniorresearcher} et
+  \refKey{juniorresearcher*} ;
+\item son affiliation, cf. \refKey{affiliation}.
+\end{itemize}
+Comme illustré \vref{fig:maketitle}, si ces deux précisions sont présentes,
+elles sont par défaut séparées :
+\begin{description}
+\item[en français] par l'une des deux expressions contextuelles suivantes,
+  selon que l'initiale de l'affiliation est une voyelle ou une consonne:
+  \begin{itemize}
+  \item \enquote{\textvisiblespace{}à l'}\footnote{Le symbole
+      \enquote{\textvisiblespace{}} matérialise une espace.} ;
+  \item \enquote{\textvisiblespace{}au\textvisiblespace{}} ;
+  \end{itemize}
+\item[en anglais] par l'expression fixe (non contextuelle)
+  \enquote{\textvisiblespace{}at\textvisiblespace{}}.
+\end{description}
+
+\begin{dbwarning}{Expressions contextuelles non robustes}{separateurs}
+  Les expressions contextuelles en français ne sont pas robustes. Elles peuvent
+  en effet ne pas donner le résultat escompté si la valeur de la clé
+  \refKey{affiliation}, définissant l'affiliation, a pour initiale :
+  \begin{itemize}
+  \item une consonne, mais est de genre féminin ;
+  \item une voyelle, mais par le truchement d'une commande\footnote{Notamment
+      une commande d'acronyme \phrase*{telle que \docAuxCommand{gls} ou
+        \docAuxCommand{acrshort}}.}, et non pas \enquote{directement}.
+  \end{itemize}
+\end{dbwarning}
+
+Au moyen des clés \refKey{sepcorpaffilfrench} et \refKey{sepcorpaffilenglish}
+suivantes, les expressions séparatrices en français et en anglais peuvent être
+redéfinies, globalement ou localement.
+
+\begin{docKey}{sepcorpaffilfrench}{=\meta{expression}}{pas de valeur par
+    défaut, initialement \lstinline[showspaces]+\ à l'+ ou \lstinline[showspaces]+\ au\ +}
+  Cette option permet de redéfinir l'\meta{expression} employée en français
+  pour séparer les corporations et instituts des membres du jury. Elle peut
+  être employée :
+  \begin{description}
+  \item[globalement:] elle est alors à spécifier en option de la classe de
+    document ;
+  \item[localement:] elle est alors à spécifier en option de l'une des
+    commandes de définition des membres du jury (cf.
+    \vref{sec:definition-jury}).
+  \end{description}
+\end{docKey}
+
+\begin{docKey}{sepcorpaffilenglish}{=\meta{expression}}{pas valeur par
+    défaut, initialement \lstinline[showspaces]+\ at\ +}
+  Cette option, analogue à \refKey{sepcorpaffilfrench}, permet de redéfinir
+  l'\meta{expression} employée en anglais pour séparer les corporations et
+  instituts des membres du jury.
+\end{docKey}
+
+\begin{dbwarning}{Expressions séparatrices débutant ou finissant par un espace}{}
+  Si les valeurs des clés \refKey{sepcorpaffilfrench} ou
+  \refKey{sepcorpaffilenglish} doivent \emph{débuter} ou \emph{finir} par
+  un espace, celui-ci doit être saisi au moyen de
+  %^^A
+  \lstinline[showspaces]+\ +
+  %^^A
+  %^^A ou de
+  %^^A
+  %^^A \lstinline[deletekeywords={[2]space}]+\space+,
+  %^^A
+  et non pas seulement de
+  %^^A
+  \lstinline[showspaces]+ +.
+  %^^A
+\end{dbwarning}
+
+\begin{dbexample}{Redéfinition (globale) de l'expression séparant corporation et
+    institut}{}
+  L'exemple suivant montre comment remplacer l'expression (par défaut) séparant
+  corporation et institut par une virgule, et ce :
+  \begin{itemize}
+  \item globalement pour tous les membres du jury;
+  \item en anglais.
+  \end{itemize}
+\begin{preamblecode}[listing options={showspaces}]
+\documentclass[sepcorpaffilenglish={,\ }]{yatcl}
+\end{preamblecode}
+\end{dbexample}
+
+\begin{dbexample}{Redéfinition (locale) de l'expression séparant corporation et
+    institut}{}
+  L'exemple suivant montre comment remplacer l'expression séparant corporation
+  et institut par \enquote{\textvisiblespace{}à la\textvisiblespace{}}, et ce :
+  \begin{itemize}
+  \item localement (pour un membre du jury particulier);
+  \item en français.
+  \end{itemize}
+\begin{bodycode}
+\referee[professor,sepcorpaffilfrench=\ à la\ ,affiliation=Cité des sciences]{René}{Descartes}
+\end{bodycode}
+\end{dbexample}
+
+\subsubsection{(Non-)Affichage des  \foreignquote{english}{warnings} propres à la \yatcl{}}
+\label{sec:non-affichage-des}
+
+Dans certaines situations, par exemple lorsque des commandes ou environnements
+\enquote{obligatoires} (cf. \vref{sec:comm-oblig}) sont omis, des
+avertissements (\foreignquote{english}{warnings}) propres à la \yatcl{} sont
+affichés dans le fichier de \enquote{log}. Il est possible de désactiver cet
+affichage de façon :
+\begin{description}
+\item[globale] pour tous ces avertissements, au moyen de la clé
+  \refKey{nowarning} ci-dessous.
+\item[ciblée] pour chacun des commandes et environnements
+  \enquote{obligatoires}, au moyen de clés indiquées seulement
+  \vref{sec:non-affichage-cible} car celles-ci, pouvant altérer le bon
+  fonctionnement de la \yatcl{}, ne sont à utiliser que dans le cadre d'un
+  usage avancé.
+\end{description}
+
+\begin{docKey}{nowarning}{=\docValue{true}\textbar\docValue{false}}{par défaut \docValue{true},
+    initialement \docValue{false}}
+  Cette option désactive l'affichage de tous les avertissements propres à la
+  \yatcl{}.
+\end{docKey}
+
+\begin{dbremark}{Avertissements masqués en versions \enquote{brouillon} et
+    \enquote{intermédiaire}}{}
+  Les versions \enquote{brouillon} et \enquote{intermédiaire} du document (clés
+  \refKey{draft} et \refKey{intermediate}, cf. \vref{sec:versions}) désactivent
+  l'affichage de tous les avertissements propres à la \yatcl{}.
+\end{dbremark}
+
+\subsubsection{Versions du mémoire}\label{sec:versions}
+
+Grâce aux clés \refKey{draft}, \refKey{intermediate}, \refKey{printed} (et
+\refKey{printed*}) suivantes, la \yatcl{} permet de facilement obtenir des
+versions du document :
+\begin{itemize}
+\item \enquote{brouillon} ;
+\item \enquote{intermédiaire}
+\item \enquote{imprimée}, sous deux formes possibles ;
+\end{itemize}
+différentes de celle par défaut qui peut être considérée comme une version
+\enquote{écran}.
+
+\begin{docKey}{draft}{=\docValue{true}\textbar\docValue{false}}{par défaut \docValue{true},
+    initialement \docValue{false}}
+  Cette option produit une version \enquote{brouillon}\footnote{Une telle
+    version est \emph{a priori} à usage exclusif de l'auteur et n'est en
+    particulier pas destinée à être diffusée.} du document. Les différences par
+  rapport à la version \enquote{écran} (par défaut) sont les suivantes :
+  \begin{enumerate}
+  \item Les dépassements de marges sont signalés par une barre
+    verticale noire dans la marge.
+  \item La mention \enquote{brouillon} ou
+    \foreignquote{english}{draft}\selonlangue{} figure en filigrane (et en
+    capitales) sur (presque) toutes les pages du document.
+  \item Aucun avertissement propre à la \yatcl{}
+    (cf. \vref{sec:non-affichage-des}) n'est affiché.
+  \item Par exemple sur les pages de titre ou en intitulé de certains chapitres
+    (des remerciements, introduction, conclusion, etc.) :
+    \begin{enumerate}
+    \item les données caractéristiques de la thèse\footnote{Auteur,
+        (sous-)titre, institut(s), directeurs, rapporteurs,
+        examinateurs, etc.} sont des hyperliens vers le fichier des
+      données de la thèse\footnote{Cf. \vref{rq:titlefile}.} où
+      il est possible de les (re)définir (cf.
+      \vref{sec:expressions-cles});
+    \item\label{item-expression} les expressions fournies par
+      la \yatcl\footnote{\enquote{Thèse présentée par},
+        \foreignquote{english}{In order to become Doctor from},
+        \foreignquote{english}{draft}, \enquote{Version
+          intermédiaire en date du}, etc. insérées de façon
+        automatique sur certaines pages du mémoire.} sont :
+      \begin{itemize}
+      \item estampillées du label qui les identifie;
+      \item des hyperliens vers le fichier de configuration de la thèse (cf.
+        \vref{rq:configurationfile}) où il est possible de les
+        (re)définir (cf. \vref{sec:expressions-cles}).
+    \end{itemize}
+    \end{enumerate}
+    Si le système d'exploitation est correctement configuré, un
+    simple clic sur ces hyperliens ouvre le fichier correspondant
+    dans l'éditeur de texte \LaTeX{} par défaut.
+  \end{enumerate}
+\end{docKey}
+
+\begin{docKey}{intermediate}{=\docValue{true}\textbar\docValue{false}}{par défaut \docValue{true},
+    initialement \docValue{false}}
+  Cette option produit une version \enquote{intermédiaire}\footnote{Un telle
+    version est éventuellement destinée à être diffusée à des relecteurs.} du
+  document sur laquelle est clairement indiqué qu'il s'agit d'une version non
+  définitive. Les différences par rapport à la version \enquote{écran} (par
+  défaut) sont les suivantes :
+  \begin{enumerate}
+  \item Les mentions suivantes figurant sur (presque) toutes les pages du
+    document :
+    \begin{itemize}
+    \item \enquote{travail en cours} ou \foreignquote{english}{work in
+        progress}\selonlangue{}, en filigrane (et en capitales);
+    \item \enquote{Version intermédiaire en date du \meta{date}} ou
+      \foreignquote{english}{Intermediate version as of
+        \meta{date}}\selonlangue{} en pied de page (et en petites
+        capitales).
+    \end{itemize}
+  \item Aucun avertissement propre à la \yatcl{}
+    (cf. \vref{sec:non-affichage-des}) n'est affiché.
+  \end{enumerate}
+\end{docKey}
+
+\begin{docKey}{printed}{=\docValue{true}\textbar\docValue{false}}{par défaut \docValue{true},
+    initialement \docValue{false}}
+  Cette option produit une version du document destinée à être imprimée
+  sur papier. Les différences par rapport à la version \enquote{écran} (par
+  défaut) sont les suivantes :
+  \begin{enumerate}
+  \item la commande
+    ×\href{×\meta{\acrshort*{url}}×}{×\meta{texte}×}×\footnote{Fournie par le
+      \Package{hyperref}, chargé par la \yatcl{}.} est automatiquement
+    remplacée par :
+    \begin{itemize}
+    \item \meta{texte}\lstinline[deletekeywords={[2]url}]+\footnote{\url{+\meta{\acrshort*{url}}×}}× si elle
+      figure dans le texte ordinaire ;
+    \item \meta{texte} \lstinline[deletekeywords={[2]url}]+(\url{+\meta{\acrshort*{url}}×})× si elle
+      figure en note de bas de page ;
+    \end{itemize}
+  \item les liens hypertexte sont supprimés ;
+  \item les barres de navigation affichées par certains styles de
+    glossaires\footnote{Telles qu'on peut en voir
+      \vref{fig:printacronyms,fig:printglossary}.} \emph{sont} masquées.
+  \end{enumerate}
+\end{docKey}
+
+\begin{docKey}{printed*}{=\docValue{true}\textbar\docValue{false}}{par défaut \docValue{true},
+    initialement \docValue{false}}
+  Cette option produit le même effet que l'option \refKey{printed} sauf que les
+  barres de navigation affichées par certains styles de glossaires \emph{ne}
+  sont \emph{pas} masquées.
+\end{docKey}
+
+\begin{dbremark}{Versions compatibles}{}
+  Les différentes versions ci-dessus du mémoire ne sont pas incompatibles mais
+  seule la conjonction \refKey{intermediate} et \refKey{printed} (ou
+  \refKey{printed*}) peut réellement être utile.
+\end{dbremark}
+
+\section{Commandes et options de commandes de la \yatcl}
+
+\begin{dbremark}{Fichier de configuration}{configurationfile}
+  Les commandes de personnalisation :
+  \begin{itemize}
+  \item listées dans cette section et donc propres à \yatcl{} ;
+  \item fournies par les packages chargés manuellement ;
+  \end{itemize}
+  peuvent être saisies :
+  \begin{itemize}
+  \item soit directement dans le (préambule du) fichier (maître) de
+    la thèse ;
+  \item soit dans un fichier (prévu à cet effet) à nommer
+    \file{\configurationfile} et à placer dans un sous-dossier
+    (prévu à cet effet) à nommer
+    \directory{\configurationdirectory}\footnote{Ces fichier et
+      sous-dossier sont à créer au besoin mais le canevas de thèse
+      \enquote{en relief} livré avec la \yatcl, décrit
+      \vref{sec:canevas-relief}, les fournit.}.
+  \end{itemize}
+\end{dbremark}
+
+\begin{dbwarning}{Fichier de configuration à ne pas importer}{}
+  Le \File{\configurationfile} est déjà importé par la \yatcl{} et
+  \emph{ne doit pas} être explicitement importé (au moyen de commandes
+  \docAuxCommand{input} ou assimilées).
+\end{dbwarning}
+
+\subsection{(Re)Définition des expressions de la thèse}\label{sec:expressions-cles}
+
+Un mémoire de thèse composé avec la \yatcl est émaillé d'expressions insérées
+de façon automatique sur certaines pages (titre, mots clés, laboratoire,
+résumés, etc.) ou en intitulé de certains chapitres (remerciements,
+introduction, conclusion, etc.). Que ces expressions soient définies par la
+\yatcl ou bien standard, il est possible de les redéfinir.
+
+\subsubsection{Expressions définies par la classe}
+\label{sec:expr-defin-par}
+
+Les expressions \meta{en français} et \meta{en anglais} définies par la \yatcl
+sont listées dans le \vref{tab:expressions-cles} et y sont identifiées par un
+\meta{label} permettant de les redéfinir (voire de les définir, cf.
+\vref{ex:doctor}) au moyen de la commande \refCom{expression} suivante.
+%
+\begin{docCommand}{expression}{\marg{label}\marg{en français}\marg{en anglais}}
+  Cette commande permet de (re)définir les valeurs \meta{en français} et
+  \meta{en anglais} de l'expression identifiée par \meta{label}.
+\end{docCommand}
+
+\begin{table}
+  \centering
+  \input{tableaux/expressions}
+  \caption{Labels et valeurs des expressions de la \yatcl}
+  \label{tab:expressions-cles}
+\end{table}
+
+\begin{dbexample}{Modification d'expression définie par la classe}{}
+  L'expression \enquote{En vue de l'obtention du grade de docteur de l'} (dont
+  le label est ×lbl-aim×) n'est pas appropriée si le nom de l'institut dans
+  lequel a été préparée la thèse a pour initiale une consonne\footnote{Le choix
+    de \enquote{de l'} plutôt que de \enquote{du} tient à ce que la plupart des
+    thèses préparées en France le sont dans des \enquote{universités}, des
+    \enquote{écoles} ou des \enquote{instituts}, termes qui commencent tous par
+    une voyelle.}. Ainsi, si l'institut est par exemple la \enquote{Cité des
+    sciences}, l'expression qui figure sur la page de titre en français :
+  \enquote{En vue de l'obtention du grade de docteur de l'Cité des sciences}
+  est inappropriée. On peut l'adapter en saisissant (notamment dans le
+  \File{\configurationfile}) par exemple\footnote{La version anglaise de
+    l'expression reste valable.} :
+  %
+\begin{preamblecode}[title=Par exemple dans le \File{\configurationfile}]
+\expression{lbl-aim}{En vue de l'obtention du grade de docteur de la}{In order to become Doctor from}
+\end{preamblecode}
+\end{dbexample}
+%
+\begin{dbexample}{Suppression d'expression définie par la classe}{}
+  Si on souhaite supprimer des pages de titre les mentions \enquote{Titre de la
+    thèse} et \foreignquote{english}{Thesis Title} (expressions dont le label
+  est ×lbl-thesistitle×), il suffit de saisir :
+\begin{preamblecode}[title=Par exemple dans le \File{\configurationfile}]
+\expression{lbl-thesistitle}{}{}
+\end{preamblecode}
+\end{dbexample}
+
+\begin{dbremark}{Modification et suppression d'expressions facilitées par la
+    version \enquote{brouillon}}{}
+  On a vu que l'option \refKey{draft} permet de facilement retrouver les labels
+  des expressions et atteindre \file{\configurationfile} pour y modifier
+  celles-ci.
+\end{dbremark}
+
+\subsubsection{Expressions standard}
+\label{sec:expressions-standard}
+
+Les commandes ×\addto×, ×\captionsfrench× et ×\captionsenglish× du
+\Package{babel} permettent de redéfinir les expressions standard listées
+\vref{tab:expressions-standard} au moyen de la syntaxe suivante.
+\begin{preamblecode}[title=Par exemple dans le \File{\configurationfile}]
+\addto\captionsfrench{\def\÷\meta{commande}÷{÷\meta{en français}÷}}
+\addto\captionsenglish{\def\÷\meta{commande}÷{÷\meta{en anglais}÷}}
+\end{preamblecode}
+\begin{table}[hb]
+  \centering
+  \input{tableaux/expressions-standard}
+  \caption{Valeurs et commandes d'expressions standard du \Package{babel}}
+  \label{tab:expressions-standard}
+\end{table}
+\begin{dbexample}{Redéfinition d'expressions du \Package{babel}}{}
+\begin{preamblecode}[title=Par exemple dans le \File{\configurationfile}]
+\addto\captionsfrench{\def\abstractname{Aperçu de notre travail}}
+\addto\captionsenglish{\def\abstractname{Overview of our work}}
+\end{preamblecode}
+\end{dbexample}
+
+En cas d'usage des packages \package{glossaries} et \package{biblatex}, la
+syntaxe précédente est inopérante avec les commandes ×\glossaryname× et
+×\bibname× (ainsi que ×\refname×). Dans ce cas, pour donner un \meta{titre
+  alternatif} :
+\begin{itemize}
+\item aux glossaire, liste d'acronymes et liste de symboles, on recourra à
+  l'une ou l'autre des instructions suivantes :
+\begin{bodycode}
+\printglossary[title=÷\meta{titre alternatif}÷]
+\printglossaries[title=÷\meta{titre alternatif}÷]
+\printacronyms[title=÷\meta{titre alternatif}÷]
+\printsymbols[title=÷\meta{titre alternatif}÷]
+\end{bodycode}
+\item à la bibliographie, on recourra à :
+\begin{bodycode}
+\printbibliography[title=÷\meta{titre alternatif}÷]
+\end{bodycode}
+\end{itemize}
+
+En outre, en cas d'usage du \Package*{listings}, un \meta{titre alternatif}
+pourra être donné à la liste des listings, au moyen de:
+\begin{preamblecode}[title=Par exemple dans le \File{\configurationfile}]
+\renewcommand\lstlistingname{÷\meta{titre alternatif}÷}
+\end{preamblecode}
+
+\subsection{Nouvelles corporations}\label{sec:corporations}
+
+On a vu que les commandes définissant les membres du
+jury\footnote{\refCom{supervisor}, \refCom{referee}, \refCom{examiner}, etc.,
+  cf. \vref{sec:jury}.} permettent de préciser\footnote{Au moyen des clés
+  \refKey{professor}, \refKey{mcf}, \refKey{mcf*}, \refKey{seniorresearcher},
+  \refKey{juniorresearcher} et \refKey{juniorresearcher*}.} si ceux-ci
+appartiennent aux corporations \emph{prédéfinies} des professeurs ou des
+maîtres de conférences (\gls{hdr} ou pas) des universités et des directeurs de
+recherche ou des chargé(e)s de recherche (\gls{hdr} ou pas) du \gls{cnrs}. La
+clé \refKey{corporation} suivante permet de spécifier de \emph{nouvelles}
+corporations.
+
+\begin{docKey}{corporation}{=\meta{label}}{pas de
+    valeur par défaut, initialement vide}
+  L'option ×corporation=×\meta{label} permet de stipuler une
+  \meta{corporation en français} et une \meta{corporation en
+    anglais} où \meta{label} identifie une expression à
+  définir au moyen de :
+\begin{preamblecode}[title=Par exemple dans le \File{\configurationfile}]
+\expression{÷\meta{label}÷}{÷\meta{corporation en français}÷}{÷\meta{corporation en anglais}÷}
+\end{preamblecode}
+\end{docKey}
+
+\begin{dbexample}{Nouvelle corporation}{doctor}
+  Si on souhaite spécifier que certains membres du jury sont docteurs, il
+  suffit de définir \phrase{une seule fois} l'expression suivante de label (par
+  exemple) ×lbl-doctor× :
+\begin{preamblecode}[title=Par exemple dans le \File{\configurationfile}]
+\expression{lbl-doctor}{docteur}{Doctor}
+\end{preamblecode}
+pour pouvoir ensuite l'utiliser \phrase{autant de fois que souhaité}, par
+exemple ainsi :
+\begin{bodycode}
+\examiner[corporation=lbl-doctor]{Joseph}{Fourier}
+\examiner[corporation=lbl-doctor]{Paul}{Verlaine}
+\end{bodycode}
+\end{dbexample}
+
+\section{Packages chargés par la \yatcl}
+
+%^^A \subsection{Glossaires absents de la table des matières}
+%^^A
+%^^A La \yatcl{} fait par défaut figurer les glossaires dans les sommaire, table des
+%^^A matières et signets du document. Si cela n'est pas souhaité, il suffit
+%^^A d'insérer la commande \docAuxCommand{glstocfalse} après le chargement du
+%^^A \Package{glossaries}.
+
+\subsection{Bibliographie absente de la table des matières}
+
+La \yatcl{} fait par défaut figurer la bibliographie dans les sommaire, table
+des matières et signets du document. Si cela n'est pas souhaité, il suffit de
+passer à la commande \docAuxCommand{printbibliography} l'option
+×heading=×\meta{entête}, où \meta{entête} vaut par exemple
+\docValue*{bibliography} (cf. la documentation du \Package{biblatex} pour plus
+de détails).
+
+\subsection{Profondeurs différentes pour les signets et la table des matières}
+
+Par défaut, la table des matières et les signets ont le même niveau de
+profondeur. Mais, grâce à l'option \docAuxKey{bookmarksdepth} du
+\Package*{hyperref}, il est possible de spécifier un \meta{autre niveau} pour
+ces derniers :
+\begin{preamblecode}[title=Par exemple dans le \File{\configurationfile}]
+\hypersetup{bookmarksdepth=÷\meta{autre niveau}÷}
+\end{preamblecode}
+où \meta{autre niveau} est l'une des valeurs possibles de la clé
+\refKey{depth}.
+
+\section{Packages chargés manuellement}
+\label{sec:options-de-classes}
+Si on souhaite recourir à des packages qui ne sont pas appelés par la
+\yatcl{}\footnote{On pourra le cas échéant consulter
+  \vref{cha:packages-charges} la liste des packages chargés par la \yatcl{}.},
+on les chargera manuellement.
+
+\begin{dbwarning}{Chargement de packages : en préambule du fichier maître}{}
+  Le chargement manuel de packages doit se faire exclusivement dans le
+  (préambule du) fichier (maître) de la thèse et notamment \emph{pas} dans le
+  \File{\configurationfile} dont il est question
+  \vref{rq:configurationfile}.
+\end{dbwarning}
+
+%
+\iffalse
+%%% Local Variables:
+%%% mode: latex
+%%% eval: (latex-mode)
+%%% ispell-local-dictionary: "fr_FR"
+%%% TeX-engine: xetex
+%%% TeX-master: "../yathesis.dtx"
+%%% End:
+\fi
