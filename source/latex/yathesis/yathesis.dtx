@@ -198,6 +198,7 @@ This work consists of the file  yathesis.dtx
 \ReplaceClass{article}{report}
 \BeforePackage{doc}{\let\oldmaketitle\maketitle}
 \documentclass[english,french]{ltxdoc}
+\PassOptionsToPackage{obeyspaces}{url}
 \usepackage{yathesisdoc}
 \let\maketitle\oldmaketitle
 %
@@ -1039,6 +1040,7 @@ This work consists of the file  yathesis.dtx
   \xspace%
 }%
 \DeclareRobustCommand*{\program}{\file}
+\DeclareUrlCommand\urldirectory{\urlstyle{tt}}
 %
 \AtBeginDocument{%
   \renewcommand*{\meta}[2][meta]{%
