@@ -761,6 +761,10 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 % \AtEndPreamble{%
 %    \end{macrocode}
+% Pour tester la langue en cours
+%    \begin{macrocode}
+\RequirePackage{iflang}%
+%    \end{macrocode}
 % Pour un document à dominante en français, mais dont certains
 % passages sont en anglais (cf. options \lstinline|english|,
 % \lstinline|french| passées à la classe de document)
@@ -981,9 +985,9 @@ This work consists of the file  yathesis.dtx
 %
 % \DeclareRobustCommand*{\package}{\textsf}
 % \DeclareRobustCommand*{\Package}[1]{%
-%   \iflanguage{french}{package }{}%
+%   \IfLanguageName{french}{package }{}%
 %   \package{#1}%
-%   \iflanguage{english}{ package}{}%
+%   \IfLanguageName{english}{ package}{}%
 %   \xspace%
 % }%
 \DeclareRobustCommand*{\package}{%
@@ -1004,39 +1008,39 @@ This work consists of the file  yathesis.dtx
   \textsf{#2}%
 }
 \DeclareRobustCommand*{\Package}{%
-  \iflanguage{french}{package }{}%
+  \IfLanguageName{french}{package }{}%
   \@ifstar{\package@star}{\package@nostar}%
-  % \iflanguage{english}{ package}{}%
+  % \IfLanguageName{english}{ package}{}%
   % \xspace%
 }
 %
 \DeclareRobustCommand*{\class}{\package}
 \DeclareRobustCommand*{\Class}{%
   \texorpdfstring{%
-    \iflanguage{french}{classe }{}%
+    \IfLanguageName{french}{classe }{}%
     \@ifstar{\package@star}{\package@nostar}%
   }{%
-    \iflanguage{french}{classe }{}%
+    \IfLanguageName{french}{classe }{}%
     \package@nostar%
   }%
   % \@ifstar{\package@star}{\package@nostar}%
-  % \iflanguage{english}{ class}{}%
+  % \IfLanguageName{english}{ class}{}%
   % \xspace%
 }%
 %
 \DeclareRobustCommand*{\file}[1]{\bgroup% \color{magenta}
   \texttt{#1}\egroup}
 \DeclareRobustCommand*{\File}[1]{%
-  \iflanguage{french}{fichier }{}%
+  \IfLanguageName{french}{fichier }{}%
   \file{#1}%
-  \iflanguage{english}{ file}{}%
+  \IfLanguageName{english}{ file}{}%
   \xspace%
 }%
 \DeclareRobustCommand*{\directory}{\file}
 \DeclareRobustCommand*{\Directory}[1]{%
-  \iflanguage{french}{répertoire }{}%
+  \IfLanguageName{french}{répertoire }{}%
   \directory{#1}%
-  \iflanguage{english}{ directory}{}%
+  \IfLanguageName{english}{ directory}{}%
   \xspace%
 }%
 \DeclareRobustCommand*{\program}{\file}
@@ -2019,14 +2023,14 @@ This work consists of the file  yathesis.dtx
             \YAD@committeemember@role=role,%
             \YAD@committeemember@corporation=corporation,%
             \YAD@committeemember@sepcorpaffil=%
-            \expandafter\iflanguage{french}{%
+            \expandafter\IfLanguageName{french}{%
               sepcorpaffilfrench%
             }{%
               sepcorpaffilenglish%
             }%
             ,%
             \YAD@committeemember@affiliation=%
-            \iflanguage{french}{%
+            \IfLanguageName{french}{%
               affiliation%
             }{%
               affiliationsecondary%
@@ -2476,7 +2480,7 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \csdef{print#2}{%
         \YAD@reach@file{%
-          \expandafter\iflanguage{\YAD@mainlanguage}{%
+          \expandafter\IfLanguageName{\YAD@mainlanguage}{%
 %    \end{macrocode}
 % En langue principale
 %    \begin{macrocode}
@@ -3602,7 +3606,7 @@ This work consists of the file  yathesis.dtx
           \itshape%
           \sffamily%
           \YAD@translation{ordernumber}%
-          \iflanguage{french}{%
+          \IfLanguageName{french}{%
             \FBcolonspace%
           }{%
           }: \printordernumber%
@@ -3841,7 +3845,7 @@ This work consists of the file  yathesis.dtx
 % Définition de ×\printkeywords×.
 %    \begin{macrocode}
 \csdef{printkeywords}{%
-  \expandafter\iflanguage{\YAD@mainlanguage}{%
+  \expandafter\IfLanguageName{\YAD@mainlanguage}{%
     \YAD@ifemptyorundef{\YAD@mainkeywords}{%
       \YAD@generic@argument@translate{keywords}%
     }{%
@@ -3914,7 +3918,7 @@ This work consists of the file  yathesis.dtx
     \begin{description}
       \renewcommand*{\do}[1]{%
         \expandafter\selectlanguage\expandafter{##1}%
-      \item[\YAD@translation{keywords}\iflanguage{french}{\,}{}:]
+      \item[\YAD@translation{keywords}\IfLanguageName{french}{\,}{}:]
         \YAD@ifemptyorundef{\printkeywords}{%
           \YAD@generic@argument@translate{keywords}%
         }{%
@@ -4238,7 +4242,7 @@ This work consists of the file  yathesis.dtx
     }{%
       \vspace{.5em}%
       \begin{description}
-      \item[\YAD@translation{keywords}\iflanguage{french}{\ifundef{\Fcolonspace}{\FBcolonspace}{\Fcolonspace}}{}:]
+      \item[\YAD@translation{keywords}\IfLanguageName{french}{\ifundef{\Fcolonspace}{\FBcolonspace}{\Fcolonspace}}{}:]
         \printkeywords
       \end{description}
     }%
@@ -4281,7 +4285,7 @@ This work consists of the file  yathesis.dtx
       }{%
         \vspace{.5em}%
         \begin{description}
-        \item[\YAD@translation{keywords}\iflanguage{french}{\ifundef{\Fcolonspace}{\FBcolonspace}{\Fcolonspace}}{}:]
+        \item[\YAD@translation{keywords}\IfLanguageName{french}{\ifundef{\Fcolonspace}{\FBcolonspace}{\Fcolonspace}}{}:]
           \textnormal{\printkeywords}
         \end{description}
       }%
@@ -4764,7 +4768,7 @@ This work consists of the file  yathesis.dtx
 %
 %    \begin{macrocode}
 \disclaimer{%
-  \iflanguage{french}{%
+  \IfLanguageName{french}{%
     L'%
     \ifundef{\printinstitute}{%
       \YAD@generic@argument@translate{institute}
