@@ -230,6 +230,7 @@
 }%
 \RequirePackage{index}%
 \RequirePackage[columns=1]{idxlayout}%
+\RequirePackage{iflang}%
 \RequirePackage{babel}%
 \RequirePackage[nodayofweek]{datetime}%
 \RequirePackage{datenumber}%
@@ -706,14 +707,14 @@
             \YAD@committeemember@role=role,%
             \YAD@committeemember@corporation=corporation,%
             \YAD@committeemember@sepcorpaffil=%
-            \expandafter\iflanguage{french}{%
+            \expandafter\IfLanguageName{french}{%
               sepcorpaffilfrench%
             }{%
               sepcorpaffilenglish%
             }%
             ,%
             \YAD@committeemember@affiliation=%
-            \iflanguage{french}{%
+            \IfLanguageName{french}{%
               affiliation%
             }{%
               affiliationsecondary%
@@ -1057,7 +1058,7 @@
 }%
 \csdef{print#2}{%
         \YAD@reach@file{%
-          \expandafter\iflanguage{\YAD@mainlanguage}{%
+          \expandafter\IfLanguageName{\YAD@mainlanguage}{%
             \ifthenelse{\isempty{##2}}{%
               \YAD@ClassWarningNoLine{%
                 La commande \csuse{#2}\space a \'et\'e employ\'ee\MessageBreak%
@@ -1903,7 +1904,7 @@
           \itshape%
           \sffamily%
           \YAD@translation{ordernumber}%
-          \iflanguage{french}{%
+          \IfLanguageName{french}{%
             \FBcolonspace%
           }{%
           }: \printordernumber%
@@ -2110,7 +2111,7 @@
   }%
 }%
 \csdef{printkeywords}{%
-  \expandafter\iflanguage{\YAD@mainlanguage}{%
+  \expandafter\IfLanguageName{\YAD@mainlanguage}{%
     \YAD@ifemptyorundef{\YAD@mainkeywords}{%
       \YAD@generic@argument@translate{keywords}%
     }{%
@@ -2169,7 +2170,7 @@
     \begin{description}
       \renewcommand*{\do}[1]{%
         \expandafter\selectlanguage\expandafter{##1}%
-      \item[\YAD@translation{keywords}\iflanguage{french}{\,}{}:]
+      \item[\YAD@translation{keywords}\IfLanguageName{french}{\,}{}:]
         \YAD@ifemptyorundef{\printkeywords}{%
           \YAD@generic@argument@translate{keywords}%
         }{%
@@ -2462,7 +2463,7 @@
     }{%
       \vspace{.5em}%
       \begin{description}
-      \item[\YAD@translation{keywords}\iflanguage{french}{\ifundef{\Fcolonspace}{\FBcolonspace}{\Fcolonspace}}{}:]
+      \item[\YAD@translation{keywords}\IfLanguageName{french}{\ifundef{\Fcolonspace}{\FBcolonspace}{\Fcolonspace}}{}:]
         \printkeywords
       \end{description}
     }%
@@ -2505,7 +2506,7 @@
       }{%
         \vspace{.5em}%
         \begin{description}
-        \item[\YAD@translation{keywords}\iflanguage{french}{\ifundef{\Fcolonspace}{\FBcolonspace}{\Fcolonspace}}{}:]
+        \item[\YAD@translation{keywords}\IfLanguageName{french}{\ifundef{\Fcolonspace}{\FBcolonspace}{\Fcolonspace}}{}:]
           \textnormal{\printkeywords}
         \end{description}
       }%
@@ -2785,7 +2786,7 @@
 }%
 \xpretocmd{\part}{\setsecnumdepth{\YAD@secnumdepth}}{}{}%
 \disclaimer{%
-  \iflanguage{french}{%
+  \IfLanguageName{french}{%
     L'%
     \ifundef{\printinstitute}{%
       \YAD@generic@argument@translate{institute}
@@ -2822,11 +2823,6 @@
     \else%
     \vspace*{\stretch{1}}%
     \fi%
-}%
-\ifthenelse{\equal{\YAD@mainlanguage}{french}}{%
-  \hypersetup{pdflang=fr}%
-}{%
-  \hypersetup{pdflang=en}%
 }%
 \AtEndPreamble{%
   \@ifpackageloaded{biblatex}{%
@@ -2926,7 +2922,7 @@
       \addcontentsline{toc}{chapter}{#1}%
       \fi
     }
-    % \let\glossarysection\YAD@ORI@chapter%
+    \let\glossarysection\YAD@ORI@chapter%
   }%
 }%
 \AtEndPreamble{%

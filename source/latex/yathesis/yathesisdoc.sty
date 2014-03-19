@@ -40,6 +40,7 @@
 \RequirePackage{pdflscape}%
 \RequirePackage{hologo}%
 \RequirePackage{xifthen}%
+\RequirePackage{iflang}%
 \RequirePackage{tocvsec2}%
 \RequirePackage[autostyle=once]{csquotes}%
 \RequirePackage{tcolorbox}%
@@ -88,37 +89,37 @@
   \textsf{#2}%
 }
 \DeclareRobustCommand*{\Package}{%
-  \iflanguage{french}{package }{}%
+  \IfLanguageName{french}{package }{}%
   \@ifstar{\package@star}{\package@nostar}%
-  % \iflanguage{english}{ package}{}%
+  % \IfLanguageName{english}{ package}{}%
   % \xspace%
 }
 \DeclareRobustCommand*{\class}{\package}
 \DeclareRobustCommand*{\Class}{%
   \texorpdfstring{%
-    \iflanguage{french}{classe }{}%
+    \IfLanguageName{french}{classe }{}%
     \@ifstar{\package@star}{\package@nostar}%
   }{%
-    \iflanguage{french}{classe }{}%
+    \IfLanguageName{french}{classe }{}%
     \package@nostar%
   }%
   % \@ifstar{\package@star}{\package@nostar}%
-  % \iflanguage{english}{ class}{}%
+  % \IfLanguageName{english}{ class}{}%
   % \xspace%
 }%
 \DeclareRobustCommand*{\file}[1]{\bgroup% \color{magenta}
   \texttt{#1}\egroup}
 \DeclareRobustCommand*{\File}[1]{%
-  \iflanguage{french}{fichier }{}%
+  \IfLanguageName{french}{fichier }{}%
   \file{#1}%
-  \iflanguage{english}{ file}{}%
+  \IfLanguageName{english}{ file}{}%
   \xspace%
 }%
 \DeclareRobustCommand*{\directory}{\file}
 \DeclareRobustCommand*{\Directory}[1]{%
-  \iflanguage{french}{répertoire }{}%
+  \IfLanguageName{french}{répertoire }{}%
   \directory{#1}%
-  \iflanguage{english}{ directory}{}%
+  \IfLanguageName{english}{ directory}{}%
   \xspace%
 }%
 \DeclareRobustCommand*{\program}{\file}
@@ -326,9 +327,6 @@
 \loadglsentries{glossaries/glossary}
 \loadglsentries{glossaries/acronyms}
 \addbibresource{\jobname.bib}
-\def\findrootlanguage{%
-   \def\rootlanguagename{\languagename}%
-}%
 \newcommand{\pdf}{\acrshort{pdf}\xspace}
 \renewcommand*{\newacronymhook}{%
 \edef\tmp{\noexpand\textsc{\the\glsshorttok}}%
