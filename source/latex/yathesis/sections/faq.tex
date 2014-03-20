@@ -1,8 +1,8 @@
-\chapter{FAQ}\label{cha:faq}
+\chapter{\texorpdfstring{\gls{faq}}{FAQ}}\label{cha:faq}
 
-Ce chapitre répertorie les questions fréquemment posées sur la \yatcl{}.
+Ce chapitre répertorie les \glspl{faq} sur la \yatcl{}.
 
-\begin{question}
+\begin{dbfaq}{Comment communiquer avec l'auteur de la \yatcl{} ?}{}
   La \yatcl{} est vraiment formidable, mais je souhaite :
   \begin{enumerate}
   \item rapporter un bogue ;
@@ -10,33 +10,36 @@ Ce chapitre répertorie les questions fréquemment posées sur la \yatcl{}.
   \item communiquer avec l'auteur de la classe.
   \end{enumerate}
   Comment faire ?
-\end{question}
-\begin{solution}
-  Pour les rapports de bogue et demandes de fonctionnalités, créer une
-  \enquote{issue} à l'adresse
-  \url{https://github.com/dbitouze/yathesis/issues/new}.
+\end{dbfaq}
+  \begin{dbanswer}{}{}
+    Pour les rapports de bogue et demandes de fonctionnalités, créer une
+    \enquote{issue} à l'adresse
+    \url{https://github.com/dbitouze/yathesis/issues/new}.
 
-  Pour communiquer avec l'auteur de la classe, utiliser l'adresse indiquée en
-  1\iere{} page de la présente documentation.
-\end{solution}
+    Pour communiquer avec l'auteur de la classe, utiliser l'adresse indiquée en
+    1\iere{} page de la présente documentation.
+  \end{dbanswer}
 
-\begin{question}
+\begin{dbfaq}{Comment faire figurer les glossaire, liste d'acronymes et liste
+    de symboles dans la table des matières ?}{}
   Par défaut, les glossaire, liste d'acronymes et liste de symboles ne figurent
   pas dans les sommaire, table des matières et signets du document. Comment les
   faire apparaître ?
-\end{question}
-\begin{solution}
-  Cette question ne concerne pas directement la \yatcl{} : il suffit de passer
-  l'option \docAuxKey*{toc} au \Package{glossaries}.
-\end{solution}
+\end{dbfaq}
+  \begin{dbanswer}{}{}
+    Cette question ne concerne pas directement la \yatcl{} : il suffit de
+    passer l'option \docAuxKey*{toc} au \Package{glossaries}.
+  \end{dbanswer}
 
-\begin{question}
-  Je suis confronté à l'erreur \enquote{no room for a new \docAuxCommand{write}}.
-\end{question}
-\begin{solution}
+\begin{dbfaq}{Comment éviter l'erreur \enquote{no room for a new
+      \protect\docAuxCommand{write}} ?}{}
+  Je suis confronté à l'erreur \enquote{no room for a new
+    \docAuxCommand{write}}. Comment l'éviter ?
+\end{dbfaq}
+\begin{dbanswer}{}{}
   Il devrait suffire de charger le \Package{morewrites} (plutôt parmi les
   premiers packages).
-\end{solution}
+\end{dbanswer}
 
 %
 \iffalse

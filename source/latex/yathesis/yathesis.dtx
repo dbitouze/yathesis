@@ -329,6 +329,7 @@ This work consists of the file  yathesis.dtx
 % \tcblistof[\chapter*]{dbwarninglist}{Table des avertissements\addcontentsline{toc}{chapter}{Table des avertissements}}
 % \tcblistof[\chapter*]{dbremarklist}{Table des remarques\addcontentsline{toc}{chapter}{Table des remarques}}
 % \tcblistof[\chapter*]{dbexamplelist}{Table des exemples\addcontentsline{toc}{chapter}{Table des exemples}}
+% \tcblistof[\chapter*]{dbfaqlist}{Table des \texorpdfstring{\glspl{faq}}{FAQ}\addcontentsline{toc}{chapter}{Table \texorpdfstring{\gls{faq}}{FAQ}}}
 % \setsecnumdepth{none}
 % \include{sections/introduction}
 % \setsecnumdepth{subsection}
@@ -757,10 +758,6 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \RequirePackage[columns=1]{idxlayout}%
 %    \end{macrocode}
-% Les packages qui suivent doivent être les derniers chargés du préambule
-%    \begin{macrocode}
-% \AtEndPreamble{%
-%    \end{macrocode}
 % Pour tester la langue en cours
 %    \begin{macrocode}
 \RequirePackage{iflang}%
@@ -917,6 +914,14 @@ This work consists of the file  yathesis.dtx
 %
 %    \begin{macrocode}
 \RequirePackage{xpatch}%
+% Pour pouvoir disposer disposer d'autant de \enquote{flots} d'écriture dans
+% des fichiers annexes que nécessaire. Il est chargé en fin de préambule sans
+% quoi la compilation s'arrête longuement à la ligne
+% ×(/usr/local/texlive/2013/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg)×
+% (problème rapporté à  l'auteur du package).
+%    \begin{macrocode}
+\AtEndPreamble{\RequirePackage{morewrites}}%
+%    \end{macrocode}
 \let\YAD@ORI@task\task
 \let\task\relax
 \RequirePackage{exsheets}
@@ -979,6 +984,7 @@ This work consists of the file  yathesis.dtx
   \addtocontents{dbwarninglist}{\protect\addvspace{10\p@}}%
   \addtocontents{dbremarklist}{\protect\addvspace{10\p@}}%
   \addtocontents{dbexamplelist}{\protect\addvspace{10\p@}}%
+  \addtocontents{dbfaqlist}{\protect\addvspace{10\p@}}%
 }{}{}
 %
 \sisetup{locale=FR,detect-all}
@@ -1123,6 +1129,18 @@ This work consists of the file  yathesis.dtx
   colframe=cyan!75!black,
   dbtcb
 }{rq}
+% FAQs sous forme de \enquote{théorème}.
+\newtcbtheorem[list inside=dbfaqlist,number within=chapter]{dbfaq}{Question}{%
+  colback=gray!5!white,
+  colframe=gray!75!black,
+  dbtcb
+}{faq}
+% Réponses aux FAQs sous forme de \enquote{théorème}.
+\newtcbtheorem[number within=chapter]{dbanswer}{Réponse}{%
+  colback=lightgray!5!white,
+  colframe=lightgray!75!black,
+  dbtcb
+}{ans}
 %
 % Déclaration des nouveaux noms de \enquote{théorèmes} en vue d'en faciliter le
 % référencement grâce au \Package{cleveref}.
@@ -1130,6 +1148,7 @@ This work consists of the file  yathesis.dtx
   \crefname{tcb@cnt@dbexample}{exemple}{exemples}%
   \crefname{tcb@cnt@dbremark}{remarque}{remarques}%
   \crefname{tcb@cnt@dbwarning}{avertissement}{avertissements}%
+  \crefname{tcb@cnt@dbfaq}{question}{questions}%
 }%
 %
 \tcbset{%
