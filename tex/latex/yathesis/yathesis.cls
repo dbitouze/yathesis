@@ -206,7 +206,6 @@
 \RequirePackage{epigraph}%
 \RequirePackage{marvosym}%
 \RequirePackage{setspace}%
-\AtEndPreamble{\RequirePackage{morewrites}}%
 \RequirePackage{shorttoc}%
 \RequirePackage{tocvsec2}%
 \RequirePackage{tocbibind}%
@@ -2823,6 +2822,11 @@
     \else%
     \vspace*{\stretch{1}}%
     \fi%
+}%
+\ifthenelse{\equal{\YAD@mainlanguage}{french}}{%
+  \hypersetup{pdflang=fr}%
+}{%
+  \hypersetup{pdflang=en}%
 }%
 \AtEndPreamble{%
   \@ifpackageloaded{biblatex}{%
