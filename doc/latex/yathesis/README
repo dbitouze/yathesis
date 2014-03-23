@@ -26,23 +26,49 @@ yourself, running 'xetex yathesis.dtx' will extract the class whereas
 
 Typesetting the documentation also requires:
 
-1. a number of packages in addition to those needed to use the
-yathesis class. To compile the documentation without error, you will
-need the packages:
+1. a number of packages in addition to those needed to use the yathesis class.
+To compile the documentation without error, you will need the packages:
 
-  - hypdoc
-  - manfnt
-  - marginnote
-  - mparhack
-  - xifthen
-  - ...
+- afterpage
+- amsthm
+- biblatex
+- booktabs
+- calc
+- cleveref
+- csquotes
+- enumitem
+- fixfoot
+- floatrow
+- footmisc
+- glossaries
+- hologo
+- letltxmacro
+- libertine
+- listings
+- marginnote
+- multicol
+- nameref
+- parskip
+- pdflscape
+- rotating
+- siunitx
+- subcaption
+- tabulary
+- tcolorbox
+- thmtools
+- varioref
+- xifthen
+- xpatch
+- xspace
+- zref
 
-and a xelatex compilation. If latexmk is available, it is easier to
+2. a complete pdflatex run of these.tex to be found in the 'sample'
+subdirectory of the current directory, with 'demo-yathesis' load at first
+place. If latexmk is available, it is easier to run:
+
+  latexmk -f -pdf -jobname=these -pdflatex="pdflatex %O '\RequirePackage{demo-yathesis}\input{%S}'" these.tex
+
+3. to run xelatex on yathesis.dtx. If latexmk is available, it is easier to
 run:
 
-latexmk yathesis.dtx
-
-2. to run something like:
-
-latexmk -f -pdf -jobname=these -pdflatex="pdflatex %O '\RequirePackage{demo-compil}\input{%S}'" these.tex
-***********************************************************************
+  latexmk yathesis.dtx
