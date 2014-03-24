@@ -2483,10 +2483,6 @@ This work consists of the file  yathesis.dtx
   \hypersetup{pdftitle=\YAD@metatitle}%
 }{%
 }%
-\ifundef{\YAD@metakeywords}{%
-}{%
-  \hypersetup{pdfkeywords=\YAD@metakeywords}%
-}%
 \ifundef{\YAD@metasubject}{%
   \ifundef{\YAD@metaacademicfield}{%
   }{%
@@ -3846,7 +3842,6 @@ This work consists of the file  yathesis.dtx
 % Définition de ×\keywords×.
 % \begin{macro}{\keywords}
 % \begin{macro}{\YAD@metakeywords}
-% \begin{macro}{\printkeywords}
 %    \begin{macrocode}
 \newcommand{\keywords}[2]{%
   \toggletrue{YAD@keywords@used}%
@@ -3862,6 +3857,9 @@ This work consists of the file  yathesis.dtx
   }%
 }%
 %    \end{macrocode}
+% \end{macro}
+% \end{macro}
+% \begin{macro}{\printkeywords}
 % Définition de ×\printkeywords×.
 %    \begin{macrocode}
 \csdef{printkeywords}{%
@@ -3913,8 +3911,6 @@ This work consists of the file  yathesis.dtx
   }%
 }%
 %    \end{macrocode}
-% \end{macro}
-% \end{macro}
 % \end{macro}
 %
 % \begin{macro}{\makekeywords}
