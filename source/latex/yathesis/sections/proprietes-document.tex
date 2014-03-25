@@ -1,0 +1,620 @@
+\chapter{Propriétés du document}
+\label{cha:propr-du-docum}
+
+Cette section liste les commandes et options permettant de \emph{préparer} les
+propriétés du document. La plupart de ces propriétés sont ensuite affichées en
+divers emplacements du document :
+\begin{itemize}
+\item sur les pages de 1\iere{} de couverture et de titre(s), produites par la
+  commande \refCom{maketitle} ;
+\item sur l'éventuelle page dédiée au(x) laboratoire(s) où la thèse a été préparée,
+  produite par la commande \refCom{makelaboratory} ;
+\item sur l'éventuelle page dédiée aux mots clés, produite par la commande \refCom{makekeywords} ;
+\item sur la page dédiée aux résumés, produite par la commande \refCom{makeabstract} ;
+\item sur l'éventuelle 4\ieme{} de couverture, produite par la commande
+  \refCom{makebackcover}.
+\end{itemize}
+Certaines de ces propriétés figurent également comme métadonnées du fichier
+\pdf produit.
+
+\section{Où saisir les propriétés du document ?}
+\label{sec:lieu-de-saisie}
+
+Les commandes permettant de définir les propriétés du document peuvent être
+saisies :
+\begin{itemize}
+\item soit directement dans le fichier (maître) de la thèse :
+  \begin{itemize}
+  \item soit dans le préambule ;
+  \item soit dans le corps ;
+  \begin{dbwarning}{Fichier de configuration à ne pas importer}{}
+    Si les propriétés du document sont saisies dans le corps du fichier
+    (maître) de la thèse, elles doivent nécessairement l'être \emph{avant} la
+    commande \refCom{maketitle}.
+  \end{dbwarning}
+  \end{itemize}
+\item soit dans un fichier de configuration à nommer \file{\configurationfile}
+  et à placer dans un sous-dossier à nommer
+  \directory{\configurationdirectory}. Ces fichier et sous-dossier \phrase{tous
+    deux prévus à cet effet} sont à créer au besoin mais ils sont fournis par
+  le canevas de thèse \enquote{en relief} livré avec la classe, décrit
+  \vref{sec:canevas-relief}.
+  \begin{dbwarning}{Fichier de configuration à ne pas importer}{}
+    Le \File{\configurationfile} \emph{ne doit pas} être explicitement importé
+    \phrase*{au moyen d'une commande \docAuxCommand{input} ou assimilée}.
+  \end{dbwarning}
+\end{itemize}
+
+\section{Propriétés de titre}
+\label{sec:proprietes-de-titre}
+
+Cette section liste les commandes et options permettant de \emph{préparer} les
+pages de 1\iere{} de couverture et de titre de la thèse\footnote{Sauf cas
+  particulier, ces pages seront dans la suite appelées simplement
+  \enquote{pages de titre}.}.
+
+\subsection{Auteur, (sous-)titre, spécialité, sujet,
+  date}\label{sec:caracteristiques}
+
+Les commandes suivantes permettent de stipuler les auteur, titre et éventuel
+sous-titre, champ disciplinaire, spécialité, date et sujet de la thèse. Toutes
+ces données, sauf le sujet, figureront automatiquement sur les pages de
+titre\footnote{En outre, les titres et éventuels sous-titres figureront sur les
+  pages de résumé (cf. \vref{sec:abstract}) et de 4\ieme{} de couverture (cf.
+  \vref{sec:quatr-de-couv}).}.
+%
+\begin{docCommand}[doc description=\mandatory]{author}{\marg{prénom}\marg{nom}\marg{adresse
+      courriel}}
+  Cette commande définit l'auteur de la thèse. Ses
+  \meta{prénom} et \meta{nom} :
+  \begin{itemize}
+  \item figureront sur la ou les pages de titre et seront un lien
+    hypertexte vers son \meta{adresse courriel};
+  \item apparaîtront aussi comme métadonnée \enquote{Auteur} du
+    fichier \pdf de la thèse.
+  \end{itemize}
+  \begin{dbwarning}{Format des prénom et nom de l'auteur}{}
+    On veillera à ce que :
+    \begin{enumerate}
+    \item les éventuels accents figurent dans les \meta{prénom} et
+      \meta{nom};
+    \item le \meta{nom} \emph{ne} soit \emph{pas} saisi en capitales
+      (sauf pour la ou les majuscules) car il sera automatiquement
+      composé en petites capitales.
+    \end{enumerate}
+  \end{dbwarning}
+\end{docCommand}
+%
+\begin{docCommand}[doc description=\mandatory]{title}{\oarg{titre dans la langue
+      secondaire}\marg{titre}}
+  Cette commande définit le \meta{titre} de la thèse. Celui-ci apparaît alors
+  aussi comme métadonnée \enquote{Titre} du fichier \pdf de la thèse.
+\end{docCommand}
+%
+\begin{docCommand}{subtitle}{\oarg{sous-titre dans la langue
+      secondaire}\marg{sous-titre}}
+  Cette commande définit l'éventuel \meta{sous-titre} de la thèse.
+\end{docCommand}
+%
+\begin{docCommand}[doc description=\mandatory]{academicfield}{\oarg{discipline dans la langue
+      secondaire}\marg{discipline}}
+  Cette commande définit la \meta{discipline} \phrase{ou champ disciplinaire}
+  de la thèse. Celui-ci apparaît alors aussi comme métadonnée \enquote{Sujet} du
+  fichier \pdf de la thèse, sauf si la commande \refCom{subject} est utilisée.
+\end{docCommand}
+%
+\begin{docCommand}{speciality}{\oarg{spécialité dans la langue
+      secondaire}\marg{spécialité}}
+  Cette commande définit la \meta{spécialité} (du champ
+  disciplinaire) de la thèse.
+\end{docCommand}
+%
+\begin{dbremark}{Titre, sous-titre, champ disciplinaire et spécialité dans la
+    langue secondaire}{titre-supp}
+  \emph{Via} leur argument obligatoire, les commandes \refCom{title},
+  \refCom{subtitle}, \refCom{academicfield} et \refCom{speciality} définissent
+  les titre, sous-titre, champ disciplinaire et spécialité, \emph{dans la
+    langue principale} de la thèse -- par défaut le français. Chacune de ces
+  commandes admet un argument optionnel permettant de stipuler la donnée
+  correspondante \emph{dans la langue secondaire} de la thèse -- par défaut
+  l'anglais\footnote{Les langues principale et secondaire de la thèse sont
+    détaillées \vref{sec:langues}.}.
+
+  Dès lors qu'une au moins des ces commandes est employée avec son argument
+  optionnel, la commande \refCom{maketitle}, qui produit les pages de titre
+  composées dans la langue principale, génère \emph{automatiquement} une page
+  de titre supplémentaire composée dans la langue secondaire.
+\end{dbremark}
+%
+\begin{docCommand}[doc description=\mandatory]{date}{\marg{jour}\marg{mois}\marg{année}}
+  Cette commande définit la date de la soutenance.
+  \begin{dbwarning}{Format des jour, mois et année de la date de
+      soutenance}{}
+    Les \meta{jour}, \meta{mois} et \meta{année} doivent être donnés
+    en nombres (entiers), respectivement :
+    \begin{itemize}
+    \item de ×1× à ×31×;
+    \item de ×1× à ×12×;
+    \item supérieur ou égal à celui de l'année en cours.
+    \end{itemize}
+  \end{dbwarning}
+\end{docCommand}
+%
+\begin{docCommand}{subject}{\oarg{sujet dans la langue
+      secondaire}\marg{sujet de la thèse}}
+  Cette commande définit le \meta{sujet de la thèse}.  Celui-ci ne figure nulle
+  part dans le document papier : il n'apparaît que comme métadonnée
+  \enquote{Sujet} du fichier \pdf de la thèse. Si cette commande n'est pas
+  employée, c'est le champ disciplinaire (commande \refCom{academicfield}) qui
+  apparaît comme métadonnée \enquote{Sujet}.
+\end{docCommand}
+
+\begin{dbexample}{Auteur, (sous-)titre, spécialité, sujet, date}{}
+  Les données principales d'une thèse peuvent être les suivantes.
+  % \tcbset{listing options={deletekeywords={[2]title}}}
+  \NoAutoSpacing%
+\begin{bodycode}[listing options={deletekeywords={[2]title}}]
+\author{Alphonse}{Allais}{aa@zygo.fr}
+\title[Laugh's Chaos]{Le chaos du rire}
+\subtitle[Chaos' laugh]{Le rire du chaos}
+\academicfield[Mathematics]{Mathématiques}
+\speciality[Dynamical systems]{Systèmes dynamiques}
+\date{1}{1}{2015}
+\subject{Rire chaotique}
+\end{bodycode}
+\end{dbexample}
+
+\subsection{Instituts et entités}\label{sec:entites}
+
+Cette section liste les commandes et options qui, respectivement, définissent
+et précisent les instituts et entités dans lesquels -- ou grâce auxquels -- la
+thèse a été préparée. Ceux-ci figureront automatiquement sur la ou les pages de
+titre\footnote{Le ou les laboratoires apparaissent en outre sur les pages
+  dédiée aux laboratoires, de résumés et de 4\ieme{} de couverture.}.
+
+\subsubsection{Définition}
+%
+\begin{docCommand}{pres}{\oarg{précision(s)}\marg{nom du
+      \acrshort*{pres}}}
+  Cette commande définit le \gls{pres}. Celui-ci ne figure que
+  par l'intermédiaire de son logo spécifié au moyen de la clé \refKey{logo}.
+\end{docCommand}
+%
+\begin{docCommand}[doc description=\mandatory]{institute}{\oarg{précision(s)}\marg{nom de
+      l'institut}}
+  Cette commande définit l'institut (ou l'université), principal
+  en cas de cotutelle.
+\end{docCommand}
+%
+\begin{docCommand}{coinstitute}{\oarg{précision(s)}\marg{nom de
+      l'institut}}
+  Cette commande définit l'institut de cotutelle. Celle-ci ne
+  devrait être employée qu'en cas de thèse cotutelle de nature
+  \emph{internationale}.
+\end{docCommand}
+%
+\begin{docCommand}{company}{\oarg{précision(s)}\marg{nom de l'entreprise}}
+  Cette commande définit l'entreprise ayant (co)financé la thèse.
+  Celle-ci ne devrait être employée qu'en cas de thèse industrielle.
+\end{docCommand}
+%
+\begin{docCommand}[doc description=\mandatory]{doctoralschool}{\oarg{précision(s)}\marg{nom de l'école
+      doctorale}}
+  Cette commande définit l'école doctorale.
+\end{docCommand}
+%
+\begin{docCommand}[doc description=\mandatory]{laboratory}{\oarg{précision(s)}\marg{nom}\marg{adresse}}
+  Cette commande définit le nom et l'adresse du laboratoire.
+\end{docCommand}
+%
+\begin{dbremark}{Changements de ligne dans l'adresse du laboratoire}{}
+  Il est possible de composer l'\meta{adresse du laboratoire} sur plusieurs
+  lignes au moyen de la commande ×\\×.
+\end{dbremark}
+%
+\begin{dbexample}{Instituts et entités}{}
+  Si la thèse a été préparée au \gls{lmpa} de l'\gls{ulco}, on
+  pourra recourir à :
+  \NoAutoSpacing%
+\begin{bodycode}
+\pres{Université Lille Nord de France}
+\institute{ULCO}
+\doctoralschool{ED Régionale SPI 72}
+\laboratory{LMPA}{%
+  Maison de la Recherche Blaise Pascal \\
+  50, rue Ferdinand Buisson            \\
+  CS 80699                             \\
+  62228 Calais Cedex                   \\
+  France}
+\end{bodycode}
+\end{dbexample}
+%
+\begin{dbremark}{Laboratoires multiples}{}
+  Si la thèse a été préparée dans plusieurs laboratoires, il est possible de
+  tous les spécifier en utilisant la commande \refCom{laboratory} autant de
+  fois que nécessaire.
+
+  Dans tous les cas, le seul laboratoire à figurer sur les pages de titre, de
+  résumés (cf. \vref{sec:abstract}) et de 4\ieme{} de couverture
+  (cf. \vref{sec:quatr-de-couv}) est le laboratoire \emph{principal}, qui est
+  celui stipulé à la première -- et éventuellement seule -- occurrence de la
+  commande \refCom{laboratory}. En revanche, tous les laboratoires stipulés
+  figurent sur la page -- facultative -- qui leur est dédiée
+  (cf. \vref{sec:laboratoires}).
+\end{dbremark}
+
+\subsubsection{Précisions}
+
+Toutes les commandes précédentes admettent un argument optionnel permettant
+d'apporter, sur les instituts ou entités, une ou plusieurs \meta{précision(s)}
+-- sous la forme d'une liste \meta{clé}×=×\meta{valeur}.
+%
+\paragraph{Pour tout institut ou entité}
+
+Les clés suivantes\syntaxeoptions{} sont valables pour tout institut ou entité.
+
+\begin{docKey}{logo}{=\meta{fichier image}}{pas de valeur
+    par défaut, initialement vide}
+  Cette option définit le logo d'un institut, spécifié sous la forme de (du
+  chemin menant à) son \meta{fichier image}.
+  \begin{dbexample}{Logo d'institut}{logoinst}
+    Supposons que la thèse ait été préparée à l'\gls{ulco} et qu'on dispose du
+    logo de cette université sous la forme d'un fichier nommé
+    \texttt{ulco.pdf}, situé dans le sous-dossier \directory{images}. On
+    saisira alors :
+\begin{bodycode}
+\institute[logo=images/ulco]{ULCO}
+\end{bodycode}
+\end{dbexample}
+Tous les logos apparaissent automatiquement en haut de la ou les
+pages de titre, sauf:
+\begin{itemize}
+\item celui du laboratoire qui ne figure que sur l'éventuelle page qui lui est
+  dédiée ;
+\item celui de l'école doctorale qui ne figure nulle part et qu'il est donc
+  inutile de spécifier.
+\end{itemize}
+\end{docKey}
+%
+\begin{docKey}{logoheight}{=\meta{dimension}}{pas de valeur par
+    défaut, initialement \docValue*{1.5cm}}
+  Par défaut, tous les logos ont une même hauteur de \SI{1.5}{\cm}
+  mais la clé \refKey{logoheight} permet de spécifier une hauteur
+  différente.
+  \begin{dbexample}{Hauteur du logo d'institut}{}
+    La commande de l'\vref{ex:logoinst} aurait ainsi pu contenir :
+\begin{bodycode}
+\institute[logoheight=1cm,logo=images/ulco]{ULCO}
+\end{bodycode}
+\end{dbexample}
+\end{docKey}
+%
+% ^^A \DescribeOption{nologo}
+% ^^A L'option ×nologo× (qui ne prend pas de valeur) pour que le logo d'un
+% ^^A institut ne figure pas, même s'il a été précisé.
+%
+\begin{docKey}{url}{=\meta{\acrshort*{url} de l'institut}}{pas de valeur par
+    défaut, initialement vide}
+  Cette option définit l'\acrshort{url} d'un institut. Les noms et
+  éventuels logos des instituts sont alors des hyperliens pointant
+  vers cette \acrshort{url}.
+  \begin{dbexample}{\acrshort*{url} d'institut}{}
+    Si la thèse a été préparée à l'\gls{ulco}, on pourra recourir à
+    : \NoAutoSpacing%
+\begin{bodycode}
+\institute[url=http://www.univ-littoral.fr/]{ULCO}
+\end{bodycode}
+\end{dbexample}
+\begin{dbwarning}{Caractère \protect\lstinline+\#+ interdit dans les
+    \acrshortpl*{url} d'instituts et entités}{}
+  Le caractère ×#× est interdit dans ces \acrshortpl{url}.
+\end{dbwarning}
+\end{docKey}
+
+\paragraph{Pour le laboratoire seulement}
+
+Les options supplémentaires suivantes \emph{ne} sont prévues
+\emph{que} pour l'entité \enquote{laboratoire} qui, contrairement
+aux autres, peut disposer d'une page dédiée\footnote{Produite au
+  moyen de la commande facultative \refCom{makelaboratory}.}.
+%
+\begin{docKey}{telephone}{=\meta{numéro}}{pas de valeur par défaut,
+    initialement vide}
+  Cette option définit le numéro de téléphone du laboratoire.
+\end{docKey}
+%
+\begin{docKey}{fax}{=\meta{numéro}}{pas de valeur par défaut,
+    initialement vide}
+  Cette option définit le numéro de fax du laboratoire.
+\end{docKey}
+\begin{docKey}{email}{=\meta{adresse courriel}}{pas de valeur par
+    défaut, initialement vide}
+  Cette option définit l'adresse courriel du laboratoire.
+\end{docKey}
+%
+\begin{dbexample}{Laboratoire}{}
+  Si la thèse a été préparée au \gls{lmpa}, on peut recourir à :
+  \NoAutoSpacing%
+\begin{bodycode}
+\laboratory[
+telephone=(33) 03 21 46 55 86,
+fax=(33) 03 21 46 55 75,
+email=secretariat@lmpa.univ-littoral.fr,
+url=http://www-lmpa.univ-littoral.fr/
+]{LMPA}{%
+  Maison de la Recherche Blaise Pascal \\
+  50, rue Ferdinand Buisson            \\
+  CS 80699                             \\
+  62228 Calais Cedex                   \\
+  France}
+\end{bodycode}
+\end{dbexample}
+%
+\begin{dbremark}{Téléphone, fax et courriel : pour le
+    laboratoire seulement}{}
+  Spécifier les options \refKey{telephone}, \refKey{fax} et \refKey{email} pour
+  un autre institut que le laboratoire est inutile : les renseignements
+  complémentaires correspondants n'apparaîtront nulle part.
+\end{dbremark}
+%
+\begin{dbremark}{Instituts sous forme d'acronymes}{acronymes}
+  Si l'institut ou l'entité doit figurer sous la forme d'un
+  acronyme, on aura intérêt à ne pas les saisir tels quel comme on
+  l'a fait jusqu'ici (×\institute{ULCO}× ou ×\laboratory{LMPA}×)
+  mais à recourir aux fonctionnalités du \Package{glossaries}. La
+  \vref{acronymes} donne un aperçu de la procédure.
+\end{dbremark}
+
+\subsection{Jury : directeur(s), rapporteurs, examinateurs, invités}\label{sec:jury}
+
+Cette section liste les commandes et options qui, respectivement,
+définissent et précisent les membres du jury de la thèse. Ceux-ci
+figureront automatiquement sur la ou les pages de titre.
+
+\subsubsection{Définition}\label{sec:definition-jury}
+
+Les commandes suivantes permettent de définir le jury de la thèse,
+notamment les directeur(s), rapporteurs et examinateurs.
+%
+\begin{docCommand}[doc description=\mandatory]{supervisor}{\oarg{précision(s)}\marg{prénom}\marg{nom}}
+  Cette commande définit le directeur de la thèse.
+\end{docCommand}
+
+\begin{docCommand}{cosupervisor}{\oarg{précision(s)}\marg{prénom}\marg{nom}}
+  Cette commande définit un éventuel co-directeur de la thèse.
+\end{docCommand}
+
+\begin{docCommand}{comonitor}{\oarg{précision(s)}\marg{prénom}\marg{nom}}
+  Cette commande définit un éventuel co-encadrant de la thèse.
+\end{docCommand}
+
+\begin{docCommand}{referee}{\oarg{précision(s)}\marg{prénom}\marg{nom}}
+  Cette commande définit un rapporteur de la thèse.
+\end{docCommand}
+
+\begin{docCommand}{committeepresident}{\oarg{précision(s)}\marg{prénom}\marg{nom}}
+  Cette commande définit le président du jury de la thèse.
+\end{docCommand}
+
+\begin{docCommand}{examiner}{\oarg{précision(s)}\marg{prénom}\marg{nom}}
+  Cette commande définit un examinateur ordinaire de la thèse.
+\end{docCommand}
+
+\begin{docCommand}{guest}{\oarg{précision(s)}\marg{prénom}\marg{nom}}
+  Cette commande définit une personne invitée au jury de la thèse.
+\end{docCommand}
+%
+\begin{dbwarning}{Usage multiple et facultatif des commandes du
+    jury}{}
+  Ces commandes sont à utiliser
+  \begin{description}
+  \item[autant de fois que nécessaire :]
+   %
+   %^^A les commandes
+   %
+    \refCom{referee} et \refCom{examiner} (par exemple) seront
+    certainement employées à plusieurs reprises ;
+  \item[seulement si nécessaire :]
+   %
+   %^^A les commandes
+   %
+    \refCom{cosupervisor}, \refCom{comonitor} et \refCom{guest} (par
+    exemple) peuvent ne pas être employées.
+  \end{description}
+\end{dbwarning}
+
+\begin{dbexample}{Jury}{}
+\begin{bodycode}
+\supervisor{Michel}{de Montaigne}
+\cosupervisor{Étienne}{de la Boétie}
+%
+\referee{René}{Descartes}
+\referee{Denis}{Diderot}
+%
+\committeepresident{Victor}{Hugo}
+\examiner{Charles}{Baudelaire}
+\examiner{Émile}{Zola}
+\examiner{Paul}{Verlaine}
+\end{bodycode}
+\end{dbexample}
+
+\begin{dbwarning}{Format des prénoms et noms des membres du jury}{}
+  Comme pour les prénom et nom de l'auteur de la thèse, on veillera à ce que :
+  \begin{enumerate}
+  \item les éventuels accents figurent dans les \meta{prénom} et \meta{nom};
+  \item les \meta{nom} \emph{ne} soient \emph{pas} saisis en capitales (sauf
+    pour la ou les majuscules) car ils seront automatiquement composés en
+    petites capitales.
+  \end{enumerate}
+\end{dbwarning}
+
+\subsubsection{Précisions}\label{sec:options-staff}
+
+Toutes les commandes précédentes admettent un argument optionnel
+permettant d'apporter une ou plusieurs \meta{précision(s)} sur les
+membres du jury. Les clés suivantes sont valables pour chacune
+d'entre elles.
+
+\paragraph{Corporation}
+\label{sec:corporation}
+
+Les clés suivantes\syntaxeoptions{} permettent de spécifier les corporations
+des membres du jury parmi celles prédéfinies par la \yatcl{}.
+
+\begin{docKey}{professor}{=\docValue{true}\textbar\docValue{false}}{par défaut
+    \docValue{true}, initialement \docValue{false}}
+  Cette clé permet de spécifier qu'une personne est professeur d'université.
+\end{docKey}
+%
+\begin{docKey}{seniorresearcher}{=\docValue{true}\textbar\docValue{false}}{par défaut
+    \docValue{true}, initialement \docValue{false}}
+  Cette clé permet de spécifier qu'une personne est directeur de
+  recherche du \gls{cnrs}.
+\end{docKey}
+%
+\begin{docKey}{mcf}{=\docValue{true}\textbar\docValue{false}}{par défaut \docValue{true},
+    initialement \docValue{false}}
+  Cette clé permet de spécifier qu'une personne est \gls{mcf}.
+\end{docKey}
+%
+\begin{docKey}{mcf*}{=\docValue{true}\textbar\docValue{false}}{par défaut \docValue{true},
+    initialement \docValue{false}}
+  Cette clé permet de spécifier qu'une personne est \gls{mcf} \gls{hdr}.
+\end{docKey}
+%
+\begin{docKey}{juniorresearcher}{=\docValue{true}\textbar\docValue{false}}{par défaut
+    \docValue{true}, initialement \docValue{false}}
+  Cette clé permet de spécifier qu'une personne est \gls{cr} du \gls{cnrs}.
+\end{docKey}
+%
+\begin{docKey}{juniorresearcher*}{=\docValue{true}\textbar\docValue{false}}{par défaut
+    \docValue{true}, initialement \docValue{false}}
+  Cette clé permet de spécifier qu'une personne est \gls{cr} \gls{hdr} du
+  \gls{cnrs}.
+\end{docKey}
+%
+\begin{dbexample}{Corporations (prédéfinies)}{}
+\begin{bodycode}
+\supervisor[professor]{Michel}{de Montaigne}
+\cosupervisor[juniorresearcher*]{Étienne}{de la Boétie}
+%
+\referee{René}{Descartes}
+\referee[seniorresearcher]{Denis}{Diderot}
+%
+\committeepresident[professor]{Victor}{Hugo}
+\examiner[mcf*]{Charles}{Baudelaire}
+\examiner[professor]{Émile}{Zola}
+\examiner{Paul}{Verlaine}
+\end{bodycode}
+\end{dbexample}
+%
+\begin{dbremark}{Corporations non prédéfinies}{}
+  Il est en fait possible de spécifier d'autres corporations que celles
+  prédéfinies ci-dessus. La \vref{sec:corporations} explique comment procéder.
+\end{dbremark}
+%
+% ^^A \begin{docKey}{distinction}{=\meta{distinction}}{pas de valeur par
+% ^^A     défaut, initialement vide}
+% ^^A   Cette clé définit une distinction, par exemple un prix, à faire
+% ^^A   apparaître sur la page de titre en français.
+% ^^A \end{docKey}
+% ^^A %
+% ^^A \begin{docKey}{award}{=\meta{distinction}}{pas de valeur par défaut,
+% ^^A     initialement vide}
+% ^^A   Cette clé définit une distinction, par exemple un prix, à faire
+% ^^A   apparaître sur la page de titre en anglais.
+% ^^A \end{docKey}
+% ^^A
+% ^^A \begin{dbexample}{Distinctions}{}
+% ^^A   \begin{bodycode}[title=Préparation du titre (p. ex. dans le \File{\configurationfile})]
+% ^^A \cosupervisor[distinction=prix Nobel,award=Nobel Price]{Étienne}{de la Boétie}
+% ^^A \referee[distinction=médaille Fields,award=Fields Medal]{René}{Descartes}
+% ^^A \end{bodycode}
+% ^^A \end{dbexample}
+
+\paragraph{Affiliation}
+\label{sec:inst-de-prov}
+
+\begin{docKey}{affiliation}{=\meta{institut}}{pas de valeur par défaut,
+    initialement vide}
+  Cette clé définit l'\meta{institut}\footnote{La \vref{rq:acronymes}
+    s'applique également ici : plutôt que spécifié tel quel, l'acronyme d'un
+    \meta{institut} peut être géré par le \Package{glossaries}.} auquel est
+  affilié un membre du jury.
+\end{docKey}
+\begin{dbexample}{Institut de provenance}{}
+\begin{bodycode}
+\supervisor[affiliation=ULCO]{Michel}{de Montaigne}
+\end{bodycode}
+\end{dbexample}
+%
+\begin{dbwarning}{Virgule(s) dans la valeur d'une clé}{virgule}
+  Dans toute option de la forme \meta{clé}×=×\meta{valeur}, si \meta{valeur}
+  contient une ou plusieurs virgules, il faut \emph{impérativement} la placer
+  entre paire d'accolades ainsi : \meta{clé}×={×\meta{valeur}×}×. Cela peut
+  notamment être le cas de la \meta{valeur} de la clé \refKey{affiliation}.
+\end{dbwarning}
+%
+\begin{dbexample}{Instituts de provenance multiples}{}
+  Si en plus d'être affilié à l'\gls{ulco}, René Descartes était membre du
+  \gls{cnrs}, on pourait procéder comme suit\phrase{noter les paires d'accolades,
+  nécessaires conformément à l'\vref{wa:virgule}}:
+\begin{bodycode}
+\referee[affiliation={ULCO, CNRS}]{René}{Descartes}
+\end{bodycode}
+Il n'est pas indispensable de faire figurer tant de précisions et, ne serait-ce
+que pour des raisons de place, on veillera à ne pas multiplier celles-ci.
+\end{dbexample}
+
+\subsection{Numéro d'ordre}
+\label{sec:numero-dordre}
+
+Certains instituts exigent que le numéro d'ordre de la thèse figure sur la page
+de 1\iere{} de couverture.
+
+\begin{docCommand}{ordernumber}{\oarg{numéro d'ordre}}
+  Cette commande définit le \meta{numéro d'ordre} de la thèse. Elle s'utilise
+  sans son argument optionnel si on ne connaît pas \phrase{encore} le
+  \meta{numéro d'ordre} : ce dernier est alors remplacé par une espace
+  horizontale vide permettant de l'inscrire \emph{a posteriori}. Si cette
+  commande est employée, le \meta{numéro d'ordre} (vide ou pas) figure sur
+  \phrase{et seulement sur} la page de 1\iere{} de couverture de la thèse,
+  précédé de l'expression \enquote{Num\'ero d'ordre :} ou
+  \foreignquote{english}{Order Number:}\selonlangue.
+\end{docCommand}
+
+\section{Propriétés de mots clés}
+\label{sec:proprietes-de-mots}
+
+Les mots clés de la thèse sont stipulés au moyen de la commande
+\refCom{keywords} suivante.
+%
+\begin{docCommand}[doc description=\mandatory]{keywords}{\marg{mots clés}\marg{mots clés dans la langue
+      secondaire}}
+  Cette commande définit les \meta{mots clés} de la thèse dans
+  les langues principale et secondaire. Ceux-ci :
+  \begin{itemize}
+  \item apparaissent comme métadonnée \enquote{Mots-clés} du fichier \pdf ;
+  \item figurent, dans les deux langues principale et secondaire, précédés des
+    expressions \enquote{Mots clés :} et
+    \foreignquote{english}{Keywords:}\selonlangue :
+    \begin{itemize}
+    \item sur la page qui leur est dédiée (si la commande \refCom{makekeywords}
+      est employée) ;
+    \item sur la page dédiée au(x) résumé(s) de la thèse générée par la
+      commande \refCom{makeabstract} ;
+    \item sur la 4\ieme{} de couverture (si la commande \refCom{makebackcover}
+      est employée).
+    \end{itemize}
+  \end{itemize}
+\end{docCommand}
+%
+\iffalse
+%%% Local Variables:
+%%% mode: latex
+%%% eval: (latex-mode)
+%%% ispell-local-dictionary: "fr_FR"
+%%% TeX-engine: xetex
+%%% TeX-master: "../yathesis.dtx"
+%%% End:
+\fi
