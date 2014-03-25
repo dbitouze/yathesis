@@ -5235,6 +5235,7 @@ This work consists of the file  yathesis.dtx
 %
 %    \begin{macrocode}
 \AtEndPreamble{%
+  \shorthandon{;:!?}%
   \InputIfFileExists{\configurationdirectory/\configurationfile}%
   {\ClassInfo{yathesis}{%
     Fichier de configuration local \configurationfile\space
@@ -5246,6 +5247,7 @@ This work consists of the file  yathesis.dtx
     %   \configurationfile\space introuvable%
     % }%
   }%
+  \shorthandoff{;:!?}%
 }%
 %    \end{macrocode}
 %
