@@ -73,13 +73,11 @@
 doc/*
 !doc/latex/
 doc/latex/*
-!doc/latex/dbdoc/
 !doc/latex/yathesis/
 
 source/*
 !source/latex/
 source/latex/*
-!source/latex/dbdoc/
 !source/latex/yathesis/
 
 tex/*
