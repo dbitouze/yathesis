@@ -5,6 +5,10 @@
 *.bbl
 *.bcf
 *.blg
+*.dbexamplelist
+*.dbfaqlist
+*.dbremarklist
+*.dbwarninglist
 *.dvi
 *.fdb_latexmk
 *.fls
