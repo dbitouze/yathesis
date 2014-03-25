@@ -83,7 +83,6 @@ source/latex/*
 tex/*
 !tex/latex/
 tex/latex/*
-!tex/latex/dbdoc/
 !tex/latex/yathesis/
 
 *Makefile
