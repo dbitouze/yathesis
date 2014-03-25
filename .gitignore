@@ -23,6 +23,7 @@
 *.ilg
 *.ind
 *.ist
+ls-R
 *.loe
 *.lof
 *.log
