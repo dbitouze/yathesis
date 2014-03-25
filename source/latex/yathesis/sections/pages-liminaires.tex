@@ -96,30 +96,6 @@ moyen de la commande \refCom{disclaimer} suivante.
 
 \section{Mots clés}\label{sec:mots-cles}
 
-Les mots clés de la thèse sont stipulés au moyen de la commande
-\refCom{keywords} suivante.
-%
-\begin{docCommand}[doc description=\mandatory]{keywords}{\marg{mots clés}\marg{mots clés dans la langue
-      secondaire}}
-  Cette commande définit les \meta{mots clés} de la thèse dans
-  les langues principale et secondaire. Ceux-ci :
-  \begin{itemize}
-  \item apparaissent comme propriété \enquote{Mots-clés} du fichier \pdf
-    \phrase{dans la langue principale seulement} ;
-  \item figurent, dans les deux langues principale et secondaire, précédés des
-    expressions \enquote{Mots clés :} et
-    \foreignquote{english}{Keywords:}\selonlangue :
-    \begin{itemize}
-    \item sur la page qui leur est dédiée (si la commande \refCom{makekeywords}
-      est employée) ;
-    \item sur la page dédiée au(x) résumé(s) de la thèse générée par la
-      commande \refCom{makeabstract} ;
-    \item sur la 4\ieme{} de couverture (si la commande \refCom{makebackcover}
-      est employée).
-    \end{itemize}
-  \end{itemize}
-\end{docCommand}
-%
 \begin{docCommand}{makekeywords}{}
   Cette commande produit une page où figurent, seuls et centrés
   verticalement, les mots clés de la thèse stipulés au moyen de la commande
