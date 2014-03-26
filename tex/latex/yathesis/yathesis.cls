@@ -335,8 +335,8 @@
 \newcommand*{\configurationdirectory}{\YAD@configuration@directory}
 \newcommand*{\YAD@configuration@file}{these.cfg}
 \newcommand*{\configurationfile}{\YAD@configuration@file}
-\newcommand*{\YAD@title@file}{yadtitle.tex}
-\newcommand*{\titlefile}{\YAD@title@file}
+\newcommand*{\YAD@properties@file}{properties.tex}
+\newcommand*{\propertiesfile}{\YAD@properties@file}
 \newcommand*{\YAD@macros@file}{yadmacros.tex}
 \newcommand*{\macrosfile}{\YAD@macros@file}
 \newcommand*{\glossaryfile}{glossary.tex}
@@ -355,9 +355,9 @@
   }{%
   }%
 }%
-\newcommand*{\YAD@reach@file}[2][\titlefile]{%
+\newcommand*{\YAD@reach@file}[2][\configurationfile]{%
   \ifdraft{%
-    \ifthenelse{\equal{\titlefile}{#1}}{%
+    \ifthenelse{\equal{\configurationfile}{#1}}{%
       \hypersetup{urlbordercolor={0.5 0 0.5}}%
     }{%
       \hypersetup{urlbordercolor={1 0.5 0}}%
@@ -461,7 +461,7 @@
           \item une \YAD@reach@file{donn\'ee}\ifundef{\Fcolonspace}{\FBcolonspace}{\Fcolonspace}: il
             suffit de cliquer sur le cadre de couleur pourpre qui l'entoure
             pour atteindre le fichier
-            \YAD@reach@file{\texttt{\titlefile}} o\`u elle est
+            \YAD@reach@file{\texttt{\configurationfile}} o\`u elle est
             d\'efinie.
           \end{enumerate}
           Pour plus de d\'etails, consulter la documentation de la
@@ -1042,10 +1042,6 @@
 \ifthenelse{\equal{#2}{title}}{%
   \hypersetup{pdftitle=\YAD@metatitle}%
 }{%
-}%
-\ifundef{\YAD@metakeywords}{%
-}{%
-  \hypersetup{pdfkeywords=\YAD@metakeywords}%
 }%
 \ifundef{\YAD@metasubject}{%
   \ifundef{\YAD@metaacademicfield}{%
@@ -2930,6 +2926,7 @@
   }%
 }%
 \AtEndPreamble{%
+  \shorthandon{;:!?}%
   \InputIfFileExists{\configurationdirectory/\configurationfile}%
   {\ClassInfo{yathesis}{%
     Fichier de configuration local \configurationfile\space
@@ -2941,8 +2938,10 @@
     %   \configurationfile\space introuvable%
     % }%
   }%
+  \shorthandoff{;:!?}%
 }%
 \AtEndPreamble{%
+  \shorthandon{;:!?}%
   \InputIfFileExists{\configurationdirectory/\macrosfile}%
   {\ClassInfo{yathesis}{%
       Fichier \macrosfile\space trouv\'e%
@@ -2954,23 +2953,26 @@
     %   dans le dossier `\configurationdirectory'%
     % }%
   }%
+  \shorthandoff{;:!?}%
 }%
 \AfterEndPreamble{%
-  \InputIfFileExists{\configurationdirectory/\titlefile}%
+  \shorthandon{;:!?}%
+  \InputIfFileExists{\configurationdirectory/\propertiesfile}%
   {%
     \ClassInfo{yathesis}{%
-      Fichier \titlefile\space des donn\'ees du titre trouv\'e%
+      Fichier \propertiesfile\space des donn\'ees du document trouv\'e%
     }%
   }%
   {%
     % \YAD@ClassWarningNoLine{%
-    %   Fichier \titlefile\space des donn\'ees du titre
+    %   Fichier \propertiesfile\space des donn\'ees du titre
     %   introuvable.\MessageBreak%
-    %   Le fichier \titlefile\space n'a pas \'et\'e trouv\'e\MessageBreak%
+    %   Le fichier \propertiesfile\space n'a pas \'et\'e trouv\'e\MessageBreak%
     %   dans le dossier `\configurationdirectory'.\MessageBreak Ce fichier
-    %   \titlefile\space peut faciliter l'usage\MessageBreak de la classe%
+    %   \propertiesfile\space peut faciliter l'usage\MessageBreak de la classe%
     % }%
   }%
+  \shorthandoff{;:!?}%
 }%
 \AtEndDocument{%
   \iftoggle{YAD@tableofcontents@used}{%

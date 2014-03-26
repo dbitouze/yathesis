@@ -199,11 +199,15 @@
 \newtcbtheorem[list inside=dbfaqlist,number within=chapter]{dbfaq}{Question}{%
   colback=gray!5!white,
   colframe=gray!75!black,
+  % beamer,
+  fontupper=\itshape,
   dbtcb
 }{faq}
 \newtcbtheorem[number within=chapter]{dbanswer}{Réponse}{%
   colback=lightgray!5!white,
   colframe=lightgray!75!black,
+  enlarge left by=1cm,
+  width=\linewidth-1cm,
   dbtcb
 }{ans}
 \AtEndPreamble{%
@@ -364,8 +368,8 @@
 \newcommand*{\configurationdirectory}{\YAD@configuration@directory}
 \newcommand*{\YAD@configuration@file}{these.cfg}
 \newcommand*{\configurationfile}{\YAD@configuration@file}
-\newcommand*{\YAD@title@file}{yadtitle.tex}
-\newcommand*{\titlefile}{\YAD@title@file}
+\newcommand*{\YAD@properties@file}{properties.tex}
+\newcommand*{\propertiesfile}{\YAD@properties@file}
 \newcommand*{\YAD@macros@file}{yadmacros.tex}
 \newcommand*{\macrosfile}{\YAD@macros@file}
 \newcommand*{\glossaryfile}{glossary.tex}
