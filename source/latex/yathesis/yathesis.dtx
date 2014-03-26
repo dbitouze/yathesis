@@ -5266,6 +5266,7 @@ This work consists of the file  yathesis.dtx
 %
 %    \begin{macrocode}
 \AtEndPreamble{%
+  \shorthandon{;:!?}%
   \InputIfFileExists{\configurationdirectory/\macrosfile}%
   {\ClassInfo{yathesis}{%
       Fichier \macrosfile\space trouv\'e%
@@ -5277,6 +5278,7 @@ This work consists of the file  yathesis.dtx
     %   dans le dossier `\configurationdirectory'%
     % }%
   }%
+  \shorthandoff{;:!?}%
 }%
 %    \end{macrocode}
 %
@@ -5284,6 +5286,7 @@ This work consists of the file  yathesis.dtx
 %
 %    \begin{macrocode}
 \AfterEndPreamble{%
+  \shorthandon{;:!?}%
   \InputIfFileExists{\configurationdirectory/\propertiesfile}%
   {%
     \ClassInfo{yathesis}{%
@@ -5299,6 +5302,7 @@ This work consists of the file  yathesis.dtx
     %   \propertiesfile\space peut faciliter l'usage\MessageBreak de la classe%
     % }%
   }%
+  \shorthandoff{;:!?}%
 }%
 %    \end{macrocode}
 %
