@@ -1429,13 +1429,13 @@ This work consists of the file  yathesis.dtx
 % \end{macro}
 %
 % On définit les macros (privée et publique) où est stocké le nom du fichier
-% esclave contenant ce qui doit figurer sur les pages de couverture et de
-% titre.
-% \begin{macro}{\YAD@title@file}
-% \begin{macro}{\titlefile}
+% esclave contenant les propriétés du document (ce qui doit figurer sur les
+% pages de couverture et de titre, et les mots clés).
+% \begin{macro}{\YAD@properties@file}
+% \begin{macro}{\propertiesfile}
 %    \begin{macrocode}
-\newcommand*{\YAD@title@file}{yadtitle.tex}
-\newcommand*{\titlefile}{\YAD@title@file}
+\newcommand*{\YAD@properties@file}{properties.tex}
+\newcommand*{\propertiesfile}{\YAD@properties@file}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -1561,9 +1561,9 @@ This work consists of the file  yathesis.dtx
 % les fichier permettant de modifier les mots et expressions clés du
 % canevas de thèse et les données de la thèse
 %    \begin{macrocode}
-\newcommand*{\YAD@reach@file}[2][\titlefile]{%
+\newcommand*{\YAD@reach@file}[2][\configurationfile]{%
   \ifdraft{%
-    \ifthenelse{\equal{\titlefile}{#1}}{%
+    \ifthenelse{\equal{\configurationfile}{#1}}{%
       \hypersetup{urlbordercolor={0.5 0 0.5}}%
     }{%
       \hypersetup{urlbordercolor={1 0.5 0}}%
@@ -1717,7 +1717,7 @@ This work consists of the file  yathesis.dtx
           \item une \YAD@reach@file{donn\'ee}\ifundef{\Fcolonspace}{\FBcolonspace}{\Fcolonspace}: il
             suffit de cliquer sur le cadre de couleur pourpre qui l'entoure
             pour atteindre le fichier
-            \YAD@reach@file{\texttt{\titlefile}} o\`u elle est
+            \YAD@reach@file{\texttt{\configurationfile}} o\`u elle est
             d\'efinie.
           \end{enumerate}
           Pour plus de d\'etails, consulter la documentation de la
@@ -5280,23 +5280,23 @@ This work consists of the file  yathesis.dtx
 }%
 %    \end{macrocode}
 %
-% \subsubsection{Contenu des pages de couverture et de titre du document}
+% \subsubsection{Propriétés du document du document}
 %
 %    \begin{macrocode}
 \AfterEndPreamble{%
-  \InputIfFileExists{\configurationdirectory/\titlefile}%
+  \InputIfFileExists{\configurationdirectory/\propertiesfile}%
   {%
     \ClassInfo{yathesis}{%
-      Fichier \titlefile\space des donn\'ees du titre trouv\'e%
+      Fichier \propertiesfile\space des donn\'ees du document trouv\'e%
     }%
   }%
   {%
     % \YAD@ClassWarningNoLine{%
-    %   Fichier \titlefile\space des donn\'ees du titre
+    %   Fichier \propertiesfile\space des donn\'ees du titre
     %   introuvable.\MessageBreak%
-    %   Le fichier \titlefile\space n'a pas \'et\'e trouv\'e\MessageBreak%
+    %   Le fichier \propertiesfile\space n'a pas \'et\'e trouv\'e\MessageBreak%
     %   dans le dossier `\configurationdirectory'.\MessageBreak Ce fichier
-    %   \titlefile\space peut faciliter l'usage\MessageBreak de la classe%
+    %   \propertiesfile\space peut faciliter l'usage\MessageBreak de la classe%
     % }%
   }%
 }%
