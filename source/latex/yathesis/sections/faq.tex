@@ -10,36 +10,60 @@ Ce chapitre répertorie les \glspl{faq} sur la \yatcl{}.
   \item communiquer avec l'auteur de la classe.
   \end{enumerate}
   Comment faire ?
-\end{dbfaq}
-  \begin{dbanswer}{}{}
-    Pour les rapports de bogue et demandes de fonctionnalités, créer une
-    \enquote{issue} à l'adresse
-    \url{https://github.com/dbitouze/yathesis/issues/new}.
+  %
+  \tcblower
+  %
+  Pour les rapports de bogue et demandes de fonctionnalités, créer une
+  \enquote{issue} à l'adresse
+  \url{https://github.com/dbitouze/yathesis/issues/new}.
 
-    Pour communiquer avec l'auteur de la classe, utiliser l'adresse indiquée en
-    1\iere{} page de la présente documentation.
-  \end{dbanswer}
+  Pour communiquer avec l'auteur de la classe, utiliser l'adresse indiquée en
+  1\iere{} page de la présente documentation.
+\end{dbfaq}
 
 \begin{dbfaq}{Comment faire figurer les glossaire, liste d'acronymes et liste
     de symboles dans la table des matières ?}{}
   Par défaut, les glossaire, liste d'acronymes et liste de symboles ne figurent
   pas dans les sommaire, table des matières et signets du document. Comment les
   faire apparaître ?
+  %
+  \tcblower
+  %
+  Cette question ne concerne pas directement la \yatcl{} : il suffit de passer
+  l'option \docAuxKey*{toc} au \Package{glossaries}.
 \end{dbfaq}
-  \begin{dbanswer}{}{}
-    Cette question ne concerne pas directement la \yatcl{} : il suffit de
-    passer l'option \docAuxKey*{toc} au \Package{glossaries}.
-  \end{dbanswer}
+
+\begin{dbfaq}{Pourquoi mes signes de ponctuation ne sont pas précédés
+    des espaces adéquates ?}{}
+  J'ai saisi les propriétés du document (cf. \vref{cha:propr-du-docum}) en
+  préambule. Certaines d'entre elles contiennent des signes de ponctuation
+  haute ({\NoAutoSpacing?;:!}) qui, dans le \pdf produit, ne sont pas précédés
+  des espaces adéquates. Comment régler ce problème ?
+  %
+  \tcblower
+  %
+  Il suffit de saisir ces propriétés :
+  \begin{itemize}
+  \item soit dans le corps du fichier (maître) de la thèse (mais cf. alors
+    \vref{wa:avant-maketitle}) ;
+  \item soit dans le fichier \file{\propertiesfile} prévu à cet effet
+    (cf. \vref{propertiesfile}).
+  \end{itemize}
+  Si on tient absolument à ce que ces propriétés soient saisies dans le
+  préambule, il faut alors les entourer des commandes ×\shorthandon{;:!?}× et
+  ×\shorthandoff{;:!?}×.
+\end{dbfaq}
 
 \begin{dbfaq}{Comment éviter l'erreur \enquote{no room for a new
       \protect\docAuxCommand{write}} ?}{}
   Je suis confronté à l'erreur \enquote{no room for a new
     \docAuxCommand{write}}. Comment l'éviter ?
-\end{dbfaq}
-\begin{dbanswer}{}{}
+  %
+  \tcblower
+  %
   Il devrait suffire de charger le \Package{morewrites} (plutôt parmi les
   premiers packages).
-\end{dbanswer}
+\end{dbfaq}
 
 %
 \iffalse
