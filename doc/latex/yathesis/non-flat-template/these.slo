@@ -1,5 +1,0 @@
-(indexentry :tkey (("ohm" "\\glossentry{ohm}") ) :locref "{}{21}" :attr "pageglsnumberformat" ) 
-(indexentry :tkey (("angstrom" "\\glossentry{angstrom}") ) :locref "{}{21}" :attr "pageglsnumberformat" ) 
-(indexentry :tkey (("exists" "\\glossentry{exists}") ) :locref "{}{21}" :attr "pageglsnumberformat" ) 
-(indexentry :tkey (("constanteplanck" "\\glossentry{planck}") ) :locref "{}{21}" :attr "pageglsnumberformat" ) 
-(indexentry :tkey (("constantedirac" "\\glossentry{dirac}") ) :locref "{}{21}" :attr "pageglsnumberformat" ) 
