@@ -141,7 +141,8 @@ This work consists of the file  yathesis.dtx
 \def\classname{\jobname}
 \def\packagename{\classname doc}
 \def\addons{addons}
-\def\caracteristiquesthesesample{caracteristiques-these}
+\def\singlefiletemplate{single-file-template}
+\def\masterslavesfilestemplate{master-slaves-files-template}
 \usedir{tex/latex/\classname}
 \generate{%
   \file{\classname.cls}{\from{\jobname.dtx}{class}}
@@ -170,6 +171,10 @@ This work consists of the file  yathesis.dtx
 \usedir{doc/latex/\classname}
 \generate{
   \file{README}{\from{\jobname.dtx}{readme}}
+}%
+\usedir{doc/latex/\classname/\singlefiletemplate}
+\generate{
+  \file{these.tex}{\from{\jobname.dtx}{single-file-template}}
 }%
 \ifx\fmtname\nameofplainTeX
   \expandafter\endbatchfile
