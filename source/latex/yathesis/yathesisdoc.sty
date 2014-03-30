@@ -199,17 +199,9 @@
 \newtcbtheorem[list inside=dbfaqlist,number within=chapter]{dbfaq}{Question}{%
   colback=gray!5!white,
   colframe=gray!75!black,
-  % beamer,
   fontupper=\itshape,
   dbtcb
 }{faq}
-\newtcbtheorem[number within=chapter]{dbanswer}{Réponse}{%
-  colback=lightgray!5!white,
-  colframe=lightgray!75!black,
-  enlarge left by=1cm,
-  width=\linewidth-1cm,
-  dbtcb
-}{ans}
 \AtEndPreamble{%
   \crefname{tcb@cnt@dbexample}{exemple}{exemples}%
   \crefname{tcb@cnt@dbremark}{remarque}{remarques}%
