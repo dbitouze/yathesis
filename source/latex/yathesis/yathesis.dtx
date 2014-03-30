@@ -5573,120 +5573,398 @@ This work consists of the file  yathesis.dtx
 %</class-lstlang0>
 %    \end{macrocode}
 %
-% Gabarit de fichier de données de la thèse.
+% Canevas de thèse.
 %    \begin{macrocode}
-%<*caracteristiques-these-sample>
+%<*single-file-template>
 %    \end{macrocode}
+%
 %    \begin{macrocode}
-%% Auteur de la thèse : prénom (1er argument), nom (2e argument) et
-%% email (3e argument). Les éventuels accents devront figurer et le
-%% nom /ne/ sera /pas/ saisi en capitales.
+%<<COMMENT
+% Document de classe yathesis
+%COMMENT
+\documentclass{yathesis}
+%
+%<<COMMENT
+% Chargement manuel de packages (pas déjà chargés par la classe yathesis)
+%COMMENT
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[frenchstyle,oldstylenums,notextcomp]{kpfonts}
+\usepackage{varioref}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{pgfplots}
+\usepackage{floatrow}
+\usepackage[autostyle]{csquotes}
+\usepackage[backend=biber,safeinputenc]{biblatex}
+%<<COMMENT
+% Pour un glossaire, une liste d'acronymes ou une liste de symboles
+% \usepackage[xindy,acronyms,symbols,toc]{glossaries}
+%
+% Configuration éventuelle des styles du glossaire et de la liste d'acronymes.
+% \setglossarystyle{}
+% \setacronymstyle{}
+%
+% Génération du glossaire (obligatoire si le package « glossaries » est chargé)
+% \makeglossaries
+%
+% Spécification éventuelle de ressource(s) terminologique(s)
+% \loadglsentries{}
+% \loadglsentries{}
+% \loadglsentries{}
+%
+% Génération de l'index (obligatoire si un index est souhaité)
+% \makeindex
+%
+% Spécification de la ou des ressources bibliographiques
+%COMMENT
+\addbibresource{}
+%<<COMMENT
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Début du document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%COMMENT
+\begin{document}
+%<<COMMENT
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Propriétés du document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Préparation des pages de couverture et de titre
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Auteur de la thèse : prénom (1er argument), nom (2e argument) et courriel (3e
+% argument). Les éventuels accents devront figurer et le nom /ne/ doit /pas/
+% être saisi en capitales.
+%COMMENT
 \author{}{}{}
-%%
-%% Titre de la thèse en français (argument obligatoire) et en anglais
-%% (argument optionnel).
-\title{}
-%%
-%% Sous-titre de la thèse en français (argument obligatoire) et en
-%% anglais (argument optionnel), si souhaité. Sinon, il suffit de
-%% commenter ou de supprimer la ligne suivante.
-\subtitle{}
-%%
-%% Spécialité en français (argument obligatoire) et en anglais
-%% (argument optionnel), si souhaitée. Sinon, il suffit de commenter ou
-%% de supprimer la ligne suivante.
-\speciality{}
-%%
-%% Sujet figurant comme propriété du PDF, si souhaité. Sinon, il suffit
-%% de commenter ou de supprimer la ligne suivante. S'il est laissé
-%% vide, il est automatiquement remplacé par la spécialité (en
-%% français) renseignée ci-dessus.
-\subject{}
-%%
-%% Mots clés en français (argument obligatoire) et en anglais (argument
-%% optionnel), si souhaités. Sinon, il suffit de commenter ou de
-%% supprimer la ligne suivante.
-\keywords{}
-%%
-%% Date de la soutenance : jour (1er argument), mois (2e argument) et
-%% année (3e argument)
+%<<COMMENT
+%
+% Titre de la thèse dans la langue principale (argument obligatoire) et dans la
+% langue secondaire (argument optionnel).
+%COMMENT
+\title[]{}
+%<<COMMENT
+%
+% Sous-titre de la thèse dans la langue principale (argument obligatoire) et
+% dans la langue secondaire (argument optionnel). À décommenter si souhaité,
+% à commenter ou à supprimer sinon.
+% \subtitle[]{}
+%
+% Champ disciplinaire dans la langue principale (argument obligatoire) et dans
+% la langue secondaire (argument optionnel).
+%COMMENT
+\academicfield[]{}
+%<<COMMENT
+%
+% Spécialité dans la langue principale (argument obligatoire) et dans la langue
+% secondaire (argument optionnel). À décommenter si souhaitée, à commenter ou
+% à supprimer sinon.
+%COMMENT
+\speciality[]{}
+%<<COMMENT
+%
+% Date de la soutenance, au format {jour}{mois}{année} donnés sous forme de
+% nombres.
+%COMMENT
 \date{}{}{}
-%%
-%% Le directeur (et les éventuels les (co-)directeur(s)) de thèse,
-%% les éventuels invités, les rapporteurs et les examinateurs (c-à-d
-%% les membres du jury, y compris le président) sont saisis au moyen
-%% des commandes \supervisor, \cosupervisor, \guest, \referee,
-%% \committeepresident, \examiner, utilisées /autant de fois que
-%% nécessaire/. Toutes basées sur le même modèle, ces commandes ont
-%% 2 arguments obligatoires : prénom (1er argument) et nom (2e
-%% argument) de chaque personne. Les éventuels accents devront
-%% figurer et le nom /ne/ sera /pas/ saisi en capitales. Si besoin
-%% est, on peut apporter certaines précisions en argument optionnel,
-%% au moyen des clés « professor », « seniorresearcher » : --
-%% « professor » (qui ne prend pas de valeur) pour stipuler que la
-%% personne appartient à la corporation des professeurs d'université
-%% ; -- « seniorresearcher » (qui ne prend pas de valeur) pour
-%% stipuler que la personne appartient à la corporation des
-%% directeurs de recherche du CNRS.
-\supervisor{}{}
-\cosupervisor{}{}
-\guest{}{}
-\referee{}{}
-\referee{}{}
-\committeepresident{}{}
-\examiner{}{}
-\examiner{}{}
-\examiner{}{}
-%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% On définit ci-dessous les diverses entités liées à préparation de la
-%% thèse :
-%%    -- le pôle de recherche et d'enseignement supérieur (PRES) ;
-%%    -- l'établissement (principal en cas de cotutelle) ;
-%%    -- l'éventuel établissement de cotutelle, en cas de cotutelle
-%%       internationale (et, normalement, seulement dans ce cas) ;
-%%    -- l'école doctorale ;
-%%    -- le laboratoire.
-%% Pour chacune de ces entités, on spécifie :
-%%   -- en argument obligatoire : son nom ;
-%%   -- éventuellement en argument optionnel :
-%%     -- le fichier image de son logo au moyen de la clé « logo », par
-%%        exemple logo=logo-institute. Tous les fichiers images des
-%%        logos doivent se trouver dans le dossier « images ». Il est
-%%        conseillé de disposer d'images à un format vectoriel, par
-%%        exemple PDF ;
-%%     -- son URL (c-à-d son adresse Web) au moyen de la clé « url »,
-%%        par exemple url=www.institute.fr. Le caractère « # » est
-%%        interdit dans cette URL ;
-%%     -- que le logo ne devra pas figurer au moyen de la clé
-%%        « nologo » (qui ne prend pas de valeur) ;
-%%     -- que les nom et logo (éventuel) ne seront pas des hyperliens
-%%        vers l'URL (éventuelle) au moyen de la clé « nolink » (qui ne
-%%        prend pas de valeur).
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% PRES, si souhaité. Sinon, il suffit de commenter ou de supprimer la
-%% ligne suivante.
-\pres{}
-%%
-%% Établissement (principal en cas de cotutelle).
-\institute{}
-%%
-%% Éventuel établissement de cotutelle, si pertinent. Sinon, il suffit
-%% de commenter ou de supprimer la ligne suivante.
-\coinstitute{}
-%%
-%% École doctorale (son logo ne figurera pas), si souhaité. Sinon, il
-%% suffit de commenter ou de supprimer la ligne suivante.
-\doctoralschool{}
-%%
-%% Laboratoire (ou de l'unité) où la thèse a été préparée.
-\laboratory[logo=,address=,telephone=,fax=,email=,url=]{}
+%<<COMMENT
+%
+% Sujet pour les méta-données du PDF. À décommenter si souhaité, à commenter ou
+% à supprimer sinon.
+%COMMENT
+\subject[]{}
+%<<COMMENT
+%
+% Logo du PRES. À décommenter si souhaité, à commenter ou à supprimer sinon.
+%COMMENT
+\pres[logo=]{}
+%<<COMMENT
+%
+% Institut (principal en cas de cotutelle).
+%COMMENT
+\institute[logo=,url=]{}
+%<<COMMENT
+%
+% En cas de cotutelle (normalement, seulement dans le cas de cotutelle
+% internationale), second institut. À décommenter si souhaité, à commenter ou
+% à supprimer sinon.
+% \coinstitute[logo=]{}
+%
+% École doctorale. À décommenter si souhaitée, à commenter ou à supprimer
+% sinon.
+%COMMENT
+\doctoralschool[url=]{}
+%<<COMMENT
+%
+% Nom (1er argument obligatoire) et adresse (2e argument obligatoire) du
+% laboratoire (ou de l'unité) où la thèse a été préparée, à utiliser /autant de
+% fois que nécessaire/.
+%COMMENT
+\laboratory[
+logo=,
+telephone=,
+fax=,
+email=,
+url=
+]{}{%
+  \\
+  \\
+  \\
+  \\
+}
+%<<COMMENT
+%
+% Membres du jury, saisis au moyen des commandes \supervisor, \cosupervisor,
+% \comonitor, \referee, \committeepresident, \examiner, \guest, à utiliser
+% /autant de fois que nécessaire/ et /seulement si nécessaire/. Toutes basées sur
+% le même modèle, ces commandes ont 2 arguments obligatoires, successivement les
+% prénom et nom de chaque personne. Si besoin est, on peut apporter certaines
+% précisions en argument optionnel, au moyen des clés suivantes :
+%   - « professor », « seniorresearcher », « mcf », « mcf* »,
+%     « juniorresearcher », « juniorresearcher* » (qui ne prennent pas de valeur)
+%     pour stipuler que la personne appartient au corps des professeurs
+%     d'université ;
+%   - « affiliation » pour stipuler l'institut auquel est rattachée la personne.
+%
+%COMMENT
+\supervisor[professor,affiliation=]{}{}
+%<<COMMENT
+% \cosupervisor[mcf*,affiliation=]{}{}
+% \comonitor[mcf,affiliation=]{}{}
+%COMMENT
+\referee[professor,affiliation=]{}{}
+\referee[professor,affiliation=]{}{}
+\committeepresident[professor,affiliation=]{}{}
+\examiner[affiliation=]{}{}
+\examiner[affiliation=]{}{}
+\examiner[affiliation=]{}{}
+%<<COMMENT
+% \guest{}{}
+%
+% Numéro d'ordre de la thèse. À décommenter si souhaité, à commenter ou
+% à supprimer sinon.
+% \ordernumber[]
+%
+% Préparation des mots clés dans la langue principale (1er argument) et dans la
+% langue secondaire (2e argument)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%COMMENT
+\keywords{}{}
+%<<COMMENT
+%
+% Production des pages de couverture et de titre
+%COMMENT
+\maketitle
+%<<COMMENT
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Début de la partie liminaire de la thèse
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Production de la page de clause de non-responsabilité. À décommenter si
+% souhaitée, à commenter ou à supprimer sinon.
+%COMMENT
+\makedisclaimer
+%<<COMMENT
+%
+% Production de la page de mots clés. À décommenter si souhaitée, à commenter
+% ou à supprimer sinon.
+%COMMENT
+\makekeywords
+%<<COMMENT
+%
+% Production de la page affichant les logo, nom et coordonnées du ou des
+% laboratoires (ou unités de recherche) où la thèse a été
+% préparée. À décommenter si souhaitée, à commenter ou à supprimer sinon.
+%COMMENT
+\makelaboratory
+%<<COMMENT
+%
+% Dédicace(s). À décommenter si souhaitée(s), à commenter ou à supprimer sinon.
+%COMMENT
+\dedication{}
+\dedication{}
+%<<COMMENT
+% Production de la page de dédicace(s). À décommenter si souhaitée, à commenter
+% ou à supprimer sinon.
+%COMMENT
+\makededications
+%<<COMMENT
+%
+% Épigraphe(s). À décommenter si souhaitée(s), à commenter ou à supprimer
+% sinon.
+%COMMENT
+\frontepigraph{}{}
+\frontepigraph{}{}
+%<<COMMENT
+% Production de la page d'épigraphe(s). À décommenter si souhaitée, à commenter
+% ou à supprimer sinon.
+%COMMENT
+\makefrontepigraphs
+%<<COMMENT
+%
+% Remerciements. À décommenter si souhaités, à commenter ou à supprimer sinon.
+%COMMENT
+\chapter{Remerciements}
+%<<COMMENT
+% ...
+%
+% Avertissement. À décommenter si souhaité, à commenter ou à supprimer sinon.
+% \chapter{Avertissement}
+% ...
+%
+% Résumés (de 1700 caractères maximum, espaces compris) dans la
+% langue principale (1re occurrence de l'environnement « abstract »)
+% et, facultativement, dans la langue secondaire (2e occurrence de
+% l'environnement « abstract »).
+%COMMENT
+\begin{abstract}
+%<<COMMENT
+% ...
+%COMMENT
+\end{abstract}
+\begin{abstract}
+%<<COMMENT
+% ...
+%COMMENT
+\end{abstract}
+%<<COMMENT
+% Production de la page de résumés.
+%COMMENT
+\makeabstract
+%<<COMMENT
+%
+% Liste des acronymes. À décommenter si souhaitée, à commenter ou à supprimer
+% sinon.
+% \printacronyms
+%
+% Liste des symboles. À décommenter si souhaitée, à commenter ou à supprimer
+% sinon.
+% \printsymbols
+%
+% Avant-propos. À décommenter si souhaité, à commenter ou à supprimer sinon.
+% \chapter{Avant-propos}
+% ...
+%
+% Sommaire
+%COMMENT
+\tableofcontents[depth=chapter,name=Sommaire]
+%<<COMMENT
+%
+% Liste des tableaux. À décommenter si souhaitée, à commenter ou à supprimer
+% sinon.
+%COMMENT
+\listoftables
+%<<COMMENT
+%
+% Table des figures. À décommenter si souhaitée, à commenter ou à supprimer
+% sinon.
+%COMMENT
+\listoffigures
+%<<COMMENT
+%
+% Table des listings (nécessite que le package « listings » soit
+% chargé). À décommenter si souhaitée, à commenter ou à supprimer sinon.
+% \lstlistoflistings
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Début de la partie principale (du « corps ») de la thèse
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%COMMENT
+\mainmatter
+%<<COMMENT
+%
+% Chapitre d'introduction générale
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \chapter{...}
+% ...
+%
+%
+% Chapitres ordinaires (avec parties éventuelles)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Première partie éventuelle
+% \part{...}
+% Premier chapitre
+% \chapter{...}
+% ...
+% Deuxième chapitre
+% \chapter{...}
+% ...
+% Troisième chapitre
+% \chapter{...}
+% ...
+%
+% Deuxième partie éventuelle
+% \part{...}
+% Quatrième chapitre
+% \chapter{...}
+% ...
+% Cinquième chapitre
+% \chapter{...}
+% ...
+% Sixième chapitre
+% \chapter{...}
+% ...
+%
+% Chapitre  de conclusion générale
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \chapter{...}
+% ...
+%
+% Liste des références bibliographiques
+%COMMENT
+\printbibliography
+%<<COMMENT
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Début de la partie annexe éventuelle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \appendix
+%
+% Chapitres annexes éventuels
+% \chapter{...}
+% ...
+% \chapter{...}
+% ...
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Début de la partie finale
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%COMMENT
+\backmatter
+%<<COMMENT
+%
+% Glossaire (si souhaité distinct de la liste des acronymes). À décommenter si
+% souhaité, à commenter ou à supprimer sinon.
+% \printglossary
+%
+% Index. À décommenter si souhaité, à commenter ou à supprimer sinon.
+% \printindex
+%
+% Table des matières
+%COMMENT
+\tableofcontents
+%<<COMMENT
+%
+% Production de la 4e de couverture. À décommenter si souhaitée, à commenter ou
+% à supprimer sinon.
+%COMMENT
+\makebackcover
+%<<COMMENT
+%
+%COMMENT
+\end{document}
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-%</caracteristiques-these-sample>
+%</single-file-template>
 %    \end{macrocode}
-%
 %
 % \chapter{Fichier de complétion}
 % Now, the \File{yathesis.cwl} for \yatcl commands completion and syntax checking:
