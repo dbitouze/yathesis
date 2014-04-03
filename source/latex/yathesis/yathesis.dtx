@@ -841,26 +841,17 @@ This work consists of the file  yathesis.dtx
 \newcounter{YAD@warnings}%
 \setcounter{YAD@warnings}{0}%
 \newcommand{\YAD@ClassWarningNoLine}[1]{%
-  \ifYAD@nowarning%
   \ifboolexpr{%
     togl {YAD@work@inprogress}%
     or bool {YAD@draft}%
-  }{%
+    or bool {YAD@nowarning}%
   }{%
     \stepcounter{YAD@warnings}%
+  }{%
+    \ClassWarningNoLine{yathesis}{%
+      #1%
+    }%
   }%
-  \else%
-  \ClassWarningNoLine{yathesis}{%
-    #1%
-  }%
-  % \AfterEndDocument{%
-  % \immediate\write\YAD@file{%
-  \ClassWarningNoLine{yathesis}{%
-    #1%
-  }%
-  % }%
-  % }%
-  \fi
 }%
 \AfterEndDocument{%
   \ifYAD@nowarning%
