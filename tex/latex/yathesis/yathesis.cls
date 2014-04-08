@@ -2946,7 +2946,7 @@
   }%
   \shorthandoff{;:!?}%
 }%
-\AfterEndPreamble{%
+\AtEndPreamble{%
   \shorthandon{;:!?}%
   \InputIfFileExists{\configurationdirectory/\propertiesfile}%
   {%
