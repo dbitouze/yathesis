@@ -592,7 +592,6 @@ This work consists of the file  yathesis.dtx
 }{%
   \edef\@classoptionslist{\YAD@secondarylanguage,\YAD@mainlanguage,\@classoptionslist}%
 }%
-\PassOptionsToPackage{main=\YAD@mainlanguage}{babel}
 \presetkeys{yathesis.cls}{%
   screen=false,%
   draft=false,%
@@ -770,9 +769,7 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \RequirePackage{iflang}%
 %    \end{macrocode}
-% Pour un document à dominante en français, mais dont certains
-% passages sont en anglais (cf. options \lstinline|english|,
-% \lstinline|french| passées à la classe de document)
+% Pour gérer les langues.
 %    \begin{macrocode}
 \RequirePackage{babel}%
 %    \end{macrocode}
@@ -810,6 +807,22 @@ This work consists of the file  yathesis.dtx
 % Les packages qui précèdent ont été les derniers chargés du préambule
 %    \begin{macrocode}
 % }%
+%    \end{macrocode}
+%
+% Pour éviter certains comportements inattendus, on précise la langue
+% principale au moyen de l'option ×main× du \Package{babel}. Mais, comme
+% celle-ci n'est apparue que récemment, on n'y recourt que si la version du
+% package est assez récente.
+%    \begin{macrocode}
+\@ifpackagelater{babel}{2013/04/15}{%
+  \PassOptionsToPackage{main=\YAD@mainlanguage}{babel}%
+}{%
+  \YAD@ClassWarningNoLine{%
+    La version de `babel' utilis\'ee est obsol\`ete.\\
+    Je vais essayer de faire mon possible, mais il est\\
+    est conseill\'e de mettre à jour sa distribution.
+  }%
+}%
 %    \end{macrocode}
 %
 % On définit la macro ×\YAD@ifemptyorundef× qui teste si le nom passé est celui
