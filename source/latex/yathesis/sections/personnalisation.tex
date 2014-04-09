@@ -4,7 +4,7 @@ Cette section passe en revue les outils de personnalisation propres
 ou pas à la \yatcl{} :
 \begin{enumerate}
 \item options de classe ;
-\item commandes et options de commandes de la \yatcl;
+\item commandes (et options de commandes) de la \yatcl;
 \item packages chargés par  la \yatcl ;
 \item packages chargés manuellement.
 \end{enumerate}
@@ -609,6 +609,15 @@ exemple ainsi :
 %^^A d'insérer la commande \docAuxCommand{glstocfalse} après le chargement du
 %^^A \Package{glossaries}.
 
+Le comportement par défaut de la \yatcl{} est aussi gouverné par le
+comportement par défaut des packages qu'elle charge
+automatiquement\footnote{ On pourra le cas échéant consulter
+  \vref{cha:packages-charges} la liste des packages chargés par la \yatcl{}.}.
+La personnalisation de \yat{} peut donc aussi passer par celle de ces
+packages.
+
+Deux exemples parmi d'autres sont traités ci-après.
+
 \subsection{Bibliographie absente de la table des matières}
 
 La \yatcl{} fait par défaut figurer la bibliographie dans les sommaire, table
@@ -632,9 +641,7 @@ où \meta{autre niveau} est l'une des valeurs possibles de la clé
 
 \section{Packages chargés manuellement}
 \label{sec:options-de-classes}
-Si on souhaite recourir à des packages qui ne sont pas appelés par la
-\yatcl{}\footnote{On pourra le cas échéant consulter
-  \vref{cha:packages-charges} la liste des packages chargés par la \yatcl{}.},
+Si on souhaite recourir à des packages qui ne sont pas appelés par la \yatcl{},
 on les chargera manuellement.
 
 \begin{dbwarning}{Chargement de packages : en préambule du fichier maître}{}
