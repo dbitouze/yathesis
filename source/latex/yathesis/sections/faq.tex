@@ -54,7 +54,18 @@ Ce chapitre répertorie les \glspl{faq} sur la \yatcl{}.
   ×\shorthandoff{;:!?}×.
 \end{dbfaq}
 
-\begin{dbfaq}{Comment éviter l'erreur \enquote{no room for a new
+\begin{dbfaq}{Comment éviter l'erreur \enquote{Option clash for package babel} ?}{}
+  Je suis confronté à l'erreur \enquote{Option clash for package
+    babel}. Comment l'éviter ?
+  %
+  \tcblower
+  %
+  Il suffit de \emph{ne pas manuellement} charger le \Package{babel} (qui l'est
+  déjà en sous-main par la \yatcl{}), ce qui est de toute façon
+  \emph{déconseillé}. Pour la gestion des langues, cf. \vref{sec:langues}.
+\end{dbfaq}
+
+\begin{dbfaq}{Comment éviter l'erreur \enquote{No room for a new
       \protect\docAuxCommand{write}} ?}{}
   Je suis confronté à l'erreur \enquote{no room for a new
     \docAuxCommand{write}}. Comment l'éviter ?
