@@ -242,10 +242,12 @@
 \@ifpackagelater{babel}{2013/04/15}{%
   \PassOptionsToPackage{main=\YAD@mainlanguage}{babel}%
 }{%
-  \YAD@ClassWarningNoLine{%
-    La version de `babel' utilis\'ee est obsol\`ete.\\
-    Je vais essayer de faire mon possible, mais il est\\
-    est conseill\'e de mettre à jour sa distribution.
+  \AtEndPreamble{%
+    \YAD@ClassWarningNoLine{%
+      La version de `babel' utilis\'ee est obsol\`ete.\\
+      Je vais essayer de faire mon possible, mais il est\\
+      est conseill\'e de mettre à jour sa distribution.
+    }%
   }%
 }%
 \newcommand{\YAD@ifemptyorundef}[3]{%
