@@ -229,8 +229,8 @@
 }%
 \RequirePackage{index}%
 \RequirePackage[columns=1]{idxlayout}%
-\RequirePackage{iflang}%
 \RequirePackage{babel}%
+\RequirePackage{iflang}%
 \RequirePackage[nodayofweek]{datetime}%
 \RequirePackage{datenumber}%
 \RequirePackage[final,unicode,hyperfootnotes=false,hyperindex=false,plainpages=false,breaklinks,pdfpagemode=UseOutlines,pdfpagelayout=TwoPageRight]{hyperref}%
@@ -246,7 +246,7 @@
     \YAD@ClassWarningNoLine{%
       La version de `babel' utilis\'ee est obsol\`ete.\\
       Je vais essayer de faire mon possible, mais il est\\
-      est conseill\'e de mettre à jour sa distribution.
+      est conseill\'e de mettre à jour sa distribution
     }%
   }%
 }%
