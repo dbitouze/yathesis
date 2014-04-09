@@ -171,8 +171,9 @@
 \ifthenelse{\equal{\@classoptionslist}{}}{%
   \edef\@classoptionslist{\YAD@secondarylanguage,\YAD@mainlanguage}%
 }{%
-  \edef\@classoptionslist{\@classoptionslist,\YAD@secondarylanguage,\YAD@mainlanguage}%
+  \edef\@classoptionslist{\YAD@secondarylanguage,\YAD@mainlanguage,\@classoptionslist}%
 }%
+\PassOptionsToPackage{main=\YAD@mainlanguage}{babel}
 \presetkeys{yathesis.cls}{%
   screen=false,%
   draft=false,%
