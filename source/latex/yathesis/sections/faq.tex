@@ -2,7 +2,7 @@
 
 Ce chapitre répertorie les \glspl{faq} sur la \yatcl{}.
 
-\begin{dbfaq}{Comment communiquer avec l'auteur de la \yatcl{} ?}{}
+\begin{dbfaq}{Comment communiquer avec l'auteur de la \yatcl{} ?}{bogues}
   La \yatcl{} est vraiment formidable, mais je souhaite :
   \begin{enumerate}
   \item rapporter un bogue ;
@@ -62,9 +62,10 @@ Ce chapitre répertorie les \glspl{faq} sur la \yatcl{}.
   \tcblower
   %
   C'est probablement parce que le \Package{babel} a été explicitement chargé au
-  moyen de ×\usepackage[...]{babel}×. Cela est \emph{déconseillé} de manière
-  générale supprimer cette commande devrait résoudre la problème. Pour plus de
-  détails concernant la gestion des langues, cf. \vref{sec:langues}.
+  moyen de la commande ×\usepackage[...]{babel}×. Avec la \yatcl{}, ce
+  chargement est déconseillé et supprimer cette commande devrait résoudre le
+  problème. Pour plus de détails concernant la gestion des langues,
+  cf. \vref{sec:langues}.
 \end{dbfaq}
 
 \begin{dbfaq}{Comment éviter l'erreur \enquote{No room for a new
@@ -109,7 +110,8 @@ où \meta{distance}, à exprimer par exemple en points (par exemple ×27pt×), e
   \tcblower
   %
   Si le \Package{tocloft} a été chargé, le supprimer car il est incompatible
-  avec la \yatcl{}. Sinon, envoyer un \gls{ecm} à l'auteur de la classe.
+  avec la \yatcl{}. Sinon, faire un \hyperref[faq:bogues]{rapport de bogue}
+  à l'auteur de la classe.
 \end{dbfaq}
 
 
