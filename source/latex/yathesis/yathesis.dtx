@@ -423,7 +423,13 @@ This work consists of the file  yathesis.dtx
 %
 %    \begin{macrocode}
 \newif\if@nolink\@nolinkfalse
-\newtoggle{YAD@work@inprogress}
+\newtoggle{YAD@inprogress@work}
+\newtoggle{YAD@inprogress@work@star}
+\newtoggle{YAD@final@work}
+\newtoggle{YAD@draft}
+%
+\newtoggle{YAD@nowarning}
+\toggletrue{YAD@nowarning}
 % \newtoggle{YAD@frenchabstract@used}
 \newtoggle{YAD@printed@on@paper}
 \newtoggle{YAD@printed@on@paper@star}
@@ -473,7 +479,7 @@ This work consists of the file  yathesis.dtx
     }%
   }%
 }%
-\YAD@create@boolean{nowarning}%
+% \YAD@create@boolean{nowarning}%
 \YAD@create@boolean{noauthor}%
 \YAD@create@boolean{notitle}%
 \YAD@create@boolean{noacademicfield}%
@@ -491,30 +497,30 @@ This work consists of the file  yathesis.dtx
 \YAD@create@boolean{noprintbibliography}%
 \YAD@create@boolean{nofrontcover}%
 %
-\define@boolkey+{yathesis.cls}[YAD@]{draft}[true]{%
-  \ifYAD@draft
-  \ifthenelse{\equal{\@classoptionslist}{}}{%
-    \edef\@classoptionslist{draft}%
-  }{%
-    \edef\@classoptionslist{\@classoptionslist,draft}%
-  }%
-  \fi
-}{%
-  \YAD@ClassWarningNoLine{%
-    Valeur de la cl\'e `draft' non valide :\MessageBreak%
-    elle ne peut \^etre que `true' ou `false'%
-  }%
-}%
-\define@boolkey+{yathesis.cls}[YAD@]{intermediate}[true]{%
-  \ifYAD@intermediate
-  \toggletrue{YAD@work@inprogress}%
-  \fi
-}{%
-  \YAD@ClassWarningNoLine{%
-    Valeur de la cl\'e `intermediate' non valide :\MessageBreak%
-    elle ne peut \^etre que `true' ou `false'%
-  }%
-}%
+% \define@boolkey+{yathesis.cls}[YAD@]{draft}[true]{%
+%   \ifYAD@draft
+%   \ifthenelse{\equal{\@classoptionslist}{}}{%
+%     \edef\@classoptionslist{draft}%
+%   }{%
+%     \edef\@classoptionslist{\@classoptionslist,draft}%
+%   }%
+%   \fi
+% }{%
+%   \YAD@ClassWarningNoLine{%
+%     Valeur de la cl\'e `draft' non valide :\MessageBreak%
+%     elle ne peut \^etre que `true' ou `false'%
+%   }%
+% }%
+% \define@boolkey+{yathesis.cls}[YAD@]{inprogress}[true]{%
+%   \ifYAD@inprogress
+%   \toggletrue{YAD@inprogress@work}%
+%   \fi
+% }{%
+%   \YAD@ClassWarningNoLine{%
+%     Valeur de la cl\'e `inprogress' non valide :\MessageBreak%
+%     elle ne peut \^etre que `true' ou `false'%
+%   }%
+% }%
 \define@boolkey+{yathesis.cls}[YAD@]{printed}[true]{%
   \ifYAD@printed
   \toggletrue{YAD@printed@on@paper}%
@@ -532,6 +538,23 @@ This work consists of the file  yathesis.dtx
     elle ne peut \^etre que `true' ou `false'%
   }%
 }%
+%    \end{macrocode}
+% On définit la clé ×version× de la classe qui prend pour valeurs :
+% \begin{itemize}
+% \item (par défaut) ×inprogress× qui désactive les warnings ;
+% \item ×draft× » ;
+% \item ×final×, qui active les warnings, à spécifier pour la version finale du
+%   document qui ne compose pas en pied de page la mention \enquote{Version
+%   intermédiaire en date du ...}.
+% \end{itemize}
+%    \begin{macrocode}
+\def\YAD@version{inprogress}%
+\define@choicekey*{yathesis.cls}{version}%
+{draft,inprogress,inprogress*,final}[inprogress]%
+{\def\YAD@version{#1}}%
+%    \end{macrocode}
+%
+%    \begin{macrocode}
 \def\YAD@interligne{single}%
 \define@choicekey*{yathesis.cls}{space}%
 {single,onehalf,double}[single]%
@@ -595,7 +618,7 @@ This work consists of the file  yathesis.dtx
 \presetkeys{yathesis.cls}{%
   screen=false,%
   draft=false,%
-  intermediate=false,%
+  inprogress=false,%
   printed=false,%
   printed*=false,%
 }{}
@@ -603,6 +626,26 @@ This work consists of the file  yathesis.dtx
 \toggletrue{YAD@printed@on@paper}%
 \toggletrue{YAD@printed@on@paper@star}%
 \fi
+%
+\ifthenelse{\equal{\YAD@version}{inprogress}}{%
+  \toggletrue{YAD@inprogress@work}%
+}{%
+  \ifthenelse{\equal{\YAD@version}{inprogress*}}{%
+    \toggletrue{YAD@inprogress@work@star}%
+  }{%
+    \ifthenelse{\equal{\YAD@version}{draft}}{%
+      \toggletrue{YAD@draft}%
+      \ifthenelse{\equal{\@classoptionslist}{}}{%
+        \edef\@classoptionslist{draft}%
+      }{%
+        \edef\@classoptionslist{\@classoptionslist,draft}%
+      }%
+    }{%
+      \toggletrue{YAD@final@work}%
+      \togglefalse{YAD@nowarning}%
+    }%
+  }%
+}%
 %    \end{macrocode}
 %
 % \section{Class Loading}
@@ -745,7 +788,7 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
   \geometry{showframe}%
 }{%
-  \iftoggle{YAD@work@inprogress}{%
+  \iftoggle{YAD@inprogress@work@star}{%
     \RequirePackage{draftwatermark}%
   }{%
   }%
@@ -848,7 +891,7 @@ This work consists of the file  yathesis.dtx
 % \begin{itemize}
 % \item apparaissent en fin de log ;
 % \item sont désactivés si l'une ou l'autre des options ×nowarning×, ×draft× ou
-%   ×intermediate× est passée à la \yatcl{}.
+%   ×inprogress× est passée à la \yatcl{}.
 % \end{itemize}
 %
 %    \begin{macrocode}
@@ -858,9 +901,10 @@ This work consists of the file  yathesis.dtx
 \setcounter{YAD@warnings}{0}%
 \newcommand{\YAD@ClassWarningNoLine}[1]{%
   \ifboolexpr{%
-    togl {YAD@work@inprogress}%
-    or bool {YAD@draft}%
-    or bool {YAD@nowarning}%
+    togl {YAD@inprogress@work}%
+    or togl {YAD@inprogress@work@star}%
+    or togl {YAD@draft}%
+    or togl {YAD@nowarning}%
   }{%
     \stepcounter{YAD@warnings}%
   }{%
@@ -870,10 +914,11 @@ This work consists of the file  yathesis.dtx
   }%
 }%
 \AfterEndDocument{%
-  \ifYAD@nowarning%
+  \iftoggle{YAD@nowarning}{%
     \ifboolexpr{%
-      togl {YAD@work@inprogress}%
-      or bool {YAD@draft}%
+      togl {YAD@inprogress@work}%
+      or togl {YAD@inprogress@work@star}%
+      or togl {YAD@draft}%
     }{%
     }{%
       \ifnumgreater{\value{YAD@warnings}}{0}{%
@@ -910,7 +955,8 @@ This work consists of the file  yathesis.dtx
       }{%
       }%
     }%
-  \fi%
+  }{%
+  }%
 }%
 % \AtEndDocument{%
 %   \immediate\closeout\YAD@file%
@@ -1637,10 +1683,10 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % En cas de travail en cours, on l'indique en filigrane.
 %    \begin{macrocode}
-\iftoggle{YAD@work@inprogress}{%
+\iftoggle{YAD@inprogress@work@star}{%
   \SetWatermarkFontSize{3cm}%
-  \AfterEndPreamble{\translatelet\YAD@trintermediate{lbl-intermediate}}%
-  \SetWatermarkText{\MakeUppercase{\YAD@trintermediate}}%
+  \AfterEndPreamble{\translatelet\YAD@trinprogress{lbl-inprogress}}%
+  \SetWatermarkText{\MakeUppercase{\YAD@trinprogress}}%
 }{%
 }%
 %    \end{macrocode}
@@ -2888,7 +2934,7 @@ This work consists of the file  yathesis.dtx
 % Définition d'une commande affichant un texte fixe en bas de page
 % en cas de version intermédiaire de la thèse.
 %    \begin{macrocode}
-\iftoggle{YAD@work@inprogress}{%
+\iftoggle{YAD@inprogress@work}{%
   \newcommand*{\YAD@setfoot}{%
     \footrule%
     \setfoot{}{\textsc{\translate{lbl-versiondate} \today}}{}%
@@ -3596,9 +3642,9 @@ This work consists of the file  yathesis.dtx
         \else%
         \YAD@ClassWarningNoLine{%
           Titre de la th\`ese non sp\'ecifi\'e :\MessageBreak%
-          la commande \protect\title\space n'a pas \'et\'e\MessageBreak%
-          employ\'ee (celle-ci est requise) ou son argument\MessageBreak%
-          obligatoire est vide (celui-ci doit \^etre renseign\'e)%
+          la commande \protect\title\space n'a pas \'et\'e employ\'ee\MessageBreak%
+          (celle-ci est requise) ou son argument obligatoire\MessageBreak%
+          est vide (celui-ci doit \^etre renseign\'e)%
         }%
         \fi%
       }{%
@@ -4329,7 +4375,7 @@ This work consists of the file  yathesis.dtx
   \egroup%
 }%
 % \newcommand{\YAD@abstract@page}{%
-%   \iftoggle{YAD@work@inprogress}{%
+%   \iftoggle{YAD@inprogress@work}{%
 %     \setfootrule{0pt}%
 %     \setfoot{}{}{}%
 %   }{%
@@ -4379,7 +4425,7 @@ This work consists of the file  yathesis.dtx
   % \setlength{\footskip}{-15pt}%
   \setfootrule{0pt}%
   \setfoot[][%
-  \iftoggle{YAD@work@inprogress}{%
+  \iftoggle{YAD@inprogress@work}{%
     \textsc{\translate{lbl-versiondate} \today}%
   }{%
   }%
@@ -5403,7 +5449,7 @@ This work consists of the file  yathesis.dtx
 \expression{lbl-guests}{Invit\'e}{Guest}%
 \expression{lbl-guests-pl}{Invit\'es}{Guests}%
 \expression{lbl-institute}{}{}%
-\expression{lbl-intermediate}{travail en cours}{work in progress}%
+\expression{lbl-inprogress}{travail en cours}{work in progress}%
 \expression{lbl-introduction}{Introduction}{Introduction}%
 \expression{lbl-juniorresearcher}{charg\'e de recherche}{Junior Researcher}%
 \expression{lbl-juniorresearcher*}{charg\'e de recherche
@@ -5433,7 +5479,7 @@ This work consists of the file  yathesis.dtx
 \expression{lbl-thesisdefendedby}{Th\`ese pr\'esent\'ee par}{Thesis defended by}%
 \expression{lbl-thesistitle}{Titre de la th\`ese}{Thesis Title}%
 \expression{lbl-universitydepartment}{Unit\'e de recherche}{University Department}%
-\expression{lbl-versiondate}{Version interm\'ediaire en date du}{Intermediate
+\expression{lbl-versiondate}{Version interm\'ediaire en date du}{In progress
   version as of}%
 \expression{lbl-website}{Site}{Web Site}%
 %    \end{macrocode}
@@ -5508,7 +5554,7 @@ This work consists of the file  yathesis.dtx
     part,chapter,section,subsection,subsubsection,paragraph,subparagraph,%
     none,true,false,UseOutlines,TwoPageRight,UK,FR,%
     Sonny,Lenny,Glenn,Conny,Rejne,Bjarne,PetersLenny,Bjornstrup,%
-    screen,draft,intermediate,printed,printed*%
+    screen,draft,inprogress,printed,printed*%
   },%
   morekeywords=[4]{% Class and packages options
     warn,final,nodayofweek,unicode,nostamp,all,numbered,a4paper,leqno,fleqn,10pt,11pt,12pt,%
@@ -5519,7 +5565,7 @@ This work consists of the file  yathesis.dtx
     lbl-cosupervisor,lbl-committee,lbl-committeepresident,lbl-company,lbl-conclusion,lbl-defendedon,%
     lbl-doctoralschool,lbl-draft,%
     %lbl-foreword,lbl-frenchabstract,lbl-acknowledgements,lbl-caution,
-    lbl-institute,lbl-intermediate,%
+    lbl-institute,lbl-inprogress,%
     lbl-introduction,lbl-keywords,lbl-prepared-at,lbl-prepared-at-pl,lbl-guests,lbl-referees,lbl-seniorresearcher,%
     lbl-speciality,lbl-supervisor,lbl-thesisdefendedby,lbl-disclaimer,lbl-thesissupervisedby,%
     lbl-thesistitle,lbl-universitydepartment,lbl-professor,lbl-juniorresearcher*,lbl-mcf*,%

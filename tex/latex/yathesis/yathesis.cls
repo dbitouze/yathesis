@@ -23,7 +23,12 @@
 \RequirePackage{hopatch}%
 \RequirePackage{xifthen}%
 \newif\if@nolink\@nolinkfalse
-\newtoggle{YAD@work@inprogress}
+\newtoggle{YAD@inprogress@work}
+\newtoggle{YAD@inprogress@work@star}
+\newtoggle{YAD@final@work}
+\newtoggle{YAD@draft}
+\newtoggle{YAD@nowarning}
+\toggletrue{YAD@nowarning}
 \newtoggle{YAD@printed@on@paper}
 \newtoggle{YAD@printed@on@paper@star}
 \newtoggle{YAD@in@footnote}
@@ -70,7 +75,6 @@
     }%
   }%
 }%
-\YAD@create@boolean{nowarning}%
 \YAD@create@boolean{noauthor}%
 \YAD@create@boolean{notitle}%
 \YAD@create@boolean{noacademicfield}%
@@ -87,30 +91,6 @@
 \YAD@create@boolean{notableofcontents}%
 \YAD@create@boolean{noprintbibliography}%
 \YAD@create@boolean{nofrontcover}%
-\define@boolkey+{yathesis.cls}[YAD@]{draft}[true]{%
-  \ifYAD@draft
-  \ifthenelse{\equal{\@classoptionslist}{}}{%
-    \edef\@classoptionslist{draft}%
-  }{%
-    \edef\@classoptionslist{\@classoptionslist,draft}%
-  }%
-  \fi
-}{%
-  \YAD@ClassWarningNoLine{%
-    Valeur de la cl\'e `draft' non valide :\MessageBreak%
-    elle ne peut \^etre que `true' ou `false'%
-  }%
-}%
-\define@boolkey+{yathesis.cls}[YAD@]{intermediate}[true]{%
-  \ifYAD@intermediate
-  \toggletrue{YAD@work@inprogress}%
-  \fi
-}{%
-  \YAD@ClassWarningNoLine{%
-    Valeur de la cl\'e `intermediate' non valide :\MessageBreak%
-    elle ne peut \^etre que `true' ou `false'%
-  }%
-}%
 \define@boolkey+{yathesis.cls}[YAD@]{printed}[true]{%
   \ifYAD@printed
   \toggletrue{YAD@printed@on@paper}%
@@ -128,6 +108,14 @@
     elle ne peut \^etre que `true' ou `false'%
   }%
 }%
+\def\YAD@version{inprogress}%
+\define@choicekey*{yathesis.cls}{version}%
+{draft,inprogress,inprogress*,final}[inprogress]%
+{\def\YAD@version{#1}}%
+\def\YAD@layout{screen}%
+\define@choicekey*{yathesis.cls}{layout}%
+{screen,printed,printed*}[screen]%
+{\def\YAD@layout{#1}}%
 \def\YAD@interligne{single}%
 \define@choicekey*{yathesis.cls}{space}%
 {single,onehalf,double}[single]%
@@ -176,7 +164,7 @@
 \presetkeys{yathesis.cls}{%
   screen=false,%
   draft=false,%
-  intermediate=false,%
+  inprogress=false,%
   printed=false,%
   printed*=false,%
 }{}
@@ -184,6 +172,25 @@
 \toggletrue{YAD@printed@on@paper}%
 \toggletrue{YAD@printed@on@paper@star}%
 \fi
+\ifthenelse{\equal{\YAD@version}{inprogress}}{%
+  \toggletrue{YAD@inprogress@work}%
+}{%
+  \ifthenelse{\equal{\YAD@version}{inprogress*}}{%
+    \toggletrue{YAD@inprogress@work@star}%
+  }{%
+    \ifthenelse{\equal{\YAD@version}{draft}}{%
+      \toggletrue{YAD@draft}%
+      \ifthenelse{\equal{\@classoptionslist}{}}{%
+        \edef\@classoptionslist{draft}%
+      }{%
+        \edef\@classoptionslist{\@classoptionslist,draft}%
+      }%
+    }{%
+      \toggletrue{YAD@final@work}%
+      \togglefalse{YAD@nowarning}%
+    }%
+  }%
+}%
 \LoadClass{book}%
 \RequirePackage[a4paper]{geometry}%
 \AtEndPreamble{%
@@ -222,7 +229,7 @@
   \RequirePackage{draftwatermark}%
   \geometry{showframe}%
 }{%
-  \iftoggle{YAD@work@inprogress}{%
+  \iftoggle{YAD@inprogress@work@star}{%
     \RequirePackage{draftwatermark}%
   }{%
   }%
@@ -264,9 +271,10 @@
 \setcounter{YAD@warnings}{0}%
 \newcommand{\YAD@ClassWarningNoLine}[1]{%
   \ifboolexpr{%
-    togl {YAD@work@inprogress}%
-    or bool {YAD@draft}%
-    or bool {YAD@nowarning}%
+    togl {YAD@inprogress@work}%
+    or togl {YAD@inprogress@work@star}%
+    or togl {YAD@draft}%
+    or togl {YAD@nowarning}%
   }{%
     \stepcounter{YAD@warnings}%
   }{%
@@ -276,10 +284,11 @@
   }%
 }%
 \AfterEndDocument{%
-  \ifYAD@nowarning%
+  \iftoggle{YAD@nowarning}{%
     \ifboolexpr{%
-      togl {YAD@work@inprogress}%
-      or bool {YAD@draft}%
+      togl {YAD@inprogress@work}%
+      or togl {YAD@inprogress@work@star}%
+      or togl {YAD@draft}%
     }{%
     }{%
       \ifnumgreater{\value{YAD@warnings}}{0}{%
@@ -316,7 +325,8 @@
       }{%
       }%
     }%
-  \fi%
+  }{%
+  }%
 }%
 \def\YAD@clearspread{\clearpage\if@twoside \ifodd\c@page
   \hbox{}\newpage\if@twocolumn\hbox{}\newpage\fi\fi\fi}
@@ -397,10 +407,10 @@
   \SetWatermarkColor{gray!10}%
 }{%
 }%
-\iftoggle{YAD@work@inprogress}{%
+\iftoggle{YAD@inprogress@work@star}{%
   \SetWatermarkFontSize{3cm}%
-  \AfterEndPreamble{\translatelet\YAD@trintermediate{lbl-intermediate}}%
-  \SetWatermarkText{\MakeUppercase{\YAD@trintermediate}}%
+  \AfterEndPreamble{\translatelet\YAD@trinprogress{lbl-inprogress}}%
+  \SetWatermarkText{\MakeUppercase{\YAD@trinprogress}}%
 }{%
 }%
 \ifdraft{%
@@ -1380,7 +1390,7 @@
     \YAD@ORI@cleardoublepage%
   }%
 }%
-\iftoggle{YAD@work@inprogress}{%
+\iftoggle{YAD@inprogress@work}{%
   \newcommand*{\YAD@setfoot}{%
     \footrule%
     \setfoot{}{\textsc{\translate{lbl-versiondate} \today}}{}%
@@ -1873,9 +1883,9 @@
         \else%
         \YAD@ClassWarningNoLine{%
           Titre de la th\`ese non sp\'ecifi\'e :\MessageBreak%
-          la commande \protect\title\space n'a pas \'et\'e\MessageBreak%
-          employ\'ee (celle-ci est requise) ou son argument\MessageBreak%
-          obligatoire est vide (celui-ci doit \^etre renseign\'e)%
+          la commande \protect\title\space n'a pas \'et\'e employ\'ee\MessageBreak%
+          (celle-ci est requise) ou son argument obligatoire\MessageBreak%
+          est vide (celui-ci doit \^etre renseign\'e)%
         }%
         \fi%
       }{%
@@ -2540,7 +2550,7 @@
   % \setlength{\footskip}{-15pt}%
   \setfootrule{0pt}%
   \setfoot[][%
-  \iftoggle{YAD@work@inprogress}{%
+  \iftoggle{YAD@inprogress@work}{%
     \textsc{\translate{lbl-versiondate} \today}%
   }{%
   }%
@@ -3042,7 +3052,7 @@
 \expression{lbl-guests}{Invit\'e}{Guest}%
 \expression{lbl-guests-pl}{Invit\'es}{Guests}%
 \expression{lbl-institute}{}{}%
-\expression{lbl-intermediate}{travail en cours}{work in progress}%
+\expression{lbl-inprogress}{travail en cours}{work in progress}%
 \expression{lbl-introduction}{Introduction}{Introduction}%
 \expression{lbl-juniorresearcher}{charg\'e de recherche}{Junior Researcher}%
 \expression{lbl-juniorresearcher*}{charg\'e de recherche
@@ -3071,7 +3081,7 @@
 \expression{lbl-thesisdefendedby}{Th\`ese pr\'esent\'ee par}{Thesis defended by}%
 \expression{lbl-thesistitle}{Titre de la th\`ese}{Thesis Title}%
 \expression{lbl-universitydepartment}{Unit\'e de recherche}{University Department}%
-\expression{lbl-versiondate}{Version interm\'ediaire en date du}{Intermediate
+\expression{lbl-versiondate}{Version interm\'ediaire en date du}{In progress
   version as of}%
 \expression{lbl-website}{Site}{Web Site}%
 %% ----------------------------------------------------------------------------------
