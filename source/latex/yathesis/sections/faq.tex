@@ -77,6 +77,41 @@ Ce chapitre répertorie les \glspl{faq} sur la \yatcl{}.
   premiers packages).
 \end{dbfaq}
 
+\begin{dbfaq}{Dans la table des matières, des numéros de pages débordent dans
+    la marge de droite}{}
+  Dans la table des matières, certains numéros de pages (en chiffres romains
+  notamment) débordent dans la marge de droite. Comment l'éviter ?
+  %
+  \tcblower
+  %
+  Il suffit d'insérer, en préambule du fichier (maître) de la thèse, les
+  lignes :
+\begin{preamblecode}
+\makeatletter
+\renewcommand*\@pnumwidth{÷\meta{distance}÷}
+\makeatother
+\end{preamblecode}
+où \meta{distance}, à exprimer par exemple en points (par exemple ×27pt×), est
+à déterminer par \enquote{essais/erreurs} de sorte que \meta{distance} soit :
+\begin{enumerate}
+\item le plus petit possible ;
+\item suffisamment grand pour cesser de causer les débordements de numéros de
+  pages.
+\end{enumerate}
+\end{dbfaq}
+
+\begin{dbfaq}{Les sommaire et table des matières ne sont pas ceux attendus}{}
+  Les sommaire et table des matières ne sont pas ceux attendus : par exemple,
+  ils ne commencent pas sur une nouvelle page, le niveau de profondeur du
+  sommaire spécifié par \refKey{depth} n'est pas pris en compte, etc. Que faire ?
+  %
+  \tcblower
+  %
+  Si le \Package{tocloft} a été chargé, le supprimer car il est incompatible
+  avec la \yatcl{}. Sinon, envoyer un \gls{ecm} à l'auteur de la classe.
+\end{dbfaq}
+
+
 %
 \iffalse
 %%% Local Variables:
