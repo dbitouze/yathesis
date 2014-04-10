@@ -431,8 +431,8 @@ This work consists of the file  yathesis.dtx
 \newtoggle{YAD@nowarning}
 \toggletrue{YAD@nowarning}
 % \newtoggle{YAD@frenchabstract@used}
-\newtoggle{YAD@printed@on@paper}
-\newtoggle{YAD@printed@on@paper@star}
+\newtoggle{YAD@output@paper}
+\newtoggle{YAD@output@paper@star}
 \newtoggle{YAD@in@footnote}
 \newtoggle{YAD@second@title}
 \newtoggle{YAD@second@abstract}
@@ -521,23 +521,23 @@ This work consists of the file  yathesis.dtx
 %     elle ne peut \^etre que `true' ou `false'%
 %   }%
 % }%
-\define@boolkey+{yathesis.cls}[YAD@]{printed}[true]{%
-  \ifYAD@printed
-  \toggletrue{YAD@printed@on@paper}%
-  \fi
-}{%
-  \YAD@ClassWarningNoLine{%
-    Valeur de la cl\'e `printed' non valide :\MessageBreak%
-    elle ne peut \^etre que `true' ou `false'%
-  }%
-}%
-\define@boolkey+{yathesis.cls}[YAD@]{printed*}[true]{%
-}{%
-  \YAD@ClassWarningNoLine{%
-    Valeur de la cl\'e `printed*' non valide :\MessageBreak%
-    elle ne peut \^etre que `true' ou `false'%
-  }%
-}%
+% \define@boolkey+{yathesis.cls}[YAD@]{paper}[true]{%
+%   \ifYAD@paper
+%   \toggletrue{YAD@output@paper}%
+%   \fi
+% }{%
+%   \YAD@ClassWarningNoLine{%
+%     Valeur de la cl\'e `paper' non valide :\MessageBreak%
+%     elle ne peut \^etre que `true' ou `false'%
+%   }%
+% }%
+% \define@boolkey+{yathesis.cls}[YAD@]{paper*}[true]{%
+% }{%
+%   \YAD@ClassWarningNoLine{%
+%     Valeur de la cl\'e `paper*' non valide :\MessageBreak%
+%     elle ne peut \^etre que `true' ou `false'%
+%   }%
+% }%
 %    \end{macrocode}
 % On définit la clé ×version× de la classe qui prend pour valeurs :
 % \begin{itemize}
@@ -552,6 +552,19 @@ This work consists of the file  yathesis.dtx
 \define@choicekey*{yathesis.cls}{version}%
 {draft,inprogress,inprogress*,final}[inprogress]%
 {\def\YAD@version{#1}}%
+%    \end{macrocode}
+%
+% On définit la clé ×output× de la classe qui prend pour valeurs :
+% \begin{itemize}
+% \item (par défaut) ×screen× ;
+% \item ×paper× » ;
+% \item ×paper*×.
+% \end{itemize}
+%    \begin{macrocode}
+\def\YAD@output{screen}%
+\define@choicekey*{yathesis.cls}{output}%
+{screen,paper,paper*}[screen]%
+{\def\YAD@output{#1}}%
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -615,17 +628,18 @@ This work consists of the file  yathesis.dtx
 }{%
   \edef\@classoptionslist{\YAD@secondarylanguage,\YAD@mainlanguage,\@classoptionslist}%
 }%
-\presetkeys{yathesis.cls}{%
-  screen=false,%
-  draft=false,%
-  inprogress=false,%
-  printed=false,%
-  printed*=false,%
-}{}
-\csuse{ifYAD@printed*}
-\toggletrue{YAD@printed@on@paper}%
-\toggletrue{YAD@printed@on@paper@star}%
-\fi
+% \presetkeys{yathesis.cls}{%
+%   screen=false,%
+%   draft=false,%
+%   inprogress=false,%
+%   paper=false,%
+%   paper*=false,%
+% }{}
+%
+% \csuse{ifYAD@paper*}
+% \toggletrue{YAD@output@paper}%
+% \toggletrue{YAD@output@paper@star}%
+% \fi
 %
 \ifthenelse{\equal{\YAD@version}{inprogress}}{%
   \toggletrue{YAD@inprogress@work}%
@@ -645,6 +659,16 @@ This work consists of the file  yathesis.dtx
       \togglefalse{YAD@nowarning}%
     }%
   }%
+}%
+%
+\ifthenelse{\equal{\YAD@output}{paper}}{%
+  \toggletrue{YAD@output@paper}%
+}{%
+}%
+\ifthenelse{\equal{\YAD@output}{paper*}}{%
+  \toggletrue{YAD@output@paper}%
+  \toggletrue{YAD@output@paper@star}%
+}{%
 }%
 %    \end{macrocode}
 %
@@ -834,7 +858,7 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % Les packages suivants ne sont à activer qu'en version \enquote{non imprimée}.
 %    \begin{macrocode}
-\iftoggle{YAD@printed@on@paper}{%
+\iftoggle{YAD@output@paper}{%
 }{%
 %    \end{macrocode}
 % Pour faire pointer les hyperliens au début des flottants plutôt qu'au
@@ -1641,7 +1665,7 @@ This work consists of the file  yathesis.dtx
   }%
 %    \end{macrocode}
 %
-% Si on est en mode ×printed× (impression sur papier) la macro
+% Si on est en mode ×paper× (impression sur papier) la macro
 % ×\YAD@href×\meta{\acrshort*{url}}×}{×\meta{texte}×}× n'affiche que le
 % \meta{texte} et les hyperliens des macros
 % ×\url× sont supprimés. En outre, les commandes
@@ -1654,7 +1678,7 @@ This work consists of the file  yathesis.dtx
 % selon que ×\href{×\meta{\acrshort*{url}}×}{×\meta{texte}×}× est dans le texte
 % ordinaire ou elle-même en note de bas de page.
 %    \begin{macrocode}
-\iftoggle{YAD@printed@on@paper}{%
+\iftoggle{YAD@output@paper}{%
   \hypersetup{draft}%
   \renewcommand{\YAD@href}[3][]{%
     #3%
@@ -3344,7 +3368,7 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
   \phantomsection%
   \setsecnumdepth{\YAD@secnumdepth}%
-  \iftoggle{YAD@printed@on@paper}{%
+  \iftoggle{YAD@output@paper}{%
   }{%
     \bookmarksetup{startatroot}%
   }%
@@ -3384,7 +3408,7 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
   \YAD@clearemptydoublepage%
   \phantomsection%
-  \iftoggle{YAD@printed@on@paper}{%
+  \iftoggle{YAD@output@paper}{%
   }{%
     \bookmarksetup{startatroot}%
   }%
@@ -3415,7 +3439,7 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
   \phantomsection%
   \setsecnumdepth{none}%
-  \iftoggle{YAD@printed@on@paper}{%
+  \iftoggle{YAD@output@paper}{%
   }{%
     \bookmarksetup{startatroot}%
   }%
@@ -3436,7 +3460,7 @@ This work consists of the file  yathesis.dtx
 \newpagestyle{contents}[]{%
   \YAD@clearemptydoublepage%
   \phantomsection%
-  \iftoggle{YAD@printed@on@paper}{%
+  \iftoggle{YAD@output@paper}{%
   }{%
     \bookmarksetup{startatroot}%
   }%
@@ -3461,7 +3485,7 @@ This work consists of the file  yathesis.dtx
 \newpagestyle{glossaire}[]{%
   \YAD@clearemptydoublepage%
   \phantomsection%
-  \iftoggle{YAD@printed@on@paper}{%
+  \iftoggle{YAD@output@paper}{%
   }{%
     \bookmarksetup{startatroot}%
   }%
@@ -3500,7 +3524,7 @@ This work consists of the file  yathesis.dtx
   \YAD@clearemptydoublepage%
   \phantomsection%
   \setsecnumdepth{\YAD@secnumdepth}%
-  \iftoggle{YAD@printed@on@paper}{%
+  \iftoggle{YAD@output@paper}{%
   }{%
     \bookmarksetup{startatroot}%
   }%
@@ -4710,7 +4734,7 @@ This work consists of the file  yathesis.dtx
   \renewcommand\chapter{%
     \YAD@clearemptydoublepage%
     \phantomsection%
-    \iftoggle{YAD@printed@on@paper}{%
+    \iftoggle{YAD@output@paper}{%
     }{%
       \bookmarksetup{startatroot}%
     }%
@@ -5031,7 +5055,7 @@ This work consists of the file  yathesis.dtx
 % \BeforeBeginEnvironment{conclusion}{
 %   \phantomsection%
 %   \setsecnumdepth{\YAD@secnumdepth}%
-%   \iftoggle{YAD@printed@on@paper}{%
+%   \iftoggle{YAD@output@paper}{%
 %   }{%
 %     \bookmarksetup{startatroot}%
 %   }%
@@ -5061,7 +5085,7 @@ This work consists of the file  yathesis.dtx
 % \BeforeBeginEnvironment{conclusion*}{%
 %   \phantomsection%
 %   \setsecnumdepth{\YAD@secnumdepth}%
-%   \iftoggle{YAD@printed@on@paper}{%
+%   \iftoggle{YAD@output@paper}{%
 %   }{%
 %     \bookmarksetup{startatroot}%
 %   }%
@@ -5184,12 +5208,12 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \hopatch@AfterPackage{glossaries}{%
 %    \end{macrocode}
-% Si on est version \enquote{impression sur papier}, on supprime la barre de
-% navigation des glossaires qui ne sert que par ses liens hypertextes et donc
-% pas en version imprimée.
+% Si on est en sortie ×output=paper× (et pas en sortie ×output=paper*×), on
+% supprime la barre de navigation des glossaires qui ne sert que par ses liens
+% hypertextes et donc \emph{a priori} pas en version imprimée.
 %    \begin{macrocode}
-  \iftoggle{YAD@printed@on@paper}{%
-    \iftoggle{YAD@printed@on@paper@star}{%
+  \iftoggle{YAD@output@paper}{%
+    \iftoggle{YAD@output@paper@star}{%
     }{%
       \renewcommand{\glsnavigation}{}%
     }%
@@ -5556,7 +5580,7 @@ This work consists of the file  yathesis.dtx
     part,chapter,section,subsection,subsubsection,paragraph,subparagraph,%
     none,true,false,UseOutlines,TwoPageRight,UK,FR,%
     Sonny,Lenny,Glenn,Conny,Rejne,Bjarne,PetersLenny,Bjornstrup,%
-    screen,draft,inprogress,printed,printed*%
+    screen,draft,inprogress,paper,paper*%
   },%
   morekeywords=[4]{% Class and packages options
     warn,final,nodayofweek,unicode,nostamp,all,numbered,a4paper,leqno,fleqn,10pt,11pt,12pt,%
