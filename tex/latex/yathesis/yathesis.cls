@@ -112,10 +112,6 @@
 \define@choicekey*{yathesis.cls}{version}%
 {draft,inprogress,inprogress*,final}[inprogress]%
 {\def\YAD@version{#1}}%
-\def\YAD@layout{screen}%
-\define@choicekey*{yathesis.cls}{layout}%
-{screen,printed,printed*}[screen]%
-{\def\YAD@layout{#1}}%
 \def\YAD@interligne{single}%
 \define@choicekey*{yathesis.cls}{space}%
 {single,onehalf,double}[single]%
@@ -3064,11 +3060,11 @@
 \expression{lbl-phdthesis}{th\`ese}{Ph. D. Thesis}%
 \expression{lbl-phone}{\Telefon}{\Telefon}%
 \expression{lbl-preface}{Pr\'eface}{Preface}%
-\expression{lbl-prepared-at}{Cette th\`ese a \'et\'e pr\'epar\'ee au}{This thesis has
-  been prepared at}%
+\expression{lbl-prepared-at}{Cette th\`ese a \'et\'e pr\'epar\'ee au}{This
+  thesis has been prepared at}%
 \expression{lbl-prepared-at-pl}{Cette th\`ese a \'et\'e pr\'epar\'ee dans les
-  laboratoires suivants.}{This thesis has
-  been prepared at the following research units.}%
+  laboratoires suivants.}{This thesis has been prepared at the following
+  research units.}%
 \expression{lbl-professor}{professeur}{Professor}%
 \expression{lbl-referees}{Rapporteur}{Referee}%
 \expression{lbl-referees-pl}{Rapporteurs}{Referees}%
@@ -3078,11 +3074,13 @@
 \expression{lbl-supervisor}{directeur}{Supervisor}%
 \expression{lbl-supervisors}{Directeur de th\`ese}{Supervisor}%
 \expression{lbl-supervisors-pl}{Directeurs de th\`ese}{Supervisors}%
-\expression{lbl-thesisdefendedby}{Th\`ese pr\'esent\'ee par}{Thesis defended by}%
+\expression{lbl-thesisdefendedby}{Th\`ese pr\'esent\'ee par}{Thesis defended
+  by}%
 \expression{lbl-thesistitle}{Titre de la th\`ese}{Thesis Title}%
-\expression{lbl-universitydepartment}{Unit\'e de recherche}{University Department}%
-\expression{lbl-versiondate}{Version interm\'ediaire en date du}{In progress
-  version as of}%
+\expression{lbl-universitydepartment}{Unit\'e de recherche}{University
+  Department}%
+\expression{lbl-versiondate}{Version interm\'ediaire en date du}{Work in
+  progress as of}%
 \expression{lbl-website}{Site}{Web Site}%
 %% ----------------------------------------------------------------------------------
 %% This work may be distributed and/or modified under the
