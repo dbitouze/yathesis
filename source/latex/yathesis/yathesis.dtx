@@ -254,8 +254,9 @@ This work consists of the file  yathesis.dtx
   \directory{\configurationdirectory}. Le canevas de thèse livré avec la
   classe, décrit \vref{sec:canevas}, fournit ce dossier et ce fichier.}
 %
-\DeclareFixedFootnote{\ifnoprinted}{Chargé seulement si aucune des options
-  \protect\refKey{printed} et \protect\refKey{printed*} n'est utilisée.}
+\DeclareFixedFootnote{\ifscreenoutput}{Chargé seulement si la clé
+  \protect\refKey{output} a pour valeur \protect\docValue{screen} (et donc ni
+  \protect\docValue{paper}, ni \protect\docValue{paper*}).}
 %
 \DeclareFixedFootnote{\noframe}{Sans le cadre.}
 %
