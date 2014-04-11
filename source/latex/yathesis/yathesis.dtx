@@ -591,48 +591,6 @@ This work consists of the file  yathesis.dtx
 \YAD@create@boolean{noprintbibliography}%
 \YAD@create@boolean{nofrontcover}%
 %
-% \define@boolkey+{yathesis.cls}[YAD@]{draft}[true]{%
-%   \ifYAD@draft
-%   \ifthenelse{\equal{\@classoptionslist}{}}{%
-%     \edef\@classoptionslist{draft}%
-%   }{%
-%     \edef\@classoptionslist{\@classoptionslist,draft}%
-%   }%
-%   \fi
-% }{%
-%   \YAD@ClassWarningNoLine{%
-%     Valeur de la cl\'e `draft' non valide :\MessageBreak%
-%     elle ne peut \^etre que `true' ou `false'%
-%   }%
-% }%
-% \define@boolkey+{yathesis.cls}[YAD@]{inprogress}[true]{%
-%   \ifYAD@inprogress
-%   \toggletrue{YAD@inprogress@work}%
-%   \fi
-% }{%
-%   \YAD@ClassWarningNoLine{%
-%     Valeur de la cl\'e `inprogress' non valide :\MessageBreak%
-%     elle ne peut \^etre que `true' ou `false'%
-%   }%
-% }%
-% \define@boolkey+{yathesis.cls}[YAD@]{paper}[true]{%
-%   \ifYAD@paper
-%   \toggletrue{YAD@output@paper}%
-%   \fi
-% }{%
-%   \YAD@ClassWarningNoLine{%
-%     Valeur de la cl\'e `paper' non valide :\MessageBreak%
-%     elle ne peut \^etre que `true' ou `false'%
-%   }%
-% }%
-% \define@boolkey+{yathesis.cls}[YAD@]{paper*}[true]{%
-% }{%
-%   \YAD@ClassWarningNoLine{%
-%     Valeur de la cl\'e `paper*' non valide :\MessageBreak%
-%     elle ne peut \^etre que `true' ou `false'%
-%   }%
-% }%
-%    \end{macrocode}
 % On définit la clé ×version× de la classe qui prend pour valeurs :
 % \begin{itemize}
 % \item (par défaut) ×inprogress× qui désactive les warnings ;
