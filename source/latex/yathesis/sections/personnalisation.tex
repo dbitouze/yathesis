@@ -278,37 +278,6 @@ redéfinies, globalement ou localement.
 \end{bodycode}
 \end{dbexample}
 
-\subsubsection{(Non-)Affichage des  \foreignquote{english}{warnings} propres à la \yatcl{}}
-\label{sec:non-affichage-des}
-
-Dans certaines situations, par exemple lorsque des commandes ou environnements
-\enquote{obligatoires} (cf. \vref{sec:comm-oblig}) sont omis, des
-avertissements (\foreignquote{english}{warnings}) propres à la \yatcl{} sont
-affichés dans le fichier de \enquote{log}. Il est possible de désactiver cet
-affichage de façon :
-\begin{description}
-\item[globale] pour tous ces avertissements, au moyen de la clé
-  \refKey{nowarning} ci-dessous.
-\item[ciblée] pour chacun des commandes et environnements
-  \enquote{obligatoires}, au moyen de clés indiquées seulement
-  \vref{sec:non-affichage-cible} car celles-ci, pouvant altérer le bon
-  fonctionnement de la \yatcl{}, ne sont à utiliser que dans le cadre d'un
-  usage avancé.
-\end{description}
-
-\begin{docKey}{nowarning}{=\docValue{true}\textbar\docValue{false}}{par défaut \docValue{true},
-    initialement \docValue{false}}
-  Cette option désactive l'affichage de tous les avertissements propres à la
-  \yatcl{}.
-\end{docKey}
-
-\begin{dbremark}{Avertissements masqués en versions \enquote{brouillon} et
-    \enquote{intermédiaire}}{}
-  Les versions \enquote{brouillon} et \enquote{intermédiaire} du document (clés
-  \refKey{draft} et \refKey{intermediate}, cf. \vref{sec:versions}) désactivent
-  l'affichage de tous les avertissements propres à la \yatcl{}.
-\end{dbremark}
-
 \subsubsection{Versions du mémoire}\label{sec:versions}
 
 Grâce aux clés \refKey{draft}, \refKey{intermediate}, \refKey{printed} (et
