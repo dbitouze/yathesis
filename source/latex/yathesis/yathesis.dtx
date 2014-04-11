@@ -473,12 +473,103 @@ This work consists of the file  yathesis.dtx
 \def\YAD@global@sepcorpaffil@english{}%
 \DeclareOption{nolink}{\YAD@nolinktrue}%
 \DeclareOption{link}{\YAD@nolinkfalse}%
+%    \end{macrocode}
+%
+% On définit la macro ×\YAD@ClassError× qui est essentiellement identique
+% à ×\ClassError×, sauf que les erreurs définies par elle sont désactivées si
+% l'une ou l'autre des options ×noerror×, ×version=draft×, ×version=inprogress×
+% ou ×version=inprogress*× est passée à la \yatcl{}.
+%    \begin{macrocode}
+\newcommand{\YAD@generic@text}{%
+  .\MessageBreak%
+  Un texte generique risque d'etre\MessageBreak%
+  affiche a la place%
+}%
+\newcommand{\YAD@quiet@text}[1]{%
+  .\MessageBreak\MessageBreak%
+  Pour ne plus etre importune par la\MessageBreak%
+  presente erreur, on peut passer l'option\MessageBreak%
+  `#1' a la classe `yathesis', mais\MessageBreak%
+  celle-ci peut serieusement alterer le\MessageBreak%
+  fonctionnement de la classe :\MessageBreak%
+  option a utiliser /a ses risques et perils/%
+}%
+\newcommand{\YAD@extra@help@text}{%
+  Consulter la documentation de la classe `yathesis' pour
+  plus\MessageBreak%
+  de précisions.%
+}%
+\newcommand{\YAD@ClassError}{\@ifstar{\@tempswatrue\@YAD@ClassError}{\@tempswafalse\@YAD@ClassError}}
+\newcommand{\@YAD@ClassError}[2]{%
+  \ifboolexpr{%
+    togl {YAD@inprogress@work}%
+    or togl {YAD@inprogress@work@star}%
+    or togl {YAD@draft}%
+    or togl {YAD@noerror}%
+  }{%
+  }{%
+    \ifthenelse{\isempty{#2}}{%
+      \ClassError{yathesis}{%
+        #1%
+        \if@tempswa%
+        \else%
+        \YAD@generic@text%
+        \fi%
+      }{%
+        \YAD@extra@help@text%
+      }%
+    }{%
+      \ClassError{yathesis}{%
+        #1%
+        \if@tempswa%
+        \else%
+        \YAD@generic@text%
+        \fi%
+        \YAD@quiet@text{#2}%
+      }{%
+        \YAD@extra@help@text%
+      }%
+    }%
+  }%
+}%
+%    \end{macrocode}
+% On définit la macro ×\YAD@ClassWarningNoLine× qui est essentiellement
+% identique à ×\ClassWarningNoLine×, sauf que les messages de warnings :
+% \begin{itemize}
+% \item apparaissent en fin de log ;
+% \item sont désactivés si l'une ou l'autre des options ×nowarning×,
+%   ×version=draft×, ×version=inprogress× ou ×version=inprogress*× est passée
+%   à la \yatcl{}.
+% \end{itemize}
+%
+%    \begin{macrocode}
+% \newwrite\YAD@file%
+% \immediate\openout\YAD@file=\jobname.yad%
+%    \begin{macrocode}
+\newcounter{YAD@warnings}%
+\setcounter{YAD@warnings}{0}%
+\newcommand{\YAD@ClassWarningNoLine}[1]{%
+  \ifboolexpr{%
+    togl {YAD@inprogress@work}%
+    or togl {YAD@inprogress@work@star}%
+    or togl {YAD@draft}%
+    or togl {YAD@nowarning}%
+  }{%
+    \stepcounter{YAD@warnings}%
+  }{%
+    \ClassWarningNoLine{yathesis}{%
+      #1%
+    }%
+  }%
+}%
+%    \end{macrocode}
+%    \begin{macrocode}
 \newcommand{\YAD@create@boolean}[1]{%
   \define@boolkey+{yathesis.cls}[YAD@]{#1}[true]{%
   }{%
     \ClassWarningNoLine{yathesis}{%
-      Valeur pass\'ee \`a la cl\'e `#1' non valide :\MessageBreak%
-      cette valeur ne peut \^etre que `true' ou `false'%
+      Valeur passee a la cle `#1' non valide :\MessageBreak%
+      cette valeur ne peut etre que `true' ou `false'%
     }%
   }%
 }%
