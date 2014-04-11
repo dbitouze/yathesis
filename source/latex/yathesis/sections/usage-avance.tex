@@ -14,26 +14,36 @@ liste complète figure à la 1\iere{} colonne du \vref{tab:no-warnings}.
   \label{tab:no-warnings}
 \end{table}
 
-Dans le cadre d'un usage \emph{avancé} de la \yatcl{}, on peut décider de
-passer outre le caractère \enquote{obligatoire} de tel ou tel élément.  Mais
-alors, \emph{en version \enquote{finale} du document}\footnote{Cf. valeur
-  \docValue{final} de la clé \refKey{version}.}, chaque compilation est
-perturbée par une erreur \enquote{ciblée} rappellant que l'élément en question
-est requis\footnote{Sauf si la production de ces erreurs propres à la \yatcl{}
-  est désactivée de façon \emph{globale} au moyen de l'option
-  \refKey{noerror}.}.  Chacune de ces erreurs \enquote{ciblées} peut être
-individuellement désactivée au moyen de l'option associée figurant à la
-2\ieme{} colonne du \vref{tab:no-warnings} et dont le rôle est précisé
-ci-après.
+Cependant en cours de rédaction, les éléments \enquote{obligatoires} de la
+thèse ne sont pas encore tous connus de l'utilisateur, par exemple la date de
+soutenance (commande \refCom{date}). De ce fait, la \yatcl{} ne signale pas
+les éléments \enquote{obligatoires} manquants en versions du document :
+\begin{itemize}
+\item \enquote{brouillon}\footnote{Cf. valeur \docValue{draft} de la clé
+    \refKey{version}.} ;
+\item \enquote{intermédiaire}\footnote{Cf. valeurs \docValue{inprogress} (par
+    défaut) et \docValue{inprogress*} de la clé \refKey{version}.}.
+\end{itemize}
+En revanche, lorsque le document est en version finale\footnote{Cf. valeur
+  \docValue{final} de la clé \refKey{version}.}, la \yatcl{} provoque une
+erreur \emph{ciblée} pour tout élément \enquote{obligatoire} manquant et ce,
+à chaque compilation.
 
-\begin{dbwarning}{Éléments \enquote{obligatoires} de la \yatcl{}
-    fortement conseillés}{}
-  Ne pas employer les éléments \enquote{obligatoires} de la \yatcl{} peut
-  sérieusement altérer le bon fonctionnement de celle-ci. Cela est déconseillé,
-  sauf dans le cadre d'un usage avancé \phrase*{si l'on est sûr de ce que l'on
-    fait et qu'on pourra en gérer \emph{seul} les conséquences}.
-\end{dbwarning}
-
+Or, l'utilisateur \emph{avancé} peut vouloir passer outre, y compris en version
+finale du document, le caractère \enquote{obligatoire} de tel ou tel
+élément\footnote{Par exemple, il peut juger inutile de faire figurer des mots
+  clés dans sa thèse et donc de recourir à la commande \enquote{obligatoire}
+  \protect\refCom{keywords}.}.  Et pour éviter que, en version finale, chaque
+compilation ne soit perturbée par les erreurs ciblées correspondantes, la
+\yatcl{} propose de désactiver ces erreurs de façon :
+\begin{description}
+\item[soit globale] au moyen de la clé \refKey{noerror} suivante.
+  \begin{docKey}{noerror}{=\docValue{true}\textbar\docValue{false}}{par défaut \docValue{true},
+      initialement \docValue{false}}
+    Cette option désactive toutes les erreurs propres à la \yatcl{}.
+  \end{docKey}
+\item[soit individuelle] au moyen des clés listées au \vref{tab:no-warnings} et
+  dont le rôle est précisé ci-après.
 \begin{docKey}{noauthor}{=\docValue{true}\textbar\docValue{false}}{par défaut
     \docValue{true}, initialement \docValue{false}}
   Cette option désactive l'erreur émise si la commande \refCom{author} est
@@ -119,6 +129,24 @@ ci-après.
   Cette option désactive l'erreur émise si la commande
   \refCom{printbibliography} est omise.
 \end{docKey}
+\end{description}
+
+\begin{dbwarning}{Éléments \enquote{obligatoires} de la \yatcl{}
+    fortement conseillés}{}
+  En version finale du document, il est conseillé d'employer tous les éléments
+  \enquote{obligatoires} et, sinon, d'utiliser à bon escient les clés de
+  désactivation ci-dessus, sans quoi :
+  \begin{itemize}
+  \item des textes génériques peuvent figurer dans le document final en
+    remplacement de certains éléments manquants ;
+  \item le bon fonctionnement de la \yatcl{} peut être sérieusement altéré.
+  \end{itemize}
+  Donc, en version finale du document, on ne passera outre les éléments
+  \enquote{obligatoires} de la \yatcl{} que dans le cadre d'un usage avancé, si
+  l'on est sûr de ce que l'on fait et qu'on pourra en gérer \emph{seul} les
+  conséquences.  On évitera notamment de recourir de façon trop légère à la clé
+  \refKey{noerror}.
+\end{dbwarning}
 
 %
 \iffalse
