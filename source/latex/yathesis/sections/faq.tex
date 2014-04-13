@@ -36,21 +36,22 @@ Ce chapitre répertorie les questions fréquemment posées sur la \yatcl{}.
 
 \begin{dbfaq}{Pourquoi mes signes de ponctuation ne sont pas précédés
     des espaces adéquates ?}{}
-  J'ai saisi les propriétés du document (cf. \vref{cha:propr-du-docum}) en
-  préambule. Certaines d'entre elles contiennent des signes de ponctuation
+  J'ai saisi les caractéristiques du document (cf. \vref{cha:caract-du-docum})
+  en préambule. Certaines d'entre elles contiennent des signes de ponctuation
   haute ({\NoAutoSpacing?;:!}) qui, dans le \pdf produit, ne sont pas précédés
   des espaces adéquates. Comment régler ce problème ?
   %
   \tcblower
   %
-  Il suffit de saisir ces propriétés :
+  Il suffit de modifier le lieu de saisie de ces
+  caractéristiques\footnote{Cf. \vref{sec:lieu-de-saisie}.} :
   \begin{itemize}
-  \item soit dans le \emph{corps} (et \emph{pas} dans le \emph{préambule}) du
-    fichier (maître) de la thèse (mais cf. alors \vref{wa:avant-maketitle}) ;
-  \item soit dans le fichier \file{\propertiesfile} prévu à cet effet
-    (cf. \vref{propertiesfile}).
+  \item soit dans le \emph{corps} du fichier (maître) de la thèse\footnote{Mais
+      cf. alors \vref{wa:avant-maketitle}.}, et \emph{pas} dans son
+    \emph{préambule} ;
+  \item soit dans le fichier \file{\characteristicsfile} prévu à cet effet.
   \end{itemize}
-  Si on tient absolument à ce que ces propriétés soient saisies dans le
+  Si on tient absolument à ce que ces caractéristiques soient saisies dans le
   préambule, il faut alors les entourer des commandes ×\shorthandon{;:!?}× et
   ×\shorthandoff{;:!?}×.
 \end{dbfaq}
@@ -62,10 +63,10 @@ Ce chapitre répertorie les questions fréquemment posées sur la \yatcl{}.
   \tcblower
   %
   C'est probablement parce que le \Package{babel} a été explicitement chargé au
-  moyen de la commande ×\usepackage[...]{babel}×. Avec la \yatcl{}, ce
-  chargement est déconseillé et supprimer cette commande devrait résoudre le
-  problème. Pour plus de détails concernant la gestion des langues,
-  cf. \vref{sec:langues}.
+  moyen de la commande ×\usepackage[...]{babel}×, déconseillée avec la
+  \yatcl{}. Supprimer cette commande devrait résoudre le problème
+  (cf. \vref{sec:langues} pour plus de détails concernant la gestion des
+  langues).
 \end{dbfaq}
 
 \begin{dbfaq}{Comment éviter l'erreur \enquote{No room for a new
