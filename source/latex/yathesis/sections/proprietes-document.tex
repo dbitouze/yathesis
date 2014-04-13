@@ -22,11 +22,11 @@ Certaines de ces caractéristiques figurent également comme métadonnées du fi
 
 Les commandes permettant de définir les caractéristiques du document peuvent être
 saisies, au choix :
-\begin{enumerate}
-\item directement dans le fichier (maître) de la thèse :
+\begin{description}
+\item[dans le fichier (maître) de la thèse]\
   \begin{enumerate}
-  \item soit dans le préambule ;
-  \item soit dans le corps ;
+  \item soit dans son préambule ;
+  \item soit dans son corps ;
     \begin{dbwarning}{Caractéristiques à saisir \emph{avant}
         \protect\docAuxCommand*{maketitle}}{avant-maketitle}
     Si les caractéristiques du document sont saisies dans le corps du fichier
@@ -34,18 +34,19 @@ saisies, au choix :
     commande \refCom{maketitle}.
   \end{dbwarning}
   \end{enumerate}
-\item\label{propertiesfile} dans un fichier dédié, à nommer
-  \file{\propertiesfile} et à placer dans un sous-dossier à nommer
+\item[dans un fichier dédié]
+  % ^^A \item\label{characteristicsfile} dans un fichier dédié,
+  à nommer \file{\characteristicsfile} et à placer dans un sous-dossier à nommer
   \directory{\configurationdirectory}. Ces fichier et sous-dossier \phrase{tous
     deux prévus à cet effet} sont à créer au besoin mais ils sont fournis par
   le canevas de thèse \enquote{en relief} livré avec la classe, décrit
   \vref{sec:canevas-relief}.
   \begin{dbwarning}{Fichier de caractéristiques à ne pas importer}{}
-    Le \File{\propertiesfile} est \emph{automatiquement} importé par la
+    Le \File{\characteristicsfile} est \emph{automatiquement} importé par la
     \yatcl{} : il doit donc \emph{ne pas} être explicitement importé
     \phrase*{au moyen d'une commande \docAuxCommand{input} ou assimilée}.
   \end{dbwarning}
-\end{enumerate}
+\end{description}
 
 \section{Caractéristiques de titre}
 \label{sec:proprietes-de-titre}
@@ -528,7 +529,7 @@ des membres du jury parmi celles prédéfinies par la \yatcl{}.
 % ^^A \end{docKey}
 % ^^A
 % ^^A \begin{dbexample}{Distinctions}{}
-% ^^A   \begin{bodycode}[title=Préparation du titre (p. ex. dans le \File{\propertiesfile})]
+% ^^A   \begin{bodycode}[title=Préparation du titre (p. ex. dans le \File{\characteristicsfile})]
 % ^^A \cosupervisor[distinction=prix Nobel,award=Nobel Price]{Étienne}{de la Boétie}
 % ^^A \referee[distinction=médaille Fields,award=Fields Medal]{René}{Descartes}
 % ^^A \end{bodycode}
