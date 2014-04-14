@@ -19,19 +19,20 @@
     listoftables,listoffigures,lstlistingname,si,SI,ohm,num,space,shorthandon,shorthandoff,%
     abstractname,appendixname,contentsname,listfigurename,listtablename,indexname,%
     figurename,tablename,chaptername,pagename,seename,alsoname,proofname,bibname,glossaryname,%
-    addto,captionsenglish,captionsfrench,lipsum,href,url,partname,refname,idxlayout,%
-    appendix,lstlistoflistings,graphicpath,loadglsentries,hypersetup,detect-all,SetWatermarkColor%
+    addto,captionsenglish,captionsfrench,lipsum,href,url,partname,refname,idxlayout,renewcommand*,%
+    appendix,lstlistoflistings,graphicpath,loadglsentries,hypersetup,detect-all,SetWatermarkColor,%
+    @pnumwidth%
   },%
   morekeywords=[1]{% Environments' names
     tabular,tabulary,math%
   },%
-  morekeywords=[2]{% Keys of key-value lists
-    bookmarksdepth,columns,see%
+  morekeywords=[2]{% Keys of key-value lists and packages' names
+    bookmarksdepth,columns,see,babel%
   },%
   morekeywords=[3]{% Values of key-value lists
     german,ngerman,french,english,spanish%
   },
-  alsoletter={-*1234560}%
+  alsoletter={-*@1234560}%
 }%
 \lst@definelanguage[yad]{TeX}[LaTeX]{TeX}{%
   % yathesis% TODO : à mettre ailleurs
@@ -52,7 +53,7 @@
     professor,seniorresearcher,mcf,juniorresearcher,mcf*,juniorresearcher*,corporation,logoheight,%
     distinction,award,affiliation,sepcorpaffilfrench,affiliationsecondary,sepcorpaffilenglish,%
     logo,url,nologo,space,mainlanguage,secnumdepth,tocdepth,depth,%
-    address,telephone,fax,email,type,acronym,heading,nowarning,%
+    address,telephone,fax,email,type,acronym,heading,nowarning,noerror,nofrontcover,%
     hyperfootnotes,hyperindex,plainpages,pdfpagemode,pdfpagelayout,locale,gray%
   },%
   morekeywords=[3]{% Values of key-value lists
@@ -60,7 +61,7 @@
     part,chapter,section,subsection,subsubsection,paragraph,subparagraph,%
     none,true,false,UseOutlines,TwoPageRight,UK,FR,%
     Sonny,Lenny,Glenn,Conny,Rejne,Bjarne,PetersLenny,Bjornstrup,%
-    screen,draft,intermediate,printed,printed*%
+    screen,draft,inprogress,paper,paper*%
   },%
   morekeywords=[4]{% Class and packages options
     warn,final,nodayofweek,unicode,nostamp,all,numbered,a4paper,leqno,fleqn,10pt,11pt,12pt,%
@@ -71,7 +72,7 @@
     lbl-cosupervisor,lbl-committee,lbl-committeepresident,lbl-company,lbl-conclusion,lbl-defendedon,%
     lbl-doctoralschool,lbl-draft,%
     %lbl-foreword,lbl-frenchabstract,lbl-acknowledgements,lbl-caution,
-    lbl-institute,lbl-intermediate,%
+    lbl-institute,lbl-inprogress,%
     lbl-introduction,lbl-keywords,lbl-prepared-at,lbl-prepared-at-pl,lbl-guests,lbl-referees,lbl-seniorresearcher,%
     lbl-speciality,lbl-supervisor,lbl-thesisdefendedby,lbl-disclaimer,lbl-thesissupervisedby,%
     lbl-thesistitle,lbl-universitydepartment,lbl-professor,lbl-juniorresearcher*,lbl-mcf*,%
