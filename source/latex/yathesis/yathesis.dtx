@@ -267,25 +267,25 @@ This work consists of the file  yathesis.dtx
 %
 \includeall
 \includeonly{%
-  % sections/titre,
-  sections/pages-titre,
-  sections/proprietes-document,
-  % sections/introduction,
-  % sections/notations,
-  sections/pages-liminaires,
-  % sections/pages-corps,
-  % sections/pages-annexes,
-  % sections/pages-finales,
-  % sections/personnalisation,
-  % sections/recommandations,
-  % sections/aspects,
-  % sections/faq,
-  % sections/add-ons,
-  % sections/packages-charges,
-  % sections/developpements,
-  % sections/usage-avance,
-  % sections/specimen,
-  % sections/canevas
+  sections/introduction
+  sections/proprietes-document
+  sections/pages-titre
+  sections/pages-liminaires
+  sections/pages-corps
+  sections/pages-annexes
+  sections/pages-finales
+  sections/personnalisation
+  sections/recommandations
+  sections/specimen
+  sections/canevas
+  sections/add-ons
+  sections/faq
+  sections/fichiers-charges
+  sections/packages-charges
+  sections/aspects
+  sections/notations
+  sections/usage-avance
+  sections/developpements
 }%
 \begin{document}
 \DocInput{\jobname.dtx}
@@ -501,6 +501,8 @@ This work consists of the file  yathesis.dtx
 }%
 \newcommand{\YAD@ClassError}{\@ifstar{\@tempswatrue\@YAD@ClassError}{\@tempswafalse\@YAD@ClassError}}
 \newcommand{\@YAD@ClassError}[2]{%
+  \ifYAD@noerror%
+  \else%
   \ifboolexpr{%
     togl {YAD@inprogress@work}%
     or togl {YAD@inprogress@work@star}%
@@ -531,6 +533,7 @@ This work consists of the file  yathesis.dtx
       }%
     }%
   }%
+  \fi
 }%
 %    \end{macrocode}
 % On définit la macro ×\YAD@ClassWarningNoLine× qui est essentiellement
@@ -573,7 +576,7 @@ This work consists of the file  yathesis.dtx
     }%
   }%
 }%
-% \YAD@create@boolean{nowarning}%
+\YAD@create@boolean{noerror}%
 \YAD@create@boolean{noauthor}%
 \YAD@create@boolean{notitle}%
 \YAD@create@boolean{noacademicfield}%
@@ -593,11 +596,14 @@ This work consists of the file  yathesis.dtx
 %
 % On définit la clé ×version× de la classe qui prend pour valeurs :
 % \begin{itemize}
-% \item (par défaut) ×inprogress× qui désactive les warnings ;
+% \item (par défaut) ×inprogress× qui désactive les erreurs pour éléments
+% \enquote{obligatoires} manquants ;
+% \item ×inprogress*×, analogue à ×inprogress× avec un filigrane en plus ;
 % \item ×draft× » ;
-% \item ×final×, qui active les warnings, à spécifier pour la version finale du
-%   document qui ne compose pas en pied de page la mention \enquote{Version
-%   intermédiaire en date du ...}.
+% \item ×final×, qui active les erreurs pour éléments \enquote{obligatoires}
+%   manquants, à spécifier pour la version finale du document qui ne compose
+%   pas en pied de page la mention \enquote{Version intermédiaire en date du
+%   ...}.
 % \end{itemize}
 %    \begin{macrocode}
 \def\YAD@version{inprogress}%
@@ -858,12 +864,13 @@ This work consists of the file  yathesis.dtx
 \ifdraft{%
   \RequirePackage{draftwatermark}%
 %    \end{macrocode}
-% Si on est en mode \enquote{draft}, des cadres matérialisant la
-% page et la zone de texte ainsi que, sur la première page, des
-% lignes matérialisant l'emplacement des titres courants sont
-% affichés.
+% Si on est en mode \enquote{draft}, les différentes zones de la page,
+% notamment celle allouée au texte, sont matérialisées et les
+% dépassements de marges sont signalés par une barre verticale noire
+% dans la marge.
 %    \begin{macrocode}
   \geometry{showframe}%
+  \setlength\overfullrule{5pt}%
 }{%
   \iftoggle{YAD@inprogress@work@star}{%
     \RequirePackage{draftwatermark}%
@@ -905,7 +912,7 @@ This work consists of the file  yathesis.dtx
 % hyperliens seront présents même en mode brouillon ; l'option
 % ×unicode× assure que les accents sont composés de façon conforme
 % dans les signets. D'autres option peuvent être fixées dans le(s)
-% fichier(s) de configuration de \yatcl)
+% fichier(s) de configuration de \yatcl
 %    \begin{macrocode}
 \RequirePackage[final,unicode,hyperfootnotes=false,hyperindex=false,plainpages=false,breaklinks,pdfpagemode=UseOutlines,pdfpagelayout=TwoPageRight]{hyperref}%
 %    \end{macrocode}
@@ -924,10 +931,6 @@ This work consists of the file  yathesis.dtx
   \RequirePackage[numbered]{bookmark}%
 }
 %    \end{macrocode}
-% Les packages qui précèdent ont été les derniers chargés du préambule
-%    \begin{macrocode}
-% }%
-%    \end{macrocode}
 %
 % Pour éviter certains comportements inattendus, on précise la langue
 % principale au moyen de l'option ×main× du \Package{babel}. Mais, comme
@@ -937,13 +940,15 @@ This work consists of the file  yathesis.dtx
 \@ifpackagelater{babel}{2013/04/15}{%
   \PassOptionsToPackage{main=\YAD@mainlanguage}{babel}%
 }{%
-  \AtEndPreamble{%
-    \YAD@ClassWarningNoLine{%
-      La version de `babel' utilis\'ee est obsol\`ete.\\
-      Je vais essayer de faire mon possible, mais il est\\
-      est conseill\'e de mettre à jour sa distribution
-    }%
+  % \AtEndPreamble{%
+  \YAD@ClassWarningNoLine{%
+    La version de `babel' utilisee est obsolete.\MessageBreak%
+    La classe `yathesis' va essayer de faire son possible\MessageBreak%
+    mais il est possible qu'elle produise des resultats\MessageBreak%
+    non prevus. Il est conseille de mettre à jour sa\MessageBreak%
+    distribution TeX%
   }%
+  % }%
 }%
 %    \end{macrocode}
 %
@@ -963,33 +968,6 @@ This work consists of the file  yathesis.dtx
 }%
 %    \end{macrocode}
 %
-% On définit la macro ×\YAD@ClassWarningNoLine× qui est essentiellement
-% identique à ×\ClassWarningNoLine×, sauf que les messages de warnings :
-% \begin{itemize}
-% \item apparaissent en fin de log ;
-% \item sont désactivés si l'une ou l'autre des options ×nowarning×, ×draft× ou
-%   ×inprogress× est passée à la \yatcl{}.
-% \end{itemize}
-%
-%    \begin{macrocode}
-% \newwrite\YAD@file%
-% \immediate\openout\YAD@file=\jobname.yad%
-\newcounter{YAD@warnings}%
-\setcounter{YAD@warnings}{0}%
-\newcommand{\YAD@ClassWarningNoLine}[1]{%
-  \ifboolexpr{%
-    togl {YAD@inprogress@work}%
-    or togl {YAD@inprogress@work@star}%
-    or togl {YAD@draft}%
-    or togl {YAD@nowarning}%
-  }{%
-    \stepcounter{YAD@warnings}%
-  }{%
-    \ClassWarningNoLine{yathesis}{%
-      #1%
-    }%
-  }%
-}%
 \AfterEndDocument{%
   \iftoggle{YAD@nowarning}{%
     \ifboolexpr{%
@@ -1001,7 +979,7 @@ This work consists of the file  yathesis.dtx
       \ifnumgreater{\value{YAD@warnings}}{0}{%
         % \immediate\write\YAD@file{%
           \ClassWarningNoLine{yathesis}{%
-            L'option `nowarning' ayant \'et\'e employ\'ee,\MessageBreak%
+            L'option `nowarning' ayant ete employee,\MessageBreak%
             \theYAD@warnings\space warning%
             \ifnumequal{\value{YAD@warnings}}{1}{%
               \space propre%
@@ -1009,15 +987,15 @@ This work consists of the file  yathesis.dtx
               s propres%
             }
             %
-            \`a la classe `yathesis'\MessageBreak%
+            a la classe `yathesis'\MessageBreak%
             \ifnumequal{\value{YAD@warnings}}{1}{%
-              a \'et\'e masqu\'e%
+              a ete masque%
             }{%
-              ont \'et\'e masqu\'es%
+              ont ete masques%
             }
             %
             dans ce fichier de log.\MessageBreak%
-            Il est fortement conseill\'e de r\'eactiver\MessageBreak%
+            Il est fortement conseille de reactiver\MessageBreak%
             l'affichage de ce%
             \ifnumequal{\value{YAD@warnings}}{1}{%
               \space warning%
@@ -1329,7 +1307,7 @@ This work consists of the file  yathesis.dtx
 \global\def\activeeol{^^M}%
 \endgroup%
 \newenvironment{preamblecode}{%
-  \@ifnextchar[\YAD@preamblecode@\YAD@preamblecode@noargs%
+  \@ifnextchar[\YAD@preamblecode@\YAD@preamblecode@noargs%]
 }{%
   \endorigpreamblecode%
 }%
@@ -1552,20 +1530,20 @@ This work consists of the file  yathesis.dtx
 % \begin{macro}{\YAD@configuration@file}
 % \begin{macro}{\configurationfile}
 %    \begin{macrocode}
-\newcommand*{\YAD@configuration@file}{these.cfg}
+\newcommand*{\YAD@configuration@file}{thesis.cfg}
 \newcommand*{\configurationfile}{\YAD@configuration@file}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
 %
 % On définit les macros (privée et publique) où est stocké le nom du fichier
-% esclave contenant les propriétés du document (ce qui doit figurer sur les
-% pages de couverture et de titre, et les mots clés).
-% \begin{macro}{\YAD@properties@file}
-% \begin{macro}{\propertiesfile}
+% esclave contenant les données caractéristiques du document (ce qui doit
+% figurer sur les pages de couverture et de titre, les mots clés, etc.).
+% \begin{macro}{\YAD@characteristics@file}
+% \begin{macro}{\characteristicsfile}
 %    \begin{macrocode}
-\newcommand*{\YAD@properties@file}{properties.tex}
-\newcommand*{\propertiesfile}{\YAD@properties@file}
+\newcommand*{\YAD@characteristics@file}{characteristics.tex}
+\newcommand*{\characteristicsfile}{\YAD@characteristics@file}
 %    \end{macrocode}
 % \end{macro}
 % \end{macro}
@@ -1691,7 +1669,7 @@ This work consists of the file  yathesis.dtx
 % les fichier permettant de modifier les mots et expressions clés du
 % canevas de thèse et les données de la thèse
 %    \begin{macrocode}
-\newcommand*{\YAD@reach@file}[2][\configurationfile]{%
+\newcommand*{\YAD@reach@file}[2][\characteristicsfile]{%
   \ifdraft{%
     \ifthenelse{\equal{\configurationfile}{#1}}{%
       \hypersetup{urlbordercolor={0.5 0 0.5}}%
@@ -2399,11 +2377,11 @@ This work consists of the file  yathesis.dtx
 }%
 \csdef{YAD@print#2@star}{%
   \ifthenelse{\isempty{##2}}{%
-    \YAD@ClassWarningNoLine{%
-      La commande \csuse{#2}\space a \'et\'e employ\'ee\MessageBreak%
-      mais avec un argument obligatoire vide.\MessageBreak%
-      Un texte g\'en\'erique va \^etre affich\'e\MessageBreak%
-      \`a la place%
+    \YAD@ClassError{%
+      La commande \csuse{#2}\space a ete employee\MessageBreak%
+      mais avec un argument obligatoire vide%
+    }{%
+      no#2%
     }%
     \YAD@reach@file{\YAD@generic@argument@translate{#2}}%
   }{%
@@ -2414,11 +2392,11 @@ This work consists of the file  yathesis.dtx
   \let\YAD@texte\relax%
   \csdef{YAD@texte}{%
     \ifthenelse{\isempty{##2}}{%
-      \YAD@ClassWarningNoLine{%
-        La commande \csuse{#2}\space a \'et\'e employ\'ee\MessageBreak%
-        mais avec un argument obligatoire vide.\MessageBreak%
-        Un texte g\'en\'erique va \^etre affich\'e\MessageBreak%
-        \`a la place%
+      \YAD@ClassError{%
+        La commande \csuse{#2}\space a ete employee\MessageBreak%
+        mais avec un argument obligatoire vide%
+      }{%
+        no#2%
       }%
       \YAD@reach@file{\YAD@generic@argument@translate{#2}}%
     }{%
@@ -2548,17 +2526,17 @@ This work consists of the file  yathesis.dtx
       \ifKV@YAD@nologo%
       \else%
       \csdef{print#2logo}{%
-%    \end{macrocode}
-% Un avertissement est émis si le logo de l'école doctorale est fourni car
-% celui-ci n'apparaîtra nulle part.
-%    \begin{macrocode}
-        \ifthenelse{\equal{#2}{doctoralschool}}{%
-          \YAD@ClassWarningNoLine{%
-            Le logo de l'\'ecole doctorale a \'et\'e fourni mais\MessageBreak%
-            il n'appara\^itra nulle part. Veuillez le supprimer%
-          }%
-        }{%
-        }%
+% %    \end{macrocode}
+% % Un avertissement est émis si le logo de l'école doctorale est fourni car
+% % celui-ci n'apparaîtra nulle part.
+% %    \begin{macrocode}
+%         \ifthenelse{\equal{#2}{doctoralschool}}{%
+%           \YAD@ClassWarningNoLine{%
+%             Le logo de l'ecole doctorale a ete fourni mais\MessageBreak%
+%             il n'apparaitra nulle part. Veuillez le supprimer%
+%           }%
+%         }{%
+%         }%
         \@ifstar{\@tempswatrue\csuse{YAD@starnostar@print#2logo}}{\@tempswafalse\csuse{YAD@starnostar@print#2logo}}%
       }%
       \csdef{YAD@starnostar@print#2logo}{%
@@ -2633,11 +2611,11 @@ This work consists of the file  yathesis.dtx
 % En langue principale
 %    \begin{macrocode}
             \ifthenelse{\isempty{##2}}{%
-              \YAD@ClassWarningNoLine{%
-                La commande \csuse{#2}\space a \'et\'e employ\'ee\MessageBreak%
-                mais avec un argument obligatoire vide.\MessageBreak%
-                Un texte g\'en\'erique va \^etre affich\'e\MessageBreak%
-                \`a la place%
+              \YAD@ClassError{%
+                La commande \csuse{#2}\space a ete employee\MessageBreak%
+                mais avec un argument obligatoire vide%
+              }{%
+                no#2%
               }%
               \YAD@reach@file{\YAD@generic@argument@translate{#2}}%
             }{%
@@ -2649,11 +2627,11 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
             \ifthenelse{\isempty{##1}}{%
               \iftoggle{YAD@two@titles}{%
-                \YAD@ClassWarningNoLine{%
-                  La commande \csuse{#2}\space a \'et\'e employ\'ee\MessageBreak%
-                  mais avec un argument optionnel vide.\MessageBreak%
-                  Un texte g\'en\'erique va \^etre affich\'e\MessageBreak%
-                  \`a la place%
+              \YAD@ClassError{%
+                  La commande \csuse{#2}\space a ete employee\MessageBreak%
+                  mais avec un argument optionnel vide%
+                }{%
+                  no#2%
                 }%
                 \YAD@reach@file{\YAD@generic@argument@translate{#2}}%
                 }{%
@@ -2702,7 +2680,7 @@ This work consists of the file  yathesis.dtx
     \YAD@ordernumber@with@argument%
   }{%
     \YAD@ordernumber@without@argument%
-  }%
+  }%]
 }%
 \newcommand{\YAD@ordernumber@with@argument}[1][]{%
   \csdef{printordernumber}{%
@@ -2710,12 +2688,11 @@ This work consists of the file  yathesis.dtx
       \YAD@reach@file{%
         \YAD@generic@argument@translate{ordernumber}%
       }%
-      \YAD@ClassWarningNoLine{%
-        La commande \protect\ordernumber\space a \'et\'e
-        employ\'ee\MessageBreak%
-        mais avec un argument optionnel vide.\MessageBreak%
-        Un texte g\'en\'erique va \^etre affich\'e\MessageBreak%
-        \`a la place%
+      \YAD@ClassError{%
+        La commande \protect\ordernumber\space a ete
+        employee\MessageBreak%
+        mais avec un argument optionnel vide%
+      }{%
       }%
     }{%
       #1%
@@ -2737,10 +2714,12 @@ This work consists of the file  yathesis.dtx
     \newcommand*\YAD@firstname@author{%
       \YAD@generic@argument@translate{firstname}%
     }%
-    \YAD@ClassWarningNoLine{%
-      Pr\'enom de l'auteur de la th\`ese non sp\'ecifi\'e :\MessageBreak%
+    \YAD@ClassError{%
+      Prenom de l'auteur de la these non specifie :\MessageBreak%
       le 1er argument obligatoire de la commande \string\author\MessageBreak%
-      est vide (celui-ci doit \^etre renseign\'e)%
+      est vide (celui-ci doit etre renseigne)%
+    }{%
+      noauthor%
     }%
   }{%
     \newcommand*\YAD@firstname@author{%
@@ -2751,10 +2730,12 @@ This work consists of the file  yathesis.dtx
     \newcommand*\YAD@lastname@author{%
       \YAD@generic@argument@translate{lastname}%
     }%
-    \YAD@ClassWarningNoLine{%
-      Nom de l'auteur de la th\`ese non sp\'ecifi\'e :\MessageBreak%
+    \YAD@ClassError{%
+      Nom de l'auteur de la these non specifie :\MessageBreak%
       Le 2e argument obligatoire de la commande \protect\author\MessageBreak%
-      est vide (celui-ci doit \^etre renseign\'e)%
+      est vide (celui-ci doit etre renseigne)%
+    }{%
+      noauthor%
     }%
   }{%
     \newcommand*\YAD@lastname@author{%
@@ -2824,12 +2805,14 @@ This work consists of the file  yathesis.dtx
   \ifboolexpr{%
     not (test {\IfInteger{\YAD@daydate}})%
   }{%
-    \YAD@ClassWarningNoLine{%
+    \YAD@ClassError{%
       La commande \protect\date{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
-      n'a pas \'et\'e correctement saisie car le\MessageBreak%
-      jour (\YAD@daydate) n'est pas valide :\MessageBreak%
-      ce doit \^etre un nombre entier entre\MessageBreak%
+      n'a pas ete correctement saisie car le\MessageBreak%
+      jour (`\YAD@daydate') n'est pas valide :\MessageBreak%
+      ce doit etre un nombre entier entre\MessageBreak%
       1 et 31%
+    }{%
+      nodate%
     }%
   }{%
     \IfDecimal{\YAD@daydate}{%
@@ -2840,12 +2823,14 @@ This work consists of the file  yathesis.dtx
       test {\ifnumless{\YAD@daydate}{1}}%
       or test {\ifnumgreater{\YAD@daydate}{31}}%
     }{%
-      \YAD@ClassWarningNoLine{%
+      \YAD@ClassError{%
         La commande \protect\date{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
-        n'a pas \'et\'e correctement saisie car le\MessageBreak%
-        num\'ero de jour (\YAD@daydate) n'est pas valide :\MessageBreak%
-        ce doit \^etre un nombre entier entre\MessageBreak%
+        n'a pas ete correctement saisie car le\MessageBreak%
+        numero de jour (`\YAD@daydate') n'est pas valide :\MessageBreak%
+        ce doit etre un nombre entier entre\MessageBreak%
         1 et 31%
+      }{%
+        nodate%
       }%
     }{%
       \toggletrue{YAD@valid@day}%
@@ -2855,12 +2840,14 @@ This work consists of the file  yathesis.dtx
   \ifboolexpr{%
     not (test {\IfInteger{\YAD@monthdate}})%
   }{%
-    \YAD@ClassWarningNoLine{%
+    \YAD@ClassError{%
       La commande \protect\date{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
-      n'a pas \'et\'e correctement saisie car le\MessageBreak%
-      mois (\YAD@monthdate) n'est pas valide :\MessageBreak%
-      ce doit \^etre un nombre entier entre\MessageBreak%
-      1 (janvier) et 12 (d\'ecembre)%
+      n'a pas ete correctement saisie car le\MessageBreak%
+      mois (`\YAD@monthdate') n'est pas valide :\MessageBreak%
+      ce doit etre un nombre entier entre\MessageBreak%
+      1 (janvier) et 12 (decembre)%
+    }{%
+      nodate%
     }%
   }{%
     \IfDecimal{\YAD@monthdate}{%
@@ -2871,12 +2858,14 @@ This work consists of the file  yathesis.dtx
       test {\ifnumless{\YAD@monthdate}{1}}%
       or test {\ifnumgreater{\YAD@monthdate}{12}}%
     }{%
-      \YAD@ClassWarningNoLine{%
+      \YAD@ClassError{%
         La commande \protect\date{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
-        n'a pas \'et\'e correctement saisie car le\MessageBreak%
-        num\'ero de mois (\YAD@monthdate) n'est pas valide :\MessageBreak%
-        ce doit \^etre un nombre entier entre\MessageBreak%
-        1 (janvier) et 12 (d\'ecembre)%
+        n'a pas ete correctement saisie car le\MessageBreak%
+        numero de mois (`\YAD@monthdate') n'est pas valide :\MessageBreak%
+        ce doit etre un nombre entier entre\MessageBreak%
+        1 (janvier) et 12 (decembre)%
+      }{%
+        nodate%
       }%
     }{%
       \toggletrue{YAD@valid@month}%
@@ -2886,13 +2875,15 @@ This work consists of the file  yathesis.dtx
   \ifboolexpr{%
     not (test {\IfInteger{\YAD@yeardate}})%
   }{%
-    \YAD@ClassWarningNoLine{%
+    \YAD@ClassError{%
       La commande
       \protect\date{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
-      n'a pas \'et\'e correctement saisie car\MessageBreak%
-      l'ann\'ee (\YAD@yeardate) n'est pas valide :\MessageBreak%
-      ce doit \^etre un nombre entier (sup\'erieur ou \'egal\MessageBreak%
-      \`a \number\year)%
+      n'a pas ete correctement saisie car\MessageBreak%
+      l'annee (`\YAD@yeardate') n'est pas valide :\MessageBreak%
+      ce doit etre un nombre entier (superieur ou egal\MessageBreak%
+      a \number\year)%
+    }{%
+      nodate%
     }%
   }{%
     \IfDecimal{\YAD@yeardate}{%
@@ -2900,12 +2891,14 @@ This work consists of the file  yathesis.dtx
     }{%
     }%
     \ifnumless{\YAD@yeardate}{\number\year}{%
-      \YAD@ClassWarningNoLine{%
+      \YAD@ClassError{%
         La commande \protect\date{#1}{#2}{#3}\space\MessageBreak%
-        n'a pas \'et\'e correctement saisie car le\MessageBreak%
-        num\'ero de l'ann\'ee (#3) n'est pas valide :\MessageBreak%
-        ce doit \^etre un nombre entier sup\'erieur ou \'egal\MessageBreak%
-        \`a \number\year%
+        n'a pas ete correctement saisie car le\MessageBreak%
+        numero de l'annee (`#3') n'est pas valide :\MessageBreak%
+        ce doit etre un nombre entier superieur ou egal\MessageBreak%
+        a \number\year%
+      }{%
+        nodate%
       }%
     }{%
       \toggletrue{YAD@valid@year}%
@@ -2920,12 +2913,14 @@ This work consists of the file  yathesis.dtx
       \setdatenumber{\YAD@yeardate}{\YAD@monthdate}{\YAD@daydate}%
       \ifnumgreater{\value{datetoday}}{\value{datenumber}}{%
         \YAD@generic@argument@translate{date}%
-        \YAD@ClassWarningNoLine{%
+        \YAD@ClassError{%
           La date saisie
-          (\protect\date{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate})\MessageBreak%
-          n'est pas correcte car elle ne doit pas \^etre\MessageBreak%
-          ant\'erieure \`a la date du jour\MessageBreak%
+          (`\protect\date{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}')\MessageBreak%
+          n'est pas correcte car elle ne doit pas etre\MessageBreak%
+          anterieure a la date du jour\MessageBreak%
           (\protect\date{\number\day}{\number\month}{\number\year})%
+        }{%
+          nodate%
         }%
       }{%
         \formatdate{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}%
@@ -2944,10 +2939,12 @@ This work consists of the file  yathesis.dtx
   \YAD@ifemptyorundef{\printdate}{%
     \ifYAD@nodate%
     \else%
-    \YAD@ClassWarningNoLine{%
-      Date de soutenance de la th\`ese non sp\'ecifi\'ee :\MessageBreak%
-      la commande \protect\date\space n'a pas \'et\'e\MessageBreak%
-      employ\'ee (celle-ci est requise)%
+    \YAD@ClassError{%
+      Date de soutenance de la these non specifiee :\MessageBreak%
+      la commande \protect\date\space n'a pas ete\MessageBreak%
+      employee (celle-ci est requise)%
+    }{%
+      nodate%
     }%
     \fi%
   }{%
@@ -3141,18 +3138,18 @@ This work consists of the file  yathesis.dtx
     \@YAD@knownsecttrue%
   }{%
   }%
-  \if@YAD@knownsect
-  \else
-  \shorttableofcontents{\cmdKV@YAD@name}{3}%
+  \if@YAD@knownsect \else \shorttableofcontents{\cmdKV@YAD@name}{3}%
   \YAD@ClassWarningNoLine{%
-    Nom de commande de sectionnement (#1) inconnu\MessageBreak%
-    et un par d\'efaut (`subsection') va \^etre utilis\'e \`a la place.\MessageBreak%
-    Les noms de commandes de sectionnement sp\'ecifi\'e doivent\MessageBreak%
-    \^etre l'un des suivants : `part', `chapter', `section', `subsection',\MessageBreak%
-    `subsubsection', `paragraph', `subparagraph' et `all'%
+    La valeur (`\cmdKV@YAD@depth') passee a la cle `depth'\MessageBreak%
+    en argument de la commande \protect\tableofcontents\space n'est
+    pas\MessageBreak%
+    un des niveaux de sectionnement connus (`part', `chapter',\MessageBreak%
+    `section', `subsection', `subsubsection', `paragraph',\MessageBreak%
+    `subparagraph' et `all').\MessageBreak%
+    Le niveau `subsection' va etre utilise\MessageBreak%
+    a la place%
   }%
-  \fi
-  \let\setcounter\YAD@ORI@setcounter%
+  \fi \let\setcounter\YAD@ORI@setcounter%
   \resettocdepth*%
 }%
 %
@@ -3391,7 +3388,7 @@ This work consists of the file  yathesis.dtx
     \and
     \value{chapter}>0
   }{%
-    \MakeUppercase\appendixname{} \thechapter.%
+    \MakeUppercase\appendixname{} \thechapter.\
   }{%
   }
   \chaptertitle%
@@ -3405,7 +3402,7 @@ This work consists of the file  yathesis.dtx
         \and
         \value{chapter}>0
       }{%
-        \MakeUppercase\appendixname{} \thechapter.%
+        \MakeUppercase\appendixname{} \thechapter.\
       }{%
       }
     }{%
@@ -3617,11 +3614,13 @@ This work consists of the file  yathesis.dtx
     \YAD@reach@file{\YAD@generic@argument@translate{laboratory}}%
     \ifYAD@nolaboratory%
     \else%
-    \YAD@ClassWarningNoLine{%
-      Laboratoire de la th\`ese non sp\'ecifi\'e ou vide :\MessageBreak%
-      la commande \protect\laboratory\space n'a pas \'et\'e\MessageBreak%
-      employ\'ee (celle-ci est requise) ou son 1er argument\MessageBreak%
-      est vide (celui-ci doit \^etre renseign\'e)%
+    \YAD@ClassError{%
+      Laboratoire de la these non specifie ou vide :\MessageBreak%
+      la commande \protect\laboratory\space n'a pas ete\MessageBreak%
+      employee (celle-ci est requise) ou son 1er argument\MessageBreak%
+      est vide (celui-ci doit etre renseigne)%
+    }{%
+      nolaboratory%
     }%
     \fi%
   }{%
@@ -3652,11 +3651,13 @@ This work consists of the file  yathesis.dtx
     \YAD@reach@file{\YAD@generic@argument@translate{laboratoryaddress}}%
     \ifYAD@nolaboratoryadress%
     \else%
-    \YAD@ClassWarningNoLine{%
-      Adresse du laboratoire non sp\'ecifi\'ee ou vide :\MessageBreak%
-      la commande \protect\laboratory\space n'a pas \'et\'e\MessageBreak%
-      employ\'ee (celle-ci est requise) ou son 2e argument\MessageBreak%
-      est vide (celui-ci doit \^etre renseign\'e)%
+    \YAD@ClassError{%
+      Adresse du laboratoire non specifiee ou vide :\MessageBreak%
+      la commande \protect\laboratory\space n'a pas ete\MessageBreak%
+      employee (celle-ci est requise) ou son 2e argument\MessageBreak%
+      est vide (celui-ci doit etre renseigne)%
+    }{%
+      nolaboratoryadress%
     }%
     \fi%
   }{%
@@ -3717,11 +3718,14 @@ This work consists of the file  yathesis.dtx
         \YAD@generic@argument@translate{title}%
         \ifYAD@notitle%
         \else%
-        \YAD@ClassWarningNoLine{%
-          Titre de la th\`ese non sp\'ecifi\'e :\MessageBreak%
-          la commande \protect\title\space n'a pas \'et\'e employ\'ee\MessageBreak%
+        \YAD@ClassError{%
+          Titre de la these non specifie :\MessageBreak%
+          la commande \protect\title\space n'a pas ete
+          employee\MessageBreak%
           (celle-ci est requise) ou son argument obligatoire\MessageBreak%
-          est vide (celui-ci doit \^etre renseign\'e)%
+          est vide (celui-ci doit etre renseigne)%
+        }{%
+          notitle%
         }%
         \fi%
       }{%
@@ -3772,13 +3776,15 @@ This work consists of the file  yathesis.dtx
         \YAD@generic@argument@translate{institute}%
         \ifYAD@noinstitute%
         \else%
-        \YAD@ClassWarningNoLine{%
-          Institut de la th\`ese non sp\'ecifi\'e :\MessageBreak%
-          la commande \protect\institute\space n'a pas \'et\'e\MessageBreak%
-          employ\'ee (celle-ci est requise) ou son argument\MessageBreak%
-          obligatoire est vide (celui-ci doit \^etre\MessageBreak%
-          renseign\'e)%
-        }%
+        \YAD@ClassError{%
+          Institut de la these non specifie :\MessageBreak%
+          la commande \protect\institute\space n'a pas ete\MessageBreak%
+          employee (celle-ci est requise) ou son argument\MessageBreak%
+          obligatoire est vide (celui-ci doit etre\MessageBreak%
+          renseigne)%
+          }{%
+            noinstitute%
+          }%
         \fi%
       }{%
         \YAD@translation{institute}
@@ -3803,13 +3809,15 @@ This work consists of the file  yathesis.dtx
         \YAD@generic@argument@translate{doctoralschool}%
         \ifYAD@nodoctoralschool%
         \else%
-        \YAD@ClassWarningNoLine{%
-          \'Ecole doctorale de la th\`ese non sp\'ecifi\'ee :\MessageBreak%
-          la commande \protect\doctoralschool\space n'a pas \'et\'e\MessageBreak%
-          employ\'ee (celle-ci est requise) ou son argument\MessageBreak%
-          obligatoire est vide (celui-ci doit \^etre\MessageBreak%
-          renseign\'e)%
-        }%
+        \YAD@ClassError{%
+          Ecole doctorale de la these non specifiee :\MessageBreak%
+          la commande \protect\doctoralschool\space n'a pas ete\MessageBreak%
+          employee (celle-ci est requise) ou son argument\MessageBreak%
+          obligatoire est vide (celui-ci doit etre\MessageBreak%
+          renseigne)%
+          }{%
+            nodoctoralschool%
+          }%
         \fi%
       }{%
         \textbf{\printdoctoralschool}%
@@ -3821,18 +3829,20 @@ This work consists of the file  yathesis.dtx
       \ifdraft{}{\vspace*{\stretch{1.5}}}%
       \par%
       {\large%
-        \YAD@translation{thesisdefendedby}
-        %
+        \YAD@translation{thesisdefendedby} %
         \YAD@ifemptyorundef{\printauthor}{%
           \YAD@generic@argument@translate{author}%
           \ifYAD@noauthor%
           \else%
-          \YAD@ClassWarningNoLine{%
-            Auteur de la th\`ese non sp\'ecifi\'e :\MessageBreak%
-            la commande \protect\author\space n'a pas \'et\'e\MessageBreak%
-            employ\'ee (celle-ci est requise) ou ses 2 premiers\MessageBreak%
-            arguments obligatoires sont vides (ceux-ci doivent \^etre\MessageBreak%
-            renseign\'es)%
+          \YAD@ClassError{%
+            Auteur de la these non specifie :\MessageBreak%
+            la commande \protect\author\space n'a pas ete
+            employee\MessageBreak%
+            (celle-ci est requise) ou ses 2 premiers\MessageBreak%
+            arguments obligatoires sont vides\MessageBreak%
+            (ceux-ci doivent etre renseignes)%
+          }{%
+            noauthor%
           }%
           \fi%
         }{%
@@ -3869,11 +3879,14 @@ This work consists of the file  yathesis.dtx
         \YAD@generic@argument@translate{academicfield}%
         \ifYAD@noacademicfield%
         \else%
-        \YAD@ClassWarningNoLine{%
-          Champ disciplinaire de la th\`ese non sp\'ecifi\'e :\MessageBreak%
-          la commande \protect\academicfield\space n'a pas \'et\'e\MessageBreak%
-          employ\'ee (celle-ci est requise) ou son argument\MessageBreak%
-          obligatoire est vide (celui-ci doit \^etre renseign\'e)%
+        \YAD@ClassError{%
+          Champ disciplinaire de la these non specifie :\MessageBreak%
+          la commande \protect\academicfield\space n'a pas ete\MessageBreak%
+          employee (celle-ci est requise) ou son argument\MessageBreak%
+          obligatoire est vide (celui-ci doit etre\MessageBreak%
+          renseigne)%
+        }{%
+          noacademicfield%
         }%
         \fi%
       }{%
@@ -3902,12 +3915,14 @@ This work consists of the file  yathesis.dtx
 }{%
   \ifYAD@nosupervisor%
   \else%
-  \YAD@ClassWarningNoLine{%
-    Directeur de th\`ese non sp\'ecifi\'e :\MessageBreak%
-    la commande \protect\supervisor\space n'a pas \'et\'e\MessageBreak%
-    employ\'ee (celle-ci est requise) ou ses arguments\MessageBreak%
-    obligatoires sont vides (ceux-ci doivent \^etre\MessageBreak%
-    renseign\'es)%
+  \YAD@ClassError*{%
+    Directeur de these non specifie :\MessageBreak%
+    la commande \protect\supervisor\space n'a pas ete\MessageBreak%
+    employee (celle-ci est requise) ou ses arguments\MessageBreak%
+    obligatoires sont vides (ceux-ci doivent etre\MessageBreak%
+    renseignes)%
+  }{%
+    nosupervisor%
   }%
   \fi%
 }%
@@ -3963,9 +3978,11 @@ This work consists of the file  yathesis.dtx
     or bool {YAD@nomaketitle}%
   }{%
   }{%
-    \YAD@ClassWarningNoLine{%
-      La commande \protect\maketitle\space n'a pas \'et\'e\MessageBreak%
-      employ\'ee. Celle-ci est requise%
+    \YAD@ClassError*{%
+      La commande \protect\maketitle\space n'a pas ete\MessageBreak%
+      employee. Celle-ci est requise%
+    }{%
+      nomaketitle%
     }%
   }%
 }%
@@ -4016,26 +4033,32 @@ This work consists of the file  yathesis.dtx
   \nottoggle{YAD@keywords@used}{%
     \ifYAD@nokeywords%
     \else%
-    \YAD@ClassWarningNoLine{%
-      La commande \protect\keywords\space n'a pas \'et\'e\MessageBreak%
-      employ\'ee. Celle-ci est requise%
+    \YAD@ClassError{%
+      La commande \protect\keywords\space n'a pas ete\MessageBreak%
+      employee. Celle-ci est requise%
+    }{%
+      nokeywords%
     }%
     \fi%
   }{%
     \ifdefempty{\YAD@mainkeywords}{%
-      \YAD@ClassWarningNoLine{%
-        Les mots cl\'e dans la langue principale\MessageBreak%
+      \YAD@ClassError{%
+        Les mots cles dans la langue principale\MessageBreak%
         (1er argument de la commande \protect\keywords) n'ont\MessageBreak%
-        pas \'et\'e spécifi\'es. Ceux-ci sont requis%
+        pas ete spécifies. Ceux-ci sont requis%
+      }{%
+        nokeywords%
       }%
     }{%
       \csdef{YAD@metakeywords}{\YAD@mainkeywords}
     }%
     \ifdefempty{\YAD@secondarykeywords}{%
-      \YAD@ClassWarningNoLine{%
-        Les mots cl\'e dans la langue secondaire\MessageBreak%
+      \YAD@ClassError{%
+        Les mots cles dans la langue secondaire\MessageBreak%
         (2e argument de la commande \protect\keywords) n'ont\MessageBreak%
-        pas \'et\'e spécifi\'es. Ceux-ci sont requis%
+        pas ete spécifies. Ceux-ci sont requis%
+      }{%
+        nokeywords%
       }%
     }{%
       \csdef{YAD@metakeywords}{\YAD@mainkeywords (\YAD@secondarykeywords)}%
@@ -4533,9 +4556,11 @@ This work consists of the file  yathesis.dtx
   }{%
     \ifYAD@nomakeabstract%
     \else%
-    \YAD@ClassWarningNoLine{%
-      La commande \protect\makeabstract\space n'a pas \'et\'e\MessageBreak%
-      employ\'ee. Celle-ci est requise%
+    \YAD@ClassError*{%
+      La commande \protect\makeabstract\space n'a pas ete\MessageBreak%
+      employee. Celle-ci est requise%
+    }{%
+      nomakeabstract%
     }%
     \fi%
   }%
@@ -4548,34 +4573,42 @@ This work consists of the file  yathesis.dtx
   \iftoggle{YAD@abstract@used}{%
     \iftoggle{YAD@main@abstract@empty}{%
       \ifnumcomp{\value{YAD@abstracts}}{>}{1}{%
-        \YAD@ClassWarningNoLine{%
+        \YAD@ClassError{%
           La 1re occurrence de l'environnement `abstract'\MessageBreak%
-          a \'et\'e employ\'ee avec un contenu est vide.\MessageBreak%
+          a ete employee avec un contenu vide.\MessageBreak%
           Un contenu non vide est requis%
+        }{%
+          noabstract%
         }%
       }{%
-        \YAD@ClassWarningNoLine{%
-          L'environnement `abstract' a \'et\'e\MessageBreak%
-          employ\'e mais avec un contenu est vide.\MessageBreak%
+        \YAD@ClassError{%
+          L'environnement `abstract' a ete\MessageBreak%
+          employe mais avec un contenu vide.\MessageBreak%
           Un contenu non vide est requis%
+        }{%
+          noabstract%
         }%
       }%
     }{%
     }%
     \iftoggle{YAD@second@abstract@empty}{%
-      \YAD@ClassWarningNoLine{%
+      \YAD@ClassError{%
         La 2e occurrence de l'environnement `abstract'\MessageBreak%
-        a \'et\'e employ\'ee avec un contenu est vide.\MessageBreak%
+        a ete employee avec un contenu vide.\MessageBreak%
         Un contenu non vide est requis%
+      }{%
+        noabstract%
       }%
     }{%
     }%
   }{%
     \ifYAD@noabstract%
     \else%
-    \YAD@ClassWarningNoLine{%
-      L'environnement `abstract' n'a pas \'et\'e\MessageBreak%
-      employ\'e. Celui-ci est requis%
+    \YAD@ClassError{%
+      L'environnement `abstract' n'a pas ete\MessageBreak%
+      employe. Celui-ci est requis%
+    }{%
+      noabstract%
     }%
     \fi%
   }%
@@ -4604,16 +4637,14 @@ This work consists of the file  yathesis.dtx
   \if@tempswa%
   \else%
   \vspace*{\stretch{2}}%
-  \fi
-  \DTLifdbempty{dedications}{%
+  \fi \DTLifdbempty{dedications}{%
     \YAD@generic@argument@translate{dedications}%
-    \YAD@ClassWarningNoLine{%
-      La commande \protect\makededications\space est employ\'ee\MessageBreak%
-      alors que la commande
-      \protect\dedication\protect{<d\'edicace>\protect},\MessageBreak%
-      permettant de pr\'eparer des d\'edicaces, n'a pas\MessageBreak%
-      \'et\'e employ\'ee. Veuillez l'employer au moins\MessageBreak%
-      une fois%
+    \YAD@ClassError{%
+      La commande \protect\makededications\space a été employee\MessageBreak%
+      alors que la commande \protect\dedication, permettant\MessageBreak%
+      de preparer des dedicaces, n'a pas ete\MessageBreak%
+      employee%
+    }{%
     }%
   }{%
 %    \end{macrocode}
@@ -4626,8 +4657,12 @@ This work consists of the file  yathesis.dtx
       }{%
         \YAD@ifemptyorundef{\YAD@dedication}{%
           \YAD@generic@argument@translate{dedication}%
-          \YAD@ClassWarningNoLine{%
-            D\'edicace vide%
+          \YAD@ClassError{%
+            Dedicace vide :\MessageBreak%
+            l'argument obligatoire d'une commande
+            \protect\dedication\MessageBreak%
+            est vide (celui-ci doit etre renseigne)%
+          }{%
           }%
         }{%
           \YAD@dedication%
@@ -4670,13 +4705,12 @@ This work consists of the file  yathesis.dtx
     \begin{epigraphs}
       \qitem{\YAD@generic@argument@translate{epigraphs}}{}%
     \end{epigraphs}
-    \YAD@ClassWarningNoLine{%
-      La commande \protect\makefrontepigraphs\space est employ\'ee\MessageBreak%
-      alors que la commande
-      \protect\frontepigraph\protect{<\'epigraphe>\protect},\MessageBreak%
-      permettant de pr\'eparer des \'epigraphes, n'a pas\MessageBreak%
-      \'et\'e employ\'ee. Veuillez l'employer au moins\MessageBreak%
-      une fois%
+    \YAD@ClassError{%
+      La commande \protect\makefrontepigraphs\space a été employee\MessageBreak%
+      alors que la commande \protect\frontepigraph, permettant\MessageBreak%
+      de preparer des epigraphes, n'a pas ete\MessageBreak%
+      employee%
+    }{%
     }%
   }{%
 %    \end{macrocode}
@@ -4692,8 +4726,12 @@ This work consists of the file  yathesis.dtx
         \renewcommand{\YAD@epigraph}{%
           \YAD@generic@argument@translate{epigraph}%
         }%
-        \YAD@ClassWarningNoLine{%
-          \'Epigraphe vide%
+        \YAD@ClassError{%
+          Epigraphe vide :\MessageBreak%
+          l'argument obligatoire d'une commande
+          \protect\frontepigraph\MessageBreak%
+          est vide (celui-ci doit etre renseigne)%
+        }{%
         }%
       }{%
       }%
@@ -4886,9 +4924,9 @@ This work consists of the file  yathesis.dtx
 %   \iftoggle{YAD@frenchabstract@used}{%
 %     \ifthenelse{\equal{\YAD@mainlanguage}{french}}{%
 %       \YAD@ClassWarningNoLine{%
-%         R\'esum\'e substantiel en fran\c cais inutile.\MessageBreak%
-%         La langue principale de la th\`ese \'etant le\MessageBreak%
-%         fran\c cais, un r\'esum\'e substantiel en\MessageBreak%
+%         Resume substantiel en francais inutile.\MessageBreak%
+%         La langue principale de la these etant le\MessageBreak%
+%         fran\c cais, un resume substantiel en\MessageBreak%
 %         fran\c cais est inutile : vous pouvez supprimer\MessageBreak%
 %         la commande \protect\frenchabstract\space et le texte qui s'y\MessageBreak%
 %         rapporte%
@@ -4899,10 +4937,10 @@ This work consists of the file  yathesis.dtx
 %     \ifthenelse{\equal{\YAD@mainlanguage}{french}}{%
 %     }{%
 %       \YAD@ClassWarningNoLine{%
-%         R\'esum\'e substantiel en fran\c cais recommand\'e.\MessageBreak%
-%         La langue principale de la th\`ese n'\'etant pas le\MessageBreak%
-%         fran\c cais, un r\'esum\'e substantiel en\MessageBreak%
-%         fran\c cais est recommand\'e : vous pouvez en cr\'eer\MessageBreak%
+%         Resume substantiel en fran\c cais recommande.\MessageBreak%
+%         La langue principale de la these n'etant pas le\MessageBreak%
+%         fran\c cais, un resume substantiel en\MessageBreak%
+%         fran\c cais est recommande : vous pouvez en creer\MessageBreak%
 %         un au moyen de \protect\frenchabstract\space (cf. la\MessageBreak%
 %         documentation de la la classe yat)%
 %       }%
@@ -4934,9 +4972,8 @@ This work consists of the file  yathesis.dtx
     %
     \ifundef{\printcoinstitute}{}{and the \printcoinstitute{}}
     %
-    neither endorse nor censure authors' opinions expressed
-    in the theses: these opinions must be considered to be those of their
-    authors.%
+    neither endorse nor censure authors' opinions expressed in the theses:
+    these opinions must be considered to be those of their authors.%
   }%
 }%
 %    \end{macrocode}
@@ -5055,8 +5092,8 @@ This work consists of the file  yathesis.dtx
 %   \iftoggle{YAD@introduction@used}{%
 %     \iftoggle{YAD@introduction@empty}{%
 %       \YAD@ClassWarningNoLine{%
-%         L'environnement `introduction' a \'et\'e employ\'e\MessageBreak%
-%         avec un contenu est vide.\MessageBreak%
+%         L'environnement `introduction' a ete employe\MessageBreak%
+%         avec un contenu vide.\MessageBreak%
 %         Un contenu non vide est requis%
 %       }%
 %     }{%
@@ -5065,8 +5102,8 @@ This work consists of the file  yathesis.dtx
 %     \ifYAD@nointroduction%
 %     \else%
 %     \YAD@ClassWarningNoLine{%
-%       L'environnement `introduction' n'a pas \'et\'e\MessageBreak%
-%       employ\'e. Celui-ci est requis%
+%       L'environnement `introduction' n'a pas ete\MessageBreak%
+%       employe. Celui-ci est requis%
 %     }%
 %     \fi%
 %   }%
@@ -5178,8 +5215,8 @@ This work consists of the file  yathesis.dtx
 %   \iftoggle{YAD@conclusion@used}{%
 %     \iftoggle{YAD@conclusion@empty}{%
 %       \YAD@ClassWarningNoLine{%
-%         L'environnement `conclusion' a \'et\'e employ\'e\MessageBreak%
-%         avec un contenu est vide.\MessageBreak%
+%         L'environnement `conclusion' a ete employe\MessageBreak%
+%         avec un contenu vide.\MessageBreak%
 %         Un contenu non vide est requis%
 %       }%
 %     }{%
@@ -5187,9 +5224,9 @@ This work consists of the file  yathesis.dtx
 %   }{%
 %     \ifYAD@noconclusion%
 %     \else%
-%     \YAD@ClassWarningNoLine{%
-%       L'environnement `conclusion' n'a pas \'et\'e\MessageBreak%
-%       employ\'e. Celui-ci est requis%
+%     \YAD@ClassError{%
+%       L'environnement `conclusion' n'a pas ete\MessageBreak%
+%       employe. Celui-ci est requis%
 %     }%
 %     \fi%
 %   }%
@@ -5246,9 +5283,11 @@ This work consists of the file  yathesis.dtx
   }{%
     \ifYAD@noprintbibliography%
     \else%
-    \YAD@ClassWarningNoLine{%
-      La commande \protect\printbibliography\space n'a pas \'et\'e\MessageBreak%
-      employ\'ee. Celle-ci est requise%
+    \YAD@ClassError*{%
+      La commande \protect\printbibliography\space n'a pas ete\MessageBreak%
+      employee. Celle-ci est requise%
+    }{%
+      noprintbibliography%
     }%
     \fi%
   }%
@@ -5305,8 +5344,8 @@ This work consists of the file  yathesis.dtx
 }%
 }{%
   \ClassError{yathesis}{}{%
-    La commande \protect\newglssymbol ne peut \^etre\MessageBreak%
-    employ\'ee que si le package 'glossaries' est charg\'e%
+    La commande \protect\newglssymbol ne peut etre\MessageBreak%
+    employee que si le package 'glossaries' est charge%
   }{%
   }%
 }%
@@ -5380,7 +5419,7 @@ This work consists of the file  yathesis.dtx
   \InputIfFileExists{\configurationdirectory/\configurationfile}%
   {\ClassInfo{yathesis}{%
     Fichier de configuration local \configurationfile\space
-    trouv\'e%
+    trouve%
     }%
   }{%
     % \YAD@ClassWarningNoLine{%
@@ -5399,12 +5438,12 @@ This work consists of the file  yathesis.dtx
   \shorthandon{;:!?}%
   \InputIfFileExists{\configurationdirectory/\macrosfile}%
   {\ClassInfo{yathesis}{%
-      Fichier \macrosfile\space trouv\'e%
+      Fichier \macrosfile\space trouve%
     }}%
   {%
     % \YAD@ClassWarningNoLine{%
     %   Fichier \macrosfile\space introuvable.\MessageBreak%
-    %   Le fichier \macrosfile\space n'a pas \'et\'e trouv\'e\MessageBreak%
+    %   Le fichier \macrosfile\space n'a pas ete trouve\MessageBreak%
     %   dans le dossier `\configurationdirectory'%
     % }%
   }%
@@ -5417,19 +5456,19 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \AtEndPreamble{%
   \shorthandon{;:!?}%
-  \InputIfFileExists{\configurationdirectory/\propertiesfile}%
+  \InputIfFileExists{\configurationdirectory/\characteristicsfile}%
   {%
     \ClassInfo{yathesis}{%
-      Fichier \propertiesfile\space des donn\'ees du document trouv\'e%
+      Fichier \characteristicsfile\space des donnees du document trouve%
     }%
   }%
   {%
     % \YAD@ClassWarningNoLine{%
-    %   Fichier \propertiesfile\space des donn\'ees du titre
+    %   Fichier \characteristicsfile\space des donnees du titre
     %   introuvable.\MessageBreak%
-    %   Le fichier \propertiesfile\space n'a pas \'et\'e trouv\'e\MessageBreak%
+    %   Le fichier \characteristicsfile\space n'a pas ete trouve\MessageBreak%
     %   dans le dossier `\configurationdirectory'.\MessageBreak Ce fichier
-    %   \propertiesfile\space peut faciliter l'usage\MessageBreak de la classe%
+    %   \characteristicsfile\space peut faciliter l'usage\MessageBreak de la classe%
     % }%
   }%
   \shorthandoff{;:!?}%
@@ -5439,16 +5478,18 @@ This work consists of the file  yathesis.dtx
 % \section{Avertissements}
 % \label{cha:yadr}
 %
-% Si la commande ×\tableofcontents× n'a pas été utilisée, un warning est émis.
+% Si la commande ×\tableofcontents× n'a pas été utilisée, une erreur est émise.
 %    \begin{macrocode}
 \AtEndDocument{%
   \iftoggle{YAD@tableofcontents@used}{%
   }{%
     \ifYAD@notableofcontents%
     \else%
-    \YAD@ClassWarningNoLine{%
-      La commande \protect\tableofcontents\space n'a pas \'et\'e\MessageBreak%
-      employ\'ee. Celle-ci est requise%
+    \YAD@ClassError*{%
+      La commande \protect\tableofcontents\space n'a pas ete\MessageBreak%
+      employee. Celle-ci est requise%
+    }{%
+      notableofcontents%
     }%
     \fi%
   }%
@@ -5626,7 +5667,7 @@ This work consists of the file  yathesis.dtx
     professor,seniorresearcher,mcf,juniorresearcher,mcf*,juniorresearcher*,corporation,logoheight,%
     distinction,award,affiliation,sepcorpaffilfrench,affiliationsecondary,sepcorpaffilenglish,%
     logo,url,nologo,space,mainlanguage,secnumdepth,tocdepth,depth,%
-    address,telephone,fax,email,type,acronym,heading,nowarning,%
+    address,telephone,fax,email,type,acronym,heading,nowarning,noerror,nofrontcover,%
     hyperfootnotes,hyperindex,plainpages,pdfpagemode,pdfpagelayout,locale,gray%
   },%
   morekeywords=[3]{% Values of key-value lists
