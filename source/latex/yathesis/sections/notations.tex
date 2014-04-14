@@ -53,43 +53,48 @@ L'icône \mandatory{}, figurant en regard de certaines éléments (commandes ou
 environnements), indique que ceux-ci sont \enquote{obligatoires} et ils peuvent
 l'être pour différentes raisons :
 \begin{itemize}
-\item parce que les objets correspondants sont requis :
+\item parce qu'ils sont requis :
   \begin{itemize}
   \item de façon évidente dans une thèse, par exemple l'auteur, le titre,
-    l'institut, la table des matières, etc. (commandes \refCom{author},
-    \refCom{title}, \refCom{institute}, \refCom{tableofcontents}, etc.) ;
-  \item selon le \textcite{guidoct}, par exemple le champ
-    disciplinaire, l'école doctorale, les mots clés, le résumé, etc. (commandes
+    l'institut, la table des matières (commandes \refCom{author},
+    \refCom{title}, \refCom{institute}, \refCom{tableofcontents}) ;
+  \item selon le \textcite{guidoct}, par exemple le champ disciplinaire,
+    l'école doctorale, les mots clés, le résumé (commandes
     \refCom{academicfield}, \refCom{doctoralschool}, \refCom{keywords},
-    \refEnv{abstract}, etc.) ;
+    environnement \refEnv{abstract}) ;
   \end{itemize}
-\item parce qu'ils sont :
-  \begin{itemize}
-  \item nécessaires au (bon) fonctionnement par défaut de la \yatcl{}, par
-    exemple \refCom{maketitle} ;
-  \item fortement conseillés par l'auteur de la présente classe, par
-    exemple\footnote{Une liste des références bibliographiques est de toute
-      façon requise de façon évidente dans une thèse mais on peut souhaiter
-      recourir à un autre système de gestion de bibliographie que celui que
-      fournit le \Package{biblatex}.}  \refCom{printbibliography}, etc.
-  \end{itemize}
+\item parce qu'ils sont nécessaires au fonctionnement \emph{par défaut} de la
+  \yatcl{}, par exemple \refCom{maketitle} ;
+\item parce qu'ils sont fortement recommandés par l'auteur de la présente
+  classe, par exemple\footnote{Une liste des références bibliographiques est de
+    toute façon requise de façon évidente dans une thèse mais on peut souhaiter
+    recourir à un autre système de gestion de bibliographie que celui que
+    fournit le \Package{biblatex}.}  \refCom{printbibliography}.
 \end{itemize}
 
 \begin{dbremark}{Éléments (modérément) \enquote{obligatoires}}{}
   Si un élément \enquote{obligatoire} est omis :
   \begin{itemize}
-  \item aucune erreur de compilation n'est provoquée mais un avertissement
-    \enquote{personnalisé}, affiché dans le fichier de \enquote{log}, en
-    rappelle le caractère obligatoire (sauf si la désactivation de cet
-    affichage a été demandée, cf. \vref{sec:non-affichage-des}) ;
-  \item un texte générique est en général affiché à sa place (si cet élément
-    est conçu pour produire du texte).
+  \item un texte générique est en général affiché à sa place\footnote{Si cet
+      élément est conçu pour produire du texte.} ;
+  \item le signalement de cette omission est :
+    \begin{description}
+    \item[désactivé] par défaut\footnote{C'est-à-dire en version intermédiaire
+        du document (cf. valeur par défaut \docValue{inprogress} de la clé
+        \refKey{version}). Le signalement est également désactivé en versions
+        intermédiaire alternative et brouillon (cf. valeurs
+        \docValue{inprogress*} et \docValue{draft} de la clé
+        \refKey{version}).} ;
+    \item[activé] (seulement) en version \emph{finale}\footnote{Cf. valeur
+        \docValue{final} de la clé \refKey{version}.} du document\footnote{Sauf
+        si la désactivation de cette erreur a été demandée,
+        cf. \vref{sec:desact-des-erre}.}, par le biais d'une erreur de
+      compilation ciblée.
+    \end{description}
   \end{itemize}
 \end{dbremark}
 
-\begin{dbremark}{Tout ce qui n'est pas obligatoire est optionnel}{}
-  Naturellement, tout élément non \enquote{obligatoire} est réputé optionnel.
-\end{dbremark}
+Naturellement, tout élément non \enquote{obligatoire} est réputé optionnel.
 
 \section{Codes sources}
 \label{sec:codes-sources}
@@ -159,25 +164,25 @@ environnements peuvent être modulés au moyen d'options, ou listes d'options
   \begin{docKey*}{freekey}{=\meta{valeur}}{\meta{précisions}}
     \meta{Description de \refKey{freekey}}
   \end{docKey*}
-\item[imposée parmi une liste de valeurs possibles.] Une telle \meta{clé}, par
-  exemple nommée \refKey{choicekey} et de valeurs imposées \docValue*{valeur1},
-  \docValue*{valeur2}, ..., \docValue*{valeurN}, est alors documentée selon la
-  syntaxe suivante (les barres verticales séparant les valeurs possibles
-  signifient \enquote{ou}) :
+\item[imposée] (parmi une liste de valeurs possibles). Une telle \meta{clé},
+  par exemple nommée \refKey{choicekey} et de valeurs imposées
+  \docValue*{valeur1}, \docValue*{valeur2}, ..., \docValue*{valeurN}, est alors
+  documentée selon la syntaxe suivante\footnote{Comme souvent en informatique,
+    la barre verticale séparant les valeurs possibles signifie \enquote{ou}.} :
   \begin{docKey*}{choicekey}{=\docValue*{valeur1}\textbar\docValue*{valeur2}\textbar...\textbar\docValue*{valeurN}}{\meta{précisions}}
     \meta{Description de \refKey{choicekey} et de ses valeurs possibles}
   \end{docKey*}
 \end{description}
 %^^A \end{description}
 
-Les \meta{précisions} figurant entre parenthèses en fin de ligne portent
-généralement sur les valeurs \emph{initiale} et \emph{par défaut} de la clé. Ce
-sont les valeurs passées en sous-main par la \yatcl{} lorsque la clé,
-respectivement :
-\begin{itemize}
-\item est employée mais sans qu'une valeur lui soit passée ;
-\item n'est pas employée.
-\end{itemize}
+Des \meta{précisions} sur les options de la forme \meta{clé}×=×\meta{valeur}
+figurent souvent en fin de ligne entre parenthèses. Elles portent généralement
+sur les valeurs passées en sous-main à la clé :
+\begin{description}
+\item[sa valeur \emph{initiale}] lorsque la clé \emph{est} employée, mais sans
+  qu'une valeur explicite lui soit passée ;
+\item[sa valeur \emph{par défaut}] lorsque la clé \emph{n'est pas} employée.
+\end{description}
 %^^A
 Ainsi certaines clés, appelées booléennes parce qu'elles ne peuvent prendre que
 deux valeurs (\docValue*{true} et \docValue*{false}), portent la précision par
@@ -197,27 +202,27 @@ syntaxe suivante :
   \meta{Description de \refKey{booleankey}}
 \end{docKey*}
 
-Illustrons ceci au moyen de la clé \refKey{printed} qui peut être passée en
-option de la \yatcl. C'est une clé booléenne valant par défaut \lstinline|true|
-et initialement \lstinline|false|, c'est-à-dire :
+Illustrons ceci au moyen de la clé \refKey{nofrontcover} qui peut être passée en
+option de la \yatcl. C'est une clé booléenne valant par défaut \docValue*{true}
+et initialement \docValue*{false}, c'est-à-dire :
 \begin{enumerate}
 \item \docValue*{true} si l'utilisateur l'emploie en option de la \yatcl mais
   sans lui passer de valeur :
 \begin{preamblecode}
-\documentclass[printed,÷\meta{autres options}÷]{yathesis}
+\documentclass[nofrontcover,÷\meta{autres options}÷]{yathesis}
 \end{preamblecode}
 \item \docValue*{false} si l'utilisateur ne l'emploie pas en option de la \yatcl :
 \begin{preamblecode}
-\documentclass[÷\meta{toutes options sauf \refKey*{printed}}÷]{yathesis}
+\documentclass[÷\meta{toutes options sauf \refKey*{nofrontcover}}÷]{yathesis}
 \end{preamblecode}
 \item la valeur \docValue*{true} ou \docValue*{false} que l'utilisateur lui
   passe le cas échéant en option de la \yatcl :
 \begin{preamblecode}
-\documentclass[printed=true,÷\meta{autres options}÷]{yathesis}
+\documentclass[nofrontcover=true,÷\meta{autres options}÷]{yathesis}
 \end{preamblecode}
 ou
 \begin{preamblecode}
-\documentclass[printed=false,÷\meta{autres options}÷]{yathesis}
+\documentclass[nofrontcover=false,÷\meta{autres options}÷]{yathesis}
 \end{preamblecode}
 \end{enumerate}
 
