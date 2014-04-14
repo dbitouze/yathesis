@@ -2900,7 +2900,7 @@
     \ifundef{\printcoinstitute}{n'entend}{et l'\printcoinstitute*{} n'entendent}
     %
     donner aucune approbation ni improbation aux opinions \'emises dans les
-    th\`eses : ces opinions devront \^etre consider\'ees comme propres \`a
+    th\`eses : ces opinions devront \^etre consid\'er\'ees comme propres \`a
     leurs auteurs.%
   }{%
     The \printinstitute{}
