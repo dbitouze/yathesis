@@ -513,11 +513,11 @@ This work consists of the file  yathesis.dtx
     \ifthenelse{\isempty{#2}}{%
       \ClassError{yathesis}{%
         #1%
+      }{%
         \if@tempswa%
         \else%
         \YAD@generic@text%
         \fi%
-      }{%
         \YAD@extra@help@text%
       }%
     }{%
