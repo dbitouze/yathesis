@@ -66,13 +66,14 @@ titre\footnote{En outre, les titres et éventuels sous-titres figureront sur les
   pages de résumé (cf. \vref{sec:abstract}) et de 4\ieme{} de couverture (cf.
   \vref{sec:quatr-de-couv}).}.
 %
-\begin{docCommand}[doc description=\mandatory]{author}{\marg{prénom}\marg{nom}\marg{adresse
-      courriel}}
-  Cette commande définit l'auteur de la thèse. Ses
-  \meta{prénom} et \meta{nom} :
+\begin{docCommand}[doc description=\mandatory]{author}{\oarg{adresse
+      courriel}\marg{prénom}\marg{nom}}
+  Cette commande définit l'auteur de la thèse. Ses \meta{prénom} et
+  \meta{nom} :
   \begin{itemize}
-  \item figureront sur la ou les pages de titre et seront un lien
-    hypertexte vers son \meta{adresse courriel};
+  \item figureront sur la ou les pages de titre ;
+  \item seront un lien hypertexte vers l'\meta{adresse courriel} si celle-ci
+    est renseignée en argument optionnel ;
   \item apparaîtront aussi comme métadonnée \enquote{Auteur} du
     fichier \pdf de la thèse.
   \end{itemize}
@@ -156,8 +157,8 @@ titre\footnote{En outre, les titres et éventuels sous-titres figureront sur les
   Les données principales d'une thèse peuvent être les suivantes.
   % \tcbset{listing options={deletekeywords={[2]title}}}
   \NoAutoSpacing%
-\begin{bodycode}[listing options={deletekeywords={[2]title}}]
-\author{Alphonse}{Allais}{aa@zygo.fr}
+\begin{bodycode}[title=Par exemple dans le \File{\characteristicsfile},listing options={deletekeywords={[2]title}}]
+\author[aa@zygo.fr]{Alphonse}{Allais}
 \title[Laugh's Chaos]{Le chaos du rire}
 \subtitle[Chaos' laugh]{Le rire du chaos}
 \academicfield[Mathematics]{Mathématiques}
