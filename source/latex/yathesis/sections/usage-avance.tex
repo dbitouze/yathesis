@@ -127,10 +127,19 @@ propose de désactiver ces erreurs de façon :
 
 \begin{dbwarning}{Éléments \enquote{obligatoires} de la \yatcl{}
     fortement conseillés}{}
-  Ne pas employer les éléments \enquote{obligatoires} de la \yatcl{} peut
-  sérieusement altérer le bon fonctionnement de celle-ci. Cela est déconseillé,
-  sauf dans le cadre d'un usage avancé \phrase*{si l'on est sûr de ce que l'on
-    fait et qu'on pourra en gérer \emph{seul} les conséquences}.
+  En version finale du document, il est conseillé d'employer tous les éléments
+  \enquote{obligatoires} et, sinon, d'utiliser à bon escient les clés de
+  désactivation ci-dessus, sans quoi :
+  \begin{itemize}
+  \item des textes génériques peuvent figurer dans le document final en
+    remplacement de certains éléments manquants ;
+  \item le bon fonctionnement de la \yatcl{} peut être sérieusement altéré.
+  \end{itemize}
+  Donc, en version finale du document, on ne passera outre les éléments
+  \enquote{obligatoires} de la \yatcl{} que dans le cadre d'un usage avancé, si
+  l'on est sûr de ce que l'on fait et qu'on pourra en gérer \emph{seul} les
+  conséquences.  On évitera notamment de recourir de façon trop légère à la clé
+  \refKey{noerror}.
 \end{dbwarning}
 
 \begin{docKey}{noauthor}{=\docValue{true}\textbar\docValue{false}}{par défaut \docValue{true},
