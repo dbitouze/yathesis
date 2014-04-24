@@ -2720,12 +2720,11 @@ This work consists of the file  yathesis.dtx
     \newcommand*\YAD@firstname@author{%
       \YAD@generic@argument@translate{firstname}%
     }%
-    \YAD@ClassError{%
-      Prenom de l'auteur de la these non specifie :\MessageBreak%
-      le 1er argument obligatoire de la commande \string\author\MessageBreak%
-      est vide (celui-ci doit etre renseigne)%
+    \YAD@ClassError[noauthor]{%
+      Prenom de l'auteur de la these non specifie%
     }{%
-      noauthor%
+      Le 1er argument obligatoire de la commande \string\author\MessageBreak%
+      est vide (celui-ci doit etre renseigne).%
     }%
   }{%
     \newcommand*\YAD@firstname@author{%
@@ -2736,12 +2735,11 @@ This work consists of the file  yathesis.dtx
     \newcommand*\YAD@lastname@author{%
       \YAD@generic@argument@translate{lastname}%
     }%
-    \YAD@ClassError{%
-      Nom de l'auteur de la these non specifie :\MessageBreak%
-      Le 2e argument obligatoire de la commande \protect\author\MessageBreak%
-      est vide (celui-ci doit etre renseigne)%
+    \YAD@ClassError[noauthor]{%
+      Nom de l'auteur de la these non specifie%
     }{%
-      noauthor%
+      Le 2e argument obligatoire de la commande \string\author\MessageBreak%
+      est vide (celui-ci doit etre renseigne).%
     }%
   }{%
     \newcommand*\YAD@lastname@author{%
