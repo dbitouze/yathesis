@@ -254,7 +254,7 @@
 \global\def\activeeol{^^M}%
 \endgroup%
 \newenvironment{preamblecode}{%
-  \@ifnextchar[\YAD@preamblecode@\YAD@preamblecode@noargs%
+  \@ifnextchar[\YAD@preamblecode@\YAD@preamblecode@noargs%]
 }{%
   \endorigpreamblecode%
 }%
@@ -324,14 +324,14 @@
   }%
 }%
 \def\disp@com#1{\colDef{\ttfamily#1}}
-\DeclareRobustCommand*{\yat}{\textsl{yathesis}}
-\DeclareRobustCommand*{\yatpa}{package \textsl{yathesisdoc}\xspace}
+\DeclareRobustCommand*{\yat}{\emph{\texttt{yathesis}}}
+\DeclareRobustCommand*{\yatpa}{package \emph{\texttt{yathesisdoc}}\xspace}
 \DeclareRobustCommand*{\yatcl}{classe \yat\xspace}
 \newcommand{\phrase}{%
   \@ifstar{\phrase@star}{\phrase@nostar}%
 }
-\newcommand{\phrase@star}[1]{---~#1}
-\newcommand{\phrase@nostar}[1]{---~#1~---}
+\newcommand{\phrase@star}[1]{--- #1}
+\newcommand{\phrase@nostar}[1]{--- #1 ---}
 \makeglossaries
 \loadglsentries{glossaries/glossary}
 \loadglsentries{glossaries/acronyms}
@@ -358,11 +358,11 @@
 }%
 \newcommand*{\YAD@configuration@directory}{configuration}
 \newcommand*{\configurationdirectory}{\YAD@configuration@directory}
-\newcommand*{\YAD@configuration@file}{these.cfg}
+\newcommand*{\YAD@configuration@file}{thesis.cfg}
 \newcommand*{\configurationfile}{\YAD@configuration@file}
-\newcommand*{\YAD@properties@file}{properties.tex}
-\newcommand*{\propertiesfile}{\YAD@properties@file}
-\newcommand*{\YAD@macros@file}{yadmacros.tex}
+\newcommand*{\YAD@characteristics@file}{characteristics.tex}
+\newcommand*{\characteristicsfile}{\YAD@characteristics@file}
+\newcommand*{\YAD@macros@file}{macros.tex}
 \newcommand*{\macrosfile}{\YAD@macros@file}
 \newcommand*{\glossaryfile}{glossary.tex}
 \newcommand*{\acronymsfile}{acronyms.tex}
