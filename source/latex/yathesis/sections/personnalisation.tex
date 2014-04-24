@@ -465,26 +465,18 @@ sont listées dans le \vref{tab:expressions-cles} et y sont identifiées par un
 \begin{table}
   \centering
   \input{tableaux/expressions}
-  \caption{Labels et valeurs des expressions de la \yatcl}
+  \caption{Expressions de la \yatcl (classées par ordre
+    alphabétique de leurs valeurs en français) et labels correspondants}
   \label{tab:expressions-cles}
 \end{table}
 
 \begin{dbexample}{Modification d'expression définie par la classe}{}
-  L'expression \enquote{En vue de l'obtention du grade de docteur de l'} (dont
-  le label est ×lbl-aim×) n'est pas appropriée si le nom de l'institut dans
-  lequel a été préparée la thèse a pour initiale une consonne\footnote{Le choix
-    de \enquote{de l'} plutôt que de \enquote{du} tient à ce que la plupart des
-    thèses préparées en France le sont dans des \enquote{universités}, des
-    \enquote{écoles} ou des \enquote{instituts}, termes qui commencent tous par
-    une voyelle.}. Ainsi, si l'institut est par exemple la \enquote{Cité des
-    sciences}, l'expression qui figure sur la page de titre en français :
-  \enquote{En vue de l'obtention du grade de docteur de l'Cité des sciences}
-  est inappropriée. On peut l'adapter en saisissant (notamment dans le
-  \File{\configurationfile}) par exemple\footnote{La version anglaise de
-    l'expression reste valable.} :
+  Pour remplacer l'expression en français \enquote{Unit\'e de recherche} (dont le label est
+  ×lbl-universitydepartment×) par \enquote{Laboratoire}, il suffit de
+  saisir :
   %
 \begin{preamblecode}[title=Par exemple dans le \File{\configurationfile}]
-\expression{lbl-aim}{En vue de l'obtention du grade de docteur de la}{In order to become Doctor from}
+\expression{lbl-universitydepartment}{Laboratoire}{University Department}
 \end{preamblecode}
 \end{dbexample}
 %
