@@ -392,8 +392,6 @@
 \newcommand*{\configurationfile}{\YAD@configuration@file}
 \newcommand*{\YAD@characteristics@file}{characteristics.tex}
 \newcommand*{\characteristicsfile}{\YAD@characteristics@file}
-\newcommand*{\YAD@macros@file}{macros.tex}
-\newcommand*{\macrosfile}{\YAD@macros@file}
 \newcommand*{\glossaryfile}{glossary.tex}
 \newcommand*{\acronymsfile}{acronyms.tex}
 \newcommand*{\symbolsfile}{symbols.tex}
@@ -3033,21 +3031,6 @@
     % \YAD@ClassWarningNoLine{%
     %   Fichier de configuration local
     %   \configurationfile\space introuvable%
-    % }%
-  }%
-  \shorthandoff{;:!?}%
-}%
-\AtEndPreamble{%
-  \shorthandon{;:!?}%
-  \InputIfFileExists{\configurationdirectory/\macrosfile}%
-  {\ClassInfo{yathesis}{%
-      Fichier \macrosfile\space trouve%
-    }}%
-  {%
-    % \YAD@ClassWarningNoLine{%
-    %   Fichier \macrosfile\space introuvable.\MessageBreak%
-    %   Le fichier \macrosfile\space n'a pas ete trouve\MessageBreak%
-    %   dans le dossier `\configurationdirectory'%
     % }%
   }%
   \shorthandoff{;:!?}%
