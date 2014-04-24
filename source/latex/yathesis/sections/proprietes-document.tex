@@ -1,9 +1,9 @@
-\chapter{Préparation des propriétés du document}
-\label{cha:propr-du-docum}
+\chapter{Caractéristiques du document}
+\label{cha:caract-du-docum}
 
-Cette section liste les commandes et options permettant de \emph{préparer} les
-propriétés du document. La plupart de ces propriétés sont ensuite affichées en
-divers emplacements du document :
+Ce chapitre liste les commandes et options permettant de spécifier les données
+caractéristiques du document. La plupart d'entre elles sont ensuite affichées
+en divers emplacements du document :
 \begin{itemize}
 \item sur les pages de 1\iere{} de couverture et de titre(s), produites par la
   commande \refCom{maketitle} ;
@@ -14,40 +14,41 @@ divers emplacements du document :
 \item sur l'éventuelle 4\ieme{} de couverture, produite par la commande
   \refCom{makebackcover}.
 \end{itemize}
-Certaines de ces propriétés figurent également comme métadonnées du fichier
+Certaines de ces caractéristiques figurent également comme métadonnées du fichier
 \pdf produit.
 
-\section{Où préparer les propriétés du document ?}
+\section{Où spécifier les caractéristiques du document ?}
 \label{sec:lieu-de-saisie}
 
-Les commandes permettant de définir les propriétés du document peuvent être
+Les commandes permettant de définir les caractéristiques du document peuvent être
 saisies, au choix :
-\begin{enumerate}
-\item directement dans le fichier (maître) de la thèse :
+\begin{description}
+\item[dans le fichier (maître) de la thèse :]\
   \begin{enumerate}
-  \item soit dans le préambule ;
-  \item soit dans le corps ;
-    \begin{dbwarning}{Propriétés à saisir \emph{avant}
+  \item soit dans son préambule ;
+  \item soit dans son corps ;
+    \begin{dbwarning}{Caractéristiques à saisir \emph{avant}
         \protect\docAuxCommand*{maketitle}}{avant-maketitle}
-    Si les propriétés du document sont saisies dans le corps du fichier
+    Si les caractéristiques du document sont saisies dans le corps du fichier
     (maître) de la thèse, elles doivent nécessairement l'être \emph{avant} la
     commande \refCom{maketitle}.
   \end{dbwarning}
   \end{enumerate}
-\item\label{propertiesfile} dans un fichier dédié, à nommer
-  \file{\propertiesfile} et à placer dans un sous-dossier à nommer
+\item[dans un fichier dédié]
+  % ^^A \item\label{characteristicsfile} dans un fichier dédié,
+  à nommer \file{\characteristicsfile} et à placer dans un sous-dossier à nommer
   \directory{\configurationdirectory}. Ces fichier et sous-dossier \phrase{tous
     deux prévus à cet effet} sont à créer au besoin mais ils sont fournis par
   le canevas de thèse \enquote{en relief} livré avec la classe, décrit
   \vref{sec:canevas-relief}.
-  \begin{dbwarning}{Fichier de propriétés à ne pas importer}{}
-    Le \File{\propertiesfile} est \emph{automatiquement} importé par la
+  \begin{dbwarning}{Fichier de caractéristiques à ne pas importer manuellement}{}
+    Le \File{\characteristicsfile} est \emph{automatiquement} importé par la
     \yatcl{} : il doit donc \emph{ne pas} être explicitement importé
     \phrase*{au moyen d'une commande \docAuxCommand{input} ou assimilée}.
   \end{dbwarning}
-\end{enumerate}
+\end{description}
 
-\section{Propriétés de titre}
+\section{Caractéristiques de titre}
 \label{sec:proprietes-de-titre}
 
 Cette section liste les commandes et options permettant de \emph{préparer} les
@@ -528,7 +529,7 @@ des membres du jury parmi celles prédéfinies par la \yatcl{}.
 % ^^A \end{docKey}
 % ^^A
 % ^^A \begin{dbexample}{Distinctions}{}
-% ^^A   \begin{bodycode}[title=Préparation du titre (p. ex. dans le \File{\propertiesfile})]
+% ^^A   \begin{bodycode}[title=Préparation du titre (p. ex. dans le \File{\characteristicsfile})]
 % ^^A \cosupervisor[distinction=prix Nobel,award=Nobel Price]{Étienne}{de la Boétie}
 % ^^A \referee[distinction=médaille Fields,award=Fields Medal]{René}{Descartes}
 % ^^A \end{bodycode}
@@ -585,7 +586,7 @@ de 1\iere{} de couverture.
   \foreignquote{english}{Order Number:}\selonlangue.
 \end{docCommand}
 
-\section{Propriétés de mots clés}
+\section{Caractéristiques de mots clés}
 \label{sec:proprietes-de-mots}
 
 Les mots clés de la thèse sont stipulés au moyen de la commande
