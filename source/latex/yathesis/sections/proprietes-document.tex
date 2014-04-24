@@ -118,16 +118,16 @@ titre\footnote{En outre, les titres et éventuels sous-titres figureront sur les
   \emph{Via} leur argument obligatoire, les commandes \refCom{title},
   \refCom{subtitle}, \refCom{academicfield} et \refCom{speciality} définissent
   les titre, sous-titre, champ disciplinaire et spécialité, \emph{dans la
-    langue principale} de la thèse -- par défaut le français. Chacune de ces
-  commandes admet un argument optionnel permettant de stipuler la donnée
-  correspondante \emph{dans la langue secondaire} de la thèse -- par défaut
-  l'anglais\footnote{Les langues principale et secondaire de la thèse sont
-    détaillées \vref{sec:langues}.}.
+    langue principale} de la thèse \phrase*{par défaut le français}. Chacune de
+  ces commandes admet un argument optionnel permettant de stipuler la donnée
+  correspondante \emph{dans la langue secondaire} de la thèse \phrase*{par
+    défaut l'anglais\footnote{Les langues principale et secondaire de la thèse
+      sont détaillées \vref{sec:langues}.}}.
 
   Dès lors qu'une au moins des ces commandes est employée avec son argument
   optionnel, la commande \refCom{maketitle}, qui produit les pages de titre
   composées dans la langue principale, génère \emph{automatiquement} une page
-  de titre supplémentaire composée dans la langue secondaire.
+  de titre \emph{supplémentaire} composée dans la langue secondaire.
 \end{dbremark}
 %
 \begin{docCommand}[doc description=\mandatory]{date}{\marg{jour}\marg{mois}\marg{année}}
@@ -171,16 +171,16 @@ titre\footnote{En outre, les titres et éventuels sous-titres figureront sur les
 \subsection{Instituts et entités}\label{sec:entites}
 
 Cette section liste les commandes et options qui, respectivement, définissent
-et précisent les instituts et entités dans lesquels -- ou grâce auxquels -- la
-thèse a été préparée. Ceux-ci figureront automatiquement sur la ou les pages de
-titre\footnote{Le ou les laboratoires apparaissent en outre sur les pages
+et précisent les instituts et entités dans lesquels \phrase{ou grâce auxquels}
+la thèse a été préparée. Ceux-ci figureront automatiquement sur la ou les pages
+de titre\footnote{Le ou les laboratoires apparaissent en outre sur les pages
   dédiée aux laboratoires, de résumés et de 4\ieme{} de couverture.}.
 
 \subsubsection{Définition}
 %
 \begin{docCommand}{pres}{\oarg{précision(s)}\marg{nom du
       \acrshort*{pres}}}
-  Cette commande définit le \gls{pres}. Celui-ci ne figure que
+  Cette commande définit le \gls{pres}. Celui-ci ne figure (pour l'instant) que
   par l'intermédiaire de son logo spécifié au moyen de la clé \refKey{logo}.
 \end{docCommand}
 %
@@ -212,7 +212,7 @@ titre\footnote{Le ou les laboratoires apparaissent en outre sur les pages
 \end{docCommand}
 %
 \begin{dbremark}{Changements de ligne dans l'adresse du laboratoire}{}
-  Il est possible de composer l'\meta{adresse du laboratoire} sur plusieurs
+  Il est possible de composer l'\meta{adresse} du laboratoire sur plusieurs
   lignes au moyen de la commande ×\\×.
 \end{dbremark}
 %
@@ -241,9 +241,9 @@ titre\footnote{Le ou les laboratoires apparaissent en outre sur les pages
   Dans tous les cas, le seul laboratoire à figurer sur les pages de titre, de
   résumés (cf. \vref{sec:abstract}) et de 4\ieme{} de couverture
   (cf. \vref{sec:quatr-de-couv}) est le laboratoire \emph{principal}, qui est
-  celui stipulé à la première -- et éventuellement seule -- occurrence de la
+  celui stipulé à la première \phrase{et éventuellement seule} occurrence de la
   commande \refCom{laboratory}. En revanche, tous les laboratoires stipulés
-  figurent sur la page -- facultative -- qui leur est dédiée
+  figurent sur la page \phrase{facultative} qui leur est dédiée
   (cf. \vref{sec:laboratoires}).
 \end{dbremark}
 
@@ -251,7 +251,7 @@ titre\footnote{Le ou les laboratoires apparaissent en outre sur les pages
 
 Toutes les commandes précédentes admettent un argument optionnel permettant
 d'apporter, sur les instituts ou entités, une ou plusieurs \meta{précision(s)}
--- sous la forme d'une liste \meta{clé}×=×\meta{valeur}.
+--- sous la forme d'une liste \meta{clé}×=×\meta{valeur}.
 %
 \paragraph{Pour tout institut ou entité}
 
@@ -405,7 +405,7 @@ notamment les directeur(s), rapporteurs et examinateurs.
 \end{docCommand}
 
 \begin{docCommand}{guest}{\oarg{précision(s)}\marg{prénom}\marg{nom}}
-  Cette commande définit une personne invitée au jury de la thèse.
+  Cette commande définit une éventuelle personne invitée au jury de la thèse.
 \end{docCommand}
 %
 \begin{dbwarning}{Usage multiple et facultatif des commandes du
@@ -513,7 +513,7 @@ des membres du jury parmi celles prédéfinies par la \yatcl{}.
 \end{dbexample}
 %
 \begin{dbremark}{Corporations non prédéfinies}{}
-  Il est en fait possible de spécifier d'autres corporations que celles
+  Il est possible de spécifier d'autres corporations que celles
   prédéfinies ci-dessus. La \vref{sec:corporations} explique comment procéder.
 \end{dbremark}
 %
