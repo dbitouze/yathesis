@@ -1,65 +1,54 @@
 \chapter{Personnalisation}\label{cha:configuration}
 
-Cette section passe en revue les outils de personnalisation propres
-ou pas à la \yatcl{} :
+Cette section passe en revue les outils de personnalisation propres ou pas à la
+\yatcl{} :
 \begin{enumerate}
 \item options de classe ;
-\item commandes et options de commandes de la \yatcl;
-\item packages chargés par  la \yatcl ;
+\item commandes (et options de commandes) de la \yatcl;
+\item packages chargés par la \yatcl ;
 \item packages chargés manuellement.
 \end{enumerate}
 
 \section{Options de classe}\label{options-classe}
 
-Les \meta{options} de la \yatcl sont à passer (exclusivement) selon la syntaxe
-usuelle :
+Les \meta{options} de la \yatcl sont à passer selon la syntaxe usuelle :
 \begin{preamblecode}
 \documentclass[÷\meta{options}÷]{yathesis}
 \end{preamblecode}
+% ^^A Tester et documenter la commande ×\yasetup×.
 
 La \yatcl accepte, en sus des options qui lui sont propres, celles de la
 \Class{book} sur laquelle est elle basée.
 
 \subsection{Options de la classe \textsf{book}}\label{sec:options-usuelles-de}
 
-Parmi les \meta{options} de la \yatcl figurent celles de la
-\Class{book}, notamment :
+Parmi les \meta{options} de la \yatcl figurent celles de la \Class{book},
+notamment :
 \begin{itemize}
-\item \docAuxKey{10pt} (défaut), \docAuxKey{11pt}, \docAuxKey{12pt}, pour fixer la taille de base des
-  caractères ;
+\item \docAuxKey{10pt} (défaut), \docAuxKey{11pt}, \docAuxKey{12pt}, pour fixer
+  la taille de base des caractères ;
 \item éventuellement :
   \begin{itemize}
   \item \docAuxKey{leqno} pour afficher les numéros d'équations à gauche ;
-  \item \docAuxKey{fleqn} pour afficher les équations toutes alignées à gauche
-    avec un même retrait ;
+  \item \docAuxKey{fleqn} pour que les équations hors texte soient toutes
+    alignées à gauche avec un même retrait d'alinéa ;
   \item \docAuxKey{oneside} pour une pagination en recto seulement.
   \end{itemize}
 \end{itemize}
-\begin{dbwarning}{Options usuelles de la \Class{book} : à utiliser
-    avec discernement}{}
-  Dans le cadre d'un usage de la \yatcl, il est \emph{fortement}
-  déconseillé de recourir à d'autres options usuelles de la
-  \Class{book} que celles ci-dessus : cela risquerait de produire
-  des résultats non souhaités.
+\begin{dbwarning}{Options usuelles de la \Class{book} : à utiliser avec
+    discernement}{}
+  Dans le cadre d'un usage de la \yatcl, il est \emph{fortement} déconseillé de
+  recourir à d'autres options usuelles de la \Class{book} que celles
+  ci-dessus : cela risquerait de produire des résultats non souhaités.
 \end{dbwarning}
 
 \subsection{Options de la \yatcl}\label{sec:options-yatcl}
 
 Les \meta{options} discutées dans cette section, propres à la \yatcl{},
 permettent de contrôler les grandes lignes du document.
-%^^A \begin{itemize}
-%^^A \item \hyperref[sec:langues]{langues (principale, secondaire, supplémentaires)};
-%^^A \item \hyperref[sec:profondeur-de-la]{profondeur de la numérotation des sections};
-%^^A \item \hyperref[sec:interligne]{interligne};
-%^^A \item \hyperref[sec:style-des-tetes]{style des têtes de chapitres};
-%^^A \item \hyperref[sec:expr-separ-les]{expressions} séparant corporations et
-%^^A   instituts des membres du jury figurant sur les pages de titre;
-%^^A \item \hyperref[sec:versions]{versions}: \enquote{brouillon},
-%^^A   \enquote{intermédiaire} ou \enquote{imprimée}.
-%^^A \end{itemize}
 
-
-\subsubsection{Langues (principale, secondaire, supplémentaires)}\label{sec:langues}
+\subsubsection{Langues (principale, secondaire,
+  supplémentaires)}\label{sec:langues}
 
 Par défaut, un mémoire créé avec la \yatcl est composé :
 \begin{itemize}
@@ -69,11 +58,11 @@ Par défaut, un mémoire créé avec la \yatcl est composé :
     mots clés.}.
 \end{itemize}
 %
-\begin{docKey}{mainlanguage}{=\docValue{french}\textbar\docValue{english}}{pas de valeur par défaut,
-    initialement \docValue{french}}
+\begin{docKey}{mainlanguage}{=\docValue{french}\textbar\docValue{english}}{pas
+    de valeur par défaut, initialement \docValue{french}}
   Pour que la langue principale \phrase{et activée par défaut} du mémoire soit
-  une langue autre que le français, il suffit de le stipuler au moyen de la clé
-  \refKey{mainlanguage}. Le français devient alors automatiquement la langue
+  l'anglais, il suffit de le stipuler au moyen de l'option
+  ×mainlanguage=english×. Le français devient alors automatiquement la langue
   secondaire de la thèse.
 \end{docKey}
 
@@ -104,10 +93,10 @@ Par défaut, un mémoire créé avec la \yatcl est composé :
 
 \subsubsection{Profondeur de la numérotation}\label{sec:profondeur-de-la}
 
-Par défaut, les numérotation des paragraphes a pour \enquote{niveau de
-  profondeur} les sous-sections. Autrement dit, ne sont numérotés que les
-titres des parties (éventuelles), chapitres, sections et sous-sections.
-L'option \refKey{secnumdepth} suivante permet de spécifier un autre niveau de
+Par défaut, la numérotation des paragraphes a pour \enquote{niveau de
+  profondeur} les sous-sections. Autrement dit, seuls les titres des parties
+(éventuelles), chapitres, sections et sous-sections sont numérotés.  L'option
+\refKey{secnumdepth} suivante permet de spécifier un autre niveau de
 profondeur.
 %
 {%
@@ -123,15 +112,14 @@ profondeur.
 
 \subsubsection{Espace interligne}\label{sec:interligne}
 
-L'interligne du document est par défaut \enquote{simple} mais, au
-moyen de l'option \refKey{space} suivante, il est possible de
-spécifier un interligne \enquote{un et demi} ou
-\enquote{double}.
+L'interligne du document est par défaut \enquote{simple} mais, au moyen de
+l'option \refKey{space} suivante, il est possible de spécifier un interligne
+\enquote{un et demi} ou \enquote{double}.
 
 \begin{docKey}{space}{=\docValue{single}\textbar\docValue{onehalf}\textbar\docValue{double}}{pas de valeur par défaut,
     initialement \docValue{single}}
-  Cette clé permet de spécifier un \meta{interligne} \docValue{single}
-  (simple), \docValue{onehalf} (un et demi) ou \docValue{double} (double).
+  Cette clé permet de spécifier un interligne \docValue{single} (simple),
+  \docValue{onehalf} (un et demi) ou \docValue{double} (double).
 \end{docKey}
 
 \begin{dbwarning}{Option d'interligne : seulement dans la partie
@@ -152,17 +140,18 @@ package.
 %
 {%
   \tcbset{before lower=\vspace*{\baselineskip}\par}
-  \begin{docKey}{chap-style}{=\docValue{Sonny}\textbar\docValue{Lenny}\textbar\docValue{Glenn}\textbar\docValue{Conny}\textbar\docValue{Rejne}\textbar\docValue{Bjarne}\textbar\docValue{PetersLenny}\textbar\docValue{Bjornstrup}\textbar\docValue{none}}{pas de valeur par défaut,
-    initialement \docValue{PetersLenny}}
-  Cette clé permet de spécifier un autre style du \Package{fncychap}.
+  \begin{docKey}{chap-style}{=\docValue{Sonny}\textbar\docValue{Lenny}\textbar\docValue{Glenn}\textbar\docValue{Conny}\textbar\docValue{Rejne}\textbar\docValue{Bjarne}\textbar\docValue{PetersLenny}\textbar\docValue{Bjornstrup}\textbar\docValue{none}}{pas
+      de valeur par défaut, initialement \docValue{PetersLenny}}
+    Cette clé permet de spécifier un autre style du \Package{fncychap}.
 
-  Le \enquote{style} supplémentaire \docValue{none} permet de désactiver le
-  chargement de \package{fncychap} pour retrouver les têtes de
-  chapitres usuelles de la \Class{book}.
-\end{docKey}
+    Le \enquote{style} supplémentaire \docValue{none} permet de désactiver le
+    chargement de \package{fncychap} pour retrouver les têtes de chapitres
+    usuelles de la \Class{book}.
+  \end{docKey}
 }
 
-\subsubsection{(Non-)Production de la page de 1\iere{} de couverture}\label{sec:non-production-de}
+\subsubsection{(Non-)Production de la page de 1\iere{} de
+  couverture}\label{sec:non-production-de}
 
 Par défaut, la commande \refCom{maketitle} produit une page de 1\iere{} de
 couverture \phrase*{en plus de la ou des pages de titre}. La clé
@@ -174,7 +163,8 @@ couverture \phrase*{en plus de la ou des pages de titre}. La clé
   couverture.
 \end{docKey}
 
-\subsubsection{Expressions séparant les corporations et instituts des membres du jury}
+\subsubsection{Expressions séparant les corporations et instituts des membres
+  du jury}
 \label{sec:expr-separ-les}
 
 Sur les pages de titre, chaque membre du jury peut être précisé notamment par :
@@ -237,19 +227,19 @@ redéfinies, globalement ou localement.
 
 \begin{dbwarning}{Expressions séparatrices débutant ou finissant par un espace}{}
   Si les valeurs des clés \refKey{sepcorpaffilfrench} ou
-  \refKey{sepcorpaffilenglish} doivent \emph{débuter} ou \emph{finir} par
-  un espace, celui-ci doit être saisi au moyen de
-  %^^A
+  \refKey{sepcorpaffilenglish} doivent \emph{débuter} ou \emph{finir} par un
+  espace, celui-ci doit être saisi au moyen de
+  % ^^A
   \lstinline[showspaces]+\ +
-  %^^A
-  %^^A ou de
-  %^^A
-  %^^A \lstinline[deletekeywords={[2]space}]+\space+,
-  %^^A
+  % ^^A
+  % ^^A ou de
+  % ^^A
+  % ^^A \lstinline[deletekeywords={[2]space}]+\space+,
+  % ^^A
   et non pas seulement de
-  %^^A
+  % ^^A
   \lstinline[showspaces]+ +.
-  %^^A
+  % ^^A
 \end{dbwarning}
 
 \begin{dbexample}{Redéfinition (globale) de l'expression séparant corporation et
@@ -278,180 +268,171 @@ redéfinies, globalement ou localement.
 \end{bodycode}
 \end{dbexample}
 
-\subsubsection{(Non-)Affichage des  \foreignquote{english}{warnings} propres à la \yatcl{}}
-\label{sec:non-affichage-des}
-
-Dans certaines situations, par exemple lorsque des commandes ou environnements
-\enquote{obligatoires} (cf. \vref{sec:comm-oblig}) sont omis, des
-avertissements (\foreignquote{english}{warnings}) propres à la \yatcl{} sont
-affichés dans le fichier de \enquote{log}. Il est possible de désactiver cet
-affichage de façon :
-\begin{description}
-\item[globale] pour tous ces avertissements, au moyen de la clé
-  \refKey{nowarning} ci-dessous.
-\item[ciblée] pour chacun des commandes et environnements
-  \enquote{obligatoires}, au moyen de clés indiquées seulement
-  \vref{sec:non-affichage-cible} car celles-ci, pouvant altérer le bon
-  fonctionnement de la \yatcl{}, ne sont à utiliser que dans le cadre d'un
-  usage avancé.
-\end{description}
-
-\begin{docKey}{nowarning}{=\docValue{true}\textbar\docValue{false}}{par défaut \docValue{true},
-    initialement \docValue{false}}
-  Cette option désactive l'affichage de tous les avertissements propres à la
-  \yatcl{}.
-\end{docKey}
-
-\begin{dbremark}{Avertissements masqués en versions \enquote{brouillon} et
-    \enquote{intermédiaire}}{}
-  Les versions \enquote{brouillon} et \enquote{intermédiaire} du document (clés
-  \refKey{draft} et \refKey{intermediate}, cf. \vref{sec:versions}) désactivent
-  l'affichage de tous les avertissements propres à la \yatcl{}.
-\end{dbremark}
-
 \subsubsection{Versions du mémoire}\label{sec:versions}
 
-Grâce aux clés \refKey{draft}, \refKey{intermediate}, \refKey{printed} (et
-\refKey{printed*}) suivantes, la \yatcl{} permet de facilement obtenir des
-versions du document :
-\begin{itemize}
-\item \enquote{brouillon} ;
-\item \enquote{intermédiaire}
-\item \enquote{imprimée}, sous deux formes possibles ;
-\end{itemize}
-différentes de celle par défaut qui peut être considérée comme une version
-\enquote{écran}.
+Au moyen de la clé \refKey{version}, la \yatcl{} permet de facilement produire
+différentes versions du document : \enquote{intermédiaire} (par défaut),
+\enquote{finale} et \enquote{brouillon}.
 
-\begin{docKey}{draft}{=\docValue{true}\textbar\docValue{false}}{par défaut \docValue{true},
-    initialement \docValue{false}}
-  Cette option produit une version \enquote{brouillon}\footnote{Une telle
-    version est \emph{a priori} à usage exclusif de l'auteur et n'est en
-    particulier pas destinée à être diffusée.} du document. Les différences par
-  rapport à la version \enquote{écran} (par défaut) sont les suivantes :
-  \begin{enumerate}
-  \item Les dépassements de marges sont signalés par une barre
-    verticale noire dans la marge.
-  \item La mention \enquote{brouillon} ou
-    \foreignquote{english}{draft}\selonlangue{} figure en filigrane (et en
-    capitales) sur (presque) toutes les pages du document.
-  \item Aucun avertissement propre à la \yatcl{}
-    (cf. \vref{sec:non-affichage-des}) n'est affiché.
-  \item Par exemple sur les pages de titre ou en intitulé de certains chapitres
-    (des remerciements, introduction, conclusion, etc.) :
-    \begin{enumerate}
-    \item les données caractéristiques de la thèse\footnote{Auteur,
-        (sous-)titre, institut(s), directeurs, rapporteurs,
-        examinateurs, etc.} sont des hyperliens vers le fichier de
-      configuration de la thèse\footnote{Cf. \vref{sec:lieu-de-saisie}.} où
-      il est possible de les (re)définir (cf.
-      \vref{sec:expressions-cles});
-    \item\label{item-expression} les expressions fournies par
-      la \yatcl\footnote{\enquote{Thèse présentée par},
-        \foreignquote{english}{In order to become Doctor from},
-        \foreignquote{english}{draft}, \enquote{Version
-          intermédiaire en date du}, etc. insérées de façon
-        automatique sur certaines pages du mémoire.} sont :
+{\tcbset{before lower=\vspace*{\baselineskip}\par}
+  \begin{docKey}{version}{=\docValue{inprogress}\textbar\docValue{inprogress*}\textbar\docValue{final}\textbar\docValue{draft}}{pas
+      de valeur par défaut, initialement \docValue{inprogress}}
+    Cette clé permet de spécifier la version du document à produire, au moyen
+    des valeurs suivantes.
+    \begin{description}
+    \item[\docValue{inprogress}.] Cette valeur produit une version
+      \enquote{intermédiaire} du document\footnote{Une telle version est
+        éventuellement destinée à être diffusée à des relecteurs.}. Ses
+      caractéristiques sont les suivantes.
+      \begin{enumerate}
+      \item\label{item:inprogress:1} Pour indiquer clairement qu'il s'agit
+        d'une version non définitive, la mention \enquote{Version intermédiaire
+          en date du \meta{date}} ou \foreignquote{english}{Work in progress as
+          of \meta{date}}\selonlangue{}, figure en pied de page et en petites
+        capitales sur (presque) toutes les pages.
+      \item\label{item:inprogress:2} Si un élément \enquote{obligatoire}
+        (cf. \vref{sec:comm-oblig}) manque, aucune erreur de compilation ne
+        signale l'omission.
+      \end{enumerate}
+    \item[\docValue{inprogress*}.] Cette valeur produit le même effet que la
+      valeur \docValue{inprogress} sauf que le caractère non définitif de la
+      version est renforcé par la mention \enquote{travail en cours} ou
+      \foreignquote{english}{work in progress}\selonlangue{}, figurant en
+      filigrane et en capitales sur toutes les pages.
+    \item[\docValue{final}.] Cette valeur produit une version \enquote{finale}
+      du document\footnote{Une telle version est destinée à être diffusée
+        notamment aux rapporteurs.}. \emph{Contrairement à} la version par défaut :
+      \begin{enumerate}
+      \item la mention \enquote{Version intermédiaire en date du \meta{date}}
+        ou \foreignquote{english}{Work in progress as of \meta{date}} ne figure
+        pas ;
+      \item si un élément \enquote{obligatoire} (cf. \vref{sec:comm-oblig})
+        manque, une erreur de compilation signale l'omission.
+      \end{enumerate}
+    \item[\docValue{draft}.] Cette valeur produit une version
+      \enquote{brouillon} du document\footnote{Une telle version est \emph{a
+          priori} à usage exclusif de l'utilisateur et n'est en particulier pas
+        destinée à être diffusée.}. Ses caractéristiques sont les suivantes :
       \begin{itemize}
-      \item estampillées du label qui les identifie;
-      \item des hyperliens vers le fichier de configuration de la thèse (cf.
-        \vref{rq:configurationfile}) où il est possible de les
-        (re)définir (cf. \vref{sec:expressions-cles}).
-    \end{itemize}
+      \item \emph{comme} la version par défaut, si un élément \enquote{obligatoire}
+        (cf. \vref{sec:comm-oblig}) manque, aucune erreur de compilation ne
+        signale l'omission ;
+      \item \emph{contrairement à} la version par défaut, la mention \enquote{Version
+          intermédiaire en date du \meta{date}} ou \foreignquote{english}{Work
+          in progress as of \meta{date}} ne figure pas ;
+      \item \emph{en plus de} la version par défaut :
+        \begin{enumerate}
+        \item Les différentes zones de la page, notamment celle allouée au
+          texte, sont matérialisées et les dépassements de marges sont signalés
+          par une barre verticale noire dans la marge.
+        \item La mention \enquote{brouillon} ou
+          \foreignquote{english}{draft}\selonlangue{} figure en filigrane (et
+          en capitales) sur toutes les pages du document.
+        \item Sur certaines pages, notamment celles de titre :
+          \begin{enumerate}
+          \item les données caractéristiques de la thèse\footnote{Auteur,
+              (sous-)titre, institut(s), directeurs, rapporteurs, examinateurs,
+              etc.} sont des hyperliens vers le fichier de configuration de la
+            thèse\footnote{Cf. \vref{sec:lieu-de-saisie}.} où il est possible
+            de les (re)définir (cf. \vref{sec:expressions-cles});
+          \item\label{item-expression} les expressions fournies par la
+            \yatcl\footnote{\enquote{Thèse présentée par},
+              \foreignquote{english}{In order to become Doctor from},
+              \foreignquote{english}{draft}, \enquote{Version intermédiaire en
+                date du}, etc. insérées de façon automatique sur certaines
+              pages du mémoire.} sont :
+            \begin{itemize}
+            \item estampillées du label qui les identifie;
+            \item des hyperliens vers le fichier de configuration de la thèse
+              (cf.  \vref{rq:configurationfile}) où il est possible de les
+              (re)définir (cf. \vref{sec:expressions-cles}).
+            \end{itemize}
+          \end{enumerate}
+          Si le système d'exploitation est correctement configuré, un simple
+          clic sur ces hyperliens ouvre le fichier correspondant dans l'éditeur
+          de texte \LaTeX{} par défaut.
+        \end{enumerate}
+      \end{itemize}
+    \end{description}
+  \end{docKey}
+}
+\begin{dbwarning}{Par défaut, documents en version intermédiaire}{}
+  La valeur \docValue*{inprogress} est la valeur initiale de la clé
+  \refKey{version} ce qui signifie qu'un document composé avec la \yatcl{} est
+  par défaut en version \emph{intermédiaire}\footnote{En effet, la version de
+    travail d'un mémoire de thèse est l'essentiel du temps une version
+    intermédiaire et la version finale n'est à produire qu'exceptionnellement,
+    en toute fin de rédaction.}.
+\end{dbwarning}
+
+\subsubsection{Formats de sortie}
+\label{sec:formats-de-sortie}
+
+Les documents composés avec la \yatcl{} peuvent avoir deux formats de sortie :
+\enquote{écran} (par défaut) et \enquote{papier}, stipulés au moyen de la clé
+\refKey{output}.
+
+\begin{docKey}{output}{=\docValue{screen}\textbar\docValue{paper}\textbar\docValue{paper*}}{pas
+    de valeur par défaut, initialement \docValue{screen}}
+  Cette clé permet de spécifier le format de sortie du document, au moyen des
+  valeurs suivantes.
+  \begin{description}
+  \item[\docValue{screen}.] Avec cette valeur, le document a un format de
+    sortie destiné à être visualisé à l'écran. Ce format ne présente pas de
+    spécificités particulières, sauf que des liens hypertextes émaillent le
+    \acrshort{pdf} produit.
+  \item[\docValue{paper}.] Avec cette valeur, le document a un format de sortie
+    destiné à être imprimé sur papier. Les différences par rapport au format
+    \enquote{écran} sont les suivantes :
+    \begin{enumerate}
+    \item les liens hypertexte sont supprimés ;
+    \item la commande
+      ×\href{×\meta{\acrshort*{url}}×}{×\meta{texte}×}×\footnote{Fournie par le
+        \Package{hyperref}, chargé par la \yatcl{}.} est automatiquement
+      remplacée par :
+      \begin{itemize}
+      \item
+        \meta{texte}\lstinline[deletekeywords={[2]url}]+\footnote{\url{+\meta{\acrshort*{url}}×}}×
+        si elle figure dans le texte ordinaire ;
+      \item \meta{texte}
+        \lstinline[deletekeywords={[2]url}]+(\url{+\meta{\acrshort*{url}}×})×
+        si elle figure en note de bas de page ;
+      \end{itemize}
+    \item\label{item:paper:1} les barres de navigation affichées par certains
+      styles de glossaires\footnote{Telles qu'on peut en voir
+        \vref{fig:printacronyms,fig:printglossary}.} \emph{sont} masquées.
     \end{enumerate}
-    Si le système d'exploitation est correctement configuré, un
-    simple clic sur ces hyperliens ouvre le fichier correspondant
-    dans l'éditeur de texte \LaTeX{} par défaut.
-  \end{enumerate}
+  \item[\docValue{paper*}.] Cette valeur produit le même effet que la valeur
+    \docValue{paper} sauf que son \vref{item:paper:1} est inversé : les barres
+    de navigation \emph{ne} sont \emph{pas} masquées.
+  \end{description}
 \end{docKey}
-
-\begin{docKey}{intermediate}{=\docValue{true}\textbar\docValue{false}}{par défaut \docValue{true},
-    initialement \docValue{false}}
-  Cette option produit une version \enquote{intermédiaire}\footnote{Un telle
-    version est éventuellement destinée à être diffusée à des relecteurs.} du
-  document sur laquelle est clairement indiqué qu'il s'agit d'une version non
-  définitive. Les différences par rapport à la version \enquote{écran} (par
-  défaut) sont les suivantes :
-  \begin{enumerate}
-  \item Les mentions suivantes figurant sur (presque) toutes les pages du
-    document :
-    \begin{itemize}
-    \item \enquote{travail en cours} ou \foreignquote{english}{work in
-        progress}\selonlangue{}, en filigrane (et en capitales);
-    \item \enquote{Version intermédiaire en date du \meta{date}} ou
-      \foreignquote{english}{Intermediate version as of
-        \meta{date}}\selonlangue{} en pied de page (et en petites
-        capitales).
-    \end{itemize}
-  \item Aucun avertissement propre à la \yatcl{}
-    (cf. \vref{sec:non-affichage-des}) n'est affiché.
-  \end{enumerate}
-\end{docKey}
-
-\begin{docKey}{printed}{=\docValue{true}\textbar\docValue{false}}{par défaut \docValue{true},
-    initialement \docValue{false}}
-  Cette option produit une version du document destinée à être imprimée
-  sur papier. Les différences par rapport à la version \enquote{écran} (par
-  défaut) sont les suivantes :
-  \begin{enumerate}
-  \item la commande
-    ×\href{×\meta{\acrshort*{url}}×}{×\meta{texte}×}×\footnote{Fournie par le
-      \Package{hyperref}, chargé par la \yatcl{}.} est automatiquement
-    remplacée par :
-    \begin{itemize}
-    \item \meta{texte}\lstinline[deletekeywords={[2]url}]+\footnote{\url{+\meta{\acrshort*{url}}×}}× si elle
-      figure dans le texte ordinaire ;
-    \item \meta{texte} \lstinline[deletekeywords={[2]url}]+(\url{+\meta{\acrshort*{url}}×})× si elle
-      figure en note de bas de page ;
-    \end{itemize}
-  \item les liens hypertexte sont supprimés ;
-  \item les barres de navigation affichées par certains styles de
-    glossaires\footnote{Telles qu'on peut en voir
-      \vref{fig:printacronyms,fig:printglossary}.} \emph{sont} masquées.
-  \end{enumerate}
-\end{docKey}
-
-\begin{docKey}{printed*}{=\docValue{true}\textbar\docValue{false}}{par défaut \docValue{true},
-    initialement \docValue{false}}
-  Cette option produit le même effet que l'option \refKey{printed} sauf que les
-  barres de navigation affichées par certains styles de glossaires \emph{ne}
-  sont \emph{pas} masquées.
-\end{docKey}
-
-\begin{dbremark}{Versions compatibles}{}
-  Les différentes versions ci-dessus du mémoire ne sont pas incompatibles mais
-  seule la conjonction \refKey{intermediate} et \refKey{printed} (ou
-  \refKey{printed*}) peut réellement être utile.
-\end{dbremark}
 
 \section{Commandes et options de commandes de la \yatcl}
 
 \begin{dbremark}{Fichier de configuration}{configurationfile}
-  Les commandes de personnalisation :
+  Les commandes de personnalisation listées dans cette section (et donc propres
+  à \yatcl{}) ou fournies par les packages chargés manuellement peuvent être
+  saisies :
   \begin{itemize}
-  \item listées dans cette section et donc propres à \yatcl{} ;
-  \item fournies par les packages chargés manuellement ;
-  \end{itemize}
-  peuvent être saisies :
-  \begin{itemize}
-  \item soit directement dans le (préambule du) fichier (maître) de
-    la thèse ;
+  \item soit directement dans le (préambule du) fichier (maître) de la thèse ;
   \item soit dans un fichier (prévu à cet effet) à nommer
-    \file{\configurationfile} et à placer dans un sous-dossier
-    (prévu à cet effet) à nommer
-    \directory{\configurationdirectory}\footnote{Ces fichier et
-      sous-dossier sont à créer au besoin mais le canevas de thèse
-      \enquote{en relief} livré avec la \yatcl, décrit
-      \vref{sec:canevas-relief}, les fournit.}.
+    \file{\configurationfile} et à placer dans un sous-dossier (prévu à cet
+    effet) à nommer \directory{\configurationdirectory}\footnote{Ces fichier et
+      sous-dossier sont à créer au besoin mais le canevas de thèse \enquote{en
+        relief} livré avec la \yatcl, décrit \vref{sec:canevas-relief}, les
+      fournit.}.
   \end{itemize}
 \end{dbremark}
 
-\begin{dbwarning}{Fichier de configuration à ne pas importer}{}
+\begin{dbwarning}{Fichier de configuration à ne pas importer manuellement}{}
   Le \File{\configurationfile} est \emph{automatiquement} importé par la
   \yatcl{} : il doit donc \emph{ne pas} être explicitement importé \phrase*{au
     moyen d'une commande \docAuxCommand{input} ou assimilée}.
 \end{dbwarning}
 
-\subsection{(Re)Définition des expressions de la thèse}\label{sec:expressions-cles}
+\subsection{(Re)Définition des expressions de la
+  thèse}\label{sec:expressions-cles}
 
 Un mémoire de thèse composé avec la \yatcl est émaillé d'expressions insérées
 de façon automatique sur certaines pages (titre, mots clés, laboratoire,
@@ -506,11 +487,11 @@ sont listées dans le \vref{tab:expressions-cles} et y sont identifiées par un
 \end{preamblecode}
 \end{dbexample}
 
-\begin{dbremark}{Modification et suppression d'expressions facilitées par la
-    version \enquote{brouillon}}{}
-  On a vu que l'option \refKey{draft} permet de facilement retrouver les labels
-  des expressions et atteindre \file{\configurationfile} pour y modifier
-  celles-ci.
+\begin{dbremark}{Modification d'expressions facilitées par la version
+    \enquote{brouillon}}{}
+  On a vu \vref{sec:versions} que l'option ×version=draft× permet de facilement
+  retrouver les labels des expressions et atteindre le \File{\configurationfile}
+  pour y modifier celles-ci.
 \end{dbremark}
 
 \subsubsection{Expressions standard}
@@ -541,8 +522,8 @@ syntaxe précédente est inopérante avec les commandes ×\glossaryname× et
 ×\bibname× (ainsi que ×\refname×). Dans ce cas, pour donner un \meta{titre
   alternatif} :
 \begin{itemize}
-\item aux glossaire, liste d'acronymes et liste de symboles, on recourra à
-  l'une ou l'autre des instructions suivantes :
+\item aux glossaire, liste d'acronymes et liste de symboles, on recourra
+  à l'une ou l'autre des instructions suivantes :
 \begin{bodycode}
 \printglossary[title=÷\meta{titre alternatif}÷]
 \printglossaries[title=÷\meta{titre alternatif}÷]
@@ -563,23 +544,19 @@ pourra être donné à la liste des listings, au moyen de:
 
 \subsection{Nouvelles corporations}\label{sec:corporations}
 
-On a vu que les commandes définissant les membres du
-jury\footnote{\refCom{supervisor}, \refCom{referee}, \refCom{examiner}, etc.,
-  cf. \vref{sec:jury}.} permettent de préciser\footnote{Au moyen des clés
-  \refKey{professor}, \refKey{mcf}, \refKey{mcf*}, \refKey{seniorresearcher},
-  \refKey{juniorresearcher} et \refKey{juniorresearcher*}.} si ceux-ci
-appartiennent aux corporations \emph{prédéfinies} des professeurs ou des
-maîtres de conférences (\gls{hdr} ou pas) des universités et des directeurs de
-recherche ou des chargé(e)s de recherche (\gls{hdr} ou pas) du \gls{cnrs}. La
-clé \refKey{corporation} suivante permet de spécifier de \emph{nouvelles}
-corporations.
+On a vu \vref{sec:jury} que les commandes définissant les membres du jury
+permettent de spécifier si ceux-ci appartiennent aux corporations
+\emph{prédéfinies} des professeurs ou des maîtres de conférences (\gls{hdr} ou
+pas) des universités et des directeurs de recherche ou des chargé(e)s de
+recherche (\gls{hdr} ou pas) du \gls{cnrs}. La clé \refKey{corporation}
+suivante permet de spécifier de \emph{nouvelles} corporations à \emph{définir}
+au moyen de la commande \refCom{expression}.
 
 \begin{docKey}{corporation}{=\meta{label}}{pas de
     valeur par défaut, initialement vide}
-  L'option ×corporation=×\meta{label} permet de stipuler une
-  \meta{corporation en français} et une \meta{corporation en
-    anglais} où \meta{label} identifie une expression à
-  définir au moyen de :
+  L'option ×corporation=×\meta{label} permet de stipuler une \meta{corporation
+    en français} et une \meta{corporation en anglais} où \meta{label} identifie
+  une expression à définir au moyen de :
 \begin{preamblecode}[title=Par exemple dans le \File{\configurationfile}]
 \expression{÷\meta{label}÷}{÷\meta{corporation en français}÷}{÷\meta{corporation en anglais}÷}
 \end{preamblecode}
@@ -592,8 +569,8 @@ corporations.
 \begin{preamblecode}[title=Par exemple dans le \File{\configurationfile}]
 \expression{lbl-doctor}{docteur}{Doctor}
 \end{preamblecode}
-pour pouvoir ensuite l'utiliser \phrase{autant de fois que souhaité}, par
-exemple ainsi :
+  pour pouvoir ensuite l'utiliser \phrase{autant de fois que souhaité}, par
+  exemple ainsi :
 \begin{bodycode}
 \examiner[corporation=lbl-doctor]{Joseph}{Fourier}
 \examiner[corporation=lbl-doctor]{Paul}{Verlaine}
@@ -620,10 +597,9 @@ de détails).
 
 \subsection{Profondeurs différentes pour les signets et la table des matières}
 
-Par défaut, la table des matières et les signets ont le même niveau de
-profondeur. Mais, grâce à l'option \docAuxKey{bookmarksdepth} du
-\Package*{hyperref}, il est possible de spécifier un \meta{autre niveau} pour
-ces derniers :
+Par défaut, les signets du fichier \acrshort{pdf} ont le même niveau de
+profondeur que la table des matières. Mais l'option \docAuxKey{bookmarksdepth}
+du \Package*{hyperref} permet de leur affecter un \meta{autre niveau}.
 \begin{preamblecode}[title=Par exemple dans le \File{\configurationfile}]
 \hypersetup{bookmarksdepth=÷\meta{autre niveau}÷}
 \end{preamblecode}
