@@ -235,16 +235,21 @@ La page dédiée à la clause de non-responsabilité est produite par la command
 
 Les \glspl{liminaire} d'un mémoire de thèse peuvent contenir un avertissement,
 des remerciements, un résumé substantiel en français
-(cf. \vref{wa:frenchabstract}), une préface, un avant-propos, etc. Ceux-ci sont
-à considérer comme des chapitres \enquote{ordinaires} et doivent donc être
-introduits au moyen de la commande usuelle \docAuxCommand{chapter}, sous sa
-forme \emph{non} étoilée : puisqu'ils seront situés dans la partie liminaire du
-mémoire, ces chapitres seront automatiquement \emph{non} numérotés.
+(cf. \vref{wa:frenchabstract}), une préface, un avant-propos, etc.
+à considérer et à composer comme des chapitres \enquote{ordinaires}.
+
+\begin{dbwarning}{Chapitres \enquote{ordinaires} des \glspl{liminaire}
+    automatiquement \emph{non} numérotés}{}
+  Les chapitres \enquote{ordinaires} des \glspl{liminaire} doivent être
+  introduits au moyen de la commande usuelle \docAuxCommand{chapter}, sous sa
+  forme \emph{non} étoilée : puisqu'ils seront situés dans la partie liminaire
+  du mémoire, ces chapitres seront automatiquement \emph{non} numérotés.
+\end{dbwarning}
 
 \begin{dbremark}{\protect\Glspl{titrecourant} des chapitres des \protect\glspl{liminaire}}{titrecourant}
-  S'ils sont situés après la page dédiée aux résumés succincts en français et
-  en anglais (cf. \vref{sec:abstract}), les chapitres \enquote{ordinaires} sont
-  pourvus de \glspl{titrecourant}. Sinon, ils n'en sont pas pourvus.
+  Les chapitres \enquote{ordinaires} sont pourvus de \glspl{titrecourant} si
+  (et seulement si) ils figurent après la page dédiée aux résumés
+  (cf. \vref{sec:abstract}).
 \end{dbremark}
 
 \section{Résumés succincts en français et en anglais}\label{sec:abstract}
@@ -262,16 +267,16 @@ page.
   \item sa 2\ieme{} occurrence, si présente, doit contenir le résumé dans la
     langue secondaire.
   \end{enumerate}
-  Ces résumés sont respectivement intitulés \enquote{Résumé} ou
-  \foreignquote{english}{Abstract}\selonlangue{} mais l'argument optionnel
-  permet de spécifier un \meta{intitulé alternatif}\redefexprcle et ils
-  figurent, dans les langues principale et secondaire :
+  Ces résumés figurent, dans les langues principale et secondaire :
   \begin{itemize}
   \item sur la page dédiée au(x) résumé(s) de la thèse produite par la commande
     \refCom{makeabstract} ;
   \item sur la 4\ieme{} de couverture si la commande \refCom{makebackcover} est
     employée.
   \end{itemize}
+  Ils sont respectivement intitulés \enquote{Résumé} ou
+  \foreignquote{english}{Abstract}\selonlangue{} mais l'argument optionnel
+  permet de spécifier un \meta{intitulé alternatif}\redefexprcle.
 \end{docEnvironment}
 
 \begin{docCommand}[doc description=\mandatory]{makeabstract}{}
