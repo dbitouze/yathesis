@@ -28,8 +28,8 @@ Cette section détaille les commandes permettant de préparer et produire les
 \begin{dbremark}{Commande \protect\docAuxCommand{frontmatter} à ne pas utiliser}{nofrontmatter}
   La commande \docAuxCommand{frontmatter} usuelle de la \Class{book}, employée
   habituellement pour entamer la partie liminaire d'un document, n'a pas besoin
-  d'être utilisée avec la classe \yatcl{} car elle l'est déjà en sous-main. Au
-  contraire les autres commandes analogues de la \Class{book} :
+  d'être utilisée car la \yatcl{} la charge déjà en sous-main. On verra plus
+  loin que, au contraire, les autres commandes analogues de la \Class{book} :
   \refCom{mainmatter}, \refCom{appendix} et \refCom{backmatter} doivent être
   explicitement employées pour entamer les parties respectivement principale,
   annexe et finale.
@@ -84,9 +84,6 @@ La page dédiée à la clause de non-responsabilité est produite par la command
   \caption{Page de clause de non-responsabilité}
   \label{fig:disclaimerpage}
 \end{figure}
-
-On peut modifier le contenu par défaut de la clause de non-responsabilité au
-moyen de la commande \refCom{disclaimer} suivante.
 
 \begin{docCommand}{disclaimer}{\marg{clause}}
   Cette commande permet de redéfinir le contenu par défaut de la
