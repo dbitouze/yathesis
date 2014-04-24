@@ -2715,8 +2715,8 @@ This work consists of the file  yathesis.dtx
 % Commande définissant l'auteur.
 % \begin{macro}{\author}
 %    \begin{macrocode}
-\renewcommand*{\author}[3]{%
-  \ifthenelse{\isempty{#1}}{%
+\renewcommand*{\author}[3][]{%
+  \ifthenelse{\isempty{#2}}{%
     \newcommand*\YAD@firstname@author{%
       \YAD@generic@argument@translate{firstname}%
     }%
@@ -2729,10 +2729,10 @@ This work consists of the file  yathesis.dtx
     }%
   }{%
     \newcommand*\YAD@firstname@author{%
-      #1%
+      #2%
     }%
   }%
-  \ifthenelse{\isempty{#2}}{%
+  \ifthenelse{\isempty{#3}}{%
     \newcommand*\YAD@lastname@author{%
       \YAD@generic@argument@translate{lastname}%
     }%
@@ -2745,20 +2745,14 @@ This work consists of the file  yathesis.dtx
     }%
   }{%
     \newcommand*\YAD@lastname@author{%
-      #2%
-    }%
-  }%
-  \hypersetup{pdfauthor=\YAD@firstname@author{} \YAD@lastname@author}%
-  \ifthenelse{\isempty{#3}}{%
-    \newcommand*\YAD@email@author{%
-      prenom.nom@laboratoire.institut.fr%
-    }%
-  }{%
-    \newcommand*\YAD@email@author{%
       #3%
     }%
   }%
-  \ifthenelse{\isempty{#1}\AND\isempty{#2}}{%
+  \hypersetup{pdfauthor=\YAD@firstname@author{} \YAD@lastname@author}%
+  \newcommand*\YAD@email@author{%
+    #1%
+  }%
+  \ifthenelse{\isempty{#2}\AND\isempty{#3}}{%
     \newcommand*{\printauthor}{%
       \ifdraft{%
         \YAD@reach@file{%
@@ -2785,9 +2779,12 @@ This work consists of the file  yathesis.dtx
       }{%
         \if@nolink%
         \YAD@firstname@author{} \bsc{\YAD@lastname@author}%
-        \else%
-        \YAD@href{mailto:\YAD@email@author}{\YAD@firstname@author{} \bsc{\YAD@lastname@author}}%
         \fi%
+        \ifthenelse{\isempty{#1}}{%
+          \YAD@firstname@author{} \bsc{\YAD@lastname@author}
+        }{%
+          \YAD@href{mailto:\YAD@email@author}{\YAD@firstname@author{} \bsc{\YAD@lastname@author}}%
+        }%
       }%
       %
     }%
