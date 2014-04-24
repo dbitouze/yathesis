@@ -4,38 +4,37 @@
 Pour faciliter son utilisation, la \yatcl{} importe automatiquement certains
 fichiers (s'ils existent et sont situés dans le répertoire \emph{ad hoc},
 cf. \vref{wa:import-sous-cond}) :
-\begin{itemize}
+\begin{enumerate}
 \item un fichier nommé \file{\characteristicsfile} dédié aux données
-  caractéristiques du document amenées à figurer en divers emplacements et
+  caractéristiques du document amenées à figurer en divers emplacements ou
   comme métadonnées du fichier \pdf produit (cf. \vref{sec:lieu-de-saisie}) ;
 \item un fichier nommé \file{\configurationfile} dédié à la configuration du
   document, où stocker notamment les réglages :
   \begin{itemize}
-  \item de la classe \yatcl (cf. \vref{cha:configuration}) ;
+  \item de la \yatcl (cf. \vref{cha:configuration}) ;
   \item des différents packages chargés soit par la classe, soit manuellement
-    (cf. \vref{cha:packages-charges}) ;
+    (cf. \vref{cha:packages-charges}).
   \end{itemize}
-\item un fichier nommé \file{\macrosfile} dédié aux macros personnelles créées
-  pour le document.
-\end{itemize}
+  % ^^A \item un fichier nommé \file{\macrosfile} dédié aux macros personnelles
+  % ^^A créées pour le document.
+\end{enumerate}
 \begin{dbwarning}{Fichiers automatiquement importés sous conditions}{import-sous-cond}
-  Pour que ces fichiers soient automatiquement importés, il est donc
+  Pour que ces fichiers soient automatiquement importés, il est
   nécessaire :
   \begin{enumerate}
-  \item qu'ils existent ;
+  \item qu'ils existent\footnote{Ces fichiers et sous-répertoire sont donc
+      à créer au besoin mais le canevas de thèse \enquote{en relief} livré avec
+      la classe, décrit \vref{sec:canevas-relief}, les fournit d'emblée.} ;
   \item qu'ils soient situés dans le répertoire \emph{ad hoc}, à savoir un
     sous-répertoire nommé \directory{\configurationdirectory} du répertoire où
     se trouve le fichier (maître) du document.
   \end{enumerate}
 \end{dbwarning}
-Ces fichiers et sous-répertoire sont à créer au besoin mais le canevas de thèse
-\enquote{en relief} livré avec la classe, décrit \vref{sec:canevas-relief}, les
-fournit d'emblée.
 %^^A
-\begin{dbwarning}{Fichiers à ne pas importer}{}
-  Si les fichiers ci-dessus vérifient les conditions de
-  l'\vref{wa:import-sous-cond}, la \yatcl{} les importe
-  \emph{automatiquement} : ils doivent donc \emph{ne pas} être explicitement
-  importés \phrase*{au moyen d'une commande \docAuxCommand{input} ou
-    assimilée}.
+\begin{dbwarning}{Fichiers à ne pas importer manuellement}{}
+  Si les fichiers \file{\characteristicsfile} et \file{\configurationfile}
+  vérifient les conditions de l'\vref{wa:import-sous-cond}, la \yatcl{} les
+  importe \emph{automatiquement} : ils doivent donc \emph{ne pas} être
+  explicitement importés \phrase*{au moyen d'une commande \docAuxCommand{input}
+    ou assimilée}.
 \end{dbwarning}
