@@ -1,7 +1,7 @@
 \chapter{Usage avancé}\label{cha:usage-avance}
 
-\section{(Dés)Activation des erreurs ciblées propres aux éléments
-  \enquote{obligatoires}}\label{sec:desact-des-erre}
+\section{(Non-)Affichage ciblé des \foreignquote{english}{warnings} propres aux
+  éléments \enquote{obligatoires}}\label{sec:non-affichage-cible}
 
 On a vu \vref{sec:comm-oblig} que la \yatcl{} considère comme
 \enquote{obligatoires} certains éléments (commandes et environnements). Leur
@@ -9,138 +9,116 @@ liste complète figure à la 1\iere{} colonne du \vref{tab:no-warnings}.
 \begin{table}[ht]
   \centering
   \input{tableaux/no-warnings}
-  \caption{Éléments \enquote{obligatoires} et options de désactivation des erreurs
-    ciblées associées}
+  \caption{Éléments \enquote{obligatoires} et clés de désactivation du message
+    personnalisé correspondant}
   \label{tab:no-warnings}
 \end{table}
 
-Cependant en cours de rédaction, les éléments \enquote{obligatoires} de la
-thèse ne sont pas encore tous connus de l'utilisateur, par exemple la date de
-soutenance (commande \refCom{date}).
-% ^^A
-De ce fait, le signalement des éléments \enquote{obligatoires} manquants est :
-\begin{description}
-\item[désactivé] par défaut\footnote{C'est-à-dire en version intermédiaire du
-    document (cf. valeur par défaut \docValue{inprogress} de la clé
-    \refKey{version}). Le signalement est également désactivé en versions
-    intermédiaire alternative et brouillon (cf. valeurs \docValue{inprogress*}
-    et \docValue{draft} de la clé \refKey{version}).} ;
-\item[activé] (seulement) en version \emph{finale}\footnote{Cf. valeur
-    \docValue{final} de la clé \refKey{version}.} du document, par le biais
-  d'une erreur ciblée, émise à chaque compilation.
-\end{description}
-
-Or, l'utilisateur \emph{avancé} peut vouloir passer outre le caractère
-\enquote{obligatoire} de tel ou tel élément\footnote{Par exemple, il peut juger
-  inutile de faire figurer des mots clés dans sa thèse et donc de recourir à la
-  commande \enquote{obligatoire} \protect\refCom{keywords}.}, y compris en
-version \emph{finale} du document, et pour éviter que chaque compilation ne
-soit alors perturbée par les erreurs ciblées correspondantes, la \yatcl{}
-propose de désactiver ces erreurs de façon :
-\begin{description}
-\item[soit globale] au moyen de la clé \refKey{noerror} suivante.
-  \begin{docKey}{noerror}{=\docValue{true}\textbar\docValue{false}}{par défaut
-      \docValue{true}, initialement \docValue{true}}
-    Cette option désactive toutes les erreurs propres à la
-    \yatcl{}. Initialement égale à \docValue{true}, elle devient égale
-    à \docValue{false} si la clé \refKey{version} a pour valeur
-    \docValue{final}.
-  \end{docKey}
-\item[soit individuelle] au moyen des clés listées au \vref{tab:no-warnings} et
-  dont le rôle est précisé ci-après.
-  \begin{docKey}{noauthor}{=\docValue{true}\textbar\docValue{false}}{par défaut
-      \docValue{true}, initialement \docValue{false}}
-    Cette option désactive l'erreur émise si la commande \refCom{author} est
-    omise (ou à argument vide).
-  \end{docKey}
-  \begin{docKey}{notitle}{=\docValue{true}\textbar\docValue{false}}{par défaut
-      \docValue{true}, initialement \docValue{false}}
-    Cette option désactive l'erreur émise si la commande \refCom{title} est
-    omise (ou à argument vide).
-  \end{docKey}
-  \begin{docKey}{noacademicfield}{=\docValue{true}\textbar\docValue{false}}{par
-      défaut \docValue{true}, initialement \docValue{false}}
-    Cette option désactive l'erreur émise si la commande \refCom{academicfield}
-    est omise (ou à argument vide).
-  \end{docKey}
-  \begin{docKey}{nodate}{=\docValue{true}\textbar\docValue{false}}{par défaut
-      \docValue{true}, initialement \docValue{false}}
-    Cette option désactive l'erreur émise si la commande \refCom{date} est
-    omise (ou à arguments vides ou à arguments incorrects).
-  \end{docKey}
-  \begin{docKey}{noinstitute}{=\docValue{true}\textbar\docValue{false}}{par
-      défaut \docValue{true}, initialement \docValue{false}}
-    Cette option désactive l'erreur émise si la commande \refCom{institute} est
-    omise (ou à argument vide).
-  \end{docKey}
-  \begin{docKey}{nodoctoralschool}{=\docValue{true}\textbar\docValue{false}}{par
-      défaut \docValue{true}, initialement \docValue{false}}
-    Cette option désactive l'erreur émise si la commande
-    \refCom{doctoralschool} est omise (ou à argument vide).
-  \end{docKey}
-  \begin{docKey}{nolaboratory}{=\docValue{true}\textbar\docValue{false}}{par
-      défaut \docValue{true}, initialement \docValue{false}}
-    Cette option désactive l'erreur émise si la commande \refCom{laboratory}
-    est omise (ou à 1\ier{} argument vide).
-  \end{docKey}
-  \begin{docKey}{nolaboratoryadress}{=\docValue{true}\textbar\docValue{false}}{par
-      défaut \docValue{true}, initialement \docValue{false}}
-    Cette option désactive l'erreur émise si la commande \refCom{laboratory}
-    est omise (ou à 2\ieme{} argument vide).
-  \end{docKey}
-  \begin{docKey}{nosupervisor}{=\docValue{true}\textbar\docValue{false}}{par
-      défaut \docValue{true}, initialement \docValue{false}}
-    Cette option désactive l'erreur émise si la commande \refCom{supervisor}
-    est omise (ou à argument vide).
-  \end{docKey}
-  \begin{docKey}{nomaketitle}{=\docValue{true}\textbar\docValue{false}}{par
-      défaut \docValue{true}, initialement \docValue{false}}
-    Cette option désactive l'erreur émise si la commande \refCom{maketitle} est
-    omise.
-  \end{docKey}
-  \begin{docKey}{nokeywords}{=\docValue{true}\textbar\docValue{false}}{par
-      défaut \docValue{true}, initialement \docValue{false}}
-    Cette option désactive l'erreur émise si la commande \refCom{keywords} est
-    omise (ou à arguments vides).
-  \end{docKey}
-  \begin{docKey}{noabstract}{=\docValue{true}\textbar\docValue{false}}{par
-      défaut \docValue{true}, initialement \docValue{false}}
-    Cette option désactive l'erreur émise si l'environnement \refEnv{abstract}
-    est omis (ou à contenu vide).
-  \end{docKey}
-  \begin{docKey}{nomakeabstract}{=\docValue{true}\textbar\docValue{false}}{par
-      défaut \docValue{true}, initialement \docValue{false}}
-    Cette option désactive l'erreur émise si la commande \refCom{makeabstract}
-    est omise.
-  \end{docKey}
-  \begin{docKey}{notableofcontents}{=\docValue{true}\textbar\docValue{false}}{par
-      défaut \docValue{true}, initialement \docValue{false}}
-    Cette option désactive l'erreur émise si la commande
-    \refCom{tableofcontents} est omise.
-  \end{docKey}
-  \begin{docKey}{noprintbibliography}{=\docValue{true}\textbar\docValue{false}}{par
-      défaut \docValue{true}, initialement \docValue{false}}
-    Cette option désactive l'erreur émise si la commande
-    \refCom{printbibliography} est omise.
-  \end{docKey}
-\end{description}
+Dans le cadre d'un usage \emph{avancé} de la \yatcl{}, on peut décider de
+passer outre le caractère \enquote{obligatoire} de tel ou tel élément.  Mais,
+à chaque compilation, le fichier de \enquote{log} contient alors un
+avertissement \enquote{personnalisé} rappelant que l'élément en question est
+requis\footnote{Sauf si l'affichage des avertissements de la \yatcl{} est
+  désactivé de façon \emph{globale} au moyen de la clé \refKey{nowarning} ou si
+  on ne travaille qu'en version \enquote{brouillon} et \enquote{intermédiaire}
+  du document (cf. clés \refKey{draft} et \refKey{intermediate}).}.
+L'affichage de ce message \enquote{personnalisé} peut être désactivé de façon
+ciblée au moyen d'une des clés figurant 2\ieme{} colonne du
+\vref{tab:no-warnings} et dont les rôles sont précisés ci-après.
 
 \begin{dbwarning}{Éléments \enquote{obligatoires} de la \yatcl{}
     fortement conseillés}{}
-  En version finale du document, il est conseillé d'employer tous les éléments
-  \enquote{obligatoires} et, sinon, d'utiliser à bon escient les clés de
-  désactivation ci-dessus, sans quoi :
-  \begin{itemize}
-  \item des textes génériques peuvent figurer dans le document final en
-    remplacement de certains éléments manquants ;
-  \item le bon fonctionnement de la \yatcl{} peut être sérieusement altéré.
-  \end{itemize}
-  Donc, en version finale du document, on ne passera outre les éléments
-  \enquote{obligatoires} de la \yatcl{} que dans le cadre d'un usage avancé, si
-  l'on est sûr de ce que l'on fait et qu'on pourra en gérer \emph{seul} les
-  conséquences.  On évitera notamment de recourir de façon trop légère à la clé
-  \refKey{noerror}.
+  Ne pas employer les éléments \enquote{obligatoires} de la \yatcl{} peut
+  sérieusement altérer le bon fonctionnement de celle-ci. Cela est déconseillé,
+  sauf dans le cadre d'un usage avancé \phrase*{si l'on est sûr de ce que l'on
+    fait et qu'on pourra en gérer \emph{seul} les conséquences}.
 \end{dbwarning}
+
+\begin{docKey}{noauthor}{=\docValue{true}\textbar\docValue{false}}{par défaut \docValue{true},
+    initialement \docValue{false}}
+  Cette option désactive l'affichage de l'avertissement émis si la commande
+  \refCom{author} est omise (ou à argument vide).
+\end{docKey}
+\begin{docKey}{notitle}{=\docValue{true}\textbar\docValue{false}}{par défaut \docValue{true},
+    initialement \docValue{false}}
+  Cette option désactive l'affichage de l'avertissement émis si la commande
+  \refCom{title} est omise (ou à argument vide).
+\end{docKey}
+\begin{docKey}{noacademicfield}{=\docValue{true}\textbar\docValue{false}}{par défaut \docValue{true},
+    initialement \docValue{false}}
+  Cette option désactive l'affichage de l'avertissement émis si la commande
+  \refCom{academicfield} est omise (ou à argument vide).
+\end{docKey}
+\begin{docKey}{nodate}{=\docValue{true}\textbar\docValue{false}}{par défaut \docValue{true},
+    initialement \docValue{false}}
+  Cette option désactive l'affichage de l'avertissement émis si la commande
+  \refCom{date} est omise (ou à arguments vides).
+\end{docKey}
+\begin{docKey}{noinstitute}{=\docValue{true}\textbar\docValue{false}}{par défaut \docValue{true},
+    initialement \docValue{false}}
+  Cette option désactive l'affichage de l'avertissement émis si la commande
+  \refCom{institute} est omise (ou à argument vide).
+\end{docKey}
+\begin{docKey}{nodoctoralschool}{=\docValue{true}\textbar\docValue{false}}{par défaut \docValue{true},
+    initialement \docValue{false}}
+  Cette option désactive l'affichage de l'avertissement émis si la commande
+  \refCom{doctoralschool} est omise (ou à argument vide).
+\end{docKey}
+\begin{docKey}{nolaboratory}{=\docValue{true}\textbar\docValue{false}}{par défaut \docValue{true},
+    initialement \docValue{false}}
+  Cette option désactive l'affichage de l'avertissement émis si la commande
+  \refCom{laboratory} est omise (ou à 1\ier{} argument vide).
+\end{docKey}
+\begin{docKey}{nolaboratoryadress}{=\docValue{true}\textbar\docValue{false}}{par défaut \docValue{true},
+    initialement \docValue{false}}
+  Cette option désactive l'affichage de l'avertissement émis si la commande
+  \refCom{laboratory} est omise (ou à 2\ieme{} argument vide).
+\end{docKey}
+\begin{docKey}{nosupervisor}{=\docValue{true}\textbar\docValue{false}}{par défaut \docValue{true},
+    initialement \docValue{false}}
+  Cette option désactive l'affichage de l'avertissement émis si la commande
+  \refCom{supervisor} est omise (ou à argument vide).
+\end{docKey}
+\begin{docKey}{nomaketitle}{=\docValue{true}\textbar\docValue{false}}{par défaut \docValue{true},
+    initialement \docValue{false}}
+  Cette option désactive l'affichage de l'avertissement émis si la commande
+  \refCom{maketitle} est omise.
+\end{docKey}
+\begin{docKey}{nokeywords}{=\docValue{true}\textbar\docValue{false}}{par défaut \docValue{true},
+    initialement \docValue{false}}
+  Cette option désactive l'affichage de l'avertissement émis si la commande
+  \refCom{keywords} est omise (ou à arguments vides).
+\end{docKey}
+\begin{docKey}{noabstract}{=\docValue{true}\textbar\docValue{false}}{par défaut \docValue{true},
+    initialement \docValue{false}}
+  Cette option désactive l'affichage de l'avertissement émis si l'environnement
+  \refEnv{abstract} est omis.
+\end{docKey}
+\begin{docKey}{nomakeabstract}{=\docValue{true}\textbar\docValue{false}}{par défaut \docValue{true},
+    initialement \docValue{false}}
+  Cette option désactive l'affichage de l'avertissement émis si la commande
+  \refCom{makeabstract} est omise.
+\end{docKey}
+\begin{docKey}{notableofcontents}{=\docValue{true}\textbar\docValue{false}}{par défaut \docValue{true},
+    initialement \docValue{false}}
+  Cette option désactive l'affichage de l'avertissement émis si la commande
+  \refCom{tableofcontents} est omise.
+\end{docKey}
+% ^^A \begin{docKey}{nointroduction}{=\docValue{true}\textbar\docValue{false}}{par défaut \docValue{true},
+% ^^A     initialement \docValue{false}}
+% ^^A   Cette option désactive l'affichage de l'avertissement émis si l'environnement
+% ^^A   \refEnv{introduction} est omis.
+% ^^A \end{docKey}
+% ^^A \begin{docKey}{noconclusion}{=\docValue{true}\textbar\docValue{false}}{par défaut \docValue{true},
+% ^^A     initialement \docValue{false}}
+% ^^A   Cette option désactive l'affichage de l'avertissement émis si l'environnement
+% ^^A   \refEnv{conclusion} est omis.
+% ^^A \end{docKey}
+\begin{docKey}{noprintbibliography}{=\docValue{true}\textbar\docValue{false}}{par défaut \docValue{true},
+    initialement \docValue{false}}
+  Cette option désactive l'affichage de l'avertissement émis si la commande
+  \refCom{printbibliography} est omise.
+\end{docKey}
 
 %
 \iffalse
