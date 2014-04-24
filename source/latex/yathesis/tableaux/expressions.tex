@@ -1,6 +1,4 @@
 \newcommand{\expression}[3]{%^^A
-  #1%^^A
-  &
   \ifthenelse{\isempty{#2}}{%^^A
     \meta{vide}%^^A
   }{%
@@ -12,12 +10,14 @@
   }{%
     #3%^^A
   }%
+  &
+  #1%^^A
   \\%^^A
 }
 \bgroup%
 \footnotesize%
-\begin{tabulary}{\linewidth}{>{\ttfamily\color{keyword5}}lLL}
-  \textcolor{black}{Label} & Valeur en français & Valeur en anglais \\\toprule
+\begin{tabulary}{\linewidth}{LL>{\ttfamily\color{keyword5}}l}
+  Valeur en français & Valeur en anglais & \textcolor{black}{Label} \\\toprule
   \input{translations}
 \end{tabulary}
 \egroup%
