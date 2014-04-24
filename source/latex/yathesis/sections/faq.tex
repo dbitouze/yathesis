@@ -5,7 +5,7 @@ Ce chapitre répertorie les questions fréquemment posées sur la \yatcl{}.
 \begin{dbfaq}{Comment communiquer avec l'auteur de la \yatcl{} ?}{bogues}
   La \yatcl{} est vraiment formidable, mais je souhaite :
   \begin{enumerate}
-  \item rapporter un bogue ;
+  \item signaler un dysfonctionnement (un bogue) ;
   \item demander une nouvelle fonctionnalité ;
   \item communiquer avec l'auteur de la classe.
   \end{enumerate}
@@ -18,15 +18,14 @@ Ce chapitre répertorie les questions fréquemment posées sur la \yatcl{}.
   \url{https://github.com/dbitouze/yathesis/issues/new} (pour les bogues, un
   \gls{ecm} est vivement souhaité).
 
-  Pour communiquer avec l'auteur de la classe, utiliser l'adresse indiquée en
-  1\iere{} page de la présente documentation.
+  Pour communiquer avec l'auteur de la classe, il est possible d'utiliser l'adresse indiquée en
+  page de titre de la présente documentation.
 \end{dbfaq}
 
-\begin{dbfaq}{Comment faire figurer les glossaire, liste d'acronymes et liste
-    de symboles dans la table des matières ?}{}
-  Par défaut, les glossaire, liste d'acronymes et liste de symboles ne figurent
-  pas dans les sommaire, table des matières et signets du document. Comment les
-  faire apparaître ?
+\begin{dbfaq}{Comment faire figurer le glossaire dans la table des matières ?}{}
+  Par défaut, le glossaire (et les listes d'acronymes et de symboles) ne figure
+  pas dans la table des matières (ni dans le sommaire, ni dans les signets) du
+  document. Comment le faire apparaître ?
   %
   \tcblower
   %
@@ -43,12 +42,12 @@ Ce chapitre répertorie les questions fréquemment posées sur la \yatcl{}.
   %
   \tcblower
   %
-  Il suffit de modifier le lieu de saisie de ces
-  caractéristiques\footnote{Cf. \vref{sec:lieu-de-saisie}.} :
+  Il suffit de saisir ces caractéristiques
+  plutôt\footnote{Cf. \vref{sec:lieu-de-saisie}.} :
   \begin{itemize}
   \item soit dans le \emph{corps} du fichier (maître) de la thèse\footnote{Mais
-      cf. alors \vref{wa:avant-maketitle}.}, et \emph{pas} dans son
-    \emph{préambule} ;
+      cf. alors \vref{wa:avant-maketitle}.} (et donc \emph{pas} dans son
+    \emph{préambule}) ;
   \item soit dans le fichier \file{\characteristicsfile} prévu à cet effet.
   \end{itemize}
   Si on tient absolument à ce que ces caractéristiques soient saisies dans le
@@ -97,9 +96,9 @@ Ce chapitre répertorie les questions fréquemment posées sur la \yatcl{}.
 où \meta{distance}, à exprimer par exemple en points (par exemple ×27pt×), est
 à déterminer par \enquote{essais/erreurs} de sorte que \meta{distance} soit :
 \begin{enumerate}
-\item le plus petit possible ;
-\item suffisamment grand pour cesser de causer les débordements de numéros de
-  pages.
+\item suffisamment grande, pour empêcher les débordements de numéros de pages ;
+\item aussi petite que possible, pour éviter les lignes de pointillés trop
+  courtes.
 \end{enumerate}
 \end{dbfaq}
 
