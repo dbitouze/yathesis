@@ -65,9 +65,9 @@ avec lesquelles ils sont appelés.
     techniques.} ;
 \item[\package*{idxlayout} :] correction d'un bogue affichant trop haut
   l'intitulé \enquote{Index} de l'index. Option par défaut
-  \docAuxKey{columns=1}\footnote{Il suffit de le spécifier au moyen de
-    \protect\lstinline+\\idxlayout\{columns=+\meta{n}\protect\lstinline+\}+ si
-    on souhaite un index, non pas sur $1$, mais sur \meta{n} colonnes.} ;
+  \docAuxKey*{columns=1}\footnote{Si on souhaite un index non pas sur $1$ mais
+    sur \meta{n} colonnes, il suffit de le spécifier au moyen de
+    \protect\lstinline+\\idxlayout\{columns=+\meta{n}\protect\lstinline+\}+.} ;
 \item[\package*{babel} :] gestion des langues ;
 \item[\package{iflang} :] test de la langue en cours ;
 \item[\package{datetime} :] gestion de la date. Option par défaut :
@@ -94,10 +94,8 @@ avec lesquelles ils sont appelés.
 \section{Packages non chargés par la \yatcl{}}
 
 La liste suivante répertorie des packages non chargés par la \yatcl{} mais
-pouvant se révéler très utiles, notamment aux doctorants.
-
-Cette liste est loin d'être exhaustive et ne mentionne notamment pas les
-packages nécessaires :
+pouvant se révéler très utiles, notamment aux doctorants.  Elle est loin d'être
+exhaustive et ne mentionne notamment pas les packages nécessaires :
 \begin{itemize}
 \item \package{inputenc} et \package{fontenc}, si on utilise \hologo{LaTeX} ou
   \hologo{pdfLaTeX} ;
@@ -132,7 +130,7 @@ les plus notables sont précisés.
   flottants ;
 \item[\package*{caption} :] personnalisation des légendes ;
 \item[\package*{todonotes} :] insertion de
-  \foreignquote{english}{TODOs}\footnote{De rappels pour les choses qu'il ne
+  \foreignquote{english}{TODOs}\footnote{Rappels de points qu'il ne
     faut pas oublier d'ajouter, de compléter, de réviser, etc.} ;
 \item[\package*{csquotes} :] pour les citations informelles et formelles (avec
   citation des sources). Réglage par défaut opéré par la \yatcl (si le
@@ -140,7 +138,7 @@ les plus notables sont précisés.
 \item[\package*{biblatex} :] gestion puissante de la bibliographie ;
 \item[\package*{glossaries} :] gestion puissante des glossaires,
   acronymes et liste de symboles ;
-\item[\package*{cleveref} :] puissante gestion des références croisées.
+\item[\package*{cleveref} :] gestion puissante des références croisées.
 \end{description}
 
 %
