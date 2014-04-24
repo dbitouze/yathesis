@@ -17,7 +17,7 @@ les pages de titre de la thèse.
     \item une page de titre.
     \end{enumerate}
     Ces deux pages sont composées dans la langue principale et
-    identiques\footnote{À ceci près que le numéro d'ordre de la thèse ne figure
+    sont identiques\footnote{À ceci près que le numéro d'ordre de la thèse ne figure
       que sur la page de 1\iere{} de couverture.} ;
   \item \emph{automatiquement}\footnote{Sans qu'il soit nécessaire de faire
       figurer une 2\ieme{} occurrence de la commande \refCom{maketitle}.} une
@@ -47,13 +47,13 @@ les pages de titre de la thèse.
 %
   \NoAutoSpacing%
   \lstset{morecomment=[is]{\%}{\^^M}}%
-  \bodysample{%
+  \preamblesample[\configurationdirectory/\characteristicsfile]{%
     deletekeywords={[2]title},%
     rangeendsuffix={\^^M},%
     linerange={%
       author-42]
     }%
-  }{title=Préparation du titre (par exemple dans le \File{\propertiesfile})}
+  }{title=Préparation du titre (par exemple dans le \File{\characteristicsfile})}
   %
   \lstset{deletecomment=[is]{\%}{\^^M}}%
   %
