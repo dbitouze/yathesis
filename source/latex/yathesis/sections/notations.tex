@@ -22,7 +22,7 @@ distinguer, ils figurent avec des couleurs propres :
 \label{sec:arguments-generiques}
 
 Pour expliquer le rôle d'une commande, il est parfois nécessaire d'indiquer
-à quoi celle-ci s'appliquera, autrement dit quel en sera l'argument générique.
+à quoi celle-ci s'applique, autrement dit quel en est l'argument générique.
 Un tel argument est composé :
 \begin{itemize}
 \item en fonte à chasse fixe ;
@@ -36,9 +36,9 @@ le tout en marron, ainsi : \meta{argument générique}.
 
 Les liens hypertextes figurent en couleur, ainsi :
 \href{http://gte.univ-littoral.fr/members/dbitouze/pub/latex}{lien hypertexte}.
-Toute référence à une commande, un environnement ou une clé, défini dans la
-présente documentation, est un lien hypertexte (surmonté de la page où se
-trouve sa cible, sauf si elle se situe sur la même page) :
+La plupart des références aux commandes, environnements et clés définis dans la
+présente documentation, sont des liens hypertextes, surmontés du numéro de page
+où se trouve la cible correspondante (sauf si elle se situe sur la même page) :
 \begin{itemize}
 \item \refCom{author} ;
 \item \refEnv{abstract} ;
@@ -74,24 +74,23 @@ l'être pour différentes raisons :
 
 \begin{dbremark}{Éléments (modérément) \enquote{obligatoires}}{}
   Si un élément \enquote{obligatoire} est omis :
-  \begin{itemize}
-  \item un texte générique est en général affiché à sa place\footnote{Si cet
-      élément est conçu pour produire du texte.} ;
-  \item le signalement de cette omission est :
+  \begin{enumerate}
+  \item cette omission est :
     \begin{description}
-    \item[désactivé] par défaut\footnote{C'est-à-dire en version intermédiaire
-        du document (cf. valeur par défaut \docValue{inprogress} de la clé
-        \refKey{version}). Le signalement est également désactivé en versions
-        intermédiaire alternative et brouillon (cf. valeurs
+    \item[passée sous silence] par défaut\footnote{C'est-à-dire en version
+        intermédiaire du document (cf. valeur par défaut \docValue{inprogress}
+        de la clé \refKey{version}). Le signalement est également désactivé en
+        versions intermédiaire alternative et brouillon (cf. valeurs
         \docValue{inprogress*} et \docValue{draft} de la clé
         \refKey{version}).} ;
-    \item[activé] (seulement) en version \emph{finale}\footnote{Cf. valeur
-        \docValue{final} de la clé \refKey{version}.} du document\footnote{Sauf
-        si la désactivation de cette erreur a été demandée,
-        cf. \vref{sec:desact-des-erre}.}, par le biais d'une erreur de
-      compilation ciblée.
+    \item[signalée] (seulement) en version \emph{finale}\footnote{Cf. valeur
+        \docValue{final} de la clé \refKey{version}.} du document, par le biais
+      d'une erreur de compilation ciblée\footnote{Sauf si la désactivation de
+        cette erreur a été demandée, cf. \vref{sec:desact-des-erre}.} ;
     \end{description}
-  \end{itemize}
+  \item un texte générique est en général affiché à sa place\footnote{Si cet
+      élément est conçu pour produire du texte.}.
+  \end{enumerate}
 \end{dbremark}
 
 Naturellement, tout élément non \enquote{obligatoire} est réputé optionnel.
@@ -101,7 +100,7 @@ Naturellement, tout élément non \enquote{obligatoire} est réputé optionnel.
 
 Les exemples qui illustrent la présente documentation sont constitués de codes
 sources et, le cas échéant, des \enquote{copies d'écran} correspondantes.
-Ceux-ci proviennent le plus souvent d'un spécimen de document composé avec la
+Ceux-ci proviennent le plus souvent du spécimen de document composé avec la
 \yatcl, fourni avec l'ensemble de la classe (cf. \vref{cha:specimen}).
 
 Ces codes sources figurent dans des cadres de couleur bleu :
@@ -153,35 +152,34 @@ environnements peuvent être modulés au moyen d'options, ou listes d'options
 %^^A \begin{description}
 %^^A \item[ne prennent pas de valeur.] Une telle option, par exemple nommée
 %^^A   \refKey{option}, est alors documentée selon la syntaxe suivante:
-%^^A     \begin{docKey*}{option}{}{\meta{précisions}}
+%^^A     \begin{docKey*}{option}{}{\meta{valeurs par défaut et initiale}}
 %^^A       \meta{Description de \refKey{option}}
 %^^A     \end{docKey*}
 %^^A \item[prennent des valeurs.] Une telle option se présente alors sous la forme
 %^^A   \meta{clé}×=×\meta{valeur}. Les valeurs passées à une clé peuvent être :
 \begin{description}
-\item[libre.] Une telle \meta{clé}, par exemple nommée \refKey{freekey}, est
-  alors documentée selon la syntaxe suivante :
-  \begin{docKey*}{freekey}{=\meta{valeur}}{\meta{précisions}}
+\item[libre.] Si une telle \meta{clé} est (pour l'exemple) nommée
+  \refKey{freekey}, elle est alors documentée selon la syntaxe suivante :
+  \begin{docKey*}{freekey}{=\meta{valeur}}{\meta{valeurs par défaut et initiale}}
     \meta{Description de \refKey{freekey}}
   \end{docKey*}
-\item[imposée] (parmi une liste de valeurs possibles). Une telle \meta{clé},
-  par exemple nommée \refKey{choicekey} et de valeurs imposées
-  \docValue*{valeur1}, \docValue*{valeur2}, ..., \docValue*{valeurN}, est alors
+\item[imposée] (parmi une liste de valeurs possibles). Si une telle \meta{clé} est
+   (pour l'exemple) nommée \refKey{choicekey} et de valeurs imposées
+  \docValue*{valeur1}, \docValue*{valeur2}, ..., \docValue*{valeurN}, elle est alors
   documentée selon la syntaxe suivante\footnote{Comme souvent en informatique,
     la barre verticale séparant les valeurs possibles signifie \enquote{ou}.} :
-  \begin{docKey*}{choicekey}{=\docValue*{valeur1}\textbar\docValue*{valeur2}\textbar...\textbar\docValue*{valeurN}}{\meta{précisions}}
+  \begin{docKey*}{choicekey}{=\docValue*{valeur1}\textbar\docValue*{valeur2}\textbar...\textbar\docValue*{valeurN}}{\meta{valeurs par défaut et initiale}}
     \meta{Description de \refKey{choicekey} et de ses valeurs possibles}
   \end{docKey*}
 \end{description}
 %^^A \end{description}
 
-Des \meta{précisions} sur les options de la forme \meta{clé}×=×\meta{valeur}
-figurent souvent en fin de ligne entre parenthèses. Elles portent généralement
-sur les valeurs passées en sous-main à la clé :
+Les \meta{valeurs par défaut et initiale} d'une clé sont souvent précisées
+(entre parenthèses en fin de ligne). Elles indiquent ce que la clé vaut :
 \begin{description}
-\item[sa valeur \emph{initiale}] lorsque la clé \emph{est} employée, mais sans
-  qu'une valeur explicite lui soit passée ;
-\item[sa valeur \emph{par défaut}] lorsque la clé \emph{n'est pas} employée.
+\item[par défaut] c'est-à-dire lorsque la clé \emph{est} employée, mais
+  \emph{seule} c'est-à-dire sans qu'une valeur explicite lui soit passée ;
+\item[initialement] c'est-à-dire lorsque la clé \emph{n'est pas} employée.
 \end{description}
 %^^A
 Ainsi certaines clés, appelées booléennes parce qu'elles ne peuvent prendre que
