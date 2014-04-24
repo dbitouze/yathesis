@@ -484,26 +484,23 @@ This work consists of the file  yathesis.dtx
 % ou ×version=inprogress*× est passée à la \yatcl{}.
 %    \begin{macrocode}
 \newcommand{\YAD@generic@text}{%
-  .\MessageBreak%
-  Un texte generique risque d'etre\MessageBreak%
-  affiche a la place%
+  Un texte generique risque d'etre affiche a la place.\MessageBreak%
 }%
 \newcommand{\YAD@quiet@text}[1]{%
-  .\MessageBreak\MessageBreak%
-  Pour ne plus etre importune par la\MessageBreak%
-  presente erreur, on peut passer l'option\MessageBreak%
-  `#1' a la classe `yathesis', mais\MessageBreak%
-  celle-ci peut serieusement alterer le\MessageBreak%
-  fonctionnement de la classe :\MessageBreak%
-  option a utiliser /a ses risques et perils/%
+  Pour ne plus etre importune par la presente erreur,\MessageBreak%
+  on peut passer l'option\MessageBreak%
+  \space\space`#1'\MessageBreak%
+  a la classe `yathesis', mais cela peut serieusement\MessageBreak%
+  alterer son fonctionnement : option a utiliser\MessageBreak%
+  \space\space\space\space/a ses risques et perils !/%
 }%
 \newcommand{\YAD@extra@help@text}{%
-  Consulter la documentation de la classe `yathesis' pour
-  plus\MessageBreak%
-  de précisions.%
+  \MessageBreak%
+  Consulter la documentation de la classe `yathesis'\MessageBreak%
+  pour plus de precisions.%
 }%
 \newcommand{\YAD@ClassError}{\@ifstar{\@tempswatrue\@YAD@ClassError}{\@tempswafalse\@YAD@ClassError}}
-\newcommand{\@YAD@ClassError}[2]{%
+\newcommand{\@YAD@ClassError}[3][]{%
   \ifYAD@noerror%
   \else%
   \ifboolexpr{%
@@ -513,10 +510,12 @@ This work consists of the file  yathesis.dtx
     or togl {YAD@noerror}%
   }{%
   }{%
-    \ifthenelse{\isempty{#2}}{%
+    \ifthenelse{\isempty{#1}}{%
       \ClassError{yathesis}{%
-        #1%
+        #2%
       }{%
+        #3%
+        \MessageBreak
         \if@tempswa%
         \else%
         \YAD@generic@text%
@@ -525,19 +524,20 @@ This work consists of the file  yathesis.dtx
       }%
     }{%
       \ClassError{yathesis}{%
-        #1%
+        #2%
+      }{%
+        #3%
+        \MessageBreak
         \if@tempswa%
         \else%
         \YAD@generic@text%
         \fi%
-        \YAD@quiet@text{#2}%
-      }{%
+        \YAD@quiet@text{#1}%
         \YAD@extra@help@text%
       }%
     }%
   }%
-  \fi
-}%
+  \fi }%
 %    \end{macrocode}
 % On définit la macro ×\YAD@ClassWarningNoLine× qui est essentiellement
 % identique à ×\ClassWarningNoLine×, sauf que les messages de warnings :
