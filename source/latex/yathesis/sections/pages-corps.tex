@@ -13,7 +13,8 @@ une conclusion \enquote{ordinaires}.
 
 \begin{dbremark}{Scission du mémoire en fichiers maître et esclaves}{}
   Il est vivement recommandé de scinder le mémoire de thèse,
-  notamment son corps, en fichiers maître et esclaves. La procédure
+  notamment son corps, en fichiers maître et esclaves (ces derniers
+  correspondants chacun à un chapitre). La procédure
   pour ce faire, standard, est rappelée \vref{sec:repart-du-memo}.
 \end{dbremark}
 
@@ -51,22 +52,23 @@ d'en simplifier l'usage.
 \begin{dbremark}{Variante étoilée de la commande \protect\docAuxCommand*{chapter} modifiée}{}
   La \yatcl{} modifie la commande \docAuxCommand{chapter*} de sorte que :
   \begin{enumerate}
-  \item automatiquement :
+  \item automatiquement, le titre du chapitre figure :
     \begin{enumerate}
-    \item le titre correspondant figure dans la table des matières ;
-    \item les \glspl{titrecourant} correspondants sont ceux attendus ;
+    \item dans la table des matières ;
+    \item dans les \glspl{titrecourant} ;
     \end{enumerate}
-  \item les (sous-(sous-))sections du chapitre sont à créer avec les versions
-    \emph{non} étoilées des commandes correspondantes : \docAuxCommand{section},
+  \item les (sous-(sous-))sections du chapitre sont peuvent et même
+    \emph{doivent} être créées avec les versions \emph{non} étoilées des
+    commandes correspondantes : \docAuxCommand{section},
     \docAuxCommand{subsection} et \docAuxCommand{subsubsection}.
   \end{enumerate}
 \end{dbremark}
 
 \begin{dbexample}{Introduction}{}
   Le code suivant produit la \vref{fig:introduction} illustrant une
-  introduction (générale) non numérotée. Bien qu'aucun élément de structuration
-  de ce chapitre ne soit numéroté, on constate que seule la commande
-  \docAuxCommand{chapter} figure sous sa forme étoilée.
+  introduction (générale) non numérotée. On constate que, bien que seule la
+  commande \docAuxCommand{chapter} figure sous sa forme étoilée, aucun élément
+  de structuration de ce chapitre n'est numéroté.
   %
   \bodysample[corps/introduction-generale]{%
     deletekeywords={[1]introduction},%
@@ -100,7 +102,7 @@ usuelle \docAuxCommand{chapter} (cf. \vref{fig:chapitre}).
 \end{figure}
 
 \begin{dbremark}{Style des têtes de chapitres numérotés personnalisable}{}
-  Les chapitres numérotés voient leurs têtes par défaut composées avec le style
+  Les têtes de chapitres numérotés sont par défaut composées avec le style
   ×PetersLenny× du \Package*{fncychap}. La \vref{sec:style-des-tetes} explique
   comment ceci peut être modifié.
 \end{dbremark}
