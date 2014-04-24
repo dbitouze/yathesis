@@ -214,8 +214,7 @@ This work consists of the file  yathesis.dtx
 %
 \DeclareFixedFootnote{\nofrontmatter}{Au contraire, la commande analogue
   \protect\docAuxCommand{frontmatter} pour les \protect\glspl{liminaire} ne
-  doit pas être utilisée car elle l'est déjà en sous-main par la classe
-  \yatcl{}.}
+  doit pas être utilisée car elle l'est déjà en sous-main par la \yatcl{}.}
 %
 \DeclareFixedFootnote{\termesdefinisutilises}{Ne figurent dans ces listes que
   les termes, acronymes et symboles qui sont à la fois \emph{définis} et
@@ -255,8 +254,12 @@ This work consists of the file  yathesis.dtx
   classe, décrit \vref{sec:canevas}, fournit ce dossier et ce fichier.}
 %
 \DeclareFixedFootnote{\ifscreenoutput}{Chargé seulement si la clé
-  \protect\refKey{output} a pour valeur \protect\docValue{screen} (et donc ni
-  \protect\docValue{paper}, ni \protect\docValue{paper*}).}
+  \protect\refKey{output} n'a pour valeur ni \protect\docValue{paper}, ni
+  \protect\docValue{paper*}.}
+%
+\DeclareFixedFootnote{\exceptoneside}{Sauf si l'option
+  \protect\docAuxKey{oneside} est utilisée
+  (cf. \vref{sec:options-usuelles-de}).}
 %
 \DeclareFixedFootnote{\noframe}{Sans le cadre.}
 %
