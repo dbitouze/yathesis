@@ -1,23 +1,22 @@
 \chapter{\texorpdfstring{\Glsentryplural{titrecourant}}{Titres courants}, \glsentrytext{pagination} et numérotation}\label{cha:pagination}
 
-Ce chapitre précise la \gls{pagination}, les \glspl{titrecourant} et la
+Ce chapitre précise les \glspl{titrecourant}, la \gls{pagination} et la
 numérotation des chapitres des documents composés avec la \yatcl{}.
 
 \begin{enumerate}
-\item La composition est en recto verso (sauf si l'option \docAuxKey{oneside}
-  est utilisée, cf. \vref{sec:options-usuelles-de}).
+\item La composition est en recto verso\exceptoneside.
 \item À l'exception de la 4\ieme{} de couverture qui commence sur une page
   paire (et laisse son recto entièrement vide), les chapitres et objets
   analogues vus \vref{cha:pages-de-titre,cha:liminaires,cha:corps,cha:annexes}
-  commencent systématiquement sur une page impaire.
+  commencent systématiquement sur une page impaire\exceptoneside.
 \item Les \glspl{titrecourant} sont activés sur toutes les pages sauf sur
   celles :
   \begin{itemize}
   \item de 1\iere{} de couverture et de titres (et leurs versos);
   \item dédiées aux mots clés, au(x) laboratoire(s), aux dédicaces et aux
     épigraphes (et leurs versos);
-  \item des chapitres ordinaires précédant la page dédiée aux résumés
-  succincts en français et en anglais (cf. \vref{rq:titrecourant}) ;
+  \item des chapitres ordinaires figurant avant la page dédiée aux résumés
+    (cf. \vref{rq:titrecourant}) ;
   \item qui ouvrent les parties (et leurs versos);
   \item qui ouvrent les chapitres;
   \item de 4\ieme{} de couverture (et son recto).
@@ -25,9 +24,9 @@ numérotation des chapitres des documents composés avec la \yatcl{}.
 \item La \gls{pagination} commence dès la 1\iere{} page, de façon
   séquentielle, en chiffres :
   \begin{itemize}
-  \item romains minuscules du début du mémoire à la fin des
+  \item romains minuscules du début du mémoire jusqu'à la fin des
     \glspl{liminaire};
-  \item arabes, avec remise à zéro, du début du corps à la fin du
+  \item arabes, avec remise à zéro, du début du corps jusqu'à la fin du
     mémoire.
   \end{itemize}
 \item Les numéros de pages :
@@ -38,14 +37,13 @@ numérotation des chapitres des documents composés avec la \yatcl{}.
   \item apparaissent tous dans le compteur de pages des afficheurs
     \pdf.
   \end{itemize}
-\item Les chapitres numérotés sont ceux :
+\item Les chapitres numérotés sont les chapitres \enquote{ordinaires} :
   \begin{itemize}
   \item de la partie corps\footnote{Sauf ceux créés avec la forme étoilée de la
-      commande \docAuxCommand{chapter}.}, alors en chiffres arabes et précédés de la
-    mention \enquote{Chapitre} ;
-  \item \enquote{ordinaires} de la partie annexe, alors en
-    caractères latins majuscules (avec remise à zéro) et
-    précédés de la mention \enquote{Annexe}.
+      commande \docAuxCommand{chapter} (cf. \vref{sec:chap-non-numer}).}, alors
+    en chiffres arabes et précédés de la mention \enquote{Chapitre} ;
+  \item de la partie annexe, alors en caractères latins majuscules (avec remise
+    à zéro) et précédés de la mention \enquote{Annexe} (à la place de \enquote{Chapitre}).
   \end{itemize}
 \end{enumerate}
 
