@@ -1551,14 +1551,14 @@ This work consists of the file  yathesis.dtx
 % \end{macro}
 % \end{macro}
 %
-% On définit les macros (privée et publique) où est stocké le nom du fichier
-% esclave dédiées aux macros personnelles.
-% \begin{macro}{\YAD@macros@file}
-% \begin{macro}{\macrosfile}
-%    \begin{macrocode}
-\newcommand*{\YAD@macros@file}{yadmacros.tex}
-\newcommand*{\macrosfile}{\YAD@macros@file}
-%    \end{macrocode}
+% % On définit les macros (privée et publique) où est stocké le nom du fichier
+% % esclave dédiées aux macros personnelles.
+% % \begin{macro}{\YAD@macros@file}
+% % \begin{macro}{\macrosfile}
+% %    \begin{macrocode}
+% \newcommand*{\YAD@macros@file}{macros.tex}
+% \newcommand*{\macrosfile}{\YAD@macros@file}
+% %    \end{macrocode}
 % \end{macro}
 % \end{macro}
 %
@@ -5434,25 +5434,25 @@ This work consists of the file  yathesis.dtx
 }%
 %    \end{macrocode}
 %
-% \subsubsection{Macros}
-%
-%    \begin{macrocode}
-\AtEndPreamble{%
-  \shorthandon{;:!?}%
-  \InputIfFileExists{\configurationdirectory/\macrosfile}%
-  {\ClassInfo{yathesis}{%
-      Fichier \macrosfile\space trouve%
-    }}%
-  {%
-    % \YAD@ClassWarningNoLine{%
-    %   Fichier \macrosfile\space introuvable.\MessageBreak%
-    %   Le fichier \macrosfile\space n'a pas ete trouve\MessageBreak%
-    %   dans le dossier `\configurationdirectory'%
-    % }%
-  }%
-  \shorthandoff{;:!?}%
-}%
-%    \end{macrocode}
+% % \subsubsection{Macros}
+% %
+% %    \begin{macrocode}
+% \AtEndPreamble{%
+%   \shorthandon{;:!?}%
+%   \InputIfFileExists{\configurationdirectory/\macrosfile}%
+%   {\ClassInfo{yathesis}{%
+%       Fichier \macrosfile\space trouve%
+%     }}%
+%   {%
+%     % \YAD@ClassWarningNoLine{%
+%     %   Fichier \macrosfile\space introuvable.\MessageBreak%
+%     %   Le fichier \macrosfile\space n'a pas ete trouve\MessageBreak%
+%     %   dans le dossier `\configurationdirectory'%
+%     % }%
+%   }%
+%   \shorthandoff{;:!?}%
+% }%
+% %    \end{macrocode}
 %
 % \subsubsection{Propriétés du document du document}
 %
