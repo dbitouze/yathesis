@@ -11,8 +11,8 @@
 %% Released under the LaTeX Project Public License v1.3c or later
 %% See http://www.latex-project.org/lppl.txt
 %% -----------------------------------------------------------------------
-\def\fileversion{v0.95}
-\def\filedate{2014/01/01}
+\def\fileversion{v0.97}
+\def\filedate{2014/04/25}
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesClass{yathesis}[\filedate\space\fileversion\space Yet another class for writing thesis (DB)]
 \RequirePackage{xkvltxp}%
@@ -57,6 +57,7 @@
 \newtoggle{YAD@valid@day}
 \newtoggle{YAD@valid@month}
 \newtoggle{YAD@valid@year}
+\newtoggle{YAD@mainmatter@used}
 \newlength{\YAD@logo@height}
 \def\YAD@mainlanguage{french}%
 \def\YAD@secondarylanguage{english}%
@@ -337,7 +338,7 @@
       \ifnumgreater{\value{YAD@warnings}}{0}{%
         % \immediate\write\YAD@file{%
           \ClassWarningNoLine{yathesis}{%
-            L'option `nowarning' ayant ete employee,\MessageBreak%
+            L'option `nowarning' ayant ete utilisee,\MessageBreak%
             \theYAD@warnings\space warning%
             \ifnumequal{\value{YAD@warnings}}{1}{%
               \space propre%
@@ -1117,9 +1118,9 @@
               \YAD@ClassError[no#2]{%
                   Argument optionnel de \csuse{#2}\space vide%
                 }{%
-                  La commande \csuse{#2}\space a ete employee\MessageBreak%
+                  La commande \csuse{#2}\space a ete utilisee\MessageBreak%
                   mais avec un argument optionnel vide : celui-ci doit\MessageBreak%
-                  etre soit non vide soit pas employe%
+                  etre soit non vide soit pas utilise%
                 }%
                 \YAD@reach@file{\YAD@generic@argument@translate{#2}}%
                 }{%
@@ -1170,9 +1171,9 @@
         Argument optionnel de \protect\ordernumber\space vide%
       }{%
         La commande \protect\ordernumber\space a ete
-        employee\MessageBreak%
+        utilisee\MessageBreak%
         mais avec un argument optionnel vide : celui-ci doit\MessageBreak%
-        etre soit non vide soit pas employe.%
+        etre soit non vide soit pas utilise.%
       }%
     }{%
       #1%
@@ -1400,7 +1401,7 @@
     \YAD@ClassError[nodate]{%
       Date de soutenance non specifiee%
     }{%
-      La commande \protect\date\space n'a pas ete employee\MessageBreak%
+      La commande \protect\date\space n'a pas ete utilisee\MessageBreak%
       (celle-ci est requise).%
     }%
     \fi%
@@ -1682,8 +1683,23 @@
   \YAD@setfoot%
 }%
 \xapptocmd{\mainmatter}{%
+  \toggletrue{YAD@mainmatter@used}%
   \pagestyle{mainmatter}%
 }{}{}%
+\AtEndDocument{%
+  \ifboolexpr{%
+    togl {YAD@mainmatter@used}%
+  }{%
+  }{%
+    \YAD@ClassError*{%
+      Commande \protect\mainmatter\space non utilisee%
+    }{%
+      La commande \protect\mainmatter\space introduisant la partie principale
+      du document\MessageBreak%
+      n'a pas ete utilisee. Celle-ci est requise.%
+    }%
+  }%
+}%
 \newpagestyle{appendix}[]{%
   \singlespacing%
   \sethead[\thepage]%
@@ -1855,7 +1871,7 @@
     \YAD@ClassError[nolaboratory]{%
       Laboratoire de la these non specifie ou vide%
     }{%
-      La commande \protect\laboratory\space n'a pas ete employee\MessageBreak%
+      La commande \protect\laboratory\space n'a pas ete utilisee\MessageBreak%
       (celle-ci est requise) ou son 1er argument est vide\MessageBreak%
       (celui-ci doit etre renseigne).%
     }%
@@ -1886,7 +1902,7 @@
     \YAD@ClassError[nolaboratoryadress]{%
       Adresse du laboratoire non specifiee ou vide%
     }{%
-      La commande \protect\laboratory\space n'a pas ete employee\MessageBreak%
+      La commande \protect\laboratory\space n'a pas ete utilisee\MessageBreak%
       (celle-ci est requise) ou son 2e argument est vide\MessageBreak%
       (celui-ci doit etre renseigne).%
     }%
@@ -1933,7 +1949,7 @@
         \YAD@ClassError[notitle]{%
           Titre de la these non specifie%
         }{%
-          La commande \protect\title\space n'a pas ete employee\MessageBreak%
+          La commande \protect\title\space n'a pas ete utilisee\MessageBreak%
           (celle-ci est requise) ou son argument obligatoire est vide\MessageBreak%
           (celui-ci doit etre renseigne).%
         }%
@@ -1983,7 +1999,7 @@
           Institut de la these non specifie%
         }{%
           La commande \protect\institute\space n'a pas ete
-          employee\MessageBreak%
+          utilisee\MessageBreak%
           (celle-ci est requise) ou son argument obligatoire est
           vide\MessageBreak%
           (celui-ci doit etre renseigne).%
@@ -2015,7 +2031,7 @@
           Ecole doctorale de la these non specifiee%
         }{%
           la commande \protect\doctoralschool\space n'a pas ete
-          employee\MessageBreak%
+          utilisee\MessageBreak%
           (celle-ci est requise) ou son argument obligatoire est
           vide\MessageBreak%
           (celui-ci doit etre renseigne).%
@@ -2039,7 +2055,7 @@
           \YAD@ClassError[noauthor]{%
             Auteur de la these non specifie%
           }{%
-            La commande \protect\author\space n'a pas ete employee (celle-ci
+            La commande \protect\author\space n'a pas ete utilisee (celle-ci
             est requise)\MessageBreak%
             ou ses 2 premiers arguments obligatoires sont vides\MessageBreak%
             (ceux-ci doivent etre renseignes).%
@@ -2082,7 +2098,7 @@
         \YAD@ClassError[noacademicfield]{%
           Champ disciplinaire de la these non specifie%
         }{%
-          La commande \protect\academicfield\space n'a pas ete employee
+          La commande \protect\academicfield\space n'a pas ete utilisee
           (celle-ci est requise)\MessageBreak%
           ou son argument obligatoire est vide (celui-ci doit etre renseigne).%
         }%
@@ -2113,7 +2129,7 @@
   \YAD@ClassError*[nosupervisor]{%
     Directeur de these non specifie%
   }{%
-    La commande \protect\supervisor\space n'a pas ete employee\MessageBreak%
+    La commande \protect\supervisor\space n'a pas ete utilisee\MessageBreak%
     (celle-ci est requise) ou ses arguments obligatoires sont
     vides\MessageBreak%
     (ceux-ci doivent etre renseignes).%
@@ -2154,9 +2170,9 @@
   }{%
   }{%
     \YAD@ClassError*[nomaketitle]{%
-      Commande \protect\maketitle\space non employee%
+      Commande \protect\maketitle\space non utilisee%
     }{%
-      La commande \protect\maketitle\space n'a pas ete employee. Celle-ci est
+      La commande \protect\maketitle\space n'a pas ete utilisee. Celle-ci est
       requise.%
     }%
   }%
@@ -2194,9 +2210,9 @@
     \ifYAD@nokeywords%
     \else%
     \YAD@ClassError[nokeywords]{%
-      Commande \protect\keywords\space non employee%
+      Commande \protect\keywords\space non utilisee%
     }{%
-      La commande \protect\keywords\space n'a pas ete employee. Celle-ci est
+      La commande \protect\keywords\space n'a pas ete utilisee. Celle-ci est
       requise.%
     }%
     \fi%
@@ -2633,10 +2649,10 @@
     \ifYAD@nomakeabstract%
     \else%
     \YAD@ClassError*[nomakeabstract]{%
-      Commande \protect\makeabstract\space non employee%
+      Commande \protect\makeabstract\space non utilisee%
     }{%
       La commande \protect\makeabstract\space n'a pas ete\MessageBreak%
-      employee. Celle-ci est requise.%
+      utilisee. Celle-ci est requise.%
     }%
     \fi%
   }%
@@ -2649,14 +2665,14 @@
           Contenu de la 1re occurrence de `abstract' vide%
         }{%
           La 1re occurrence de l'environnement `abstract' a ete
-          employee\MessageBreak%
+          utilisee\MessageBreak%
           avec un contenu vide.  Un contenu non vide est requis.%
         }%
       }{%
         \YAD@ClassError[noabstract]{%
           Contenu de l'environnement `abstract' vide%
         }{%
-          L'environnement `abstract' a ete employe mais avec un contenu
+          L'environnement `abstract' a ete utilise mais avec un contenu
           vide.\MessageBreak%
           Un contenu non vide est requis.%
         }%
@@ -2668,7 +2684,7 @@
         Contenu de la 2e occurrence de `abstract' vide%
       }{%
         La 2e occurrence de l'environnement `abstract' a ete
-        employee\MessageBreak%
+        utilisee\MessageBreak%
         avec un contenu vide.  Un contenu non vide est requis.%
       }%
     }{%
@@ -2677,9 +2693,9 @@
     \ifYAD@noabstract%
     \else%
     \YAD@ClassError[noabstract]{%
-      Environnement `abstract' non employe%
+      Environnement `abstract' non utilise%
     }{%
-      L'environnement `abstract' n'a pas ete employe. Celui-ci est requis.%
+      L'environnement `abstract' n'a pas ete utilise. Celui-ci est requis.%
     }%
     \fi%
   }%
@@ -2700,12 +2716,12 @@
   \fi \DTLifdbempty{dedications}{%
     \YAD@generic@argument@translate{dedications}%
     \YAD@ClassError{%
-      \protect\makededications\space employee/\protect\dedication\space non
-      employee%
+      \protect\makededications\space utilisee/\protect\dedication\space non
+      utilisee%
     }{%
-      La commande \protect\makededications\space a ete employee mais la
+      La commande \protect\makededications\space a ete utilisee mais la
       commande \protect\dedication,\MessageBreak%
-      permettant de preparer des dedicaces, n'a pas ete employee.%
+      permettant de preparer des dedicaces, n'a pas ete utilisee.%
     }%
   }{%
     \begin{flushright}
@@ -2758,13 +2774,13 @@
       \qitem{\YAD@generic@argument@translate{epigraphs}}{}%
     \end{epigraphs}
     \YAD@ClassError{%
-      \protect\makefrontepigraphs\space employee/\protect\frontepigraph\space
-      non employee%
+      \protect\makefrontepigraphs\space utilisee/\protect\frontepigraph\space
+      non utilisee%
     }{%
-      La commande \protect\makefrontepigraphs\space a ete employee mais la
+      La commande \protect\makefrontepigraphs\space a ete utilisee mais la
       commande\MessageBreak%
       \protect\frontepigraph, permettant de preparer des epigraphes, n'a pas
-      ete employee.%
+      ete utilisee.%
     }{%
     }%
   }{%
@@ -2939,9 +2955,9 @@
     \ifYAD@noprintbibliography%
     \else%
     \YAD@ClassError*[noprintbibliography]{%
-      Commande \protect\printbibliography\space non employee%
+      Commande \protect\printbibliography\space non utilisee%
     }{%
-      La commande \protect\printbibliography\space n'a pas ete employee. Celle-ci est
+      La commande \protect\printbibliography\space n'a pas ete utilisee. Celle-ci est
       requise.%
     }%
     \fi%
@@ -2976,11 +2992,11 @@
 }%
 }{%
   \ClassError{yathesis}{}{%
-    Commande \protect\newglssymbol\space employee sans que 'glossaries' soit
+    Commande \protect\newglssymbol\space utilisee sans que 'glossaries' soit
     charge%
   }{%
     La commande \protect\newglssymbol ne peut etre\MessageBreak%
-    employee que si le package 'glossaries' est charge%
+    utilisee que si le package 'glossaries' est charge%
   }%
 }%
 }%
@@ -3060,9 +3076,9 @@
     \ifYAD@notableofcontents%
     \else%
     \YAD@ClassError*[notableofcontents]{%
-      Commande \protect\tableofcontents\space non employee%
+      Commande \protect\tableofcontents\space non utilisee%
     }{%
-      La commande \protect\tableofcontents\space n'a pas ete employee. Celle-ci
+      La commande \protect\tableofcontents\space n'a pas ete utilisee. Celle-ci
       est requise.%
     }%
     \fi%
