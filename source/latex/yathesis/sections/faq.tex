@@ -75,17 +75,20 @@ Ce chapitre est une \gls{faq} \phrase{autrement dit une liste des questions
   ×\shorthandoff{;:!?}×.
 \end{dbfaq}
 
-\begin{dbfaq}{Comment éviter l'erreur \enquote{Option clash for package babel} ?}{}
+\begin{dbfaq}{Comment éviter l'erreur \enquote{Option clash for package
+      \meta{package}} ?}{option-clash}
   Je suis confronté à l'erreur \enquote{Option clash for package
-    babel}. Comment l'éviter ?
+    \meta{package}} (notamment avec \meta{package}×=×\package{babel}). Comment
+  l'éviter ?
   %
   \tcblower
   %
-  C'est probablement parce que le \Package{babel} a été explicitement chargé au
-  moyen de la commande ×\usepackage[...]{babel}×, déconseillée avec la
-  \yatcl{}. Supprimer cette commande devrait résoudre le problème
-  (cf. \vref{sec:langues} pour plus de détails concernant la gestion des
-  langues).
+  Cette erreur est probablement due au fait que le \meta{package} a été
+  manuellement chargé au moyen de la commande
+  ×\usepackage[...]{×\meta{package}×}×, alors que la \yatcl{} le charge déjà
+  automatiquement (cf. l'\vref{sec:packages-charges-par} pour la liste des
+  packages automatiquement chargés). Supprimer cette commande devrait résoudre
+  le problème (cf. également l'\vref{wa:packages-a-ne-pas-charger}).
 \end{dbfaq}
 
 \begin{dbfaq}{Comment éviter l'erreur \enquote{No room for a new
