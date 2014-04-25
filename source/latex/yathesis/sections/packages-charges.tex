@@ -10,11 +10,29 @@ Ci-dessous, les packages qui peuvent être utiles dans le cadre d'un usage
 standard de la \yatcl{} sont des hyperliens vers leur page sur le \gls{ctan}.
 
 \section{Packages chargés par la \yatcl{}}
+\label{sec:packages-charges-par}
 
 Pour plusieurs de ses fonctionnalités, la \yatcl s'appuie sur des packages
-qu'elle charge explicitement. La liste suivante répertorie ces packages dans
+qu'elle charge automatiquement. La liste suivante répertorie ces packages dans
 l'ordre de chargement, en indiquant les raisons de leur emploi et les options
 avec lesquelles ils sont appelés.
+
+\begin{dbwarning}{Packages automatiquement chargés par la \yatcl{} : à ne pas
+    charger manuellement}{packages-a-ne-pas-charger}
+  Il est préférable de ne pas charger manuellement (au moyen de
+  \docAuxCommand{usepackage}) les packages chargés automatiquement par la
+  \yatcl{} et en tous cas \emph{pas} avec d'autres options que celles indiquées
+  ci-dessous (sous peine d'erreur telle que celle de la
+  \vref{faq:option-clash}). En cas de nécessité d'option particulière de l'un
+  de ces packages, consulter sa documentation pour savoir comment spécifier
+  cette option autrement qu'en argument optionnel de
+  \docAuxCommand{usepackage}\footnote{Par exemple via les commandes
+    \docAuxCommand*{geometry} du \Package{geometry},
+    \docAuxCommand*{hypersetup} du \Package{hyperref}, ou en option de
+    \docAuxCommand*{documentclass} pour les langues du \Package{babel}
+    (cf. \vref{sec:langues} pour plus de détails concernant la gestion des
+    langues).}.
+\end{dbwarning}
 
 \begin{description}
 \item[\package{xkvltxp} :] extension du \Package{xkeyval} ci-dessous ;
