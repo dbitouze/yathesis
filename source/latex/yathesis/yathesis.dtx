@@ -463,6 +463,7 @@ This work consists of the file  yathesis.dtx
 \newtoggle{YAD@valid@day}
 \newtoggle{YAD@valid@month}
 \newtoggle{YAD@valid@year}
+\newtoggle{YAD@mainmatter@used}
 \newlength{\YAD@logo@height}
 \def\YAD@mainlanguage{french}%
 \def\YAD@secondarylanguage{english}%
@@ -3370,8 +3371,27 @@ This work consists of the file  yathesis.dtx
 % page ×mainmatter×.
 %    \begin{macrocode}
 \xapptocmd{\mainmatter}{%
+  \toggletrue{YAD@mainmatter@used}%
   \pagestyle{mainmatter}%
 }{}{}%
+%    \end{macrocode}
+% Vérification, en fin de document, de l'usage de la commande ×\mainmatter× et
+% émission d'une erreur si ça n'est pas le cas.
+%    \begin{macrocode}
+\AtEndDocument{%
+  \ifboolexpr{%
+    togl {YAD@mainmatter@used}%
+  }{%
+  }{%
+    \YAD@ClassError*{%
+      Commande \protect\mainmatter\space non utilisee%
+    }{%
+      La commande \protect\mainmatter\space introduisant la partie principale
+      du document\MessageBreak%
+      n'a pas ete utilisee. Celle-ci est requise.%
+    }%
+  }%
+}%
 %    \end{macrocode}
 % Définition du style de page de la partie annexe
 %    \begin{macrocode}
