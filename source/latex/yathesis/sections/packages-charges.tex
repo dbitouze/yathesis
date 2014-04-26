@@ -103,6 +103,19 @@ avec lesquelles ils sont appelés.
   défaut : \docAuxKey{numbered}.
 \end{description}
 
+\begin{dbremark}{Disposer d'une distribution \TeX{} à jour est fortement
+    recommandé}{packages-anciens}
+  Si on ne dispose pas de versions suffisamment récentes des packages
+  automatiquement chargés, des avertissements sont émis car le bon
+  fonctionnement de la \yatcl{} peut alors être sérieusement altéré, voire être
+  bloqué par une erreur de compilation \phrase*{éventuellement absconse}. Il
+  est très fortement recommandé de mettre sa distribution \TeX{} à jour et, si
+  le problème persiste dans le cas de la distribution \enquote{MiK\TeX{}},
+  d'installer plutôt la distribution \enquote{\TeX~Live} dont les versions (à
+  jour) à partir de la \enquote{2013} fournissent des packages suffisamment
+  récents pour la \yatcl.
+\end{dbremark}
+
 \section{Packages non chargés par la \yatcl{}}
 
 La liste suivante répertorie des packages non chargés par la \yatcl{} mais
