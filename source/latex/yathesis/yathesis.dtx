@@ -400,30 +400,30 @@ This work consists of the file  yathesis.dtx
 % sous la forme ×clé=×\meta{valeur}, sans erreur si \meta{valeur} est
 % passée entre paire d'accolades
 %    \begin{macrocode}
-\RequirePackage{xkvltxp}%
+\RequirePackage{xkvltxp}[2004/12/13]%
 %    \end{macrocode}
 % Pour pouvoir définir des macros dont les arguments puissent être
 % spécifiés sous la forme ×clé=×\meta{valeur}
 %    \begin{macrocode}
-\RequirePackage{xkeyval}%
+\RequirePackage{xkeyval}[2012/10/14]%
 %    \end{macrocode}
 % Pour disposer d'une boîte à outils de programmation
 %    \begin{macrocode}
-\RequirePackage{etoolbox}%
+\RequirePackage{etoolbox}[2011/01/03]%
 %    \end{macrocode}
 % Extension de \package{etoolbox} permettant de patcher des
 % commandes à argument(s) optionnel
 %    \begin{macrocode}
-\RequirePackage{xpatch}%
+\RequirePackage{xpatch}[2012/10/02]%
 %    \end{macrocode}
 % Pour pouvoir patcher des commandes à argument(s) optionnel(s)
 %    \begin{macrocode}
-\RequirePackage{filehook}%
-\RequirePackage{hopatch}%
+\RequirePackage{filehook}[2011/10/12]%
+\RequirePackage{hopatch}[2012/05/28]%
 %    \end{macrocode}
 % Pour la gestion des tests conditionnels
 %    \begin{macrocode}
-\RequirePackage{xifthen}%
+\RequirePackage{xifthen}[2009/04/17]%
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -751,7 +751,7 @@ This work consists of the file  yathesis.dtx
 %
 % Gestion de la géométrie de la page.
 %    \begin{macrocode}
-\RequirePackage[a4paper]{geometry}%
+\RequirePackage[a4paper]{geometry}[2010/09/12]%
 %    \end{macrocode}
 % Accès à certaines fontes utiles à la composition des \textquote{méta-informations}
 %    \begin{macrocode}
@@ -760,56 +760,56 @@ This work consists of the file  yathesis.dtx
   }{%
     \@ifpackageloaded{libertine}{%
     }{%
-      \RequirePackage[full]{textcomp}%
+      \RequirePackage[full]{textcomp}[2005/09/27]%
     }%
   }%
 }%
 %    \end{macrocode}
 % Pour insérer des images
 %    \begin{macrocode}
-\RequirePackage[final]{graphicx}%
+\RequirePackage[final]{graphicx}[1999/02/16]%
 %    \end{macrocode}
 % Pour stocker le contenu d'un environnement dans une macro.
 %    \begin{macrocode}
-\RequirePackage{environ}%
+\RequirePackage{environ}[2013/04/01]%
 %    \end{macrocode}
 % Pour ajuster la position des matériels \LaTeX{}, notamment pour assurer
 % l'alignement vertical des images.
 %    \begin{macrocode}
-\RequirePackage[export]{adjustbox}%
+\RequirePackage[export]{adjustbox}[2012/05/21]%
 %    \end{macrocode}
 % Pour disposer d'outils pour les tableaux
 %    \begin{macrocode}
-\RequirePackage{array}%
+\RequirePackage{array}[2008/09/09]%
 %    \end{macrocode}
 % Pour effectuer des manipulations sur des chaîne de caractères
 %    \begin{macrocode}
-\RequirePackage{xstring}%
+\RequirePackage{xstring}[2013/10/13]%
 %    \end{macrocode}
 % Pour facilement changer la casse
 %    \begin{macrocode}
-\RequirePackage{textcase}%
+\RequirePackage{textcase}[2004/10/07]%
 %    \end{macrocode}
 % Pour pouvoir assurer facilement les traductions de certains mots ou
 % expressions clés du canevas de thèse (notamment dans les pages de titre)
 %    \begin{macrocode}
-\RequirePackage{translator}%
+\RequirePackage{translator}[2010/06/12]%
 %    \end{macrocode}
 % Pour fixer quelques bugs (en général sans conséquence) de \hologo{LaTeX2e}
 %    \begin{macrocode}
-\RequirePackage{fixltx2e}%
+\RequirePackage{fixltx2e}[2006/09/13]%
 %    \end{macrocode}
 % Pour les épigraphes
 %    \begin{macrocode}
-\RequirePackage{epigraph}%
+\RequirePackage{epigraph}[2009/09/02]%
 %    \end{macrocode}
 % Pour insérer des petits symboles rigolos (téléphone, fax, etc.)
 %    \begin{macrocode}
-\RequirePackage{marvosym}%
+\RequirePackage{marvosym}[2011/07/20]%
 %    \end{macrocode}
 % Pour la gestion des interlignes
 %    \begin{macrocode}
-\RequirePackage{setspace}%
+\RequirePackage{setspace}[2011/12/19]%
 %    \end{macrocode}
 % % Pour pouvoir disposer disposer d'autant de \enquote{flots} d'écriture dans
 % % des fichiers annexes que nécessaire. Il est chargé en fin de préambule sans
@@ -821,17 +821,17 @@ This work consists of the file  yathesis.dtx
 % %    \end{macrocode}
 % Pour pouvoir afficher un sommaire c-à-d une table des matières réduite
 %    \begin{macrocode}
-\RequirePackage{shorttoc}%
+\RequirePackage{shorttoc}[2002/08/20]%
 %    \end{macrocode}
 % Pour régler finement la profondeur de la table des matières et de la
 % numérotation
 %    \begin{macrocode}
-\RequirePackage{tocvsec2}%
+\RequirePackage{tocvsec2}[2014/03/10]%
 %    \end{macrocode}
 % Pour faire figurer les table des matières, bibliographie et index
 % dans la table des matières
 %    \begin{macrocode}
-\RequirePackage{tocbibind}%
+\RequirePackage{tocbibind}[2010/10/13]%
 %    \end{macrocode}
 % Pour déboguer
 %    \begin{macrocode}
@@ -839,35 +839,35 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % Pour supprimer le numéro de page sur la page de titre d'une partie
 %    \begin{macrocode}
-\RequirePackage{nonumonpart}%
+\RequirePackage{nonumonpart}[2011/04/15]%
 %    \end{macrocode}
 % Pour les couleurs
 %    \begin{macrocode}
-\RequirePackage{xcolor}%
+\RequirePackage{xcolor}[2007/01/21]%
 %    \end{macrocode}
 % Pour manipuler des bases de données
 %    \begin{macrocode}
-\RequirePackage{datatool}%
+\RequirePackage{datatool}[2014/03/08]%
 %    \end{macrocode}
 % Pour des titres de chapitres améliorés
 %    \begin{macrocode}
 \ifthenelse{\equal{\YAD@fncychapstyle}{none}}{%
 }{%
-  \RequirePackage{fncychap}%
+  \RequirePackage{fncychap}[2007/07/30]%
 }%
 %    \end{macrocode}
 % Pour gérer les titres courants (entêtes) et bas de page
 %    \begin{macrocode}
-\RequirePackage{titleps}%
+\RequirePackage{titleps}[2011/12/15]%
 %    \end{macrocode}
 % Pour distinguer le mode \enquote{draft} des autres modes.
 %    \begin{macrocode}
-\RequirePackage{ifdraft}%
+\RequirePackage{ifdraft}[2008/08/11]%
 %    \end{macrocode}
 % Pour insérer du texte en filigrane
 %    \begin{macrocode}
 \ifdraft{%
-  \RequirePackage{draftwatermark}%
+  \RequirePackage{draftwatermark}[2006/06/30]%
 %    \end{macrocode}
 % Si on est en mode \enquote{draft}, les différentes zones de la page,
 % notamment celle allouée au texte, sont matérialisées et les
@@ -878,7 +878,7 @@ This work consists of the file  yathesis.dtx
   \setlength\overfullrule{5pt}%
 }{%
   \iftoggle{YAD@inprogress@work@star}{%
-    \RequirePackage{draftwatermark}%
+    \RequirePackage{draftwatermark}[2006/06/30]%
   }{%
   }%
 }%
@@ -889,29 +889,29 @@ This work consists of the file  yathesis.dtx
 % \emph{avant} le \Package{hyperref}, ce qui nécessite de le faire
 % dans la classe et non pas dans le document.
 %    \begin{macrocode}
-\RequirePackage{index}%
+\RequirePackage{index}[2004/01/20]%
 %    \end{macrocode}
 % Pour corriger un bug qui fait que l'intitulé \enquote{Index} est situé plus
 % haut que les intitulés standard tels que \enquote{Table des matières} ou
 % \enquote{Liste des figures}.
 %    \begin{macrocode}
-\RequirePackage[columns=1]{idxlayout}%
+\RequirePackage[columns=1]{idxlayout}[2012/03/30]%
 %    \end{macrocode}
 % Pour gérer les langues.
 %    \begin{macrocode}
-\RequirePackage{babel}%
+\RequirePackage{babel}[2014/03/24]
 %    \end{macrocode}
 % Pour tester la langue en cours
 %    \begin{macrocode}
-\RequirePackage{iflang}%
+\RequirePackage{iflang}[2007/11/11]%
 %    \end{macrocode}
 % Pour générer les dates (sans affichage du jour de la semaine)
 %    \begin{macrocode}
-\RequirePackage[nodayofweek]{datetime}%
+\RequirePackage[nodayofweek]{datetime}[2013/09/10]%
 %    \end{macrocode}
 % Pour comparer des dates
 %    \begin{macrocode}
-\RequirePackage{datenumber}%
+\RequirePackage{datenumber}[2001/08/06]%
 %    \end{macrocode}
 % Pour la gestion des hyperliens. L'option ×final× assure que les
 % hyperliens seront présents même en mode brouillon ; l'option
@@ -919,7 +919,7 @@ This work consists of the file  yathesis.dtx
 % dans les signets. D'autres option peuvent être fixées dans le(s)
 % fichier(s) de configuration de \yatcl
 %    \begin{macrocode}
-\RequirePackage[final,unicode,hyperfootnotes=false,hyperindex=false,plainpages=false,breaklinks,pdfpagemode=UseOutlines,pdfpagelayout=TwoPageRight]{hyperref}%
+\RequirePackage[final,unicode,hyperfootnotes=false,hyperindex=false,plainpages=false,breaklinks,pdfpagemode=UseOutlines,pdfpagelayout=TwoPageRight]{hyperref}[2012/11/06]%
 %    \end{macrocode}
 % Les packages suivants ne sont à activer qu'en version \enquote{non imprimée}.
 %    \begin{macrocode}
@@ -929,11 +929,11 @@ This work consists of the file  yathesis.dtx
 % Pour faire pointer les hyperliens au début des flottants plutôt qu'au
 % début des légendes
 %    \begin{macrocode}
-  \RequirePackage[all]{hypcap}%
+  \RequirePackage[all]{hypcap}[2011/02/16]%
 %    \end{macrocode}
 % Pour la gestion des signets
 %    \begin{macrocode}
-  \RequirePackage[numbered]{bookmark}%
+  \RequirePackage[numbered]{bookmark}[2011/12/02]%
 }
 %    \end{macrocode}
 %
