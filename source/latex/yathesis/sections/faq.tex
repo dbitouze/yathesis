@@ -48,26 +48,22 @@ Ce chapitre est une \gls{faq} \phrase{autrement dit une liste des questions
 \section{Avertissements}
 \label{sec:avertissements}
 
-\begin{dbfaq}{Pourquoi mes signes de ponctuation ne sont pas précédés
-    des espaces adéquates ?}{}
-  J'ai saisi les caractéristiques du document (cf. \vref{cha:caract-du-docum})
-  en préambule. Certaines d'entre elles contiennent des signes de ponctuation
-  haute ({\NoAutoSpacing?;:!}) qui, dans le \pdf produit, ne sont pas précédés
-  des espaces adéquates. Comment régler ce problème ?
+\begin{dbfaq}{Puis-je ignorer un avertissement signalant une version trop
+    ancienne d'un package ?}{}
+  Je suis confronté à un avertissement de la forme \enquote{You have requested,
+    on input line \meta{numéro}, version `\meta{date plus récente}' of package
+    \meta{nom d'un package}, but only version `\meta{date moins récente} ...'
+    is available.}. Est-ce grave, docteur ?
   %
   \tcblower
   %
-  Il suffit de saisir ces caractéristiques
-  plutôt\footnote{Cf. \vref{sec:lieu-de-saisie}.} :
-  \begin{itemize}
-  \item soit dans le \emph{corps} du fichier (maître) de la thèse\footnote{Mais
-      cf. alors \vref{wa:avant-maketitle}.} (et donc \emph{pas} dans son
-    \emph{préambule}) ;
-  \item soit dans le fichier \file{\characteristicsfile} prévu à cet effet.
-  \end{itemize}
-  Si on tient absolument à ce que ces caractéristiques soient saisies dans le
-  préambule, il faut alors les entourer des commandes ×\shorthandon{;:!?}× et
-  ×\shorthandoff{;:!?}×.
+  Ça peut être grave : si un package n'est pas aussi récent que la \yatcl le
+  suppose, le bon fonctionnement de celle-ci peut être sérieusement altéré,
+  voire être bloqué par une erreur de compilation (éventuellement absconse). Il
+  est très fortement recommandé de mettre à jour sa distribution \TeX{} et, si
+  le problème persiste dans le cas de la MiK\TeX{}, il est conseillé de passer
+  à la \TeX~Live dont les versions (à jour) à partir de la \enquote{2013}
+  fournit des packages suffisamment récents pour la \yatcl.
 \end{dbfaq}
 
 \section{Erreurs}
@@ -98,6 +94,56 @@ Ce chapitre est une \gls{faq} \phrase{autrement dit une liste des questions
   %
   Il devrait suffire de charger le \Package{morewrites} (plutôt parmi les
   premiers packages).
+\end{dbfaq}
+
+\section{Mise en page}
+\label{sec:mise-en-page}
+
+\begin{dbfaq}{Comment modifier l'apparence de la page de titre ?}{}
+  L'apparence par défaut de la page de titre ne me convient pas et je voudrais
+  la modifier. Comment faire ?
+  %
+  \tcblower
+  %
+  Il est prévu de permettre de modifier certains aspects de la mise en page de
+  la page de titre, et même de fournir une documentation permettant d'obtenir
+  une apparence complètement personnalisée, mais ce n'est pas encore
+  implémenté.  En attendant que ça le soit, il faut composer cette page soit
+  même, en y resaisissant manuellement toutes les caractéristiques nécessaires
+  définies au \vref{cha:caract-du-docum}.
+\end{dbfaq}
+
+\begin{dbfaq}{Comment faire figurer le glossaire dans la table des matières ?}{}
+  Par défaut, le glossaire (et les listes d'acronymes et de symboles) ne figure
+  pas dans la table des matières (ni dans le sommaire, ni dans les signets) du
+  document. Comment le faire apparaître ?
+  %
+  \tcblower
+  %
+  Cette question ne concerne pas directement la \yatcl{} : il suffit de passer
+  l'option \docAuxKey*{toc} au \Package{glossaries}.
+\end{dbfaq}
+
+\begin{dbfaq}{Pourquoi mes signes de ponctuation ne sont pas précédés
+    des espaces adéquates ?}{}
+  J'ai saisi les caractéristiques du document (cf. \vref{cha:caract-du-docum})
+  en préambule. Certaines d'entre elles contiennent des signes de ponctuation
+  haute ({\NoAutoSpacing?;:!}) qui, dans le \pdf produit, ne sont pas précédés
+  des espaces adéquates. Comment régler ce problème ?
+  %
+  \tcblower
+  %
+  Il suffit de saisir ces caractéristiques
+  plutôt\footnote{Cf. \vref{sec:lieu-de-saisie}.} :
+  \begin{itemize}
+  \item soit dans le \emph{corps} du fichier (maître) de la thèse\footnote{Mais
+      cf. alors \vref{wa:avant-maketitle}.} (et donc \emph{pas} dans son
+    \emph{préambule}) ;
+  \item soit dans le fichier \file{\characteristicsfile} prévu à cet effet.
+  \end{itemize}
+  Si on tient absolument à ce que ces caractéristiques soient saisies dans le
+  préambule, il faut alors les entourer des commandes ×\shorthandon{;:!?}× et
+  ×\shorthandoff{;:!?}×.
 \end{dbfaq}
 
 \begin{dbfaq}{Dans la table des matières, des numéros de pages débordent dans
