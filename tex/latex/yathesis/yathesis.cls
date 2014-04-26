@@ -15,13 +15,13 @@
 \def\filedate{2014/04/25}
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesClass{yathesis}[\filedate\space\fileversion\space Yet another class for writing thesis (DB)]
-\RequirePackage{xkvltxp}%
-\RequirePackage{xkeyval}%
-\RequirePackage{etoolbox}%
-\RequirePackage{xpatch}%
-\RequirePackage{filehook}%
-\RequirePackage{hopatch}%
-\RequirePackage{xifthen}%
+\RequirePackage{xkvltxp}[2004/12/13]%
+\RequirePackage{xkeyval}[2012/10/14]%
+\RequirePackage{etoolbox}[2011/01/03]%
+\RequirePackage{xpatch}[2012/10/02]%
+\RequirePackage{filehook}[2011/10/12]%
+\RequirePackage{hopatch}[2012/05/28]%
+\RequirePackage{xifthen}[2009/04/17]%
 \newif\if@nolink\@nolinkfalse
 \newtoggle{YAD@inprogress@work}
 \newtoggle{YAD@inprogress@work@star}
@@ -249,60 +249,60 @@
 }{%
 }%
 \LoadClass{book}%
-\RequirePackage[a4paper]{geometry}%
+\RequirePackage[a4paper]{geometry}[2010/09/12]%
 \AtEndPreamble{%
   \@ifpackageloaded{kpfonts}{%
   }{%
     \@ifpackageloaded{libertine}{%
     }{%
-      \RequirePackage[full]{textcomp}%
+      \RequirePackage[full]{textcomp}[2005/09/27]%
     }%
   }%
 }%
-\RequirePackage[final]{graphicx}%
-\RequirePackage{environ}%
-\RequirePackage[export]{adjustbox}%
-\RequirePackage{array}%
-\RequirePackage{xstring}%
-\RequirePackage{textcase}%
-\RequirePackage{translator}%
-\RequirePackage{fixltx2e}%
-\RequirePackage{epigraph}%
-\RequirePackage{marvosym}%
-\RequirePackage{setspace}%
-\RequirePackage{shorttoc}%
-\RequirePackage{tocvsec2}%
-\RequirePackage{tocbibind}%
-\RequirePackage{nonumonpart}%
-\RequirePackage{xcolor}%
-\RequirePackage{datatool}%
+\RequirePackage[final]{graphicx}[1999/02/16]%
+\RequirePackage{environ}[2013/04/01]%
+\RequirePackage[export]{adjustbox}[2012/05/21]%
+\RequirePackage{array}[2008/09/09]%
+\RequirePackage{xstring}[2013/10/13]%
+\RequirePackage{textcase}[2004/10/07]%
+\RequirePackage{translator}[2010/06/12]%
+\RequirePackage{fixltx2e}[2006/09/13]%
+\RequirePackage{epigraph}[2009/09/02]%
+\RequirePackage{marvosym}[2011/07/20]%
+\RequirePackage{setspace}[2011/12/19]%
+\RequirePackage{shorttoc}[2002/08/20]%
+\RequirePackage{tocvsec2}[2014/03/10]%
+\RequirePackage{tocbibind}[2010/10/13]%
+\RequirePackage{nonumonpart}[2011/04/15]%
+\RequirePackage{xcolor}[2007/01/21]%
+\RequirePackage{datatool}[2014/03/08]%
 \ifthenelse{\equal{\YAD@fncychapstyle}{none}}{%
 }{%
-  \RequirePackage{fncychap}%
+  \RequirePackage{fncychap}[2007/07/30]%
 }%
-\RequirePackage{titleps}%
-\RequirePackage{ifdraft}%
+\RequirePackage{titleps}[2011/12/15]%
+\RequirePackage{ifdraft}[2008/08/11]%
 \ifdraft{%
-  \RequirePackage{draftwatermark}%
+  \RequirePackage{draftwatermark}[2006/06/30]%
   \geometry{showframe}%
   \setlength\overfullrule{5pt}%
 }{%
   \iftoggle{YAD@inprogress@work@star}{%
-    \RequirePackage{draftwatermark}%
+    \RequirePackage{draftwatermark}[2006/06/30]%
   }{%
   }%
 }%
-\RequirePackage{index}%
-\RequirePackage[columns=1]{idxlayout}%
-\RequirePackage{babel}%
-\RequirePackage{iflang}%
-\RequirePackage[nodayofweek]{datetime}%
-\RequirePackage{datenumber}%
-\RequirePackage[final,unicode,hyperfootnotes=false,hyperindex=false,plainpages=false,breaklinks,pdfpagemode=UseOutlines,pdfpagelayout=TwoPageRight]{hyperref}%
+\RequirePackage{index}[2004/01/20]%
+\RequirePackage[columns=1]{idxlayout}[2012/03/30]%
+\RequirePackage{babel}[2014/03/24]
+\RequirePackage{iflang}[2007/11/11]%
+\RequirePackage[nodayofweek]{datetime}[2013/09/10]%
+\RequirePackage{datenumber}[2001/08/06]%
+\RequirePackage[final,unicode,hyperfootnotes=false,hyperindex=false,plainpages=false,breaklinks,pdfpagemode=UseOutlines,pdfpagelayout=TwoPageRight]{hyperref}[2012/11/06]%
 \iftoggle{YAD@output@paper}{%
 }{%
-  \RequirePackage[all]{hypcap}%
-  \RequirePackage[numbered]{bookmark}%
+  \RequirePackage[all]{hypcap}[2011/02/16]%
+  \RequirePackage[numbered]{bookmark}[2011/12/02]%
 }
 \@ifpackagelater{babel}{2013/04/15}{%
   \PassOptionsToPackage{main=\YAD@mainlanguage}{babel}%
@@ -1963,8 +1963,11 @@
   \setlength{\YAD@otherboxheight}{0.5\paperheight-\YAD@titleboxheight-2cm}%
   %\YAD@astuce@expressioncle%
   \noindent%
-    \ifcsdef{printordernumber}{%
-      \iftoggle{YAD@cover@page}{%
+  \ifcsdef{printordernumber}{%
+  \ifboolexpr{%
+    togl {YAD@cover@page}%
+    or (bool {YAD@nofrontcover} and  test {\IfLanguageName{\YAD@mainlanguage}})%
+  }{%
         \raggedleft{%
           \itshape%
           \sffamily%
