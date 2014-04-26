@@ -3760,12 +3760,16 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
   %\YAD@astuce@expressioncle%
   \noindent%
-    \ifcsdef{printordernumber}{%
+  \ifcsdef{printordernumber}{%
 %    \end{macrocode}
-% On n'affiche le numéro d'ordre de la thèse que sur la page de 1\iere{} de
-% couverture.
+% On n'affiche le numéro d'ordre de la thèse que sur la 1\iere{} page du
+% document : 1\iere{} de couverture s'il y a, page de titre en langue
+% principale sinon.
 %    \begin{macrocode}
-      \iftoggle{YAD@cover@page}{%
+  \ifboolexpr{%
+    togl {YAD@cover@page}%
+    or (bool {YAD@nofrontcover} and  test {\IfLanguageName{\YAD@mainlanguage}})%
+  }{%
         \raggedleft{%
           \itshape%
           \sffamily%
