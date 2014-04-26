@@ -1519,92 +1519,87 @@ This work consists of the file  yathesis.dtx
 %<*class|class-doc-package>
 %    \end{macrocode}
 %
-% On définit les macros (privée et publique) où est stocké le nom du répertoire des
+% On définit la macro privée où est stocké le nom du répertoire des
 % \enquote{réglages} où se trouvent les divers fichiers de configuration.
 % \begin{macro}{\YAD@configuration@directory}
-% \begin{macro}{\configurationdirectory}
 %    \begin{macrocode}
 \newcommand*{\YAD@configuration@directory}{configuration}
+%    \end{macrocode}
+% \end{macro}
+%
+% On définit la macro privée où est stocké le nom du fichier
+% de configuration \emph{local} de la thèse.
+% \begin{macro}{\YAD@configuration@file}
+%    \begin{macrocode}
+\newcommand*{\YAD@configuration@file}{thesis.cfg}
+%    \end{macrocode}
+% \end{macro}
+%
+% On définit la macro privée où est stocké le nom du fichier esclave contenant
+% les données caractéristiques du document (ce qui doit figurer sur les pages
+% de couverture et de titre, les mots clés, etc.).
+% \begin{macro}{\YAD@characteristics@file}
+%    \begin{macrocode}
+\newcommand*{\YAD@characteristics@file}{characteristics.tex}
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
+%</class|class-doc-package>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%<*class-doc-package>
+%    \end{macrocode}
+%
+% On définit la macro publique où est stocké le nom du répertoire des
+% \enquote{réglages} où se trouvent les divers fichiers de configuration.
+% \begin{macro}{\configurationdirectory}
+%    \begin{macrocode}
 \newcommand*{\configurationdirectory}{\YAD@configuration@directory}
 %    \end{macrocode}
 % \end{macro}
-% \end{macro}
 %
-% On définit les macros (privée et publique) où est stocké le nom du fichier
+% On définit la macro publique où est stocké le nom du fichier
 % de configuration \emph{local} de la thèse.
-% \begin{macro}{\YAD@configuration@file}
 % \begin{macro}{\configurationfile}
 %    \begin{macrocode}
-\newcommand*{\YAD@configuration@file}{thesis.cfg}
 \newcommand*{\configurationfile}{\YAD@configuration@file}
 %    \end{macrocode}
 % \end{macro}
-% \end{macro}
 %
-% On définit les macros (privée et publique) où est stocké le nom du fichier
-% esclave contenant les données caractéristiques du document (ce qui doit
-% figurer sur les pages de couverture et de titre, les mots clés, etc.).
-% \begin{macro}{\YAD@characteristics@file}
+% On définit la macro publique où est stocké le nom du fichier esclave
+% contenant les données caractéristiques du document (ce qui doit figurer sur
+% les pages de couverture et de titre, les mots clés, etc.).
 % \begin{macro}{\characteristicsfile}
 %    \begin{macrocode}
-\newcommand*{\YAD@characteristics@file}{characteristics.tex}
 \newcommand*{\characteristicsfile}{\YAD@characteristics@file}
 %    \end{macrocode}
 % \end{macro}
-% \end{macro}
-%
-% % On définit les macros (privée et publique) où est stocké le nom du fichier
-% % esclave dédiées aux macros personnelles.
-% % \begin{macro}{\YAD@macros@file}
-% % \begin{macro}{\macrosfile}
-% %    \begin{macrocode}
-% \newcommand*{\YAD@macros@file}{macros.tex}
-% \newcommand*{\macrosfile}{\YAD@macros@file}
-% %    \end{macrocode}
-% \end{macro}
-% \end{macro}
 %
 % On définit les macros (privée et publique) où est stocké le nom du fichier
-% esclave contenant ce qui doit figurer sur les pages de la partie liminaire du
-% document.
-% \begin{macro}{\YAD@preliminary@file}
-% \begin{macro}{\preliminaryfile}
+% esclave dédiées aux macros personnelles.
+% \begin{macro}{\macrosfile}
 %    \begin{macrocode}
-% \newcommand*{\YAD@preliminary@file}{preliminary.tex}
-% \newcommand*{\preliminaryfile}{\YAD@preliminary@file}
+\newcommand*{\macrosfile}{macros.tex}
 %    \end{macrocode}
-% \end{macro}
 % \end{macro}
 %
-% On définit les macros (privée et publique) où est stocké le nom du fichier
-% esclave contenant ce qui doit figurer sur les pages de la partie principale
-% du document.
-% \begin{macro}{\YAD@main@file}
-% \begin{macro}{\mainfile}
+% On définit la macro publique où est stocké le nom du répertoire des fichiers
+% auxiliaires, par exemple de base bibliographique (fichier(s) \file{.bib}) et
+% de base terminologique (fichier(s) \file{.tex} contenant les définitions par
+% exemple du glossaire, des acronymes, des symboles).
+% \begin{macro}{\configurationdirectory}
 %    \begin{macrocode}
-% \newcommand*{\YAD@main@file}{main.tex}
-% \newcommand*{\mainfile}{\YAD@main@file}
+\newcommand*{\auxiliarydirectory}{auxiliaires}
 %    \end{macrocode}
-% \end{macro}
-% \end{macro}
-%
-% On définit les macros (privée et publique) où est stocké le nom du fichier esclave
-% contenant ce qui doit figurer sur les pages de la partie annexe du
-% document.
-% \begin{macro}{\YAD@appendix@file}
-% \begin{macro}{\appendixfile}
-%    \begin{macrocode}
-% \newcommand*{\YAD@appendix@file}{appendix.tex}
-% \newcommand*{\appendixfile}{\YAD@appendix@file}
-%    \end{macrocode}
-% \end{macro}
 % \end{macro}
 %
 % On définit la macro (publique) où est stocké le nom du fichier contenant les
 % définitions des termes du glossaire.
 % \begin{macro}{\glossaryfile}
 %    \begin{macrocode}
-\newcommand*{\glossaryfile}{glossary.tex}
+\newcommand*{\glossaryfile}{glossaire.tex}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1612,7 +1607,7 @@ This work consists of the file  yathesis.dtx
 % définitions des acronymes.
 % \begin{macro}{\acronymsfile}
 %    \begin{macrocode}
-\newcommand*{\acronymsfile}{acronyms.tex}
+\newcommand*{\acronymsfile}{acronymes.tex}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1620,7 +1615,7 @@ This work consists of the file  yathesis.dtx
 % définitions des acronymes.
 % \begin{macro}{\symbolsfile}
 %    \begin{macrocode}
-\newcommand*{\symbolsfile}{symbols.tex}
+\newcommand*{\symbolsfile}{symboles.tex}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1641,7 +1636,10 @@ This work consists of the file  yathesis.dtx
 % \end{macro}
 %
 %    \begin{macrocode}
-%</class|class-doc-package>
+%</class-doc-package>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
 %<*class>
 %    \end{macrocode}
 %
@@ -1674,15 +1672,15 @@ This work consists of the file  yathesis.dtx
 % les fichier permettant de modifier les mots et expressions clés du
 % canevas de thèse et les données de la thèse
 %    \begin{macrocode}
-\newcommand*{\YAD@reach@file}[2][\characteristicsfile]{%
+\newcommand*{\YAD@reach@file}[2][\YAD@characteristics@file]{%
   \ifdraft{%
-    \ifthenelse{\equal{\configurationfile}{#1}}{%
+    \ifthenelse{\equal{\YAD@configuration@file}{#1}}{%
       \hypersetup{urlbordercolor={0.5 0 0.5}}%
     }{%
       \hypersetup{urlbordercolor={1 0.5 0}}%
     }%
-    \IfFileExists{\configurationdirectory/#1}{%
-       \YAD@href{\configurationdirectory/#1}{#2}%
+    \IfFileExists{\YAD@configuration@directory/#1}{%
+       \YAD@href{\YAD@configuration@directory/#1}{#2}%
     }{%
       \YAD@href{\jobname.tex}{#2}%
     }
@@ -1784,7 +1782,7 @@ This work consists of the file  yathesis.dtx
           (lbl-#1)%
         }%
         \\[-.3\baselineskip]
-        \YAD@reach@file[\configurationfile]{%
+        \YAD@reach@file[\YAD@configuration@file]{%
           \translate{lbl-#1}%
         }%
       \end{tabular}
@@ -1809,11 +1807,11 @@ This work consists of the file  yathesis.dtx
           Sur cette page, il est simple de (re)d\'efinir\ifundef{\Fcolonspace}{\FBcolonspace}{\Fcolonspace}:
           \begin{enumerate}
           \item une
-            \YAD@reach@file[\configurationfile]{expression
+            \YAD@reach@file[\YAD@configuration@file]{expression
               cl\'e}\ifundef{\Fcolonspace}{\FBcolonspace}{\Fcolonspace}:
             il suffit de cliquer sur le cadre de couleur orange qui
             l'entoure pour atteindre le fichier
-            \YAD@reach@file[\configurationfile]{\texttt{\configurationfile}}
+            \YAD@reach@file[\YAD@configuration@file]{\texttt{\YAD@configuration@file}}
             et d'y ins\'erer
             \begin{center}
               \lstinline[morekeywords=expression]|\\expression\{|%
@@ -1830,7 +1828,7 @@ This work consists of the file  yathesis.dtx
           \item une \YAD@reach@file{donn\'ee}\ifundef{\Fcolonspace}{\FBcolonspace}{\Fcolonspace}: il
             suffit de cliquer sur le cadre de couleur pourpre qui l'entoure
             pour atteindre le fichier
-            \YAD@reach@file{\texttt{\configurationfile}} o\`u elle est
+            \YAD@reach@file{\texttt{\YAD@configuration@file}} o\`u elle est
             d\'efinie.
           \end{enumerate}
           Pour plus de d\'etails, consulter la documentation de la
@@ -4914,7 +4912,7 @@ This work consists of the file  yathesis.dtx
 %   \expandafter\newcommand\expandafter{\csname #2\endcsname}[1][\csuse{YAD@tr#2}]{%
 %     \pagestyle{#1}%
 %     \expandafter\translatelet\expandafter{\csname YAD@tr#2\endcsname}{lbl-#2}%
-%     \chapter[##1]{\YAD@reach@file[\configurationfile]{##1}}%
+%     \chapter[##1]{\YAD@reach@file[\YAD@configuration@file]{##1}}%
 %   }%
 % }
 % %    \end{macrocode}
@@ -5080,7 +5078,7 @@ This work consists of the file  yathesis.dtx
 % \newcommand{\YAD@introduction@begin}[1][\YAD@trintroduction]{%
 %   \translatelet\YAD@trintroduction{lbl-introduction}%
 %   \global\toggletrue{YAD@introduction@used}%
-%   \chapter[#1]{\YAD@reach@file[\configurationfile]{#1}}
+%   \chapter[#1]{\YAD@reach@file[\YAD@configuration@file]{#1}}
 % }%
 % %    \end{macrocode}
 % % \end{macro}
@@ -5203,7 +5201,7 @@ This work consists of the file  yathesis.dtx
 % \newcommand{\YAD@conclusion@begin}[1][\YAD@trconclusion]{%
 %   \translatelet\YAD@trconclusion{lbl-conclusion}%
 %   \global\toggletrue{YAD@conclusion@used}%
-%   \chapter[#1]{\YAD@reach@file[\configurationfile]{#1}}
+%   \chapter[#1]{\YAD@reach@file[\YAD@configuration@file]{#1}}
 % }%
 % %    \end{macrocode}
 % % \end{macro}
@@ -5423,20 +5421,20 @@ This work consists of the file  yathesis.dtx
 %
 % La \yatcl charge le fichier de configuration \lstinline|\jobname|\file{.cfg}:
 % c'est un fichier de configuration \emph{local}, situé dans le répertoire
-% \file{\configurationdirectory}.
+% \file{\YAD@configuration@directory}.
 %
 %    \begin{macrocode}
 \AtEndPreamble{%
   \shorthandon{;:!?}%
-  \InputIfFileExists{\configurationdirectory/\configurationfile}%
+  \InputIfFileExists{\YAD@configuration@directory/\YAD@configuration@file}%
   {\ClassInfo{yathesis}{%
-    Fichier de configuration local \configurationfile\space
+    Fichier de configuration local \YAD@configuration@file\space
     trouve%
     }%
   }{%
     % \YAD@ClassWarningNoLine{%
     %   Fichier de configuration local
-    %   \configurationfile\space introuvable%
+    %   \YAD@configuration@file\space introuvable%
     % }%
   }%
   \shorthandoff{;:!?}%
@@ -5448,7 +5446,7 @@ This work consists of the file  yathesis.dtx
 % %    \begin{macrocode}
 % \AtEndPreamble{%
 %   \shorthandon{;:!?}%
-%   \InputIfFileExists{\configurationdirectory/\macrosfile}%
+%   \InputIfFileExists{\YAD@configuration@directory/\macrosfile}%
 %   {\ClassInfo{yathesis}{%
 %       Fichier \macrosfile\space trouve%
 %     }}%
@@ -5456,7 +5454,7 @@ This work consists of the file  yathesis.dtx
 %     % \YAD@ClassWarningNoLine{%
 %     %   Fichier \macrosfile\space introuvable.\MessageBreak%
 %     %   Le fichier \macrosfile\space n'a pas ete trouve\MessageBreak%
-%     %   dans le dossier `\configurationdirectory'%
+%     %   dans le dossier `\YAD@configuration@directory'%
 %     % }%
 %   }%
 %   \shorthandoff{;:!?}%
@@ -5468,19 +5466,19 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \AtEndPreamble{%
   \shorthandon{;:!?}%
-  \InputIfFileExists{\configurationdirectory/\characteristicsfile}%
+  \InputIfFileExists{\YAD@configuration@directory/\YAD@characteristics@file}%
   {%
     \ClassInfo{yathesis}{%
-      Fichier \characteristicsfile\space des donnees du document trouve%
+      Fichier \YAD@characteristics@file\space des donnees du document trouve%
     }%
   }%
   {%
     % \YAD@ClassWarningNoLine{%
-    %   Fichier \characteristicsfile\space des donnees du titre
+    %   Fichier \YAD@characteristics@file\space des donnees du titre
     %   introuvable.\MessageBreak%
-    %   Le fichier \characteristicsfile\space n'a pas ete trouve\MessageBreak%
-    %   dans le dossier `\configurationdirectory'.\MessageBreak Ce fichier
-    %   \characteristicsfile\space peut faciliter l'usage\MessageBreak de la classe%
+    %   Le fichier \YAD@characteristics@file\space n'a pas ete trouve\MessageBreak%
+    %   dans le dossier `\YAD@configuration@directory'.\MessageBreak Ce fichier
+    %   \YAD@characteristics@file\space peut faciliter l'usage\MessageBreak de la classe%
     % }%
   }%
   \shorthandoff{;:!?}%
