@@ -1,9 +1,10 @@
 % !TeX root = ../these.tex
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Page de couverture et page(s) de titre
+% Données caractéristiques du document
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % Préparation des pages de couverture et de titre
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % Auteur de la thèse : prénom (1er argument obligatoire), nom (2e argument
 % obligatoire) et éventuel courriel (argument optionnel). Les éventuels accents
@@ -14,9 +15,9 @@
 % langue secondaire (argument optionnel).
 \title[Laugh's Chaos]{Le chaos du rire}
 %
-% Sous-titre de la thèse dans la langue principale (argument obligatoire) et
-% dans la langue secondaire (argument optionnel), si souhaité. Sinon, il suffit
-% de commenter ou supprimer la ligne suivante.
+% % Sous-titre de la thèse dans la langue principale (argument obligatoire) et
+% % dans la langue secondaire (argument optionnel). À décommenter si souhaité,
+% % à commenter ou à supprimer sinon.
 \subtitle[Chaos' laugh]{Le rire du chaos}
 %
 % Champ disciplinaire dans la langue principale (argument obligatoire) et dans
@@ -24,38 +25,37 @@
 \academicfield[Mathematics]{Mathématiques}
 %
 % Spécialité dans la langue principale (argument obligatoire) et dans la langue
-% secondaire (argument optionnel) si souhaitée. Sinon, il suffit de commenter
-% ou supprimer la ligne suivante.
+% secondaire (argument optionnel). À décommenter si souhaitée, à commenter ou
+% à supprimer sinon.
 \speciality[Dynamical systems]{Systèmes dynamiques}
 %
 % Date de la soutenance, au format {jour}{mois}{année} donnés sous forme de
 % nombres.
 \date{1}{1}{2015}
 %
-% Sujet pour les méta-données du PDF
+% Sujet pour les méta-données du PDF. À décommenter si souhaité, à commenter ou
+% à supprimer sinon.
 \subject[Chaotic Laugh]{Rire chaotique}
 %
-% (Tous les fichiers images stipulés ci-dessous comme valeurs des clés « logo »
-% se trouvent dans le sous-dossier « images ». Il est conseillé de disposer
-% d'images à un format vectoriel, par exemple PDF.)
-%
-% Logo du PRES, si souhaité. Sinon, il suffit de commenter ou de supprimer la
-% ligne suivante.
+% Logo et URL du PRES. À décommenter si souhaité, à commenter ou à supprimer
+% sinon.
 \pres[logo=images/pres]{Université Lille Nord de France}
 %
 % Institut (principal en cas de cotutelle).
 \institute[logo=images/ulco,url=http://www.univ-littoral.fr/]{ULCO}
 %
-% En cas de cotutelle (normalement, seulement dans le cas de cotutelle
-% internationale), second institut. Sinon, il suffit de commenter ou de
-% supprimer la ligne suivante.
+% % En cas de cotutelle (normalement, seulement dans le cas de cotutelle
+% % internationale), second institut. À décommenter si souhaité, à commenter ou
+% % à supprimer sinon.
 \coinstitute[logo=images/paris13]{Université de Paris~13}
 %
-% Nom de l'école doctorale, si souhaité. Sinon, il suffit de commenter ou
-% supprimer la ligne suivante.
+% École doctorale. À décommenter si souhaitée, à commenter ou à supprimer
+% sinon.
 \doctoralschool[url=http://edspi.univ-lille1.fr/]{ED Régionale SPI 72}
 %
-% Laboratoire (ou de l'unité) où la thèse a été préparée.
+% Nom (1er argument obligatoire) et adresse (2e argument obligatoire) du
+% laboratoire (ou de l'unité) où la thèse a été préparée, à utiliser /autant de
+% fois que nécessaire/.
 \laboratory[
 logo=images/labo,
 logoheight=1.25cm,
@@ -70,19 +70,16 @@ url=http://www-lmpa.univ-littoral.fr/
   62228 Calais Cedex                   \\
   France}
 %
-% Les membres du jury sont saisis au moyen des commandes \supervisor,
-% \cosupervisor, \comonitor, \referee, \committeepresident, \examiner, \guest,
-% utilisées /autant de fois que nécessaire/. Toutes basées sur le même modèle,
-% ces commandes ont 2 arguments obligatoires, successivement les prénom et nom
-% de chaque personne. Si besoin est, on peut apporter certaines précisions en
-% argument optionnel, au moyen des clés suivantes :
-%
-% -- « professor », « seniorresearcher », « mcf », « mcf* »,
-% « juniorresearcher », « juniorresearcher* » (qui ne prennent pas de valeur)
-% pour stipuler que la personne appartient au corps des professeurs
-% d'université ;
-%
-% -- « affiliation » pour stipuler l'institut auquel est rattachée la personne.
+% Membres du jury, saisis au moyen des commandes \supervisor, \cosupervisor,
+% \comonitor, \referee, \committeepresident, \examiner, \guest, à utiliser
+% /autant de fois que nécessaire/ et /seulement si nécessaire/. Toutes basées sur
+% le même modèle, ces commandes ont 2 arguments obligatoires, successivement les
+% prénom et nom de chaque personne. Si besoin est, on peut apporter certaines
+% précisions en argument optionnel, au moyen des clés suivantes :
+%   - « professor », « seniorresearcher », « mcf », « mcf* »,
+%     « juniorresearcher », « juniorresearcher* » (qui ne prennent pas de valeur)
+%     pour stipuler le corps auquel appartient la personne ;
+%   - « affiliation » pour stipuler l'institut auquel est affiliée la personne.
 %
 \supervisor[professor,affiliation=ULCO]{Michel}{de Montaigne}
 \cosupervisor[mcf*,affiliation=ULCO]{Charles}{Baudelaire}
@@ -95,12 +92,12 @@ url=http://www-lmpa.univ-littoral.fr/
 \examiner[juniorresearcher*,affiliation=CNRS]{Paul}{Verlaine}
 \guest{George}{Sand}
 %
-% Numéro d'ordre de la thèse
+% % Mention du numéro d'ordre de la thèse (s'il est connu, le numéro d'ordre
+% % est à spécifier en argument optionnel). À décommenter si souhaité,
+% % à commenter ou à supprimer sinon.
 \ordernumber[42]
 %
+% Préparation des mots clés dans la langue principale (1er argument) et dans la
+% langue secondaire (2e argument)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Mots clés
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% Préparation des mots clés
 \keywords{chaos, rire}{chaos, laugh}
