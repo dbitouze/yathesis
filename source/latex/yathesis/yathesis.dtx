@@ -5761,43 +5761,46 @@ This work consists of the file  yathesis.dtx
 % Document de classe yathesis
 %COMMENT
 \documentclass{yathesis}
-%
 %<<COMMENT
+%
 % Chargement manuel de packages (pas déjà chargés par la classe yathesis)
 %COMMENT
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[frenchstyle,oldstylenums,notextcomp]{kpfonts}
+\usepackage{kpfonts}
 \usepackage{varioref}
 \usepackage{booktabs}
 \usepackage{siunitx}
 \usepackage{pgfplots}
 \usepackage{floatrow}
+\usepackage{caption}
+\usepackage{microtype}
 \usepackage[autostyle]{csquotes}
 \usepackage[backend=biber,safeinputenc]{biblatex}
 %<<COMMENT
-% Pour un glossaire, une liste d'acronymes ou une liste de symboles
-% \usepackage[xindy,acronyms,symbols,toc]{glossaries}
 %
-% Configuration éventuelle des styles du glossaire et de la liste d'acronymes.
+% % Pour un éventuel glossaire, une liste d'acronymes et/ou une liste de
+% % symboles
+% \usepackage[xindy,acronyms,symbols,toc]{glossaries}
+% % Configuration éventuelle des styles du glossaire et de la liste
+% % d'acronymes.
 % \setglossarystyle{}
 % \setacronymstyle{}
-%
-% Génération du glossaire (obligatoire si le package « glossaries » est chargé)
+% % Génération du glossaire (obligatoire si le package « glossaries » est
+% % chargé)
 % \makeglossaries
+% % Spécification éventuelle de la ou des ressources terminologiques
+% \loadglsentries{}
+% % \loadglsentries{}
 %
-% Spécification éventuelle de ressource(s) terminologique(s)
-% \loadglsentries{}
-% \loadglsentries{}
-% \loadglsentries{}
-%
-% Génération de l'index (obligatoire si un index est souhaité)
+% % Génération de l'index (obligatoire si un index est souhaité)
 % \makeindex
 %
 % Spécification de la ou des ressources bibliographiques
 %COMMENT
 \addbibresource{}
 %<<COMMENT
+% \addbibresource{}
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -5809,7 +5812,7 @@ This work consists of the file  yathesis.dtx
 %<<COMMENT
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Propriétés du document
+% Données caractéristiques du document
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % Préparation des pages de couverture et de titre
@@ -5818,7 +5821,7 @@ This work consists of the file  yathesis.dtx
 % Auteur de la thèse : prénom (1er argument obligatoire), nom (2e argument
 % obligatoire) et éventuel courriel (argument optionnel). Les éventuels accents
 % devront figurer et le nom /ne/ doit /pas/ être saisi en capitales.
-% %COMMENT
+%COMMENT
 \author[]{}{}
 %<<COMMENT
 %
@@ -5828,9 +5831,9 @@ This work consists of the file  yathesis.dtx
 \title[]{}
 %<<COMMENT
 %
-% Sous-titre de la thèse dans la langue principale (argument obligatoire) et
-% dans la langue secondaire (argument optionnel). À décommenter si souhaité,
-% à commenter ou à supprimer sinon.
+% % Sous-titre de la thèse dans la langue principale (argument obligatoire) et
+% % dans la langue secondaire (argument optionnel). À décommenter si souhaité,
+% % à commenter ou à supprimer sinon.
 % \subtitle[]{}
 %
 % Champ disciplinaire dans la langue principale (argument obligatoire) et dans
@@ -5868,9 +5871,9 @@ This work consists of the file  yathesis.dtx
 \institute[logo=,url=]{}
 %<<COMMENT
 %
-% En cas de cotutelle (normalement, seulement dans le cas de cotutelle
-% internationale), second institut. À décommenter si souhaité, à commenter ou
-% à supprimer sinon.
+% % En cas de cotutelle (normalement, seulement dans le cas de cotutelle
+% % internationale), second institut. À décommenter si souhaité, à commenter ou
+% % à supprimer sinon.
 % \coinstitute[logo=]{}
 %
 % École doctorale. À décommenter si souhaitée, à commenter ou à supprimer
@@ -5905,9 +5908,8 @@ url=
 % précisions en argument optionnel, au moyen des clés suivantes :
 %   - « professor », « seniorresearcher », « mcf », « mcf* »,
 %     « juniorresearcher », « juniorresearcher* » (qui ne prennent pas de valeur)
-%     pour stipuler que la personne appartient au corps des professeurs
-%     d'université ;
-%   - « affiliation » pour stipuler l'institut auquel est rattachée la personne.
+%     pour stipuler le corps auquel appartient la personne ;
+%   - « affiliation » pour stipuler l'institut auquel est affiliée la personne.
 %
 %COMMENT
 \supervisor[professor,affiliation=]{}{}
@@ -5924,8 +5926,9 @@ url=
 %<<COMMENT
 % \guest{}{}
 %
-% Numéro d'ordre de la thèse. À décommenter si souhaité, à commenter ou
-% à supprimer sinon.
+% % Mention du numéro d'ordre de la thèse (s'il est connu, le numéro d'ordre
+% % est à spécifier en argument optionnel). À décommenter si souhaité,
+% % à commenter ou à supprimer sinon.
 % \ordernumber[]
 %
 % Préparation des mots clés dans la langue principale (1er argument) et dans la
@@ -5992,7 +5995,7 @@ url=
 %<<COMMENT
 % ...
 %
-% Avertissement. À décommenter si souhaité, à commenter ou à supprimer sinon.
+% % Avertissement. À décommenter si souhaité, à commenter ou à supprimer sinon.
 % \chapter{Avertissement}
 % ...
 %
@@ -6017,15 +6020,15 @@ url=
 \makeabstract
 %<<COMMENT
 %
-% Liste des acronymes. À décommenter si souhaitée, à commenter ou à supprimer
-% sinon.
+% % Liste des acronymes. À décommenter si souhaitée, à commenter ou à supprimer
+% % sinon.
 % \printacronyms
 %
-% Liste des symboles. À décommenter si souhaitée, à commenter ou à supprimer
-% sinon.
+% % Liste des symboles. À décommenter si souhaitée, à commenter ou à supprimer
+% % sinon.
 % \printsymbols
 %
-% Avant-propos. À décommenter si souhaité, à commenter ou à supprimer sinon.
+% % Avant-propos. À décommenter si souhaité, à commenter ou à supprimer sinon.
 % \chapter{Avant-propos}
 % ...
 %
@@ -6046,8 +6049,8 @@ url=
 \listoffigures
 %<<COMMENT
 %
-% Table des listings (nécessite que le package « listings » soit
-% chargé). À décommenter si souhaitée, à commenter ou à supprimer sinon.
+% % Table des listings (nécessite que le package « listings » soit
+% % chargé). À décommenter si souhaitée, à commenter ou à supprimer sinon.
 % \lstlistoflistings
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -6061,7 +6064,6 @@ url=
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % \chapter{...}
 % ...
-%
 %
 % Chapitres ordinaires (avec parties éventuelles)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -6118,11 +6120,11 @@ url=
 \backmatter
 %<<COMMENT
 %
-% Glossaire (si souhaité distinct de la liste des acronymes). À décommenter si
-% souhaité, à commenter ou à supprimer sinon.
+% % Glossaire (si souhaité distinct de la liste des acronymes). À décommenter
+% % si souhaité, à commenter ou à supprimer sinon.
 % \printglossary
 %
-% Index. À décommenter si souhaité, à commenter ou à supprimer sinon.
+% % Index. À décommenter si souhaité, à commenter ou à supprimer sinon.
 % \printindex
 %
 % Table des matières
