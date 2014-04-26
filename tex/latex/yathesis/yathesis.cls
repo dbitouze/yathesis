@@ -388,16 +388,8 @@
 }%
 \patchcmd{\chapter}{plain}{empty}{}{}%
 \newcommand*{\YAD@configuration@directory}{configuration}
-\newcommand*{\configurationdirectory}{\YAD@configuration@directory}
 \newcommand*{\YAD@configuration@file}{thesis.cfg}
-\newcommand*{\configurationfile}{\YAD@configuration@file}
 \newcommand*{\YAD@characteristics@file}{characteristics.tex}
-\newcommand*{\characteristicsfile}{\YAD@characteristics@file}
-\newcommand*{\glossaryfile}{glossary.tex}
-\newcommand*{\acronymsfile}{acronyms.tex}
-\newcommand*{\symbolsfile}{symbols.tex}
-\newcommand*{\imagesdirectory}{images}
-\newcommand*{\thesismasterfile}{these}
 \AtEndPreamble{%
   \@ifpackageloaded{siunitx}{%
     \sisetup{detect-all}%
@@ -409,15 +401,15 @@
   }{%
   }%
 }%
-\newcommand*{\YAD@reach@file}[2][\characteristicsfile]{%
+\newcommand*{\YAD@reach@file}[2][\YAD@characteristics@file]{%
   \ifdraft{%
-    \ifthenelse{\equal{\configurationfile}{#1}}{%
+    \ifthenelse{\equal{\YAD@configuration@file}{#1}}{%
       \hypersetup{urlbordercolor={0.5 0 0.5}}%
     }{%
       \hypersetup{urlbordercolor={1 0.5 0}}%
     }%
-    \IfFileExists{\configurationdirectory/#1}{%
-       \YAD@href{\configurationdirectory/#1}{#2}%
+    \IfFileExists{\YAD@configuration@directory/#1}{%
+       \YAD@href{\YAD@configuration@directory/#1}{#2}%
     }{%
       \YAD@href{\jobname.tex}{#2}%
     }
@@ -474,7 +466,7 @@
           (lbl-#1)%
         }%
         \\[-.3\baselineskip]
-        \YAD@reach@file[\configurationfile]{%
+        \YAD@reach@file[\YAD@configuration@file]{%
           \translate{lbl-#1}%
         }%
       \end{tabular}
@@ -494,11 +486,11 @@
           Sur cette page, il est simple de (re)d\'efinir\ifundef{\Fcolonspace}{\FBcolonspace}{\Fcolonspace}:
           \begin{enumerate}
           \item une
-            \YAD@reach@file[\configurationfile]{expression
+            \YAD@reach@file[\YAD@configuration@file]{expression
               cl\'e}\ifundef{\Fcolonspace}{\FBcolonspace}{\Fcolonspace}:
             il suffit de cliquer sur le cadre de couleur orange qui
             l'entoure pour atteindre le fichier
-            \YAD@reach@file[\configurationfile]{\texttt{\configurationfile}}
+            \YAD@reach@file[\YAD@configuration@file]{\texttt{\YAD@configuration@file}}
             et d'y ins\'erer
             \begin{center}
               \lstinline[morekeywords=expression]|\\expression\{|%
@@ -515,7 +507,7 @@
           \item une \YAD@reach@file{donn\'ee}\ifundef{\Fcolonspace}{\FBcolonspace}{\Fcolonspace}: il
             suffit de cliquer sur le cadre de couleur pourpre qui l'entoure
             pour atteindre le fichier
-            \YAD@reach@file{\texttt{\configurationfile}} o\`u elle est
+            \YAD@reach@file{\texttt{\YAD@configuration@file}} o\`u elle est
             d\'efinie.
           \end{enumerate}
           Pour plus de d\'etails, consulter la documentation de la
@@ -3038,34 +3030,34 @@
 }%
 \AtEndPreamble{%
   \shorthandon{;:!?}%
-  \InputIfFileExists{\configurationdirectory/\configurationfile}%
+  \InputIfFileExists{\YAD@configuration@directory/\YAD@configuration@file}%
   {\ClassInfo{yathesis}{%
-    Fichier de configuration local \configurationfile\space
+    Fichier de configuration local \YAD@configuration@file\space
     trouve%
     }%
   }{%
     % \YAD@ClassWarningNoLine{%
     %   Fichier de configuration local
-    %   \configurationfile\space introuvable%
+    %   \YAD@configuration@file\space introuvable%
     % }%
   }%
   \shorthandoff{;:!?}%
 }%
 \AtEndPreamble{%
   \shorthandon{;:!?}%
-  \InputIfFileExists{\configurationdirectory/\characteristicsfile}%
+  \InputIfFileExists{\YAD@configuration@directory/\YAD@characteristics@file}%
   {%
     \ClassInfo{yathesis}{%
-      Fichier \characteristicsfile\space des donnees du document trouve%
+      Fichier \YAD@characteristics@file\space des donnees du document trouve%
     }%
   }%
   {%
     % \YAD@ClassWarningNoLine{%
-    %   Fichier \characteristicsfile\space des donnees du titre
+    %   Fichier \YAD@characteristics@file\space des donnees du titre
     %   introuvable.\MessageBreak%
-    %   Le fichier \characteristicsfile\space n'a pas ete trouve\MessageBreak%
-    %   dans le dossier `\configurationdirectory'.\MessageBreak Ce fichier
-    %   \characteristicsfile\space peut faciliter l'usage\MessageBreak de la classe%
+    %   Le fichier \YAD@characteristics@file\space n'a pas ete trouve\MessageBreak%
+    %   dans le dossier `\YAD@configuration@directory'.\MessageBreak Ce fichier
+    %   \YAD@characteristics@file\space peut faciliter l'usage\MessageBreak de la classe%
     % }%
   }%
   \shorthandoff{;:!?}%
