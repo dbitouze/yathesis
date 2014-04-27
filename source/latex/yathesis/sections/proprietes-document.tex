@@ -43,8 +43,10 @@ saisies, au choix :
   \vref{sec:canevas-relief}.
   \begin{dbwarning}{Fichier de caractéristiques à ne pas importer manuellement}{}
     Le \File{\characteristicsfile} est \emph{automatiquement} importé par la
-    \yatcl{} : il doit donc \emph{ne pas} être explicitement importé
-    \phrase*{au moyen d'une commande \docAuxCommand{input} ou assimilée}.
+    \yatcl{} et il doit donc \emph{ne pas} être explicitement importé : on
+    \emph{ne} recourra donc \emph{pas} à la commande
+    ×\input{×\file{\characteristicsfile}×}× (ou autre commande d'importation
+    similaire à \docAuxCommand{input}).
   \end{dbwarning}
 \end{description}
 
