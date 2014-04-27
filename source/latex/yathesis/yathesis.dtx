@@ -5422,8 +5422,9 @@ This work consists of the file  yathesis.dtx
 %
 % \subsection{Fichiers importés par la classe}
 %
-% La \yatcl charge le fichier de configuration \lstinline|\jobname|\file{.cfg}:
-% c'est un fichier de configuration \emph{local}, situé dans le répertoire
+% La \yatcl charge les fichiers de configuration locale
+% \file{\YAD@configuration@file} et de données caractéristiques du document
+% \file{\YAD@characteristics@file}, situés dans le répertoire
 % \file{\YAD@configuration@directory}.
 %
 %    \begin{macrocode}
@@ -5438,6 +5439,30 @@ This work consists of the file  yathesis.dtx
     % \YAD@ClassWarningNoLine{%
     %   Fichier de configuration local
     %   \YAD@configuration@file\space introuvable%
+    % }%
+  }%
+  \shorthandoff{;:!?}%
+}%
+%    \end{macrocode}
+%
+% \subsubsection{Données caractéristiques du document}
+%
+%    \begin{macrocode}
+\AtEndPreamble{%
+  \shorthandon{;:!?}%
+  \InputIfFileExists{\YAD@configuration@directory/\YAD@characteristics@file}%
+  {%
+    \ClassInfo{yathesis}{%
+      Fichier \YAD@characteristics@file\space des donnees du document trouve%
+    }%
+  }%
+  {%
+    % \YAD@ClassWarningNoLine{%
+    %   Fichier \YAD@characteristics@file\space des donnees du titre
+    %   introuvable.\MessageBreak%
+    %   Le fichier \YAD@characteristics@file\space n'a pas ete trouve\MessageBreak%
+    %   dans le dossier `\YAD@configuration@directory'.\MessageBreak Ce fichier
+    %   \YAD@characteristics@file\space peut faciliter l'usage\MessageBreak de la classe%
     % }%
   }%
   \shorthandoff{;:!?}%
@@ -5463,30 +5488,6 @@ This work consists of the file  yathesis.dtx
 %   \shorthandoff{;:!?}%
 % }%
 % %    \end{macrocode}
-%
-% \subsubsection{Propriétés du document du document}
-%
-%    \begin{macrocode}
-\AtEndPreamble{%
-  \shorthandon{;:!?}%
-  \InputIfFileExists{\YAD@configuration@directory/\YAD@characteristics@file}%
-  {%
-    \ClassInfo{yathesis}{%
-      Fichier \YAD@characteristics@file\space des donnees du document trouve%
-    }%
-  }%
-  {%
-    % \YAD@ClassWarningNoLine{%
-    %   Fichier \YAD@characteristics@file\space des donnees du titre
-    %   introuvable.\MessageBreak%
-    %   Le fichier \YAD@characteristics@file\space n'a pas ete trouve\MessageBreak%
-    %   dans le dossier `\YAD@configuration@directory'.\MessageBreak Ce fichier
-    %   \YAD@characteristics@file\space peut faciliter l'usage\MessageBreak de la classe%
-    % }%
-  }%
-  \shorthandoff{;:!?}%
-}%
-%    \end{macrocode}
 %
 % \section{Avertissements}
 % \label{cha:yadr}
