@@ -18,26 +18,9 @@
 \usepackage[backend=biber,safeinputenc]{biblatex}
 \usepackage[xindy,acronyms,symbols,toc]{glossaries}
 %
-% Configuration des styles du glossaire et de la liste d'acronymes, si
-% souhaitée. Sinon, il suffit de commenter ou de supprimer les lignes
-% suivantes.
-\setglossarystyle{indexhypergroup}
-\setacronymstyle{long-sc-short}
-%
-% Génération du glossaire
-\makeglossaries
-%
-% Spécification de ressource(s) terminologique(s)
-\loadglsentries{auxiliaires/glossaire}
-\loadglsentries{auxiliaires/acronymes}
-\loadglsentries{auxiliaires/symboles}
-%
-% Génération de l'index
-\makeindex
-%
-% Spécification des ressource(s) bibliographique(s)
-\addbibresource{auxiliaires/bibliographie.bib}
-\addbibresource{biblatex-examples.bib} % Fournie par biblatex
+% Les réglages figurant habituellement dans le préambule sont saisis dans le
+% fichier `thesis.cfg' (situé dans le sous-dossier `configuration') qui est
+% automatiquement importé par la classe yathesis.
 %
 % Commande permettant de faire figurer d'un seul coup toutes les références des
 % ressources bibliographiques ci-dessus, même si elles ne sont pas citées
