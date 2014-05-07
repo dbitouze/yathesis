@@ -1,5 +1,5 @@
 # mode: yathesis.cls
-# denisbitouze, 17.03.2014
+# denisbitouze, 07.05.2014
 #
 #include:class-book
 #include:babel
@@ -47,7 +47,8 @@
 # Cover and title pages
 #
 # Author
-\author{prénom}{nom}{email}#n
+\author{prénom}{nom}#n
+\author[email]{prénom}{nom}#n
 #
 # Title, etc.
 \title[titre dans la langue secondaire]{titre dans la langue principale}#n
