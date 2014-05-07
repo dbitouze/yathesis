@@ -1,0 +1,59 @@
+\chapter{Installation}
+\label{cha:installation}
+
+La procédure d'installation de la \yatcl{} dépend de :
+\begin{itemize}
+\item sa version souhaitée : stable ou de développement ;
+\item sa disponibilité par la distribution \TeX{} utilisée. On ne décrit ici la
+  procédure qu'avec la \enquote{\TeX~Live}\footnote{La procédure avec la
+    \enquote{MiK\TeX{}} sera décrite dès que possible.}.
+\end{itemize}
+
+\section{Version stable}
+\label{sec:version-stable}
+
+Si on souhaite utiliser la version stable de la \yatcl{}, deux cas se
+présentent :
+\begin{enumerate}
+\item si la \yatcl{} est fournie par la distribution \TeX{}, il n'y a rien
+  à faire ;
+\item sinon, il faut télécharger l'archive \file{yathesis.tds.zip} à la page
+  \url{http://www.ctan.org/pkg/yathesis} ou, à défaut, l'archive \file{.zip} ou
+  \file{.tar.gz} le plus récent à la page
+  \url{https://github.com/dbitouze/yathesis/releases}.
+
+  Il faut ensuite décompresser l'archive téléchargée dans le dossier adéquat,
+  appelé \enquote{arborescence \TeX{}} personnelle, et noté
+  \directory{TEXMFHOME}.
+
+  \begin{dbremark}{Arborescences \TeX{} personnelles par défaut}{}
+    Par défaut, la distribution \enquote{\TeX~Live} considère comme dossier
+    \directory{TEXMFHOME} :
+    \begin{description}
+    \item[sous Linux :] \directory{/home/\meta{nom}/texmf}, soit
+      \path|~/texmf|
+    \item[sous Mac OS X :] \directory{/Users/\meta{nom}/Library/texmf}
+    \item[sous Windows :] \directory{C:/Users/\meta{nom}/texmf}
+    \end{description}
+    le dossier \directory{texmf} si ce n'est déjà fait.
+  \end{dbremark}
+\end{enumerate}
+
+\section{Version de développement}
+\label{sec:vers-de-devel}
+
+Si on souhaite utiliser la version de développement\footnote{À ses risques et
+  périls !} de la \yatcl{}, on clonera\footnote{Procédure non détaillée ici.}
+son dépôt Git à la page \url{https://github.com/dbitouze/yathesis}.
+
+
+%
+\iffalse
+%%% Local Variables:
+%%% mode: latex
+%%% eval: (latex-mode)
+%%% ispell-local-dictionary: "fr_FR"
+%%% TeX-engine: xetex
+%%% TeX-master: "../yathesis.dtx"
+%%% End:
+\fi
