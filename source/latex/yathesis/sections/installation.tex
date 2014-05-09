@@ -1,43 +1,51 @@
 \chapter{Installation}
 \label{cha:installation}
 
-La procédure d'installation de la \yatcl{} dépend de :
-\begin{itemize}
-\item la version souhaitée (stable ou de développement) ;
-\item la disponibilité \emph{via} la distribution \TeX{} utilisée.
-\end{itemize}
-On ne décrit ici la procédure que dans le cadre de la distribution
-\TeX~Live\footnote{Le cas de la distribution MiK\TeX{} sera décrit dès que
-  possible.}.
+La procédure d'installation de la \yatcl{} dépend de la version souhaitée
+(stable ou de développement) et de la disponibilité \emph{via} la distribution
+\TeX{} utilisée\footnote{Seul le cas de la distribution \TeX~Live est décrit
+  ici. Celui de la distribution MiK\TeX{} le sera dès que possible.}.
 
 \section{Version stable}
 \label{sec:version-stable}
 
 Si on souhaite utiliser la classe sous sa version stable, deux cas se
-présentent selon que la \TeX~Live la fournit d'emblée\footnote{Ce devrait être
-  le cas à partir de la version \texttt{2014}.} ou pas :
+présentent selon qu'elle est ou pas fournie d'emblée par la
+\TeX~Live\footnote{Ce devrait être le cas à partir de la version
+  \texttt{2014}.}.
 \begin{description}
-\item[classe fournie :] elle est alors installée en même temps que la
+\item[Classe \yat{} fournie :] elle est alors installée en même temps que la
   distribution ;
-\item[classe \emph{non} fournie :] il faut
+\item[Classe \yat{} \emph{non} fournie :] il faut
   \begin{enumerate}
+  \item créer, si ce n'est déjà fait, son \enquote{arborescence \TeX{}}
+    personnelle, notée \directory{TEXMFHOME}.
+    \begin{dbremark}{Arborescences \TeX{} personnelles par défaut}{}
+      Par défaut, la distribution \enquote{\TeX~Live} considère comme dossier
+      \directory{TEXMFHOME} :
+      \begin{description}
+      \item[sous Linux :] \directory{/home/\meta{nom}/texmf}, soit
+        \path|~/texmf|
+      \item[sous Mac OS X :] \directory{/Users/\meta{nom}/Library/texmf}
+      \item[sous Windows :] \directory{C:/Users/\meta{nom}/texmf}
+      \end{description}
+    \end{dbremark}
   \item télécharger l'archive \file{yathesis.tds.zip} à la page
     \url{http://www.ctan.org/pkg/yathesis} ou, à défaut, l'archive \file{.zip}
     ou \file{.tar.gz} la plus récente à la page
     \url{https://github.com/dbitouze/yathesis/releases} ;
-  \item décompresser l'archive téléchargée dans le dossier adéquat, appelé
-    \enquote{arborescence \TeX{}} personnelle, et noté \directory{TEXMFHOME}.
-  \begin{dbremark}{Arborescences \TeX{} personnelles par défaut}{}
-    Par défaut, la distribution \enquote{\TeX~Live} considère comme dossier
-    \directory{TEXMFHOME} :
-    \begin{description}
-    \item[sous Linux :] \directory{/home/\meta{nom}/texmf}, soit \path|~/texmf|
-    \item[sous Mac OS X :] \directory{/Users/\meta{nom}/Library/texmf}
-    \item[sous Windows :] \directory{C:/Users/\meta{nom}/texmf}
-    \end{description}
-    le dossier \directory{texmf} si ce n'est déjà fait.
-  \end{dbremark}
-\end{enumerate}
+  \item \emph{extraire} l'archive téléchargée ;
+  \item ouvrir le dossier \directory{yathesis-v}\meta{numéro de version}
+    résultant de l'extraction, ou dans un de ses sous-dossiers, qui contient
+    les dossiers :
+    \begin{itemize}
+    \item \directory{doc} ;
+    \item \directory{source} ;
+    \item \directory{tex} ;
+    \end{itemize}
+  \item déplacer les dossiers \directory{doc}, \directory{source} et
+    \directory{tex} dans le \directory{TEXMFHOME}.
+  \end{enumerate}
 \end{description}
 
 \section{Version de développement}
