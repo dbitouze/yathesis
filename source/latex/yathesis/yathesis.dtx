@@ -99,8 +99,8 @@ To compile the documentation without error, you will need the packages:
 - cleveref
 
 2. a complete pdflatex run of these.tex to be found in the 'sample'
-subdirectory of the current directory, with 'demo-yathesis' load at first
-place. If latexmk is available, it is easier to run:
+subdirectory of the current directory, with 'demo-yathesis' package load at
+first place. If latexmk is available, it is easier to run:
 
   latexmk -f -pdf -jobname=these -pdflatex="pdflatex %O '\RequirePackage{demo-yathesis}\input{%S}'" these.tex
 
