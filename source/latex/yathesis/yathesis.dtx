@@ -987,6 +987,7 @@ This work consists of the file  yathesis.dtx
 }%
 %    \end{macrocode}
 %
+%    \begin{macrocode}
 \AfterEndDocument{%
   \iftoggle{YAD@nowarning}{%
     \ifboolexpr{%
@@ -1055,7 +1056,7 @@ This work consists of the file  yathesis.dtx
 % (problème rapporté à  l'auteur du package).
 %    \begin{macrocode}
 \AtEndPreamble{\RequirePackage{morewrites}}%
-%    \end{macrocode}
+%
 \let\YAD@ORI@task\task
 \let\task\relax
 \RequirePackage{exsheets}
@@ -1658,7 +1659,7 @@ This work consists of the file  yathesis.dtx
 %<*class>
 %    \end{macrocode}
 %
-% Recherche automatique des fichiers images dans le répertoire \path{images}.
+% Recherche automatique des fichiers images dans le \Directory{images}.
 % Ceci permet de ne pas spécifier le chemin des images qui s'y trouvent.
 %
 %    \begin{macrocode}
@@ -4394,7 +4395,7 @@ This work consists of the file  yathesis.dtx
   \endlrbox%
   \stepcounter{YAD@abstracts}%
 }%
-% \end{macrocode}
+%    \end{macrocode}
 % \end{environment}
 %
 % \begin{macro}{\YAD@abstract@page}
@@ -5438,10 +5439,8 @@ This work consists of the file  yathesis.dtx
 %
 % \subsection{Fichiers importés par la classe}
 %
-% La \yatcl charge les fichiers de configuration locale
-% \file{\YAD@configuration@file} et de données caractéristiques du document
-% \file{\YAD@characteristics@file}, situés dans le répertoire
-% \file{\YAD@configuration@directory}.
+% La \yatcl charge les fichiers de configuration locale et de données
+% caractéristiques du document, situés dans le répertoire de configuration.
 %
 %    \begin{macrocode}
 \AtEndPreamble{%
