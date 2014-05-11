@@ -1,4 +1,4 @@
-yathesis, une classe LaTeX pour thèses préparées en France
+yathesis, classe LaTeX pour thèses préparées en France
 ========
 
 La classe `yathesis' a pour objet de faciliter la composition de mémoires de
@@ -9,7 +9,6 @@ l'Enseignement Supérieur et de la
 Recherche](http://www.sup.adc.education.fr/bib/Acti/These/guidoct.rtf).  Elle
 a en outre été conçue pour (facultativement) tirer profit de plusieurs outils
 récents et puissants disponibles sous LaTeX, notamment :
-
 - la bibliographie avec le package biblatex ;
 - les glossaire, liste d'acronymes et liste de symboles avec le package
   glossaries.
