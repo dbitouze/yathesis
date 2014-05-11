@@ -12,7 +12,7 @@
 %% See http://www.latex-project.org/lppl.txt
 %% -----------------------------------------------------------------------
 \def\fileversion{v0.97}
-\def\filedate{2014/04/25}
+\def\filedate{2014/05/11}
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesClass{yathesis}[\filedate\space\fileversion\space Yet another class for writing thesis (DB)]
 \RequirePackage{xkvltxp}[2004/12/13]%
