@@ -16,9 +16,55 @@ présentent selon qu'elle est ou pas fournie d'emblée par la
 \begin{description}
 \item[Classe \yat{} fournie :] elle est alors installée en même temps que la
   distribution ;
-\item[Classe \yat{} \emph{non} fournie :] il faut
+\item[Classe \yat{} \emph{non} fournie :]\
+  \begin{description}
+  \item[Par lignes de commandes.] Cette méthode est la plus simple et la plus
+    la plus automatisée.
+    \begin{enumerate}
+    \item Ouvrir un terminal\footnote{Sous Linux, c'est en général simple
+        à trouver. Sous Mac OS X, il devrait suffire de visiter le menu
+        \enquote{Applications} puis \enquote{Utilitaires} puis
+        \enquote{Terminal}. Sous Windows, il devrait suffire de visiter le menu
+        \enquote{Tous les programmes} puis \enquote{Accessoires} puis
+        \enquote{Invite de commandes}.}.
+    \item Y lancer successivement les commandes suivantes\footnote{Sous Linux
+        et Mac OS X, en les faisant éventuellement précéder de
+        \enquote{\protect\lstinline|sudo|}.} :
+\begin{lstlisting}
+tlmgr repository add http://tlcontrib.metatex.org/2013  tlcontrib
+tlmgr pinning add tlcontrib yathesis
+tlmgr install yathesis
+\end{lstlisting}
+      Ne pas s'inquiéter pas de messages du type :
+\begin{lstlisting}
+TeX Live 2013 is frozen forever and will no longer be updated.  This
+happens in preparation for a new release. [...]
+\end{lstlisting}
+      et être patient lorsqu'apparaissent les lignes :
+\begin{lstlisting}
+running mktexlsr ...
+done running mktexlsr.
+running mtxrun --generate ...
+\end{lstlisting}
+    \item Pour vérifier que tout s'est bien passé, lancer la commande :
+\begin{lstlisting}
+kpsewhich yathesis.cls
+\end{lstlisting}
+      qui devrait renvoyer un message \emph{non} vide tel que, sous Linux et
+      sous Mac OS X :
+\begin{lstlisting}
+/usr/local/texlive/2013/texmf-dist/tex/latex/yathesis/yathesis.cls
+\end{lstlisting}
+      et tel que, sous Windows :
+\begin{lstlisting}
+c:/texlive/2013/texmf-dist/tex/latex/yathesis/yathesis.cls
+\end{lstlisting}
+    \end{enumerate}
+  \end{description}
+\item[Par extraction d'archives.] Cette méthode, moins simple à mettre en
+  œuvre, ne sera utilisée qu'en cas d'échec de la méthode précédente.
   \begin{enumerate}
-  \item créer, si ce n'est déjà fait, son \enquote{arborescence \TeX{}}
+  \item Créer, si ce n'est déjà fait, son \enquote{arborescence \TeX{}}
     personnelle, notée \directory{TEXMFHOME}.
     \begin{dbremark}{Arborescences \TeX{} personnelles par défaut}{}
       Par défaut, la distribution \enquote{\TeX~Live} considère comme dossier
@@ -30,20 +76,20 @@ présentent selon qu'elle est ou pas fournie d'emblée par la
       \item[sous Windows :] \directory{C:/Users/\meta{nom}/texmf}
       \end{description}
     \end{dbremark}
-  \item télécharger l'archive \file{yathesis.tds.zip} à la page
+  \item Télécharger l'archive \file{yathesis.tds.zip} à la page
     \url{http://www.ctan.org/pkg/yathesis} ou, à défaut, l'archive \file{.zip}
     ou \file{.tar.gz} la plus récente à la page
-    \url{https://github.com/dbitouze/yathesis/releases} ;
-  \item \emph{extraire} l'archive téléchargée ;
-  \item ouvrir le dossier \directory{yathesis-v}\meta{numéro de version}
+    \url{https://github.com/dbitouze/yathesis/releases}.
+  \item \emph{Extraire} l'archive téléchargée.
+  \item Ouvrir le dossier \directory{yathesis-v}\meta{numéro de version}
     résultant de l'extraction, ou dans un de ses sous-dossiers, qui contient
     les dossiers :
     \begin{itemize}
     \item \directory{doc} ;
     \item \directory{source} ;
-    \item \directory{tex} ;
+    \item \directory{tex}.
     \end{itemize}
-  \item déplacer les dossiers \directory{doc}, \directory{source} et
+  \item Déplacer les dossiers \directory{doc}, \directory{source} et
     \directory{tex} dans le \directory{TEXMFHOME}.
   \end{enumerate}
 \end{description}
