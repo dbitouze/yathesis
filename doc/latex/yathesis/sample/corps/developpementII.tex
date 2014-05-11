@@ -1,23 +1,24 @@
 \chapter{Développement}
 
-% Nous pouvons insérer de beaux graphiques, comme celui de la figure\vref{3D}.
-% \begin{figure}[ht]
-%   \centering
-%   \capstart
-%   \begin{tikzpicture}
-%     \begin{axis}[colorbar]
-%       \addplot3[surf,domain=0:360]
-%       {sin(x)*sin(y)};
-%     \end{axis}
-%   \end{tikzpicture}
-%   \caption{Représentation graphique de la fonction $f:(x,y)\mapsto
-%     \sin x\times\sin y$}
-%   \label{3D}
-% \end{figure}
+Nous pouvons insérer de beaux graphiques, comme celui de la
+figure\vref{sin-x*sin-y}.
+\begin{figure}[ht]
+  \centering
+  \capstart
+  \begin{tikzpicture}
+    \begin{axis}[colorbar]
+      \addplot3[surf,domain=0:360]
+      {sin(x)*sin(y)};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Représentation graphique de la fonction $f:(x,y)\mapsto
+    \sin x\times\sin y$}
+  \label{sin-x*sin-y}
+\end{figure}
 
 \lipsum[3-10]
 
-%%% Local Variables: 
+%%% Local Variables:
 %%% mode: latex
 %%% TeX-master: "../these"
-%%% End: 
+%%% End:
