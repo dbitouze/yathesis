@@ -29,42 +29,55 @@ Typesetting the documentation also requires:
 1. a number of packages in addition to those needed to use the yathesis class.
 To compile the documentation without error, you will need the packages:
 
-- afterpage
-- amsthm
-- biblatex
-- booktabs
-- calc
-- cleveref
-- csquotes
-- enumitem
-- fixfoot
-- floatrow
-- footmisc
-- glossaries
-- hologo
-- letltxmacro
-- libertine
-- listings
-- marginnote
-- multicol
-- nameref
-- parskip
-- pdflscape
-- rotating
-- siunitx
-- subcaption
-- tabulary
-- tcolorbox
-- thmtools
-- varioref
-- xifthen
 - xpatch
+- morewrites
+- exsheets}
+- parskip
+- amsthm
+- thmtools
+- fixfoot
+- enumitem
+- afterpage
+- tabulary
+- calc
+- libertine
+- geometry
+- siunitx
+- tocbibind
+- biblatex
+- listings
+- varioref
+- marginnote
 - xspace
+- booktabs
 - zref
+- footmisc
+- rotating
+- pdflscape
+- hologo
+- xifthen
+- iflang
+- tocvsec2
+- csquotes
+- tcolorbox
+- path
+- fontawesome
+- textcase
+- multicol
+- babel
+- datetime
+- floatrow
+- subcaption
+- hyperref
+- nameref
+- hypcap
+- bookmark
+- glossaries
+- cleveref
 
 2. a complete pdflatex run of these.tex to be found in the 'sample'
-subdirectory of the current directory, with 'demo-yathesis' load at first
-place. If latexmk is available, it is easier to run:
+subdirectory of the current directory, with 'demo-yathesis' package load at
+first place. If latexmk is available, it is easier to run:
 
   latexmk -f -pdf -jobname=these -pdflatex="pdflatex %O '\RequirePackage{demo-yathesis}\input{%S}'" these.tex
 
