@@ -5,7 +5,7 @@ Cette section détaille les commandes permettant de préparer et produire les
 \begin{enumerate}
 \item la page (éventuelle) de clause de non-responsabilité ;
 \item la page (éventuelle) des mots clés de la thèse ;
-\item la page (éventuelle) du laboratoire où a été préparée la thèse ;
+\item la page (éventuelle) du ou des laboratoires où a été préparée la thèse ;
 \item la page (éventuelle) des dédicaces ;
 \item la page (éventuelle) des épigraphes ;
 \item la page de résumés dans les langues principale et secondaire ;
@@ -129,12 +129,12 @@ La page dédiée à la clause de non-responsabilité est produite par la command
 \end{docCommand}
 %
 \begin{docCommand}{makelaboratory*}{}
-  Cette commande a le même effet que la commande
-  \refCom{makelaboratory} sauf que le laboratoire est aligné sur le haut de la
-  page et non centré verticalement.
+  Cette commande a le même effet que la commande \refCom{makelaboratory} sauf
+  que le ou les laboratoires sont alignés sur le haut de la page et non centrés
+  verticalement.
 \end{docCommand}
 
-\begin{dbexample}{Préparation et production de la page dédiée au laboratoire}{}
+\begin{dbexample}{Préparation et production de la page dédiée au(x) laboratoire(s)}{}
   Les codes suivants produisent la page illustrée \vref{fig:makelaboratory}.
   \NoAutoSpacing%
   \preamblesample[\configurationdirectory/\characteristicsfile]{linerange={laboratory-Liouville}}{title=Préparation}
@@ -144,7 +144,7 @@ La page dédiée à la clause de non-responsabilité est produite par la command
 
 \begin{figure}[htbp]
   \centering \screenshot{laboratory}
-  \caption{Page dédiée au laboratoire}
+  \caption{Page dédiée au(x) laboratoire(s)}
   \label{fig:makelaboratory}
 \end{figure}
 
