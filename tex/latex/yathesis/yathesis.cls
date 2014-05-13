@@ -59,6 +59,22 @@
 \newtoggle{YAD@valid@year}
 \newtoggle{YAD@mainmatter@used}
 \newlength{\YAD@logo@height}
+\newlength{\YAD@titleboxheight}%
+\newlength{\YAD@titleboxwidth}%
+\newlength{\YAD@otherboxheight}%
+\newlength{\YAD@laboratory@width}%
+\newsavebox{\YAD@titlebox}%
+\newsavebox{\YAD@beforetitlebox}%
+\newsavebox{\YAD@aftertitlebox}%
+\newsavebox{\YAD@abstract@mainlanguage}%
+\newsavebox{\YAD@abstract@secondarylanguage}%
+\newcounter{YAD@titlepages}%
+\newcounter{YAD@abstracts}%
+\newcounter{YAD@warnings}%
+\newcounter{datetoday}
+\setcounter{YAD@titlepages}{0}%
+\setcounter{YAD@abstracts}{0}%
+\setcounter{YAD@warnings}{0}%
 \def\YAD@mainlanguage{french}%
 \def\YAD@secondarylanguage{english}%
 \def\YAD@tocdepth{subsection}%
@@ -124,8 +140,6 @@
     }%
   }%
   \fi }%
-\newcounter{YAD@warnings}%
-\setcounter{YAD@warnings}{0}%
 \newcommand{\YAD@ClassWarningNoLine}[1]{%
   \ifboolexpr{%
     togl {YAD@inprogress@work}%
@@ -1250,7 +1264,6 @@
     }%
   }%
 }%
-\newcounter{datetoday}
 \setmydatenumber{datetoday}{\the\year}{\the\month}{\the\day}
 \csdef{date}#1#2#3{%
   \csxdef{YAD@daydate}{#1}%
@@ -1907,14 +1920,6 @@
 \else%
 \toggletrue{YAD@cover@page}%
 \fi%
-\newlength{\YAD@titleboxheight}%
-\newlength{\YAD@titleboxwidth}%
-\newlength{\YAD@otherboxheight}%
-\newsavebox{\YAD@titlebox}%
-\newsavebox{\YAD@beforetitlebox}%
-\newsavebox{\YAD@aftertitlebox}%
-\newcounter{YAD@titlepages}%
-\setcounter{YAD@titlepages}{0}%
 \renewcommand{\maketitle}{%
   \toggletrue{YAD@maketitle@used}%
   \setlength{\fboxsep}{10pt}%
@@ -2354,7 +2359,6 @@
     \YAD@laboratory@fax=fax,%
     \YAD@laboratory@email=email%
   }{%
-    \newlength{\YAD@laboratory@width}%
     \ifthenelse{\DTLiseq{\YAD@laboratory@logo}{}}{%
       \setlength{\YAD@laboratory@width}{\linewidth-\parindent}%
     }{%
@@ -2470,12 +2474,8 @@
   }{%
   }%
 }%
-\newsavebox{\YAD@abstract@mainlanguage}%
-\newsavebox{\YAD@abstract@secondarylanguage}%
 \csgdef{YAD@abstractname@mainlanguage}{\abstractname}%
 \csgdef{YAD@abstractname@secondarylanguage}{\abstractname}%
-\newcounter{YAD@abstracts}%
-\setcounter{YAD@abstracts}{0}%
 \newcommand{\YAD@absract}[1]{%
   \ifthenelse{\isempty{#1}}{
     \ifnumcomp{\value{YAD@abstracts}}{>}{0}{%
