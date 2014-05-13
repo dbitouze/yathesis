@@ -282,10 +282,10 @@ redéfinies, globalement ou localement.
 
 Au moyen de la clé \refKey{version}, la \yatcl{} permet de facilement produire
 différentes versions du document : \enquote{intermédiaire} (par défaut),
-\enquote{finale} et \enquote{brouillon}.
+\enquote{en cours de soumission}, \enquote{finale} et \enquote{brouillon}.
 
 {\tcbset{before lower=\vspace*{\baselineskip}\par}
-  \begin{docKey}{version}{=\docValue{inprogress}\textbar\docValue{inprogress*}\textbar\docValue{final}\textbar\docValue{draft}}{pas
+\begin{docKey}{version}{=\docValue{inprogress}\textbar\docValue{inprogress*}\textbar\docValue{submitted}\textbar\docValue{submitted*}\textbar\docValue{final}\textbar\docValue{draft}}{pas
       de valeur par défaut, initialement \docValue{inprogress}}
     Cette clé permet de spécifier la version du document à produire, au moyen
     des valeurs suivantes.
@@ -296,10 +296,10 @@ différentes versions du document : \enquote{intermédiaire} (par défaut),
       caractéristiques sont les suivantes.
       \begin{enumerate}
       \item\label{item:inprogress:1} Pour indiquer clairement qu'il s'agit
-        d'une version non définitive, la mention \enquote{Version intermédiaire
-          en date du \meta{date}} ou \foreignquote{english}{Work in progress as
-          of \meta{date}}\selonlangue{}, figure en pied de page et en petites
-        capitales sur (presque) toutes les pages.
+        d'une version \enquote{intermédiaire}, la mention \enquote{Version
+          intermédiaire en date du \meta{date}} ou \foreignquote{english}{Work
+          in progress as of \meta{date}}\selonlangue{}, figure en pied de page
+        et en petites capitales sur (presque) toutes les pages.
       \item\label{item:inprogress:2} Si un élément \enquote{obligatoire}
         (cf. \vref{sec:comm-oblig}) manque, aucune erreur de compilation ne
         signale l'omission.
@@ -309,6 +309,20 @@ différentes versions du document : \enquote{intermédiaire} (par défaut),
       version est renforcé par la mention \enquote{travail en cours} ou
       \foreignquote{english}{work in progress}\selonlangue{}, figurant en
       filigrane et en capitales sur toutes les pages.
+    \item[\docValue{submitted}.] Cette valeur produit une version du document
+      destinée à être \enquote{soumise} aux rapporteurs. \emph{Contrairement à}
+      la version par défaut :
+      \begin{enumerate}
+      \item la date de soutenance n'apparaît sur aucune des pages de titre.
+      \item si un élément \enquote{obligatoire} (cf. \vref{sec:comm-oblig})
+        manque, une erreur de compilation signale l'omission.
+      \end{enumerate}
+    \item[\docValue{submitted*}.] Cette valeur produit le même effet que la
+      valeur \docValue{submitted} sauf que le caractère \enquote{en cours de
+        soumission} de la version est renforcé par la mention \enquote{Version
+        soumise en date du} ou \foreignquote{english}{Submitted work as
+        of}\selonlangue{}, figurant en pied de page et en petites capitales sur
+      (presque) toutes les pages.
     \item[\docValue{final}.] Cette valeur produit une version \enquote{finale}
       du document\footnote{Une telle version est destinée à être diffusée
         notamment aux rapporteurs.}. \emph{Contrairement à} la version par défaut :
