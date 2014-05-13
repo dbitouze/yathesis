@@ -23,8 +23,10 @@
 \RequirePackage{hopatch}[2012/05/28]%
 \RequirePackage{xifthen}[2009/04/17]%
 \newif\if@nolink\@nolinkfalse
-\newtoggle{YAD@inprogress@work}
 \newtoggle{YAD@inprogress@work@star}
+\newtoggle{YAD@inprogress@work}
+\newtoggle{YAD@submitted@work}
+\newtoggle{YAD@submitted@work@star}
 \newtoggle{YAD@final@work}
 \newtoggle{YAD@draft}
 \newtoggle{YAD@nowarning}
@@ -182,7 +184,7 @@
 \YAD@create@boolean{nofrontcover}%
 \def\YAD@version{inprogress}%
 \define@choicekey*{yathesis.cls}{version}%
-{draft,inprogress,inprogress*,final}[inprogress]%
+{draft,inprogress,inprogress*,submitted,submitted*,final}[inprogress]%
 {\def\YAD@version{#1}}%
 \def\YAD@output{screen}%
 \define@choicekey*{yathesis.cls}{output}%
@@ -247,9 +249,17 @@
         \edef\@classoptionslist{\@classoptionslist,draft}%
       }%
     }{%
-      \toggletrue{YAD@final@work}%
       \togglefalse{YAD@nowarning}%
       \togglefalse{YAD@noerror}%
+      \ifthenelse{\equal{\YAD@version}{submitted}}{%
+        \toggletrue{YAD@submitted@work}%
+      }{%
+        \ifthenelse{\equal{\YAD@version}{submitted*}}{%
+          \toggletrue{YAD@submitted@work@star}%
+        }{%
+          \toggletrue{YAD@final@work}%
+        }%
+      }%
     }%
   }%
 }%
@@ -1443,13 +1453,25 @@
     \YAD@ORI@cleardoublepage%
   }%
 }%
-\iftoggle{YAD@inprogress@work}{%
+\ifboolexpr{%
+  togl {YAD@inprogress@work}%
+  or togl {YAD@inprogress@work@star}%
+}{%
   \newcommand*{\YAD@setfoot}{%
     \footrule%
-    \setfoot{}{\textsc{\translate{lbl-versiondate} \today}}{}%
-    }%
+    \setfoot{}{\textsc{\translate{lbl-inprogressfoottext} \today}}{}%
+  }%
 }{%
-  \newcommand*{\YAD@setfoot}{}%
+  \ifboolexpr{%
+    togl {YAD@submitted@work@star}%
+  }{%
+    \newcommand*{\YAD@setfoot}{%
+      \footrule%
+      \setfoot{}{\textsc{\translate{lbl-submittedfoottext} \today}}{}%
+    }%
+  }{%
+    \newcommand*{\YAD@setfoot}{}%
+  }%
 }%
 \xpretocmd{\pagestyle}{\cleardoublepage}{}{}%
 \newcommand{\YAD@starttoctoc}{%
@@ -1971,7 +1993,7 @@
   \ifcsdef{printordernumber}{%
   \ifboolexpr{%
     togl {YAD@cover@page}%
-    or (bool {YAD@nofrontcover} and  test {\IfLanguageName{\YAD@mainlanguage}})%
+    or (bool {YAD@nofrontcover} and test {\IfLanguageName{\YAD@mainlanguage}})%
   }{%
         \raggedleft{%
           \itshape%
@@ -2064,13 +2086,27 @@
         }{%
           \textbf{\printauthor}%
         }%
-        \ifdraft{}{\vspace*{\stretch{1}}}%
-        \par%
-        \YAD@translation{defendedon}
-        \YAD@ifemptyorundef{\printdate}{%
-          \YAD@generic@argument@translate{date}%
+        \ifboolexpr{%
+          togl {YAD@submitted@work}%
+          or togl {YAD@submitted@work@star}%
         }{%
-          \textbf{\printdate}%
+          % \ifdraft{}{\vspace*{\stretch{1}}}%
+          % \par%
+          % \YAD@translation{estimateddefensedate}
+          % \YAD@ifemptyorundef{\printdate}{%
+          %   \YAD@generic@argument@translate{date}%
+          % }{%
+          %   \textbf{\printdate}%
+          % }%
+        }{%
+          \ifdraft{}{\vspace*{\stretch{1}}}%
+          \par%
+          \YAD@translation{defendedon}
+          \YAD@ifemptyorundef{\printdate}{%
+            \YAD@generic@argument@translate{date}%
+          }{%
+            \textbf{\printdate}%
+          }%
         }%
       }%
       \ifdraft{}{\vspace*{\stretch{1}}}%
@@ -2623,9 +2659,18 @@
   % \setlength{\footskip}{-15pt}%
   \setfootrule{0pt}%
   \setfoot[][%
-  \iftoggle{YAD@inprogress@work}{%
-    \textsc{\translate{lbl-versiondate} \today}%
+  \ifboolexpr{%
+    togl {YAD@inprogress@work}%
+    or togl {YAD@inprogress@work@star}%
   }{%
+    \textsc{\translate{lbl-inprogressfoottext} \today}%
+  }{%
+    \ifboolexpr{%
+      togl {YAD@submitted@work@star}%
+    }{%
+      \textsc{\translate{lbl-submittedfoottext} \today}%
+    }{%
+    }%
   }%
   ][]{%
     \YAD@laboratory@abstract@page%
@@ -3117,6 +3162,7 @@
 \expression{lbl-institute}{}{}%
 \expression{lbl-email}{\Email}{\Email}%
 \expression{lbl-phone}{\Telefon}{\Telefon}%
+\expression{lbl-fax}{\Fax}{\Fax}%
 \expression{lbl-caution}{Avertissement}{Caution}%
 \expression{lbl-draft}{brouillon}{draft}%
 \expression{lbl-prepared-at}{Cette th\`ese a \'et\'e pr\'epar\'ee au}{This
@@ -3154,6 +3200,8 @@
 \expression{lbl-referees-pl}{Rapporteurs}{Referees}%
 \expression{lbl-website}{Site}{Web Site}%
 \expression{lbl-defendedon}{Soutenue le}{Defended on}%
+\expression{lbl-estimateddefensedate}{Date de soutenance pr\'evue le}{Defense
+  date scheduled on}%
 \expression{lbl-speciality}{Sp\'ecialit\'e}{Speciality}%
 \expression{lbl-thesisdefendedby}{Th\`ese pr\'esent\'ee par}{Thesis defended
   by}%
@@ -3161,8 +3209,11 @@
 \expression{lbl-inprogress}{travail en cours}{work in progress}%
 \expression{lbl-universitydepartment}{Unit\'e de recherche}{University
   Department}%
-\expression{lbl-versiondate}{Version interm\'ediaire en date du}{Work in
-  progress as of}%
+\expression{lbl-versiondate}{Version interm\'ediaire en date
+du}{Work in progress as of}%
+\expression{lbl-inprogressfoottext}{\translate{lbl-versiondate}}{\translate{lbl-versiondate}}%
+\expression{lbl-submittedfoottext}{Version soumise en date du}{Submitted work
+  as of}%
 %% ----------------------------------------------------------------------------------
 %% This work may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either version 1.3
