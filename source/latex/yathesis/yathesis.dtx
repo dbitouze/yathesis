@@ -442,8 +442,10 @@ This work consists of the file  yathesis.dtx
 %
 %    \begin{macrocode}
 \newif\if@nolink\@nolinkfalse
-\newtoggle{YAD@inprogress@work}
 \newtoggle{YAD@inprogress@work@star}
+\newtoggle{YAD@inprogress@work}
+\newtoggle{YAD@submitted@work}
+\newtoggle{YAD@submitted@work@star}
 \newtoggle{YAD@final@work}
 \newtoggle{YAD@draft}
 %
@@ -632,19 +634,24 @@ This work consists of the file  yathesis.dtx
 %
 % On définit la clé ×version× de la classe qui prend pour valeurs :
 % \begin{itemize}
-% \item (par défaut) ×inprogress× qui désactive les erreurs pour éléments
-% \enquote{obligatoires} manquants ;
-% \item ×inprogress*×, analogue à ×inprogress× avec un filigrane en plus ;
+% \item (par défaut) ×inprogress× qui indique clairement qu'il s'agit d'une
+%   version de travail et désactive les erreurs pour éléments
+%   \enquote{obligatoires} manquants ;
+% \item ×inprogress*×, identique à ×inprogress× avec un filigrane en plus ;
 % \item ×draft× » ;
 % \item ×final×, qui active les erreurs pour éléments \enquote{obligatoires}
 %   manquants, à spécifier pour la version finale du document qui ne compose
 %   pas en pied de page la mention \enquote{Version intermédiaire en date du
-%   ...}.
+%   ...} ;
+% \item ×submitted×, analogue à ×final×, sauf que la date de soutenance n'est
+%   pas affichée ;
+% \item ×submitted*×, identique à ×submitted×, mais qui en plus indique
+%   clairement qu'il s'agit d'une version soumise aux rapporteurs.
 % \end{itemize}
 %    \begin{macrocode}
 \def\YAD@version{inprogress}%
 \define@choicekey*{yathesis.cls}{version}%
-{draft,inprogress,inprogress*,final}[inprogress]%
+{draft,inprogress,inprogress*,submitted,submitted*,final}[inprogress]%
 {\def\YAD@version{#1}}%
 %    \end{macrocode}
 %
@@ -749,9 +756,17 @@ This work consists of the file  yathesis.dtx
         \edef\@classoptionslist{\@classoptionslist,draft}%
       }%
     }{%
-      \toggletrue{YAD@final@work}%
       \togglefalse{YAD@nowarning}%
       \togglefalse{YAD@noerror}%
+      \ifthenelse{\equal{\YAD@version}{submitted}}{%
+        \toggletrue{YAD@submitted@work}%
+      }{%
+        \ifthenelse{\equal{\YAD@version}{submitted*}}{%
+          \toggletrue{YAD@submitted@work@star}%
+        }{%
+          \toggletrue{YAD@final@work}%
+        }%
+      }%
     }%
   }%
 }%
@@ -3034,16 +3049,28 @@ This work consists of the file  yathesis.dtx
 % \end{macro}
 %
 % \begin{macro}{\YAD@setfoot}
-% Définition d'une commande affichant un texte fixe en bas de page
-% en cas de version intermédiaire de la thèse.
+%   Définition d'une commande affichant un texte fixe en bas de page en cas de
+%   version ×inprogess(*)× ou ×submitted*× de la thèse.
 %    \begin{macrocode}
-\iftoggle{YAD@inprogress@work}{%
+\ifboolexpr{%
+  togl {YAD@inprogress@work}%
+  or togl {YAD@inprogress@work@star}%
+}{%
   \newcommand*{\YAD@setfoot}{%
     \footrule%
-    \setfoot{}{\textsc{\translate{lbl-versiondate} \today}}{}%
-    }%
+    \setfoot{}{\textsc{\translate{lbl-inprogressfoottext} \today}}{}%
+  }%
 }{%
-  \newcommand*{\YAD@setfoot}{}%
+  \ifboolexpr{%
+    togl {YAD@submitted@work@star}%
+  }{%
+    \newcommand*{\YAD@setfoot}{%
+      \footrule%
+      \setfoot{}{\textsc{\translate{lbl-submittedfoottext} \today}}{}%
+    }%
+  }{%
+    \newcommand*{\YAD@setfoot}{}%
+  }%
 }%
 %    \end{macrocode}
 % \end{macro}
@@ -3792,7 +3819,7 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
   \ifboolexpr{%
     togl {YAD@cover@page}%
-    or (bool {YAD@nofrontcover} and  test {\IfLanguageName{\YAD@mainlanguage}})%
+    or (bool {YAD@nofrontcover} and test {\IfLanguageName{\YAD@mainlanguage}})%
   }{%
         \raggedleft{%
           \itshape%
@@ -3885,13 +3912,27 @@ This work consists of the file  yathesis.dtx
         }{%
           \textbf{\printauthor}%
         }%
-        \ifdraft{}{\vspace*{\stretch{1}}}%
-        \par%
-        \YAD@translation{defendedon}
-        \YAD@ifemptyorundef{\printdate}{%
-          \YAD@generic@argument@translate{date}%
+        \ifboolexpr{%
+          togl {YAD@submitted@work}%
+          or togl {YAD@submitted@work@star}%
         }{%
-          \textbf{\printdate}%
+          % \ifdraft{}{\vspace*{\stretch{1}}}%
+          % \par%
+          % \YAD@translation{estimateddefensedate}
+          % \YAD@ifemptyorundef{\printdate}{%
+          %   \YAD@generic@argument@translate{date}%
+          % }{%
+          %   \textbf{\printdate}%
+          % }%
+        }{%
+          \ifdraft{}{\vspace*{\stretch{1}}}%
+          \par%
+          \YAD@translation{defendedon}
+          \YAD@ifemptyorundef{\printdate}{%
+            \YAD@generic@argument@translate{date}%
+          }{%
+            \textbf{\printdate}%
+          }%
         }%
       }%
       \ifdraft{}{\vspace*{\stretch{1}}}%
@@ -4553,9 +4594,18 @@ This work consists of the file  yathesis.dtx
   % \setlength{\footskip}{-15pt}%
   \setfootrule{0pt}%
   \setfoot[][%
-  \iftoggle{YAD@inprogress@work}{%
-    \textsc{\translate{lbl-versiondate} \today}%
+  \ifboolexpr{%
+    togl {YAD@inprogress@work}%
+    or togl {YAD@inprogress@work@star}%
   }{%
+    \textsc{\translate{lbl-inprogressfoottext} \today}%
+  }{%
+    \ifboolexpr{%
+      togl {YAD@submitted@work@star}%
+    }{%
+      \textsc{\translate{lbl-submittedfoottext} \today}%
+    }{%
+    }%
   }%
   ][]{%
     \YAD@laboratory@abstract@page%
@@ -5618,6 +5668,8 @@ This work consists of the file  yathesis.dtx
 \expression{lbl-referees-pl}{Rapporteurs}{Referees}%
 \expression{lbl-website}{Site}{Web Site}%
 \expression{lbl-defendedon}{Soutenue le}{Defended on}%
+\expression{lbl-estimateddefensedate}{Date de soutenance pr\'evue le}{Defense
+  date scheduled on}%
 \expression{lbl-speciality}{Sp\'ecialit\'e}{Speciality}%
 \expression{lbl-thesisdefendedby}{Th\`ese pr\'esent\'ee par}{Thesis defended
   by}%
@@ -5627,6 +5679,10 @@ This work consists of the file  yathesis.dtx
   Department}%
 \expression{lbl-versiondate}{Version interm\'ediaire en date du}{Work in
   progress as of}%
+\expression{lbl-inprogressfoottext}{Version interm\'ediaire en date du}{Work in
+  progress as of}%
+\expression{lbl-submittedfoottext}{Version soumise en date du}{Submitted work
+  as of}%
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -5700,7 +5756,7 @@ This work consists of the file  yathesis.dtx
     part,chapter,section,subsection,subsubsection,paragraph,subparagraph,%
     none,true,false,UseOutlines,TwoPageRight,UK,FR,%
     Sonny,Lenny,Glenn,Conny,Rejne,Bjarne,PetersLenny,Bjornstrup,%
-    screen,draft,inprogress,inprogress*,final,paper,paper*%
+    screen,draft,inprogress,inprogress*,submitted,submitted*,final,paper,paper*%
   },%
   morekeywords=[4]{% Class and packages options
     warn,nodayofweek,unicode,nostamp,all,numbered,a4paper,leqno,fleqn,10pt,11pt,12pt,%
@@ -5715,7 +5771,7 @@ This work consists of the file  yathesis.dtx
     lbl-introduction,lbl-keywords,lbl-prepared-at,lbl-prepared-at-pl,lbl-guests,lbl-referees,lbl-seniorresearcher,%
     lbl-speciality,lbl-supervisor,lbl-thesisdefendedby,lbl-disclaimer,lbl-thesissupervisedby,%
     lbl-thesistitle,lbl-universitydepartment,lbl-professor,lbl-juniorresearcher*,lbl-mcf*,%
-    lbl-juniorresearcher,lbl-mcf,lbl-versiondate,lbl-website%
+    lbl-juniorresearcher,lbl-mcf,lbl-versiondate,lbl-website,lbl-submittedfoottext,lbl-inprogressfoottext%
   },%
   alsoletter={-*1234560}%
 }%
