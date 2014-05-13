@@ -480,6 +480,25 @@ This work consists of the file  yathesis.dtx
 \newtoggle{YAD@valid@year}
 \newtoggle{YAD@mainmatter@used}
 \newlength{\YAD@logo@height}
+\newlength{\YAD@titleboxheight}%
+\newlength{\YAD@titleboxwidth}%
+\newlength{\YAD@otherboxheight}%
+\newlength{\YAD@laboratory@width}%
+%
+\newsavebox{\YAD@titlebox}%
+\newsavebox{\YAD@beforetitlebox}%
+\newsavebox{\YAD@aftertitlebox}%
+\newsavebox{\YAD@abstract@mainlanguage}%
+\newsavebox{\YAD@abstract@secondarylanguage}%
+%
+\newcounter{YAD@titlepages}%
+\newcounter{YAD@abstracts}%
+\newcounter{YAD@warnings}%
+\newcounter{datetoday}
+\setcounter{YAD@titlepages}{0}%
+\setcounter{YAD@abstracts}{0}%
+\setcounter{YAD@warnings}{0}%
+%
 \def\YAD@mainlanguage{french}%
 \def\YAD@secondarylanguage{english}%
 \def\YAD@tocdepth{subsection}%
@@ -568,8 +587,6 @@ This work consists of the file  yathesis.dtx
 % \newwrite\YAD@file%
 % \immediate\openout\YAD@file=\jobname.yad%
 %    \begin{macrocode}
-\newcounter{YAD@warnings}%
-\setcounter{YAD@warnings}{0}%
 \newcommand{\YAD@ClassWarningNoLine}[1]{%
   \ifboolexpr{%
     togl {YAD@inprogress@work}%
@@ -2810,7 +2827,6 @@ This work consists of the file  yathesis.dtx
 % \begin{macro}{\date}
 %   Définition d'un compteur permettant de comparer à la date du jour.
 %    \begin{macrocode}
-\newcounter{datetoday}
 \setmydatenumber{datetoday}{\the\year}{\the\month}{\the\day}
 %    \end{macrocode}
 %
@@ -3710,14 +3726,6 @@ This work consists of the file  yathesis.dtx
 % \begin{macro}{\maketitle}
 % Commande de la page de title
 %    \begin{macrocode}
-\newlength{\YAD@titleboxheight}%
-\newlength{\YAD@titleboxwidth}%
-\newlength{\YAD@otherboxheight}%
-\newsavebox{\YAD@titlebox}%
-\newsavebox{\YAD@beforetitlebox}%
-\newsavebox{\YAD@aftertitlebox}%
-\newcounter{YAD@titlepages}%
-\setcounter{YAD@titlepages}{0}%
 \renewcommand{\maketitle}{%
   \toggletrue{YAD@maketitle@used}%
   \setlength{\fboxsep}{10pt}%
@@ -4233,7 +4241,6 @@ This work consists of the file  yathesis.dtx
     \YAD@laboratory@fax=fax,%
     \YAD@laboratory@email=email%
   }{%
-    \newlength{\YAD@laboratory@width}%
     \ifthenelse{\DTLiseq{\YAD@laboratory@logo}{}}{%
       \setlength{\YAD@laboratory@width}{\linewidth-\parindent}%
     }{%
@@ -4358,12 +4365,8 @@ This work consists of the file  yathesis.dtx
 %   optionnel. Une seconde occurrence de cet environnement est
 %   similaire, mais compose le contenu dans la langue secondaire.
 %    \begin{macrocode}
-\newsavebox{\YAD@abstract@mainlanguage}%
-\newsavebox{\YAD@abstract@secondarylanguage}%
 \csgdef{YAD@abstractname@mainlanguage}{\abstractname}%
 \csgdef{YAD@abstractname@secondarylanguage}{\abstractname}%
-\newcounter{YAD@abstracts}%
-\setcounter{YAD@abstracts}{0}%
 %
 \newcommand{\YAD@absract}[1]{%
   \ifthenelse{\isempty{#1}}{
