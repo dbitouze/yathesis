@@ -26,18 +26,20 @@ De ce fait, le signalement des éléments \enquote{obligatoires} manquants est :
     \refKey{version}). Le signalement est également désactivé en versions
     intermédiaire alternative et brouillon (cf. valeurs \docValue{inprogress*}
     et \docValue{draft} de la clé \refKey{version}).} ;
-\item[activé] (seulement) en version \emph{finale}\footnote{Cf. valeur
-    \docValue{final} de la clé \refKey{version}.} du document, par le biais
-  d'une erreur ciblée, émise à chaque compilation.
+\item[activé] (seulement) en versions \enquote{à soumettre}\footnote{Cf. valeur
+    \docValue{submitted} de la clé \refKey{version}.} et
+  \emph{finale}\footnote{Cf. valeur \docValue{final} de la clé
+    \refKey{version}.} du document, par le biais d'une erreur ciblée, émise
+  à chaque compilation.
 \end{description}
 
 Or, l'utilisateur \emph{avancé} peut vouloir passer outre le caractère
 \enquote{obligatoire} de tel ou tel élément\footnote{Par exemple, il peut juger
   inutile de faire figurer des mots clés dans sa thèse et donc de recourir à la
   commande \enquote{obligatoire} \protect\refCom{keywords}.}, y compris en
-version \emph{finale} du document, et pour éviter que chaque compilation ne
-soit alors perturbée par les erreurs ciblées correspondantes, la \yatcl{}
-propose de désactiver ces erreurs de façon :
+versions à soumettre ou finale du document, et pour éviter que chaque
+compilation ne soit alors perturbée par les erreurs ciblées correspondantes, la
+\yatcl{} propose de désactiver ces erreurs de façon :
 \begin{description}
 \item[soit globale] au moyen de la clé \refKey{noerror} suivante.
   \begin{docKey}{noerror}{=\docValue{true}\textbar\docValue{false}}{par défaut
@@ -45,7 +47,7 @@ propose de désactiver ces erreurs de façon :
     Cette option désactive toutes les erreurs propres à la
     \yatcl{}. Initialement égale à \docValue{true}, elle devient
     automatiquement égale à \docValue{false} si la clé \refKey{version} a pour
-    valeur \docValue{final}.
+    valeur \docValue{submitted}, \docValue{submitted*} ou \docValue{final}.
   \end{docKey}
 \item[soit individuelle] au moyen des clés listées au \vref{tab:no-warnings} et
   dont le rôle est précisé ci-après.
@@ -128,15 +130,15 @@ propose de désactiver ces erreurs de façon :
 
 \begin{dbwarning}{Éléments \enquote{obligatoires} de la \yatcl{}
     fortement conseillés}{}
-  En version finale du document, il est conseillé d'employer tous les éléments
-  \enquote{obligatoires} et, sinon, d'utiliser à bon escient les clés de
-  désactivation ci-dessus, sans quoi :
+  En versions à soumettre et finale du document, il est conseillé d'employer
+  tous les éléments \enquote{obligatoires} et, sinon, d'utiliser à bon escient
+  les clés de désactivation ci-dessus, sans quoi :
   \begin{itemize}
-  \item des textes génériques peuvent figurer dans le document final en
-    remplacement de certains éléments manquants ;
+  \item des textes génériques peuvent figurer dans le document en remplacement
+    de certains éléments manquants ;
   \item le bon fonctionnement de la \yatcl{} peut être sérieusement altéré.
   \end{itemize}
-  Donc, en version finale du document, on ne passera outre les éléments
+  Donc, pour ces versions, on ne passera outre les éléments
   \enquote{obligatoires} de la \yatcl{} que dans le cadre d'un usage avancé, si
   l'on est sûr de ce que l'on fait et qu'on pourra en gérer \emph{seul} les
   conséquences.  On évitera notamment de recourir de façon trop légère à la clé
