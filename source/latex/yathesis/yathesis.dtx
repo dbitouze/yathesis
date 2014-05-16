@@ -3684,9 +3684,9 @@ This work consists of the file  yathesis.dtx
 %
 % \begin{macro}{\printlaboratory}
 %    \begin{macrocode}
-\newcommand*{\printlaboratory}{\@ifstar{\@tempswatrue\YAD@thelaboratory@temp}{\@tempswafalse\YAD@thelaboratory@temp}}%
-\newcommand*{\YAD@thelaboratory@temp}{%
-  \YAD@ifemptyorundef{\YAD@thelaboratory}{%
+\newcommand*{\printlaboratory}{\@ifstar{\@tempswatrue\YAD@laboratory@name@temp}{\@tempswafalse\YAD@laboratory@name@temp}}%
+\newcommand*{\YAD@laboratory@name@temp}[2]{%
+  \YAD@ifemptyorundef{#1}{%
     \YAD@reach@file{\YAD@generic@argument@translate{laboratory}}%
     \ifYAD@nolaboratory%
     \else%
@@ -3701,16 +3701,16 @@ This work consists of the file  yathesis.dtx
   }{%
     \ifdraft{%
       \YAD@reach@file{%
-        \YAD@thelaboratory%
+        #1%
       }%
     }{%
       \ifboolexpr{ bool {@tempswa} or bool {@nolink} }{%
-        \YAD@thelaboratory%
+        #1%
       }{%
-        \YAD@ifemptyorundef{\YAD@thelaboratoryurl}{%
-          \YAD@href{www.laboratory.fr}{\YAD@thelaboratory}%
+        \YAD@ifemptyorundef{#2}{%
+          \YAD@href{www.laboratory.fr}{#1}%
         }{%
-          \YAD@href{\YAD@thelaboratoryurl}{\YAD@thelaboratory}%
+          \YAD@href{#2}{#1}%
         }%
       }%
     }%
@@ -3721,8 +3721,8 @@ This work consists of the file  yathesis.dtx
 %
 % \begin{macro}{\printlaboratoryaddress}
 %    \begin{macrocode}
-\newcommand*{\printlaboratoryaddress}{%
-  \YAD@ifemptyorundef{\YAD@thelaboratoryaddress}{%
+\newcommand*{\printlaboratoryaddress}[1]{%
+  \YAD@ifemptyorundef{#1}{%
     \YAD@reach@file{\YAD@generic@argument@translate{laboratoryaddress}}%
     \ifYAD@nolaboratoryadress%
     \else%
@@ -3735,7 +3735,7 @@ This work consists of the file  yathesis.dtx
     }%
     \fi%
   }{%
-    \YAD@reach@file{\YAD@thelaboratoryaddress}%
+    \YAD@reach@file{#1}%
   }%
 }%
 %    \end{macrocode}
@@ -3892,7 +3892,7 @@ This work consists of the file  yathesis.dtx
       \ifdraft{}{\vspace*{\stretch{.5}}}%
       \par%
       \YAD@translation{universitydepartment}
-      \textbf{\printlaboratory}%
+      \textbf{\printlaboratory{\YAD@main@laboratory@name}{\YAD@main@laboratory@url}}%
       \ifdraft{}{\vspace*{\stretch{1.5}}}%
       \par%
       {\large%
@@ -4228,9 +4228,9 @@ This work consists of the file  yathesis.dtx
     \DTLnewdbentry{laboratories}{email}{\cmdKV@YAD@email}%
   }%
   %
-  \DTLgetvalue{\YAD@thelaboratory}{laboratories}{1}{\dtlcolumnindex{laboratories}{name}}%
-  \DTLgetvalue{\YAD@thelaboratoryaddress}{laboratories}{1}{\dtlcolumnindex{laboratories}{address}}%
-  \DTLgetvalue{\YAD@thelaboratoryurl}{laboratories}{1}{\dtlcolumnindex{laboratories}{url}}%
+  \DTLgetvalue{\YAD@main@laboratory@name}{laboratories}{1}{\dtlcolumnindex{laboratories}{name}}%
+  \DTLgetvalue{\YAD@main@laboratory@address}{laboratories}{1}{\dtlcolumnindex{laboratories}{address}}%
+  \DTLgetvalue{\YAD@main@laboratory@url}{laboratories}{1}{\dtlcolumnindex{laboratories}{url}}%
   %
 }%
 %    \end{macrocode}
@@ -4276,9 +4276,9 @@ This work consists of the file  yathesis.dtx
   \DTLforeach*{laboratories}{%
     \YAD@laboratory@name=name,%
     \YAD@laboratory@address=address,%
+    \YAD@laboratory@url=url,%
     \YAD@laboratory@logo=logo,%
     \YAD@laboratory@logoheight=logoheight,%
-    \YAD@laboratory@url=url,%
     \YAD@laboratory@telephone=telephone,%
     \YAD@laboratory@fax=fax,%
     \YAD@laboratory@email=email%
@@ -4289,9 +4289,9 @@ This work consists of the file  yathesis.dtx
       \setlength{\YAD@laboratory@width}{.625\linewidth-\parindent}%
     }%
     \begin{minipage}[t]{\YAD@laboratory@width}
-      \textbf{\printlaboratory}%
+      \textbf{\printlaboratory{\YAD@laboratory@name}{\YAD@laboratory@url}}%
       \\[.1cm]
-      \printlaboratoryaddress%
+      \printlaboratoryaddress{\YAD@laboratory@address}%
       \\[.25cm]
       \begin{tabular}{@{}ll}
         \ifthenelse{\DTLiseq{\YAD@laboratory@telephone}{}}{%
@@ -4444,7 +4444,7 @@ This work consists of the file  yathesis.dtx
 % \end{environment}
 %
 % \begin{macro}{\YAD@abstract@page}
-% Éléments communs aux pages de résumé(s)  et de 4\ieme{} de couverture.
+%   Éléments communs aux pages de résumé(s) et de 4\ieme{} de couverture.
 %    \begin{macrocode}
 \newcommand{\YAD@abstract@page}{%
   \bgroup%
@@ -4572,11 +4572,11 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \newcommand{\YAD@laboratory@abstract@page}{%
   \begin{minipage}[t]{\linewidth}
-    \textbf{\printlaboratory*}%
+    \textbf{\printlaboratory*{\YAD@main@laboratory@name}{\YAD@main@laboratory@url}}%
     \\%
     \let\YAD@ORI@doublebackslash\\%
     \renewcommand{\\}{ -- }%
-    \printlaboratoryaddress%
+    \printlaboratoryaddress{\YAD@main@laboratory@address}%
     \let\\\YAD@ORI@doublebackslash%
   \end{minipage}%
 }%
@@ -6541,7 +6541,7 @@ name=
 #
 # Customization
 #
-\expression{label}{valeur (en français)}{valeur (en anglais)}#n*
+\expression{%<label%>}{%<valeur (en français)%>}{%<valeur (en anglais)%>}#n*
 %    \end{macrocode}
 %
 %    \begin{macrocode}
