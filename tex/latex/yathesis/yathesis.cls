@@ -1889,9 +1889,9 @@
   {}%
   \setsecnumdepth{none}%
 }%
-\newcommand*{\printlaboratory}{\@ifstar{\@tempswatrue\YAD@thelaboratory@temp}{\@tempswafalse\YAD@thelaboratory@temp}}%
-\newcommand*{\YAD@thelaboratory@temp}{%
-  \YAD@ifemptyorundef{\YAD@thelaboratory}{%
+\newcommand*{\printlaboratory}{\@ifstar{\@tempswatrue\YAD@laboratory@name@temp}{\@tempswafalse\YAD@laboratory@name@temp}}%
+\newcommand*{\YAD@laboratory@name@temp}[2]{%
+  \YAD@ifemptyorundef{#1}{%
     \YAD@reach@file{\YAD@generic@argument@translate{laboratory}}%
     \ifYAD@nolaboratory%
     \else%
@@ -1906,23 +1906,23 @@
   }{%
     \ifdraft{%
       \YAD@reach@file{%
-        \YAD@thelaboratory%
+        #1%
       }%
     }{%
       \ifboolexpr{ bool {@tempswa} or bool {@nolink} }{%
-        \YAD@thelaboratory%
+        #1%
       }{%
-        \YAD@ifemptyorundef{\YAD@thelaboratoryurl}{%
-          \YAD@href{www.laboratory.fr}{\YAD@thelaboratory}%
+        \YAD@ifemptyorundef{#2}{%
+          \YAD@href{www.laboratory.fr}{#1}%
         }{%
-          \YAD@href{\YAD@thelaboratoryurl}{\YAD@thelaboratory}%
+          \YAD@href{#2}{#1}%
         }%
       }%
     }%
   }%
 }%
-\newcommand*{\printlaboratoryaddress}{%
-  \YAD@ifemptyorundef{\YAD@thelaboratoryaddress}{%
+\newcommand*{\printlaboratoryaddress}[1]{%
+  \YAD@ifemptyorundef{#1}{%
     \YAD@reach@file{\YAD@generic@argument@translate{laboratoryaddress}}%
     \ifYAD@nolaboratoryadress%
     \else%
@@ -1935,7 +1935,7 @@
     }%
     \fi%
   }{%
-    \YAD@reach@file{\YAD@thelaboratoryaddress}%
+    \YAD@reach@file{#1}%
   }%
 }%
 \ifYAD@nofrontcover%
@@ -2065,7 +2065,7 @@
       \ifdraft{}{\vspace*{\stretch{.5}}}%
       \par%
       \YAD@translation{universitydepartment}
-      \textbf{\printlaboratory}%
+      \textbf{\printlaboratory{\YAD@main@laboratory@name}{\YAD@main@laboratory@url}}%
       \ifdraft{}{\vspace*{\stretch{1.5}}}%
       \par%
       {\large%
@@ -2198,6 +2198,7 @@
 }{%
 }%
 \expandafter\selectlanguage\expandafter{\YAD@mainlanguage}%
+\pagestyle{prepreliminary}%
 }%
 \AtEndDocument{%
   \ifboolexpr{%
@@ -2350,9 +2351,9 @@
     \DTLnewdbentry{laboratories}{email}{\cmdKV@YAD@email}%
   }%
   %
-  \DTLgetvalue{\YAD@thelaboratory}{laboratories}{1}{\dtlcolumnindex{laboratories}{name}}%
-  \DTLgetvalue{\YAD@thelaboratoryaddress}{laboratories}{1}{\dtlcolumnindex{laboratories}{address}}%
-  \DTLgetvalue{\YAD@thelaboratoryurl}{laboratories}{1}{\dtlcolumnindex{laboratories}{url}}%
+  \DTLgetvalue{\YAD@main@laboratory@name}{laboratories}{1}{\dtlcolumnindex{laboratories}{name}}%
+  \DTLgetvalue{\YAD@main@laboratory@address}{laboratories}{1}{\dtlcolumnindex{laboratories}{address}}%
+  \DTLgetvalue{\YAD@main@laboratory@url}{laboratories}{1}{\dtlcolumnindex{laboratories}{url}}%
   %
 }%
 \csdef{makelaboratory}{%
@@ -2388,9 +2389,9 @@
   \DTLforeach*{laboratories}{%
     \YAD@laboratory@name=name,%
     \YAD@laboratory@address=address,%
+    \YAD@laboratory@url=url,%
     \YAD@laboratory@logo=logo,%
     \YAD@laboratory@logoheight=logoheight,%
-    \YAD@laboratory@url=url,%
     \YAD@laboratory@telephone=telephone,%
     \YAD@laboratory@fax=fax,%
     \YAD@laboratory@email=email%
@@ -2401,9 +2402,9 @@
       \setlength{\YAD@laboratory@width}{.625\linewidth-\parindent}%
     }%
     \begin{minipage}[t]{\YAD@laboratory@width}
-      \textbf{\printlaboratory}%
+      \textbf{\printlaboratory{\YAD@laboratory@name}{\YAD@laboratory@url}}%
       \\[.1cm]
-      \printlaboratoryaddress%
+      \printlaboratoryaddress{\YAD@laboratory@address}%
       \\[.25cm]
       \begin{tabular}{@{}ll}
         \ifthenelse{\DTLiseq{\YAD@laboratory@telephone}{}}{%
@@ -2485,10 +2486,10 @@
         \if@nolink%
         \YAD@logo%
         \else%
-        \ifthenelse{\equal{\cmdKV@YAD@url}{}}{%
+        \ifthenelse{\equal{\YAD@laboratory@url}{}}{%
           \YAD@href{www.laboratory.fr}{\YAD@logo}%
         }{%
-          \YAD@href{\cmdKV@YAD@url}{\YAD@logo}%
+          \YAD@href{\YAD@laboratory@url}{\YAD@logo}%
         }%
         \fi%
         \fi%
@@ -2642,11 +2643,11 @@
 }%
 \newcommand{\YAD@laboratory@abstract@page}{%
   \begin{minipage}[t]{\linewidth}
-    \textbf{\printlaboratory*}%
+    \textbf{\printlaboratory*{\YAD@main@laboratory@name}{\YAD@main@laboratory@url}}%
     \\%
     \let\YAD@ORI@doublebackslash\\%
     \renewcommand{\\}{ -- }%
-    \printlaboratoryaddress%
+    \printlaboratoryaddress{\YAD@main@laboratory@address}%
     \let\\\YAD@ORI@doublebackslash%
   \end{minipage}%
 }%
