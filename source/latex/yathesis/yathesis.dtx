@@ -4374,10 +4374,10 @@ This work consists of the file  yathesis.dtx
         \if@nolink%
         \YAD@logo%
         \else%
-        \ifthenelse{\equal{\cmdKV@YAD@url}{}}{%
+        \ifthenelse{\equal{\YAD@laboratory@url}{}}{%
           \YAD@href{www.laboratory.fr}{\YAD@logo}%
         }{%
-          \YAD@href{\cmdKV@YAD@url}{\YAD@logo}%
+          \YAD@href{\YAD@laboratory@url}{\YAD@logo}%
         }%
         \fi%
         \fi%
