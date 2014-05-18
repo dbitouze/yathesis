@@ -8,11 +8,21 @@ différents éditeurs de texte.
 
 Le fichier de complétion \file{yathesis.cwl}, destiné à l'éditeur
 \href{http://texstudio.sourceforge.net/}{TeXstudio}, se trouve dans le
-répertoire \urldirectory{.../tex/latex/yathesis/addons/completion/}. En attendant
-que ce fichier soit officiellement livré avec cet éditeur, il suffit de le
-placer dans le dossier :
+répertoire \directory{\meta{racine}/\jobdocdirectory/addons/completion/} où,
+par défaut, \meta{racine} est, avec la distribution :
 \begin{description}
-\item[sous Linux, Unix, Mac OS X :] \urldirectory{~/.config/texstudio} ;
+\item[\TeX{}~Live :]\
+  \begin{description}
+  \item[sous Linux et Mac OS X :] \unixtldirectory\tldistdirectory\versiontl ;
+  \item[sous Windows :] \wintldirectory\tldistdirectory\versiontl ;
+  \end{description}
+\item[MiK\TeX{} :] \miktexdistdirectory.
+\end{description}
+En attendant que ce fichier soit officiellement livré avec cet éditeur, ou pour
+être certain d'en avoir la version la plus à jour, il suffit de le copier dans
+le dossier :
+\begin{description}
+\item[sous Linux et Mac OS X :] \urldirectory{~/.config/texstudio} ;
 \item[sous Windows :] \urldirectory{C:\Documents and Settings/User/AppData/Roaming/texstudio}.
 \end{description}
 
