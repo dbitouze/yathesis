@@ -951,13 +951,49 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \RequirePackage{iflang}[2007/11/11]%
 %    \end{macrocode}
-% Pour générer les dates (sans affichage du jour de la semaine)
+% Pour comparer des dates, on utilise le \Package{datenumber}. Du fait d'une
+% incompatibilité avec le \Package{datetime}, on recourt au hack fourni ici :
+% \url{http://tex.stackexchange.com/a/178850/18401}. Début du hack.
 %    \begin{macrocode}
-\RequirePackage[nodayofweek]{datetime}[2013/09/10]%
+\let\@modulo@SAVED\@modulo
 %    \end{macrocode}
-% Pour comparer des dates
+% Chargement du \Package{datenumber}.
 %    \begin{macrocode}
 \RequirePackage{datenumber}[2001/08/06]%
+%    \end{macrocode}
+% Suite du hack.
+%    \begin{macrocode}
+\let\DATENUMBER@modulo\@modulo
+\def\setdaynamebynumber#1{%
+  \@tempcnta=#1\relax
+  \ifnum\the@startyear=1800\advance \@tempcnta by 1\fi
+  \ifnum\the@startyear=1900\advance \@tempcnta by 6\fi
+  \ifnum\the@startyear=2000\advance \@tempcnta by 4\fi
+  \DATENUMBER@modulo{\the\@tempcnta}{7}%
+  \setcounter{datedayname}{\the\@den}%
+  \addtocounter{datedayname}{1}%
+  \setdayname{\thedatedayname}%
+}
+\def\ifleapyear#1{%#1 year
+  \ifnum#1>1500
+    \DATENUMBER@modulo{#1}{100}%
+    \ifnum\@den=0
+      \DATENUMBER@modulo{#1}{400}%
+    \else
+      \DATENUMBER@modulo{#1}{4}%
+    \fi
+  \else
+    \DATENUMBER@modulo{#1}{4}%
+  \fi
+  \ifnum\@den=0
+}
+\let\@modulo\@modulo@SAVED
+%    \end{macrocode}
+% Fin du hack.
+%
+% Pour générer les dates (sans affichage du jour de la semaine).
+%    \begin{macrocode}
+\RequirePackage[nodayofweek]{datetime}[2013/09/10]%
 %    \end{macrocode}
 % Pour la gestion des hyperliens. L'option ×final× assure que les
 % hyperliens seront présents même en mode brouillon ; l'option
