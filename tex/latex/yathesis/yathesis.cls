@@ -15,7 +15,6 @@
 \def\filedate{2014/05/12}
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesClass{yathesis}[\filedate\space\fileversion\space Yet another class for writing thesis (DB)]
-\RequirePackage{xkvltxp}[2004/12/13]%
 \RequirePackage{xkeyval}[2012/10/14]%
 \RequirePackage{etoolbox}[2011/01/03]%
 \RequirePackage{xpatch}[2012/10/02]%
@@ -221,7 +220,6 @@
 \ExecuteOptionsX{secnumdepth}%
 \ExecuteOptionsX{chap-style}%
 \ProcessOptionsX\relax%
-\ProcessOptionsX\relax%
 \ifthenelse{\equal{\YAD@mainlanguage}{english}}{%
   \def\YAD@secondarylanguage{french}%
 }{%
@@ -320,8 +318,34 @@
 \RequirePackage[columns=1]{idxlayout}[2012/03/30]%
 \RequirePackage{babel}[2014/03/24]
 \RequirePackage{iflang}[2007/11/11]%
-\RequirePackage[nodayofweek]{datetime}[2013/09/10]%
+\let\@modulo@SAVED\@modulo
 \RequirePackage{datenumber}[2001/08/06]%
+\let\DATENUMBER@modulo\@modulo
+\def\setdaynamebynumber#1{%
+  \@tempcnta=#1\relax
+  \ifnum\the@startyear=1800\advance \@tempcnta by 1\fi
+  \ifnum\the@startyear=1900\advance \@tempcnta by 6\fi
+  \ifnum\the@startyear=2000\advance \@tempcnta by 4\fi
+  \DATENUMBER@modulo{\the\@tempcnta}{7}%
+  \setcounter{datedayname}{\the\@den}%
+  \addtocounter{datedayname}{1}%
+  \setdayname{\thedatedayname}%
+}
+\def\ifleapyear#1{%#1 year
+  \ifnum#1>1500
+    \DATENUMBER@modulo{#1}{100}%
+    \ifnum\@den=0
+      \DATENUMBER@modulo{#1}{400}%
+    \else
+      \DATENUMBER@modulo{#1}{4}%
+    \fi
+  \else
+    \DATENUMBER@modulo{#1}{4}%
+  \fi
+  \ifnum\@den=0
+}
+\let\@modulo\@modulo@SAVED
+\RequirePackage[nodayofweek]{datetime}[2013/09/10]%
 \RequirePackage[final,unicode,hyperfootnotes=false,hyperindex=false,plainpages=false,breaklinks,pdfpagemode=UseOutlines,pdfpagelayout=TwoPageRight]{hyperref}[2012/11/06]%
 \iftoggle{YAD@output@paper}{%
 }{%
