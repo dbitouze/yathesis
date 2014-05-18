@@ -1570,7 +1570,9 @@
     \@YAD@knownsecttrue%
   }{%
   }%
-  \if@YAD@knownsect \else \shorttableofcontents{\cmdKV@YAD@name}{3}%
+  \if@YAD@knownsect%
+  \else%
+  \shorttableofcontents{\cmdKV@YAD@name}{3}%
   \YAD@ClassWarningNoLine{%
     La valeur (`\cmdKV@YAD@depth') passee a la cle `depth'\MessageBreak%
     en argument de la commande \protect\tableofcontents\space n'est
@@ -1581,7 +1583,8 @@
     Le niveau `subsection' va etre utilise\MessageBreak%
     a la place%
   }%
-  \fi \let\setcounter\YAD@ORI@setcounter%
+  \fi%
+  \let\setcounter\YAD@ORI@setcounter%
   \resettocdepth*%
 }%
 \AtBeginDocument{\maxtocdepth{\YAD@tocdepth}}%
