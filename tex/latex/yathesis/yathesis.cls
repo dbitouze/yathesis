@@ -11,8 +11,8 @@
 %% Released under the LaTeX Project Public License v1.3c or later
 %% See http://www.latex-project.org/lppl.txt
 %% -----------------------------------------------------------------------
-\def\fileversion{v0.98}
-\def\filedate{2014/05/12}
+\def\fileversion{v0.99}
+\def\filedate{2014/05/18}
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesClass{yathesis}[\filedate\space\fileversion\space Yet another class for writing thesis (DB)]
 \RequirePackage{xkeyval}[2012/10/14]%
@@ -346,6 +346,7 @@
 }
 \let\@modulo\@modulo@SAVED
 \RequirePackage[nodayofweek]{datetime}[2013/09/10]%
+\RequirePackage{varioref}[2011/10/02]%
 \RequirePackage[final,unicode,hyperfootnotes=false,hyperindex=false,plainpages=false,breaklinks,pdfpagemode=UseOutlines,pdfpagelayout=TwoPageRight]{hyperref}[2012/11/06]%
 \iftoggle{YAD@output@paper}{%
 }{%
