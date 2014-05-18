@@ -1,10 +1,27 @@
 \chapter{Specimen de thèse}\label{cha:specimen}
 
 Pour montrer comment mettre en œuvre la \yatcl, un specimen de thèse composé
-avec elle est fourni. Celui-ci se trouve dans le sous-dossier
-\directory{sample} du dossier \directory{.../doc/latex/yathesis} mais est également
-disponible à l'adresse
-\url{https://github.com/dbitouze/yathesis/tree/master/doc/latex/yathesis/sample}
+avec elle est fourni.  Celui-ci se trouve dans le sous-dossier\footnote{Une
+  version de développement de ce specimen se trouve également à la page
+  \url{https://github.com/dbitouze/yathesis/tree/master/doc/latex/yathesis/}.}
+\directory{\meta{racine}/\jobdocdirectory/sample} où, par défaut, \meta{racine}
+est avec la distribution :
+\begin{description}
+\item[\TeX{}~Live :]\
+  \begin{description}
+  \item[sous Linux et Mac OS X :] \unixtldirectory\tldistdirectory\versiontl ;
+  \item[sous Windows :] \wintldirectory\tldistdirectory\versiontl ;
+  \end{description}
+\item[MiK\TeX{} :] \miktexdistdirectory.
+\end{description}
+
+\begin{dbwarning}{Ne pas travailer directement dans le dossier de spécimen
+    fourni !}{}
+  Si on souhaite utiliser ce spécimen, il est \emph{essentiel} de copier dans
+  un répertoire de travail habituel le dossier \directory{sample}. On \emph{ne}
+  travaillera \emph{surtout pas} directement dans le dossier fourni, sous peine
+  que tout son travail soit écrasé lors d'une mise à jour de la classe.
+\end{dbwarning}
 
 % ^^A La commande à utiliser pour lister le contenu du répertoire est :
 % ^^A tree -A -F -I
