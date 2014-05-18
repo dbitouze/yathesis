@@ -1481,6 +1481,15 @@ This work consists of the file  yathesis.dtx
 \DeclareRobustCommand*{\yat}{\textsl{\texttt{yathesis}}}
 \DeclareRobustCommand*{\yatpa}{package \textsl{\texttt{yathesisdoc}}\xspace}
 \DeclareRobustCommand*{\yatcl}{classe \yat\xspace}
+\DeclareRobustCommand*{\unixtldirectory}{\directory{/usr/local/}}
+\DeclareRobustCommand*{\wintldirectory}{\directory{c:/}}
+\DeclareRobustCommand*{\tldistdirectory}{\directory{texlive/2013/texmf-dist/}}
+\DeclareRobustCommand*{\miktexdistdirectory}{[TODO]}
+\DeclareRobustCommand*{\docdirectory}{\directory{doc/}}
+\DeclareRobustCommand*{\texdirectory}{\directory{tex/}}
+\DeclareRobustCommand*{\sourcedirectory}{\directory{source/}}
+\DeclareRobustCommand*{\jobdirectory}{\directory{latex/\jobname}}
+\DeclareRobustCommand*{\jobdocdirectory}{\docdirectory\jobdirectory}
 %
 \newcommand{\phrase}{%
   \@ifstar{\phrase@star}{\phrase@nostar}%
