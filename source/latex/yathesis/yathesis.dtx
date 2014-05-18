@@ -175,11 +175,6 @@ This work consists of the file  yathesis.dtx
   \nopreamble\nopostamble
   \file{translations.tex}{\from{\jobname.dtx}{translations}}
 }%
-\usedir{tex/latex/\classname/\addons/completion}
-\generate{%
-  \nopreamble\nopostamble
-  \file{\classname.cwl}{\from{\jobname.dtx}{class-cwl}}
-}%
 \nopreamble\nopostamble
 \usedir{doc/latex/\classname}
 \generate{
@@ -188,6 +183,10 @@ This work consists of the file  yathesis.dtx
 \usedir{doc/latex/\classname/\singlefiletemplate}
 \generate{
   \file{these.tex}{\from{\jobname.dtx}{single-file-template}}
+}%
+\usedir{doc/latex/\classname/\addons/completion}
+\generate{%
+  \file{\classname.cwl}{\from{\jobname.dtx}{class-cwl}}
 }%
 \ifx\fmtname\nameofplainTeX
   \expandafter\endbatchfile
