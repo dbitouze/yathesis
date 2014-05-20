@@ -54,7 +54,7 @@ To compile the documentation without error, you will need the packages:
 
 - xpatch
 - morewrites
-- exsheets}
+- exsheets
 - parskip
 - amsthm
 - thmtools
@@ -156,6 +156,11 @@ This work consists of the file  yathesis.dtx
 \def\addons{addons}
 \def\singlefiletemplate{single-file-template}
 \def\masterslavesfilestemplate{master-slaves-files-template}
+\nopreamble\nopostamble
+\usedir{/}
+\generate{
+  \file{README}{\from{\jobname.dtx}{readme}}
+}%
 \usedir{tex/latex/\classname}
 \generate{%
   \file{\classname.cls}{\from{\jobname.dtx}{class}}
@@ -175,7 +180,6 @@ This work consists of the file  yathesis.dtx
   \nopreamble\nopostamble
   \file{translations.tex}{\from{\jobname.dtx}{translations}}
 }%
-\nopreamble\nopostamble
 \usedir{doc/latex/\classname}
 \generate{
   \file{README}{\from{\jobname.dtx}{readme}}
@@ -6335,6 +6339,7 @@ url=
 #include:babel
 #include:datetime
 #include:datenumber
+#include:varioref
 #include:hyperref
 #include:hypcap
 #include:bookmark
