@@ -1,11 +1,12 @@
 \chapter{Incompatibilités connues}
 \label{cha:incomp-conn}
 
-La \yatcl{} présente des incompatibilités avec certains packages qui lui sont
-propres \phrase*{en plus de celles propres aux packages qu'elle charge
-  automatiquement}. Celle qui est actuellement connue est celle concernant le
-package :
+La \yatcl{} présente avec certains packages des incompatibilités qui lui sont
+propres. Celles qui sont actuellement connues, et que l'auteur va chercher
+à régler dans un futur indéterminé, concernent les packages :
 \begin{description}
+\item[\package{titlesec}] qui provoque une erreur de compilation due au fait
+  que la classe charge le \Package{titleps} ;
 \item[\package{tocloft}] qui provoque des sommaire et table des matières
   non conformes.
 \end{description}
