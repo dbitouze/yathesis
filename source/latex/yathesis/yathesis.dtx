@@ -153,17 +153,15 @@ This work consists of the file  yathesis.dtx
 \def\addons{addons}
 \def\singlefiletemplate{single-file-template}
 \def\masterslavesfilestemplate{master-slaves-files-template}
-\nopreamble\nopostamble
 \usedir{/}
 \generate{
+  \nopreamble\nopostamble
   \file{README}{\from{\jobname.dtx}{readme}}
 }%
 \usedir{tex/latex/\classname}
 \generate{%
   \file{\classname.cls}{\from{\jobname.dtx}{class}}
   \file{\classname-demo.sty}{\from{\jobname.dtx}{demopkg}}
-  \nopreamble\nopostamble
-  % \file{\caracteristiquesthesesample.tex}{\from{\jobname.dtx}{caracteristiques-these-sample}}
 }%
 %</install>
 %<install>\endbatchfile
@@ -1513,14 +1511,6 @@ This work consists of the file  yathesis.dtx
 \expandafter\glsshorttok\expandafter{\tmp}%
 }%
 \renewcommand*{\acrpluralsuffix}{\textup{\glspluralsuffix}}
-%    \end{macrocode}
-%    \begin{macrocode}
-\declaretheoremstyle[headfont=\sffamily\itshape\bfseries,bodyfont=\itshape,notefont=\sffamily\itshape\bfseries]{mystyle}
-\declaretheorem[style=mystyle,numbered=unless unique]{remarque}
-\AtEndPreamble{\crefname{remarque}{remarque}{remarques}}
-\declaretheorem[style=mystyle]{exemple}
-\AtEndPreamble{\crefname{exemple}{exemple}{exemples}}
-\DeclareRobustCommand*{\dossier}{\path}
 %    \end{macrocode}
 % On définit une nouvelle clé pour la commande ×\includegraphics× de
 % sorte à pouvoir inclure les pages d'un \File{.pdf} externe en
