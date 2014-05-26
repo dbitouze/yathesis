@@ -217,14 +217,7 @@ This work consists of the file  yathesis.dtx
 \ReplaceClass{article}{report}
 \BeforePackage{doc}{\let\oldmaketitle\maketitle}
 \documentclass[english,french]{ltxdoc}
-\PassOptionsToPackage{obeyspaces}{url}
 \usepackage{yathesisdoc}
-\let\maketitle\oldmaketitle
-%
-\newcommand{\includeall}{%
-  \renewcommand\includeonly[1]{}%
-  % \let\include\input%
-}%
 %
 \includeall
 \includeonly{%
@@ -1070,12 +1063,20 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 %
 %    \begin{macrocode}
+\let\maketitle\oldmaketitle
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\PassOptionsToPackage{obeyspaces}{url}
+%    \end{macrocode}
+%
+%    \begin{macrocode}
 \RequirePackage{xpatch}%
 % Pour pouvoir disposer disposer d'autant de \enquote{flots} d'écriture dans
 % des fichiers annexes que nécessaire. Il est chargé en fin de préambule sans
 % quoi la compilation s'arrête longuement à la ligne
 % ×(/usr/local/texlive/2013/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg)×
-% (problème rapporté à  l'auteur du package).
+% (problème rapporté à l'auteur du package).
 %    \begin{macrocode}
 \AtEndPreamble{\RequirePackage{morewrites}}%
 %
@@ -1125,6 +1126,11 @@ This work consists of the file  yathesis.dtx
 \RequirePackage[numbered]{bookmark}%
 \RequirePackage[xindy,toc,hyperfirst=false]{glossaries}%
 \RequirePackage{cleveref}%
+%
+\newcommand{\includeall}{%
+  \renewcommand\includeonly[1]{}%
+  % \let\include\input%
+}%
 %
 \setlength\bibinitsep{1.25\baselineskip}
 %
