@@ -174,22 +174,24 @@ This work consists of the file  yathesis.dtx
 \usedir{source/latex/\classname}
 \generate{
   \file{\classname.ins}{\from{\jobname.dtx}{install}}
-  \file{lstlang0.sty}{\from{\jobname.dtx}{class-lstlang0}}
   \file{\packagename.sty}{\from{\jobname.dtx}{class-doc-package}}
-  \file{\packagename.cfg}{\from{\jobname.dtx}{class-doc-cfg}}
   \nopreamble\nopostamble
+  \file{lstlang0.sty}{\from{\jobname.dtx}{class-lstlang0}}
   \file{translations.tex}{\from{\jobname.dtx}{translations}}
 }%
 \usedir{doc/latex/\classname}
 \generate{
+  \nopreamble\nopostamble
   \file{README}{\from{\jobname.dtx}{readme}}
 }%
 \usedir{doc/latex/\classname/\singlefiletemplate}
 \generate{
+  \nopreamble\nopostamble
   \file{these.tex}{\from{\jobname.dtx}{single-file-template}}
 }%
 \usedir{doc/latex/\classname/\addons/completion}
 \generate{%
+  \nopreamble\nopostamble
   \file{\classname.cwl}{\from{\jobname.dtx}{class-cwl}}
 }%
 \ifx\fmtname\nameofplainTeX
