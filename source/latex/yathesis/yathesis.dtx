@@ -153,47 +153,50 @@ This work consists of the file  yathesis.dtx
                                 and a number of configuration files.
 \endpostamble
 %
-\def\classname{\jobname}
-\def\packagename{\classname doc}
-\def\addons{addons}
-\def\singlefiletemplate{single-file-template}
+\def\YAD@classname{\jobname}
+\def\YAD@packagename{\YAD@classname doc}
+\def\YAD@addons{addons}
+\def\YAD@sample{sample}
+\def\YAD@singlefiletemplate{single-file-template}
 % \def\masterslavesfilestemplate{master-slaves-files-template}
 \usedir{/}
 \generate{
   \nopreamble\nopostamble
   \file{README}{\from{\jobname.dtx}{readme}}
 }%
-\usedir{tex/latex/\classname}
+\usedir{tex/latex/\YAD@classname}
 \generate{%
-  \file{\classname.cls}{\from{\jobname.dtx}{class}}
-  \file{\classname-demo.sty}{\from{\jobname.dtx}{demopkg}}
+  \file{\YAD@classname.cls}{\from{\jobname.dtx}{class}}
+  \file{\YAD@classname-demo.sty}{\from{\jobname.dtx}{demopkg}}
 }%
 %</install>
 %<install>\endbatchfile
 %<*internal>
-\usedir{source/latex/\classname}
+\usedir{source/latex/\YAD@classname}
 \generate{
-  \file{\classname.ins}{\from{\jobname.dtx}{install}}
-  \file{\packagename.sty}{\from{\jobname.dtx}{class-doc-package}}
-  \file{\classname.drv}{\from{\classname.dtx}{driver}}%
+  \file{\YAD@classname.ins}{\from{\jobname.dtx}{install}}
+  \file{\YAD@packagename.sty}{\from{\jobname.dtx}{class-doc-package}}
+  \file{\YAD@classname.drv}{\from{\jobname.dtx}{driver}}%
   \nopreamble\nopostamble
   \file{lstlang0.sty}{\from{\jobname.dtx}{class-lstlang0}}
+  \file{latexmkrc}{\from{\jobname.dtx}{class-latexmkrc}}
   \file{translations.tex}{\from{\jobname.dtx}{translations}}
 }%
-\usedir{doc/latex/\classname}
+\usedir{doc/latex/\YAD@classname}
 \generate{
   \nopreamble\nopostamble
   \file{README}{\from{\jobname.dtx}{readme}}
 }%
-\usedir{doc/latex/\classname/\singlefiletemplate}
+\usedir{doc/latex/\YAD@classname/\YAD@sample}
+\usedir{doc/latex/\YAD@classname/\YAD@singlefiletemplate}
 \generate{
   \nopreamble\nopostamble
   \file{these.tex}{\from{\jobname.dtx}{single-file-template}}
 }%
-\usedir{doc/latex/\classname/\addons/completion}
+\usedir{doc/latex/\YAD@classname/\YAD@addons/completion}
 \generate{%
   \nopreamble\nopostamble
-  \file{\classname.cwl}{\from{\jobname.dtx}{class-cwl}}
+  \file{\YAD@classname.cwl}{\from{\jobname.dtx}{class-cwl}}
 }%
 \ifx\fmtname\nameofplainTeX
   \expandafter\endbatchfile
