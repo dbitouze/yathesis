@@ -220,66 +220,6 @@ This work consists of the file  yathesis.dtx
 \usepackage{yathesisdoc}
 \let\maketitle\oldmaketitle
 %
-\DeclareFixedFootnote{\syntaxeoptions}{Le sens de la syntaxe décrivant les options est
-  explicité \vref{sec:options}.}
-%
-\DeclareFixedFootnote{\versiontl}{L'année \directory{2013} est éventuellement à remplacer par celle de
-  la version de la \TeX{}~Live effectivement utilisée.}
-%
-\DeclareFixedFootnote{\selonlangue}{Selon que la langue principale de la
-  thèse est le français ou l'anglais.}
-%
-\DeclareFixedFootnote{\nofrontmatter}{Au contraire, la commande analogue
-  \protect\docAuxCommand{frontmatter} pour les \protect\glspl{liminaire} ne
-  doit pas être utilisée car elle l'est déjà en sous-main par la \yatcl{}.}
-%
-\DeclareFixedFootnote{\termesdefinisutilises}{Ne figurent dans ces listes que
-  les termes, acronymes et symboles qui sont à la fois \emph{définis} et
-  \emph{employés dans le texte}.}
-%
-\DeclareFixedFootnote{\redefexprcle}{Une autre manière de modifier cet intitulé
-  est de recourir à la commande \protect\refCom{expression} pour redéfinir
-  l'expression qui lui est attachée (cf. \vref{sec:expressions-standard}).}
-%
-\DeclareFixedFootnote{\hauteurpage}{Dans la limite de la hauteur de page.}
-%
-\DeclareFixedFootnote{\sepcorpaffil}{Selon l'initiale de l'institut :
-  %
-  \protect\lstinline[showspaces]+\ à l'+
-  %
-  ou
-  %
-  \protect\lstinline[showspaces]+\ au\ +.%
-}
-%
-% \DeclareFixedFootnote{\noillustration}{Cette commande n'est pas illustrée car
-%   elle est analogue aux commandes \protect\refCom{acknowledgements} et
-%   \protect\refCom{caution}, illustrées
-%   \vref{fig:acknowledgements,fig:caution}.}
-%
-\DeclareFixedFootnote{\nochapter}{Le contenu de ce chapitre doit donc \emph{ne
-    pas} comporter d'occurrence de la commande \protect\docAuxCommand{chapter}.
-  Il peut cependant contenir une ou plusieurs occurrences des autres commandes
-  usuelles de structuration : \protect\docAuxCommand{section},
-  \protect\docAuxCommand{subsection}, etc.}
-%
-\DeclareFixedFootnote{\fichierconfig}{Ceci peut être saisi directement dans le
-  préambule du fichier (maître) de la thèse mais, pour optimiser l'usage de la
-  \yatcl, il est conseillé de l'insérer dans un fichier nommé
-  \file{\configurationfile} à placer dans un dossier nommé
-  \directory{\configurationdirectory}. Le canevas de thèse livré avec la
-  classe, décrit \vref{sec:canevas}, fournit ce dossier et ce fichier.}
-%
-\DeclareFixedFootnote{\ifscreenoutput}{Chargé seulement si la clé
-  \protect\refKey{output} n'a pour valeur ni \protect\docValue{paper}, ni
-  \protect\docValue{paper*}.}
-%
-\DeclareFixedFootnote{\exceptoneside}{Sauf si l'option
-  \protect\docAuxKey{oneside} est utilisée
-  (cf. \vref{sec:options-usuelles-de}).}
-%
-\DeclareFixedFootnote{\noframe}{Sans le cadre.}
-%
 \newcommand{\includeall}{%
   \renewcommand\includeonly[1]{}%
   % \let\include\input%
@@ -345,6 +285,7 @@ This work consists of the file  yathesis.dtx
 %
 % \selectlanguage{french}
 % ^^A\settocdepth{subparagraph}
+% \include{sections/fixed-footnotes}
 % \include{sections/titre}
 % \include{sections/abstract}
 % \tableofcontents
