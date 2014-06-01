@@ -163,6 +163,24 @@ où \meta{distance}, à exprimer par exemple en points (par exemple ×27pt×), e
 \end{enumerate}
 \end{dbfaq}
 
+\begin{dbfaq}{Pourquoi \protect\docAuxCommand*{setcounter} n'a-t-elle pas
+    d'effet sur \protect\docAuxKey*{secnumdepth} ?}{}
+  J'essaie de modifier la profondeur de numérotation de mon document en
+  spécifiant la valeur du compteur \docAuxKey*{secnumdepth} au moyen de la
+  commande :
+\begin{preamblecode}
+\setcounter{secnumdepth}{÷\meta{nombre}÷}
+\end{preamblecode}
+  mais cela n'a aucun effet. Pourquoi ?
+  %
+  \tcblower
+  %
+  La profondeur de numérotation d'un document composé avec la \yatcl{} est
+  à spécifier au moyen de l'option de classe
+  \refKey{secnumdepth}. Cf. \vref{sec:profondeur-de-la} pour plus de
+  précisions.
+\end{dbfaq}
+
 %
 \iffalse
 %%% Local Variables:
