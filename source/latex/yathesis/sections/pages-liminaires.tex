@@ -169,9 +169,9 @@ La page dédiée à la clause de non-responsabilité est produite par la command
 
 \begin{dbexample}{Préparation et production de la page dédiée aux dédicaces}{}
   \NoAutoSpacing%
-  \preamblesample{linerange={dedication-{co-aimé\ !}}}{title=Préparation}
+  \preamblesample[liminaires/dedicaces]{linerange={dedication-{co-aimé\ !}}}{title=Préparation}
 %
-  \bodysample{rangesuffix=\^^M,linerange={makededications}}{title=Production}
+  \bodysample[liminaires/dedicaces]{rangesuffix=\^^M,linerange={makededications}}{title=Production}
   Le résultat de ce code est illustré \vref{fig:dedicationspage}.
 \end{dbexample}
 
@@ -212,9 +212,9 @@ La page dédiée à la clause de non-responsabilité est produite par la command
     liminaires}{}
   \NoAutoSpacing%
   Les codes suivants produisent la page illustrée \vref{fig:epigraphspage}.
-  \preamblesample{linerange={frontepigraph-Einstein}}{title=Préparation}
+  \preamblesample[liminaires/epigraphes]{linerange={frontepigraph-Einstein}}{title=Préparation}
   %
-  \bodysample{rangesuffix=\^^M,linerange={makefrontepigraphs}}{title=Production}
+  \bodysample[liminaires/epigraphes]{rangesuffix=\^^M,linerange={makefrontepigraphs}}{title=Production}
 \end{dbexample}
 
 \begin{figure}[htbp]
@@ -313,7 +313,7 @@ page.
 \end{abstract}
 \end{bodycode}
   %
-  \bodysample{rangesuffix=\^^M,linerange={makeabstract}}{title=Production
+  \bodysample[liminaires/resumes]{rangesuffix=\^^M,linerange={makeabstract}}{title=Production
     des résumés}
 \end{dbexample}
 
@@ -578,6 +578,7 @@ des acronymes\footnote{Les commandes \docAuxCommand{printglossary} et
   \end{enumerate}
   on insérera respectivement :
   \bodysample{rangeendsuffix=\],linerange={tableofcontents-Sommaire}}{}
+  et :
   \bodysample{rangesuffix=\^^M,linerange={tableofcontents}}{} La
   \vref{fig:tableofcontentsto-tableofcontents} illustre ce code.
 \end{dbexample}
