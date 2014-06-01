@@ -51,6 +51,8 @@
 %COMMENT
 %<!single-sample>\input{configuration/macros}
 %</single-sample|these-sample|these-master>
+%<*macros-master>
+%</macros-master>
 %<*single-sample|macros-sample>
 %<<COMMENT
 % Macro pour mettre en forme les noms de fichiers
@@ -72,7 +74,6 @@
 % la bibliographie et les éventuels glossaires et index, peuvent être saisis
 % dans le fichier « thesis.cfg » (situé dans le sous-dossier « configuration »)
 % qui est automatiquement importé par la classe yathesis.
-%
 %COMMENT
 %</these-sample|these-master>
 %<*cfg-master|cfg-sample>
@@ -210,13 +211,6 @@
 %<*cfg-sample|single-sample>
 %<<COMMENT
 %
-% Commande permettant de faire figurer d'un seul coup toutes les références des
-% ressources bibliographiques ci-dessus, même si elles ne sont pas citées
-% explicitement (à proscrire dans un vrai mémoire de thèse !)
-%COMMENT
-\nocite{*}
-%<<COMMENT
-%
 % Configuration globale de l'apparence des listings informatiques
 %COMMENT
 \lstset{%
@@ -249,12 +243,21 @@
 \renewcommand*\@pnumwidth{29pt}
 \makeatother
 %<<COMMENT
-%
 %COMMENT
 %</cfg-sample|single-sample>
 %</single-template|single-sample|cfg-master|cfg-sample>
+%<*these-sample|single-sample>
+%<<COMMENT
+%
+% Commande permettant de faire figurer d'un seul coup toutes les références des
+% ressources bibliographiques ci-dessus, même si elles ne sont pas citées
+% explicitement (à proscrire dans un vrai mémoire de thèse !)
+%COMMENT
+\nocite{*}
+%</these-sample|single-sample>
 %<*these-sample|single-sample|single-template|these-master>
 %<<COMMENT
+%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Début du document
