@@ -18,7 +18,8 @@ distributions \TeX{} \enquote{\TeX~Live\footnote{Ce devrait être le cas
     à partir de la version \texttt{2014} de la \TeX~Live dont la sortie est
     annoncée pour le début du mois de juillet 2014.}} et
 \enquote{MiK\TeX{}}\footnote{Pour s'assurer que cette version stable est la
-  plus récente, il est conseillé de mettre sa distribution \TeX{} à jour.}.
+  plus récente, il est conseillé de mettre sa distribution \TeX{} à jour.},
+sinon par défaut, du moins après mise à jour.
 
 Si tel n'est pas le cas, on pourra installer sa version de test comme suit.
 
@@ -30,32 +31,29 @@ que pour la distribution \TeX~Live\footnote{Bien qu'une procédure analogue
   existe certainement pour la distribution MiK\TeX{}, l'auteur ne la connaît
   pas : contributions bienvenues !}. Elle utilise des lignes de commandes,
 méthode simple et automatisée:
-% ^^A
-% ^^A \begin{description}
-% ^^A \item[Par lignes de commandes.]
-  \begin{enumerate}
-  \item Ouvrir un terminal\footnote{Sous Linux, c'est en général simple
-      à trouver. Sous Mac OS X, il devrait suffire de visiter le menu
-      \enquote{Applications} puis \enquote{Utilitaires} puis
-      \enquote{Terminal}. Sous Windows, il devrait suffire de visiter le menu
-      \enquote{Tous les programmes} puis \enquote{Accessoires} puis
-      \enquote{Invite de commandes}.}.
-  \item Dans ce terminal, lancer successivement les trois commandes
-    suivantes\footnote{On évitera de les recopier manuellement : il est
-      possible de les copier (\texttt{CTRL~+~C} ou assimilé) et de les coller
-      (\texttt{CTRL~+~V} ou assimilé, ou clic droit).} (à faire éventuellement
-    précéder de \enquote{\protect\lstinline|sudo|} sous Linux et Mac OS X) :
+\begin{enumerate}
+\item Ouvrir un terminal\footnote{Sous Linux, c'est en général simple
+    à trouver. Sous Mac OS X, il devrait suffire de visiter le menu
+    \enquote{Applications} puis \enquote{Utilitaires} puis
+    \enquote{Terminal}. Sous Windows, il devrait suffire de visiter le menu
+    \enquote{Tous les programmes} puis \enquote{Accessoires} puis
+    \enquote{Invite de commandes}.}.
+\item Dans ce terminal, lancer successivement les trois commandes
+  suivantes\footnote{On évitera de les recopier manuellement : il est possible
+    de les copier (\texttt{CTRL~+~C} ou assimilé) et de les coller
+    (\texttt{CTRL~+~V} ou assimilé, ou clic droit).} (à faire éventuellement
+  précéder de \enquote{\protect\lstinline|sudo|} sous Linux et Mac OS X) :
 \begin{lstlisting}[numbers=left]
-tlmgr repository add http://tlcontrib.metatex.org/2013 tlcontrib tlmgr
-pinning add tlcontrib yathesis
+tlmgr repository add http://tlcontrib.metatex.org/2013 tlcontrib
+tlmgr pinning add tlcontrib yathesis
 tlmgr install yathesis
 \end{lstlisting}
-    Ne pas s'inquiéter pas de messages du type :
+  Ne pas s'inquiéter pas de messages du type :
 \begin{lstlisting}
 TeX Live 2013 is frozen forever and will no longer be updated. This
 happens in preparation for a new release. [...]
 \end{lstlisting}
-    et être patient lorsqu'apparaissent les lignes :
+  et être patient lorsqu'apparaissent les lignes :
 \begin{lstlisting}
 running mktexlsr ...
 done running mktexlsr.
@@ -67,48 +65,18 @@ running mtxrun --generate
 \begin{lstlisting}
 kpsewhich yathesis.cls
 \end{lstlisting}
-    qui devrait renvoyer un message \emph{non} vide tel que, sous Linux et sous
-    Mac OS X :
+  qui devrait renvoyer un message \emph{non} vide tel que, sous Linux et sous
+  Mac OS X :
 \begin{lstlisting}
 /usr/local/texlive/2013/texmf-dist/tex/latex/yathesis/yathesis.cls
 \end{lstlisting}
-    et, sous Windows :
+  et, sous Windows :
 \begin{lstlisting}
 c:/texlive/2013/texmf-dist/tex/latex/yathesis/yathesis.cls
 \end{lstlisting}
-  \end{enumerate}
-% ^^A \item[Par extraction d'archives.] Cette méthode, moins simple à mettre en
-% ^^A   œuvre, ne sera utilisée qu'en cas d'échec de la méthode précédente.
-% ^^A   \begin{enumerate}
-% ^^A   \item Créer, si ce n'est déjà fait, son \enquote{arborescence \TeX{}}
-% ^^A     personnelle, notée \directory{TEXMFHOME}.
-% ^^A     \begin{dbremark}{Arborescences \TeX{} personnelles par défaut}{}
-% ^^A       Par défaut, la distribution \enquote{\TeX~Live} considère comme dossier
-% ^^A       \directory{TEXMFHOME} :
-% ^^A       \begin{description}
-% ^^A       \item[sous Linux :] \directory{/home/\meta{nom}/texmf}, soit
-% ^^A         \path|~/texmf|
-% ^^A       \item[sous Mac OS X :] \directory{/Users/\meta{nom}/Library/texmf}
-% ^^A       \item[sous Windows :] \directory{C:/Users/\meta{nom}/texmf}
-% ^^A       \end{description}
-% ^^A     \end{dbremark}
-% ^^A   \item Télécharger l'archive \file{yathesis.tds.zip} à la page
-% ^^A     \url{http://www.ctan.org/pkg/yathesis} ou, à défaut, l'archive \file{.zip}
-% ^^A     ou \file{.tar.gz} la plus récente à la page
-% ^^A     \url{https://github.com/dbitouze/yathesis/releases}.
-% ^^A   \item \emph{Extraire} l'archive téléchargée.
-% ^^A   \item Ouvrir le dossier \directory{yathesis-v}\meta{numéro de version}
-% ^^A     résultant de l'extraction, ou dans un de ses sous-dossiers, qui contient
-% ^^A     les dossiers :
-% ^^A     \begin{itemize}
-% ^^A     \item \directory{doc} ;
-% ^^A     \item \directory{source} ;
-% ^^A     \item \directory{tex}.
-% ^^A     \end{itemize}
-% ^^A   \item Déplacer les dossiers \directory{doc}, \directory{source} et
-% ^^A     \directory{tex} dans le \directory{TEXMFHOME}.
-% ^^A   \end{enumerate}
-% ^^A \end{description}
+\end{enumerate}
+
+\lstset{frame=none}
 
 \section{Version de développement}
 \label{sec:vers-de-devel}
