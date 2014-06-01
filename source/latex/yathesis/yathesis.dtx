@@ -155,12 +155,12 @@ This work consists of the file  yathesis.dtx
 %
 \def\YAD@classname{\jobname}
 \def\YAD@packagename{\YAD@classname doc}
-\def\YAD@sample{sample}
 \def\YAD@sampletemplates{\jobname-samples-templates}
 \def\YAD@addons{addons}
 \def\YAD@singlefiletemplate{single-file-template}
 \def\YAD@singlefilesample{single-file-sample}
 \def\YAD@masterslavesfilestemplate{master-slaves-files-template}
+\def\YAD@sample{master-slaves-files-sample}
 \usedir{/}
 \generate{
   \nopreamble\nopostamble
@@ -1484,13 +1484,13 @@ This work consists of the file  yathesis.dtx
 \newtcbinputlisting{\preamblesample}[3][these.tex]{%
   samples,
   drop shadow,
-  listing file={sample/#1},
+  listing file={master-slaves-files-sample/#1},
   listing options={rangebeginprefix=\\,rangeendsuffix=\},#2},
   #3,
 }%
 \newtcbinputlisting{\bodysample}[3][these.tex]{%
   samples,
-  listing file={sample/#1},
+  listing file={master-slaves-files-sample/#1},
   listing options={rangebeginprefix=\\,rangeendsuffix=\},#2},
   #3,
 }%
@@ -1581,9 +1581,9 @@ This work consists of the file  yathesis.dtx
 % \Package{zref} avec l'option ×xr× dans le \File{.tex} où sont
 % incluses les pages du \File{.pdf} externe.
 %    \begin{macrocode}
-\zexternaldocument{sample/these}
+\zexternaldocument{master-slaves-files-sample/these}
 \newcommand{\screenshot}[2][.45]{%
-  \fbox{\includegraphics[bylabel=#2,width=#1\linewidth-2\fboxsep-2\fboxrule]{sample/these}}%
+  \fbox{\includegraphics[bylabel=#2,width=#1\linewidth-2\fboxsep-2\fboxrule]{master-slaves-files-sample/these}}%
 }%
 %    \end{macrocode}
 %
