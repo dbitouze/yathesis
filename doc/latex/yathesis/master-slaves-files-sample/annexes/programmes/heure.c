@@ -1,4 +1,3 @@
-\begin{lstlisting}[caption={Il est l'heure}]
 #include <stdio.h>
 int heures, minutes, secondes;
 
@@ -25,4 +24,3 @@ void print_heure(void)
   if (secondes > 1) printf("s");
   printf("\n");
 }
-\end{lstlisting}

@@ -2854,35 +2854,35 @@
     }%
   }{%
     \begin{epigraphs}
-    \DTLforeach*{frontepigraphs}{%
-      \YAD@epigraphlanguage=epigraphlanguage,%
-      \YAD@epigraph=epigraph,%
-      \YAD@epigraphauthor=epigraphauthor%
-    }{%
-      \YAD@ifemptyorundef{\YAD@epigraph}{%
-        \renewcommand{\YAD@epigraph}{%
-          \YAD@generic@argument@translate{epigraph}%
-        }%
-        \YAD@ClassError{%
-          Epigraphe vide%
+      \DTLforeach*{frontepigraphs}{%
+        \YAD@epigraphlanguage=epigraphlanguage,%
+        \YAD@epigraph=epigraph,%
+        \YAD@epigraphauthor=epigraphauthor%
+      }{%
+        \YAD@ifemptyorundef{\YAD@epigraph}{%
+          \renewcommand{\YAD@epigraph}{%
+            \YAD@generic@argument@translate{epigraph}%
+          }%
+          \YAD@ClassError{%
+            Epigraphe vide%
+          }{%
+            L'argument obligatoire d'une commande \protect\frontepigraph\space
+            est vide\MessageBreak%
+            (celui-ci doit etre renseigne).%
+          }%
         }{%
-          L'argument obligatoire d'une commande \protect\frontepigraph\space est
-          vide\MessageBreak%
-          (celui-ci doit etre renseigne).%
         }%
-      }{%
-      }%
-      \ifthenelse{\equal{\YAD@mainlanguage}{\YAD@epigraphlanguage}}{%
-        \qitem{\YAD@epigraph}{\YAD@epigraphauthor}%
-      }{%
-        \bgroup%
-        \expandafter\selectlanguage\expandafter{\YAD@epigraphlanguage}%
-        \qitem{\YAD@epigraph}{\YAD@epigraphauthor}%
-        \egroup%
-      }
-      \DTLiflastrow{%
-      }{%
-        \if@tempswa%
+        \ifthenelse{\equal{\YAD@mainlanguage}{\YAD@epigraphlanguage}}{%
+          \qitem{\YAD@epigraph}{\YAD@epigraphauthor}%
+        }{%
+          \bgroup%
+          \expandafter\selectlanguage\expandafter{\YAD@epigraphlanguage}%
+          \qitem{\YAD@epigraph}{\YAD@epigraphauthor}%
+          \egroup%
+        }%
+        \DTLiflastrow{%
+        }{%
+          \if@tempswa%
         % \vspace*{2cm}%
         \else%
         % \vspace*{\stretch{1}}%
