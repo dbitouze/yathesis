@@ -1,11 +1,22 @@
-\chapter{Specimen de thèse}\label{cha:specimen}
+\chapter{Specimens de thèse}\label{cha:specimen}
 
-Pour montrer comment mettre en œuvre la \yatcl, un specimen de thèse composé
-avec elle est fourni.  Celui-ci se trouve dans le sous-dossier\footnote{Une
-  version de développement de ce specimen se trouve également à la page
-  \url{https://github.com/dbitouze/yathesis/tree/master/doc/latex/yathesis/}.}
-\directory{\meta{racine}/\jobdocdirectory/sample} où, par défaut, \meta{racine}
-est avec la distribution :
+Pour montrer comment mettre en œuvre la \yatcl, deux specimens de thèse
+composés avec elle sont fournis.  Ils fournissent deux fichiers \gls{pdf}
+identiques, mais se distinguent par le fait que la source \file{.tex} du
+mémoire de thèse correspondant est, respectivement :
+\begin{enumerate}
+\item toute entière située dans un unique fichier (spécimen \enquote{à plat}) ;
+\item scindée en fichiers maître et esclaves, qui plus est répartis dans
+  différents sous-dossiers (spécimen \enquote{en relief}).
+\end{enumerate}
+Ils se trouvent dans les sous-dossiers\footnote{Une version de
+  développement de ces canevas se trouve également à la page
+  \url{https://github.com/dbitouze/yathesis/tree/master/doc/latex/yathesis/}.} :
+\begin{enumerate}
+\item \directory{\meta{racine}/\jobdocdirectory/single-file-sample} ;
+\item \directory{\meta{racine}/\jobdocdirectory/master-slaves-files-sample} ;
+\end{enumerate}
+où, par défaut, \meta{racine} est avec la distribution :
 \begin{description}
 \item[\TeX{}~Live :]\
   \begin{description}
@@ -15,10 +26,11 @@ est avec la distribution :
 \item[MiK\TeX{} :] \miktexdistdirectory.
 \end{description}
 
-\begin{dbwarning}{Ne pas travailler directement dans le dossier de spécimen
-    fourni !}{}
-  Si on souhaite utiliser ce spécimen, il est \emph{essentiel} de copier dans
-  un répertoire de travail habituel le dossier \directory{sample}. On \emph{ne}
+\begin{dbwarning}{Ne pas travailler directement dans les dossiers de spécimens
+    fournis !}{}
+  Si on souhaite utiliser l'un de ces spécimens, il est \emph{essentiel} de
+  copier dans un répertoire de travail habituel le dossier correspondant (qu'il
+  est conseillé de renommer, par exemple en \directory{these}). On \emph{ne}
   travaillera \emph{surtout pas} directement dans le dossier fourni, sous peine
   que tout son travail soit écrasé lors d'une mise à jour de la classe.
 \end{dbwarning}
