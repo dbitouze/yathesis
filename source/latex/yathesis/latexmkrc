@@ -1,11 +1,7 @@
-$pdflatex = 'xelatex %O %S';
 $pdf_mode = 1;
-$postscript_mode = $dvi_mode = 0;
 
 $bibtex = 'biber %O %B';
 $bibtex_use = 2;
-
-$quote_filenames = 0;
 
 add_cus_dep('glo', 'gls', 0, 'makeglossaries');
 add_cus_dep('glo2', 'gls2', 0, 'makeglossaries');
@@ -20,4 +16,10 @@ sub texindy{
     system("texindy -L french \"$_[0].idx\"");
 }
 
-@generated_exts = qw(db* listing tcbtemp aux idx ind lof lot out toc acn acr alg glg* glo* gls* ins sbl slg sym ist run.xml xdy lol fls unq synctex.gz mw *~);
+@generated_exts = qw(aux idx ind lo* out toc acn acr alg bcf fls gl* ist
+run.xml sbl* sl* sym* xdy unq synctex.gz mw *~
+db* listing tcbtemp ins drv
+);
+$pdflatex = 'xelatex %O %S';
+$postscript_mode = $dvi_mode = 0;
+$quote_filenames = 0;
