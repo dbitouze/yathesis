@@ -155,10 +155,12 @@ This work consists of the file  yathesis.dtx
 %
 \def\YAD@classname{\jobname}
 \def\YAD@packagename{\YAD@classname doc}
-\def\YAD@addons{addons}
 \def\YAD@sample{sample}
+\def\YAD@sampletemplates{\jobname-samples-templates}
+\def\YAD@addons{addons}
 \def\YAD@singlefiletemplate{single-file-template}
-% \def\masterslavesfilestemplate{master-slaves-files-template}
+\def\YAD@singlefilesample{single-file-sample}
+\def\YAD@masterslavesfilestemplate{master-slaves-files-template}
 \usedir{/}
 \generate{
   \nopreamble\nopostamble
@@ -187,16 +189,100 @@ This work consists of the file  yathesis.dtx
   \nopreamble\nopostamble
   \file{README}{\from{\jobname.dtx}{readme}}
 }%
-\usedir{doc/latex/\YAD@classname/\YAD@sample}
-\generate{
-  \nopreamble\nopostamble
-  \file{latexmkrc}{\from{\jobname.dtx}{sample-template-latexmkrc}}
-}%
 \usedir{doc/latex/\YAD@classname/\YAD@singlefiletemplate}
 \generate{
   \nopreamble\nopostamble
-  \file{latexmkrc}{\from{\jobname.dtx}{sample-template-latexmkrc}}
-  \file{these.tex}{\from{\jobname.dtx}{single-file-template}}
+  \file{latexmkrc}{\from{\jobname.dtx}{sample-templates-latexmkrc}}
+  \file{these.tex}{\from{\YAD@sampletemplates.dtx}{single-template}}
+}%
+\usedir{doc/latex/\YAD@classname/\YAD@singlefilesample}
+\generate{
+  \nopreamble\nopostamble
+  \file{latexmkrc}{\from{\jobname.dtx}{sample-templates-latexmkrc}}
+  \file{these.tex}{\from{\YAD@sampletemplates.dtx}{single-sample}}
+}%
+\usedir{doc/latex/\YAD@classname/\YAD@sample}
+\generate{
+  \nopreamble\nopostamble
+  \file{latexmkrc}{\from{\jobname.dtx}{sample-templates-latexmkrc}}
+  \file{these.tex}{\from{\YAD@sampletemplates.dtx}{these-sample}}
+}%
+\usedir{doc/latex/\YAD@classname/\YAD@sample/configuration}
+\generate{
+  \nopreamble\nopostamble
+  \file{characteristics.tex}{\from{\YAD@sampletemplates.dtx}{characteristics-sample}}
+  \file{thesis.cfg}{\from{\YAD@sampletemplates.dtx}{cfg-sample}}
+  \file{macros.tex}{\from{\YAD@sampletemplates.dtx}{macros-sample}}
+}%
+\usedir{doc/latex/\YAD@classname/\YAD@sample/corps}
+\generate{
+  \nopreamble\nopostamble
+  \file{conclusion.tex}{\from{\YAD@sampletemplates.dtx}{conclusion-sample}}
+  \file{conclusionI.tex}{\from{\YAD@sampletemplates.dtx}{conclusionI-sample}}
+  \file{position-problemeI.tex}{\from{\YAD@sampletemplates.dtx}{position-problemeI-sample}}
+  \file{developpementI.tex}{\from{\YAD@sampletemplates.dtx}{developpementI-sample}}
+  \file{position-problemeII.tex}{\from{\YAD@sampletemplates.dtx}{position-problemeII-sample}}
+  \file{conclusionII.tex}{\from{\YAD@sampletemplates.dtx}{conclusionII-sample}}
+  \file{developpementII.tex}{\from{\YAD@sampletemplates.dtx}{developpementII-sample}}
+  \file{introduction.tex}{\from{\YAD@sampletemplates.dtx}{introduction-sample}}
+}%
+\usedir{doc/latex/\YAD@classname/\YAD@sample/liminaires}
+\generate{
+  \nopreamble\nopostamble
+  \file{dedicaces.tex}{\from{\YAD@sampletemplates.dtx}{dedications-sample}}
+  \file{epigraphes.tex}{\from{\YAD@sampletemplates.dtx}{epigraphs-sample}}
+  \file{avant-propos.tex}{\from{\YAD@sampletemplates.dtx}{foreword-sample}}
+  \file{avertissement.tex}{\from{\YAD@sampletemplates.dtx}{caution-sample}}
+  \file{remerciements.tex}{\from{\YAD@sampletemplates.dtx}{acknowledgments-sample}}
+  \file{resumes.tex}{\from{\YAD@sampletemplates.dtx}{abstract-sample}}
+}%
+\usedir{doc/latex/\YAD@classname/\YAD@sample/annexes}
+\generate{
+  \nopreamble\nopostamble
+  \file{juridique.tex}{\from{\YAD@sampletemplates.dtx}{juridique-sample}}
+  \file{listings.tex}{\from{\YAD@sampletemplates.dtx}{listings-sample}}
+}%
+\usedir{doc/latex/\YAD@classname/\YAD@sample/annexes/programmes}
+\generate{
+  \nopreamble\nopostamble
+  \file{factorielle.c}{\from{\YAD@sampletemplates.dtx}{factorielle-sample}}
+  \file{heure.c}{\from{\YAD@sampletemplates.dtx}{heure-sample}}
+}%
+\usedir{doc/latex/\YAD@classname/\YAD@sample/auxiliaires}
+\generate{
+  \nopreamble\nopostamble
+  \file{acronymes.tex}{\from{\YAD@sampletemplates.dtx}{acronyms-sample}}
+  \file{glossaire.tex}{\from{\YAD@sampletemplates.dtx}{glossary-sample}}
+  \file{symboles.tex}{\from{\YAD@sampletemplates.dtx}{symbols-sample}}
+  \file{bibliographie.bib}{\from{\YAD@sampletemplates.dtx}{bibliography-sample}}
+}%
+\usedir{doc/latex/\YAD@classname/\YAD@masterslavesfilestemplate}
+\generate{
+  \nopreamble\nopostamble
+  \file{latexmkrc}{\from{\jobname.dtx}{sample-templates-latexmkrc}}
+  \file{these.tex}{\from{\YAD@sampletemplates.dtx}{these-master}}
+}%
+\usedir{doc/latex/\YAD@classname/\YAD@masterslavesfilestemplate/configuration}
+\generate{
+  \nopreamble\nopostamble
+  \file{characteristics.tex}{\from{\YAD@sampletemplates.dtx}{characteristics-master}}
+  \file{thesis.cfg}{\from{\YAD@sampletemplates.dtx}{cfg-master}}
+}%
+\usedir{doc/latex/\YAD@classname/\YAD@masterslavesfilestemplate/corps}
+\generate{
+  \nopreamble\nopostamble
+  \file{conclusion.tex}{\from{\YAD@sampletemplates.dtx}{conclusion-master}}
+  \file{introduction.tex}{\from{\YAD@sampletemplates.dtx}{introduction-master}}
+}%
+\usedir{doc/latex/\YAD@classname/\YAD@masterslavesfilestemplate/liminaires}
+\generate{
+  \nopreamble\nopostamble
+  \file{dedicaces.tex}{\from{\YAD@sampletemplates.dtx}{dedications-master}}
+  \file{epigraphes.tex}{\from{\YAD@sampletemplates.dtx}{epigraphs-master}}
+  \file{avant-propos.tex}{\from{\YAD@sampletemplates.dtx}{foreword-master}}
+  \file{avertissement.tex}{\from{\YAD@sampletemplates.dtx}{caution-master}}
+  \file{remerciements.tex}{\from{\YAD@sampletemplates.dtx}{acknowledgments-master}}
+  \file{resumes.tex}{\from{\YAD@sampletemplates.dtx}{abstract-master}}
 }%
 \usedir{doc/latex/\YAD@classname/\YAD@addons/completion}
 \generate{%
@@ -5836,401 +5922,6 @@ This work consists of the file  yathesis.dtx
 %
 %    \begin{macrocode}
 %</class-lstlang0>
-%    \end{macrocode}
-%
-% Canevas de thèse.
-%    \begin{macrocode}
-%<*single-file-template>
-%    \end{macrocode}
-%
-%    \begin{macrocode}
-%<<COMMENT
-% Document de classe yathesis
-%COMMENT
-\documentclass{yathesis}
-%<<COMMENT
-%
-% Chargement manuel de packages (pas déjà chargés par la classe yathesis)
-%COMMENT
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
-\usepackage{kpfonts}
-\usepackage{booktabs}
-\usepackage{siunitx}
-\usepackage{pgfplots}
-\usepackage{floatrow}
-\usepackage{caption}
-\usepackage{microtype}
-\usepackage[autostyle]{csquotes}
-\usepackage[backend=biber,safeinputenc]{biblatex}
-%<<COMMENT
-%
-% % Pour un éventuel glossaire, une liste d'acronymes et/ou une liste de
-% % symboles
-% \usepackage[xindy,acronyms,symbols,toc]{glossaries}
-% % Configuration éventuelle des styles du glossaire et de la liste
-% % d'acronymes.
-% \setglossarystyle{}
-% \setacronymstyle{}
-% % Génération du glossaire (obligatoire si le package « glossaries » est
-% % chargé)
-% \makeglossaries
-% % Spécification éventuelle de la ou des ressources terminologiques
-% \loadglsentries{}
-% % \loadglsentries{}
-%
-% % Génération de l'index (obligatoire si un index est souhaité)
-% \makeindex
-%
-% Spécification de la ou des ressources bibliographiques
-%COMMENT
-\addbibresource{}
-%<<COMMENT
-% \addbibresource{}
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Début du document
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%COMMENT
-\begin{document}
-%<<COMMENT
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Données caractéristiques du document
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% Préparation des pages de couverture et de titre
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% Auteur de la thèse : prénom (1er argument obligatoire), nom (2e argument
-% obligatoire) et éventuel courriel (argument optionnel). Les éventuels accents
-% devront figurer et le nom /ne/ doit /pas/ être saisi en capitales.
-%COMMENT
-\author[]{}{}
-%<<COMMENT
-%
-% Titre de la thèse dans la langue principale (argument obligatoire) et dans la
-% langue secondaire (argument optionnel).
-%COMMENT
-\title[]{}
-%<<COMMENT
-%
-% % Sous-titre de la thèse dans la langue principale (argument obligatoire) et
-% % dans la langue secondaire (argument optionnel). À décommenter si souhaité,
-% % à commenter ou à supprimer sinon.
-% \subtitle[]{}
-%
-% Champ disciplinaire dans la langue principale (argument obligatoire) et dans
-% la langue secondaire (argument optionnel).
-%COMMENT
-\academicfield[]{}
-%<<COMMENT
-%
-% Spécialité dans la langue principale (argument obligatoire) et dans la langue
-% secondaire (argument optionnel). À décommenter si souhaitée, à commenter ou
-% à supprimer sinon.
-%COMMENT
-\speciality[]{}
-%<<COMMENT
-%
-% Date de la soutenance, au format {jour}{mois}{année} donnés sous forme de
-% nombres.
-%COMMENT
-\date{}{}{}
-%<<COMMENT
-%
-% Sujet pour les méta-données du PDF. À décommenter si souhaité, à commenter ou
-% à supprimer sinon.
-%COMMENT
-\subject[]{}
-%<<COMMENT
-%
-% Logo et URL du PRES. À décommenter si souhaité, à commenter ou à supprimer
-% sinon.
-%COMMENT
-\pres[logo=,url=]{}
-%<<COMMENT
-%
-% Institut (principal en cas de cotutelle).
-%COMMENT
-\institute[logo=,url=]{}
-%<<COMMENT
-%
-% % En cas de cotutelle (normalement, seulement dans le cas de cotutelle
-% % internationale), second institut. À décommenter si souhaité, à commenter ou
-% % à supprimer sinon.
-% \coinstitute[logo=]{}
-%
-% École doctorale. À décommenter si souhaitée, à commenter ou à supprimer
-% sinon.
-%COMMENT
-\doctoralschool[url=]{}
-%<<COMMENT
-%
-% Nom (1er argument obligatoire) et adresse (2e argument obligatoire) du
-% laboratoire (ou de l'unité) où la thèse a été préparée, à utiliser /autant de
-% fois que nécessaire/.
-%COMMENT
-\laboratory[
-logo=,
-telephone=,
-fax=,
-email=,
-url=
-]{}{%
-  \\
-  \\
-  \\
-  \\
-}
-%<<COMMENT
-%
-% Membres du jury, saisis au moyen des commandes \supervisor, \cosupervisor,
-% \comonitor, \referee, \committeepresident, \examiner, \guest, à utiliser
-% /autant de fois que nécessaire/ et /seulement si nécessaire/. Toutes basées sur
-% le même modèle, ces commandes ont 2 arguments obligatoires, successivement les
-% prénom et nom de chaque personne. Si besoin est, on peut apporter certaines
-% précisions en argument optionnel, au moyen des clés suivantes :
-% - « professor », « seniorresearcher », « mcf », « mcf* »,
-%   « juniorresearcher », « juniorresearcher* » (qui peuvent ne pas prendre de
-%   valeur) pour stipuler le corps auquel appartient la personne ;
-% - « affiliation » pour stipuler l'institut auquel est affiliée la personne.
-%
-%COMMENT
-\supervisor[professor,affiliation=]{}{}
-%<<COMMENT
-% \cosupervisor[mcf*,affiliation=]{}{}
-% \comonitor[mcf,affiliation=]{}{}
-%COMMENT
-\referee[professor,affiliation=]{}{}
-\referee[professor,affiliation=]{}{}
-\committeepresident[professor,affiliation=]{}{}
-\examiner[affiliation=]{}{}
-\examiner[affiliation=]{}{}
-\examiner[affiliation=]{}{}
-%<<COMMENT
-% \guest{}{}
-%
-% % Mention du numéro d'ordre de la thèse (s'il est connu, le numéro d'ordre
-% % est à spécifier en argument optionnel). À décommenter si souhaité,
-% % à commenter ou à supprimer sinon.
-% \ordernumber[]
-%
-% Préparation des mots clés dans la langue principale (1er argument) et dans la
-% langue secondaire (2e argument)
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%COMMENT
-\keywords{}{}
-%<<COMMENT
-%
-% Production des pages de couverture et de titre
-%COMMENT
-\maketitle
-%<<COMMENT
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Début de la partie liminaire de la thèse
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% Production de la page de clause de non-responsabilité. À décommenter si
-% souhaitée, à commenter ou à supprimer sinon.
-%COMMENT
-\makedisclaimer
-%<<COMMENT
-%
-% Production de la page de mots clés. À décommenter si souhaitée, à commenter
-% ou à supprimer sinon.
-%COMMENT
-\makekeywords
-%<<COMMENT
-%
-% Production de la page affichant les logo, nom et coordonnées du ou des
-% laboratoires (ou unités de recherche) où la thèse a été
-% préparée. À décommenter si souhaitée, à commenter ou à supprimer sinon.
-%COMMENT
-\makelaboratory
-%<<COMMENT
-%
-% Dédicace(s). À décommenter si souhaitée(s), à commenter ou à supprimer sinon.
-%COMMENT
-\dedication{}
-\dedication{}
-%<<COMMENT
-% Production de la page de dédicace(s). À décommenter si souhaitée, à commenter
-% ou à supprimer sinon.
-%COMMENT
-\makededications
-%<<COMMENT
-%
-% Épigraphe(s). À décommenter si souhaitée(s), à commenter ou à supprimer
-% sinon.
-%COMMENT
-\frontepigraph{}{}
-\frontepigraph{}{}
-%<<COMMENT
-% Production de la page d'épigraphe(s). À décommenter si souhaitée, à commenter
-% ou à supprimer sinon.
-%COMMENT
-\makefrontepigraphs
-%<<COMMENT
-%
-% Remerciements. À décommenter si souhaités, à commenter ou à supprimer sinon.
-%COMMENT
-\chapter{Remerciements}
-%<<COMMENT
-% ...
-%
-% % Avertissement. À décommenter si souhaité, à commenter ou à supprimer sinon.
-% \chapter{Avertissement}
-% ...
-%
-% Résumés (de 1700 caractères maximum, espaces compris) dans la
-% langue principale (1re occurrence de l'environnement « abstract »)
-% et, facultativement, dans la langue secondaire (2e occurrence de
-% l'environnement « abstract »).
-%COMMENT
-\begin{abstract}
-%<<COMMENT
-% ...
-%COMMENT
-\end{abstract}
-\begin{abstract}
-%<<COMMENT
-% ...
-%COMMENT
-\end{abstract}
-%<<COMMENT
-% Production de la page de résumés.
-%COMMENT
-\makeabstract
-%<<COMMENT
-%
-% % Liste des acronymes. À décommenter si souhaitée, à commenter ou à supprimer
-% % sinon.
-% \printacronyms
-%
-% % Liste des symboles. À décommenter si souhaitée, à commenter ou à supprimer
-% % sinon.
-% \printsymbols
-%
-% % Avant-propos. À décommenter si souhaité, à commenter ou à supprimer sinon.
-% \chapter{Avant-propos}
-% ...
-%
-% Sommaire
-%COMMENT
-\tableofcontents[depth=chapter,name=Sommaire]
-%<<COMMENT
-%
-% Liste des tableaux. À décommenter si souhaitée, à commenter ou à supprimer
-% sinon.
-%COMMENT
-\listoftables
-%<<COMMENT
-%
-% Table des figures. À décommenter si souhaitée, à commenter ou à supprimer
-% sinon.
-%COMMENT
-\listoffigures
-%<<COMMENT
-%
-% % Table des listings (nécessite que le package « listings » soit
-% % chargé). À décommenter si souhaitée, à commenter ou à supprimer sinon.
-% \lstlistoflistings
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Début de la partie principale (du « corps ») de la thèse
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%COMMENT
-\mainmatter
-%<<COMMENT
-%
-% Chapitre d'introduction générale
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \chapter{...}
-% ...
-%
-% Chapitres ordinaires (avec parties éventuelles)
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-% Première partie éventuelle
-% \part{...}
-% Premier chapitre
-% \chapter{...}
-% ...
-% Deuxième chapitre
-% \chapter{...}
-% ...
-% Troisième chapitre
-% \chapter{...}
-% ...
-%
-% Deuxième partie éventuelle
-% \part{...}
-% Quatrième chapitre
-% \chapter{...}
-% ...
-% Cinquième chapitre
-% \chapter{...}
-% ...
-% Sixième chapitre
-% \chapter{...}
-% ...
-%
-% Chapitre  de conclusion générale
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \chapter{...}
-% ...
-%
-% Liste des références bibliographiques
-%COMMENT
-\printbibliography
-%<<COMMENT
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Début de la partie annexe éventuelle
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \appendix
-%
-% Chapitres annexes éventuels
-% \chapter{...}
-% ...
-% \chapter{...}
-% ...
-%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Début de la partie finale
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%COMMENT
-\backmatter
-%<<COMMENT
-%
-% % Glossaire (si souhaité distinct de la liste des acronymes). À décommenter
-% % si souhaité, à commenter ou à supprimer sinon.
-% \printglossary
-%
-% % Index. À décommenter si souhaité, à commenter ou à supprimer sinon.
-% \printindex
-%
-% Table des matières
-%COMMENT
-\tableofcontents
-%<<COMMENT
-%
-% Production de la 4e de couverture. À décommenter si souhaitée, à commenter ou
-% à supprimer sinon.
-%COMMENT
-\makebackcover
-%<<COMMENT
-%
-%COMMENT
-\end{document}
-%    \end{macrocode}
-%
-%    \begin{macrocode}
-%</single-file-template>
 %    \end{macrocode}
 %
 % \chapter{Fichier de complétion}
