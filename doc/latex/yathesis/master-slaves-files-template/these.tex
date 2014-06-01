@@ -1,0 +1,180 @@
+% Document de classe yathesis
+\documentclass{yathesis}
+%
+% Chargement manuel de packages (pas déjà chargés par la classe yathesis)
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{kpfonts}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{pgfplots}
+\usepackage{floatrow}
+\usepackage{caption}
+\usepackage{microtype}
+\usepackage[autostyle]{csquotes}
+\usepackage[backend=biber,safeinputenc]{biblatex}
+% Pour un éventuel glossaire, une liste d'acronymes et/ou une liste de
+% symboles
+% \usepackage[xindy,acronyms,symbols,toc]{glossaries}
+%
+% Importation manuelle du fichier de macros personnelles
+\input{configuration/macros}
+%
+% Les réglages figurant habituellement dans le préambule, notamment concernant
+% la bibliographie et les éventuels glossaires et index, peuvent être saisis
+% dans le fichier « thesis.cfg » (situé dans le sous-dossier « configuration »)
+% qui est automatiquement importé par la classe yathesis.
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Début du document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Caractéristiques du document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Préparation des pages de couverture et de titre
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Les caractéristiques de la thèse sont saisies dans le fichier
+% « characteristics.tex » (situé dans le dossier « configuration »).
+%
+% Production des pages de couverture et de titre
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\maketitle
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Début de la partie liminaire de la thèse
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Production de la page de clause de non-responsabilité. À décommenter si
+% souhaitée, à commenter ou à supprimer sinon.
+\makedisclaimer
+%
+% Production de la page de mots clés. À décommenter si souhaitée, à commenter
+% ou à supprimer sinon.
+\makekeywords
+%
+% Production de la page affichant les logo, nom et coordonnées du ou des
+% laboratoires (ou unités de recherche) où la thèse a été
+% préparée. À décommenter si souhaitée, à commenter ou à supprimer sinon.
+\makelaboratory
+%
+% Dédicace(s). À décommenter si souhaitée(s), à commenter ou à supprimer
+% sinon.
+\include{liminaires/dedicaces}
+%
+% Épigraphes(s). À décommenter si souhaitée(s), à commenter ou à supprimer
+% sinon.
+\include{liminaires/epigraphes}
+%
+% Chapitre de remerciements. À décommenter si souhaité, à commenter ou
+% à supprimer sinon.
+\include{liminaires/remerciements}
+%
+% Chapitre d'avertissement. À décommenter si souhaité, à commenter ou
+% à supprimer sinon.
+% \include{liminaires/avertissement}
+%
+% Résumés succincts.
+\include{liminaires/resumes}
+%
+% Liste des acronymes. À décommenter si souhaitée, à commenter ou à supprimer
+% sinon.
+% \printacronyms
+%
+% Liste des symboles. À décommenter si souhaitée, à commenter ou à supprimer
+% sinon.
+% \printsymbols
+%
+% Chapitre d'avant-propos. À décommenter si souhaité, à commenter ou
+% à supprimer sinon.
+% \include{liminaires/avant-propos}
+%
+% Sommaire
+\tableofcontents[depth=chapter,name=Sommaire]
+%
+% Liste des tableaux. À décommenter si souhaitée, à commenter ou à supprimer
+% sinon.
+\listoftables
+%
+% Table des figures. À décommenter si souhaitée, à commenter ou à supprimer
+% sinon.
+\listoffigures
+%
+% Table des listings (nécessite que le package « listings » soit
+% chargé). À décommenter si souhaitée, à commenter ou à supprimer sinon.
+% \lstlistoflistings
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Début de la partie principale (du « corps ») de la thèse
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mainmatter
+%
+% Chapitre d'introduction (générale)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\include{corps/introduction}
+%
+% Chapitres ordinaires (avec parties éventuelles)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Première partie éventuelle
+% \part{...}
+%
+% Premier chapitre
+% \include{corps/}
+% Deuxième chapitre
+% \include{corps/}
+% Troisième chapitre
+% \include{corps/}
+%
+%
+% Deuxième partie éventuelle
+% \part{...}
+%
+% Quatrième chapitre
+% \include{corps/}
+% Cinquième chapitre
+% \include{corps/}
+% Sixième chapitre
+% \include{corps/}
+%
+% Chapitre  de conclusion (générale)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\include{corps/conclusion}
+%
+% Liste des références bibliographiques
+\printbibliography
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Début de la partie annexe éventuelle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \appendix
+%
+% Premier chapitre annexe (éventuel)
+% \include{corps/}
+% Deuxième chapitre annexe (éventuel)
+% \include{corps/}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Début de la partie finale
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\backmatter
+%
+% Glossaire (si souhaité distinct de la liste des acronymes). À décommenter si
+% souhaité, à commenter ou à supprimer sinon.
+% \printglossary
+%
+% Index. À décommenter si souhaité, à commenter ou à supprimer sinon.
+% \printindex
+%
+% Table des matières
+\tableofcontents
+%
+% Production de la 4e de couverture. À décommenter si souhaitée, à commenter ou
+% à supprimer sinon.
+\makebackcover
+%
+\end{document}
