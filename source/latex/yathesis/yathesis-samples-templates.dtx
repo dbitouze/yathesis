@@ -1197,7 +1197,7 @@ Les listings suivants sont au cœur de notre travail.
 %</listings-sample|single-sample>
 %<listings-sample>\lstinputlisting[caption={Il est l'heure}]{annexes/programmes/heure.c}
 %<*single-sample|heure-sample>
-\begin{lstlisting}[caption={Il est l'heure}]
+%<single-sample>\begin{lstlisting}[caption={Il est l'heure}]
 #include <stdio.h>
 int heures, minutes, secondes;
 
@@ -1224,17 +1224,17 @@ void print_heure(void)
   if (secondes > 1) printf("s");
   printf("\n");
 }
-\end{lstlisting}
+%<single-sample>\end{lstlisting}
 %</single-sample|heure-sample>
 %<listings-sample>\lstinputlisting[caption={Factorielle}]{annexes/programmes/factorielle.c}
 %<*single-sample|factorielle-sample>
-\begin{lstlisting}[caption={Factorielle}]
+%<single-sample>\begin{lstlisting}[caption={Factorielle}]
 int factorielle(int n)
 {
   if (n > 2) return n * factorielle(n - 1);
   return n;
 }
-\end{lstlisting}
+%<single-sample>\end{lstlisting}
 %</single-sample|factorielle-sample>
 %<*these-sample|single-sample|single-template|these-master>
 %<<COMMENT
