@@ -13,42 +13,47 @@
 \usepackage{microtype}
 \usepackage[autostyle]{csquotes}
 \usepackage[backend=biber,safeinputenc]{biblatex}
-%
-% % Pour un éventuel glossaire, une liste d'acronymes et/ou une liste de
-% % symboles
+% Pour un éventuel glossaire, une liste d'acronymes et/ou une liste de
+% symboles
 % \usepackage[xindy,acronyms,symbols,toc]{glossaries}
-% % Configuration éventuelle des styles du glossaire et de la liste
-% % d'acronymes.
-% \setglossarystyle{}
-% \setacronymstyle{}
-% % Génération du glossaire (obligatoire si le package « glossaries » est
-% % chargé)
-% \makeglossaries
-% % Spécification éventuelle de la ou des ressources terminologiques
-% \loadglsentries{}
-% % \loadglsentries{}
-%
-% % Génération de l'index (obligatoire si un index est souhaité)
-% \makeindex
 %
 % Spécification de la ou des ressources bibliographiques
 \addbibresource{}
 % \addbibresource{}
 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Configuration des styles du glossaire et de la liste d'acronymes, si
+% souhaitée. Sinon, il suffit de commenter ou de supprimer les lignes
+% suivantes.
+% \setglossarystyle{}
+% \setacronymstyle{}
+%
+% Génération du glossaire (obligatoire si le package « glossaries » est
+% chargé), si souhaitée. Sinon, il suffit de commenter ou de supprimer la
+% ligne suivante.
+% \makeglossaries
+%
+% Spécification de la ou des ressources terminologiques, si souhaitée. Sinon,
+% il suffit de commenter ou de supprimer les lignes suivantes.
+% \loadglsentries{}
+% \loadglsentries{}
+% \loadglsentries{}
+%
+% Génération de l'index (obligatoire si un index est souhaité), si
+% souhaitée. Sinon, il suffit de commenter ou de supprimer la ligne suivante.
+% \makeindex
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Début du document
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Données caractéristiques du document
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Caractéristiques du document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % Préparation des pages de couverture et de titre
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Auteur de la thèse : prénom (1er argument obligatoire), nom (2e argument
 % obligatoire) et éventuel courriel (argument optionnel). Les éventuels accents
 % devront figurer et le nom /ne/ doit /pas/ être saisi en capitales.
@@ -58,9 +63,9 @@
 % langue secondaire (argument optionnel).
 \title[]{}
 %
-% % Sous-titre de la thèse dans la langue principale (argument obligatoire) et
-% % dans la langue secondaire (argument optionnel). À décommenter si souhaité,
-% % à commenter ou à supprimer sinon.
+% Sous-titre de la thèse dans la langue principale (argument obligatoire) et
+% dans la langue secondaire (argument optionnel). À décommenter si souhaité,
+% à commenter ou à supprimer sinon.
 % \subtitle[]{}
 %
 % Champ disciplinaire dans la langue principale (argument obligatoire) et dans
@@ -80,20 +85,20 @@
 % à supprimer sinon.
 \subject[]{}
 %
-% Logo et URL du PRES. À décommenter si souhaité, à commenter ou à supprimer
-% sinon.
+% Nom (argument obligatoire) du PRES. À décommenter si souhaité, à commenter ou
+% à supprimer sinon.
 \pres[logo=,url=]{}
 %
-% Institut (principal en cas de cotutelle).
+% Nom (argument obligatoire) de l'institut (principal en cas de cotutelle).
 \institute[logo=,url=]{}
 %
-% % En cas de cotutelle (normalement, seulement dans le cas de cotutelle
-% % internationale), second institut. À décommenter si souhaité, à commenter ou
-% % à supprimer sinon.
+% En cas de cotutelle (normalement, seulement dans le cas de cotutelle
+% internationale), nom (argument obligatoire) du second
+% institut. À décommenter si souhaité, à commenter ou à supprimer sinon.
 % \coinstitute[logo=]{}
 %
-% École doctorale. À décommenter si souhaitée, à commenter ou à supprimer
-% sinon.
+% Nom (argument obligatoire) de l'école doctorale. À décommenter si souhaitée,
+% à commenter ou à supprimer sinon.
 \doctoralschool[url=]{}
 %
 % Nom (1er argument obligatoire) et adresse (2e argument obligatoire) du
@@ -110,7 +115,8 @@ url=
   \\
   \\
   \\
-}
+  \\
+  }
 %
 % Membres du jury, saisis au moyen des commandes \supervisor, \cosupervisor,
 % \comonitor, \referee, \committeepresident, \examiner, \guest, à utiliser
@@ -134,22 +140,23 @@ url=
 \examiner[affiliation=]{}{}
 % \guest{}{}
 %
-% % Mention du numéro d'ordre de la thèse (s'il est connu, le numéro d'ordre
-% % est à spécifier en argument optionnel). À décommenter si souhaité,
-% % à commenter ou à supprimer sinon.
+% Mention du numéro d'ordre de la thèse (s'il est connu, ce numéro est
+% à spécifier en argument optionnel). À décommenter si souhaité, à commenter
+% ou à supprimer sinon.
 % \ordernumber[]
 %
 % Préparation des mots clés dans la langue principale (1er argument) et dans la
 % langue secondaire (2e argument)
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \keywords{}{}
 %
 % Production des pages de couverture et de titre
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \maketitle
 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Début de la partie liminaire de la thèse
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % Production de la page de clause de non-responsabilité. À décommenter si
 % souhaitée, à commenter ou à supprimer sinon.
@@ -164,14 +171,15 @@ url=
 % préparée. À décommenter si souhaitée, à commenter ou à supprimer sinon.
 \makelaboratory
 %
-% Dédicace(s). À décommenter si souhaitée(s), à commenter ou à supprimer sinon.
+% Dédicace(s). À décommenter si souhaitée(s), à commenter ou à supprimer
+% sinon.
 \dedication{}
 \dedication{}
 % Production de la page de dédicace(s). À décommenter si souhaitée, à commenter
 % ou à supprimer sinon.
 \makededications
 %
-% Épigraphe(s). À décommenter si souhaitée(s), à commenter ou à supprimer
+% Épigraphes(s). À décommenter si souhaitée(s), à commenter ou à supprimer
 % sinon.
 \frontepigraph{}{}
 \frontepigraph{}{}
@@ -179,11 +187,13 @@ url=
 % ou à supprimer sinon.
 \makefrontepigraphs
 %
-% Remerciements. À décommenter si souhaités, à commenter ou à supprimer sinon.
+% Chapitre de remerciements. À décommenter si souhaité, à commenter ou
+% à supprimer sinon.
 \chapter{Remerciements}
 % ...
 %
-% % Avertissement. À décommenter si souhaité, à commenter ou à supprimer sinon.
+% Chapitre d'avertissement. À décommenter si souhaité, à commenter ou
+% à supprimer sinon.
 % \chapter{Avertissement}
 % ...
 %
@@ -197,18 +207,20 @@ url=
 \begin{abstract}
 % ...
 \end{abstract}
+%
 % Production de la page de résumés.
 \makeabstract
 %
-% % Liste des acronymes. À décommenter si souhaitée, à commenter ou à supprimer
-% % sinon.
+% Liste des acronymes. À décommenter si souhaitée, à commenter ou à supprimer
+% sinon.
 % \printacronyms
 %
-% % Liste des symboles. À décommenter si souhaitée, à commenter ou à supprimer
-% % sinon.
+% Liste des symboles. À décommenter si souhaitée, à commenter ou à supprimer
+% sinon.
 % \printsymbols
 %
-% % Avant-propos. À décommenter si souhaité, à commenter ou à supprimer sinon.
+% Chapitre d'avant-propos. À décommenter si souhaité, à commenter ou
+% à supprimer sinon.
 % \chapter{Avant-propos}
 % ...
 %
@@ -223,25 +235,26 @@ url=
 % sinon.
 \listoffigures
 %
-% % Table des listings (nécessite que le package « listings » soit
-% % chargé). À décommenter si souhaitée, à commenter ou à supprimer sinon.
+% Table des listings (nécessite que le package « listings » soit
+% chargé). À décommenter si souhaitée, à commenter ou à supprimer sinon.
 % \lstlistoflistings
 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Début de la partie principale (du « corps ») de la thèse
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \mainmatter
 %
-% Chapitre d'introduction générale
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \chapter{...}
+% Chapitre d'introduction (générale)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter*{Introduction}
 % ...
 %
 % Chapitres ordinaires (avec parties éventuelles)
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
 % Première partie éventuelle
 % \part{...}
+%
 % Premier chapitre
 % \chapter{...}
 % ...
@@ -252,8 +265,10 @@ url=
 % \chapter{...}
 % ...
 %
+%
 % Deuxième partie éventuelle
 % \part{...}
+%
 % Quatrième chapitre
 % \chapter{...}
 % ...
@@ -264,35 +279,36 @@ url=
 % \chapter{...}
 % ...
 %
-% Chapitre  de conclusion générale
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \chapter{...}
+% Chapitre  de conclusion (générale)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter*{Conclusion}
 % ...
 %
 % Liste des références bibliographiques
 \printbibliography
 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Début de la partie annexe éventuelle
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % \appendix
 %
-% Chapitres annexes éventuels
+% Premier chapitre annexe (éventuel)
 % \chapter{...}
 % ...
+% Deuxième chapitre annexe (éventuel)
 % \chapter{...}
 % ...
 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Début de la partie finale
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \backmatter
 %
-% % Glossaire (si souhaité distinct de la liste des acronymes). À décommenter
-% % si souhaité, à commenter ou à supprimer sinon.
+% Glossaire (si souhaité distinct de la liste des acronymes). À décommenter si
+% souhaité, à commenter ou à supprimer sinon.
 % \printglossary
 %
-% % Index. À décommenter si souhaité, à commenter ou à supprimer sinon.
+% Index. À décommenter si souhaité, à commenter ou à supprimer sinon.
 % \printindex
 %
 % Table des matières
