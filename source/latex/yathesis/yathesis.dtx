@@ -3022,24 +3022,12 @@ This work consists of the file  yathesis.dtx
       \protect\date{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
       n'a pas ete correctement saisie car l'annee\MessageBreak%
       (`\YAD@yeardate') n'est pas valide : ce doit etre\MessageBreak%
-      un nombre entier (superieur ou egal a \number\year).%
+      un nombre entier.%
     }%
   }{%
     \IfDecimal{\YAD@yeardate}{%
       \csxdef{YAD@yeardate}{\number\integerpart}%
     }{%
-    }%
-    \ifnumless{\YAD@yeardate}{\number\year}{%
-      \YAD@ClassError[nodate]{%
-        Annee de la date de soutenance non valide%
-      }{%
-        La commande \protect\date{#1}{#2}{#3}\space\MessageBreak%
-        n'a pas ete correctement saisie car le numero de\MessageBreak%
-        l'annee (`#3') n'est pas valide : ce doit etre\MessageBreak%
-        un nombre entier (superieur ou egal a \number\year).%
-      }%
-    }{%
-      \toggletrue{YAD@valid@year}%
     }%
   }%
   \ifboolexpr{%
