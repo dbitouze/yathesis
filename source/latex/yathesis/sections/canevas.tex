@@ -1,35 +1,19 @@
 \chapter{Canevas de thèse}\label{cha:canevas}
 
 Pour faciliter sa mise en œuvre, la \yatcl fournit deux canevas de thèse. Ils
-fournissent deux fichiers \gls{pdf} identiques, mais se distinguent par le fait
+produisent deux fichiers \gls{pdf} identiques, mais se distinguent par le fait
 que la source \file{.tex} du mémoire de thèse correspondant est,
 respectivement :
 \begin{enumerate}
 \item toute entière située dans un unique fichier\footnote{Mis à part le
     fichier de bibliographie et les fichiers images.} (canevas \enquote{à
-    plat}) ;
+    plat}). Il peut être consulté dans \href{single-file-template/.}{ce dossier} ;
 \item scindée en fichiers maître et esclaves, qui plus est répartis dans
-  différents sous-dossiers (canevas \enquote{en relief}).
+  différents sous-dossiers (canevas \enquote{en relief}). Il peut être
+  consulté dans \href{master-slaves-files-template/.}{ce dossier}.
 \end{enumerate}
-Ils se trouvent dans les sous-dossiers\footnote{Une version de
-  développement de ces canevas se trouve également à la page
-  \url{https://github.com/dbitouze/yathesis/tree/master/doc/latex/yathesis/}.} :
-\begin{enumerate}
-\item \directory{\meta{racine}/\jobdocdirectory/single-file-template} ;
-\item \directory{\meta{racine}/\jobdocdirectory/master-slaves-files-template} ;
-\end{enumerate}
-où, par défaut, \meta{racine} est avec la distribution :
-\begin{description}
-\item[\TeX{}~Live :]\
-  \begin{description}
-  \item[sous Linux et Mac OS X :] \unixtldirectory\tldistdirectory\versiontl ;
-  \item[sous Windows :] \wintldirectory\tldistdirectory\versiontl ;
-  \end{description}
-\item[MiK\TeX{} :] \miktexdistdirectory.
-\end{description}
 
-\begin{dbwarning}{Ne pas travailler directement dans les dossiers de canevas
-    fournis !}{}
+\begin{dbwarning}{Ne pas travailler directement dans les dossiers de canevas !}{}
   Si on souhaite utiliser l'un de ces canevas, il est \emph{essentiel} de
   copier dans un répertoire de travail habituel le dossier correspondant (qu'il
   est conseillé de renommer, par exemple en \directory{these}). On \emph{ne}
