@@ -339,13 +339,15 @@
 % à supprimer sinon.
 %COMMENT
 %<single-template|characteristics-master>\pres[logo=,url=]{}
-%<characteristics-sample|single-sample>\pres[logo=images/pres]{Université Lille Nord de France}
+%<characteristics-sample>\pres[logo=images/pres]{Université Lille Nord de France}
+%<single-sample>\pres[logo=pres]{Université Lille Nord de France}
 %<<COMMENT
 %
 % Nom (argument obligatoire) de l'institut (principal en cas de cotutelle).
 %COMMENT
 %<single-template|characteristics-master>\institute[logo=,url=]{}
-%<characteristics-sample|single-sample>\institute[logo=images/ulco,url=http://www.univ-littoral.fr/]{ULCO}
+%<characteristics-sample>\institute[logo=images/ulco,url=http://www.univ-littoral.fr/]{ULCO}
+%<single-sample>\institute[logo=ulco,url=http://www.univ-littoral.fr/]{ULCO}
 %<<COMMENT
 %
 % En cas de cotutelle (normalement, seulement dans le cas de cotutelle
@@ -353,7 +355,8 @@
 % institut. À décommenter si souhaité, à commenter ou à supprimer sinon.
 %COMMENT
 %<single-template|characteristics-master>% \coinstitute[logo=]{}
-%<characteristics-sample|single-sample>\coinstitute[logo=images/paris13,url=http://www.univ-paris13.fr/]{Université de Paris~13}
+%<characteristics-sample>\coinstitute[logo=images/paris13,url=http://www.univ-paris13.fr/]{Université de Paris~13}
+%<single-sample>\coinstitute[logo=paris13,url=http://www.univ-paris13.fr/]{Université de Paris~13}
 %<<COMMENT
 %
 % Nom (argument obligatoire) de l'école doctorale. À décommenter si souhaitée,
@@ -380,7 +383,8 @@
 %<single-template|characteristics-master>  \\
 %<single-template|characteristics-master>  \\
 %<single-template|characteristics-master>  }
-%<characteristics-sample|single-sample>logo=images/labo,
+%<characteristics-sample>logo=images/labo,
+%<single-sample>logo=labo,
 %<characteristics-sample|single-sample>logoheight=1.25cm,
 %<characteristics-sample|single-sample>telephone=(33)(0)3 21 46 55 86,
 %<characteristics-sample|single-sample>fax=(33)(0)3 21 46 55 75,
@@ -956,7 +960,8 @@ pas là pour faire joli, mais bien pour éclairer notre propos.
 \begin{figure}
   \centering
   \capstart
-  \includegraphics[width=.35\linewidth]{images/tiger}
+%<characteristics-sample>  \includegraphics[width=.35\linewidth]{images/tiger}
+%<single-sample>  \includegraphics[width=.35\linewidth]{tiger}
   \caption[Un tigre]{Une figure avec une légende assez longue qui peut
     même, au besoin, s'étaler sur plusieurs lignes.}
   \label{fig-tigre}
