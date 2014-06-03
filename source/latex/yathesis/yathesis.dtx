@@ -3025,33 +3025,45 @@ This work consists of the file  yathesis.dtx
       un nombre entier.%
     }%
   }{%
-    \IfDecimal{\YAD@yeardate}{%
-      \csxdef{YAD@yeardate}{\number\integerpart}%
-    }{%
-    }%
-  }%
+    % \IfDecimal{\YAD@yeardate}{%
+    %   \csxdef{YAD@yeardate}{\number\integerpart}%
+    % }{%
+    % }%
+    % \ifnumless{\YAD@yeardate}{\number\year}{%
+    %   \YAD@ClassError[nodate]{%
+    %     Annee de la date de soutenance non valide%
+    %   }{%
+    %     La commande \protect\date{#1}{#2}{#3}\space\MessageBreak%
+    %     n'a pas ete correctement saisie car le numero de\MessageBreak%
+    %     l'annee (`#3') n'est pas valide : ce doit etre\MessageBreak%
+    %     un nombre entier (superieur ou egal a \number\year).%
+    %   }%
+    % }{%
+      \toggletrue{YAD@valid@year}%
+    % }%
+   }%
   \ifboolexpr{%
     togl {YAD@valid@day}%
     and togl {YAD@valid@month}%
     and togl {YAD@valid@year}%
   }{%
     \csdef{printdate}{%
-      \setdatenumber{\YAD@yeardate}{\YAD@monthdate}{\YAD@daydate}%
-      \ifnumgreater{\value{datetoday}}{\value{datenumber}}{%
-        \YAD@generic@argument@translate{date}%
-        \YAD@ClassError[nodate]{%
-          Date de soutenance non valide%
-        }{%
-          La date saisie
-          (`\protect\date{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}') n'est
-          pas\MessageBreak%
-          correcte car elle ne doit pas etre anterieure\MessageBreak%
-          a la date du jour
-          (\protect\date{\number\day}{\number\month}{\number\year}).%
-        }%
-      }{%
+      % \setdatenumber{\YAD@yeardate}{\YAD@monthdate}{\YAD@daydate}%
+      % \ifnumgreater{\value{datetoday}}{\value{datenumber}}{%
+      %   \YAD@generic@argument@translate{date}%
+      %   \YAD@ClassError[nodate]{%
+      %     Date de soutenance non valide%
+      %   }{%
+      %     La date saisie
+      %     (`\protect\date{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}') n'est
+      %     pas\MessageBreak%
+      %     correcte car elle ne doit pas etre anterieure\MessageBreak%
+      %     a la date du jour
+      %     (\protect\date{\number\day}{\number\month}{\number\year}).%
+      %   }%
+      % }{%
         \formatdate{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}%
-      }%
+      % }%
     }%
   }{%
     \csdef{printdate}{%
