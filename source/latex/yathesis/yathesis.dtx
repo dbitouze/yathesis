@@ -765,19 +765,6 @@ This work consists of the file  yathesis.dtx
 }{%
   \edef\@classoptionslist{\YAD@secondarylanguage,\YAD@mainlanguage,\@classoptionslist}%
 }%
-% \presetkeys{yathesis.cls}{%
-%   screen=false,%
-%   draft=false,%
-%   inprogress=false,%
-%   paper=false,%
-%   paper*=false,%
-% }{}
-%
-% \csuse{ifYAD@paper*}
-% \toggletrue{YAD@output@paper}%
-% \toggletrue{YAD@output@paper@star}%
-% \fi
-%
 \ifthenelse{\equal{\YAD@version}{inprogress}}{%
   \toggletrue{YAD@inprogress@work}%
 }{%
@@ -2041,7 +2028,7 @@ This work consists of the file  yathesis.dtx
   mcf*,%
   juniorresearcher,%
   juniorresearcher*,%
-  seniorresearcher,%
+  seniorresearcher%
 }[true]%
 \newcommand*{\yatsetup}[1]{%
   \presetkeys{YAD}{#1}{}%
@@ -2210,7 +2197,6 @@ This work consists of the file  yathesis.dtx
 }%
 %    \end{macrocode}
 % \end{macro}
-%
 %
 % \begin{macro}{\committeepresident}
 %    \begin{macrocode}
