@@ -4,6 +4,7 @@ Cette section passe en revue les outils de personnalisation propres ou pas à la
 \yatcl{} :
 \begin{enumerate}
 \item options de classe ;
+\item options de préambule ;
 \item commandes (et options de commandes) de la \yatcl;
 \item packages chargés par la \yatcl ;
 \item packages chargés manuellement.
@@ -11,14 +12,15 @@ Cette section passe en revue les outils de personnalisation propres ou pas à la
 
 \section{Options de classe}\label{options-classe}
 
-Les \meta{options} de la \yatcl sont à passer selon la syntaxe usuelle :
+Les \meta{options} de classe de la \yatcl sont à passer selon la syntaxe
+usuelle :
 \begin{preamblecode}
 \documentclass[÷\meta{options}÷]{yathesis}
 \end{preamblecode}
 % ^^A Tester et documenter la commande ×\yasetup×.
 
-La \yatcl accepte, en sus des options qui lui sont propres, celles de la
-\Class{book} sur laquelle est elle basée.
+% ^^A La \yatcl accepte, en sus des options qui lui sont propres, celles de la
+% ^^A \Class{book} sur laquelle est elle basée.
 
 \subsection{Options de la classe \textsf{book}}\label{sec:options-usuelles-de}
 
@@ -42,12 +44,12 @@ notamment :
   ci-dessus : cela risquerait de produire des résultats non souhaités.
 \end{dbwarning}
 
-\subsection{Options de la \yatcl}\label{sec:options-yatcl}
+% ^^A \subsection{Options de la \yatcl}\label{sec:options-yatcl}
+%
+% ^^A Les \meta{options} discutées dans cette section, propres à la \yatcl{},
+% ^^A permettent de contrôler les grandes lignes du document.
 
-Les \meta{options} discutées dans cette section, propres à la \yatcl{},
-permettent de contrôler les grandes lignes du document.
-
-\subsubsection{Langues (principale, secondaire,
+\subsection{Langues (principale, secondaire,
   supplémentaires)}\label{sec:langues}
 
 Par défaut, un mémoire créé avec la \yatcl est composé :
@@ -101,7 +103,7 @@ Par défaut, un mémoire créé avec la \yatcl est composé :
 \end{preamblecode}
 \end{dbexample}
 
-\subsubsection{Profondeur de la numérotation}\label{sec:profondeur-de-la}
+\subsection{Profondeur de la numérotation}\label{sec:profondeur-de-la}
 
 Par défaut, la numérotation des paragraphes a pour \enquote{niveau de
   profondeur} les sous-sections. Autrement dit, seuls les titres des parties
@@ -120,7 +122,7 @@ profondeur.
   \end{docKey}
 }
 
-\subsubsection{Espace interligne}\label{sec:interligne}
+\subsection{Espace interligne}\label{sec:interligne}
 
 L'interligne du document est par défaut \enquote{simple} mais, au moyen de
 l'option \refKey{space} suivante, il est possible de spécifier un interligne
@@ -141,7 +143,7 @@ l'option \refKey{space} suivante, il est possible de spécifier un interligne
   \phrase*{chargé par la \yatcl}.
 \end{dbwarning}
 
-\subsubsection{Style des têtes de chapitres}\label{sec:style-des-tetes}
+\subsection{Style des têtes de chapitres}\label{sec:style-des-tetes}
 
 Pour gérer les têtes de chapitres, la \yatcl{} s'appuie sur le
 \Package*{fncychap}, par défaut chargé avec le style \docValue{PetersLenny}. La
@@ -160,7 +162,7 @@ package.
   \end{docKey}
 }
 
-\subsubsection{(Non-)Production de la page de première de
+\subsection{(Non-)Production de la page de première de
   couverture}\label{sec:non-production-de}
 
 Par défaut, la commande \refCom{maketitle} produit une page de 1\iere{} de
@@ -173,112 +175,7 @@ couverture \phrase*{en plus de la ou des pages de titre}. La clé
   couverture.
 \end{docKey}
 
-\subsubsection{Expressions séparant les corporations et instituts des membres
-  du jury}
-\label{sec:expr-separ-les}
-
-Sur les pages de titre, chaque membre du jury peut être précisé notamment par :
-\begin{itemize}
-\item sa corporation, cf. \refKey{professor}, \refKey{mcf}, \refKey{mcf*},
-  \refKey{seniorresearcher}, \refKey{juniorresearcher} et
-  \refKey{juniorresearcher*} ;
-\item son affiliation, cf. \refKey{affiliation}.
-\end{itemize}
-Comme illustré \vref{fig:maketitle}, si ces deux précisions sont présentes,
-elles sont par défaut séparées :
-\begin{description}
-\item[en français] par l'une des deux expressions contextuelles suivantes,
-  selon que l'initiale de l'affiliation est une voyelle ou une consonne:
-  \begin{itemize}
-  \item \enquote{\textvisiblespace{}à l'}\footnote{Le symbole
-      \enquote{\textvisiblespace{}} matérialise une espace.} ;
-  \item \enquote{\textvisiblespace{}au\textvisiblespace{}} ;
-  \end{itemize}
-\item[en anglais] par l'expression fixe (non contextuelle)
-  \enquote{\textvisiblespace{}at\textvisiblespace{}}.
-\end{description}
-
-\begin{dbwarning}{Expressions contextuelles non robustes}{separateurs}
-  Les expressions contextuelles en français ne sont pas robustes. Elles peuvent
-  en effet ne pas donner le résultat escompté si la valeur de la clé
-  \refKey{affiliation}, définissant l'affiliation, a pour initiale :
-  \begin{itemize}
-  \item une consonne, mais est de genre féminin ;
-  \item une voyelle, mais par le truchement d'une commande\footnote{Notamment
-      une commande d'acronyme \phrase*{telle que \docAuxCommand{gls} ou
-        \docAuxCommand{acrshort}}.}, et non pas \enquote{directement}.
-  \end{itemize}
-\end{dbwarning}
-
-Au moyen des clés \refKey{sepcorpaffilfrench} et \refKey{sepcorpaffilenglish}
-suivantes, les expressions séparatrices en français et en anglais peuvent être
-redéfinies, globalement ou localement.
-
-\begin{docKey}{sepcorpaffilfrench}{=\meta{expression}}{pas de valeur par
-    défaut, initialement \lstinline[showspaces]+\ à l'+ ou \lstinline[showspaces]+\ au\ +}
-  Cette option permet de redéfinir l'\meta{expression} employée en français
-  pour séparer les corporations et instituts des membres du jury. Elle peut
-  être employée :
-  \begin{description}
-  \item[globalement:] elle est alors à spécifier en option de la classe de
-    document ;
-  \item[localement:] elle est alors à spécifier en option de l'une des
-    commandes de définition des membres du jury (cf.
-    \vref{sec:definition-jury}).
-  \end{description}
-\end{docKey}
-
-\begin{docKey}{sepcorpaffilenglish}{=\meta{expression}}{pas valeur par
-    défaut, initialement \lstinline[showspaces]+\ at\ +}
-  Cette option, analogue à \refKey{sepcorpaffilfrench}, permet de redéfinir
-  l'\meta{expression} employée en anglais pour séparer les corporations et
-  instituts des membres du jury.
-\end{docKey}
-
-\begin{dbwarning}{Expressions séparatrices débutant ou finissant par un espace}{}
-  Si les valeurs des clés \refKey{sepcorpaffilfrench} ou
-  \refKey{sepcorpaffilenglish} doivent \emph{débuter} ou \emph{finir} par un
-  espace, celui-ci doit être saisi au moyen de
-  % ^^A
-  \lstinline[showspaces]+\ +
-  % ^^A
-  % ^^A ou de
-  % ^^A
-  % ^^A \lstinline[deletekeywords={[2]space}]+\space+,
-  % ^^A
-  et non pas seulement de
-  % ^^A
-  \lstinline[showspaces]+ +.
-  % ^^A
-\end{dbwarning}
-
-\begin{dbexample}{Redéfinition (globale) de l'expression séparant corporation et
-    institut}{}
-  L'exemple suivant montre comment remplacer l'expression (par défaut) séparant
-  corporation et institut par une virgule, et ce :
-  \begin{itemize}
-  \item globalement pour tous les membres du jury;
-  \item en anglais.
-  \end{itemize}
-\begin{preamblecode}[listing options={showspaces}]
-\documentclass[sepcorpaffilenglish={,\ }]{yathesis}
-\end{preamblecode}
-\end{dbexample}
-
-\begin{dbexample}{Redéfinition (locale) de l'expression séparant corporation et
-    institut}{}
-  L'exemple suivant montre comment remplacer l'expression séparant corporation
-  et institut par \enquote{\textvisiblespace{}à la\textvisiblespace{}}, et ce :
-  \begin{itemize}
-  \item localement (pour un membre du jury particulier);
-  \item en français.
-  \end{itemize}
-\begin{bodycode}[listing options={showspaces}]
-\referee[professor,sepcorpaffilfrench=\ à la\ ,affiliation=Cité des sciences]{René}{Descartes}
-\end{bodycode}
-\end{dbexample}
-
-\subsubsection{Versions du mémoire}\label{sec:versions}
+\subsection{Versions du mémoire}\label{sec:versions}
 
 Au moyen de la clé \refKey{version}, la \yatcl{} permet de facilement produire
 différentes versions du document : \enquote{intermédiaire} (par défaut),
@@ -391,7 +288,7 @@ sont à produire qu'exceptionnellement, en toute fin de rédaction. De ce fait :
   initiale \docValue*{inprogress}.
 \end{dbwarning}
 
-\subsubsection{Formats de sortie}
+\subsection{Formats de sortie}
 \label{sec:formats-de-sortie}
 
 Les documents composés avec la \yatcl{} peuvent avoir deux formats de sortie :
@@ -433,6 +330,111 @@ Les documents composés avec la \yatcl{} peuvent avoir deux formats de sortie :
     de navigation \emph{ne} sont \emph{pas} masquées.
   \end{description}
 \end{docKey}
+
+\subsection{Expressions séparant les corporations et instituts des membres
+  du jury}
+\label{sec:expr-separ-les}
+
+Sur les pages de titre, chaque membre du jury peut être précisé notamment par :
+\begin{itemize}
+\item sa corporation, cf. \refKey{professor}, \refKey{mcf}, \refKey{mcf*},
+  \refKey{seniorresearcher}, \refKey{juniorresearcher} et
+  \refKey{juniorresearcher*} ;
+\item son affiliation, cf. \refKey{affiliation}.
+\end{itemize}
+Comme illustré \vref{fig:maketitle}, si ces deux précisions sont présentes,
+elles sont par défaut séparées :
+\begin{description}
+\item[en français] par l'une des deux expressions contextuelles suivantes,
+  selon que l'initiale de l'affiliation est une voyelle ou une consonne:
+  \begin{itemize}
+  \item \enquote{\textvisiblespace{}à l'}\footnote{Le symbole
+      \enquote{\textvisiblespace{}} matérialise une espace.} ;
+  \item \enquote{\textvisiblespace{}au\textvisiblespace{}} ;
+  \end{itemize}
+\item[en anglais] par l'expression fixe (non contextuelle)
+  \enquote{\textvisiblespace{}at\textvisiblespace{}}.
+\end{description}
+
+\begin{dbwarning}{Expressions contextuelles non robustes}{separateurs}
+  Les expressions contextuelles en français ne sont pas robustes. Elles peuvent
+  en effet ne pas donner le résultat escompté si la valeur de la clé
+  \refKey{affiliation}, définissant l'affiliation, a pour initiale :
+  \begin{itemize}
+  \item une consonne, mais est de genre féminin ;
+  \item une voyelle, mais par le truchement d'une commande\footnote{Notamment
+      une commande d'acronyme \phrase*{telle que \docAuxCommand{gls} ou
+        \docAuxCommand{acrshort}}.}, et non pas \enquote{directement}.
+  \end{itemize}
+\end{dbwarning}
+
+Au moyen des clés \refKey{sepcorpaffilfrench} et \refKey{sepcorpaffilenglish}
+suivantes, les expressions séparatrices en français et en anglais peuvent être
+redéfinies, globalement ou localement.
+
+\begin{docKey}{sepcorpaffilfrench}{=\meta{expression}}{pas de valeur par
+    défaut, initialement \lstinline[showspaces]+\ à l'+ ou \lstinline[showspaces]+\ au\ +}
+  Cette option permet de redéfinir l'\meta{expression} employée en français
+  pour séparer les corporations et instituts des membres du jury. Elle peut
+  être employée :
+  \begin{description}
+  \item[globalement:] elle est alors à spécifier en option de la classe de
+    document ;
+  \item[localement:] elle est alors à spécifier en option de l'une des
+    commandes de définition des membres du jury (cf.
+    \vref{sec:definition-jury}).
+  \end{description}
+\end{docKey}
+
+\begin{docKey}{sepcorpaffilenglish}{=\meta{expression}}{pas valeur par
+    défaut, initialement \lstinline[showspaces]+\ at\ +}
+  Cette option, analogue à \refKey{sepcorpaffilfrench}, permet de redéfinir
+  l'\meta{expression} employée en anglais pour séparer les corporations et
+  instituts des membres du jury.
+\end{docKey}
+
+\begin{dbwarning}{Expressions séparatrices débutant ou finissant par un espace}{}
+  Si les valeurs des clés \refKey{sepcorpaffilfrench} ou
+  \refKey{sepcorpaffilenglish} doivent \emph{débuter} ou \emph{finir} par un
+  espace, celui-ci doit être saisi au moyen de
+  % ^^A
+  \lstinline[showspaces]+\ +
+  % ^^A
+  % ^^A ou de
+  % ^^A
+  % ^^A \lstinline[deletekeywords={[2]space}]+\space+,
+  % ^^A
+  et non pas seulement de
+  % ^^A
+  \lstinline[showspaces]+ +.
+  % ^^A
+\end{dbwarning}
+
+\begin{dbexample}{Redéfinition (globale) de l'expression séparant corporation et
+    institut}{}
+  L'exemple suivant montre comment remplacer l'expression (par défaut) séparant
+  corporation et institut par une virgule, et ce :
+  \begin{itemize}
+  \item globalement pour tous les membres du jury;
+  \item en anglais.
+  \end{itemize}
+\begin{preamblecode}[listing options={showspaces}]
+\documentclass[sepcorpaffilenglish={,\ }]{yathesis}
+\end{preamblecode}
+\end{dbexample}
+
+\begin{dbexample}{Redéfinition (locale) de l'expression séparant corporation et
+    institut}{}
+  L'exemple suivant montre comment remplacer l'expression séparant corporation
+  et institut par \enquote{\textvisiblespace{}à la\textvisiblespace{}}, et ce :
+  \begin{itemize}
+  \item localement (pour un membre du jury particulier);
+  \item en français.
+  \end{itemize}
+\begin{bodycode}[listing options={showspaces}]
+\referee[professor,sepcorpaffilfrench=\ à la\ ,affiliation=Cité des sciences]{René}{Descartes}
+\end{bodycode}
+\end{dbexample}
 
 \section{Commandes de la \yatcl}
 
