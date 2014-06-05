@@ -2047,9 +2047,6 @@ This work consists of the file  yathesis.dtx
   juniorresearcher*,%
   seniorresearcher%
 }[true]%
-\newcommand*{\yatsetup}[1]{%
-  \presetkeys{YAD}{#1}{}%
-}%
 \presetkeys{YAD}{%
   role=,%
   corporation=,%
@@ -2076,7 +2073,36 @@ This work consists of the file  yathesis.dtx
   juniorresearcher*=false,%
   seniorresearcher=false,%
 }{}%
+% %    \end{macrocode}
+% % On définit des options de mêmes noms que celle de la classe, de sorte que
+% % celles-ci puissent aussi être spécifiées en argument de ×\yadsetup×.
+% %    \begin{macrocode}
+% \define@boolkeys{YAD}[YAD@]{%
+%   nofrontcover%
+% }[true]%
+% \define@choicekey*{YAD}{version}%
+% {draft,inprogress,inprogress*,submitted,submitted*,final}[inprogress]%
+% {\def\YAD@version{#1}}%
+% \presetkeys{YAD}{%
+%   nofrontcover=false%
+% }{}%
 %    \end{macrocode}
+%
+% \begin{macro}{\yadsetup}
+%   On crée la commande ×\yadsetup× permettant de fixer des options de la classe,
+%   notamment celles ne pouvant pas être passées en argument de ×\documentclass×
+%   (par exemple, celles de la forme ×foo={bar=baz}×).
+%    \begin{macrocode}
+\newcommand*{\yadsetup}[1]{%
+  \presetkeys{YAD}{#1}{}%
+}%
+%    \end{macrocode}
+% On interdit l'utilisation de ×\yadsetup× ailleurs qu'en préambule.
+%    \begin{macrocode}
+\@onlypreamble\yadsetup%
+%    \end{macrocode}
+% \end{macro}
+%
 % Définition de nouvelles bases de données
 %    \begin{macrocode}
 \DTLnewdb{YAD@staffs}%
@@ -5866,7 +5892,11 @@ This work consists of the file  yathesis.dtx
     maketitle,makedisclaimer,makekeywords,makelaboratory,makeabstract,makededications,makefrontepigraphs,%
     % acknowledgements,frenchabstract,foreword,preface,caution,
     makebackcover,ordernumber,chapter*,%
-    disclaimer,newglssymbol,yatsetup%
+    disclaimer,newglssymbol,yadsetup%
+  },%
+  % Environments' names
+  morekeywords={%
+    yathesis%
   },%
   morekeywords=[1]{% Environments' names
     abstract,dedicationspage,epigraphspage,epigraphs,%
@@ -6053,6 +6083,8 @@ leqno
 fleqn
 oneside
 #endkeyvals
+#
+\yadsetup{%<options%>}#n
 #
 # Cover and title pages
 #
