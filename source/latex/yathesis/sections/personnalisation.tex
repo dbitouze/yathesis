@@ -436,6 +436,71 @@ redéfinies, globalement ou localement.
 \end{bodycode}
 \end{dbexample}
 
+\section{Options de préambule}
+\label{sec:options-de-preambule}
+
+Pour des raisons techniques, certaines options de la \yatcl ne peuvent pas être
+passées en argument optionnel de \docAuxCommand{documentclass} et doivent
+l'être en préambule, en argument de la commande \refCom{yadsetup}.  C'est le
+cas des options étudiées dans cette section.
+
+\begin{docCommand}{yadsetup}{\marg{options}}
+  Cette commande permet de spécifier les \meta{options} de la \yatcl ne pouvant
+  pas être passées en argument optionnel de \docAuxCommand{documentclass}.
+\end{docCommand}
+
+\begin{dbwarning}{Commande \protect\refCom{yadsetup} : seulement en préambule}{}
+  La commande \refCom{yadsetup} ne peut être utilisée qu'en préambule.
+\end{dbwarning}
+
+
+\subsection{Cadre autour du titre de la thèse}
+\label{sec:cadre-autour-du}
+
+{%
+  \tcbset{before lower=\vspace*{\baselineskip}\par}
+\begin{docKey}{frametitle}{=\docValue{none}\textbar\docValue{shadowbox}\textbar\docValue{ovalbox}\textbar\marg{autre}}{pas de valeur par défaut, pas de valeur initiale}
+  Cette clé permet de personnaliser le cadre figurant par défaut autour du
+  titre de la thèse sur les pages de titre :
+  \begin{itemize}
+  \item sa valeur \docValue{none} permet de supprimer ce cadre. L'affichage des
+    mentions \enquote{Titre de la thèse} et \foreignquote{english}{Thesis
+      Title} est alors désactivé ;
+  \item sa valeur \docValue{shadowbox} produit un cadre ombré ;
+  \item sa valeur \docValue{ovalbox} produit un cadre dont les sommets sont
+    arrondis ;
+  \item toute \meta{autre} valeur lui étant passée doit être :
+    \begin{enumerate}
+    \item une liste de clés/valeurs propres à l'environnement
+      \docAuxEnvironment{tcolorbox} du \Package{tcolorbox} (cf. la
+      documentation de ce package) ;
+    \item passée entre paire d'accolades :
+\begin{preamblecode}
+\yadsetup{frametitle={÷\meta{autre}÷}}
+\end{preamblecode}
+    \end{enumerate}
+  \end{itemize}
+\end{docKey}
+}
+
+\begin{dbexample}{Cadre personnalisé autour du titre de la thèse}{}
+  L'exemple suivant montre comment personnaliser le cadre autour du titre de la
+  thèse, de sorte à ce qu'il soit sur fond gris.
+\begin{preamblecode}
+\yadsetup{frametitle={colback=lightgray}}
+\end{preamblecode}
+\end{dbexample}
+
+\begin{dbexample}{Cadre \enquote{fantaisie} autour du titre de la thèse}{}
+  Cet exemple, certainement déconseillé, montre comment exploiter les
+  fonctionnalités du \Package{tcolorbox} pour obtenir un cadre
+  \enquote{fantaisie} autour du titre de la thèse.
+\begin{preamblecode}
+\tcbuselibrary{skins}
+\yadsetup{frametitle={colback=red!50!white,beamer}}
+\end{preamblecode}
+\end{dbexample}
+
 \section{Commandes de la \yatcl}
 
 \begin{dbremark}{Lieu des commandes de personnalisations}{configurationfile}
