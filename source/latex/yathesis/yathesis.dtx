@@ -2006,6 +2006,12 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % \end{macro}
 %
+% On définit une marco dans laquelle sera stockée le style du cadre figurant
+% autour du  titre de la thèse sur les pages de titre.
+% \begin{macro}{\YAD@frametitle@set}
+\newcommand{\YAD@frametitle@set}{}%
+% \end{macro}
+%
 % Déclarations permettant de définir des macros des directeurs (dont
 % d'éventuels co-directeurs), rapporteurs et examinateurs (dont le président du
 % jury) dont les arguments puissent être spécifiés sous la forme \meta{clé} =
@@ -2029,7 +2035,8 @@ This work consists of the file  yathesis.dtx
   affiliationsecondary,%
   sepcorpaffilenglish,%
   name,%
-  depth%
+  depth,%
+  frametitle%
 }[]%
 \define@boolkeys{YAD}{%
   nologo,%
@@ -3863,12 +3870,27 @@ This work consists of the file  yathesis.dtx
 \begingroup%
 \expandafter\selectlanguage\expandafter{##1}%
   \begin{lrbox}{\YAD@titlebox}
-    \fbox{%
-      \noindent%
-      \begin{minipage}{\linewidth-2\fboxsep-2\fboxrule}
+    \ifthenelse{\equal{\cmdKV@YAD@frametitle}{none}}{%
+    }{%
+      \ifthenelse{\equal{\cmdKV@YAD@frametitle}{shadowbox}}{%
+        \renewcommand{\YAD@frametitle@set}{enhanced,colback=white,boxsep=3pt,boxrule=0.4pt,arc=0mm,drop shadow southeast=black}%
+      }{%
+        \ifthenelse{\equal{\cmdKV@YAD@frametitle}{ovalbox}}{%
+          \renewcommand{\YAD@frametitle@set}{colback=white,boxsep=3pt,boxrule=0.4pt,arc=3mm}%
+        }{%
+          \renewcommand{\YAD@frametitle@set}{colback=white,boxsep=3pt,boxrule=0.4pt,arc=0mm}%
+        }%
+      }%
+      \begin{tcolorbox}[code={\pgfkeysalsofrom\YAD@frametitle@set}]
+    }%
+    \noindent%
+    \begin{minipage}{\linewidth-2\fboxsep-2\fboxrule}
       \onehalfspacing%
       \noindent%
-      \YAD@translation{thesistitle}%
+      \ifthenelse{\equal{\cmdKV@YAD@frametitle}{none}}{%
+      }{%
+        \YAD@translation{thesistitle}%
+      }%
       \par%
       \centering%
       \Huge\bfseries%
@@ -3895,7 +3917,10 @@ This work consists of the file  yathesis.dtx
         \Large\printsubtitle%
       }%
     \end{minipage}%
-    }%
+    \ifthenelse{\equal{\cmdKV@YAD@frametitle}{none}}{%
+    }{%
+    \end{tcolorbox}
+  }%
   \end{lrbox}
   \settototalheight{\YAD@titleboxheight}{\YAD@titlebox}%
   \setlength{\YAD@otherboxheight}{0.5\paperheight-\YAD@titleboxheight-2cm}%
@@ -4069,10 +4094,18 @@ This work consists of the file  yathesis.dtx
         \YAD@translation{speciality} \textbf{\printspeciality}%
       }
     \end{center}
-  \ifdraft{}{\vspace*{\stretch{.25}}}%
   % \end{minipage}%
   \begin{center}
+    \ifthenelse{\equal{\cmdKV@YAD@frametitle}{none}}{%
+      \ifdraft{}{\vspace*{\stretch{2}}}%
+    }{%
+      \ifdraft{}{\vspace*{\stretch{.25}}}%
+    }%
     \usebox{\YAD@titlebox}%
+    \ifthenelse{\equal{\cmdKV@YAD@frametitle}{none}}{%
+      \ifdraft{}{\vspace*{\stretch{2}}}%
+    }{%
+    }%
   \end{center}
   % \noindent%
   % \begin{minipage}[c][\YAD@otherboxheight][c]{\YAD@titleboxwidth}
@@ -5844,7 +5877,7 @@ This work consists of the file  yathesis.dtx
     distinction,award,affiliation,sepcorpaffilfrench,affiliationsecondary,sepcorpaffilenglish,%
     logo,url,nologo,space,mainlanguage,secnumdepth,tocdepth,depth,version,output%
     address,telephone,fax,email,type,acronym,heading,nowarning,noerror,nofrontcover,%
-    hyperfootnotes,hyperindex,plainpages,pdfpagemode,pdfpagelayout,locale,gray%
+    hyperfootnotes,hyperindex,plainpages,pdfpagemode,pdfpagelayout,locale,gray,frametitle,%
   },%
   morekeywords=[3]{% Values of key-value lists
     single,onehalf,double,doctor,yadsymbolstyle,%
