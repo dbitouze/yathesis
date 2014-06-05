@@ -872,6 +872,10 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \RequirePackage{epigraph}[2009/09/02]%
 %    \end{macrocode}
+% Pour disposer de boîtes élaborées en couleurs et encadrées
+%    \begin{macrocode}
+\RequirePackage{tcolorbox}[2014/03/31]%
+%    \end{macrocode}
 % Pour insérer des petits symboles rigolos (téléphone, fax, etc.)
 %    \begin{macrocode}
 \RequirePackage{marvosym}[2011/07/20]%
@@ -1343,6 +1347,7 @@ This work consists of the file  yathesis.dtx
   alsolanguage=[yad]TeX,
   alsolanguage=[glossaries]TeX,
   alsolanguage=[biblatex]TeX,
+  alsolanguage=[tcolorbox]TeX,
   texcsstyle=*\color{texcs},
   % numbers=left,
   numberstyle=\small,
@@ -1426,6 +1431,7 @@ This work consists of the file  yathesis.dtx
     listing options={style=dbtex}
   }%
 }%
+\tcbuselibrary{skins}%
 \newtcblisting{origpreamblecode}[1][]{%
   codes,
   drop shadow,
@@ -1584,8 +1590,12 @@ This work consists of the file  yathesis.dtx
 %<*class>
 %    \end{macrocode}
 %
-% \begin{macro}{\tc@errorwarn}
+% On charge la libraire ×skins× du \Package{tcolorbox}.
+%    \begin{macrocode}
+  \tcbuselibrary{skins}%
+%    \end{macrocode}
 %
+% \begin{macro}{\tc@errorwarn}
 % Hack permettant de ne pas faire figurer les warnings de la
 % forme:
 % \begin{verbatim}
@@ -5907,6 +5917,26 @@ This work consists of the file  yathesis.dtx
   },%
   sensitive%
 }[keywords,tex,comments]%
+%
+\lst@definelanguage[tcolorbox]{TeX}[LaTeX]{TeX}%
+{%
+  % Séquences de contrôles (communément appelées commandes ou macros)
+  moretexcs={%
+    tcbset,tcbuselibrary%
+  },%
+  % Mots-clés de niveau 1 : arguments optionnels
+  morekeywords={%
+  },%
+  % Mots-clés de niveau 2 : arguments obligatoires et environnements
+  morekeywords=[2]{%
+    colback,beamer,skins%
+  },%
+  % Mots-clés de niveau 3 : arguments optionnels valeurs de clés dans clé=valeur
+  morekeywords=[3]{%
+    lightgray,red!50!white%
+  },%
+  sensitive,%
+}[keywords,tex,comments]%
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -5956,6 +5986,7 @@ This work consists of the file  yathesis.dtx
 #include:tocbibind
 #include:nonumonpart
 #include:xcolor
+#include:tcolorbox
 #include:datatool
 #include:fncychap
 #include:titleps
