@@ -466,9 +466,10 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % Pour pouvoir disposer d'autant de \enquote{flots} d'écriture dans
 % des fichiers annexes que nécessaire. Il est chargé en fin de préambule sans
-% quoi la compilation s'arrête longuement à la ligne
-% ×(/usr/local/texlive/2013/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg)×
-% (problème rapporté à  l'auteur du package).
+% quoi la compilation s'arrête longuement à la ligne :
+% \directory{/usr/local/texlive/2013/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg}
+% (problème rapporté à  l'auteur du package) ou à la ligne :
+% \directory{/usr/local/texlive/2013/texmf-dist/tex/latex/floatrow/fr-longtable.sty}.
 %    \begin{macrocode}
 \AtEndPreamble{%
   \RequirePackage{morewrites}%
