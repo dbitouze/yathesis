@@ -3914,24 +3914,18 @@ This work consists of the file  yathesis.dtx
     }{%
       \tcbset{colback=white,boxsep=3pt,boxrule=0.4pt,arc=0mm}%
       \ifthenelse{\equal{\cmdKV@YAD@frametitle}{shadowbox}}{%
-        % \renewcommand{\YAD@frametitle@set}{enhanced,colback=white,boxsep=3pt,boxrule=0.4pt,arc=0mm,drop
-        %   shadow southeast={black,opacity=1}}%
         \tcbset{enhanced,drop shadow southeast={black,opacity=1}}%
       }{%
         \ifthenelse{\equal{\cmdKV@YAD@frametitle}{ovalbox}}{%
-          % \renewcommand{\YAD@frametitle@set}{colback=white,boxsep=3pt,boxrule=0.4pt,arc=3mm}%
           \tcbset{arc=3mm}%
         }{%
           \ifthenelse{\equal{\cmdKV@YAD@frametitle}{fbox}}{%
-            % \renewcommand{\YAD@frametitle@set}{colback=white,boxsep=3pt,boxrule=0.4pt,arc=0mm}%
           }{%
-            % \renewcommand{\YAD@frametitle@set}{\cmdKV@YAD@frametitle}%
             \tcbset{code={\pgfkeysalsofrom\cmdKV@YAD@frametitle}}%
           }%
         }%
       }%
       \begin{tcolorbox}
-        % [code={\pgfkeysalsofrom\YAD@frametitle@set}]
     }%
     \noindent%
     \begin{minipage}{\linewidth-2\fboxsep-2\fboxrule}
