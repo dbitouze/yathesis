@@ -3876,17 +3876,12 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % Utilisation d'un hack fourni par l'auteur du \Package{tcolorbox} de sorte
 % que, lorsqu'une \enquote{×tcolorbox×} est à sommets non arrondis, il en soit
-% de même de son ombre (et ce, seulement lorsque l'ombre est demandée).
+% de même de son ombre.
 %    \begin{macrocode}
-\AfterEndPreamble{%
-  \ifthenelse{\equal{\cmdKV@YAD@frametitle}{shadowbox}}{%
-    \let\origtcb@shadow@prepare=\tcb@shadow@prepare%
-    \def\tcb@shadow@prepare#1#2{%
-      \origtcb@shadow@prepare{#1}{#2}%
-      \let\tcb@shadow@arc=\tcb@zpt%
-    }%
-  }{%
-  }%
+\let\origtcb@shadow@prepare=\tcb@shadow@prepare%
+\def\tcb@shadow@prepare#1#2{%
+  \origtcb@shadow@prepare{#1}{#2}%
+  \let\tcb@shadow@arc=\tcb@zpt%
 }%
 %    \end{macrocode}
 %
