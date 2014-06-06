@@ -450,14 +450,6 @@ This work consists of the file  yathesis.dtx
 % %    \begin{macrocode}
 % \RequirePackage{xkvltxp}[2004/12/13]%
 % %    \end{macrocode}
-% Pour pouvoir disposer d'autant de \enquote{flots} d'écriture dans
-% des fichiers annexes que nécessaire. Il est chargé en fin de préambule sans
-% quoi la compilation s'arrête longuement à la ligne
-% ×(/usr/local/texlive/2013/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg)×
-% (problème rapporté à  l'auteur du package).
-%    \begin{macrocode}
-\RequirePackage{morewrites}%
-%    \end{macrocode}
 % Pour pouvoir définir des macros dont les arguments puissent être
 % spécifiés sous la forme ×clé=×\meta{valeur}
 %    \begin{macrocode}
@@ -471,6 +463,16 @@ This work consists of the file  yathesis.dtx
 % commandes à argument(s) optionnel
 %    \begin{macrocode}
 \RequirePackage{xpatch}[2012/10/02]%
+%    \end{macrocode}
+% Pour pouvoir disposer d'autant de \enquote{flots} d'écriture dans
+% des fichiers annexes que nécessaire. Il est chargé en fin de préambule sans
+% quoi la compilation s'arrête longuement à la ligne
+% ×(/usr/local/texlive/2013/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg)×
+% (problème rapporté à  l'auteur du package).
+%    \begin{macrocode}
+\AtEndPreamble{%
+  \RequirePackage{morewrites}%
+}%
 %    \end{macrocode}
 % Pour pouvoir patcher des commandes à argument(s) optionnel(s)
 %    \begin{macrocode}
