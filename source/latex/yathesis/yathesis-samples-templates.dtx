@@ -28,7 +28,8 @@
 \usepackage{caption}
 \usepackage{microtype}
 \usepackage[autostyle]{csquotes}
-\usepackage[backend=biber,safeinputenc]{biblatex}
+%<single-sample|these-sample>\usepackage[backend=biber,safeinputenc]{biblatex}
+%<single-template|these-master>% \usepackage[backend=biber,safeinputenc]{biblatex}
 %</these-sample|single-sample|single-template|these-master>
 %<*these-sample|single-sample>
 \usepackage{listings}
@@ -89,9 +90,9 @@
 %
 % Spécification de la ou des ressources bibliographiques
 %COMMENT
-%<single-template>\addbibresource{}
 %<single-template>% \addbibresource{}
-%<cfg-master>\addbibresource{auxiliaires/}
+%<single-template>% \addbibresource{}
+%<cfg-master>% \addbibresource{auxiliaires/bibliographie.bib}
 %<cfg-master>% \addbibresource{auxiliaires/}
 %<single-sample>\addbibresource{bibliographie.bib}
 %<cfg-sample>\addbibresource{auxiliaires/bibliographie.bib}
@@ -1150,7 +1151,8 @@ Dans ce chapitre, nous concluons l'étude du rire du chaos.
 %
 % Liste des références bibliographiques
 %COMMENT
-\printbibliography
+%<single-sample|these-sample>\printbibliography
+%<single-template|these-master>%\printbibliography
 %<<COMMENT
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
