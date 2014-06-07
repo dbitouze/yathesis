@@ -327,8 +327,9 @@ This work consists of the file  yathesis.dtx
   % sections/personnalisation,
   % sections/recommandations,
   % sections/installation,
-  sections/specimens-canevas,
+  % sections/specimens-canevas,
   % sections/add-ons,
+  sections/changes
   % sections/faq,
   % sections/fichiers-charges,
   % sections/packages-charges,
@@ -361,7 +362,7 @@ This work consists of the file  yathesis.dtx
 %   Grave accent  \`     Left brace    \{     Vertical bar  \|
 %   Right brace   \}     Tilde         \~}
 %
-% ^^A\changes{0.1}{2012/11/11}{Initial version}
+% \changes{v0.99c}{2014/06/06}{Corrections de bugs}
 %
 % \DoNotIndex{%
 % \newcommand,\newenvironment,\begin,\end,\acrpluralsuffix,\acrshort,\active,\addlinespace,\advance,\AtEndDocument,\begingroup,\caption,\catcode,\ClassInfo,\color,\colorlet,\cr,\DeclareGraphicsExtensions,\declaretheorem,\declaretheoremstyle,\def,\definecolor,\do,\edef,\else,\emph,\endgroup,\endVerbatimOut,\expandafter,\fi,\floatsetup,\footnotesize,\gls,\glsentrylong,\glspluralsuffix,\glsshorttok,\graphicspath,\hide,\ifluatex,\includegraphics,\InputIfFileExists,\intertitle,\killienc,\label,\LaTeX,\linewidth,\LoadClass,\loadglsentries,\lstinputlisting,\lstMakeShortInline,\lstset,\LTXtable,\makeglossaries,\mdfdefinestyle,\mdfsetup,\medskipamount,\meta,\multicolumn,\noexpand,\normalfont,\nothing,\PassOptionsToClass,\PassOptionsToPackage,\ProcessOptions,\protect,\raisebox,\relax,\renewcommand,\RequirePackage,\temp,\TeX,\textbf,\textlangle,\textrangle,\textsc,\textsf,\texttt,\textup,\the,\tmp,\to,\todoformat,\todos,\ttdefault,\ttfamily,\typeout,\uccode,\uppercase,\VerbatimOut,\WithSuffix,\LoadClassWithOptions,\DeclareOption,\xspace,\undefined,\newif,\nothtfalse,\nothttrue,\HCode,\ifnotht,\ifx,\@bsphack}
@@ -398,6 +399,7 @@ This work consists of the file  yathesis.dtx
 % \include{sections/pages-finales}
 % \include{sections/personnalisation}
 % \appendix
+% ^^A \include{sections/changes}
 % \include{sections/installation}
 % \include{sections/specimens-canevas}
 % \include{sections/recommandations}
@@ -410,6 +412,7 @@ This work consists of the file  yathesis.dtx
 % \include{sections/add-ons}
 % \include{sections/usage-avance}
 % \include{sections/developpements}
+% \PrintChanges%
 % \printbibliography[heading=bibintoc]
 % \printglossaries\label{glossaire}
 % \printindex
@@ -695,7 +698,6 @@ This work consists of the file  yathesis.dtx
 % \end{itemize}
 %    \begin{macrocode}
 \def\YAD@version{inprogress}%
-% \changes{v0.99}{2014/05/18}{Versions \enquote{en cours de soumission}}%
 \define@choicekey*{yathesis.cls}{version}%
 {draft,inprogress,inprogress*,submitted,submitted*,final}[inprogress]%
 {\def\YAD@version{#1}}%
@@ -1200,6 +1202,7 @@ This work consists of the file  yathesis.dtx
 \RequirePackage{tocvsec2}%
 \RequirePackage[autostyle=once]{csquotes}%
 \RequirePackage{tcolorbox}%
+\RequirePackage[tocentry]{vhistory}
 \RequirePackage{path}%
 \RequirePackage{fontawesome}%
 \RequirePackage{textcase}%
