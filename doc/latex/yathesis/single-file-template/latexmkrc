@@ -16,4 +16,6 @@ sub texindy{
     system("texindy -L french \"$_[0].idx\"");
 }
 
-@generated_exts = qw(aux idx ind lof lot out toc acn acr alg bcf glg glo gls glg2 gls2 glo2 ist run.xml xdy lol fls slg slo sls unq synctex.gz mw *~);
+@generated_exts = qw(aux idx ind lo* out toc acn acr alg bcf fls gl* ist
+run.xml sbl* sl* sym* xdy unq synctex.gz mw *~
+);

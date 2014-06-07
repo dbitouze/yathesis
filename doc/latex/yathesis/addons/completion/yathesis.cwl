@@ -33,6 +33,7 @@
 #include:tocbibind
 #include:nonumonpart
 #include:xcolor
+#include:tcolorbox
 #include:datatool
 #include:fncychap
 #include:titleps
@@ -66,6 +67,8 @@ leqno
 fleqn
 oneside
 #endkeyvals
+#
+\yadsetup{%<options%>}#n
 #
 # Cover and title pages
 #

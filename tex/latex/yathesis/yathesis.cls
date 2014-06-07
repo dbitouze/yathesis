@@ -18,6 +18,9 @@
 \RequirePackage{xkeyval}[2012/10/14]%
 \RequirePackage{etoolbox}[2011/01/03]%
 \RequirePackage{xpatch}[2012/10/02]%
+\AtEndPreamble{%
+  \RequirePackage{morewrites}%
+}%
 \RequirePackage{filehook}[2011/10/12]%
 \RequirePackage{hopatch}[2012/05/28]%
 \RequirePackage{xifthen}[2009/04/17]%
@@ -290,6 +293,7 @@
 \RequirePackage{translator}[2010/06/12]%
 \RequirePackage{fixltx2e}[2006/09/13]%
 \RequirePackage{epigraph}[2009/09/02]%
+\RequirePackage{tcolorbox}[2014/03/31]%
 \RequirePackage{marvosym}[2011/07/20]%
 \RequirePackage{setspace}[2011/12/19]%
 \RequirePackage{shorttoc}[2002/08/20]%
@@ -421,6 +425,7 @@
   }{%
   }%
 }%
+  \tcbuselibrary{skins}%
 \def\YAD@clearspread{\clearpage\if@twoside \ifodd\c@page
   \hbox{}\newpage\if@twocolumn\hbox{}\newpage\fi\fi\fi}
 \renewenvironment{titlepage}
@@ -576,6 +581,7 @@
 \newcommand*{\YAD@generic@argument@translate}[1]{%
   \texorpdfstring{\YAD@generic@argument{\translate{meta-#1}}}{<#1>}%
 }%
+\newcommand{\YAD@frametitle@set}{}%
 \define@cmdkeys{YAD}{%
   role,%
   corporation,%
@@ -593,7 +599,8 @@
   affiliationsecondary,%
   sepcorpaffilenglish,%
   name,%
-  depth%
+  depth,%
+  frametitle%
 }[]%
 \define@boolkeys{YAD}{%
   nologo,%
@@ -602,11 +609,8 @@
   mcf*,%
   juniorresearcher,%
   juniorresearcher*,%
-  seniorresearcher,%
+  seniorresearcher%
 }[true]%
-\newcommand*{\yatsetup}[1]{%
-  \presetkeys{YAD}{#1}{}%
-}%
 \presetkeys{YAD}{%
   role=,%
   corporation=,%
@@ -632,7 +636,12 @@
   juniorresearcher=false,%
   juniorresearcher*=false,%
   seniorresearcher=false,%
+  frametitle=fbox%
 }{}%
+\newcommand*{\yadsetup}[1]{%
+  \presetkeys{YAD}{#1}{}%
+}%
+\@onlypreamble\yadsetup%
 \DTLnewdb{YAD@staffs}%
 \DTLnewrow{YAD@staffs}%
 \DTLnewdbentry{YAD@staffs}{YAD@the@staff}{referees}%
@@ -1385,33 +1394,45 @@
       un nombre entier.%
     }%
   }{%
-    \IfDecimal{\YAD@yeardate}{%
-      \csxdef{YAD@yeardate}{\number\integerpart}%
-    }{%
-    }%
-  }%
+    % \IfDecimal{\YAD@yeardate}{%
+    %   \csxdef{YAD@yeardate}{\number\integerpart}%
+    % }{%
+    % }%
+    % \ifnumless{\YAD@yeardate}{\number\year}{%
+    %   \YAD@ClassError[nodate]{%
+    %     Annee de la date de soutenance non valide%
+    %   }{%
+    %     La commande \protect\date{#1}{#2}{#3}\space\MessageBreak%
+    %     n'a pas ete correctement saisie car le numero de\MessageBreak%
+    %     l'annee (`#3') n'est pas valide : ce doit etre\MessageBreak%
+    %     un nombre entier (superieur ou egal a \number\year).%
+    %   }%
+    % }{%
+      \toggletrue{YAD@valid@year}%
+    % }%
+   }%
   \ifboolexpr{%
     togl {YAD@valid@day}%
     and togl {YAD@valid@month}%
     and togl {YAD@valid@year}%
   }{%
     \csdef{printdate}{%
-      \setdatenumber{\YAD@yeardate}{\YAD@monthdate}{\YAD@daydate}%
-      \ifnumgreater{\value{datetoday}}{\value{datenumber}}{%
-        \YAD@generic@argument@translate{date}%
-        \YAD@ClassError[nodate]{%
-          Date de soutenance non valide%
-        }{%
-          La date saisie
-          (`\protect\date{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}') n'est
-          pas\MessageBreak%
-          correcte car elle ne doit pas etre anterieure\MessageBreak%
-          a la date du jour
-          (\protect\date{\number\day}{\number\month}{\number\year}).%
-        }%
-      }{%
+      % \setdatenumber{\YAD@yeardate}{\YAD@monthdate}{\YAD@daydate}%
+      % \ifnumgreater{\value{datetoday}}{\value{datenumber}}{%
+      %   \YAD@generic@argument@translate{date}%
+      %   \YAD@ClassError[nodate]{%
+      %     Date de soutenance non valide%
+      %   }{%
+      %     La date saisie
+      %     (`\protect\date{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}') n'est
+      %     pas\MessageBreak%
+      %     correcte car elle ne doit pas etre anterieure\MessageBreak%
+      %     a la date du jour
+      %     (\protect\date{\number\day}{\number\month}{\number\year}).%
+      %   }%
+      % }{%
         \formatdate{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}%
-      }%
+      % }%
     }%
   }{%
     \csdef{printdate}{%
@@ -1958,6 +1979,11 @@
 \else%
 \toggletrue{YAD@cover@page}%
 \fi%
+\let\origtcb@shadow@prepare=\tcb@shadow@prepare%
+\def\tcb@shadow@prepare#1#2{%
+  \origtcb@shadow@prepare{#1}{#2}%
+  \let\tcb@shadow@arc=\tcb@zpt%
+}%
 \renewcommand{\maketitle}{%
   \toggletrue{YAD@maketitle@used}%
   \setlength{\fboxsep}{10pt}%
@@ -1968,12 +1994,31 @@
 \begingroup%
 \expandafter\selectlanguage\expandafter{##1}%
   \begin{lrbox}{\YAD@titlebox}
-    \fbox{%
-      \noindent%
-      \begin{minipage}{\linewidth-2\fboxsep-2\fboxrule}
+    \ifthenelse{\equal{\cmdKV@YAD@frametitle}{none}}{%
+    }{%
+      \tcbset{colback=white,boxsep=3pt,boxrule=0.4pt,arc=0mm}%
+      \ifthenelse{\equal{\cmdKV@YAD@frametitle}{shadowbox}}{%
+        \tcbset{enhanced,drop shadow southeast={black,opacity=1}}%
+      }{%
+        \ifthenelse{\equal{\cmdKV@YAD@frametitle}{ovalbox}}{%
+          \tcbset{arc=3mm}%
+        }{%
+          \ifthenelse{\equal{\cmdKV@YAD@frametitle}{fbox}}{%
+          }{%
+            \tcbset{code={\pgfkeysalsofrom\cmdKV@YAD@frametitle}}%
+          }%
+        }%
+      }%
+      \begin{tcolorbox}
+    }%
+    \noindent%
+    \begin{minipage}{\linewidth-2\fboxsep-2\fboxrule}
       \onehalfspacing%
       \noindent%
-      \YAD@translation{thesistitle}%
+      \ifthenelse{\equal{\cmdKV@YAD@frametitle}{none}}{%
+      }{%
+        \YAD@translation{thesistitle}%
+      }%
       \par%
       \centering%
       \Huge\bfseries%
@@ -2000,7 +2045,10 @@
         \Large\printsubtitle%
       }%
     \end{minipage}%
-    }%
+    \ifthenelse{\equal{\cmdKV@YAD@frametitle}{none}}{%
+    }{%
+    \end{tcolorbox}
+  }%
   \end{lrbox}
   \settototalheight{\YAD@titleboxheight}{\YAD@titlebox}%
   \setlength{\YAD@otherboxheight}{0.5\paperheight-\YAD@titleboxheight-2cm}%
@@ -2166,10 +2214,18 @@
         \YAD@translation{speciality} \textbf{\printspeciality}%
       }
     \end{center}
-  \ifdraft{}{\vspace*{\stretch{.25}}}%
   % \end{minipage}%
   \begin{center}
+    \ifthenelse{\equal{\cmdKV@YAD@frametitle}{none}}{%
+      \ifdraft{}{\vspace*{\stretch{2}}}%
+    }{%
+      \ifdraft{}{\vspace*{\stretch{.25}}}%
+    }%
     \usebox{\YAD@titlebox}%
+    \ifthenelse{\equal{\cmdKV@YAD@frametitle}{none}}{%
+      \ifdraft{}{\vspace*{\stretch{2}}}%
+    }{%
+    }%
   \end{center}
   % \noindent%
   % \begin{minipage}[c][\YAD@otherboxheight][c]{\YAD@titleboxwidth}
@@ -2211,6 +2267,10 @@
     \docsvlist{english,french}%
     \fi%
   }%
+}{%
+}%
+\ifthenelse{\equal{\cmdKV@YAD@frametitle}{shadowbox}}{%
+  \let\tcb@shadow@prepare=\origtcb@shadow@prepare%
 }{%
 }%
 \expandafter\selectlanguage\expandafter{\YAD@mainlanguage}%
