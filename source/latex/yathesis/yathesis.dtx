@@ -270,6 +270,17 @@ This work consists of the file  yathesis.dtx
   \file{thesis.cfg}{\from{\YAD@sampletemplates.dtx}{cfg-master}}
   \file{macros.tex}{\from{\YAD@sampletemplates.dtx}{macros-master}}
 }%
+\usedir{doc/latex/\YAD@classname/\YAD@masterslavesfilestemplate/auxiliaires}
+\generate{
+  \nopreamble\nopostamble
+  \file{bibliographie.bib}{\from{\YAD@sampletemplates.dtx}{bibliography-master}}
+}%
+\usedir{doc/latex/\YAD@classname/\YAD@masterslavesfilestemplate/annexes}
+\generate{
+  \nopreamble\nopostamble
+  \file{annexeI.tex}{\from{\YAD@sampletemplates.dtx}{annexe-masterI}}
+  \file{annexeII.tex}{\from{\YAD@sampletemplates.dtx}{annexe-masterII}}
+}%
 \usedir{doc/latex/\YAD@classname/\YAD@masterslavesfilestemplate/corps}
 \generate{
   \nopreamble\nopostamble

@@ -1163,9 +1163,15 @@ Dans ce chapitre, nous concluons l'étude du rire du chaos.
 %
 % Premier chapitre annexe (éventuel)
 %COMMENT
-%<single-template>% \chapter{...}
-%<single-template>% ...
-%<these-master>% \include{corps/}
+%</these-sample|single-sample|single-template|these-master>
+%<*single-template|annexe-masterI>
+%<<COMMENT
+% \chapter{...}
+% ...
+%COMMENT
+%</single-template|annexe-masterI>
+%<*these-sample|single-sample|single-template|these-master>
+%<these-master>% \include{annexes/annexeI}
 %<these-sample>\include{annexes/juridique}
 %</these-sample|single-sample|single-template|these-master>
 %<*juridique-sample|single-sample>
@@ -1188,9 +1194,15 @@ Cette partie regroupe les documents juridiques officiels.
 %<<COMMENT
 % Deuxième chapitre annexe (éventuel)
 %COMMENT
-%<single-template>% \chapter{...}
-%<single-template>% ...
-%<these-master>% \include{corps/}
+%</these-sample|single-sample|single-template|these-master>
+%<*single-template|annexe-masterII>
+%<<COMMENT
+% \chapter{...}
+% ...
+%COMMENT
+%</single-template|annexe-masterII>
+%<*these-sample|single-sample|single-template|these-master>
+%<these-master>% \include{annexes/annexeII}
 %<these-sample>\include{annexes/listings}
 %</these-sample|single-sample|single-template|these-master>
 %<*listings-sample|single-sample>
@@ -1281,6 +1293,11 @@ int factorielle(int n)
 %
 %    \begin{macrocode}
 %</these-sample|single-sample|single-template|these-master>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%<*bibliography-master>
+%</bibliography-master>
 %    \end{macrocode}
 %
 %    \begin{macrocode}
