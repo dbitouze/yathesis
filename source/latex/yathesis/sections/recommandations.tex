@@ -54,14 +54,20 @@ on peut recourir, non pas à ×\institute{ULCO}×, mais à :
 \end{preamblecode}
 \end{dbexample}
 
-\begin{dbremark}{Acronymes et expressions séparatrices contextuelles}{}
-  L'\vref{wa:separateurs} a déjà signalé que, si de telles commandes
-  d'acronymes sont employées pour spécifier les affiliations des membres du
-  jury (clé \refKey{affiliation}), les expressions contextuelles séparant
-  corporations et instituts ne donneront pas toujours le résultat escompté (en
-  français notamment). On pourra alors le cas échéant faire usage des clés
-  \refKey{sepcorpaffilfrench} ou \refKey{sepcorpaffilenglish} pour redéfinir
-  localement ces expressions.
+\begin{dbremark}{Acronymes et élisions automatiques}{}
+  Les \vref{wa:elision-disclaimer,wa:elision-separateurs} ont déjà signalé que,
+  si de telles commandes d'acronymes sont employées pour spécifier les
+  instituts (commandes \refCom{institute} et \refCom{coinstitute}) ou les
+  affiliations des membres du jury (clé \refKey{affiliation}), les élisions
+  automatiques de la clause de non-responsabilité ou des expressions
+  contextuelles séparant corporations et affiliations ne donneront pas toujours
+  le résultat escompté (en français notamment). On pourra alors le cas échéant
+  faire usage :
+  \begin{itemize}
+  \item de la commande \refCom{disclaimer} ;
+  \item des clés \refKey{sepcorpaffilfrench} ou \refKey{sepcorpaffilenglish} ;
+  \end{itemize}
+  pour redéfinir ces expressions.
 \end{dbremark}
 
 \section{Scission du mémoire en fichiers maître et esclaves}

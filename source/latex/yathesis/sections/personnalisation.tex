@@ -345,26 +345,26 @@ Sur les pages de titre, chaque membre du jury peut être précisé notamment par
 Comme illustré \vref{fig:maketitle}, si ces deux précisions sont présentes,
 elles sont par défaut séparées :
 \begin{description}
-\item[en français] par l'une des deux expressions contextuelles suivantes,
-  selon que l'initiale de l'affiliation est une voyelle ou une consonne:
+\item[en français] par l'une des deux expressions contextuelles suivantes :
   \begin{itemize}
   \item \enquote{\textvisiblespace{}à l'}\footnote{Le symbole
       \enquote{\textvisiblespace{}} matérialise une espace.} ;
   \item \enquote{\textvisiblespace{}au\textvisiblespace{}} ;
   \end{itemize}
+  où l'article défini est automatiquement élidé selon l'initiale (voyelle ou
+  consonne) de l'affiliation ;
 \item[en anglais] par l'expression fixe (non contextuelle)
   \enquote{\textvisiblespace{}at\textvisiblespace{}}.
 \end{description}
 
-\begin{dbwarning}{Expressions contextuelles non robustes}{separateurs}
-  Les expressions contextuelles en français ne sont pas robustes. Elles peuvent
-  en effet ne pas donner le résultat escompté si la valeur de la clé
-  \refKey{affiliation}, définissant l'affiliation, a pour initiale :
+\begin{dbwarning}{Élision automatique non robuste}{elision-separateurs}
+  L'élision automatique des expressions contextuelles en français n'est pas
+  robuste : elle peut en effet ne pas donner le résultat escompté si la valeur
+  de la clé \refKey{affiliation}, définissant l'affiliation, a pour initiale :
   \begin{itemize}
   \item une consonne, mais est de genre féminin ;
-  \item une voyelle, mais par le truchement d'une commande\footnote{Notamment
-      une commande d'acronyme \phrase*{telle que \docAuxCommand{gls} ou
-        \docAuxCommand{acrshort}}.}, et non pas \enquote{directement}.
+  \item une voyelle, mais par le truchement d'une commande\commandeacronyme, et
+    non pas \enquote{directement}.
   \end{itemize}
 \end{dbwarning}
 
