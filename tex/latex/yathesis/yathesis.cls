@@ -11,8 +11,8 @@
 %% Released under the LaTeX Project Public License v1.3c or later
 %% See http://www.latex-project.org/lppl.txt
 %% -----------------------------------------------------------------------
-\def\fileversion{v0.99c}
-\def\filedate{2014/06/06}
+\def\fileversion{v0.99d}
+\def\filedate{2014/06/08}
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesClass{yathesis}[\filedate\space\fileversion\space Yet another class for writing thesis (DB)]
 \RequirePackage{xkeyval}[2012/10/14]%
@@ -741,57 +741,59 @@
 \newcommand*{\YAD@au}{ au }%
 \newcommand*{\YAD@del}{ de l'}%
 \newcommand*{\YAD@du}{ du }%
-\newcommand*{\YAD@alaudeldu}[3]{%
+\newcommand*{\YAD@if@starts@with@vowel}[3]{%
   \ifboolexpr{%
-    test {\IfBeginWith{#3}{a}} or %
-    test {\IfBeginWith{#3}{e}} or %
-    test {\IfBeginWith{#3}{i}} or %
-    test {\IfBeginWith{#3}{o}} or %
-    test {\IfBeginWith{#3}{u}} or %
-    test {\IfBeginWith{#3}{y}} or %
-    test {\IfBeginWith{#3}{\`a}} or %
-    test {\IfBeginWith{#3}{\^a}} or %
-    test {\IfBeginWith{#3}{\"a}} or %
-    test {\IfBeginWith{#3}{\'e}} or %
-    test {\IfBeginWith{#3}{\`e}} or %
-    test {\IfBeginWith{#3}{\^e}} or %
-    test {\IfBeginWith{#3}{\"e}} or %
-    test {\IfBeginWith{#3}{\^i}} or %
-    test {\IfBeginWith{#3}{\"i}} or %
-    test {\IfBeginWith{#3}{\^o}} or %
-    test {\IfBeginWith{#3}{\"o}} or %
-    test {\IfBeginWith{#3}{\`u}} or %
-    test {\IfBeginWith{#3}{\^u}} or %
-    test {\IfBeginWith{#3}{\"u}} or %
-    test {\IfBeginWith{#3}{\"y}} or %
-    test {\IfBeginWith{#3}{A}} or %
-    test {\IfBeginWith{#3}{E}} or %
-    test {\IfBeginWith{#3}{I}} or %
-    test {\IfBeginWith{#3}{O}} or %
-    test {\IfBeginWith{#3}{U}} or %
-    test {\IfBeginWith{#3}{Y}} or %
-    test {\IfBeginWith{#3}{\`A}} or %
-    test {\IfBeginWith{#3}{\^A}} or %
-    test {\IfBeginWith{#3}{\"A}} or %
-    test {\IfBeginWith{#3}{\'E}} or %
-    test {\IfBeginWith{#3}{\`E}} or %
-    test {\IfBeginWith{#3}{\^E}} or %
-    test {\IfBeginWith{#3}{\"E}} or %
-    test {\IfBeginWith{#3}{\^I}} or %
-    test {\IfBeginWith{#3}{\"I}} or %
-    test {\IfBeginWith{#3}{\^O}} or %
-    test {\IfBeginWith{#3}{\"O}} or %
-    test {\IfBeginWith{#3}{\`U}} or %
-    test {\IfBeginWith{#3}{\^U}} or %
-    test {\IfBeginWith{#3}{\"U}} or %
-    test {\IfBeginWith{#3}{\"Y}} or %
-    test {\IfBeginWith{#3}{\ae}} or %
-    test {\IfBeginWith{#3}{\oe}} or %
-    test {\IfBeginWith{#3}{\AE}} or %
-    test {\IfBeginWith{#3}{\OE}}%
+    test {\IfBeginWith{#1}{a}} or %
+    test {\IfBeginWith{#1}{e}} or %
+    test {\IfBeginWith{#1}{i}} or %
+    test {\IfBeginWith{#1}{o}} or %
+    test {\IfBeginWith{#1}{u}} or %
+    test {\IfBeginWith{#1}{y}} or %
+    test {\IfBeginWith{#1}{\`a}} or %
+    test {\IfBeginWith{#1}{\^a}} or %
+    test {\IfBeginWith{#1}{\"a}} or %
+    test {\IfBeginWith{#1}{\'e}} or %
+    test {\IfBeginWith{#1}{\`e}} or %
+    test {\IfBeginWith{#1}{\^e}} or %
+    test {\IfBeginWith{#1}{\"e}} or %
+    test {\IfBeginWith{#1}{\^i}} or %
+    test {\IfBeginWith{#1}{\"i}} or %
+    test {\IfBeginWith{#1}{\^o}} or %
+    test {\IfBeginWith{#1}{\"o}} or %
+    test {\IfBeginWith{#1}{\`u}} or %
+    test {\IfBeginWith{#1}{\^u}} or %
+    test {\IfBeginWith{#1}{\"u}} or %
+    test {\IfBeginWith{#1}{\"y}} or %
+    test {\IfBeginWith{#1}{A}} or %
+    test {\IfBeginWith{#1}{E}} or %
+    test {\IfBeginWith{#1}{I}} or %
+    test {\IfBeginWith{#1}{O}} or %
+    test {\IfBeginWith{#1}{U}} or %
+    test {\IfBeginWith{#1}{Y}} or %
+    test {\IfBeginWith{#1}{\`A}} or %
+    test {\IfBeginWith{#1}{\^A}} or %
+    test {\IfBeginWith{#1}{\"A}} or %
+    test {\IfBeginWith{#1}{\'E}} or %
+    test {\IfBeginWith{#1}{\`E}} or %
+    test {\IfBeginWith{#1}{\^E}} or %
+    test {\IfBeginWith{#1}{\"E}} or %
+    test {\IfBeginWith{#1}{\^I}} or %
+    test {\IfBeginWith{#1}{\"I}} or %
+    test {\IfBeginWith{#1}{\^O}} or %
+    test {\IfBeginWith{#1}{\"O}} or %
+    test {\IfBeginWith{#1}{\`U}} or %
+    test {\IfBeginWith{#1}{\^U}} or %
+    test {\IfBeginWith{#1}{\"U}} or %
+    test {\IfBeginWith{#1}{\"Y}} or %
+    test {\IfBeginWith{#1}{\ae}} or %
+    test {\IfBeginWith{#1}{\oe}} or %
+    test {\IfBeginWith{#1}{\AE}} or %
+    test {\IfBeginWith{#1}{\OE}}%
+  }{%
+    #2%
+  }{%
+    #3%
   }%
-  {#1}{#2}%
-  #3%
 }%
 \newcommand*{\YAD@committee@tabular}{%
   {%
@@ -899,7 +901,7 @@
                   \YAD@committeemember@affiliation%
                 }{%
                   \ifthenelse{\equal{\YAD@committeemember@sepcorpaffil}{}}{%
-                    \YAD@alaudeldu{\YAD@al}{\YAD@au}{\YAD@committeemember@affiliation}%
+                    \YAD@if@starts@with@vowel{\YAD@committeemember@affiliation}{\YAD@al}{\YAD@au}\YAD@committeemember@affiliation%
                   }{%
                     \YAD@committeemember@sepcorpaffil\YAD@committeemember@affiliation%
                   }%
@@ -984,6 +986,7 @@
   }%
   \ifthenelse{\equal{#1}{entite}}{%
     \expandafter\newcommand\expandafter{\csname #2\endcsname}[2][]{%
+     \csdef{YAD@#2}{##2}%
 \csdef{print#2}{%
   \@ifstar{\csuse{YAD@print#2@star}}{\csuse{YAD@print#2@nostar}}%
 }%
@@ -3007,14 +3010,19 @@
 \xpretocmd{\part}{\setsecnumdepth{\YAD@secnumdepth}}{}{}%
 \disclaimer{%
   \IfLanguageName{french}{%
-    L'%
     \ifundef{\printinstitute}{%
-      \YAD@generic@argument@translate{institute}
+      L'\YAD@generic@argument@translate{institute}
     }{%
-      \printinstitute*
+      \YAD@if@starts@with@vowel{\YAD@institute}{L'}{Le }\printinstitute*
     }%
     %
-    \ifundef{\printcoinstitute}{n'entend}{et l'\printcoinstitute*{} n'entendent}
+    \ifundef{\printcoinstitute}{%
+      n'entend
+    }{%
+      et
+      \YAD@if@starts@with@vowel{\YAD@coinstitute}{l'}{le }\printcoinstitute*
+      n'entendent
+    }%
     %
     donner aucune approbation ni improbation aux opinions \'emises dans les
     th\`eses : ces opinions devront \^etre consid\'er\'ees comme propres \`a
