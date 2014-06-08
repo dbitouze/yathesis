@@ -37,12 +37,13 @@ Cette section détaille les commandes permettant de préparer et produire les
 
 \section{Clause de non-responsabilité}
 \label{sec:clause-de-non}
+\changes{v0.99d}{2014/06/08}{Dans la clause de non-responsabilité, élision
+  automatique des articles définis précédant \meta{institut} et
+  \meta{co-institut} selon les initiales de ceux-ci}
 
 La \yatcl{} permet de faire figurer une clause de non-responsabilité, telle
-qu'exigée par certains instituts. Celle-ci apparaît sur une page dédiée et :
-\begin{enumerate}
-\item a pour contenu par défaut une phrase semblable
-  à\selonlangue{} :
+qu'exigée par certains instituts. Celle-ci apparaît sur une page dédiée et
+a pour contenu par défaut une phrase semblable à\selonlangue{} :
   \begin{itemize}
   \item \enquote{L'\meta{institut} n'entend donner aucune
       approbation ni improbation aux opinions \'emises dans les th\`eses : ces
@@ -53,8 +54,6 @@ qu'exigée par certains instituts. Celle-ci apparaît sur une page dédiée et :
   \end{itemize}
   où l'\meta{institut} est celui défini par la commande \refCom{institute}
   \phrase*{auquel est adjoint l'éventuel institut de cotutelle}.
-\item peut être redéfinie au moyen de la commande \refCom{disclaimer}.
-\end{enumerate}
 
 La page dédiée à la clause de non-responsabilité est produite par la commande
 \refCom{makedisclaimer}.
@@ -85,9 +84,26 @@ La page dédiée à la clause de non-responsabilité est produite par la command
   \label{fig:disclaimerpage}
 \end{figure}
 
+\begin{dbwarning}{Élision automatique non robuste}{elision-disclaimer}
+  Dans la clause de non-responsabilité, l'article défini précédant
+  \meta{institut} est automatiquement élidé selon l'initiale (voyelle ou
+  consonne) du mot suivant. Cette élision automatique n'est donc pas robuste :
+  elle peut ne pas donner le résultat escompté si \meta{institut} a pour
+  initiale :
+  \begin{itemize}
+  \item une consonne, mais est de genre féminin ;
+  \item une voyelle, mais par le truchement d'une commande\commandeacronyme, et
+    non pas \enquote{directement}.
+  \end{itemize}
+\end{dbwarning}
+
+Pour pallier à cet inconvénient, et aussi pour permettre de redéfinir la phrase
+par défaut si elle ne convient pas, on pourra recourir à la commande
+\refCom{disclaimer}.
+
 \begin{docCommand}{disclaimer}{\marg{clause}}
-  Cette commande permet de redéfinir le contenu par défaut de la
-  \meta{clause} de non-responsabilité.
+  Cette commande, à placer avant \refCom{makedisclaimer}, permet de redéfinir
+  le contenu par défaut de la \meta{clause} de non-responsabilité.
 \end{docCommand}
 
 \section{Mots clés}\label{sec:mots-cles}
