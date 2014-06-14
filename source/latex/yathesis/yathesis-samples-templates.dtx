@@ -99,9 +99,7 @@
 %<cfg-sample|single-sample>\addbibresource{biblatex-examples.bib} % Fournie par biblatex
 %<<COMMENT
 %
-% Configuration des styles du glossaire et de la liste d'acronymes, si
-% souhaitée. Sinon, il suffit de commenter ou de supprimer les lignes
-% suivantes.
+% Configuration des styles du glossaire et de la liste d'acronymes. Facultatif.
 %COMMENT
 %<single-template|cfg-master>% \setglossarystyle{}
 %<single-template|cfg-master>% \setacronymstyle{}
@@ -109,16 +107,14 @@
 %<cfg-sample|single-sample>\setacronymstyle{long-sc-short}
 %<<COMMENT
 %
-% Génération du glossaire (obligatoire si le package « glossaries » est
-% chargé), si souhaitée. Sinon, il suffit de commenter ou de supprimer la
-% ligne suivante.
+% Génération du glossaire. Facultatif (mais obligatoire si le package
+% « glossaries » est chargé).
 %COMMENT
 %<single-template|cfg-master>% \makeglossaries
 %<cfg-sample|single-sample>\makeglossaries
 %<<COMMENT
 %
-% Spécification de la ou des ressources terminologiques, si souhaitée. Sinon,
-% il suffit de commenter ou de supprimer les lignes suivantes.
+% Spécification de la ou des ressources terminologiques. Facultatif.
 %COMMENT
 %<single-template>% \loadglsentries{}
 %<single-template>% \loadglsentries{}
@@ -204,8 +200,7 @@
 %<*single-template|single-sample|cfg-master|cfg-sample>
 %<<COMMENT
 %
-% Génération de l'index (obligatoire si un index est souhaité), si
-% souhaitée. Sinon, il suffit de commenter ou de supprimer la ligne suivante.
+% Génération de l'index. Facultatif.
 %COMMENT
 %<single-template|cfg-master>% \makeindex
 %<cfg-sample|single-sample>\makeindex
@@ -300,8 +295,7 @@
 %<<COMMENT
 %
 % Sous-titre de la thèse dans la langue principale (argument obligatoire) et
-% dans la langue secondaire (argument optionnel). À décommenter si souhaité,
-% à commenter ou à supprimer sinon.
+% dans la langue secondaire (argument optionnel). Facultatif.
 %COMMENT
 %<single-template|characteristics-master>% \subtitle[]{}
 %<characteristics-sample|single-sample>\subtitle[Chaos' laugh]{Le rire du chaos}
@@ -315,8 +309,7 @@
 %<<COMMENT
 %
 % Spécialité dans la langue principale (argument obligatoire) et dans la langue
-% secondaire (argument optionnel). À décommenter si souhaitée, à commenter ou
-% à supprimer sinon.
+% secondaire (argument optionnel). Facultatif.
 %COMMENT
 %<single-template|characteristics-master>\speciality[]{}
 %<characteristics-sample|single-sample>\speciality[Dynamical systems]{Systèmes dynamiques}
@@ -329,15 +322,13 @@
 %<characteristics-sample|single-sample>\date{1}{1}{2015}
 %<<COMMENT
 %
-% Sujet pour les méta-données du PDF. À décommenter si souhaité, à commenter ou
-% à supprimer sinon.
+% Sujet pour les méta-données du PDF. Facultatif.
 %COMMENT
 %<single-template|characteristics-master>\subject[]{}
 %<characteristics-sample|single-sample>\subject[Chaotic Laugh]{Rire chaotique}
 %<<COMMENT
 %
-% Nom (argument obligatoire) du PRES. À décommenter si souhaité, à commenter ou
-% à supprimer sinon.
+% Nom (argument obligatoire) du PRES. Facultatif.
 %COMMENT
 %<single-template|characteristics-master>\pres[logo=,url=]{}
 %<characteristics-sample>\pres[logo=images/pres]{Université Lille Nord de France}
@@ -352,16 +343,14 @@
 %<<COMMENT
 %
 % En cas de cotutelle (normalement, seulement dans le cas de cotutelle
-% internationale), nom (argument obligatoire) du second
-% institut. À décommenter si souhaité, à commenter ou à supprimer sinon.
+% internationale), nom (argument obligatoire) du second institut. Facultatif.
 %COMMENT
 %<single-template|characteristics-master>% \coinstitute[logo=]{}
 %<characteristics-sample>\coinstitute[logo=images/paris13,url=http://www.univ-paris13.fr/]{Université de Paris~13}
 %<single-sample>\coinstitute[logo=paris13,url=http://www.univ-paris13.fr/]{Université de Paris~13}
 %<<COMMENT
 %
-% Nom (argument obligatoire) de l'école doctorale. À décommenter si souhaitée,
-% à commenter ou à supprimer sinon.
+% Nom (argument obligatoire) de l'école doctorale. Facultatif.
 %COMMENT
 %<single-template|characteristics-master>\doctoralschool[url=]{}
 %<characteristics-sample|single-sample>\doctoralschool[url=http://edspi.univ-lille1.fr/]{ED Régionale SPI 72}
@@ -434,8 +423,7 @@
 %<<COMMENT
 %
 % Mention du numéro d'ordre de la thèse (s'il est connu, ce numéro est
-% à spécifier en argument optionnel). À décommenter si souhaité, à commenter
-% ou à supprimer sinon.
+% à spécifier en argument optionnel). Facultatif.
 %COMMENT
 %<single-template|characteristics-master>% \ordernumber[]
 %<characteristics-sample|single-sample>\ordernumber[42]
@@ -461,71 +449,60 @@
 % Début de la partie liminaire de la thèse
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-% Production de la page de clause de non-responsabilité. À décommenter si
-% souhaitée, à commenter ou à supprimer sinon.
+% Production de la page de clause de non-responsabilité. Facultatif.
 %COMMENT
 \makedisclaimer
 %<<COMMENT
 %
-% Production de la page de mots clés. À décommenter si souhaitée, à commenter
-% ou à supprimer sinon.
+% Production de la page de mots clés. Facultatif.
 %COMMENT
 \makekeywords
 %<<COMMENT
 %
 % Production de la page affichant les logo, nom et coordonnées du ou des
 % laboratoires (ou unités de recherche) où la thèse a été
-% préparée. À décommenter si souhaitée, à commenter ou à supprimer sinon.
+% préparée. Facultatif.
 %COMMENT
 \makelaboratory
 %<<COMMENT
 %
-% Dédicace(s). À décommenter si souhaitée(s), à commenter ou à supprimer
-% sinon.
+% Dédicace(s). Facultatif.
 %COMMENT
 %<these-sample|these-master>\input{liminaires/dedicaces}
 %</these-sample|single-template|single-sample|these-master>
 %<*single-template|single-sample|dedications-sample|dedications-master>
-%<dedications-sample|dedications-master>% Dédicace(s). À décommenter si souhaitée(s), à commenter ou à supprimer
-%<dedications-sample|dedications-master>% sinon.
+%<dedications-sample|dedications-master>% Dédicace(s).
 %<single-template|dedications-master>\dedication{}
 %<single-template|dedications-master>\dedication{}
 %<dedications-sample|single-sample>\dedication{Je dédie ce travail\\à tous ceux qui le méritent}
 %<dedications-sample|single-sample>\dedication{À mon directeur bien-aimé !}
 %<dedications-sample|single-sample>\dedication{À mon co-directeur bien-co-aimé !}
-%<<COMMENT
-% Production de la page de dédicace(s). À décommenter si souhaitée, à commenter
-% ou à supprimer sinon.
-%COMMENT
+%<dedications-sample|dedications-master>% Production de la page de dédicace(s).
+%<single-template|single-sample>% Production de la page de dédicace(s). Facultatif.
 \makededications
 %</single-template|single-sample|dedications-sample|dedications-master>
 %<*these-sample|single-sample|single-template|these-master>
 %<<COMMENT
 %
-% Épigraphes(s). À décommenter si souhaitée(s), à commenter ou à supprimer
-% sinon.
+% Épigraphe(s). Facultatif.
 %COMMENT
 %<these-sample|these-master>\input{liminaires/epigraphes}
 %</these-sample|single-sample|single-template|these-master>
 %<*single-template|single-sample|epigraphs-sample|epigraphs-master>
-%<epigraphs-sample|epigraphs-master>% Épigraphes(s). À décommenter si souhaitée(s), à commenter ou à supprimer
-%<epigraphs-sample|epigraphs-master>% sinon.
+%<epigraphs-sample|epigraphs-master>% Épigraphes(s).
 %<single-template|epigraphs-master>\frontepigraph{}{}
 %<single-template|epigraphs-master>\frontepigraph{}{}
 %<single-sample|epigraphs-sample>\frontepigraph{Science sans conscience n'est que ruine de l'âme.}{François Rabelais}
 %<single-sample|epigraphs-sample>\frontepigraph[english]{I can resist everything, except temptation!}{Oscar Wilde}
 %<single-sample|epigraphs-sample>\frontepigraph{Il est plus facile de désintégrer un atome qu'un préjugé.}{Albert Einstein}
-%<<COMMENT
-% Production de la page d'épigraphe(s). À décommenter si souhaitée, à commenter
-% ou à supprimer sinon.
-%COMMENT
+%<epigraphs-sample|epigraphs-master>% Production de la page de d'épigraphe(s).
+%<single-template|single-sample>% Production de la page de d'épigraphe(s). Facultatif.
 \makefrontepigraphs
 %</single-template|single-sample|epigraphs-sample|epigraphs-master>
 %<*these-sample|single-template|single-sample|these-master>
 %<<COMMENT
 %
-% Chapitre de remerciements. À décommenter si souhaité, à commenter ou
-% à supprimer sinon.
+% Chapitre de remerciements. Facultatif.
 %COMMENT
 %<these-sample|these-master>\include{liminaires/remerciements}
 %</these-sample|single-template|single-sample|these-master>
@@ -540,8 +517,7 @@
 %<*these-sample|single-template|single-sample|these-master>
 %<<COMMENT
 %
-% Chapitre d'avertissement. À décommenter si souhaité, à commenter ou
-% à supprimer sinon.
+% Chapitre d'avertissement. Facultatif.
 %COMMENT
 %<these-master>% \include{liminaires/avertissement}
 %<these-sample>\include{liminaires/avertissement}
@@ -584,22 +560,19 @@
 %<*these-sample|single-sample|single-template|these-master>
 %<<COMMENT
 %
-% Liste des acronymes. À décommenter si souhaitée, à commenter ou à supprimer
-% sinon.
+% Liste des acronymes. Facultatif.
 %COMMENT
 %<single-template|these-master>% \printacronyms
 %<these-sample|single-sample>\printacronyms
 %<<COMMENT
 %
-% Liste des symboles. À décommenter si souhaitée, à commenter ou à supprimer
-% sinon.
+% Liste des symboles. Facultatif.
 %COMMENT
 %<single-template|these-master>% \printsymbols
 %<these-sample|single-sample>\printsymbols
 %<<COMMENT
 %
-% Chapitre d'avant-propos. À décommenter si souhaité, à commenter ou
-% à supprimer sinon.
+% Chapitre d'avant-propos. Facultatif.
 %COMMENT
 %<these-master>% \include{liminaires/avant-propos}
 %<these-sample>\include{liminaires/avant-propos}
@@ -621,20 +594,18 @@
 \tableofcontents[depth=chapter,name=Sommaire]
 %<<COMMENT
 %
-% Liste des tableaux. À décommenter si souhaitée, à commenter ou à supprimer
-% sinon.
+% Liste des tableaux. Facultatif.
 %COMMENT
 \listoftables
 %<<COMMENT
 %
-% Table des figures. À décommenter si souhaitée, à commenter ou à supprimer
-% sinon.
+% Table des figures. Facultatif.
 %COMMENT
 \listoffigures
 %<<COMMENT
 %
 % Table des listings (nécessite que le package « listings » soit
-% chargé). À décommenter si souhaitée, à commenter ou à supprimer sinon.
+% chargé). Facultatif.
 % \lstlistoflistings
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1265,14 +1236,13 @@ int factorielle(int n)
 \backmatter
 %<<COMMENT
 %
-% Glossaire (si souhaité distinct de la liste des acronymes). À décommenter si
-% souhaité, à commenter ou à supprimer sinon.
+% Glossaire (si souhaité distinct de la liste des acronymes). Facultatif.
 %COMMENT
 %<single-template|these-master>% \printglossary
 %<these-sample|single-sample>\printglossary
 %<<COMMENT
 %
-% Index. À décommenter si souhaité, à commenter ou à supprimer sinon.
+% Index. Facultatif.
 %COMMENT
 %<single-template|these-master>% \printindex
 %<these-sample|single-sample>\printindex
@@ -1283,8 +1253,7 @@ int factorielle(int n)
 \tableofcontents
 %<<COMMENT
 %
-% Production de la 4e de couverture. À décommenter si souhaitée, à commenter ou
-% à supprimer sinon.
+% Production de la 4e de couverture. Facultatif.
 %COMMENT
 \makebackcover
 %<<COMMENT
