@@ -4197,8 +4197,8 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % On fixe la numérotation des pages selon le nombre de pages de titres.
 %    \begin{macrocode}
-\ifnumcomp{\value{YAD@titlepages}}{=}{2}{\addtocounter{page}{2}}{}
-\ifnumcomp{\value{YAD@titlepages}}{=}{3}{\addtocounter{page}{4}}{}
+\ifnumcomp{\value{YAD@titlepages}}{=}{2}{\addtocounter{page}{2}}{}%
+\ifnumcomp{\value{YAD@titlepages}}{=}{3}{\addtocounter{page}{4}}{}%
 %    \end{macrocode}
 % On repasse à la langue par défaut
 %    \begin{macrocode}
@@ -6115,7 +6115,7 @@ This work consists of the file  yathesis.dtx
 #include:bookmark
 #
 # Document class
-#keyvals:\documentclass
+#keyvals:\documentclass/yathesis
 mainlanguage=#french,english
 secnumdepth=#part,chapter,section,subsection,subsubsection,paragraph,subparagraph
 space=#single,onehalf,double
