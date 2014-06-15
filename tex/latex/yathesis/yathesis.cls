@@ -585,6 +585,7 @@
 \define@cmdkeys{YAD}{%
   role,%
   corporation,%
+  corps,%
   url,%
   logoheight,%
   logo,%
@@ -614,6 +615,7 @@
 \presetkeys{YAD}{%
   role=,%
   corporation=,%
+  corps=,%
   url=,%
   logoheight=\YAD@logo@height,%
   logo=,%
@@ -661,23 +663,30 @@
   \dtlexpandnewvalue%
   \setkeys{YAD}{#1}%
   \ifKV@YAD@professor%
-  \setkeys{YAD}{#1,corporation=professor}%
+  \setkeys{YAD}{#1,corps=professor}%
   \fi%
   \ifKV@YAD@mcf%
-  \setkeys{YAD}{#1,corporation=mcf}%
+  \setkeys{YAD}{#1,corps=mcf}%
   \fi%
   \csuse{ifKV@YAD@mcf*}%
-  \setkeys{YAD}{#1,corporation=mcf*}%
+  \setkeys{YAD}{#1,corps=mcf*}%
   \fi%
   \ifKV@YAD@juniorresearcher%
-  \setkeys{YAD}{#1,corporation=juniorresearcher}%
+  \setkeys{YAD}{#1,corps=juniorresearcher}%
   \fi%
   \csuse{ifKV@YAD@juniorresearcher*}%
-  \setkeys{YAD}{#1,corporation=juniorresearcher*}%
+  \setkeys{YAD}{#1,corps=juniorresearcher*}%
   \fi%
   \ifKV@YAD@seniorresearcher%
-  \setkeys{YAD}{#1,corporation=seniorresearcher}%
+  \setkeys{YAD}{#1,corps=seniorresearcher}%
   \fi%
+  \ifthenelse{\equal{\cmdKV@YAD@corporation}{}}{%
+  }{%
+    \ifthenelse{\equal{\cmdKV@YAD@corps}{}}{%
+      \setkeys{YAD}{#1,corps=\cmdKV@YAD@corporation}%
+    }{%
+    }%
+  }%
   \DTLnewrow{#4}%
   \DTLnewdbentry{#4}{firstname}{#2}%
   \DTLnewdbentry{#4}{lastname}{#3}%
@@ -686,10 +695,10 @@
   }{%
     \DTLnewdbentry{#4}{role}{\cmdKV@YAD@role}%
   }%
-  \ifthenelse{\equal{\cmdKV@YAD@corporation}{}}{%
-    \DTLnewdbentry{#4}{corporation}{}%
+  \ifthenelse{\equal{\cmdKV@YAD@corps}{}}{%
+    \DTLnewdbentry{#4}{corps}{}%
   }{%
-    \DTLnewdbentry{#4}{corporation}{\cmdKV@YAD@corporation}%
+    \DTLnewdbentry{#4}{corps}{\cmdKV@YAD@corps}%
   }%
   \ifthenelse{\equal{\cmdKV@YAD@sepcorpaffilfrench}{}}{%
     \DTLnewdbentry{#4}{sepcorpaffilfrench}{\YAD@global@sepcorpaffil@french}%
@@ -810,7 +819,7 @@
             \YAD@committeemember@lastname=lastname,%
             \YAD@committeemember@fistname=firstname,%
             \YAD@committeemember@role=role,%
-            \YAD@committeemember@corporation=corporation,%
+            \YAD@committeemember@corps=corps,%
             \YAD@committeemember@sepcorpaffil=%
             \expandafter\IfLanguageName{french}{%
               sepcorpaffilfrench%
@@ -876,16 +885,16 @@
               }%
             }%
             &
-            % Corporation
+            % Corps
             \YAD@reach@file{%
-              \ifthenelse{\DTLiseq{\YAD@committeemember@corporation}{}}{%
+              \ifthenelse{\DTLiseq{\YAD@committeemember@corps}{}}{%
                 \ifdraft{%
-                  \YAD@generic@argument@translate{corporation}%
+                  \YAD@generic@argument@translate{corps}%
                 }{%
                 }%
               }{%
                 \YAD@translation{%
-                  \YAD@committeemember@corporation%
+                  \YAD@committeemember@corps%
                 }%
               }%
             }%
@@ -897,7 +906,7 @@
                 }{%
                 }%
               }{%
-                \ifthenelse{\DTLiseq{\YAD@committeemember@corporation}{}}{%
+                \ifthenelse{\DTLiseq{\YAD@committeemember@corps}{}}{%
                   \YAD@committeemember@affiliation%
                 }{%
                   \ifthenelse{\equal{\YAD@committeemember@sepcorpaffil}{}}{%
@@ -3227,6 +3236,7 @@
 \expression{meta-lastname}{Nom}{Nom}
 \expression{meta-role}{fonction}{fonction}
 \expression{meta-corporation}{corporation}{corporation}
+\expression{meta-corps}{corps}{corps}
 \expression{meta-affiliation}{affiliation}{affiliation}
 \expression{meta-introduction}{introduction}{introduction}%
 \expression{meta-conclusion}{conclusion}{conclusion}%
@@ -3261,7 +3271,6 @@
 \expression{lbl-cosupervisor}{co-directeur}{Co-Supervisor}%
 \expression{lbl-comonitor}{co-encadrant}{Co-Monitor}%
 \expression{lbl-committeemembers}{Composition du jury}{Committee members}%
-\expression{lbl-conclusion}{Conclusion}{Conclusion}%
 \expression{lbl-supervisor}{directeur}{Supervisor}%
 \expression{lbl-seniorresearcher}{directeur de recherche}{Senior Researcher}%
 \expression{lbl-supervisors}{Directeur de th\`ese}{Supervisor}%
