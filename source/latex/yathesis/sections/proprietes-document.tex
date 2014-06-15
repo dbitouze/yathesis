@@ -465,45 +465,49 @@ permettant d'apporter une ou plusieurs \meta{précision(s)} sur les
 membres du jury. Les clés suivantes sont valables pour chacune
 d'entre elles.
 
-\paragraph{Corporation}
-\label{sec:corporation}
+\paragraph{Corps (de métier)}
+\label{sec:corps}
 
-Les clés suivantes\syntaxeoptions{} permettent de spécifier les corporations
-des membres du jury parmi celles prédéfinies par la \yatcl{}.
+Les clés suivantes\syntaxeoptions{} permettent de spécifier les corps (de
+métier) des membres du jury parmi celles prédéfinies par la \yatcl{}.
 
 \begin{docKey}{professor}{=\docValue{true}\textbar\docValue{false}}{par défaut
     \docValue{true}, initialement \docValue{false}}
-  Cette clé permet de spécifier qu'une personne est professeur d'université.
+  Cette clé permet de spécifier qu'une personne appartient au corps des
+  professeurs d'université.
 \end{docKey}
 %
-\begin{docKey}{seniorresearcher}{=\docValue{true}\textbar\docValue{false}}{par défaut
+\begin{docKey}{seniorresearcher}{=\docValue{true}\textbar\docValue{false}}{par
+    défaut \docValue{true}, initialement \docValue{false}}
+  Cette clé permet de spécifier qu'une personne appartient au corps des
+  directeurs de recherche du \gls{cnrs}.
+\end{docKey}
+%
+\begin{docKey}{mcf}{=\docValue{true}\textbar\docValue{false}}{par défaut
     \docValue{true}, initialement \docValue{false}}
-  Cette clé permet de spécifier qu'une personne est directeur de
-  recherche du \gls{cnrs}.
+  Cette clé permet de spécifier qu'une personne appartient au corps des
+  \glspl{mcf}.
 \end{docKey}
 %
-\begin{docKey}{mcf}{=\docValue{true}\textbar\docValue{false}}{par défaut \docValue{true},
-    initialement \docValue{false}}
-  Cette clé permet de spécifier qu'une personne est \gls{mcf}.
-\end{docKey}
-%
-\begin{docKey}{mcf*}{=\docValue{true}\textbar\docValue{false}}{par défaut \docValue{true},
-    initialement \docValue{false}}
-  Cette clé permet de spécifier qu'une personne est \gls{mcf} \gls{hdr}.
-\end{docKey}
-%
-\begin{docKey}{juniorresearcher}{=\docValue{true}\textbar\docValue{false}}{par défaut
+\begin{docKey}{mcf*}{=\docValue{true}\textbar\docValue{false}}{par défaut
     \docValue{true}, initialement \docValue{false}}
-  Cette clé permet de spécifier qu'une personne est \gls{cr} du \gls{cnrs}.
+  Cette clé permet de spécifier qu'une personne appartient au corps des
+  \glspl{mcf} \gls{hdr}.
 \end{docKey}
 %
-\begin{docKey}{juniorresearcher*}{=\docValue{true}\textbar\docValue{false}}{par défaut
-    \docValue{true}, initialement \docValue{false}}
-  Cette clé permet de spécifier qu'une personne est \gls{cr} \gls{hdr} du
-  \gls{cnrs}.
+\begin{docKey}{juniorresearcher}{=\docValue{true}\textbar\docValue{false}}{par
+    défaut \docValue{true}, initialement \docValue{false}}
+  Cette clé permet de spécifier qu'une personne appartient au corps des
+  \glspl{cr} du \gls{cnrs}.
 \end{docKey}
 %
-\begin{dbexample}{Corporations (prédéfinies)}{}
+\begin{docKey}{juniorresearcher*}{=\docValue{true}\textbar\docValue{false}}{par
+    défaut \docValue{true}, initialement \docValue{false}}
+  Cette clé permet de spécifier qu'une personne appartient au corps des
+  \glspl{cr} \gls{hdr} du \gls{cnrs}.
+\end{docKey}
+%
+\begin{dbexample}{Corps (prédéfinis)}{}
 \begin{bodycode}
 \supervisor[professor]{Michel}{de Montaigne}
 \cosupervisor[juniorresearcher*]{Étienne}{de la Boétie}
@@ -518,9 +522,9 @@ des membres du jury parmi celles prédéfinies par la \yatcl{}.
 \end{bodycode}
 \end{dbexample}
 %
-\begin{dbremark}{Corporations non prédéfinies}{}
-  Il est possible de spécifier d'autres corporations que celles
-  prédéfinies ci-dessus. La \vref{sec:corporations} explique comment procéder.
+\begin{dbremark}{Corps non prédéfinis}{}
+  Il est possible de spécifier d'autres corps que ceux prédéfinis ci-dessus. La
+  \vref{sec:nouveaux-corps} explique comment procéder.
 \end{dbremark}
 %
 % ^^A \begin{docKey}{distinction}{=\meta{distinction}}{pas de valeur par

@@ -331,13 +331,12 @@ Les documents composés avec la \yatcl{} peuvent avoir deux formats de sortie :
   \end{description}
 \end{docKey}
 
-\subsection{Expressions séparant les corporations et instituts des membres
-  du jury}
+\subsection{Expressions séparant les corps et affiliations des membres du jury}
 \label{sec:expr-separ-les}
 
 Sur les pages de titre, chaque membre du jury peut être précisé notamment par :
 \begin{itemize}
-\item sa corporation, cf. \refKey{professor}, \refKey{mcf}, \refKey{mcf*},
+\item son corps, cf. \refKey{professor}, \refKey{mcf}, \refKey{mcf*},
   \refKey{seniorresearcher}, \refKey{juniorresearcher} et
   \refKey{juniorresearcher*} ;
 \item son affiliation, cf. \refKey{affiliation}.
@@ -375,7 +374,7 @@ redéfinies, globalement ou localement.
 \begin{docKey}{sepcorpaffilfrench}{=\meta{expression}}{pas de valeur par
     défaut, initialement \lstinline[showspaces]+\ à l'+ ou \lstinline[showspaces]+\ au\ +}
   Cette option permet de redéfinir l'\meta{expression} employée en français
-  pour séparer les corporations et instituts des membres du jury. Elle peut
+  pour séparer les corps et affiliations des membres du jury. Elle peut
   être employée :
   \begin{description}
   \item[globalement:] elle est alors à spécifier en option de la classe de
@@ -389,8 +388,8 @@ redéfinies, globalement ou localement.
 \begin{docKey}{sepcorpaffilenglish}{=\meta{expression}}{pas valeur par
     défaut, initialement \lstinline[showspaces]+\ at\ +}
   Cette option, analogue à \refKey{sepcorpaffilfrench}, permet de redéfinir
-  l'\meta{expression} employée en anglais pour séparer les corporations et
-  instituts des membres du jury.
+  l'\meta{expression} employée en anglais pour séparer les corps et
+  affiliations des membres du jury.
 \end{docKey}
 
 \begin{dbwarning}{Expressions séparatrices débutant ou finissant par un espace}{}
@@ -410,10 +409,10 @@ redéfinies, globalement ou localement.
   % ^^A
 \end{dbwarning}
 
-\begin{dbexample}{Redéfinition (globale) de l'expression séparant corporation et
-    institut}{}
+\begin{dbexample}{Redéfinition (globale) de l'expression séparant corps et
+    affiliations}{}
   L'exemple suivant montre comment remplacer l'expression (par défaut) séparant
-  corporation et institut par une virgule, et ce :
+  corps et affiliations par une virgule, et ce :
   \begin{itemize}
   \item globalement pour tous les membres du jury;
   \item en anglais.
@@ -423,10 +422,10 @@ redéfinies, globalement ou localement.
 \end{preamblecode}
 \end{dbexample}
 
-\begin{dbexample}{Redéfinition (locale) de l'expression séparant corporation et
-    institut}{}
-  L'exemple suivant montre comment remplacer l'expression séparant corporation
-  et institut par \enquote{\textvisiblespace{}à la\textvisiblespace{}}, et ce :
+\begin{dbexample}{Redéfinition (locale) de l'expression séparant corps et
+    affiliation}{}
+  L'exemple suivant montre comment remplacer l'expression séparant corps et
+  affiliation par \enquote{\textvisiblespace{}à la\textvisiblespace{}}, et ce :
   \begin{itemize}
   \item localement (pour un membre du jury particulier);
   \item en français.
@@ -633,27 +632,32 @@ pourra être donné à la liste des listings, au moyen de:
 \renewcommand\lstlistingname{÷\meta{titre alternatif}÷}
 \end{preamblecode}
 
-\subsection{Nouvelles corporations}\label{sec:corporations}
+\subsection{Nouveaux corps}\label{sec:nouveaux-corps}
 
 On a vu \vref{sec:jury} que les commandes définissant les membres du jury
-permettent de spécifier si ceux-ci appartiennent aux corporations
-\emph{prédéfinies} des professeurs ou des maîtres de conférences (\gls{hdr} ou
-pas) des universités et des directeurs de recherche ou des chargé(e)s de
-recherche (\gls{hdr} ou pas) du \gls{cnrs}. La clé \refKey{corporation}
-suivante permet de spécifier de \emph{nouvelles} corporations à \emph{définir}
-au moyen de la commande \refCom{expression}.
+permettent de spécifier si ceux-ci appartiennent aux corps \emph{prédéfinis}
+des professeurs ou des maîtres de conférences (\gls{hdr} ou pas) des
+universités et des directeurs de recherche ou des chargé(e)s de recherche
+(\gls{hdr} ou pas) du \gls{cnrs}. La clé \refKey{corps} suivante permet de
+spécifier de \emph{nouveaux} corps à \emph{définir} au moyen de la commande
+\refCom{expression}.
 
-\begin{docKey}{corporation}{=\meta{label}}{pas de
+\changes{v0.99e}{2014/06/15}{La clé \protect\refAux{corporation} est remplacée
+  par (et devient un alias de) la clé \protect\refKey{corps}}
+% ^^A \marginpar{Nouveau (2014/06/15) : la clé \protect\refAux{corporation} est
+% ^^A remplacée par (et devient un alias de) la clé \protect\refKey{corps}}
+%
+\begin{docKey}{corps}{=\meta{label}}{pas de
     valeur par défaut, initialement vide}
-  L'option ×corporation=×\meta{label} permet de stipuler une \meta{corporation
-    en français} et une \meta{corporation en anglais} où \meta{label} identifie
-  une expression à définir au moyen de :
+  L'option ×corps=×\meta{label} permet de stipuler un \meta{corps en français}
+  et une \meta{corps en anglais} où \meta{label} identifie une expression
+  à définir au moyen de :
 \begin{preamblecode}[title=Par exemple dans le \File{\configurationfile}]
-\expression{÷\meta{label}÷}{÷\meta{corporation en français}÷}{÷\meta{corporation en anglais}÷}
+\expression{÷\meta{label}÷}{÷\meta{corps en français}÷}{÷\meta{corps en anglais}÷}
 \end{preamblecode}
 \end{docKey}
 
-\begin{dbexample}{Nouvelle corporation}{doctor}
+\begin{dbexample}{Nouveau corps}{doctor}
   Si on souhaite spécifier que certains membres du jury sont docteurs, il
   suffit de définir \phrase{une seule fois} l'expression suivante de label (par
   exemple) ×lbl-doctor× :
@@ -663,8 +667,8 @@ au moyen de la commande \refCom{expression}.
   pour pouvoir ensuite l'utiliser \phrase{autant de fois que souhaité}, par
   exemple ainsi :
 \begin{bodycode}
-\examiner[corporation=lbl-doctor]{Joseph}{Fourier}
-\examiner[corporation=lbl-doctor]{Paul}{Verlaine}
+\examiner[corps=doctor]{Joseph}{Fourier}
+\examiner[corps=doctor]{Paul}{Verlaine}
 \end{bodycode}
 \end{dbexample}
 
