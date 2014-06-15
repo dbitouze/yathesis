@@ -2039,6 +2039,7 @@ This work consists of the file  yathesis.dtx
 \define@cmdkeys{YAD}{%
   role,%
   corporation,%
+  corps,%
   url,%
   logoheight,%
   logo,%
@@ -2068,6 +2069,7 @@ This work consists of the file  yathesis.dtx
 \presetkeys{YAD}{%
   role=,%
   corporation=,%
+  corps=,%
   url=,%
   logoheight=\YAD@logo@height,%
   logo=,%
@@ -2149,22 +2151,22 @@ This work consists of the file  yathesis.dtx
   \dtlexpandnewvalue%
   \setkeys{YAD}{#1}%
   \ifKV@YAD@professor%
-  \setkeys{YAD}{#1,corporation=professor}%
+  \setkeys{YAD}{#1,corps=professor}%
   \fi%
   \ifKV@YAD@mcf%
-  \setkeys{YAD}{#1,corporation=mcf}%
+  \setkeys{YAD}{#1,corps=mcf}%
   \fi%
   \csuse{ifKV@YAD@mcf*}%
-  \setkeys{YAD}{#1,corporation=mcf*}%
+  \setkeys{YAD}{#1,corps=mcf*}%
   \fi%
   \ifKV@YAD@juniorresearcher%
-  \setkeys{YAD}{#1,corporation=juniorresearcher}%
+  \setkeys{YAD}{#1,corps=juniorresearcher}%
   \fi%
   \csuse{ifKV@YAD@juniorresearcher*}%
-  \setkeys{YAD}{#1,corporation=juniorresearcher*}%
+  \setkeys{YAD}{#1,corps=juniorresearcher*}%
   \fi%
   \ifKV@YAD@seniorresearcher%
-  \setkeys{YAD}{#1,corporation=seniorresearcher}%
+  \setkeys{YAD}{#1,corps=seniorresearcher}%
   \fi%
   \DTLnewrow{#4}%
   \DTLnewdbentry{#4}{firstname}{#2}%
@@ -2174,10 +2176,10 @@ This work consists of the file  yathesis.dtx
   }{%
     \DTLnewdbentry{#4}{role}{\cmdKV@YAD@role}%
   }%
-  \ifthenelse{\equal{\cmdKV@YAD@corporation}{}}{%
-    \DTLnewdbentry{#4}{corporation}{}%
+  \ifthenelse{\equal{\cmdKV@YAD@corps}{}}{%
+    \DTLnewdbentry{#4}{corps}{}%
   }{%
-    \DTLnewdbentry{#4}{corporation}{\cmdKV@YAD@corporation}%
+    \DTLnewdbentry{#4}{corps}{\cmdKV@YAD@corps}%
   }%
   \ifthenelse{\equal{\cmdKV@YAD@sepcorpaffilfrench}{}}{%
     \DTLnewdbentry{#4}{sepcorpaffilfrench}{\YAD@global@sepcorpaffil@french}%
@@ -2346,7 +2348,7 @@ This work consists of the file  yathesis.dtx
             \YAD@committeemember@lastname=lastname,%
             \YAD@committeemember@fistname=firstname,%
             \YAD@committeemember@role=role,%
-            \YAD@committeemember@corporation=corporation,%
+            \YAD@committeemember@corps=corps,%
             \YAD@committeemember@sepcorpaffil=%
             \expandafter\IfLanguageName{french}{%
               sepcorpaffilfrench%
@@ -2416,16 +2418,16 @@ This work consists of the file  yathesis.dtx
               }%
             }%
             &
-            % Corporation
+            % Corps
             \YAD@reach@file{%
-              \ifthenelse{\DTLiseq{\YAD@committeemember@corporation}{}}{%
+              \ifthenelse{\DTLiseq{\YAD@committeemember@corps}{}}{%
                 \ifdraft{%
-                  \YAD@generic@argument@translate{corporation}%
+                  \YAD@generic@argument@translate{corps}%
                 }{%
                 }%
               }{%
                 \YAD@translation{%
-                  \YAD@committeemember@corporation%
+                  \YAD@committeemember@corps%
                 }%
               }%
             }%
@@ -2437,7 +2439,7 @@ This work consists of the file  yathesis.dtx
                 }{%
                 }%
               }{%
-                \ifthenelse{\DTLiseq{\YAD@committeemember@corporation}{}}{%
+                \ifthenelse{\DTLiseq{\YAD@committeemember@corps}{}}{%
                   \YAD@committeemember@affiliation%
                 }{%
                   \ifthenelse{\equal{\YAD@committeemember@sepcorpaffil}{}}{%
@@ -5798,6 +5800,7 @@ This work consists of the file  yathesis.dtx
 \expression{meta-lastname}{Nom}{Nom}
 \expression{meta-role}{fonction}{fonction}
 \expression{meta-corporation}{corporation}{corporation}
+\expression{meta-corps}{corps}{corps}
 \expression{meta-affiliation}{affiliation}{affiliation}
 \expression{meta-introduction}{introduction}{introduction}%
 \expression{meta-conclusion}{conclusion}{conclusion}%
@@ -5951,7 +5954,7 @@ This work consists of the file  yathesis.dtx
     glossaries,otherlanguage%
   },%
   morekeywords=[2]{% Keys of key-value lists
-    professor,seniorresearcher,mcf,juniorresearcher,mcf*,juniorresearcher*,corporation,logoheight,%
+    professor,seniorresearcher,mcf,juniorresearcher,mcf*,juniorresearcher*,corporation,corps,%
     distinction,award,affiliation,sepcorpaffilfrench,affiliationsecondary,sepcorpaffilenglish,%
     logo,url,nologo,space,mainlanguage,secnumdepth,tocdepth,depth,version,output%
     address,telephone,fax,email,type,acronym,heading,nowarning,noerror,nofrontcover,%
