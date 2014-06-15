@@ -2249,8 +2249,8 @@
 }%
 \ifdraft{}{\vspace*{\stretch{.1}}}%
   % \end{minipage}
-\ifnumcomp{\value{YAD@titlepages}}{=}{2}{\addtocounter{page}{2}}{}
-\ifnumcomp{\value{YAD@titlepages}}{=}{3}{\addtocounter{page}{4}}{}
+\ifnumcomp{\value{YAD@titlepages}}{=}{2}{\addtocounter{page}{2}}{}%
+\ifnumcomp{\value{YAD@titlepages}}{=}{3}{\addtocounter{page}{4}}{}%
 \endgroup%
 \togglefalse{YAD@cover@page}%
 }%

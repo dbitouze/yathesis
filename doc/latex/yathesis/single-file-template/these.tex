@@ -21,25 +21,20 @@
 % \addbibresource{}
 % \addbibresource{}
 %
-% Configuration des styles du glossaire et de la liste d'acronymes, si
-% souhaitée. Sinon, il suffit de commenter ou de supprimer les lignes
-% suivantes.
+% Configuration des styles du glossaire et de la liste d'acronymes. Facultatif.
 % \setglossarystyle{}
 % \setacronymstyle{}
 %
-% Génération du glossaire (obligatoire si le package « glossaries » est
-% chargé), si souhaitée. Sinon, il suffit de commenter ou de supprimer la
-% ligne suivante.
+% Génération du glossaire. Facultatif (mais obligatoire si le package
+% « glossaries » est chargé).
 % \makeglossaries
 %
-% Spécification de la ou des ressources terminologiques, si souhaitée. Sinon,
-% il suffit de commenter ou de supprimer les lignes suivantes.
+% Spécification de la ou des ressources terminologiques. Facultatif.
 % \loadglsentries{}
 % \loadglsentries{}
 % \loadglsentries{}
 %
-% Génération de l'index (obligatoire si un index est souhaité), si
-% souhaitée. Sinon, il suffit de commenter ou de supprimer la ligne suivante.
+% Génération de l'index. Facultatif.
 % \makeindex
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -65,8 +60,7 @@
 \title[]{}
 %
 % Sous-titre de la thèse dans la langue principale (argument obligatoire) et
-% dans la langue secondaire (argument optionnel). À décommenter si souhaité,
-% à commenter ou à supprimer sinon.
+% dans la langue secondaire (argument optionnel). Facultatif.
 % \subtitle[]{}
 %
 % Champ disciplinaire dans la langue principale (argument obligatoire) et dans
@@ -74,32 +68,27 @@
 \academicfield[]{}
 %
 % Spécialité dans la langue principale (argument obligatoire) et dans la langue
-% secondaire (argument optionnel). À décommenter si souhaitée, à commenter ou
-% à supprimer sinon.
+% secondaire (argument optionnel). Facultatif.
 \speciality[]{}
 %
 % Date de la soutenance, au format {jour}{mois}{année} donnés sous forme de
 % nombres.
 \date{}{}{}
 %
-% Sujet pour les méta-données du PDF. À décommenter si souhaité, à commenter ou
-% à supprimer sinon.
+% Sujet pour les méta-données du PDF. Facultatif.
 \subject[]{}
 %
-% Nom (argument obligatoire) du PRES. À décommenter si souhaité, à commenter ou
-% à supprimer sinon.
+% Nom (argument obligatoire) du PRES. Facultatif.
 \pres[logo=,url=]{}
 %
 % Nom (argument obligatoire) de l'institut (principal en cas de cotutelle).
 \institute[logo=,url=]{}
 %
 % En cas de cotutelle (normalement, seulement dans le cas de cotutelle
-% internationale), nom (argument obligatoire) du second
-% institut. À décommenter si souhaité, à commenter ou à supprimer sinon.
+% internationale), nom (argument obligatoire) du second institut. Facultatif.
 % \coinstitute[logo=]{}
 %
-% Nom (argument obligatoire) de l'école doctorale. À décommenter si souhaitée,
-% à commenter ou à supprimer sinon.
+% Nom (argument obligatoire) de l'école doctorale. Facultatif.
 \doctoralschool[url=]{}
 %
 % Nom (1er argument obligatoire) et adresse (2e argument obligatoire) du
@@ -142,8 +131,7 @@ url=
 % \guest{}{}
 %
 % Mention du numéro d'ordre de la thèse (s'il est connu, ce numéro est
-% à spécifier en argument optionnel). À décommenter si souhaité, à commenter
-% ou à supprimer sinon.
+% à spécifier en argument optionnel). Facultatif.
 % \ordernumber[]
 %
 % Préparation des mots clés dans la langue principale (1er argument) et dans la
@@ -159,42 +147,34 @@ url=
 % Début de la partie liminaire de la thèse
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-% Production de la page de clause de non-responsabilité. À décommenter si
-% souhaitée, à commenter ou à supprimer sinon.
+% Production de la page de clause de non-responsabilité. Facultatif.
 \makedisclaimer
 %
-% Production de la page de mots clés. À décommenter si souhaitée, à commenter
-% ou à supprimer sinon.
+% Production de la page de mots clés. Facultatif.
 \makekeywords
 %
 % Production de la page affichant les logo, nom et coordonnées du ou des
 % laboratoires (ou unités de recherche) où la thèse a été
-% préparée. À décommenter si souhaitée, à commenter ou à supprimer sinon.
+% préparée. Facultatif.
 \makelaboratory
 %
-% Dédicace(s). À décommenter si souhaitée(s), à commenter ou à supprimer
-% sinon.
+% Dédicace(s). Facultatif.
 \dedication{}
 \dedication{}
-% Production de la page de dédicace(s). À décommenter si souhaitée, à commenter
-% ou à supprimer sinon.
+% Production de la page de dédicace(s). Facultatif.
 \makededications
 %
-% Épigraphes(s). À décommenter si souhaitée(s), à commenter ou à supprimer
-% sinon.
+% Épigraphe(s). Facultatif.
 \frontepigraph{}{}
 \frontepigraph{}{}
-% Production de la page d'épigraphe(s). À décommenter si souhaitée, à commenter
-% ou à supprimer sinon.
+% Production de la page de d'épigraphe(s). Facultatif.
 \makefrontepigraphs
 %
-% Chapitre de remerciements. À décommenter si souhaité, à commenter ou
-% à supprimer sinon.
+% Chapitre de remerciements. Facultatif.
 \chapter{Remerciements}
 % ...
 %
-% Chapitre d'avertissement. À décommenter si souhaité, à commenter ou
-% à supprimer sinon.
+% Chapitre d'avertissement. Facultatif.
 % \chapter{Avertissement}
 % ...
 %
@@ -212,32 +192,27 @@ url=
 % Production de la page de résumés.
 \makeabstract
 %
-% Liste des acronymes. À décommenter si souhaitée, à commenter ou à supprimer
-% sinon.
+% Liste des acronymes. Facultatif.
 % \printacronyms
 %
-% Liste des symboles. À décommenter si souhaitée, à commenter ou à supprimer
-% sinon.
+% Liste des symboles. Facultatif.
 % \printsymbols
 %
-% Chapitre d'avant-propos. À décommenter si souhaité, à commenter ou
-% à supprimer sinon.
+% Chapitre d'avant-propos. Facultatif.
 % \chapter{Avant-propos}
 % ...
 %
 % Sommaire
 \tableofcontents[depth=chapter,name=Sommaire]
 %
-% Liste des tableaux. À décommenter si souhaitée, à commenter ou à supprimer
-% sinon.
+% Liste des tableaux. Facultatif.
 \listoftables
 %
-% Table des figures. À décommenter si souhaitée, à commenter ou à supprimer
-% sinon.
+% Table des figures. Facultatif.
 \listoffigures
 %
 % Table des listings (nécessite que le package « listings » soit
-% chargé). À décommenter si souhaitée, à commenter ou à supprimer sinon.
+% chargé). Facultatif.
 % \lstlistoflistings
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -305,18 +280,16 @@ url=
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \backmatter
 %
-% Glossaire (si souhaité distinct de la liste des acronymes). À décommenter si
-% souhaité, à commenter ou à supprimer sinon.
+% Glossaire (si souhaité distinct de la liste des acronymes). Facultatif.
 % \printglossary
 %
-% Index. À décommenter si souhaité, à commenter ou à supprimer sinon.
+% Index. Facultatif.
 % \printindex
 %
 % Table des matières
 \tableofcontents
 %
-% Production de la 4e de couverture. À décommenter si souhaitée, à commenter ou
-% à supprimer sinon.
+% Production de la 4e de couverture. Facultatif.
 \makebackcover
 %
 \end{document}
