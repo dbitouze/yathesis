@@ -2168,6 +2168,20 @@ This work consists of the file  yathesis.dtx
   \ifKV@YAD@seniorresearcher%
   \setkeys{YAD}{#1,corps=seniorresearcher}%
   \fi%
+%    \end{macrocode}
+% On fait en sorte que la clé ×corporation×, obsolète et remplacée par la clé
+% ×corps×,  soit un alias de ce dernier.
+%    \begin{macrocode}
+  \ifthenelse{\equal{\cmdKV@YAD@corporation}{}}{%
+  }{%
+    \ifthenelse{\equal{\cmdKV@YAD@corps}{}}{%
+      \setkeys{YAD}{#1,corps=\cmdKV@YAD@corporation}%
+    }{%
+    }%
+  }%
+%    \end{macrocode}
+% On continue.
+%    \begin{macrocode}
   \DTLnewrow{#4}%
   \DTLnewdbentry{#4}{firstname}{#2}%
   \DTLnewdbentry{#4}{lastname}{#3}%
