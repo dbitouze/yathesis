@@ -195,11 +195,10 @@ différentes versions du document : \enquote{intermédiaire} (par défaut),
       \item\label{item:inprogress:1} Pour indiquer clairement qu'il s'agit
         d'une version \enquote{intermédiaire}, la mention \enquote{Version
           intermédiaire en date du \meta{date}} ou \foreignquote{english}{Work
-          in progress as of \meta{date}}\selonlangue{}, figure en pied de page
-        et en petites capitales sur (presque) toutes les pages.
-      \item\label{item:inprogress:2} Si un élément \enquote{obligatoire}
-        (cf. \vref{sec:comm-oblig}) manque, aucune erreur de compilation ne
-        signale l'omission.
+          in progress as of \meta{date}}\selonlangue{}, est affichée en petites
+        capitales sur (presque) tous les pieds de page.
+      \item\label{item:inprogress:2} Aucun élément \enquote{obligatoire}
+        (cf. \vref{sec:comm-oblig}) manquant n'est signalé.
       \end{enumerate}
     \item[\docValue{inprogress*}.] Cette valeur produit le même effet que la
       valeur \docValue{inprogress} sauf que le caractère non définitif de la
@@ -210,25 +209,28 @@ différentes versions du document : \enquote{intermédiaire} (par défaut),
       destinée à être \enquote{soumise} aux rapporteurs. \emph{Contrairement à}
       la version par défaut :
       \begin{enumerate}
+      \item l'affichage en pied de page de la mention \enquote{Version
+          intermédiaire en date du \meta{date}} ou \foreignquote{english}{Work
+          in progress as of \meta{date}} est désactivé ;
+      \item la composition du jury n'apparaît sur aucune des pages de titre ;
       \item la date de soutenance n'apparaît sur aucune des pages de titre ;
-      \item la mention \enquote{Version intermédiaire en date du \meta{date}}
-        ou \foreignquote{english}{Work in progress as of \meta{date}} ne figure
-        pas ;
-      \item si un élément \enquote{obligatoire} (cf. \vref{sec:comm-oblig})
-        manque, une erreur de compilation signale l'omission.
+      \item tout élément \enquote{obligatoire} (cf. \vref{sec:comm-oblig})
+        manquant est signalé par une erreur de compilation\footnote{La date de
+          soutenance est normalement \enquote{obligatoire}, sauf dans les
+          versions soumises aux rapporteurs où elle ne figure nulle part).}.
       \end{enumerate}
     \item[\docValue{submitted*}.] Cette valeur produit le même effet que la
       valeur \docValue{submitted} sauf que le caractère \enquote{à soumettre}
-      de la version est renforcé par la mention \enquote{Version soumise en
-        date du} ou \foreignquote{english}{Submitted work as of}\selonlangue{},
-      figurant en pied de page et en petites capitales sur (presque) toutes les
-      pages.
+      de la version est renforcé par l'affichage en petites capitales, sur
+      (presque) tous les pieds de pages, de la mention \enquote{Version soumise
+        en date du} ou \foreignquote{english}{Submitted work as
+        of}\selonlangue{}.
     \item[\docValue{final}.] Cette valeur produit une version \enquote{finale}
       du document. \emph{Contrairement à} la version par défaut :
       \begin{enumerate}
-      \item la mention \enquote{Version intermédiaire en date du \meta{date}}
-        ou \foreignquote{english}{Work in progress as of \meta{date}} ne figure
-        pas ;
+      \item l'affichage en pied de page de la mention \enquote{Version
+          intermédiaire en date du \meta{date}} ou \foreignquote{english}{Work
+          in progress as of \meta{date}} est désactivé ;
       \item si un élément \enquote{obligatoire} (cf. \vref{sec:comm-oblig})
         manque, une erreur de compilation signale l'omission.
       \end{enumerate}
