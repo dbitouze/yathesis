@@ -45,29 +45,6 @@
 %<*these-sample|single-sample>
 \usepackage[xindy,acronyms,symbols,toc]{glossaries}
 %</these-sample|single-sample>
-%<*single-sample|these-sample|these-master>
-%<<COMMENT
-%
-% Importation manuelle du fichier de macros personnelles
-%COMMENT
-%<!single-sample>\input{configuration/macros}
-%</single-sample|these-sample|these-master>
-%<*macros-master>
-%</macros-master>
-%<*single-sample|macros-sample>
-%<<COMMENT
-% Macro pour mettre en forme les noms de fichiers
-%COMMENT
-\newcommand\fichier[1]{\texttt{#1}}
-%<<COMMENT
-% Macro pour mettre en forme les noms de packages LaTeX
-%COMMENT
-\newcommand\package[1]{\textsf{#1}}
-%<<COMMENT
-% Macro pour mettre en forme des locutions étrangères
-%COMMENT
-\newcommand{\locution}[1]{\emph{#1}}
-%</single-sample|macros-sample>
 %<*single-template|single-sample|these-master|these-sample>
 %<<COMMENT
 %
@@ -247,6 +224,29 @@
 %COMMENT
 %</cfg-sample|single-sample>
 %</single-template|single-sample|cfg-master|cfg-sample>
+%<*single-sample|these-sample|these-master>
+%<<COMMENT
+%
+%COMMENT
+%<these-sample|these-master>% Importation manuelle du fichier de macros personnelles
+%<!single-sample>\input{configuration/macros}
+%</single-sample|these-sample|these-master>
+%<*macros-master>
+%</macros-master>
+%<*single-sample|macros-sample>
+%<<COMMENT
+% Macro pour mettre en forme les noms de fichiers
+%COMMENT
+\newcommand\fichier[1]{\texttt{#1}}
+%<<COMMENT
+% Macro pour mettre en forme les noms de packages LaTeX
+%COMMENT
+\newcommand\package[1]{\textsf{#1}}
+%<<COMMENT
+% Macro pour mettre en forme des locutions étrangères
+%COMMENT
+\newcommand{\locution}[1]{\emph{#1}}
+%</single-sample|macros-sample>
 %<*these-sample|single-sample>
 %<<COMMENT
 %
