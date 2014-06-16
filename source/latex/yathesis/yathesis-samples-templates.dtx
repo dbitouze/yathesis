@@ -68,50 +68,27 @@
 %COMMENT
 \newcommand{\locution}[1]{\emph{#1}}
 %</single-sample|macros-sample>
-%<*these-sample|these-master>
-%<<COMMENT
-%
-% Les réglages figurant habituellement dans le préambule, notamment concernant
-% la bibliographie et les éventuels glossaires et index, peuvent être saisis
-% dans le fichier « thesis.cfg » (situé dans le sous-dossier « configuration »)
-% qui est automatiquement importé par la classe yathesis.
-%COMMENT
-%</these-sample|these-master>
-%<*cfg-master|cfg-sample>
-%<<COMMENT
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Ce fichier doit s'appeler « thesis.cfg » et se situer dans le dossier
-% « configuration » ; sinon, la classe yathesis ne le détectera pas.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%COMMENT
-%</cfg-master|cfg-sample>
-%<*single-template|single-sample|cfg-master|cfg-sample>
+%<*single-template|single-sample|these-master|these-sample>
 %<<COMMENT
 %
 % Spécification de la ou des ressources bibliographiques
 %COMMENT
 %<single-template>% \addbibresource{}
 %<single-template>% \addbibresource{}
-%<cfg-master>% \addbibresource{auxiliaires/bibliographie.bib}
-%<cfg-master>% \addbibresource{auxiliaires/}
+%<these-master>% \addbibresource{auxiliaires/bibliographie.bib}
+%<these-master>% \addbibresource{auxiliaires/}
 %<single-sample>\addbibresource{bibliographie.bib}
-%<cfg-sample>\addbibresource{auxiliaires/bibliographie.bib}
-%<cfg-sample|single-sample>\addbibresource{biblatex-examples.bib} % Fournie par biblatex
-%<<COMMENT
-%
-% Configuration des styles du glossaire et de la liste d'acronymes. Facultatif.
-%COMMENT
-%<single-template|cfg-master>% \setglossarystyle{}
-%<single-template|cfg-master>% \setacronymstyle{}
-%<cfg-sample|single-sample>\setglossarystyle{indexhypergroup}
-%<cfg-sample|single-sample>\setacronymstyle{long-sc-short}
+%<these-sample>\addbibresource{auxiliaires/bibliographie.bib}
+%<these-sample|single-sample>\addbibresource{biblatex-examples.bib} % Fournie par biblatex
 %<<COMMENT
 %
 % Génération du glossaire. Facultatif (mais obligatoire si le package
 % « glossaries » est chargé).
 %COMMENT
-%<single-template|cfg-master>% \makeglossaries
-%<cfg-sample|single-sample>\makeglossaries
+%<single-template|these-master>% \makeglossaries
+%<these-sample|single-sample>\makeglossaries
+%</single-template|single-sample|these-master|these-sample>
+%<*single-template|single-sample|these-master|these-sample>
 %<<COMMENT
 %
 % Spécification de la ou des ressources terminologiques. Facultatif.
@@ -119,13 +96,13 @@
 %<single-template>% \loadglsentries{}
 %<single-template>% \loadglsentries{}
 %<single-template>% \loadglsentries{}
-%<cfg-master>% \loadglsentries{auxiliaires/}
-%<cfg-master>% \loadglsentries{auxiliaires/}
-%<cfg-master>% \loadglsentries{auxiliaires/}
-%<cfg-sample>\loadglsentries{auxiliaires/glossaire}
-%<cfg-sample>\loadglsentries{auxiliaires/acronymes}
-%<cfg-sample>\loadglsentries{auxiliaires/symboles}
-%</single-template|single-sample|cfg-master|cfg-sample>
+%<these-master>% \loadglsentries{auxiliaires/}
+%<these-master>% \loadglsentries{auxiliaires/}
+%<these-master>% \loadglsentries{auxiliaires/}
+%<these-sample>\loadglsentries{auxiliaires/glossaire}
+%<these-sample>\loadglsentries{auxiliaires/acronymes}
+%<these-sample>\loadglsentries{auxiliaires/symboles}
+%</single-template|single-sample|these-master|these-sample>
 %<single-sample>% Termes du glossaire
 %<*single-sample|glossary-sample>
 \newglossaryentry{latex}{%
@@ -197,13 +174,41 @@
 \newglssymbol[constanteplanck]{planck}{\ensuremath{h}}{constante de
   Planck}{\ensuremath{h\approx\SI{6,62606957e-34}{J.s}}}
 %</single-sample|symbols-sample>
-%<*single-template|single-sample|cfg-master|cfg-sample>
+%<*single-template|single-sample|these-master|these-sample>
 %<<COMMENT
 %
 % Génération de l'index. Facultatif.
 %COMMENT
-%<single-template|cfg-master>% \makeindex
-%<cfg-sample|single-sample>\makeindex
+%<single-template|these-master>% \makeindex
+%<these-sample|single-sample>\makeindex
+%</single-template|single-sample|these-master|these-sample>
+%<*these-sample|these-master>
+%<<COMMENT
+%
+% Les réglages figurant habituellement dans le préambule, notamment concernant
+% la bibliographie et les éventuels glossaires et index, peuvent être saisis
+% dans le fichier « thesis.cfg » (situé dans le sous-dossier « configuration »)
+% qui est automatiquement importé par la classe yathesis.
+%COMMENT
+%</these-sample|these-master>
+%<*cfg-master|cfg-sample>
+%<<COMMENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Ce fichier doit s'appeler « thesis.cfg » et se situer dans le dossier
+% « configuration » ; sinon, la classe yathesis ne le détectera pas.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%COMMENT
+%</cfg-master|cfg-sample>
+%<*single-template|single-sample|cfg-master|cfg-sample>
+%<<COMMENT
+%
+% Configuration des styles du glossaire et de la liste
+% d'acronymes. Facultatif.
+%COMMENT
+%<single-template|cfg-master>% \setglossarystyle{}
+%<single-template|cfg-master>% \setacronymstyle{}
+%<cfg-sample|single-sample>\setglossarystyle{indexhypergroup}
+%<cfg-sample|single-sample>\setacronymstyle{long-sc-short}
 %<*cfg-sample|single-sample>
 %<<COMMENT
 %
