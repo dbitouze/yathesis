@@ -19,7 +19,7 @@ sub texindy{
     system("texindy -L french \"$_[0].idx\"");
 }
 
-@generated_exts = qw(aux idx ind lo* out toc acn acr alg bcf fls gl* ist
+@generated_exts = qw(aux idx ind lo* out toc acn acr alg bbl bcf fls gl* ist
 run.xml sbl* sl* sym* xdy unq synctex.gz mw *~
 db* listing tcbtemp ins drv
 );

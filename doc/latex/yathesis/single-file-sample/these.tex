@@ -17,21 +17,9 @@
 \usepackage{lipsum} % À proscrire dans un vrai mémoire de thèse !
 \usepackage[xindy,acronyms,symbols,toc]{glossaries}
 %
-% Importation manuelle du fichier de macros personnelles
-% Macro pour mettre en forme les noms de fichiers
-\newcommand\fichier[1]{\texttt{#1}}
-% Macro pour mettre en forme les noms de packages LaTeX
-\newcommand\package[1]{\textsf{#1}}
-% Macro pour mettre en forme des locutions étrangères
-\newcommand{\locution}[1]{\emph{#1}}
-%
 % Spécification de la ou des ressources bibliographiques
 \addbibresource{bibliographie.bib}
 \addbibresource{biblatex-examples.bib} % Fournie par biblatex
-%
-% Configuration des styles du glossaire et de la liste d'acronymes. Facultatif.
-\setglossarystyle{indexhypergroup}
-\setacronymstyle{long-sc-short}
 %
 % Génération du glossaire. Facultatif (mais obligatoire si le package
 % « glossaries » est chargé).
@@ -107,6 +95,11 @@
 % Génération de l'index. Facultatif.
 \makeindex
 %
+% Configuration des styles du glossaire et de la liste
+% d'acronymes. Facultatif.
+\setglossarystyle{indexhypergroup}
+\setacronymstyle{long-sc-short}
+%
 % Configuration globale de l'apparence des listings informatiques
 \lstset{%
   language=C,
@@ -131,6 +124,13 @@
 \makeatletter
 \renewcommand*\@pnumwidth{29pt}
 \makeatother
+%
+% Macro pour mettre en forme les noms de fichiers
+\newcommand\fichier[1]{\texttt{#1}}
+% Macro pour mettre en forme les noms de packages LaTeX
+\newcommand\package[1]{\textsf{#1}}
+% Macro pour mettre en forme des locutions étrangères
+\newcommand{\locution}[1]{\emph{#1}}
 %
 % Commande permettant de faire figurer d'un seul coup toutes les références des
 % ressources bibliographiques ci-dessus, même si elles ne sont pas citées
@@ -272,17 +272,6 @@ url=http://www-lmpa.univ-littoral.fr/
 % Production de la page de d'épigraphe(s). Facultatif.
 \makefrontepigraphs
 %
-% Chapitre de remerciements. Facultatif.
-\chapter{Remerciements}
-\section{Une section de remerciements}
-\lipsum[1]
-\section{Une autre section de remerciements}
-\lipsum[2-9]
-%
-% Chapitre d'avertissement. Facultatif.
-\chapter{Avertissement}
-Thèse hilarante, comme le gaz du même nom !
-%
 % Résumés (de 1700 caractères maximum, espaces compris) dans la
 % langue principale (1re occurrence de l'environnement « abstract »)
 % et, facultativement, dans la langue secondaire (2e occurrence de
@@ -296,6 +285,17 @@ Thèse hilarante, comme le gaz du même nom !
 %
 % Production de la page de résumés.
 \makeabstract
+%
+% Chapitre de remerciements. Facultatif.
+\chapter{Remerciements}
+\section{Une section de remerciements}
+\lipsum[1]
+\section{Une autre section de remerciements}
+\lipsum[2-9]
+%
+% Chapitre d'avertissement. Facultatif.
+\chapter{Avertissement}
+Thèse hilarante, comme le gaz du même nom !
 %
 % Liste des acronymes. Facultatif.
 \printacronyms

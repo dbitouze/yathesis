@@ -17,13 +17,29 @@
 \usepackage{lipsum} % À proscrire dans un vrai mémoire de thèse !
 \usepackage[xindy,acronyms,symbols,toc]{glossaries}
 %
-% Importation manuelle du fichier de macros personnelles
-\input{configuration/macros}
+% Spécification de la ou des ressources bibliographiques
+\addbibresource{auxiliaires/bibliographie.bib}
+\addbibresource{biblatex-examples.bib} % Fournie par biblatex
+%
+% Génération du glossaire. Facultatif (mais obligatoire si le package
+% « glossaries » est chargé).
+\makeglossaries
+%
+% Spécification de la ou des ressources terminologiques. Facultatif.
+\loadglsentries{auxiliaires/glossaire}
+\loadglsentries{auxiliaires/acronymes}
+\loadglsentries{auxiliaires/symboles}
+%
+% Génération de l'index. Facultatif.
+\makeindex
 %
 % Les réglages figurant habituellement dans le préambule, notamment concernant
 % la bibliographie et les éventuels glossaires et index, peuvent être saisis
 % dans le fichier « thesis.cfg » (situé dans le sous-dossier « configuration »)
 % qui est automatiquement importé par la classe yathesis.
+%
+% Importation manuelle du fichier de macros personnelles
+\input{configuration/macros}
 %
 % Commande permettant de faire figurer d'un seul coup toutes les références des
 % ressources bibliographiques ci-dessus, même si elles ne sont pas citées
@@ -71,14 +87,14 @@
 % Épigraphe(s). Facultatif.
 \input{liminaires/epigraphes}
 %
+% Résumés succincts.
+\input{liminaires/resumes}
+%
 % Chapitre de remerciements. Facultatif.
 \include{liminaires/remerciements}
 %
 % Chapitre d'avertissement. Facultatif.
 \include{liminaires/avertissement}
-%
-% Résumés succincts.
-\input{liminaires/resumes}
 %
 % Liste des acronymes. Facultatif.
 \printacronyms
