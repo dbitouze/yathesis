@@ -3150,11 +3150,17 @@ This work consists of the file  yathesis.dtx
   \YAD@ifemptyorundef{\printdate}{%
     \ifYAD@nodate%
     \else%
-    \YAD@ClassError[nodate]{%
-      Date de soutenance non specifiee%
+    \ifboolexpr{%
+      togl {YAD@submitted@work}%
+      or togl {YAD@submitted@work@star}%
     }{%
-      La commande \protect\date\space n'a pas ete utilisee\MessageBreak%
-      (celle-ci est requise).%
+    }{%
+      \YAD@ClassError[nodate]{%
+        Date de soutenance non specifiee%
+      }{%
+        La commande \protect\date\space n'a pas ete utilisee\MessageBreak%
+        (celle-ci est requise).%
+      }%
     }%
     \fi%
   }{%
