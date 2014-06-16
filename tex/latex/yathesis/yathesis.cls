@@ -2002,6 +2002,10 @@
   \origtcb@shadow@prepare{#1}{#2}%
   \let\tcb@shadow@arc=\tcb@zpt%
 }%
+\newcommand{\YAD@addpagenumber}{%
+  \ifnumcomp{\value{YAD@titlepages}}{=}{2}{\addtocounter{page}{2}}{}%
+  \ifnumcomp{\value{YAD@titlepages}}{=}{3}{\addtocounter{page}{4}}{}%
+}%
 \renewcommand{\maketitle}{%
   \toggletrue{YAD@maketitle@used}%
   \setlength{\fboxsep}{10pt}%
@@ -2270,8 +2274,7 @@
 }%
 \ifdraft{}{\vspace*{\stretch{.1}}}%
   % \end{minipage}
-\ifnumcomp{\value{YAD@titlepages}}{=}{2}{\addtocounter{page}{2}}{}%
-\ifnumcomp{\value{YAD@titlepages}}{=}{3}{\addtocounter{page}{4}}{}%
+\YAD@addpagenumber%
 \endgroup%
 \togglefalse{YAD@cover@page}%
 }%

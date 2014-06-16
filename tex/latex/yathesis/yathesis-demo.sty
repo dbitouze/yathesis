@@ -23,7 +23,8 @@
 }
 \AfterEndPreamble{%
   \xpretocmd{\maketitle}{\zlabel{fr-title}}{}{}%
-  \xapptocmd{\maketitle}{\zlabel{en-title}}{}{}%
+  \xpatchcmd{\YAD@addpagenumber}{\addtocounter{page}{4}}{\zlabel{en-title}\addtocounter{page}{4}}{}{}%
+  %
   \xpretocmd{\makedisclaimer}{\cleardoublepage\zlabel{disclaimer}}{}{}
   \xpretocmd{\makekeywords}{\cleardoublepage\zlabel{keywords}}{}{}
   \xpretocmd{\makelaboratory}{\cleardoublepage\zlabel{laboratory}}{}{}
