@@ -1459,11 +1459,17 @@
   \YAD@ifemptyorundef{\printdate}{%
     \ifYAD@nodate%
     \else%
-    \YAD@ClassError[nodate]{%
-      Date de soutenance non specifiee%
+    \ifboolexpr{%
+      togl {YAD@submitted@work}%
+      or togl {YAD@submitted@work@star}%
     }{%
-      La commande \protect\date\space n'a pas ete utilisee\MessageBreak%
-      (celle-ci est requise).%
+    }{%
+      \YAD@ClassError[nodate]{%
+        Date de soutenance non specifiee%
+      }{%
+        La commande \protect\date\space n'a pas ete utilisee\MessageBreak%
+        (celle-ci est requise).%
+      }%
     }%
     \fi%
   }{%
@@ -2241,7 +2247,13 @@
   \end{center}
   % \noindent%
   % \begin{minipage}[c][\YAD@otherboxheight][c]{\YAD@titleboxwidth}
-\YAD@committee@tabular%
+\ifboolexpr{%
+  togl {YAD@submitted@work}%
+  or togl {YAD@submitted@work@star}%
+}{%
+}{%
+  \YAD@committee@tabular%
+}%
 \iftoggle{YAD@supervisor@specified}{%
 }{%
   \ifYAD@nosupervisor%
