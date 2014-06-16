@@ -4201,7 +4201,13 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % Affichage du jury
 %    \begin{macrocode}
-\YAD@committee@tabular%
+\ifboolexpr{%
+  togl {YAD@submitted@work}%
+  or togl {YAD@submitted@work@star}%
+}{%
+}{%
+  \YAD@committee@tabular%
+}%
 \iftoggle{YAD@supervisor@specified}{%
 }{%
   \ifYAD@nosupervisor%
