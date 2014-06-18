@@ -2255,6 +2255,7 @@
   togl {YAD@submitted@work}%
   or togl {YAD@submitted@work@star}%
 }{%
+  \vphantom{\YAD@committee@tabular}%
 }{%
   \YAD@committee@tabular%
 }%
