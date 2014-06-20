@@ -2969,12 +2969,6 @@ This work consists of the file  yathesis.dtx
     \newcommand*\YAD@firstname@author{%
       \YAD@generic@argument@translate{firstname}%
     }%
-    \YAD@ClassError[noauthor]{%
-      Prenom de l'auteur de la these non specifie%
-    }{%
-      Le 1er argument obligatoire de la commande \string\author\MessageBreak%
-      est vide (celui-ci doit etre renseigne).%
-    }%
   }{%
     \newcommand*\YAD@firstname@author{%
       #2%
@@ -2984,17 +2978,12 @@ This work consists of the file  yathesis.dtx
     \newcommand*\YAD@lastname@author{%
       \YAD@generic@argument@translate{lastname}%
     }%
-    \YAD@ClassError[noauthor]{%
-      Nom de l'auteur de la these non specifie%
-    }{%
-      Le 2e argument obligatoire de la commande \string\author\MessageBreak%
-      est vide (celui-ci doit etre renseigne).%
-    }%
   }{%
     \newcommand*\YAD@lastname@author{%
       #3%
     }%
   }%
+  \YAD@error@firstlastnames@empty{de l'auteur de la these}{#2}{#3}{\author}%
   \hypersetup{pdfauthor=\YAD@firstname@author{} \YAD@lastname@author}%
   \newcommand*\YAD@email@author{%
     #1%
