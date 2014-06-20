@@ -721,30 +721,60 @@
     \DTLnewdbentry{#4}{affiliationsecondary}{\cmdKV@YAD@affiliationsecondary}%
   }%
 }%
+\newcommand{\YAD@error@firstlastnames@empty}[4]{%
+  \ifthenelse{\isempty{#2}}{%
+    \YAD@ClassError{%
+      Prenom #1 non specifie%
+    }{%
+      Le 1er argument obligatoire de la commande \string#4\MessageBreak%
+      est vide (celui-ci doit etre renseigne).%
+    }%
+  }{%
+  }%
+  \ifthenelse{\isempty{#3}}{%
+    \YAD@ClassError{%
+      Nom #1 non specifie%
+    }{%
+      Le 2e argument obligatoire de la commande \string#4\MessageBreak%
+      est vide (celui-ci doit etre renseigne).%
+    }%
+  }{%
+  }%
+}
 \newcommand*{\YAD@supervisors}[3][]{%
   \YAD@staff[#1]{#2}{#3}{supervisors}%
 }%
 \newcommand*{\supervisor}[3][]{%
   \YAD@supervisors[#1,role=supervisor]{#2}{#3}%
   \toggletrue{YAD@supervisor@specified}%
+  \YAD@error@firstlastnames@empty{du directeur de these}{#2}{#3}{\supervisor}%
 }%
 \newcommand*{\cosupervisor}[3][]{%
   \YAD@supervisors[#1,role=cosupervisor]{#2}{#3}%
+  \YAD@error@firstlastnames@empty{du co-directeur de these}{#2}{#3}{\cosupervisor}%
 }%
 \newcommand*{\comonitor}[3][]{%
   \YAD@supervisors[#1,role=comonitor]{#2}{#3}%
+  \YAD@error@firstlastnames@empty{du co-encadrant de these}{#2}{#3}{\comonitor}%
 }%
 \newcommand*{\guest}[3][]{%
   \YAD@staff[#1]{#2}{#3}{guests}%
+  \YAD@error@firstlastnames@empty{de l'invite}{#2}{#3}{\guest}%
 }%
 \newcommand*{\referee}[3][]{%
   \YAD@staff[#1]{#2}{#3}{referees}%
+  \YAD@error@firstlastnames@empty{du rapporteur}{#2}{#3}{\referee}%
 }%
 \newcommand*{\examiner}[3][]{%
   \YAD@staff[#1]{#2}{#3}{examiners}%
+  \ifthenelse{\equal{\cmdKV@YAD@role}{committeepresident}}{%
+  }{%
+    \YAD@error@firstlastnames@empty{de l'examinateur}{#2}{#3}{\examiner}%
+  }%
 }%
 \newcommand*{\committeepresident}[3][]{%
   \examiner[#1,role=committeepresident]{#2}{#3}%
+  \YAD@error@firstlastnames@empty{du president du jury}{#2}{#3}{\committeepresident}%
 }%
 \newcommand*{\YAD@al}{ \`a l'}%
 \newcommand*{\YAD@au}{ au }%
@@ -996,17 +1026,20 @@
   \ifthenelse{\equal{#1}{entite}}{%
     \expandafter\newcommand\expandafter{\csname #2\endcsname}[2][]{%
      \csdef{YAD@#2}{##2}%
+     \ifthenelse{\isempty{##2}}{%
+       \YAD@ClassError[no#2]{%
+         Argument obligatoire de \csuse{#2}\space vide%
+       }{%
+         L'argument obligatoire de la commande \csuse{#2}\MessageBreak%
+         est vide (celui-ci doit etre renseigne).%
+       }%
+     }{%
+     }%
 \csdef{print#2}{%
   \@ifstar{\csuse{YAD@print#2@star}}{\csuse{YAD@print#2@nostar}}%
 }%
 \csdef{YAD@print#2@star}{%
   \ifthenelse{\isempty{##2}}{%
-    \YAD@ClassError[no#2]{%
-      Argument obligatoire de \csuse{#2}\space vide%
-    }{%
-      L'argument obligatoire de la commande \csuse{#2}\MessageBreak%
-      est vide (celui-ci doit etre renseigne).%
-    }%
     \YAD@reach@file{\YAD@generic@argument@translate{#2}}%
   }{%
     \YAD@reach@file{##2}%
@@ -1016,12 +1049,6 @@
   \let\YAD@texte\relax%
   \csdef{YAD@texte}{%
     \ifthenelse{\isempty{##2}}{%
-      \YAD@ClassError[no#2]{%
-        Argument obligatoire de \csuse{#2}\space vide%
-      }{%
-        L'argument obligatoire de la commande \csuse{#2}\MessageBreak%
-        est vide (celui-ci doit etre renseigne).%
-      }%
       \YAD@reach@file{\YAD@generic@argument@translate{#2}}%
     }{%
       ##2%
@@ -1148,6 +1175,15 @@
     ##2 (##1)%
   }%
 }%
+\ifthenelse{\isempty{##2}}{%
+  \YAD@ClassError[no#2]{%
+    Argument obligatoire de \csuse{#2}\space vide%
+  }{%
+    L'argument obligatoire de la commande \csuse{#2}\MessageBreak%
+    est vide (celui-ci doit etre renseigne).%
+  }%
+}{%
+}%
 \ifthenelse{\equal{#2}{title}}{%
   \hypersetup{pdftitle=\YAD@metatitle}%
 }{%
@@ -1164,12 +1200,6 @@
         \YAD@reach@file{%
           \expandafter\IfLanguageName{\YAD@mainlanguage}{%
             \ifthenelse{\isempty{##2}}{%
-              \YAD@ClassError[no#2]{%
-                Argument obligatoire de \csuse{#2}\space vide%
-              }{%
-                L'argument obligatoire de la commande \csuse{#2}\MessageBreak%
-                est vide (celui-ci doit etre renseigne).%
-              }%
               \YAD@reach@file{\YAD@generic@argument@translate{#2}}%
             }{%
               \YAD@reach@file{##2}%
@@ -1252,12 +1282,6 @@
     \newcommand*\YAD@firstname@author{%
       \YAD@generic@argument@translate{firstname}%
     }%
-    \YAD@ClassError[noauthor]{%
-      Prenom de l'auteur de la these non specifie%
-    }{%
-      Le 1er argument obligatoire de la commande \string\author\MessageBreak%
-      est vide (celui-ci doit etre renseigne).%
-    }%
   }{%
     \newcommand*\YAD@firstname@author{%
       #2%
@@ -1267,17 +1291,12 @@
     \newcommand*\YAD@lastname@author{%
       \YAD@generic@argument@translate{lastname}%
     }%
-    \YAD@ClassError[noauthor]{%
-      Nom de l'auteur de la these non specifie%
-    }{%
-      Le 2e argument obligatoire de la commande \string\author\MessageBreak%
-      est vide (celui-ci doit etre renseigne).%
-    }%
   }{%
     \newcommand*\YAD@lastname@author{%
       #3%
     }%
   }%
+  \YAD@error@firstlastnames@empty{de l'auteur de la these}{#2}{#3}{\author}%
   \hypersetup{pdfauthor=\YAD@firstname@author{} \YAD@lastname@author}%
   \newcommand*\YAD@email@author{%
     #1%
@@ -1326,134 +1345,140 @@
   \csxdef{YAD@monthdate}{#2}%
   \csxdef{YAD@yeardate}{#3}%
   \ifboolexpr{%
-    not (test {\IfInteger{\YAD@daydate}})%
+    togl {YAD@submitted@work}%
+    or togl {YAD@submitted@work@star}%
   }{%
-    \YAD@ClassError[nodate]{%
-      Jour de la date de soutenance non valide%
-    }{%
-      La commande \protect\date{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
-      n'a pas ete correctement saisie car le\MessageBreak%
-      jour (`\YAD@daydate') n'est pas valide :\MessageBreak%
-      ce doit etre un nombre entier entre 1 et 31.%
-    }%
   }{%
-    \IfDecimal{\YAD@daydate}{%
-      \csxdef{YAD@daydate}{\number\integerpart}%
-    }{%
-    }%
     \ifboolexpr{%
-      test {\ifnumless{\YAD@daydate}{1}}%
-      or test {\ifnumgreater{\YAD@daydate}{31}}%
+      not (test {\IfInteger{\YAD@daydate}})%
     }{%
       \YAD@ClassError[nodate]{%
         Jour de la date de soutenance non valide%
       }{%
         La commande \protect\date{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
         n'a pas ete correctement saisie car le\MessageBreak%
-        numero de jour (`\YAD@daydate') n'est pas valide :\MessageBreak%
+        jour (`\YAD@daydate') n'est pas valide :\MessageBreak%
         ce doit etre un nombre entier entre 1 et 31.%
       }%
     }{%
-      \toggletrue{YAD@valid@day}%
+      \IfDecimal{\YAD@daydate}{%
+        \csxdef{YAD@daydate}{\number\integerpart}%
+      }{%
+      }%
+      \ifboolexpr{%
+        test {\ifnumless{\YAD@daydate}{1}}%
+        or test {\ifnumgreater{\YAD@daydate}{31}}%
+      }{%
+        \YAD@ClassError[nodate]{%
+          Jour de la date de soutenance non valide%
+        }{%
+          La commande \protect\date{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
+          n'a pas ete correctement saisie car le\MessageBreak%
+          numero de jour (`\YAD@daydate') n'est pas valide :\MessageBreak%
+          ce doit etre un nombre entier entre 1 et 31.%
+        }%
+      }{%
+        \toggletrue{YAD@valid@day}%
+      }%
     }%
-  }%
-  % month
-  \ifboolexpr{%
-    not (test {\IfInteger{\YAD@monthdate}})%
-  }{%
-    \YAD@ClassError[nodate]{%
-      Mois de la date de soutenance non valide%
-    }{%
-      La commande \protect\date{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
-      n'a pas ete correctement saisie car le\MessageBreak%
-      mois (`\YAD@monthdate') n'est pas valide :\MessageBreak%
-      ce doit etre un nombre entier entre\MessageBreak%
-      1 (janvier) et 12 (decembre).%
-    }%
-  }{%
-    \IfDecimal{\YAD@monthdate}{%
-      \csxdef{YAD@monthdate}{\number\integerpart}%
-    }{%
-    }%
+    % month
     \ifboolexpr{%
-      test {\ifnumless{\YAD@monthdate}{1}}%
-      or test {\ifnumgreater{\YAD@monthdate}{12}}%
+      not (test {\IfInteger{\YAD@monthdate}})%
     }{%
       \YAD@ClassError[nodate]{%
         Mois de la date de soutenance non valide%
       }{%
         La commande \protect\date{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
         n'a pas ete correctement saisie car le\MessageBreak%
-        numero de mois (`\YAD@monthdate') n'est pas valide :\MessageBreak%
+        mois (`\YAD@monthdate') n'est pas valide :\MessageBreak%
         ce doit etre un nombre entier entre\MessageBreak%
         1 (janvier) et 12 (decembre).%
       }%
     }{%
-      \toggletrue{YAD@valid@month}%
+      \IfDecimal{\YAD@monthdate}{%
+        \csxdef{YAD@monthdate}{\number\integerpart}%
+      }{%
+      }%
+      \ifboolexpr{%
+        test {\ifnumless{\YAD@monthdate}{1}}%
+        or test {\ifnumgreater{\YAD@monthdate}{12}}%
+      }{%
+        \YAD@ClassError[nodate]{%
+          Mois de la date de soutenance non valide%
+        }{%
+          La commande \protect\date{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
+          n'a pas ete correctement saisie car le\MessageBreak%
+          numero de mois (`\YAD@monthdate') n'est pas valide :\MessageBreak%
+          ce doit etre un nombre entier entre\MessageBreak%
+          1 (janvier) et 12 (decembre).%
+        }%
+      }{%
+        \toggletrue{YAD@valid@month}%
+      }%
     }%
-  }%
-  % year
-  \ifboolexpr{%
-    not (test {\IfInteger{\YAD@yeardate}})%
-  }{%
-    \YAD@ClassError[nodate]{%
-      Annee de la date de soutenance non valide%
+    % year
+    \ifboolexpr{%
+      not (test {\IfInteger{\YAD@yeardate}})%
     }{%
-      La commande
-      \protect\date{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
-      n'a pas ete correctement saisie car l'annee\MessageBreak%
-      (`\YAD@yeardate') n'est pas valide : ce doit etre\MessageBreak%
-      un nombre entier.%
-    }%
-  }{%
-    % \IfDecimal{\YAD@yeardate}{%
-    %   \csxdef{YAD@yeardate}{\number\integerpart}%
-    % }{%
-    % }%
-    % \ifnumless{\YAD@yeardate}{\number\year}{%
-    %   \YAD@ClassError[nodate]{%
-    %     Annee de la date de soutenance non valide%
-    %   }{%
-    %     La commande \protect\date{#1}{#2}{#3}\space\MessageBreak%
-    %     n'a pas ete correctement saisie car le numero de\MessageBreak%
-    %     l'annee (`#3') n'est pas valide : ce doit etre\MessageBreak%
-    %     un nombre entier (superieur ou egal a \number\year).%
-    %   }%
-    % }{%
-      \toggletrue{YAD@valid@year}%
-    % }%
-   }%
-  \ifboolexpr{%
-    togl {YAD@valid@day}%
-    and togl {YAD@valid@month}%
-    and togl {YAD@valid@year}%
-  }{%
-    \csdef{printdate}{%
-      % \setdatenumber{\YAD@yeardate}{\YAD@monthdate}{\YAD@daydate}%
-      % \ifnumgreater{\value{datetoday}}{\value{datenumber}}{%
-      %   \YAD@generic@argument@translate{date}%
-      %   \YAD@ClassError[nodate]{%
-      %     Date de soutenance non valide%
-      %   }{%
-      %     La date saisie
-      %     (`\protect\date{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}') n'est
-      %     pas\MessageBreak%
-      %     correcte car elle ne doit pas etre anterieure\MessageBreak%
-      %     a la date du jour
-      %     (\protect\date{\number\day}{\number\month}{\number\year}).%
-      %   }%
+      \YAD@ClassError[nodate]{%
+        Annee de la date de soutenance non valide%
+      }{%
+        La commande
+        \protect\date{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
+        n'a pas ete correctement saisie car l'annee\MessageBreak%
+        (`\YAD@yeardate') n'est pas valide : ce doit etre\MessageBreak%
+        un nombre entier.%
+      }%
+    }{%
+      % \IfDecimal{\YAD@yeardate}{%
+      % \csxdef{YAD@yeardate}{\number\integerpart}%
       % }{%
-        \formatdate{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}%
+      % }%
+      %   \ifnumless{\YAD@yeardate}{\number\year}{%
+      %   \YAD@ClassError[nodate]{%
+      %   Annee de la date de soutenance non valide%
+      % }{%
+      %   La commande \protect\date{#1}{#2}{#3}\space\MessageBreak%
+      %   n'a pas ete correctement saisie car le numero de\MessageBreak%
+      %   l'annee (`#3') n'est pas valide : ce doit etre\MessageBreak%
+      %   un nombre entier (superieur ou egal a \number\year).%
+      % }%
+      % }{%
+      \toggletrue{YAD@valid@year}%
       % }%
     }%
-  }{%
-    \csdef{printdate}{%
-      \YAD@generic@argument@translate{date}%
+    \ifboolexpr{%
+      togl {YAD@valid@day}%
+      and togl {YAD@valid@month}%
+      and togl {YAD@valid@year}%
+    }{%
+      \csdef{printdate}{%
+        % \setdatenumber{\YAD@yeardate}{\YAD@monthdate}{\YAD@daydate}%
+        % \ifnumgreater{\value{datetoday}}{\value{datenumber}}{%
+        % \YAD@generic@argument@translate{date}%
+        % \YAD@ClassError[nodate]{%
+        % Date de soutenance non valide%
+        % }{%
+        %   La date saisie
+        %   (`\protect\date{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}') n'est
+        %   pas\MessageBreak%
+        %   correcte car elle ne doit pas etre anterieure\MessageBreak%
+        %   a la date du jour
+        %   (\protect\date{\number\day}{\number\month}{\number\year}).%
+        % }%
+        % }{%
+        \formatdate{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}%
+        % }%
+      }%
+    }{%
+      \csdef{printdate}{%
+        \YAD@generic@argument@translate{date}%
+      }%
     }%
+    \togglefalse{YAD@valid@day}%
+    \togglefalse{YAD@valid@month}%
+    \togglefalse{YAD@valid@year}%
   }%
-  \togglefalse{YAD@valid@day}%
-  \togglefalse{YAD@valid@month}%
-  \togglefalse{YAD@valid@year}%
 }%
 \AtEndDocument{%
   \YAD@ifemptyorundef{\printdate}{%
@@ -1946,12 +1971,12 @@
 }%
 \newcommand*{\printlaboratory}{\@ifstar{\@tempswatrue\YAD@laboratory@name@temp}{\@tempswafalse\YAD@laboratory@name@temp}}%
 \newcommand*{\YAD@laboratory@name@temp}[2]{%
-  \YAD@ifemptyorundef{#1}{%
+  \ifundef{#1}{%
     \YAD@reach@file{\YAD@generic@argument@translate{laboratory}}%
     \ifYAD@nolaboratory%
     \else%
     \YAD@ClassError[nolaboratory]{%
-      Laboratoire de la these non specifie ou vide%
+      Nom du laboratoire de la these non specifie ou vide%
     }{%
       La commande \protect\laboratory\space n'a pas ete utilisee\MessageBreak%
       (celle-ci est requise) ou son 1er argument est vide\MessageBreak%
@@ -1977,7 +2002,7 @@
   }%
 }%
 \newcommand*{\printlaboratoryaddress}[1]{%
-  \YAD@ifemptyorundef{#1}{%
+  \ifundef{#1}{%
     \YAD@reach@file{\YAD@generic@argument@translate{laboratoryaddress}}%
     \ifYAD@nolaboratoryadress%
     \else%
@@ -2006,6 +2031,10 @@
   \ifnumcomp{\value{YAD@titlepages}}{=}{2}{\addtocounter{page}{2}}{}%
   \ifnumcomp{\value{YAD@titlepages}}{=}{3}{\addtocounter{page}{4}}{}%
 }%
+\ifundef{\cmdKV@YAD@frametitle}{%
+  \newcommand{\cmdKV@YAD@frametitle}{fbox}%
+}{%
+}%
 \renewcommand{\maketitle}{%
   \toggletrue{YAD@maketitle@used}%
   \setlength{\fboxsep}{10pt}%
@@ -2016,7 +2045,7 @@
 \begingroup%
 \expandafter\selectlanguage\expandafter{##1}%
   \begin{lrbox}{\YAD@titlebox}
-    \ifthenelse{\equal{\cmdKV@YAD@frametitle}{none}}{%
+    \ifdefstrequal{\cmdKV@YAD@frametitle}{none}{%
     }{%
       \tcbset{colback=white,boxsep=3pt,boxrule=0.4pt,arc=0mm}%
       \ifthenelse{\equal{\cmdKV@YAD@frametitle}{shadowbox}}{%
@@ -2037,7 +2066,7 @@
     \begin{minipage}{\linewidth-2\fboxsep-2\fboxrule}
       \onehalfspacing%
       \noindent%
-      \ifthenelse{\equal{\cmdKV@YAD@frametitle}{none}}{%
+      \ifdefstrequal{\cmdKV@YAD@frametitle}{none}{%
       }{%
         \YAD@translation{thesistitle}%
       }%
@@ -2067,7 +2096,7 @@
         \Large\printsubtitle%
       }%
     \end{minipage}%
-    \ifthenelse{\equal{\cmdKV@YAD@frametitle}{none}}{%
+    \ifdefstrequal{\cmdKV@YAD@frametitle}{none}{%
     }{%
     \end{tcolorbox}
   }%
@@ -2238,13 +2267,15 @@
     \end{center}
   % \end{minipage}%
   \begin{center}
-    \ifthenelse{\equal{\cmdKV@YAD@frametitle}{none}}{%
+    \ifdefstrequal{\cmdKV@YAD@frametitle}{none}{%
+    }{%
       \ifdraft{}{\vspace*{\stretch{2}}}%
     }{%
       \ifdraft{}{\vspace*{\stretch{.25}}}%
     }%
     \usebox{\YAD@titlebox}%
-    \ifthenelse{\equal{\cmdKV@YAD@frametitle}{none}}{%
+    \ifdefstrequal{\cmdKV@YAD@frametitle}{none}{%
+    }{%
       \ifdraft{}{\vspace*{\stretch{2}}}%
     }{%
     }%
@@ -2424,6 +2455,29 @@
   \setkeys{YAD}{#1}%
   \DTLnewdbentry{laboratories}{name}{#2}%
   \DTLnewdbentry{laboratories}{address}{#3}%
+  \ifYAD@nolaboratory%
+  \else%
+  \ifthenelse{\isempty{#2}}{%
+    \YAD@ClassError[nolaboratory]{%
+      Nom du laboratoire de la these vide%
+    }{%
+      Le 1er argument obligatoire de la commande
+      \protect\laboratory\MessageBreak%
+      est vide (celui-ci doit etre renseigne).%
+    }%
+  }{%
+  }%
+  \ifthenelse{\isempty{#3}}{%
+    \YAD@ClassError[nolaboratory]{%
+      Adresse du laboratoire de la these vide%
+    }{%
+      Le 2e argument obligatoire de la commande
+      \protect\laboratory\MessageBreak%
+      est vide (celui-ci doit etre renseigne).%
+    }%
+  }{%
+  }%
+  \fi%
   \ifthenelse{\equal{\cmdKV@YAD@logo}{}}{%
     \DTLnewdbentry{laboratories}{logo}{}%
   }{%
@@ -2786,6 +2840,8 @@
   \YAD@abstract@page%
   \YAD@clearemptydoublepage%
   \egroup%
+  \YAD@nolaboratorytrue%
+  \YAD@nolaboratoryadresstrue%
 }%
 \newcommand{\YAD@abstract@page@rule}[1][black]{\bgroup\color{#1}\noindent\rule[2pt]{\linewidth}{2pt}\egroup}
 \AtEndDocument{%
