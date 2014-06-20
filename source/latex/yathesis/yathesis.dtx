@@ -2221,6 +2221,31 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}{\YAD@error@firstlastnames@empty}
+%    \begin{macrocode}
+\newcommand{\YAD@error@firstlastnames@empty}[4]{%
+  \ifthenelse{\isempty{#2}}{%
+    \YAD@ClassError{%
+      Prenom #1 non specifie%
+    }{%
+      Le 1er argument obligatoire de la commande \string#4\MessageBreak%
+      est vide (celui-ci doit etre renseigne).%
+    }%
+  }{%
+  }%
+  \ifthenelse{\isempty{#3}}{%
+    \YAD@ClassError{%
+      Nom #1 non specifie%
+    }{%
+      Le 2e argument obligatoire de la commande \string#4\MessageBreak%
+      est vide (celui-ci doit etre renseigne).%
+    }%
+  }{%
+  }%
+}
+%    \end{macrocode}
+% \end{macro}
+%
 % \begin{macro}{\YAD@supervisors}
 %    \begin{macrocode}
 \newcommand*{\YAD@supervisors}[3][]{%
@@ -2234,6 +2259,7 @@ This work consists of the file  yathesis.dtx
 \newcommand*{\supervisor}[3][]{%
   \YAD@supervisors[#1,role=supervisor]{#2}{#3}%
   \toggletrue{YAD@supervisor@specified}%
+  \YAD@error@firstlastnames@empty{du directeur de these}{#2}{#3}{\supervisor}%
 }%
 %    \end{macrocode}
 % \end{macro}
@@ -2242,6 +2268,7 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \newcommand*{\cosupervisor}[3][]{%
   \YAD@supervisors[#1,role=cosupervisor]{#2}{#3}%
+  \YAD@error@firstlastnames@empty{du co-directeur de these}{#2}{#3}{\cosupervisor}%
 }%
 %    \end{macrocode}
 % \end{macro}
@@ -2250,6 +2277,7 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \newcommand*{\comonitor}[3][]{%
   \YAD@supervisors[#1,role=comonitor]{#2}{#3}%
+  \YAD@error@firstlastnames@empty{du co-encadrant de these}{#2}{#3}{\comonitor}%
 }%
 %    \end{macrocode}
 % \end{macro}
@@ -2258,6 +2286,7 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \newcommand*{\guest}[3][]{%
   \YAD@staff[#1]{#2}{#3}{guests}%
+  \YAD@error@firstlastnames@empty{de l'invite}{#2}{#3}{\guest}%
 }%
 %    \end{macrocode}
 % \end{macro}
@@ -2266,6 +2295,7 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \newcommand*{\referee}[3][]{%
   \YAD@staff[#1]{#2}{#3}{referees}%
+  \YAD@error@firstlastnames@empty{du rapporteur}{#2}{#3}{\referee}%
 }%
 %    \end{macrocode}
 % \end{macro}
@@ -2274,6 +2304,10 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \newcommand*{\examiner}[3][]{%
   \YAD@staff[#1]{#2}{#3}{examiners}%
+  \ifthenelse{\equal{\cmdKV@YAD@role}{committeepresident}}{%
+  }{%
+    \YAD@error@firstlastnames@empty{de l'examinateur}{#2}{#3}{\examiner}%
+  }%
 }%
 %    \end{macrocode}
 % \end{macro}
@@ -2282,6 +2316,7 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \newcommand*{\committeepresident}[3][]{%
   \examiner[#1,role=committeepresident]{#2}{#3}%
+  \YAD@error@firstlastnames@empty{du president du jury}{#2}{#3}{\committeepresident}%
 }%
 %    \end{macrocode}
 % \end{macro}
