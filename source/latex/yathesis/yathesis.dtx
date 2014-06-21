@@ -2064,7 +2064,8 @@ This work consists of the file  yathesis.dtx
   mcf*,%
   juniorresearcher,%
   juniorresearcher*,%
-  seniorresearcher%
+  seniorresearcher,%
+  % not@incommittee%
 }[true]%
 \presetkeys{YAD}{%
   role=,%
@@ -2092,6 +2093,7 @@ This work consists of the file  yathesis.dtx
   juniorresearcher=false,%
   juniorresearcher*=false,%
   seniorresearcher=false,%
+  % not@incommittee=false,%
   frametitle=fbox%
 }{}%
 % %    \end{macrocode}
@@ -2135,6 +2137,8 @@ This work consists of the file  yathesis.dtx
 \DTLnewdbentry{YAD@staffs}{YAD@the@staff}{guests}%
 \DTLnewrow{YAD@staffs}%
 \DTLnewdbentry{YAD@staffs}{YAD@the@staff}{supervisors}%
+\DTLnewrow{YAD@staffs}%
+\DTLnewdbentry{YAD@staffs}{YAD@the@staff}{YAD@supervisors@incommittee}%
 %
 \DTLforeach{YAD@staffs}{%
   \YAD@the@staff=YAD@the@staff}{%
@@ -2197,6 +2201,11 @@ This work consists of the file  yathesis.dtx
   }{%
     \DTLnewdbentry{#4}{corps}{\cmdKV@YAD@corps}%
   }%
+  % \ifKV@YAD@not@incommittee%
+  % \DTLnewdbentry{#4}{isincommittee}{false}%
+  % \else%
+  % \DTLnewdbentry{#4}{isincommittee}{true}%
+  % \fi%
   \ifthenelse{\equal{\cmdKV@YAD@sepcorpaffilfrench}{}}{%
     \DTLnewdbentry{#4}{sepcorpaffilfrench}{\YAD@global@sepcorpaffil@french}%
   }{%
@@ -2254,39 +2263,77 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}{\YAD@supervisors@incommittee}
+%    \begin{macrocode}
+\newcommand*{\YAD@supervisors@incommittee}[3][]{%
+  \YAD@staff[#1]{#2}{#3}{YAD@supervisors@incommittee}%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
 % \begin{macro}{\supervisor}
 %    \begin{macrocode}
-\newcommand*{\supervisor}[3][]{%
+\newcommand{\supervisor}{%
+  \@ifstar{\@tempswatrue\YAD@supervisor}{\@tempswafalse\YAD@supervisor}%
+}
+\newcommand*{\YAD@supervisor}[3][]{%
   \YAD@supervisors[#1,role=supervisor]{#2}{#3}%
   \toggletrue{YAD@supervisor@specified}%
   \YAD@error@firstlastnames@empty{du directeur de these}{#2}{#3}{\supervisor}%
+  \if@tempswa%
+  \YAD@supervisors@incommittee[#1,role=supervisor]{#2}{#3}%
+  \fi%
 }%
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\cosupervisor}
 %    \begin{macrocode}
-\newcommand*{\cosupervisor}[3][]{%
+\newcommand{\cosupervisor}{%
+  \@ifstar{\@tempswatrue\YAD@cosupervisor}{\@tempswafalse\YAD@cosupervisor}%
+}
+\newcommand*{\YAD@cosupervisor}[3][]{%
   \YAD@supervisors[#1,role=cosupervisor]{#2}{#3}%
+  \toggletrue{YAD@supervisor@specified}%
   \YAD@error@firstlastnames@empty{du co-directeur de these}{#2}{#3}{\cosupervisor}%
+  \if@tempswa%
+  \YAD@supervisors@incommittee[#1,role=cosupervisor]{#2}{#3}%
+  \fi%
 }%
 %    \end{macrocode}
 % \end{macro}
 %
 % \begin{macro}{\comonitor}
 %    \begin{macrocode}
-\newcommand*{\comonitor}[3][]{%
+\newcommand{\comonitor}{%
+  \@ifstar{\@tempswatrue\YAD@comonitor}{\@tempswafalse\YAD@comonitor}%
+}
+\newcommand*{\YAD@comonitor}[3][]{%
   \YAD@supervisors[#1,role=comonitor]{#2}{#3}%
+  \toggletrue{YAD@supervisor@specified}%
   \YAD@error@firstlastnames@empty{du co-encadrant de these}{#2}{#3}{\comonitor}%
+  \if@tempswa%
+  \YAD@supervisors@incommittee[#1,role=comonitor]{#2}{#3}%
+  \fi%
 }%
 %    \end{macrocode}
 % \end{macro}
-%
+% On définit maintenant les membres du jury. Si le document est en versions
+% \enquote{à soumettre} aux rapporteurs, les membres du jury autres les
+% directeurs sont ignorés car ils sont censés ne pas être encore connus : le
+% doctorant ne peut préjuger d'un jury, ne sachant pas encore s’il va être
+% autorisé à soutenir.
 % \begin{macro}{\guest}
 %    \begin{macrocode}
 \newcommand*{\guest}[3][]{%
-  \YAD@staff[#1]{#2}{#3}{guests}%
-  \YAD@error@firstlastnames@empty{de l'invite}{#2}{#3}{\guest}%
+  \ifboolexpr{%
+    togl {YAD@submitted@work}%
+    or togl {YAD@submitted@work@star}%
+  }{%
+  }{%
+    \YAD@staff[#1]{#2}{#3}{guests}%
+    \YAD@error@firstlastnames@empty{de l'invite}{#2}{#3}{\guest}%
+  }%
 }%
 %    \end{macrocode}
 % \end{macro}
@@ -2294,8 +2341,14 @@ This work consists of the file  yathesis.dtx
 % \begin{macro}{\referee}
 %    \begin{macrocode}
 \newcommand*{\referee}[3][]{%
-  \YAD@staff[#1]{#2}{#3}{referees}%
-  \YAD@error@firstlastnames@empty{du rapporteur}{#2}{#3}{\referee}%
+  \ifboolexpr{%
+    togl {YAD@submitted@work}%
+    or togl {YAD@submitted@work@star}%
+  }{%
+  }{%
+    \YAD@staff[#1]{#2}{#3}{referees}%
+    \YAD@error@firstlastnames@empty{du rapporteur}{#2}{#3}{\referee}%
+  }%
 }%
 %    \end{macrocode}
 % \end{macro}
@@ -2303,10 +2356,16 @@ This work consists of the file  yathesis.dtx
 % \begin{macro}{\examiner}
 %    \begin{macrocode}
 \newcommand*{\examiner}[3][]{%
-  \YAD@staff[#1]{#2}{#3}{examiners}%
-  \ifthenelse{\equal{\cmdKV@YAD@role}{committeepresident}}{%
+  \ifboolexpr{%
+    togl {YAD@submitted@work}%
+    or togl {YAD@submitted@work@star}%
   }{%
-    \YAD@error@firstlastnames@empty{de l'examinateur}{#2}{#3}{\examiner}%
+  }{%
+    \YAD@staff[#1]{#2}{#3}{examiners}%
+    \ifthenelse{\equal{\cmdKV@YAD@role}{committeepresident}}{%
+    }{%
+      \YAD@error@firstlastnames@empty{de l'examinateur}{#2}{#3}{\examiner}%
+    }%
   }%
 }%
 %    \end{macrocode}
@@ -2315,8 +2374,14 @@ This work consists of the file  yathesis.dtx
 % \begin{macro}{\committeepresident}
 %    \begin{macrocode}
 \newcommand*{\committeepresident}[3][]{%
-  \examiner[#1,role=committeepresident]{#2}{#3}%
-  \YAD@error@firstlastnames@empty{du president du jury}{#2}{#3}{\committeepresident}%
+  \ifboolexpr{%
+    togl {YAD@submitted@work}%
+    or togl {YAD@submitted@work@star}%
+  }{%
+  }{%
+    \examiner[#1,role=committeepresident]{#2}{#3}%
+    \YAD@error@firstlastnames@empty{du president du jury}{#2}{#3}{\committeepresident}%
+  }%
 }%
 %    \end{macrocode}
 % \end{macro}
@@ -2388,18 +2453,25 @@ This work consists of the file  yathesis.dtx
   {%
     \small%
     \DTLifdbempty{\YAD@the@staff}{}{%
-      \vspace{\stretch{1}}%
       \begin{tabular}[t]{>{\itshape}lllll}
-        \multicolumn{5}{@{}l}{\bfseries\YAD@translation{committeemembers}}%
-        \\[.25cm]
+        \ifboolexpr{%
+          togl {YAD@submitted@work}%
+          or togl {YAD@submitted@work@star}%
+        }{%
+        }{%
+          \multicolumn{5}{@{}l}{\bfseries\YAD@translation{committeemembers}}%
+          \tabularnewline[.25cm]
+        }%
         \DTLforeach*{YAD@staffs}{%
           \YAD@the@staff=YAD@the@staff%
         }{%
+          % \DTLforeach*[\DTLiseq{\YAD@isincommittee}{true}]{\YAD@the@staff}{%
           \DTLforeach*{\YAD@the@staff}{%
             \YAD@committeemember@lastname=lastname,%
             \YAD@committeemember@fistname=firstname,%
             \YAD@committeemember@role=role,%
             \YAD@committeemember@corps=corps,%
+            % \YAD@isincommittee=isincommittee,%
             \YAD@committeemember@sepcorpaffil=%
             \expandafter\IfLanguageName{french}{%
               sepcorpaffilfrench%
@@ -4247,19 +4319,23 @@ This work consists of the file  yathesis.dtx
     }{%
     }%
   \end{center}
-  % \noindent%
-  % \begin{minipage}[c][\YAD@otherboxheight][c]{\YAD@titleboxwidth}
 %    \end{macrocode}
 % Affichage du jury
 %    \begin{macrocode}
-\ifboolexpr{%
-  togl {YAD@submitted@work}%
-  or togl {YAD@submitted@work@star}%
-}{%
-  \vphantom{\YAD@committee@tabular}%
-}{%
-  \YAD@committee@tabular%
-}%
+  % \begin{minipage}[c][\YAD@otherboxheight][c]{\YAD@titleboxwidth}
+  \noindent%
+  % \fbox{%
+    \begin{minipage}[t][9cm][t]{\linewidth}
+% \ifboolexpr{%
+% togl {YAD@submitted@work}%
+% or togl {YAD@submitted@work@star}%
+% }{%
+% \vphantom{\YAD@committee@tabular}%
+% }{%
+    \YAD@committee@tabular%
+% }%
+  \end{minipage}
+  % }%
 \iftoggle{YAD@supervisor@specified}{%
 }{%
   \ifYAD@nosupervisor%
@@ -4274,8 +4350,6 @@ This work consists of the file  yathesis.dtx
   }%
   \fi%
 }%
-\ifdraft{}{\vspace*{\stretch{.1}}}%
-  % \end{minipage}
 %    \end{macrocode}
 % On fixe la numérotation des pages selon le nombre de pages de titres au moyen
 % de la commande ×\YAD@addpagenumber× créée précédemment.
