@@ -2064,8 +2064,7 @@ This work consists of the file  yathesis.dtx
   mcf*,%
   juniorresearcher,%
   juniorresearcher*,%
-  seniorresearcher,%
-  % not@incommittee%
+  seniorresearcher%
 }[true]%
 \presetkeys{YAD}{%
   role=,%
@@ -2093,7 +2092,6 @@ This work consists of the file  yathesis.dtx
   juniorresearcher=false,%
   juniorresearcher*=false,%
   seniorresearcher=false,%
-  % not@incommittee=false,%
   frametitle=fbox%
 }{}%
 % %    \end{macrocode}
@@ -2201,11 +2199,6 @@ This work consists of the file  yathesis.dtx
   }{%
     \DTLnewdbentry{#4}{corps}{\cmdKV@YAD@corps}%
   }%
-  % \ifKV@YAD@not@incommittee%
-  % \DTLnewdbentry{#4}{isincommittee}{false}%
-  % \else%
-  % \DTLnewdbentry{#4}{isincommittee}{true}%
-  % \fi%
   \ifthenelse{\equal{\cmdKV@YAD@sepcorpaffilfrench}{}}{%
     \DTLnewdbentry{#4}{sepcorpaffilfrench}{\YAD@global@sepcorpaffil@french}%
   }{%
