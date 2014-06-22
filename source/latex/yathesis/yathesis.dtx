@@ -2136,7 +2136,7 @@ This work consists of the file  yathesis.dtx
 \DTLnewrow{YAD@staffs}%
 \DTLnewdbentry{YAD@staffs}{YAD@the@staff}{supervisors}%
 \DTLnewrow{YAD@staffs}%
-\DTLnewdbentry{YAD@staffs}{YAD@the@staff}{YAD@supervisors@incommittee}%
+\DTLnewdbentry{YAD@staffs}{YAD@the@staff}{supervisorsincommittee}%
 %
 \DTLforeach{YAD@staffs}{%
   \YAD@the@staff=YAD@the@staff}{%
@@ -2259,7 +2259,7 @@ This work consists of the file  yathesis.dtx
 % \begin{macro}{\YAD@supervisors@incommittee}
 %    \begin{macrocode}
 \newcommand*{\YAD@supervisors@incommittee}[3][]{%
-  \YAD@staff[#1]{#2}{#3}{YAD@supervisors@incommittee}%
+  \YAD@staff[#1]{#2}{#3}{supervisorsincommittee}%
 }%
 %    \end{macrocode}
 % \end{macro}
@@ -2311,22 +2311,12 @@ This work consists of the file  yathesis.dtx
 }%
 %    \end{macrocode}
 % \end{macro}
-% On définit maintenant les membres du jury. Si le document est en versions
-% \enquote{à soumettre} aux rapporteurs, les membres du jury autres les
-% directeurs sont ignorés car ils sont censés ne pas être encore connus : le
-% doctorant ne peut préjuger d'un jury, ne sachant pas encore s’il va être
-% autorisé à soutenir.
+%
 % \begin{macro}{\guest}
 %    \begin{macrocode}
 \newcommand*{\guest}[3][]{%
-  \ifboolexpr{%
-    togl {YAD@submitted@work}%
-    or togl {YAD@submitted@work@star}%
-  }{%
-  }{%
-    \YAD@staff[#1]{#2}{#3}{guests}%
-    \YAD@error@firstlastnames@empty{de l'invite}{#2}{#3}{\guest}%
-  }%
+  \YAD@staff[#1]{#2}{#3}{guests}%
+  \YAD@error@firstlastnames@empty{de l'invite}{#2}{#3}{\guest}%
 }%
 %    \end{macrocode}
 % \end{macro}
@@ -2334,14 +2324,8 @@ This work consists of the file  yathesis.dtx
 % \begin{macro}{\referee}
 %    \begin{macrocode}
 \newcommand*{\referee}[3][]{%
-  \ifboolexpr{%
-    togl {YAD@submitted@work}%
-    or togl {YAD@submitted@work@star}%
-  }{%
-  }{%
-    \YAD@staff[#1]{#2}{#3}{referees}%
-    \YAD@error@firstlastnames@empty{du rapporteur}{#2}{#3}{\referee}%
-  }%
+  \YAD@staff[#1]{#2}{#3}{referees}%
+  \YAD@error@firstlastnames@empty{du rapporteur}{#2}{#3}{\referee}%
 }%
 %    \end{macrocode}
 % \end{macro}
@@ -2349,16 +2333,10 @@ This work consists of the file  yathesis.dtx
 % \begin{macro}{\examiner}
 %    \begin{macrocode}
 \newcommand*{\examiner}[3][]{%
-  \ifboolexpr{%
-    togl {YAD@submitted@work}%
-    or togl {YAD@submitted@work@star}%
+  \YAD@staff[#1]{#2}{#3}{examiners}%
+  \ifthenelse{\equal{\cmdKV@YAD@role}{committeepresident}}{%
   }{%
-  }{%
-    \YAD@staff[#1]{#2}{#3}{examiners}%
-    \ifthenelse{\equal{\cmdKV@YAD@role}{committeepresident}}{%
-    }{%
-      \YAD@error@firstlastnames@empty{de l'examinateur}{#2}{#3}{\examiner}%
-    }%
+    \YAD@error@firstlastnames@empty{de l'examinateur}{#2}{#3}{\examiner}%
   }%
 }%
 %    \end{macrocode}
@@ -2367,14 +2345,8 @@ This work consists of the file  yathesis.dtx
 % \begin{macro}{\committeepresident}
 %    \begin{macrocode}
 \newcommand*{\committeepresident}[3][]{%
-  \ifboolexpr{%
-    togl {YAD@submitted@work}%
-    or togl {YAD@submitted@work@star}%
-  }{%
-  }{%
-    \examiner[#1,role=committeepresident]{#2}{#3}%
-    \YAD@error@firstlastnames@empty{du president du jury}{#2}{#3}{\committeepresident}%
-  }%
+  \examiner[#1,role=committeepresident]{#2}{#3}%
+  \YAD@error@firstlastnames@empty{du president du jury}{#2}{#3}{\committeepresident}%
 }%
 %    \end{macrocode}
 % \end{macro}
@@ -2442,140 +2414,189 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\newcommand*{\YAD@committee@tabular}{%
-  {%
-    \small%
-    \DTLifdbempty{\YAD@the@staff}{}{%
-      \begin{tabular}[t]{>{\itshape}lllll}
-        \ifboolexpr{%
-          togl {YAD@submitted@work}%
-          or togl {YAD@submitted@work@star}%
-        }{%
-        }{%
-          \multicolumn{5}{@{}l}{\bfseries\YAD@translation{committeemembers}}%
-          \tabularnewline[.25cm]
-        }%
-        \DTLforeach*{YAD@staffs}{%
-          \YAD@the@staff=YAD@the@staff%
-        }{%
-          % \DTLforeach*[\DTLiseq{\YAD@isincommittee}{true}]{\YAD@the@staff}{%
-          \DTLforeach*{\YAD@the@staff}{%
-            \YAD@committeemember@lastname=lastname,%
-            \YAD@committeemember@fistname=firstname,%
-            \YAD@committeemember@role=role,%
-            \YAD@committeemember@corps=corps,%
-            % \YAD@isincommittee=isincommittee,%
-            \YAD@committeemember@sepcorpaffil=%
-            \expandafter\IfLanguageName{french}{%
-              sepcorpaffilfrench%
-            }{%
-              sepcorpaffilenglish%
-            }%
-            ,%
-            \YAD@committeemember@affiliation=%
-            \IfLanguageName{french}{%
-              affiliation%
-            }{%
-              affiliationsecondary%
-            }%
-          }{%
-            % Nature des membres du jury
-            \DTLiffirstrow{%
-              \ifthenelse{\DTLrowcount{\YAD@the@staff}>1}{%
-                \YAD@translation{\YAD@the@staff-pl}%
-              }{%
-                \YAD@translation{\YAD@the@staff}%
-              }%
-            }{%
-            }%
-            &
-            % Prénom
-            \YAD@reach@file{%
-              %
-              \ifthenelse{\DTLiseq{\YAD@committeemember@fistname}{}}{%
-                \YAD@generic@argument@translate{firstname}%
-              }{%
-                \YAD@committeemember@fistname%
-              }%
+\newcommand{\YAD@display@staff}[1]{%
+  \DTLforeach*{#1}{%
+    \YAD@committeemember@lastname=lastname,%
+    \YAD@committeemember@fistname=firstname,%
+    \YAD@committeemember@role=role,%
+    \YAD@committeemember@corps=corps,%
+    \YAD@committeemember@sepcorpaffil=%
+    \expandafter\IfLanguageName{french}{%
+      sepcorpaffilfrench%
+    }{%
+      sepcorpaffilenglish%
+    }%
+    ,%
+    \YAD@committeemember@affiliation=%
+    \IfLanguageName{french}{%
+      affiliation%
+    }{%
+      affiliationsecondary%
+    }%
+  }{%
+    % Nature des membres du jury
+    \DTLiffirstrow{%
+      \ifthenelse{\DTLrowcount{\YAD@the@staff}>1}{%
+        \YAD@translation{\YAD@the@staff-pl}%
+      }{%
+        \YAD@translation{\YAD@the@staff}%
+      }%
+    }{%
+    }%
+    &
+    % Prénom
+    \YAD@reach@file{%
+      %
+      \ifthenelse{\DTLiseq{\YAD@committeemember@fistname}{}}{%
+        \YAD@generic@argument@translate{firstname}%
+      }{%
+        \YAD@committeemember@fistname%
+      }%
 %    \end{macrocode}
 % L'accolade suivante ne doit pas être suivie d'un ×%× sans quoi il
 % n'y aura pas d'espace entre le prénom et le nom.
 %    \begin{macrocode}
-            }
-            % Nom
-            \YAD@reach@file{%
-              \ifthenelse{\DTLiseq{\YAD@committeemember@lastname}{}}{%
-                \YAD@generic@argument@translate{lastname}%
-              }{%
-                \textsc{\YAD@committeemember@lastname}%
-              }%
-            }%
-            &
-            % Fonction
-            \YAD@reach@file{%
-              \ifthenelse{\DTLiseq{\YAD@committeemember@role}{}}{%
-                \ifdraft{%
-                  \YAD@generic@argument@translate{role}%
-                }{%
-                }%
-              }{%
-                \ifthenelse{\equal{\YAD@the@staff}{supervisors}}{%
-                  \ifthenelse{\DTLrowcount{supervisors}>1}{%
-                    \YAD@translation{%
-                      \YAD@committeemember@role%
-                    }%
-                  }{%
-                  }%
-                }{%
-                  \YAD@translation{%
-                    \YAD@committeemember@role%
-                  }%
-                }%
-              }%
-            }%
-            &
-            % Corps
-            \YAD@reach@file{%
-              \ifthenelse{\DTLiseq{\YAD@committeemember@corps}{}}{%
-                \ifdraft{%
-                  \YAD@generic@argument@translate{corps}%
-                }{%
-                }%
-              }{%
-                \YAD@translation{%
-                  \YAD@committeemember@corps%
-                }%
-              }%
-            }%
-            % Établissement
-            \YAD@reach@file{%
-              \ifthenelse{\DTLiseq{\YAD@committeemember@affiliation}{}}{%
-                \ifdraft{%
-                  \YAD@generic@argument@translate{affiliation}%
-                }{%
-                }%
-              }{%
-                \ifthenelse{\DTLiseq{\YAD@committeemember@corps}{}}{%
-                  \YAD@committeemember@affiliation%
-                }{%
-                  \ifthenelse{\equal{\YAD@committeemember@sepcorpaffil}{}}{%
-                    \YAD@if@starts@with@vowel{\YAD@committeemember@affiliation}{\YAD@al}{\YAD@au}\YAD@committeemember@affiliation%
-                  }{%
-                    \YAD@committeemember@sepcorpaffil\YAD@committeemember@affiliation%
-                  }%
-                }%
-              }%
-            }%
-            \DTLiflastrow{%
-              \\[.25cm]
+    }
+% Nom
+    \YAD@reach@file{%
+      \ifthenelse{\DTLiseq{\YAD@committeemember@lastname}{}}{%
+        \YAD@generic@argument@translate{lastname}%
+      }{%
+        \textsc{\YAD@committeemember@lastname}%
+      }%
+    }%
+    &
+% Corps
+    \YAD@reach@file{%
+      \ifthenelse{\DTLiseq{\YAD@committeemember@corps}{}}{%
+        \ifdraft{%
+          \YAD@generic@argument@translate{corps}%
+        }{%
+        }%
+      }{%
+        \YAD@translation{%
+          \YAD@committeemember@corps%
+        }%
+      }%
+    }%
+% Établissement
+    \YAD@reach@file{%
+      \ifthenelse{\DTLiseq{\YAD@committeemember@affiliation}{}}{%
+        \ifdraft{%
+          \YAD@generic@argument@translate{affiliation}%
+        }{%
+        }%
+      }{%
+        \ifthenelse{\DTLiseq{\YAD@committeemember@corps}{}}{%
+          \YAD@committeemember@affiliation%
+        }{%
+          \ifthenelse{\equal{\YAD@committeemember@sepcorpaffil}{}}{%
+            \YAD@if@starts@with@vowel{\YAD@committeemember@affiliation}{\YAD@al}{\YAD@au}\YAD@committeemember@affiliation%
+          }{%
+            \YAD@committeemember@sepcorpaffil\YAD@committeemember@affiliation%
+          }%
+        }%
+      }%
+    }%
+    &
+% Fonction
+    \YAD@reach@file{%
+      \ifthenelse{\DTLiseq{\YAD@committeemember@role}{}}{%
+        \ifdraft{%
+          \YAD@generic@argument@translate{role}%
+        }{%
+        }%
+      }{%
+        \YAD@translation{\YAD@committeemember@role}%
+      }%
+    }%
+    \DTLiflastrow{%
+      \\[.15cm]
+    }{%
+      \\
+    }%
+  }%
+}%
+%
+\newcommand*{\YAD@supervisors@tabular}{%
+  \small%
+  \DTLifdbempty{YAD@staffs}{}{%
+    \ifthenelse{\DTLrowcount{supervisors}>1}{%
+      \begin{tabular}[t]{>{\itshape}lll}
+      }{%
+        \begin{tabular}[t]{>{\itshape}l@{ }ll}
+        }%
+        \DTLforeach*{supervisors}{%
+          \YAD@committeemember@lastname=lastname,%
+          \YAD@committeemember@fistname=firstname,%
+          \YAD@committeemember@role=role%
+        }{%
+          % Nature des membres du jury
+          \DTLiffirstrow{%
+            \hspace{-\tabcolsep}%
+            \normalfont\bfseries%
+            \YAD@translation{supervisedby}%
+          }{%
+          }%
+          &
+          % Prénom
+          \YAD@reach@file{%
+            %
+            \ifthenelse{\DTLiseq{\YAD@committeemember@fistname}{}}{%
+              \YAD@generic@argument@translate{firstname}%
             }{%
-              \\
+              \YAD@committeemember@fistname%
             }%
+          }
+          % Nom
+          \YAD@reach@file{%
+            \ifthenelse{\DTLiseq{\YAD@committeemember@lastname}{}}{%
+              \YAD@generic@argument@translate{lastname}%
+            }{%
+              \textsc{\YAD@committeemember@lastname}%
+            }%
+          }%
+          &
+          % Fonction
+          \YAD@reach@file{%
+            \ifthenelse{\DTLiseq{\YAD@committeemember@role}{}}{%
+              \ifdraft{%
+                \YAD@generic@argument@translate{role}%
+              }{%
+              }%
+            }{%
+              \ifthenelse{\DTLrowcount{supervisors}>1}{%
+                \YAD@translation{%
+                  \YAD@committeemember@role%
+                }%
+              }{%
+              }%
+            }%
+          }%
+          % &
+          \DTLiflastrow{%
+            \\[.5cm]
+          }{%
+            \\
           }%
         }%
       \end{tabular}
+    }{%
     }%
   }%
+%
+\newcommand*{\YAD@committee@tabular}{%
+  \small%
+  \begin{tabular}[t]{>{\itshape}llll}
+    \multicolumn{4}{@{}l}{\bfseries\YAD@translation{committeemembers}}%
+    \\[.25cm]
+    \DTLforeach*[\not\DTLiseq{\YAD@the@staff}{supervisors}]{YAD@staffs}{%
+      \YAD@the@staff=YAD@the@staff%
+    }{%
+      %
+      \YAD@display@staff{\YAD@the@staff}%
+    }%
+  \end{tabular}
 }%
 %    \end{macrocode}
 %
@@ -4233,7 +4254,7 @@ This work consists of the file  yathesis.dtx
         }{%
           \textbf{\printauthor}%
         }%
-        \ifboolexpr{%
+      \ifboolexpr{%
           togl {YAD@submitted@work}%
           or togl {YAD@submitted@work@star}%
         }{%
@@ -4313,36 +4334,41 @@ This work consists of the file  yathesis.dtx
     }%
   \end{center}
 %    \end{macrocode}
-% Affichage du jury
+% Affichage des directeurs de thèse et du jury
 %    \begin{macrocode}
-  % \begin{minipage}[c][\YAD@otherboxheight][c]{\YAD@titleboxwidth}
   \noindent%
-  % \fbox{%
-    \begin{minipage}[t][9cm][t]{\linewidth}
-% \ifboolexpr{%
-% togl {YAD@submitted@work}%
-% or togl {YAD@submitted@work@star}%
-% }{%
-% \vphantom{\YAD@committee@tabular}%
-% }{%
-    \YAD@committee@tabular%
-% }%
+  \begin{minipage}[c][\YAD@otherboxheight][c]{\YAD@titleboxwidth}
+    \YAD@supervisors@tabular%
+    \par%
+    \ifboolexpr{%
+      togl {YAD@submitted@work}%
+      or togl {YAD@submitted@work@star}%
+    }{%
+      \vphantom{\YAD@committee@tabular}%
+    }{%
+      \YAD@committee@tabular%
+    }%
+    \ifdraft{}{\vspace*{\stretch{.1}}}%
   \end{minipage}
-  % }%
-\iftoggle{YAD@supervisor@specified}{%
-}{%
-  \ifYAD@nosupervisor%
-  \else%
-  \YAD@ClassError*[nosupervisor]{%
-    Directeur de these non specifie%
+  \ifdefstrequal{\cmdKV@YAD@frametitle}{none}{%
   }{%
-    La commande \protect\supervisor\space n'a pas ete utilisee\MessageBreak%
-    (celle-ci est requise) ou ses arguments obligatoires sont
-    vides\MessageBreak%
-    (ceux-ci doivent etre renseignes).%
+    \ifdraft{}{\vspace*{\stretch{2}}}%
+  }{%
   }%
-  \fi%
-}%
+  \iftoggle{YAD@supervisor@specified}{%
+  }{%
+    \ifYAD@nosupervisor%
+    \else%
+    \YAD@ClassError*[nosupervisor]{%
+      Directeur de these non specifie%
+    }{%
+      La commande \protect\supervisor\space n'a pas ete utilisee\MessageBreak%
+      (celle-ci est requise) ou ses arguments obligatoires sont
+      vides\MessageBreak%
+      (ceux-ci doivent etre renseignes).%
+    }%
+    \fi%
+  }%
 %    \end{macrocode}
 % On fixe la numérotation des pages selon le nombre de pages de titres au moyen
 % de la commande ×\YAD@addpagenumber× créée précédemment.
@@ -6027,8 +6053,9 @@ This work consists of the file  yathesis.dtx
 % \expression{lbl-conclusion}{Conclusion}{Conclusion}%
 \expression{lbl-supervisor}{directeur}{Supervisor}%
 \expression{lbl-seniorresearcher}{directeur de recherche}{Senior Researcher}%
-\expression{lbl-supervisors}{Directeur de th\`ese}{Supervisor}%
-\expression{lbl-supervisors-pl}{Directeurs de th\`ese}{Supervisors}%
+\expression{lbl-supervisorsincommittee}{Directeur de th\`ese}{Supervisor}%
+\expression{lbl-supervisorsincommittee-pl}{Directeurs de th\`ese}{Supervisors}%
+\expression{lbl-supervisedby}{Th\`ese dirig\'ee par}{Thesis supervised by}%
 \expression{lbl-academicfield}{Discipline}{Academic Field}%
 \expression{lbl-doctoralschool}{\'Ecole doctorale}{Doctoral School}%
 \expression{lbl-aim}{En vue de l'obtention du grade de docteur de l'}{In order
@@ -6044,7 +6071,7 @@ This work consists of the file  yathesis.dtx
 \expression{lbl-keywords}{Mots cl\'es}{Keywords}%
 \expression{lbl-ordernumber}{Num\'ero d'ordre}{Order Number}%
 % \expression{lbl-preface}{Pr\'eface}{Preface}%
-\expression{lbl-committeepresident}{pr\'esident}{President}%
+\expression{lbl-committeepresident}{pr\'esident du jury}{Committee President}%
 \expression{lbl-professor}{professeur}{Professor}%
 \expression{lbl-referees}{Rapporteur}{Referee}%
 \expression{lbl-referees-pl}{Rapporteurs}{Referees}%
