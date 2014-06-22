@@ -2507,7 +2507,10 @@ This work consists of the file  yathesis.dtx
         }{%
         }%
       }{%
-        \YAD@translation{\YAD@committeemember@role}%
+        \ifthenelse{\equal{\YAD@the@staff}{supervisorsincommittee}}{%
+        }{%
+          \YAD@translation{\YAD@committeemember@role}%
+        }%
       }%
     }%
     \DTLiflastrow{%
