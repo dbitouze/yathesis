@@ -2128,20 +2128,19 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \DTLnewdb{YAD@staffs}%
 \DTLnewrow{YAD@staffs}%
-\DTLnewdbentry{YAD@staffs}{YAD@the@staff}{referees}%
+\DTLnewdbentry{YAD@staffs}{YAD@the@staff}{YAD@referees}%
 \DTLnewrow{YAD@staffs}%
-\DTLnewdbentry{YAD@staffs}{YAD@the@staff}{examiners}%
+\DTLnewdbentry{YAD@staffs}{YAD@the@staff}{YAD@examiners}%
 \DTLnewrow{YAD@staffs}%
-\DTLnewdbentry{YAD@staffs}{YAD@the@staff}{guests}%
+\DTLnewdbentry{YAD@staffs}{YAD@the@staff}{YAD@guests}%
 \DTLnewrow{YAD@staffs}%
-\DTLnewdbentry{YAD@staffs}{YAD@the@staff}{supervisors}%
-\DTLnewrow{YAD@staffs}%
-\DTLnewdbentry{YAD@staffs}{YAD@the@staff}{supervisorsincommittee}%
+\DTLnewdbentry{YAD@staffs}{YAD@the@staff}{YAD@supervisors@in@committee}%
 %
 \DTLforeach{YAD@staffs}{%
   \YAD@the@staff=YAD@the@staff}{%
   \DTLnewdb{\YAD@the@staff}%
 }%
+\DTLnewdb{YAD@supervisors}%
 %
 \DTLnewdb{dedications}%
 \DTLnewdb{frontepigraphs}%
@@ -2248,18 +2247,10 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\YAD@supervisors}
+% \begin{macro}{\YAD@supervisors@in@committee}
 %    \begin{macrocode}
-\newcommand*{\YAD@supervisors}[3][]{%
-  \YAD@staff[#1]{#2}{#3}{supervisors}%
-}%
-%    \end{macrocode}
-% \end{macro}
-%
-% \begin{macro}{\YAD@supervisors@incommittee}
-%    \begin{macrocode}
-\newcommand*{\YAD@supervisors@incommittee}[3][]{%
-  \YAD@staff[#1]{#2}{#3}{supervisorsincommittee}%
+\newcommand*{\YAD@supervisors@in@committee}[3][]{%
+  \YAD@staff[#1]{#2}{#3}{YAD@supervisors@in@committee}%
 }%
 %    \end{macrocode}
 % \end{macro}
@@ -2270,11 +2261,13 @@ This work consists of the file  yathesis.dtx
   \@ifstar{\@tempswatrue\YAD@supervisor}{\@tempswafalse\YAD@supervisor}%
 }
 \newcommand*{\YAD@supervisor}[3][]{%
-  \YAD@supervisors[#1,role=supervisor]{#2}{#3}%
   \toggletrue{YAD@supervisor@specified}%
   \YAD@error@firstlastnames@empty{du directeur de these}{#2}{#3}{\supervisor}%
   \if@tempswa%
-  \YAD@supervisors@incommittee[#1,role=supervisor]{#2}{#3}%
+  \YAD@staff[#1,role=supervisor]{#2}{#3}{YAD@supervisors}%
+  \else%
+  \YAD@staff[#1,role=supervisor]{#2}{#3}{YAD@supervisors}%
+  \YAD@staff[#1,role=supervisor]{#2}{#3}{YAD@supervisors@in@committee}%
   \fi%
 }%
 %    \end{macrocode}
@@ -2286,11 +2279,13 @@ This work consists of the file  yathesis.dtx
   \@ifstar{\@tempswatrue\YAD@cosupervisor}{\@tempswafalse\YAD@cosupervisor}%
 }
 \newcommand*{\YAD@cosupervisor}[3][]{%
-  \YAD@supervisors[#1,role=cosupervisor]{#2}{#3}%
   \toggletrue{YAD@supervisor@specified}%
-  \YAD@error@firstlastnames@empty{du co-directeur de these}{#2}{#3}{\cosupervisor}%
+  \YAD@error@firstlastnames@empty{de co-directeur de these}{#2}{#3}{\cosupervisor}%
   \if@tempswa%
-  \YAD@supervisors@incommittee[#1,role=cosupervisor]{#2}{#3}%
+  \YAD@staff[#1,role=cosupervisor]{#2}{#3}{YAD@supervisors}%
+  \else%
+  \YAD@staff[#1,role=cosupervisor]{#2}{#3}{YAD@supervisors}%
+  \YAD@staff[#1,role=cosupervisor]{#2}{#3}{YAD@supervisors@in@committee}%
   \fi%
 }%
 %    \end{macrocode}
@@ -2302,11 +2297,13 @@ This work consists of the file  yathesis.dtx
   \@ifstar{\@tempswatrue\YAD@comonitor}{\@tempswafalse\YAD@comonitor}%
 }
 \newcommand*{\YAD@comonitor}[3][]{%
-  \YAD@supervisors[#1,role=comonitor]{#2}{#3}%
   \toggletrue{YAD@supervisor@specified}%
-  \YAD@error@firstlastnames@empty{du co-encadrant de these}{#2}{#3}{\comonitor}%
+  \YAD@error@firstlastnames@empty{de co-encadrant de these}{#2}{#3}{\comonitor}%
   \if@tempswa%
-  \YAD@supervisors@incommittee[#1,role=comonitor]{#2}{#3}%
+  \YAD@staff[#1,role=comonitor]{#2}{#3}{YAD@supervisors}%
+  \else%
+  \YAD@staff[#1,role=comonitor]{#2}{#3}{YAD@supervisors}%
+  \YAD@staff[#1,role=comonitor]{#2}{#3}{YAD@supervisors@in@committee}%
   \fi%
 }%
 %    \end{macrocode}
@@ -2315,7 +2312,7 @@ This work consists of the file  yathesis.dtx
 % \begin{macro}{\guest}
 %    \begin{macrocode}
 \newcommand*{\guest}[3][]{%
-  \YAD@staff[#1]{#2}{#3}{guests}%
+  \YAD@staff[#1]{#2}{#3}{YAD@guests}%
   \YAD@error@firstlastnames@empty{de l'invite}{#2}{#3}{\guest}%
 }%
 %    \end{macrocode}
@@ -2324,7 +2321,7 @@ This work consists of the file  yathesis.dtx
 % \begin{macro}{\referee}
 %    \begin{macrocode}
 \newcommand*{\referee}[3][]{%
-  \YAD@staff[#1]{#2}{#3}{referees}%
+  \YAD@staff[#1]{#2}{#3}{YAD@referees}%
   \YAD@error@firstlastnames@empty{du rapporteur}{#2}{#3}{\referee}%
 }%
 %    \end{macrocode}
@@ -2333,7 +2330,7 @@ This work consists of the file  yathesis.dtx
 % \begin{macro}{\examiner}
 %    \begin{macrocode}
 \newcommand*{\examiner}[3][]{%
-  \YAD@staff[#1]{#2}{#3}{examiners}%
+  \YAD@staff[#1]{#2}{#3}{YAD@examiners}%
   \ifthenelse{\equal{\cmdKV@YAD@role}{committeepresident}}{%
   }{%
     \YAD@error@firstlastnames@empty{de l'examinateur}{#2}{#3}{\examiner}%
@@ -2507,7 +2504,7 @@ This work consists of the file  yathesis.dtx
         }{%
         }%
       }{%
-        \ifthenelse{\equal{\YAD@the@staff}{supervisorsincommittee}}{%
+        \ifthenelse{\equal{\YAD@the@staff}{YAD@supervisors@in@committee}}{%
         }{%
           \YAD@translation{\YAD@committeemember@role}%
         }%
@@ -2524,12 +2521,12 @@ This work consists of the file  yathesis.dtx
 \newcommand*{\YAD@supervisors@tabular}{%
   \small%
   \DTLifdbempty{YAD@staffs}{}{%
-    \ifthenelse{\DTLrowcount{supervisors}>1}{%
+    \ifthenelse{\DTLrowcount{YAD@supervisors}>1}{%
       \begin{tabular}[t]{>{\itshape}lll}
       }{%
         \begin{tabular}[t]{>{\itshape}l@{ }ll}
         }%
-        \DTLforeach*{supervisors}{%
+        \DTLforeach*{YAD@supervisors}{%
           \YAD@committeemember@lastname=lastname,%
           \YAD@committeemember@fistname=firstname,%
           \YAD@committeemember@role=role%
@@ -2568,7 +2565,7 @@ This work consists of the file  yathesis.dtx
               }{%
               }%
             }{%
-              \ifthenelse{\DTLrowcount{supervisors}>1}{%
+              \ifthenelse{\DTLrowcount{YAD@supervisors}>1}{%
                 \YAD@translation{%
                   \YAD@committeemember@role%
                 }%
@@ -2590,10 +2587,10 @@ This work consists of the file  yathesis.dtx
 %
 \newcommand*{\YAD@committee@tabular}{%
   \small%
-  \begin{tabular}[t]{>{\itshape}llp{7cm}l}
+  \begin{tabular}[t]{>{\itshape}llp{5cm}l}
     \multicolumn{4}{@{}l}{\bfseries\YAD@translation{committeemembers}}%
     \\[.25cm]
-    \DTLforeach*[\not\DTLiseq{\YAD@the@staff}{supervisors}]{YAD@staffs}{%
+    \DTLforeach*{YAD@staffs}{%
       \YAD@the@staff=YAD@the@staff%
     }{%
       %
@@ -4150,7 +4147,7 @@ This work consists of the file  yathesis.dtx
   }%
   \end{lrbox}
   \settototalheight{\YAD@titleboxheight}{\YAD@titlebox}%
-  \setlength{\YAD@otherboxheight}{0.35\paperheight-\YAD@titleboxheight-3cm}%
+  \setlength{\YAD@otherboxheight}{0.3\paperheight-\YAD@titleboxheight}%
 %    \end{macrocode}
 % On met en page les divers éléments des titres.
 %    \begin{macrocode}
@@ -6056,18 +6053,18 @@ This work consists of the file  yathesis.dtx
 % \expression{lbl-conclusion}{Conclusion}{Conclusion}%
 \expression{lbl-supervisor}{directeur}{Supervisor}%
 \expression{lbl-seniorresearcher}{directeur de recherche}{Senior Researcher}%
-\expression{lbl-supervisorsincommittee}{Directeur de th\`ese}{Supervisor}%
-\expression{lbl-supervisorsincommittee-pl}{Directeurs de th\`ese}{Supervisors}%
+\expression{lbl-YAD@supervisors@in@committee}{Directeur de th\`ese}{Supervisor}%
+\expression{lbl-YAD@supervisors@in@committee-pl}{Directeurs de th\`ese}{Supervisors}%
 \expression{lbl-supervisedby}{Th\`ese dirig\'ee par}{Thesis supervised by}%
 \expression{lbl-academicfield}{Discipline}{Academic Field}%
 \expression{lbl-doctoralschool}{\'Ecole doctorale}{Doctoral School}%
 \expression{lbl-aim}{En vue de l'obtention du grade de docteur de l'}{In order
   to become Doctor from }%
 \expression{lbl-aimand}{ et de l'}{ and from }%
-\expression{lbl-examiners}{Examinateur}{Examiner}%
-\expression{lbl-examiners-pl}{Examinateurs}{Examiners}%
-\expression{lbl-guests}{Invit\'e}{Guest}%
-\expression{lbl-guests-pl}{Invit\'es}{Guests}%
+\expression{lbl-YAD@examiners}{Examinateur}{Examiner}%
+\expression{lbl-YAD@examiners-pl}{Examinateurs}{Examiners}%
+\expression{lbl-YAD@guests}{Invit\'e}{Guest}%
+\expression{lbl-YAD@guests-pl}{Invit\'es}{Guests}%
 % \expression{lbl-introduction}{Introduction}{Introduction}%
 \expression{lbl-mcf}{\textsc{mcf}}{Lecturer}%
 \expression{lbl-mcf*}{\textsc{mcf} \textsc{hdr}}{\textsc{hdr} Lecturer}%
@@ -6076,8 +6073,8 @@ This work consists of the file  yathesis.dtx
 % \expression{lbl-preface}{Pr\'eface}{Preface}%
 \expression{lbl-committeepresident}{pr\'esident du jury}{Committee President}%
 \expression{lbl-professor}{professeur}{Professor}%
-\expression{lbl-referees}{Rapporteur}{Referee}%
-\expression{lbl-referees-pl}{Rapporteurs}{Referees}%
+\expression{lbl-YAD@referees}{Rapporteur}{Referee}%
+\expression{lbl-YAD@referees-pl}{Rapporteurs}{Referees}%
 \expression{lbl-website}{Site}{Web Site}%
 \expression{lbl-defendedon}{Soutenue le}{Defended on}%
 \expression{lbl-estimateddefensedate}{Date de soutenance pr\'evue le}{Defense
