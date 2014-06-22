@@ -252,8 +252,8 @@ de titre\footnote{Le ou les laboratoires apparaissent en outre sur les pages
 \subsubsection{Précisions}
 
 Toutes les commandes précédentes admettent un argument optionnel permettant
-d'apporter, sur les instituts ou entités, une ou plusieurs \meta{précision(s)}
---- sous la forme d'une liste \meta{clé}×=×\meta{valeur}.
+d'apporter sur les instituts ou entités des \meta{précisions} --- sous la forme
+d'une liste \meta{clé}×=×\meta{valeur}.
 %
 \paragraph{Pour tout institut ou entité}
 
@@ -373,32 +373,51 @@ url=http://www-lmpa.univ-littoral.fr/
   de la procédure.
 \end{dbremark}
 
-\subsection{Jury : directeur(s), rapporteurs, examinateurs, invités}\label{sec:jury}
+\subsection{Directeur(s) de thèse et membres du jury}\label{sec:jury}
 
-Les membres du jury de la thèse sont définis et précisés au moyen des commandes
-et options listés dans cette section. Ils figureront automatiquement sur la ou
-les pages de titre\footnote{Sauf en version \enquote{à soumettre} aux
-  rapporteurs (cf. valeurs \protect\docValue{submitted} et
-  \protect\docValue{submitted*} de la clé \protect\refKey{version}) car le
-  doctorant ne peut alors préjuger d'un jury, ne sachant pas encore s'il va
-  être autorisé à soutenir.}.
+Les directeur(s) et membres du jury de la thèse sont définis et précisés au
+moyen des commandes et options listés dans cette section. Ils figurent
+automatiquement sur la ou les pages de titre\footnote{En versions \enquote{à
+    soumettre} aux rapporteurs (cf. valeurs \protect\docValue{submitted} et
+  \protect\docValue{submitted*} de la clé \protect\refKey{version}), les
+  membres du jury ne figurent pas car le doctorant ne peut alors préjuger d'un
+  jury, ne sachant pas encore s'il va être autorisé à soutenir.}.
 
-\subsubsection{Définition}\label{sec:definition-jury}
+\subsubsection{Définition}\label{sec:definition-directeurs-jury}
 
-Les commandes suivantes permettent de définir le jury de la thèse,
-notamment les directeur(s), rapporteurs et examinateurs.
-%
-\begin{docCommand}[doc description=\mandatory]{supervisor}{\oarg{précision(s)}\marg{prénom}\marg{nom}}
-  Cette commande définit le directeur de la thèse.
+\paragraph{Directeurs}\label{sec:definition-directeurs}
+
+Les directeurs de thèse peuvent être ou ne pas être membres du jury. Les
+premiers sont définis au moyen des commandes \refCom{supervisor},
+\refCom{cosupervisor} et \refCom{comonitor} ci-dessous, et les seconds au moyen
+de variantes étoilées de ces commandes.
+
+\begin{docCommand}[doc
+  description=\mandatory]{supervisor}{\oarg{précision(s)}\marg{prénom}\marg{nom}}
+  Cette commande définit un directeur de la thèse (également membre du jury).
+\end{docCommand}
+
+\begin{docCommand}[doc description=\mandatory]{supervisor*}{\oarg{précision(s)}\marg{prénom}\marg{nom}}
+  Cette commande définit un directeur de la thèse (non membre du jury).
 \end{docCommand}
 
 \begin{docCommand}{cosupervisor}{\oarg{précision(s)}\marg{prénom}\marg{nom}}
-  Cette commande définit un éventuel co-directeur de la thèse.
+  Cette commande définit un éventuel co-directeur de la thèse (également membre du jury).
+\end{docCommand}
+
+\begin{docCommand}{cosupervisor*}{\oarg{précision(s)}\marg{prénom}\marg{nom}}
+  Cette commande définit un co-directeur de la thèse (non membre du jury).
 \end{docCommand}
 
 \begin{docCommand}{comonitor}{\oarg{précision(s)}\marg{prénom}\marg{nom}}
-  Cette commande définit un éventuel co-encadrant de la thèse.
+  Cette commande définit un éventuel co-encadrant de la thèse (également membre du jury).
 \end{docCommand}
+
+\begin{docCommand}{comonitor*}{\oarg{précision(s)}\marg{prénom}\marg{nom}}
+  Cette commande définit un co-encadrant de la thèse (non membre du jury).
+\end{docCommand}
+
+\paragraph{Membres du jury}\label{sec:definition-jury}
 
 \begin{docCommand}{referee}{\oarg{précision(s)}\marg{prénom}\marg{nom}}
   Cette commande définit un rapporteur de la thèse.
@@ -464,12 +483,13 @@ notamment les directeur(s), rapporteurs et examinateurs.
 
 \subsubsection{Précisions}\label{sec:options-staff}
 
-Toutes les commandes précédentes admettent un argument optionnel
-permettant d'apporter une ou plusieurs \meta{précision(s)} sur les
-membres du jury. Les clés suivantes sont valables pour chacune
-d'entre elles.
+Toutes les commandes précédentes admettent un argument optionnel permettant
+d'apporter sur les membres du jury des \meta{précisions}\footnote{Pour les
+  directeurs de thèse \emph{non} membres du jury, ces \meta{précisions} sont
+  inutiles car elles ne figureront nulle part.} --- sous la forme d'une liste
+\meta{clé}×=×\meta{valeur}.
 
-\paragraph{Corps (de métier)}
+\paragraph{Corps de métier}
 \label{sec:corps}
 
 Les clés suivantes\syntaxeoptions{} permettent de spécifier les corps (de
