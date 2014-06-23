@@ -502,6 +502,7 @@ This work consists of the file  yathesis.dtx
 %
 %    \begin{macrocode}
 \newif\if@nolink\@nolinkfalse
+\newtoggle{YAD@cosupervisor@or@comonitor}
 \newtoggle{YAD@inprogress@work@star}
 \newtoggle{YAD@inprogress@work}
 \newtoggle{YAD@submitted@work}
@@ -2280,6 +2281,7 @@ This work consists of the file  yathesis.dtx
 }
 \newcommand*{\YAD@cosupervisor}[3][]{%
   \toggletrue{YAD@supervisor@specified}%
+  \toggletrue{YAD@cosupervisor@or@comonitor}%
   \YAD@error@firstlastnames@empty{de co-directeur de these}{#2}{#3}{\cosupervisor}%
   \if@tempswa%
   \YAD@staff[#1,role=cosupervisor]{#2}{#3}{YAD@supervisors}%
@@ -2298,6 +2300,7 @@ This work consists of the file  yathesis.dtx
 }
 \newcommand*{\YAD@comonitor}[3][]{%
   \toggletrue{YAD@supervisor@specified}%
+  \toggletrue{YAD@cosupervisor@or@comonitor}%
   \YAD@error@firstlastnames@empty{de co-encadrant de these}{#2}{#3}{\comonitor}%
   \if@tempswa%
   \YAD@staff[#1,role=comonitor]{#2}{#3}{YAD@supervisors}%
@@ -2566,8 +2569,11 @@ This work consists of the file  yathesis.dtx
               }%
             }{%
               \ifthenelse{\DTLrowcount{YAD@supervisors}>1}{%
-                \YAD@translation{%
-                  \YAD@committeemember@role%
+                \iftoggle{YAD@cosupervisor@or@comonitor}{%
+                  \YAD@translation{%
+                    \YAD@committeemember@role%
+                  }%
+                }{%
                 }%
               }{%
               }%
