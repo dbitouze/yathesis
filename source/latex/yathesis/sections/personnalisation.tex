@@ -313,8 +313,7 @@ Les documents composés avec la \yatcl{} peuvent avoir deux formats de sortie :
     destiné à être imprimé sur papier. Les différences par rapport au format
     \enquote{écran} sont les suivantes :
     \begin{enumerate}
-    \item les liens hypertexte sont supprimés ;
-    \item la commande
+    \item\label{item:paper:1} la commande
       ×\href{×\meta{\acrshort*{url}}×}{×\meta{texte}×}×\footnote{Fournie par le
         \Package{hyperref}, chargé par la \yatcl{}.} est automatiquement
       remplacée par :
@@ -326,15 +325,23 @@ Les documents composés avec la \yatcl{} peuvent avoir deux formats de sortie :
         \lstinline[deletekeywords={[2]url}]+(\url{+\meta{\acrshort*{url}}×})×
         si elle figure en note de bas de page ;
       \end{itemize}
-    \item\label{item:paper:1} les barres de navigation affichées par certains
+    \item\label{item:paper:2} les barres de navigation affichées par certains
       styles de glossaires\footnote{Telles qu'on peut en voir
         \vref{fig:printacronyms,fig:printglossary}.} \emph{sont} masquées.
     \end{enumerate}
   \item[\docValue{paper*}.] Cette valeur produit le même effet que la valeur
-    \docValue{paper} sauf que son \vref{item:paper:1} est inversé : les barres
+    \docValue{paper} sauf que son \vref{item:paper:2} est inversé : les barres
     de navigation \emph{ne} sont \emph{pas} masquées.
   \end{description}
 \end{docKey}
+
+\begin{dbwarning}{Mises en page éventuellement différentes en sortie
+    \enquote{écran} et \enquote{papier}}{}
+  Des mises en page différentes, en sorties \enquote{écran} et
+  \enquote{papier}, peuvent résulter des \vref{item:paper:1,item:paper:2}. Il
+  pourra être opportun de les comparer, par exemple à l'aide d'un logiciel
+  comparateur de fichiers \gls{pdf}.
+\end{dbwarning}
 
 \subsection{Expressions séparant les corps et affiliations des membres du jury}
 \label{sec:expr-separ-les}
