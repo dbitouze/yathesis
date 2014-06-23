@@ -1053,11 +1053,6 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \RequirePackage[final,unicode,hyperfootnotes=false,hyperindex=false,plainpages=false,breaklinks,pdfpagemode=UseOutlines,pdfpagelayout=TwoPageRight]{hyperref}[2012/11/06]%
 %    \end{macrocode}
-% Les packages suivants ne sont à activer qu'en version \enquote{non imprimée}.
-%    \begin{macrocode}
-\iftoggle{YAD@output@paper}{%
-}{%
-%    \end{macrocode}
 % Pour faire pointer les hyperliens au début des flottants plutôt qu'au
 % début des légendes
 %    \begin{macrocode}
@@ -1066,7 +1061,6 @@ This work consists of the file  yathesis.dtx
 % Pour la gestion des signets
 %    \begin{macrocode}
   \RequirePackage[numbered]{bookmark}[2011/12/02]%
-}
 %    \end{macrocode}
 %
 % Pour éviter certains comportements inattendus, on précise la langue
@@ -1856,7 +1850,7 @@ This work consists of the file  yathesis.dtx
   }%
 %    \end{macrocode}
 %
-% Si on est en mode ×paper× (impression sur papier) la macro
+% Si on est en format de sortie ×paper× (impression sur papier) la macro
 % ×\YAD@href×\meta{\acrshort*{url}}×}{×\meta{texte}×}× n'affiche que le
 % \meta{texte} et les hyperliens des macros
 % ×\url× sont supprimés. En outre, les commandes
@@ -1870,7 +1864,7 @@ This work consists of the file  yathesis.dtx
 % ordinaire ou elle-même en note de bas de page.
 %    \begin{macrocode}
 \iftoggle{YAD@output@paper}{%
-  \hypersetup{draft}%
+  % \hypersetup{draft}%
   \renewcommand{\YAD@href}[3][]{%
     #3%
   }%
@@ -3790,10 +3784,7 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
   \phantomsection%
   \setsecnumdepth{\YAD@secnumdepth}%
-  \iftoggle{YAD@output@paper}{%
-  }{%
-    \bookmarksetup{startatroot}%
-  }%
+  \bookmarksetup{startatroot}%
   \YAD@setfoot%
 }%
 %    \end{macrocode}
@@ -3830,10 +3821,7 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
   \YAD@clearemptydoublepage%
   \phantomsection%
-  \iftoggle{YAD@output@paper}{%
-  }{%
-    \bookmarksetup{startatroot}%
-  }%
+  \bookmarksetup{startatroot}%
   \YAD@setfoot%
 }%
 %    \end{macrocode}
@@ -3861,10 +3849,7 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
   \phantomsection%
   \setsecnumdepth{none}%
-  \iftoggle{YAD@output@paper}{%
-  }{%
-    \bookmarksetup{startatroot}%
-  }%
+  \bookmarksetup{startatroot}%
   \YAD@setfoot%
 }%
 %    \end{macrocode}
@@ -3882,10 +3867,7 @@ This work consists of the file  yathesis.dtx
 \newpagestyle{contents}[]{%
   \YAD@clearemptydoublepage%
   \phantomsection%
-  \iftoggle{YAD@output@paper}{%
-  }{%
-    \bookmarksetup{startatroot}%
-  }%
+  \bookmarksetup{startatroot}%
   \singlespacing%
   \sethead[\thepage]%
   []%
@@ -3907,10 +3889,7 @@ This work consists of the file  yathesis.dtx
 \newpagestyle{glossaire}[]{%
   \YAD@clearemptydoublepage%
   \phantomsection%
-  \iftoggle{YAD@output@paper}{%
-  }{%
-    \bookmarksetup{startatroot}%
-  }%
+  \bookmarksetup{startatroot}%
   \singlespacing%
   \sethead[\thepage]%
   []%
@@ -3946,10 +3925,7 @@ This work consists of the file  yathesis.dtx
   \YAD@clearemptydoublepage%
   \phantomsection%
   \setsecnumdepth{\YAD@secnumdepth}%
-  \iftoggle{YAD@output@paper}{%
-  }{%
-    \bookmarksetup{startatroot}%
-  }%
+  \bookmarksetup{startatroot}%
   \YAD@setfoot%
 }%
 %    \end{macrocode}
@@ -5636,13 +5612,10 @@ This work consists of the file  yathesis.dtx
 % % haut niveau des signets, chargé avant l'environnement
 % % ×conclusion×.
 % %    \begin{macrocode}
-% \BeforeBeginEnvironment{conclusion}{
+% \BeforeBeginEnvironment{conclusion}{%
 %   \phantomsection%
 %   \setsecnumdepth{\YAD@secnumdepth}%
-%   \iftoggle{YAD@output@paper}{%
-%   }{%
-%     \bookmarksetup{startatroot}%
-%   }%
+%   \bookmarksetup{startatroot}%
 % }%
 % \AfterEndEnvironment{conclusion}{\appendix}
 % %    \end{macrocode}
@@ -5669,10 +5642,7 @@ This work consists of the file  yathesis.dtx
 % \BeforeBeginEnvironment{conclusion*}{%
 %   \phantomsection%
 %   \setsecnumdepth{\YAD@secnumdepth}%
-%   \iftoggle{YAD@output@paper}{%
-%   }{%
-%     \bookmarksetup{startatroot}%
-%   }%
+%   \bookmarksetup{startatroot}%
 % }%
 % \AfterEndEnvironment{conclusion*}{%
 %   \appendix%
