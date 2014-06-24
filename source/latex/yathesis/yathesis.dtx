@@ -5842,16 +5842,22 @@ This work consists of the file  yathesis.dtx
   % set how sub-entries appear:
   \renewcommand*{\subglossentry}[3]{%
     \glossentry{##2}{##3}}%
-}
+}%
 %    \end{macrocode}
 % \end{macro}
 %
-% La commande ×\printsymbols× est redéfinie de sorte que lui soit par défaut
+% La commande ×\printsymbols× est (re)définie de sorte que lui soit par défaut
 % appliqué le style ×yadsymbolstyle×.
 % \begin{macro}{\printsymbols}
 %    \begin{macrocode}
-\renewcommand{\printsymbols}[1][]{%
-  \printglossary[type=symbols,style=yadsymbolstyle,#1]%
+\ifundef{\printsymbols}{%
+  \newcommand{\printsymbols}[1][]{%
+    \printglossary[type=symbols,style=yadsymbolstyle,#1]%
+  }%
+}{%
+  \renewcommand{\printsymbols}[1][]{%
+    \printglossary[type=symbols,style=yadsymbolstyle,#1]%
+  }%
 }%
 %    \end{macrocode}
 % \end{macro}
