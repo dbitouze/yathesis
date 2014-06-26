@@ -307,16 +307,24 @@ Les documents composés avec la \yatcl{} peuvent avoir deux formats de sortie :
   \begin{description}
   \item[\docValue{screen}.] Avec cette valeur, le document a un format de
     sortie destiné à être visualisé à l'écran. Ce format ne présente pas de
-    spécificités particulières, sauf que des liens hypertextes émaillent le
-    \acrshort{pdf} produit.
+    spécificités particulières, sauf que des liens hypertextes émaillent le -
+    \acrshort{pdf} produit\footnote{Car la \yatcl{} charge automatiquement le
+      \Package{hyperref}.}.
   \item[\docValue{paper}.] Avec cette valeur, le document a un format de sortie
     destiné à être imprimé sur papier. Les différences par rapport au format
     \enquote{écran} sont les suivantes :
     \begin{enumerate}
+    \item Les liens hypertextes sont matérialisés comme ils le sont par défaut
+      avec le \Package{hyperref} : ils sont encadrés par des rectangles de
+      couleurs (différentes selon la nature de ces hyperliens) qui ne sont pas
+      imprimés\footnote{Ainsi, si l'utilisateur recourt en préambule à la
+        commande \protect\lstinline|\\hypersetup\{colorlinks=true\}| pour que
+        les hyperliens soient en couleur, il n'a pas besoin de modifier ce
+        choix pour que, en sortie \enquote{papier}, cette coloration soit
+        désactivée.} ;
     \item\label{item:paper:1} la commande
       ×\href{×\meta{\acrshort*{url}}×}{×\meta{texte}×}×\footnote{Fournie par le
-        \Package{hyperref}, chargé par la \yatcl{}.} est automatiquement
-      remplacée par :
+        \Package{hyperref}.} est automatiquement remplacée par :
       \begin{itemize}
       \item
         \meta{texte}\lstinline[deletekeywords={[2]url}]+\footnote{\url{+\meta{\acrshort*{url}}×}}×

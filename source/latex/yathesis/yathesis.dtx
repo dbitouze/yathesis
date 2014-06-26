@@ -1864,7 +1864,9 @@ This work consists of the file  yathesis.dtx
 % ordinaire ou elle-même en note de bas de page.
 %    \begin{macrocode}
 \iftoggle{YAD@output@paper}{%
-  % \hypersetup{draft}%
+  \AtEndPreamble{%
+    \hypersetup{colorlinks=false}%
+  }%
   \renewcommand{\YAD@href}[3][]{%
     #3%
   }%
