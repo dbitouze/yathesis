@@ -25,7 +25,6 @@
 \RequirePackage{hopatch}[2012/05/28]%
 \RequirePackage{xifthen}[2009/04/17]%
 \newif\if@nolink\@nolinkfalse
-\newtoggle{YAD@cosupervisor@or@comonitor}
 \newtoggle{YAD@inprogress@work@star}
 \newtoggle{YAD@inprogress@work}
 \newtoggle{YAD@submitted@work}
@@ -353,8 +352,11 @@
 \RequirePackage[nodayofweek]{datetime}[2013/09/10]%
 \RequirePackage{varioref}[2011/10/02]%
 \RequirePackage[final,unicode,hyperfootnotes=false,hyperindex=false,plainpages=false,breaklinks,pdfpagemode=UseOutlines,pdfpagelayout=TwoPageRight]{hyperref}[2012/11/06]%
+\iftoggle{YAD@output@paper}{%
+}{%
   \RequirePackage[all]{hypcap}[2011/02/16]%
   \RequirePackage[numbered]{bookmark}[2011/12/02]%
+}
 \@ifpackagelater{babel}{2013/04/15}{%
   \PassOptionsToPackage{main=\YAD@mainlanguage}{babel}%
 }{%
@@ -473,7 +475,7 @@
     \href[#1]{#2}{#3}%
   }%
 \iftoggle{YAD@output@paper}{%
-  % \hypersetup{draft}%
+  \hypersetup{draft}%
   \renewcommand{\YAD@href}[3][]{%
     #3%
   }%
@@ -750,10 +752,10 @@
   \toggletrue{YAD@supervisor@specified}%
   \YAD@error@firstlastnames@empty{du directeur de these}{#2}{#3}{\supervisor}%
   \if@tempswa%
-  \YAD@staff[#1,role=supervisor]{#2}{#3}{YAD@supervisors}%
+  \YAD@staff[role=supervisor,#1]{#2}{#3}{YAD@supervisors}%
   \else%
-  \YAD@staff[#1,role=supervisor]{#2}{#3}{YAD@supervisors}%
-  \YAD@staff[#1,role=supervisor]{#2}{#3}{YAD@supervisors@in@committee}%
+  \YAD@staff[role=supervisor,#1]{#2}{#3}{YAD@supervisors}%
+  \YAD@staff[role=supervisor,#1]{#2}{#3}{YAD@supervisors@in@committee}%
   \fi%
 }%
 \newcommand{\cosupervisor}{%
@@ -761,13 +763,12 @@
 }
 \newcommand*{\YAD@cosupervisor}[3][]{%
   \toggletrue{YAD@supervisor@specified}%
-  \toggletrue{YAD@cosupervisor@or@comonitor}%
   \YAD@error@firstlastnames@empty{de co-directeur de these}{#2}{#3}{\cosupervisor}%
   \if@tempswa%
-  \YAD@staff[#1,role=cosupervisor]{#2}{#3}{YAD@supervisors}%
+  \YAD@staff[role=cosupervisor,#1]{#2}{#3}{YAD@supervisors}%
   \else%
-  \YAD@staff[#1,role=cosupervisor]{#2}{#3}{YAD@supervisors}%
-  \YAD@staff[#1,role=cosupervisor]{#2}{#3}{YAD@supervisors@in@committee}%
+  \YAD@staff[role=cosupervisor,#1]{#2}{#3}{YAD@supervisors}%
+  \YAD@staff[role=cosupervisor,#1]{#2}{#3}{YAD@supervisors@in@committee}%
   \fi%
 }%
 \newcommand{\comonitor}{%
@@ -775,13 +776,12 @@
 }
 \newcommand*{\YAD@comonitor}[3][]{%
   \toggletrue{YAD@supervisor@specified}%
-  \toggletrue{YAD@cosupervisor@or@comonitor}%
   \YAD@error@firstlastnames@empty{de co-encadrant de these}{#2}{#3}{\comonitor}%
   \if@tempswa%
-  \YAD@staff[#1,role=comonitor]{#2}{#3}{YAD@supervisors}%
+  \YAD@staff[role=comonitor,#1]{#2}{#3}{YAD@supervisors}%
   \else%
-  \YAD@staff[#1,role=comonitor]{#2}{#3}{YAD@supervisors}%
-  \YAD@staff[#1,role=comonitor]{#2}{#3}{YAD@supervisors@in@committee}%
+  \YAD@staff[role=comonitor,#1]{#2}{#3}{YAD@supervisors}%
+  \YAD@staff[role=comonitor,#1]{#2}{#3}{YAD@supervisors@in@committee}%
   \fi%
 }%
 \newcommand*{\guest}[3][]{%
@@ -800,7 +800,7 @@
   }%
 }%
 \newcommand*{\committeepresident}[3][]{%
-  \examiner[#1,role=committeepresident]{#2}{#3}%
+  \examiner[role=committeepresident,#1]{#2}{#3}%
   \YAD@error@firstlastnames@empty{du president du jury}{#2}{#3}{\committeepresident}%
 }%
 \newcommand*{\YAD@al}{ \`a l'}%
@@ -1007,11 +1007,8 @@
               }%
             }{%
               \ifthenelse{\DTLrowcount{YAD@supervisors}>1}{%
-                \iftoggle{YAD@cosupervisor@or@comonitor}{%
-                  \YAD@translation{%
-                    \YAD@committeemember@role%
-                  }%
-                }{%
+                \YAD@translation{%
+                  \YAD@committeemember@role%
                 }%
               }{%
               }%
@@ -1043,7 +1040,6 @@
 }%
 \DeclareRobustCommand*\YAD@meta{\YAD@generic@argument}%
         \newcommand*\YAD@logo{}%
-\DTLnewdb{diploma-institutes}%
 \newcommand*{\YAD@create@macro}[2][]{%
   \ifthenelse{\isempty{#1}}{%
     \csdef{#2}##1{%
@@ -1927,7 +1923,10 @@
   \headrule%
   \phantomsection%
   \setsecnumdepth{\YAD@secnumdepth}%
-  \bookmarksetup{startatroot}%
+  \iftoggle{YAD@output@paper}{%
+  }{%
+    \bookmarksetup{startatroot}%
+  }%
   \YAD@setfoot%
 }%
 \xapptocmd{\appendix}{%
@@ -1945,7 +1944,10 @@
   \headrule%
   \YAD@clearemptydoublepage%
   \phantomsection%
-  \bookmarksetup{startatroot}%
+  \iftoggle{YAD@output@paper}{%
+  }{%
+    \bookmarksetup{startatroot}%
+  }%
   \YAD@setfoot%
 }%
 \newpagestyle{backmatter}[]{%
@@ -1967,7 +1969,10 @@
   \headrule%
   \phantomsection%
   \setsecnumdepth{none}%
-  \bookmarksetup{startatroot}%
+  \iftoggle{YAD@output@paper}{%
+  }{%
+    \bookmarksetup{startatroot}%
+  }%
   \YAD@setfoot%
 }%
 \xapptocmd{\backmatter}{%
@@ -1976,7 +1981,10 @@
 \newpagestyle{contents}[]{%
   \YAD@clearemptydoublepage%
   \phantomsection%
-  \bookmarksetup{startatroot}%
+  \iftoggle{YAD@output@paper}{%
+  }{%
+    \bookmarksetup{startatroot}%
+  }%
   \singlespacing%
   \sethead[\thepage]%
   []%
@@ -1991,7 +1999,10 @@
 \newpagestyle{glossaire}[]{%
   \YAD@clearemptydoublepage%
   \phantomsection%
-  \bookmarksetup{startatroot}%
+  \iftoggle{YAD@output@paper}{%
+  }{%
+    \bookmarksetup{startatroot}%
+  }%
   \singlespacing%
   \sethead[\thepage]%
   []%
@@ -2016,7 +2027,10 @@
   \YAD@clearemptydoublepage%
   \phantomsection%
   \setsecnumdepth{\YAD@secnumdepth}%
-  \bookmarksetup{startatroot}%
+  \iftoggle{YAD@output@paper}{%
+  }{%
+    \bookmarksetup{startatroot}%
+  }%
   \YAD@setfoot%
 }%
 \newpagestyle{backcover}[]{%
@@ -3301,15 +3315,9 @@
   % set how sub-entries appear:
   \renewcommand*{\subglossentry}[3]{%
     \glossentry{##2}{##3}}%
-}%
-\ifundef{\printsymbols}{%
-  \newcommand{\printsymbols}[1][]{%
-    \printglossary[type=symbols,style=yadsymbolstyle,#1]%
-  }%
-}{%
-  \renewcommand{\printsymbols}[1][]{%
-    \printglossary[type=symbols,style=yadsymbolstyle,#1]%
-  }%
+}
+\renewcommand{\printsymbols}[1][]{%
+  \printglossary[type=symbols,style=yadsymbolstyle,#1]%
 }%
   \AfterEndPreamble{%
     \renewcommand*{\glossarysection}[2][]{%
