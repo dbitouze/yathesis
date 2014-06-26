@@ -2264,10 +2264,10 @@ This work consists of the file  yathesis.dtx
   \toggletrue{YAD@supervisor@specified}%
   \YAD@error@firstlastnames@empty{du directeur de these}{#2}{#3}{\supervisor}%
   \if@tempswa%
-  \YAD@staff[#1,role=supervisor]{#2}{#3}{YAD@supervisors}%
+  \YAD@staff[role=supervisor,#1]{#2}{#3}{YAD@supervisors}%
   \else%
-  \YAD@staff[#1,role=supervisor]{#2}{#3}{YAD@supervisors}%
-  \YAD@staff[#1,role=supervisor]{#2}{#3}{YAD@supervisors@in@committee}%
+  \YAD@staff[role=supervisor,#1]{#2}{#3}{YAD@supervisors}%
+  \YAD@staff[role=supervisor,#1]{#2}{#3}{YAD@supervisors@in@committee}%
   \fi%
 }%
 %    \end{macrocode}
@@ -2282,10 +2282,10 @@ This work consists of the file  yathesis.dtx
   \toggletrue{YAD@supervisor@specified}%
   \YAD@error@firstlastnames@empty{de co-directeur de these}{#2}{#3}{\cosupervisor}%
   \if@tempswa%
-  \YAD@staff[#1,role=cosupervisor]{#2}{#3}{YAD@supervisors}%
+  \YAD@staff[role=cosupervisor,#1]{#2}{#3}{YAD@supervisors}%
   \else%
-  \YAD@staff[#1,role=cosupervisor]{#2}{#3}{YAD@supervisors}%
-  \YAD@staff[#1,role=cosupervisor]{#2}{#3}{YAD@supervisors@in@committee}%
+  \YAD@staff[role=cosupervisor,#1]{#2}{#3}{YAD@supervisors}%
+  \YAD@staff[role=cosupervisor,#1]{#2}{#3}{YAD@supervisors@in@committee}%
   \fi%
 }%
 %    \end{macrocode}
@@ -2300,10 +2300,10 @@ This work consists of the file  yathesis.dtx
   \toggletrue{YAD@supervisor@specified}%
   \YAD@error@firstlastnames@empty{de co-encadrant de these}{#2}{#3}{\comonitor}%
   \if@tempswa%
-  \YAD@staff[#1,role=comonitor]{#2}{#3}{YAD@supervisors}%
+  \YAD@staff[role=comonitor,#1]{#2}{#3}{YAD@supervisors}%
   \else%
-  \YAD@staff[#1,role=comonitor]{#2}{#3}{YAD@supervisors}%
-  \YAD@staff[#1,role=comonitor]{#2}{#3}{YAD@supervisors@in@committee}%
+  \YAD@staff[role=comonitor,#1]{#2}{#3}{YAD@supervisors}%
+  \YAD@staff[role=comonitor,#1]{#2}{#3}{YAD@supervisors@in@committee}%
   \fi%
 }%
 %    \end{macrocode}
@@ -2342,7 +2342,7 @@ This work consists of the file  yathesis.dtx
 % \begin{macro}{\committeepresident}
 %    \begin{macrocode}
 \newcommand*{\committeepresident}[3][]{%
-  \examiner[#1,role=committeepresident]{#2}{#3}%
+  \examiner[role=committeepresident,#1]{#2}{#3}%
   \YAD@error@firstlastnames@empty{du president du jury}{#2}{#3}{\committeepresident}%
 }%
 %    \end{macrocode}
