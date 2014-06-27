@@ -502,6 +502,7 @@ This work consists of the file  yathesis.dtx
 %
 %    \begin{macrocode}
 \newif\if@nolink\@nolinkfalse
+\newtoggle{YAD@cosupervisor@or@comonitor}
 \newtoggle{YAD@inprogress@work@star}
 \newtoggle{YAD@inprogress@work}
 \newtoggle{YAD@submitted@work}
@@ -1052,11 +1053,6 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \RequirePackage[final,unicode,hyperfootnotes=false,hyperindex=false,plainpages=false,breaklinks,pdfpagemode=UseOutlines,pdfpagelayout=TwoPageRight]{hyperref}[2012/11/06]%
 %    \end{macrocode}
-% Les packages suivants ne sont à activer qu'en version \enquote{non imprimée}.
-%    \begin{macrocode}
-\iftoggle{YAD@output@paper}{%
-}{%
-%    \end{macrocode}
 % Pour faire pointer les hyperliens au début des flottants plutôt qu'au
 % début des légendes
 %    \begin{macrocode}
@@ -1065,7 +1061,6 @@ This work consists of the file  yathesis.dtx
 % Pour la gestion des signets
 %    \begin{macrocode}
   \RequirePackage[numbered]{bookmark}[2011/12/02]%
-}
 %    \end{macrocode}
 %
 % Pour éviter certains comportements inattendus, on précise la langue
@@ -1855,7 +1850,7 @@ This work consists of the file  yathesis.dtx
   }%
 %    \end{macrocode}
 %
-% Si on est en mode ×paper× (impression sur papier) la macro
+% Si on est en format de sortie ×paper× (impression sur papier) la macro
 % ×\YAD@href×\meta{\acrshort*{url}}×}{×\meta{texte}×}× n'affiche que le
 % \meta{texte} et les hyperliens des macros
 % ×\url× sont supprimés. En outre, les commandes
@@ -1869,7 +1864,9 @@ This work consists of the file  yathesis.dtx
 % ordinaire ou elle-même en note de bas de page.
 %    \begin{macrocode}
 \iftoggle{YAD@output@paper}{%
-  \hypersetup{draft}%
+  \AtEndPreamble{%
+    \hypersetup{colorlinks=false}%
+  }%
   \renewcommand{\YAD@href}[3][]{%
     #3%
   }%
@@ -2280,6 +2277,7 @@ This work consists of the file  yathesis.dtx
 }
 \newcommand*{\YAD@cosupervisor}[3][]{%
   \toggletrue{YAD@supervisor@specified}%
+  \toggletrue{YAD@cosupervisor@or@comonitor}%
   \YAD@error@firstlastnames@empty{de co-directeur de these}{#2}{#3}{\cosupervisor}%
   \if@tempswa%
   \YAD@staff[role=cosupervisor,#1]{#2}{#3}{YAD@supervisors}%
@@ -2298,6 +2296,7 @@ This work consists of the file  yathesis.dtx
 }
 \newcommand*{\YAD@comonitor}[3][]{%
   \toggletrue{YAD@supervisor@specified}%
+  \toggletrue{YAD@cosupervisor@or@comonitor}%
   \YAD@error@firstlastnames@empty{de co-encadrant de these}{#2}{#3}{\comonitor}%
   \if@tempswa%
   \YAD@staff[role=comonitor,#1]{#2}{#3}{YAD@supervisors}%
@@ -2566,8 +2565,11 @@ This work consists of the file  yathesis.dtx
               }%
             }{%
               \ifthenelse{\DTLrowcount{YAD@supervisors}>1}{%
-                \YAD@translation{%
-                  \YAD@committeemember@role%
+                \iftoggle{YAD@cosupervisor@or@comonitor}{%
+                  \YAD@translation{%
+                    \YAD@committeemember@role%
+                  }%
+                }{%
                 }%
               }{%
               }%
@@ -3784,10 +3786,7 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
   \phantomsection%
   \setsecnumdepth{\YAD@secnumdepth}%
-  \iftoggle{YAD@output@paper}{%
-  }{%
-    \bookmarksetup{startatroot}%
-  }%
+  \bookmarksetup{startatroot}%
   \YAD@setfoot%
 }%
 %    \end{macrocode}
@@ -3824,10 +3823,7 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
   \YAD@clearemptydoublepage%
   \phantomsection%
-  \iftoggle{YAD@output@paper}{%
-  }{%
-    \bookmarksetup{startatroot}%
-  }%
+  \bookmarksetup{startatroot}%
   \YAD@setfoot%
 }%
 %    \end{macrocode}
@@ -3855,10 +3851,7 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
   \phantomsection%
   \setsecnumdepth{none}%
-  \iftoggle{YAD@output@paper}{%
-  }{%
-    \bookmarksetup{startatroot}%
-  }%
+  \bookmarksetup{startatroot}%
   \YAD@setfoot%
 }%
 %    \end{macrocode}
@@ -3876,10 +3869,7 @@ This work consists of the file  yathesis.dtx
 \newpagestyle{contents}[]{%
   \YAD@clearemptydoublepage%
   \phantomsection%
-  \iftoggle{YAD@output@paper}{%
-  }{%
-    \bookmarksetup{startatroot}%
-  }%
+  \bookmarksetup{startatroot}%
   \singlespacing%
   \sethead[\thepage]%
   []%
@@ -3901,10 +3891,7 @@ This work consists of the file  yathesis.dtx
 \newpagestyle{glossaire}[]{%
   \YAD@clearemptydoublepage%
   \phantomsection%
-  \iftoggle{YAD@output@paper}{%
-  }{%
-    \bookmarksetup{startatroot}%
-  }%
+  \bookmarksetup{startatroot}%
   \singlespacing%
   \sethead[\thepage]%
   []%
@@ -3940,10 +3927,7 @@ This work consists of the file  yathesis.dtx
   \YAD@clearemptydoublepage%
   \phantomsection%
   \setsecnumdepth{\YAD@secnumdepth}%
-  \iftoggle{YAD@output@paper}{%
-  }{%
-    \bookmarksetup{startatroot}%
-  }%
+  \bookmarksetup{startatroot}%
   \YAD@setfoot%
 }%
 %    \end{macrocode}
@@ -5630,13 +5614,10 @@ This work consists of the file  yathesis.dtx
 % % haut niveau des signets, chargé avant l'environnement
 % % ×conclusion×.
 % %    \begin{macrocode}
-% \BeforeBeginEnvironment{conclusion}{
+% \BeforeBeginEnvironment{conclusion}{%
 %   \phantomsection%
 %   \setsecnumdepth{\YAD@secnumdepth}%
-%   \iftoggle{YAD@output@paper}{%
-%   }{%
-%     \bookmarksetup{startatroot}%
-%   }%
+%   \bookmarksetup{startatroot}%
 % }%
 % \AfterEndEnvironment{conclusion}{\appendix}
 % %    \end{macrocode}
@@ -5663,10 +5644,7 @@ This work consists of the file  yathesis.dtx
 % \BeforeBeginEnvironment{conclusion*}{%
 %   \phantomsection%
 %   \setsecnumdepth{\YAD@secnumdepth}%
-%   \iftoggle{YAD@output@paper}{%
-%   }{%
-%     \bookmarksetup{startatroot}%
-%   }%
+%   \bookmarksetup{startatroot}%
 % }%
 % \AfterEndEnvironment{conclusion*}{%
 %   \appendix%
@@ -5866,16 +5844,22 @@ This work consists of the file  yathesis.dtx
   % set how sub-entries appear:
   \renewcommand*{\subglossentry}[3]{%
     \glossentry{##2}{##3}}%
-}
+}%
 %    \end{macrocode}
 % \end{macro}
 %
-% La commande ×\printsymbols× est redéfinie de sorte que lui soit par défaut
+% La commande ×\printsymbols× est (re)définie de sorte que lui soit par défaut
 % appliqué le style ×yadsymbolstyle×.
 % \begin{macro}{\printsymbols}
 %    \begin{macrocode}
-\renewcommand{\printsymbols}[1][]{%
-  \printglossary[type=symbols,style=yadsymbolstyle,#1]%
+\ifundef{\printsymbols}{%
+  \newcommand{\printsymbols}[1][]{%
+    \printglossary[type=symbols,style=yadsymbolstyle,#1]%
+  }%
+}{%
+  \renewcommand{\printsymbols}[1][]{%
+    \printglossary[type=symbols,style=yadsymbolstyle,#1]%
+  }%
 }%
 %    \end{macrocode}
 % \end{macro}

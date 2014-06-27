@@ -308,16 +308,23 @@ Les documents composés avec la \yatcl{} peuvent avoir deux formats de sortie :
   \item[\docValue{screen}.] Avec cette valeur, le document a un format de
     sortie destiné à être visualisé à l'écran. Ce format ne présente pas de
     spécificités particulières, sauf que des liens hypertextes émaillent le
-    \acrshort{pdf} produit.
+    \acrshort{pdf} produit\footnote{Car la \yatcl{} charge automatiquement le
+      \Package{hyperref}.}.
   \item[\docValue{paper}.] Avec cette valeur, le document a un format de sortie
     destiné à être imprimé sur papier. Les différences par rapport au format
     \enquote{écran} sont les suivantes :
     \begin{enumerate}
-    \item les liens hypertexte sont supprimés ;
-    \item la commande
+    \item Les liens hypertextes sont matérialisés comme ils le sont par défaut
+      avec le \Package{hyperref} : ils sont encadrés par des rectangles de
+      couleurs (différentes selon la nature de ces hyperliens) qui ne sont pas
+      imprimés\footnote{Ainsi, si l'utilisateur recourt en préambule à la
+        commande \protect\lstinline|\\hypersetup\{colorlinks=true\}| pour que
+        les hyperliens soient en couleur, il n'a pas besoin de modifier ce
+        choix pour que, en sortie \enquote{papier}, cette coloration soit
+        désactivée.} ;
+    \item\label{item:paper:1} la commande
       ×\href{×\meta{\acrshort*{url}}×}{×\meta{texte}×}×\footnote{Fournie par le
-        \Package{hyperref}, chargé par la \yatcl{}.} est automatiquement
-      remplacée par :
+        \Package{hyperref}.} est automatiquement remplacée par :
       \begin{itemize}
       \item
         \meta{texte}\lstinline[deletekeywords={[2]url}]+\footnote{\url{+\meta{\acrshort*{url}}×}}×
@@ -326,15 +333,23 @@ Les documents composés avec la \yatcl{} peuvent avoir deux formats de sortie :
         \lstinline[deletekeywords={[2]url}]+(\url{+\meta{\acrshort*{url}}×})×
         si elle figure en note de bas de page ;
       \end{itemize}
-    \item\label{item:paper:1} les barres de navigation affichées par certains
+    \item\label{item:paper:2} les barres de navigation affichées par certains
       styles de glossaires\footnote{Telles qu'on peut en voir
         \vref{fig:printacronyms,fig:printglossary}.} \emph{sont} masquées.
     \end{enumerate}
   \item[\docValue{paper*}.] Cette valeur produit le même effet que la valeur
-    \docValue{paper} sauf que son \vref{item:paper:1} est inversé : les barres
+    \docValue{paper} sauf que son \vref{item:paper:2} est inversé : les barres
     de navigation \emph{ne} sont \emph{pas} masquées.
   \end{description}
 \end{docKey}
+
+\begin{dbwarning}{Mises en page éventuellement différentes en sortie
+    \enquote{écran} et \enquote{papier}}{}
+  Du fait des \cref{item:paper:1,item:paper:2} précédents, les mises en page
+  des sorties \enquote{écran} et \enquote{papier} peuvent être différentes. Il
+  pourra être opportun de les comparer, par exemple à l'aide d'un logiciel
+  comparateur de fichiers \gls{pdf}.
+\end{dbwarning}
 
 \subsection{Expressions séparant les corps et affiliations des membres du jury}
 \label{sec:expr-separ-les}
