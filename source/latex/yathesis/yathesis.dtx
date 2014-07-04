@@ -2127,13 +2127,13 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \DTLnewdb{YAD@staffs}%
 \DTLnewrow{YAD@staffs}%
-\DTLnewdbentry{YAD@staffs}{YAD@the@staff}{YAD@referees}%
+\DTLnewdbentry{YAD@staffs}{YAD@the@staff}{referees}%
 \DTLnewrow{YAD@staffs}%
-\DTLnewdbentry{YAD@staffs}{YAD@the@staff}{YAD@examiners}%
+\DTLnewdbentry{YAD@staffs}{YAD@the@staff}{examiners}%
 \DTLnewrow{YAD@staffs}%
-\DTLnewdbentry{YAD@staffs}{YAD@the@staff}{YAD@guests}%
+\DTLnewdbentry{YAD@staffs}{YAD@the@staff}{guests}%
 \DTLnewrow{YAD@staffs}%
-\DTLnewdbentry{YAD@staffs}{YAD@the@staff}{YAD@supervisors@in@committee}%
+\DTLnewdbentry{YAD@staffs}{YAD@the@staff}{supervisors-in-committee}%
 %
 \DTLforeach{YAD@staffs}{%
   \YAD@the@staff=YAD@the@staff}{%
@@ -2249,7 +2249,7 @@ This work consists of the file  yathesis.dtx
 % \begin{macro}{\YAD@supervisors@in@committee}
 %    \begin{macrocode}
 \newcommand*{\YAD@supervisors@in@committee}[3][]{%
-  \YAD@staff[#1]{#2}{#3}{YAD@supervisors@in@committee}%
+  \YAD@staff[#1]{#2}{#3}{supervisors-in-committee}%
 }%
 %    \end{macrocode}
 % \end{macro}
@@ -2266,7 +2266,7 @@ This work consists of the file  yathesis.dtx
   \YAD@staff[role=supervisor,#1]{#2}{#3}{YAD@supervisors}%
   \else%
   \YAD@staff[role=supervisor,#1]{#2}{#3}{YAD@supervisors}%
-  \YAD@staff[role=supervisor,#1]{#2}{#3}{YAD@supervisors@in@committee}%
+  \YAD@staff[role=supervisor,#1]{#2}{#3}{supervisors-in-committee}%
   \fi%
 }%
 %    \end{macrocode}
@@ -2285,7 +2285,7 @@ This work consists of the file  yathesis.dtx
   \YAD@staff[role=cosupervisor,#1]{#2}{#3}{YAD@supervisors}%
   \else%
   \YAD@staff[role=cosupervisor,#1]{#2}{#3}{YAD@supervisors}%
-  \YAD@staff[role=cosupervisor,#1]{#2}{#3}{YAD@supervisors@in@committee}%
+  \YAD@staff[role=cosupervisor,#1]{#2}{#3}{supervisors-in-committee}%
   \fi%
 }%
 %    \end{macrocode}
@@ -2304,7 +2304,7 @@ This work consists of the file  yathesis.dtx
   \YAD@staff[role=comonitor,#1]{#2}{#3}{YAD@supervisors}%
   \else%
   \YAD@staff[role=comonitor,#1]{#2}{#3}{YAD@supervisors}%
-  \YAD@staff[role=comonitor,#1]{#2}{#3}{YAD@supervisors@in@committee}%
+  \YAD@staff[role=comonitor,#1]{#2}{#3}{supervisors-in-committee}%
   \fi%
 }%
 %    \end{macrocode}
@@ -2313,7 +2313,7 @@ This work consists of the file  yathesis.dtx
 % \begin{macro}{\guest}
 %    \begin{macrocode}
 \newcommand*{\guest}[3][]{%
-  \YAD@staff[#1]{#2}{#3}{YAD@guests}%
+  \YAD@staff[#1]{#2}{#3}{guests}%
   \YAD@error@firstlastnames@empty{de l'invite}{#2}{#3}{\guest}%
 }%
 %    \end{macrocode}
@@ -2322,7 +2322,7 @@ This work consists of the file  yathesis.dtx
 % \begin{macro}{\referee}
 %    \begin{macrocode}
 \newcommand*{\referee}[3][]{%
-  \YAD@staff[#1]{#2}{#3}{YAD@referees}%
+  \YAD@staff[#1]{#2}{#3}{referees}%
   \YAD@error@firstlastnames@empty{du rapporteur}{#2}{#3}{\referee}%
 }%
 %    \end{macrocode}
@@ -2331,7 +2331,7 @@ This work consists of the file  yathesis.dtx
 % \begin{macro}{\examiner}
 %    \begin{macrocode}
 \newcommand*{\examiner}[3][]{%
-  \YAD@staff[#1]{#2}{#3}{YAD@examiners}%
+  \YAD@staff[#1]{#2}{#3}{examiners}%
   \ifthenelse{\equal{\cmdKV@YAD@role}{committeepresident}}{%
   }{%
     \YAD@error@firstlastnames@empty{de l'examinateur}{#2}{#3}{\examiner}%
@@ -2505,7 +2505,7 @@ This work consists of the file  yathesis.dtx
         }{%
         }%
       }{%
-        \ifthenelse{\equal{\YAD@the@staff}{YAD@supervisors@in@committee}}{%
+        \ifthenelse{\equal{\YAD@the@staff}{supervisors-in-committee}}{%
         }{%
           \YAD@translation{\YAD@committeemember@role}%
         }%
