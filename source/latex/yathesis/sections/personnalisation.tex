@@ -670,11 +670,9 @@ spécifier de \emph{nouveaux} corps à \emph{définir} au moyen de la commande
 \begin{docKey}{corps}{=\meta{label}}{pas de
     valeur par défaut, initialement vide}
   L'option ×corps=×\meta{label} permet de stipuler un \meta{corps en français}
-  et une \meta{corps en anglais} où \meta{label} identifie une expression
-  à définir au moyen de :
-\begin{preamblecode}[title=Par exemple dans le \File{\configurationfile}]
-\expression{÷\meta{label}÷}{÷\meta{corps en français}÷}{÷\meta{corps en anglais}÷}
-\end{preamblecode}
+  et un \meta{corps en anglais} où \meta{label} identifie une expression listée
+  au \vref{tab:expressions-cles} ou à définir au moyen de la commande
+  \refCom{expression}.
 \end{docKey}
 
 \begin{dbexample}{Nouveau corps}{doctor}
@@ -696,7 +694,7 @@ spécifier de \emph{nouveaux} corps à \emph{définir} au moyen de la commande
 
 Le comportement par défaut de la \yatcl{} est aussi gouverné par le
 comportement par défaut des packages qu'elle charge
-automatiquement\footnote{ On pourra le cas échéant consulter
+automatiquement\footnote{On pourra le cas échéant consulter
   \vref{cha:packages-charges} la liste des packages chargés par la \yatcl{}.}.
 La personnalisation de \yat{} peut donc aussi passer par celle de ces packages.
 
