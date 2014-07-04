@@ -2262,10 +2262,9 @@ This work consists of the file  yathesis.dtx
 \newcommand*{\YAD@supervisor}[3][]{%
   \toggletrue{YAD@supervisor@specified}%
   \YAD@error@firstlastnames@empty{du directeur de these}{#2}{#3}{\supervisor}%
+  \YAD@staff[role=supervisor,#1]{#2}{#3}{YAD@supervisors}%
   \if@tempswa%
-  \YAD@staff[role=supervisor,#1]{#2}{#3}{YAD@supervisors}%
   \else%
-  \YAD@staff[role=supervisor,#1]{#2}{#3}{YAD@supervisors}%
   \YAD@staff[role=supervisor,#1]{#2}{#3}{supervisors-in-committee}%
   \fi%
 }%
@@ -2281,10 +2280,9 @@ This work consists of the file  yathesis.dtx
   \toggletrue{YAD@supervisor@specified}%
   \toggletrue{YAD@cosupervisor@or@comonitor}%
   \YAD@error@firstlastnames@empty{de co-directeur de these}{#2}{#3}{\cosupervisor}%
+  \YAD@staff[role=cosupervisor,#1]{#2}{#3}{YAD@supervisors}%
   \if@tempswa%
-  \YAD@staff[role=cosupervisor,#1]{#2}{#3}{YAD@supervisors}%
   \else%
-  \YAD@staff[role=cosupervisor,#1]{#2}{#3}{YAD@supervisors}%
   \YAD@staff[role=cosupervisor,#1]{#2}{#3}{supervisors-in-committee}%
   \fi%
 }%
@@ -2300,10 +2298,9 @@ This work consists of the file  yathesis.dtx
   \toggletrue{YAD@supervisor@specified}%
   \toggletrue{YAD@cosupervisor@or@comonitor}%
   \YAD@error@firstlastnames@empty{de co-encadrant de these}{#2}{#3}{\comonitor}%
+  \YAD@staff[role=comonitor,#1]{#2}{#3}{YAD@supervisors}%
   \if@tempswa%
-  \YAD@staff[role=comonitor,#1]{#2}{#3}{YAD@supervisors}%
   \else%
-  \YAD@staff[role=comonitor,#1]{#2}{#3}{YAD@supervisors}%
   \YAD@staff[role=comonitor,#1]{#2}{#3}{supervisors-in-committee}%
   \fi%
 }%
