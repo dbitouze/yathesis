@@ -580,20 +580,20 @@ sont listées dans le \vref{tab:expressions-cles} et y sont identifiées par un
 
 \begin{dbexample}{Modification d'expression définie par la classe}{}
   Pour remplacer l'expression en français \enquote{Unit\'e de recherche} (dont le label est
-  ×lbl-universitydepartment×) par \enquote{Laboratoire}, il suffit de
+  ×universitydepartment×) par \enquote{Laboratoire}, il suffit de
   saisir :
   %
 \begin{preamblecode}[title=Par exemple dans le \File{\configurationfile}]
-\expression{lbl-universitydepartment}{Laboratoire}{University Department}
+\expression{universitydepartment}{Laboratoire}{University Department}
 \end{preamblecode}
 \end{dbexample}
 %
 \begin{dbexample}{Suppression d'expression définie par la classe}{}
   Si on souhaite supprimer des pages de titre les mentions \enquote{Titre de la
     thèse} et \foreignquote{english}{Thesis Title} (expressions dont le label
-  est ×lbl-thesistitle×), il suffit de saisir :
+  est ×thesistitle×), il suffit de saisir :
 \begin{preamblecode}[title=Par exemple dans le \File{\configurationfile}]
-\expression{lbl-thesistitle}{}{}
+\expression{thesistitle}{}{}
 \end{preamblecode}
 \end{dbexample}
 
@@ -680,9 +680,9 @@ spécifier de \emph{nouveaux} corps à \emph{définir} au moyen de la commande
 \begin{dbexample}{Nouveau corps}{doctor}
   Si on souhaite spécifier que certains membres du jury sont docteurs, il
   suffit de définir \phrase{une seule fois} l'expression suivante de label (par
-  exemple) ×lbl-doctor× :
+  exemple) ×doctor× :
 \begin{preamblecode}[title=Par exemple dans le \File{\configurationfile}]
-\expression{lbl-doctor}{docteur}{Doctor}
+\expression{doctor}{docteur}{Doctor}
 \end{preamblecode}
   pour pouvoir ensuite l'utiliser \phrase{autant de fois que souhaité}, par
   exemple ainsi :
