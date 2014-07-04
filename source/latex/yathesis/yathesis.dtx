@@ -2004,6 +2004,8 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \newcommand{\expression}[3]{%
   \AtBeginDocument{%
+    \deftranslation[to=French]{lbl-#1}{#2}%
+    \deftranslation[to=English]{lbl-#1}{#3}%
     \deftranslation[to=French]{#1}{#2}%
     \deftranslation[to=English]{#1}{#3}%
   }%
@@ -6015,67 +6017,71 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % Traduction des expressions clés de la thèse.
 %    \begin{macrocode}
-\expression{lbl-coinstitute}{}{}%
-\expression{lbl-company}{}{}%
-\expression{lbl-institute}{}{}%
-\expression{lbl-email}{\Email}{\Email}%
-\expression{lbl-phone}{\Telefon}{\Telefon}%
-\expression{lbl-fax}{\Fax}{\Fax}%
-\expression{lbl-caution}{Avertissement}{Caution}%
-\expression{lbl-draft}{brouillon}{draft}%
-\expression{lbl-prepared-at}{Cette th\`ese a \'et\'e pr\'epar\'ee au}{This
+\expression{coinstitute}{}{}%
+\expression{company}{}{}%
+\expression{institute}{}{}%
+\expression{email}{\Email}{\Email}%
+\expression{phone}{\Telefon}{\Telefon}%
+\expression{fax}{\Fax}{\Fax}%
+\expression{caution}{Avertissement}{Caution}%
+\expression{draft}{brouillon}{draft}%
+\expression{prepared-at}{Cette th\`ese a \'et\'e pr\'epar\'ee au}{This
   thesis has been prepared at}%
-\expression{lbl-prepared-at-pl}{Cette th\`ese a \'et\'e pr\'epar\'ee dans les
+\expression{prepared-at-pl}{Cette th\`ese a \'et\'e pr\'epar\'ee dans les
   laboratoires suivants.}{This thesis has been prepared at the following
   research units.}%
-\expression{lbl-juniorresearcher}{charg\'e de recherche}{Junior Researcher}%
-\expression{lbl-juniorresearcher*}{charg\'e de recherche
+\expression{juniorresearcher}{charg\'e de recherche}{Junior Researcher}%
+\expression{juniorresearcher*}{charg\'e de recherche
   \textsc{hdr}}{\textsc{hdr} Junior Researcher}%
-\expression{lbl-cosupervisor}{co-directeur}{Co-Supervisor}%
-\expression{lbl-comonitor}{co-encadrant}{Co-Monitor}%
-\expression{lbl-committeemembers}{Composition du jury}{Committee members}%
-% \expression{lbl-conclusion}{Conclusion}{Conclusion}%
-\expression{lbl-supervisor}{directeur}{Supervisor}%
-\expression{lbl-seniorresearcher}{directeur de recherche}{Senior Researcher}%
-\expression{lbl-YAD@supervisors@in@committee}{Directeur de th\`ese}{Supervisor}%
-\expression{lbl-YAD@supervisors@in@committee-pl}{Directeurs de th\`ese}{Supervisors}%
-\expression{lbl-supervisedby}{Th\`ese dirig\'ee par}{Thesis supervised by}%
-\expression{lbl-academicfield}{Discipline}{Academic Field}%
-\expression{lbl-doctoralschool}{\'Ecole doctorale}{Doctoral School}%
-\expression{lbl-aim}{En vue de l'obtention du grade de docteur de l'}{In order
-  to become Doctor from }%
-\expression{lbl-aimand}{ et de l'}{ and from }%
-\expression{lbl-YAD@examiners}{Examinateur}{Examiner}%
-\expression{lbl-YAD@examiners-pl}{Examinateurs}{Examiners}%
-\expression{lbl-YAD@guests}{Invit\'e}{Guest}%
-\expression{lbl-YAD@guests-pl}{Invit\'es}{Guests}%
-% \expression{lbl-introduction}{Introduction}{Introduction}%
-\expression{lbl-mcf}{\textsc{mcf}}{Lecturer}%
-\expression{lbl-mcf*}{\textsc{mcf} \textsc{hdr}}{\textsc{hdr} Lecturer}%
-\expression{lbl-keywords}{Mots cl\'es}{Keywords}%
-\expression{lbl-ordernumber}{Num\'ero d'ordre}{Order Number}%
-% \expression{lbl-preface}{Pr\'eface}{Preface}%
-\expression{lbl-committeepresident}{pr\'esident du jury}{Committee President}%
-\expression{lbl-professor}{professeur}{Professor}%
-\expression{lbl-YAD@referees}{Rapporteur}{Referee}%
-\expression{lbl-YAD@referees-pl}{Rapporteurs}{Referees}%
-\expression{lbl-website}{Site}{Web Site}%
-\expression{lbl-defendedon}{Soutenue le}{Defended on}%
-\expression{lbl-estimateddefensedate}{Date de soutenance pr\'evue le}{Defense
+\expression{cosupervisor}{co-directeur}{Co-Supervisor}%
+\expression{cosupervisor*}{co-directrice}{Co-Supervisor}
+\expression{comonitor}{co-encadrant}{Co-Monitor}%
+\expression{comonitor*}{co-encadrante}{Co-Monitor}
+\expression{committeemembers}{Composition du jury}{Committee members}%
+% \expression{conclusion}{Conclusion}{Conclusion}%
+\expression{estimateddefensedate}{Date de soutenance pr\'evue le}{Defense
   date scheduled on}%
-\expression{lbl-speciality}{Sp\'ecialit\'e}{Speciality}%
-\expression{lbl-thesisdefendedby}{Th\`ese pr\'esent\'ee par}{Thesis defended
+\expression{supervisor}{directeur}{Supervisor}%
+\expression{supervisor*}{directrice}{Supervisor}
+\expression{seniorresearcher}{directeur de recherche}{Senior Researcher}%
+\expression{supervisors-in-committee}{Directeur de th\`ese}{Supervisor}%
+\expression{supervisors-in-committee-pl}{Directeurs de th\`ese}{Supervisors}%
+\expression{academicfield}{Discipline}{Academic Field}%
+\expression{doctoralschool}{\'Ecole doctorale}{Doctoral School}%
+\expression{aim}{En vue de l'obtention du grade de docteur de l'}{In order
+  to become Doctor from }%
+\expression{aimand}{ et de l'}{ and from }%
+\expression{examiners}{Examinateur}{Examiner}%
+\expression{examiners-pl}{Examinateurs}{Examiners}%
+\expression{guests}{Invit\'e}{Guest}%
+\expression{guests-pl}{Invit\'es}{Guests}%
+% \expression{introduction}{Introduction}{Introduction}%
+\expression{mcf}{\textsc{mcf}}{Lecturer}%
+\expression{mcf*}{\textsc{mcf} \textsc{hdr}}{\textsc{hdr} Lecturer}%
+\expression{keywords}{Mots cl\'es}{Keywords}%
+\expression{ordernumber}{Num\'ero d'ordre}{Order Number}%
+% \expression{preface}{Pr\'eface}{Preface}%
+\expression{committeepresident}{pr\'esident du jury}{Committee President}%
+\expression{committeepresident*}{pr\'esidente du jury}{Committee President}%
+\expression{professor}{professeur}{Professor}%
+\expression{referees}{Rapporteur}{Referee}%
+\expression{referees-pl}{Rapporteurs}{Referees}%
+\expression{website}{Site}{Web Site}%
+\expression{defendedon}{Soutenue le}{Defended on}%
+\expression{speciality}{Sp\'ecialit\'e}{Speciality}%
+\expression{supervisedby}{Th\`ese dirig\'ee par}{Thesis supervised by}%
+\expression{thesisdefendedby}{Th\`ese pr\'esent\'ee par}{Thesis defended
   by}%
-\expression{lbl-thesistitle}{Titre de la th\`ese}{Thesis Title}%
-\expression{lbl-inprogress}{travail en cours}{work in progress}%
-\expression{lbl-universitydepartment}{Unit\'e de recherche}{University
+\expression{thesistitle}{Titre de la th\`ese}{Thesis Title}%
+\expression{inprogress}{travail en cours}{work in progress}%
+\expression{universitydepartment}{Unit\'e de recherche}{University
   Department}%
-%<!translations>\expression{lbl-versiondate}{Version interm\'ediaire en date
+%<!translations>\expression{versiondate}{Version interm\'ediaire en date
 %<!translations>du}{Work in progress as of}%
-%<translations>\expression{lbl-inprogressfoottext}{Version interm\'ediaire en
+%<translations>\expression{inprogressfoottext}{Version interm\'ediaire en
 %<translations>date du}{Work in progress as of}%
-%<class>\expression{lbl-inprogressfoottext}{\translate{lbl-versiondate}}{\translate{lbl-versiondate}}%
-\expression{lbl-submittedfoottext}{Version soumise en date du}{Submitted work
+%<class>\expression{inprogressfoottext}{\translate{lbl-versiondate}}{\translate{lbl-versiondate}}%
+\expression{submittedfoottext}{Version soumise en date du}{Submitted work
   as of}%
 %    \end{macrocode}
 %
@@ -6155,22 +6161,23 @@ This work consists of the file  yathesis.dtx
     none,true,false,UseOutlines,TwoPageRight,UK,FR,%
     Sonny,Lenny,Glenn,Conny,Rejne,Bjarne,PetersLenny,Bjornstrup,%
     screen,draft,inprogress,inprogress*,submitted,submitted*,final,paper,paper*,%
-    fbox,shadowbox,ovalbox%
+    fbox,shadowbox,ovalbox,supervisor*,cosupervisor*,comonitor*%
   },%
   morekeywords=[4]{% Class and packages options
     warn,nodayofweek,unicode,nostamp,all,numbered,a4paper,leqno,fleqn,10pt,11pt,12pt,%
     detect-all,breaklinks,oneside%
   },%
   morekeywords=[5]{% Translation labels
-    lbl-abstract,lbl-aim,lbl-aimand,lbl-coinstitute,lbl-comonitor,%
-    lbl-cosupervisor,lbl-committee,lbl-committeepresident,lbl-company,lbl-conclusion,lbl-defendedon,%
-    lbl-doctoralschool,lbl-draft,%
-    %lbl-foreword,lbl-frenchabstract,lbl-acknowledgements,lbl-caution,
-    lbl-institute,lbl-inprogress,%
-    lbl-introduction,lbl-keywords,lbl-prepared-at,lbl-prepared-at-pl,lbl-guests,lbl-referees,lbl-seniorresearcher,%
-    lbl-speciality,lbl-supervisor,lbl-thesisdefendedby,lbl-disclaimer,lbl-thesissupervisedby,%
-    lbl-thesistitle,lbl-universitydepartment,lbl-professor,lbl-juniorresearcher*,lbl-mcf*,%
-    lbl-juniorresearcher,lbl-mcf,lbl-versiondate,lbl-website,lbl-submittedfoottext,lbl-inprogressfoottext%
+    abstract,aim,aimand,coinstitute,comonitor,%
+    cosupervisor,committee,committeepresident,company,conclusion,defendedon,%
+    doctoralschool,draft,%
+    %foreword,frenchabstract,acknowledgements,caution,
+    institute,inprogress,%
+    supervisor*,cosupervisor*,comonitor*,%
+    introduction,keywords,prepared-at,prepared-at-pl,guests,referees,seniorresearcher,%
+    speciality,supervisor,thesisdefendedby,disclaimer,thesissupervisedby,%
+    thesistitle,universitydepartment,professor,juniorresearcher*,mcf*,%
+    juniorresearcher,mcf,versiondate,website,submittedfoottext,inprogressfoottext%
   },%
   alsoletter={!-*1234560}%
 }%
