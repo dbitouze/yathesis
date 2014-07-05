@@ -601,6 +601,43 @@ figurer tant de précisions et, ne serait-ce que pour des raisons de place, on
 veillera à ne pas multiplier celles-ci.
 \end{dbexample}
 
+\paragraph{Homme/femme}
+\label{sec:hommefemme}
+
+Par défaut, les directeurs de thèse et membres du jury sont supposés être des
+hommes\footnote{Je promets d'envisager mon adhésion au \acrshort{mlf} pour une
+  supposition aussi sexiste !}, si bien qu'un certain nombre de mots clés de la
+\yatcl{} sont de genre masculin (\enquote{directeur}, \enquote{chargé de
+  recherche}, etc.). Il est possible de spécifier qu'un directeur de thèse ou
+un membre du jury est un homme ou une femme au moyen des clés \refKey{male} et
+\refKey{female} suivantes.
+
+\begin{docKey}{male}{=\docValue{true}\textbar\docValue{false}}{par défaut
+    \docValue{true}, initialement \docValue{true}}
+  Cette clé permet de spécifier qu'une personne est ou pas de sexe masculin.
+\end{docKey}
+
+\begin{docKey}{female}{=\docValue{true}\textbar\docValue{false}}{par défaut
+    \docValue{true}, initialement \docValue{false}}
+  Cette clé permet de spécifier qu'une personne est ou pas de sexe féminin.
+\end{docKey}
+
+Le fait qu'une personne ait pour option ×female×\footnote{Ou, de façons
+  équivalentes, \protect\lstinline|male=false| ou
+  \protect\lstinline|female=true|.} n'a pour effet que d'accorder en genre
+féminin un certain nombre de mots clés de la \yatcl{} (\enquote{directrice} au
+lieu \enquote{directeur}, \enquote{chargée de recherche} au lieu
+\enquote{chargé de recherche}, etc.).
+
+\begin{dbexample}{Directrice de thèse}{}
+  S'il est demandé que le rôle de Sophie \textsc{Germain}, directrice de thèse,
+  soit accordé en genre (\enquote{directrice} et non \enquote{directeur}), il
+  suffit de saisir :
+\begin{preamblecode}[title=Par exemple dans le \File{\characteristicsfile}]
+\supervisor[female]{Sophie}{Germain}
+\end{preamblecode}
+\end{dbexample}
+
 \subsection{Numéro d'ordre}
 \label{sec:numero-dordre}
 
