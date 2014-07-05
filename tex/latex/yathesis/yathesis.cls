@@ -194,8 +194,7 @@
 {screen,paper,paper*}[screen]%
 {\def\YAD@output{#1}}%
 \def\YAD@interligne{single}%
-\define@choicekey*{yathesis.cls}{space}%
-{single,onehalf,double}[single]%
+\define@choicekey*{yathesis.cls}{space}{single,onehalf,double}[single]%
 {\def\YAD@interligne{#1}}%
 \DeclareOptionX{mainlanguage}{%
   \ifthenelse{\isempty{#1}}{%
@@ -507,7 +506,7 @@
 }{%
 }%
 \newcommand*{\YAD@generic@argument}[1]{%
-  \bgroup\color{brown}{\normalfont\textlangle}\textit{\texttt{#1}}{\normalfont\textrangle}\egroup%
+  \bgroup\color{brown}{\normalfont\textlangle}\textsl{\texttt{#1}}{\normalfont\textrangle}\egroup%
 }%
 \newcommand*{\YAD@translation}[1]{%
   \ifthenelse{\isempty{#1}}{%
@@ -574,6 +573,8 @@
 }%
 \newcommand{\expression}[3]{%
   \AtBeginDocument{%
+    \deftranslation[to=French]{lbl-#1}{#2}%
+    \deftranslation[to=English]{lbl-#1}{#3}%
     \deftranslation[to=French]{#1}{#2}%
     \deftranslation[to=English]{#1}{#3}%
   }%
@@ -610,7 +611,9 @@
   mcf*,%
   juniorresearcher,%
   juniorresearcher*,%
-  seniorresearcher%
+  seniorresearcher,%
+  male,%
+  female%
 }[true]%
 \presetkeys{YAD}{%
   role=,%
@@ -638,6 +641,8 @@
   juniorresearcher=false,%
   juniorresearcher*=false,%
   seniorresearcher=false,%
+  male=true,%
+  female=false,%
   frametitle=fbox%
 }{}%
 \newcommand*{\yadsetup}[1]{%
@@ -646,13 +651,13 @@
 \@onlypreamble\yadsetup%
 \DTLnewdb{YAD@staffs}%
 \DTLnewrow{YAD@staffs}%
-\DTLnewdbentry{YAD@staffs}{YAD@the@staff}{YAD@referees}%
+\DTLnewdbentry{YAD@staffs}{YAD@the@staff}{referees}%
 \DTLnewrow{YAD@staffs}%
-\DTLnewdbentry{YAD@staffs}{YAD@the@staff}{YAD@examiners}%
+\DTLnewdbentry{YAD@staffs}{YAD@the@staff}{examiners}%
 \DTLnewrow{YAD@staffs}%
-\DTLnewdbentry{YAD@staffs}{YAD@the@staff}{YAD@guests}%
+\DTLnewdbentry{YAD@staffs}{YAD@the@staff}{guests}%
 \DTLnewrow{YAD@staffs}%
-\DTLnewdbentry{YAD@staffs}{YAD@the@staff}{YAD@supervisors@in@committee}%
+\DTLnewdbentry{YAD@staffs}{YAD@the@staff}{supervisors-in-committee}%
 \DTLforeach{YAD@staffs}{%
   \YAD@the@staff=YAD@the@staff}{%
   \DTLnewdb{\YAD@the@staff}%
@@ -663,24 +668,58 @@
 \newcommand*{\YAD@staff}[4][]{%
   \dtlexpandnewvalue%
   \setkeys{YAD}{#1}%
-  \ifKV@YAD@professor%
-  \setkeys{YAD}{#1,corps=professor}%
-  \fi%
-  \ifKV@YAD@mcf%
-  \setkeys{YAD}{#1,corps=mcf}%
-  \fi%
-  \csuse{ifKV@YAD@mcf*}%
-  \setkeys{YAD}{#1,corps=mcf*}%
-  \fi%
-  \ifKV@YAD@juniorresearcher%
-  \setkeys{YAD}{#1,corps=juniorresearcher}%
-  \fi%
-  \csuse{ifKV@YAD@juniorresearcher*}%
-  \setkeys{YAD}{#1,corps=juniorresearcher*}%
-  \fi%
-  \ifKV@YAD@seniorresearcher%
-  \setkeys{YAD}{#1,corps=seniorresearcher}%
-  \fi%
+  \ifboolexpr{ bool {KV@YAD@professor} }{%
+    \ifboolexpr{%
+      bool {KV@YAD@female} or %
+      not bool {KV@YAD@male}%
+    }{%
+      \setkeys{YAD}{corps=professorfem,#1}%
+    }{%
+      \setkeys{YAD}{corps=professor,#1}%
+    }%
+  }{%
+  }%
+  \ifboolexpr{ bool {KV@YAD@mcf} }{%
+    \setkeys{YAD}{corps=mcf,#1}%
+  }{%
+  }%
+  \ifboolexpr{ bool {KV@YAD@mcf*} }{%
+    \setkeys{YAD}{corps=mcf*,#1}%
+  }{%
+  }%
+  \ifboolexpr{ bool {KV@YAD@juniorresearcher} }{%
+    \ifboolexpr{%
+      bool {KV@YAD@female} or %
+      not bool {KV@YAD@male}%
+    }{%
+      \setkeys{YAD}{corps=juniorresearcherfem,#1}%
+    }{%
+      \setkeys{YAD}{corps=juniorresearcher,#1}%
+    }%
+  }{%
+  }%
+  \ifboolexpr{ bool {KV@YAD@juniorresearcher*} }{%
+    \ifboolexpr{%
+      bool {KV@YAD@female} or %
+      not bool {KV@YAD@male}%
+    }{%
+      \setkeys{YAD}{corps=juniorresearcherfem*,#1}%
+    }{%
+      \setkeys{YAD}{corps=juniorresearcher*,#1}%
+    }%
+  }{%
+  }%
+  \ifboolexpr{ bool {KV@YAD@seniorresearcher} }{%
+    \ifboolexpr{%
+      bool {KV@YAD@female} or %
+      not bool {KV@YAD@male}%
+    }{%
+      \setkeys{YAD}{corps=seniorresearcherfem,#1}%
+    }{%
+      \setkeys{YAD}{corps=seniorresearcher,#1}%
+    }%
+  }{%
+  }%
   \ifthenelse{\equal{\cmdKV@YAD@corporation}{}}{%
   }{%
     \ifthenelse{\equal{\cmdKV@YAD@corps}{}}{%
@@ -743,20 +782,29 @@
   }%
 }
 \newcommand*{\YAD@supervisors@in@committee}[3][]{%
-  \YAD@staff[#1]{#2}{#3}{YAD@supervisors@in@committee}%
+  \YAD@staff[#1]{#2}{#3}{supervisors-in-committee}%
 }%
 \newcommand{\supervisor}{%
   \@ifstar{\@tempswatrue\YAD@supervisor}{\@tempswafalse\YAD@supervisor}%
 }
 \newcommand*{\YAD@supervisor}[3][]{%
   \toggletrue{YAD@supervisor@specified}%
-  \YAD@error@firstlastnames@empty{du directeur de these}{#2}{#3}{\supervisor}%
-  \if@tempswa%
-  \YAD@staff[role=supervisor,#1]{#2}{#3}{YAD@supervisors}%
+  \setkeys{YAD}{#1}%
+  \ifboolexpr{%
+    bool {KV@YAD@female} or %
+    not bool {KV@YAD@male}%
+  }{%
+    \YAD@error@firstlastnames@empty{de la directrice de these}{#2}{#3}{\supervisor}%
+    \YAD@staff[role=supervisorfem,#1]{#2}{#3}{YAD@supervisors}%
+  }{%
+    \YAD@error@firstlastnames@empty{du directeur de these}{#2}{#3}{\supervisor}%
+    \YAD@staff[role=supervisor,#1]{#2}{#3}{YAD@supervisors}%
+  }%
+\if@tempswa%
   \else%
-  \YAD@staff[role=supervisor,#1]{#2}{#3}{YAD@supervisors}%
-  \YAD@staff[role=supervisor,#1]{#2}{#3}{YAD@supervisors@in@committee}%
+  \YAD@staff[role=supervisor,#1]{#2}{#3}{supervisors-in-committee}%
   \fi%
+  \setkeys{YAD}{#1,male}%
 }%
 \newcommand{\cosupervisor}{%
   \@ifstar{\@tempswatrue\YAD@cosupervisor}{\@tempswafalse\YAD@cosupervisor}%
@@ -764,13 +812,22 @@
 \newcommand*{\YAD@cosupervisor}[3][]{%
   \toggletrue{YAD@supervisor@specified}%
   \toggletrue{YAD@cosupervisor@or@comonitor}%
-  \YAD@error@firstlastnames@empty{de co-directeur de these}{#2}{#3}{\cosupervisor}%
+  \setkeys{YAD}{#1}%
+  \ifboolexpr{%
+    bool {KV@YAD@female} or %
+    not bool {KV@YAD@male}%
+  }{%
+    \YAD@error@firstlastnames@empty{de la co-directrice de these}{#2}{#3}{\cosupervisor}%
+    \YAD@staff[role=cosupervisorfem,#1]{#2}{#3}{YAD@supervisors}%
+  }{%
+    \YAD@error@firstlastnames@empty{du co-directeur de these}{#2}{#3}{\cosupervisor}%
+    \YAD@staff[role=cosupervisor,#1]{#2}{#3}{YAD@supervisors}%
+  }%
   \if@tempswa%
-  \YAD@staff[role=cosupervisor,#1]{#2}{#3}{YAD@supervisors}%
   \else%
-  \YAD@staff[role=cosupervisor,#1]{#2}{#3}{YAD@supervisors}%
-  \YAD@staff[role=cosupervisor,#1]{#2}{#3}{YAD@supervisors@in@committee}%
+  \YAD@staff[role=cosupervisor,#1]{#2}{#3}{supervisors-in-committee}%
   \fi%
+  \setkeys{YAD}{#1,male}%
 }%
 \newcommand{\comonitor}{%
   \@ifstar{\@tempswatrue\YAD@comonitor}{\@tempswafalse\YAD@comonitor}%
@@ -778,32 +835,71 @@
 \newcommand*{\YAD@comonitor}[3][]{%
   \toggletrue{YAD@supervisor@specified}%
   \toggletrue{YAD@cosupervisor@or@comonitor}%
-  \YAD@error@firstlastnames@empty{de co-encadrant de these}{#2}{#3}{\comonitor}%
+  \setkeys{YAD}{#1}%
+  \ifboolexpr{%
+    bool {KV@YAD@female} or %
+    not bool {KV@YAD@male}%
+  }{%
+    \YAD@error@firstlastnames@empty{de la co-encadrante de these}{#2}{#3}{\comonitor}%
+    \YAD@staff[role=comonitorfem,#1]{#2}{#3}{YAD@supervisors}%
+  }{%
+    \YAD@error@firstlastnames@empty{de co-encadrant de these}{#2}{#3}{\comonitor}%
+    \YAD@staff[role=comonitor,#1]{#2}{#3}{YAD@supervisors}%
+  }%
   \if@tempswa%
-  \YAD@staff[role=comonitor,#1]{#2}{#3}{YAD@supervisors}%
   \else%
-  \YAD@staff[role=comonitor,#1]{#2}{#3}{YAD@supervisors}%
-  \YAD@staff[role=comonitor,#1]{#2}{#3}{YAD@supervisors@in@committee}%
+  \YAD@staff[role=comonitor,#1]{#2}{#3}{supervisors-in-committee}%
   \fi%
+  \setkeys{YAD}{#1,male}%
 }%
 \newcommand*{\guest}[3][]{%
-  \YAD@staff[#1]{#2}{#3}{YAD@guests}%
+  \YAD@staff[#1]{#2}{#3}{guests}%
   \YAD@error@firstlastnames@empty{de l'invite}{#2}{#3}{\guest}%
 }%
 \newcommand*{\referee}[3][]{%
-  \YAD@staff[#1]{#2}{#3}{YAD@referees}%
-  \YAD@error@firstlastnames@empty{du rapporteur}{#2}{#3}{\referee}%
+  \setkeys{YAD}{#1}%
+  \ifboolexpr{%
+    bool {KV@YAD@female} or %
+    not bool {KV@YAD@male}%
+  }{%
+    \YAD@error@firstlastnames@empty{de la rapportrice}{#2}{#3}{\referee}%
+  }{%
+    \YAD@error@firstlastnames@empty{du rapporteur}{#2}{#3}{\referee}%
+  }%
+  \YAD@staff[#1]{#2}{#3}{referees}%
 }%
 \newcommand*{\examiner}[3][]{%
-  \YAD@staff[#1]{#2}{#3}{YAD@examiners}%
-  \ifthenelse{\equal{\cmdKV@YAD@role}{committeepresident}}{%
+  \setkeys{YAD}{#1}%
+  \YAD@staff[#1]{#2}{#3}{examiners}%
+  \ifboolexpr{%
+    test {\ifdefstring{\cmdKV@YAD@role}{committeepresident}} or %
+    test {\ifdefstring{\cmdKV@YAD@role}{committeepresidentfem}}%
   }{%
-    \YAD@error@firstlastnames@empty{de l'examinateur}{#2}{#3}{\examiner}%
+  }{%
+    \ifboolexpr{%
+      bool {KV@YAD@female} or %
+      not bool {KV@YAD@male} or %
+    }{%
+      \YAD@error@firstlastnames@empty{de l'examinatrice}{#2}{#3}{\examiner}%
+    }{%
+      \YAD@error@firstlastnames@empty{de l'examinateur}{#2}{#3}{\examiner}%
+    }%
   }%
+  \setkeys{YAD}{#1,male}%
 }%
 \newcommand*{\committeepresident}[3][]{%
-  \examiner[role=committeepresident,#1]{#2}{#3}%
-  \YAD@error@firstlastnames@empty{du president du jury}{#2}{#3}{\committeepresident}%
+  \setkeys{YAD}{#1}%
+  \ifboolexpr{%
+    bool {KV@YAD@female} or %
+    not bool {KV@YAD@male}%
+  }{%
+    \YAD@error@firstlastnames@empty{de la presidente du jury}{#2}{#3}{\committeepresident}%
+    \examiner[role=committeepresidentfem,#1]{#2}{#3}%
+  }{%
+    \YAD@error@firstlastnames@empty{du president du jury}{#2}{#3}{\committeepresident}%
+    \examiner[role=committeepresident,#1]{#2}{#3}%
+  }%
+  \setkeys{YAD}{#1,male}%
 }%
 \newcommand*{\YAD@al}{ \`a l'}%
 \newcommand*{\YAD@au}{ au }%
@@ -948,7 +1044,7 @@
         }{%
         }%
       }{%
-        \ifthenelse{\equal{\YAD@the@staff}{YAD@supervisors@in@committee}}{%
+        \ifthenelse{\equal{\YAD@the@staff}{supervisors-in-committee}}{%
         }{%
           \YAD@translation{\YAD@committeemember@role}%
         }%
@@ -3404,62 +3500,71 @@
 \expression{meta-epigraphs}{\'epigraphes}{epigraphs}
 \expression{meta-abstract}{r\'esum\'e}{abstract}%
 \expression{meta-ordernumber}{num\'ero d'ordre}{order number}%
-\expression{lbl-coinstitute}{}{}%
-\expression{lbl-company}{}{}%
-\expression{lbl-institute}{}{}%
-\expression{lbl-email}{\Email}{\Email}%
-\expression{lbl-phone}{\Telefon}{\Telefon}%
-\expression{lbl-fax}{\Fax}{\Fax}%
-\expression{lbl-caution}{Avertissement}{Caution}%
-\expression{lbl-draft}{brouillon}{draft}%
-\expression{lbl-prepared-at}{Cette th\`ese a \'et\'e pr\'epar\'ee au}{This
+\expression{coinstitute}{}{}%
+\expression{company}{}{}%
+\expression{institute}{}{}%
+\expression{email}{\Email}{\Email}%
+\expression{phone}{\Telefon}{\Telefon}%
+\expression{fax}{\Fax}{\Fax}%
+\expression{caution}{Avertissement}{Caution}%
+\expression{draft}{brouillon}{draft}%
+\expression{prepared-at}{Cette th\`ese a \'et\'e pr\'epar\'ee au}{This
   thesis has been prepared at}%
-\expression{lbl-prepared-at-pl}{Cette th\`ese a \'et\'e pr\'epar\'ee dans les
+\expression{prepared-at-pl}{Cette th\`ese a \'et\'e pr\'epar\'ee dans les
   laboratoires suivants.}{This thesis has been prepared at the following
   research units.}%
-\expression{lbl-juniorresearcher}{charg\'e de recherche}{Junior Researcher}%
-\expression{lbl-juniorresearcher*}{charg\'e de recherche
+\expression{juniorresearcher}{charg\'e de recherche}{Junior Researcher}%
+\expression{juniorresearcherfem}{charg\'ee de recherche}{Junior Researcher}%
+\expression{juniorresearcher*}{charg\'e de recherche
   \textsc{hdr}}{\textsc{hdr} Junior Researcher}%
-\expression{lbl-cosupervisor}{co-directeur}{Co-Supervisor}%
-\expression{lbl-comonitor}{co-encadrant}{Co-Monitor}%
-\expression{lbl-committeemembers}{Composition du jury}{Committee members}%
-\expression{lbl-supervisor}{directeur}{Supervisor}%
-\expression{lbl-seniorresearcher}{directeur de recherche}{Senior Researcher}%
-\expression{lbl-YAD@supervisors@in@committee}{Directeur de th\`ese}{Supervisor}%
-\expression{lbl-YAD@supervisors@in@committee-pl}{Directeurs de th\`ese}{Supervisors}%
-\expression{lbl-supervisedby}{Th\`ese dirig\'ee par}{Thesis supervised by}%
-\expression{lbl-academicfield}{Discipline}{Academic Field}%
-\expression{lbl-doctoralschool}{\'Ecole doctorale}{Doctoral School}%
-\expression{lbl-aim}{En vue de l'obtention du grade de docteur de l'}{In order
-  to become Doctor from }%
-\expression{lbl-aimand}{ et de l'}{ and from }%
-\expression{lbl-YAD@examiners}{Examinateur}{Examiner}%
-\expression{lbl-YAD@examiners-pl}{Examinateurs}{Examiners}%
-\expression{lbl-YAD@guests}{Invit\'e}{Guest}%
-\expression{lbl-YAD@guests-pl}{Invit\'es}{Guests}%
-\expression{lbl-mcf}{\textsc{mcf}}{Lecturer}%
-\expression{lbl-mcf*}{\textsc{mcf} \textsc{hdr}}{\textsc{hdr} Lecturer}%
-\expression{lbl-keywords}{Mots cl\'es}{Keywords}%
-\expression{lbl-ordernumber}{Num\'ero d'ordre}{Order Number}%
-\expression{lbl-committeepresident}{pr\'esident du jury}{Committee President}%
-\expression{lbl-professor}{professeur}{Professor}%
-\expression{lbl-YAD@referees}{Rapporteur}{Referee}%
-\expression{lbl-YAD@referees-pl}{Rapporteurs}{Referees}%
-\expression{lbl-website}{Site}{Web Site}%
-\expression{lbl-defendedon}{Soutenue le}{Defended on}%
-\expression{lbl-estimateddefensedate}{Date de soutenance pr\'evue le}{Defense
+\expression{juniorresearcherfem*}{charg\'ee de recherche
+  \textsc{hdr}}{\textsc{hdr} Junior Researcher}%
+\expression{cosupervisor}{co-directeur}{Co-Supervisor}%
+\expression{cosupervisorfem}{co-directrice}{Co-Supervisor}
+\expression{comonitor}{co-encadrant}{Co-Monitor}%
+\expression{comonitorfem}{co-encadrante}{Co-Monitor}
+\expression{committeemembers}{Composition du jury}{Committee members}%
+\expression{estimateddefensedate}{Date de soutenance pr\'evue le}{Defense
   date scheduled on}%
-\expression{lbl-speciality}{Sp\'ecialit\'e}{Speciality}%
-\expression{lbl-thesisdefendedby}{Th\`ese pr\'esent\'ee par}{Thesis defended
+\expression{supervisor}{directeur}{Supervisor}%
+\expression{supervisorfem}{directrice}{Supervisor}
+\expression{seniorresearcher}{directeur de recherche}{Senior Researcher}%
+\expression{seniorresearcherfem}{directrice de recherche}{Senior Researcher}%
+\expression{supervisors-in-committee}{Directeur de th\`ese}{Supervisor}%
+\expression{supervisors-in-committee-pl}{Directeurs de th\`ese}{Supervisors}%
+\expression{academicfield}{Discipline}{Academic Field}%
+\expression{doctoralschool}{\'Ecole doctorale}{Doctoral School}%
+\expression{aim}{En vue de l'obtention du grade de docteur de l'}{In order
+  to become Doctor from }%
+\expression{aimand}{ et de l'}{ and from }%
+\expression{examiners}{Examinateur}{Examiner}%
+\expression{examiners-pl}{Examinateurs}{Examiners}%
+\expression{guests}{Invit\'e}{Guest}%
+\expression{guests-pl}{Invit\'es}{Guests}%
+\expression{mcf}{\textsc{mcf}}{Lecturer}%
+\expression{mcf*}{\textsc{mcf} \textsc{hdr}}{\textsc{hdr} Lecturer}%
+\expression{keywords}{Mots cl\'es}{Keywords}%
+\expression{ordernumber}{Num\'ero d'ordre}{Order Number}%
+\expression{committeepresident}{pr\'esident du jury}{Committee President}%
+\expression{committeepresidentfem}{pr\'esidente du jury}{Committee President}%
+\expression{professor}{professeur}{Professor}%
+\expression{professorfem}{professeure}{Professor}%
+\expression{referees}{Rapporteur}{Referee}%
+\expression{referees-pl}{Rapporteurs}{Referees}%
+\expression{website}{Site}{Web Site}%
+\expression{defendedon}{Soutenue le}{Defended on}%
+\expression{speciality}{Sp\'ecialit\'e}{Speciality}%
+\expression{supervisedby}{Th\`ese dirig\'ee par}{Thesis supervised by}%
+\expression{thesisdefendedby}{Th\`ese pr\'esent\'ee par}{Thesis defended
   by}%
-\expression{lbl-thesistitle}{Titre de la th\`ese}{Thesis Title}%
-\expression{lbl-inprogress}{travail en cours}{work in progress}%
-\expression{lbl-universitydepartment}{Unit\'e de recherche}{University
+\expression{thesistitle}{Titre de la th\`ese}{Thesis Title}%
+\expression{inprogress}{travail en cours}{work in progress}%
+\expression{universitydepartment}{Unit\'e de recherche}{University
   Department}%
-\expression{lbl-versiondate}{Version interm\'ediaire en date
+\expression{versiondate}{Version interm\'ediaire en date
 du}{Work in progress as of}%
-\expression{lbl-inprogressfoottext}{\translate{lbl-versiondate}}{\translate{lbl-versiondate}}%
-\expression{lbl-submittedfoottext}{Version soumise en date du}{Submitted work
+\expression{inprogressfoottext}{\translate{lbl-versiondate}}{\translate{lbl-versiondate}}%
+\expression{submittedfoottext}{Version soumise en date du}{Submitted work
   as of}%
 %% ----------------------------------------------------------------------------------
 %% This work may be distributed and/or modified under the
