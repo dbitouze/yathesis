@@ -181,6 +181,21 @@ où \meta{distance}, à exprimer par exemple en points (par exemple ×27pt×), e
   précisions.
 \end{dbfaq}
 
+\begin{dbfaq}{Comment faire en sorte que, dans la table des matières, seuls
+    les numéros de page soient des liens hypertexte ?}{}
+  Par défaut, les entrées de la table des matières sont toutes entières des
+  liens hypertexte, ce qui est trop envahissant. Comment faire en sorte que
+  seuls les numéros de page soient des liens hypertexte ?
+  %
+  \tcblower
+  %
+  Cette question ne concerne pas directement la \yatcl{} : il suffit de passer
+  l'option ×linktoc=false× au \Package{hyperref}. Comme celui-ci est déjà
+  chargé par la \yatcl{}, cette option est à passer (de préférence en
+  préambule) en argument de \docAuxCommand{hypersetup} :
+  ×\hypersetup{linktoc=false}×
+\end{dbfaq}
+
 %
 \iffalse
 %%% Local Variables:
