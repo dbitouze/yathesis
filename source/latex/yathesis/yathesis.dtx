@@ -1396,7 +1396,7 @@ This work consists of the file  yathesis.dtx
 \newtcbtheorem[list inside=dbfaqlist,number within=chapter]{dbfaq}{Question}{%
   colback=lightgray!5!white,
   colframe=lightgray!75!black,
-  fontupper=\itshape,
+  fontupper=\slshape,
   dbtcb
 }{faq}
 %
@@ -1914,7 +1914,7 @@ This work consists of the file  yathesis.dtx
 % \begin{macro}{\YAD@generic@argument@}
 %    \begin{macrocode}
 \newcommand*{\YAD@generic@argument}[1]{%
-  \bgroup\color{brown}{\normalfont\textlangle}\textit{\texttt{#1}}{\normalfont\textrangle}\egroup%
+  \bgroup\color{brown}{\normalfont\textlangle}\textsl{\texttt{#1}}{\normalfont\textrangle}\egroup%
 }%
 %    \end{macrocode}
 % \end{macro}
@@ -2062,7 +2062,12 @@ This work consists of the file  yathesis.dtx
   mcf*,%
   juniorresearcher,%
   juniorresearcher*,%
-  seniorresearcher%
+  juniorresearcherfem,%
+  juniorresearcherfem*,%
+  seniorresearcher,%
+  seniorresearcherfem,%
+  male,%
+  female%
 }[true]%
 \presetkeys{YAD}{%
   role=,%
