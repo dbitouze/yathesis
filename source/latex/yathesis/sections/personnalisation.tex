@@ -690,6 +690,31 @@ ou des chargé(e)s de recherche (\gls{hdr} ou pas) du \gls{cnrs}. La clé
 \end{bodycode}
 \end{dbexample}
 
+\subsection{Nouveaux rôles}\label{sec:nouveaux-roles}
+
+On a pu noter \vref{sec:jury} que des rôles, figurant automatiquement sur les
+pages de titre, sont attachés :
+\begin{itemize}
+\item aux directeurs de thèse définis au moyen des commandes
+  \refCom{supervisor}, \refCom{cosupervisor} et \refCom{comonitor} :
+  \enquote{directeur}, \enquote{co-directeur} et \enquote{co-encadrant} ;
+\item au président du jury défini au moyen de la commande
+  \refCom{committeepresident} : \enquote{président du jury}.
+\end{itemize}
+La clé \refKey{role} suivante permet de spécifier de \emph{nouveaux} rôles
+à \emph{définir} au moyen de la commande \refCom{expression}.
+
+% ^^A Il est même possible de \emph{définir} de \emph{nouveaux} rôles au moyen
+% ^^A de la commande \refCom{expression}.
+
+\begin{docKey}{role}{=\meta{label}}{pas de valeur par défaut, initialement
+    vide}
+  L'option ×role=×\meta{label} permet de stipuler un \meta{rôle en français} et
+  un \meta{rôle en anglais} où \meta{label} identifie une expression listée au
+  \vref{tab:expressions-cles} ou à définir au moyen de la commande
+  \refCom{expression}.
+\end{docKey}
+
 \section{Packages chargés par la \yatcl}
 
 Le comportement par défaut de la \yatcl{} est aussi gouverné par le
