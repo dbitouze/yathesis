@@ -346,9 +346,14 @@ Les documents composés avec la \yatcl{} peuvent avoir deux formats de sortie :
 \begin{dbwarning}{Mises en page éventuellement différentes en sortie
     \enquote{écran} et \enquote{papier}}{}
   Du fait des \cref{item:paper:1,item:paper:2} précédents, les mises en page
-  des sorties \enquote{écran} et \enquote{papier} peuvent être différentes. Il
-  pourra être opportun de les comparer, par exemple à l'aide d'un logiciel
-  comparateur de fichiers \gls{pdf}.
+  des sorties \enquote{écran} et \enquote{papier} peuvent être différentes, et
+  il pourra être opportun de les comparer, par exemple à l'aide d'un logiciel
+  comparateur de fichiers \gls{pdf}. Si on souhaite que les sorties
+  \enquote{écran} et \enquote{papier} soient absolument identiques, il suffit
+  d'imprimer la première ; mais il faut avoir conscience du fait que, dans ce
+  cas, si le mémoire contient des références vers des \acrshort{url} (par
+  exemple fournies par ×\href{×\meta{\acrshort*{url}}×}{×\meta{texte}×}×),
+  leurs cibles ne figureront nulle part en sortie \enquote{papier}.
 \end{dbwarning}
 
 \subsection{Expressions séparant les corps et affiliations des membres du jury}
