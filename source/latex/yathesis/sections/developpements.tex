@@ -92,6 +92,8 @@
   verticalement le titre (en fait la boîte le contenant) dans les pages de
   titre.
 \item Tester l'intégration du \Package{minitoc}.
+\item Rendre personnalisable les différents \enquote{output} en proposant
+  diverses options.
 \end{enumerate}
 
 \subsection{Documentation de la classe}
@@ -125,6 +127,12 @@
 \item Prévoir un \File{.el} (pour \program{Emacs+AUCTeX}) et voir le format
   pour \program{TeXworks}.
 \item Documenter \docAuxCommand{yatsetup}.
+\item Indiquer comment obtenir un nom de fichier \gls{pdf} différent de ×\jobname×,
+  par exemple pour le fichier à imprimer :
+\begin{lstlisting}
+pdflatex -jobname=these_a_imprimer "\PassOptionsToClass{output=paper}{yathesis}\input{these}"
+\end{lstlisting}
+Évoquer éventuellement les \enquote{makefile}.
 \end{enumerate}
 
 %
