@@ -167,13 +167,15 @@ Ce chapitre est une \gls{faq} \phrase{autrement dit une liste des questions
 \renewcommand*\@pnumwidth{÷\meta{distance}÷}
 \makeatother
 \end{preamblecode}
-où \meta{distance}, à exprimer par exemple en points (par exemple ×27pt×), est
-à déterminer par \enquote{essais/erreurs} de sorte que \meta{distance} soit :
-\begin{enumerate}
-\item suffisamment grande, pour empêcher les débordements de numéros de pages ;
-\item aussi petite que possible, pour éviter les lignes de pointillés trop
-  courtes.
-\end{enumerate}
+  où \meta{distance}, à exprimer par exemple en points (par exemple ×27pt×),
+  est à déterminer par \enquote{essais/erreurs} de sorte que \meta{distance}
+  soit :
+  \begin{enumerate}
+  \item suffisamment grande, pour empêcher les débordements de numéros de
+    pages ;
+  \item aussi petite que possible, pour éviter les lignes de pointillés trop
+    courtes.
+  \end{enumerate}
 \end{dbfaq}
 
 \begin{dbfaq}{Pourquoi \protect\docAuxCommand*{setcounter} n'a-t-elle pas
@@ -206,7 +208,9 @@ où \meta{distance}, à exprimer par exemple en points (par exemple ×27pt×), e
   l'option ×linktoc=false× au \Package{hyperref}. Comme celui-ci est déjà
   chargé par la \yatcl{}, cette option est à passer (de préférence en
   préambule) en argument de \docAuxCommand{hypersetup} :
-  ×\hypersetup{linktoc=false}×
+\begin{preamblecode}
+\hypersetup{linktoc=false}
+\end{preamblecode}
 \end{dbfaq}
 
 %
