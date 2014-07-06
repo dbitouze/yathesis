@@ -208,7 +208,6 @@
     \def\YAD@secnumdepth{#1}%
   }%
 }%
-\DeclareOptionX{xcolor}{\PassOptionsToPackage{#1}{xcolor}}
 \DeclareOptionX{logoheight}[1.5cm]{\setlength\YAD@logo@height{#1}}%
 \DeclareOptionX{sepcorpaffilfrench}[]{\def\YAD@global@sepcorpaffil@french{#1}}%
 \DeclareOptionX{sepcorpaffilenglish}[ at ]{\def\YAD@global@sepcorpaffil@english{#1}}%
