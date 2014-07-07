@@ -107,15 +107,17 @@ Ce chapitre est une \gls{faq} \phrase{autrement dit une liste des questions
   définies au \vref{cha:caract-du-docum}.
 \end{dbfaq}
 
-\begin{dbfaq}{Comment faire figurer le glossaire dans la table des matières ?}{}
-  Par défaut, le glossaire (et les listes d'acronymes et de symboles) ne figure
-  pas dans la table des matières (ni dans le sommaire, ni dans les signets) du
-  document. Comment le faire apparaître ?
-  %
+\begin{dbfaq}{Pourquoi les signets des glossaire, listes d'acronymes et de
+    symboles apparaissent en double ?}{}
+  Les signets des glossaire, listes d'acronymes et de symboles apparaissent en
+  double. Comment éviter cela ?%
   \tcblower
   %
-  Cette question ne concerne pas directement la \yatcl{} : il suffit de passer
-  l'option \docAuxKey*{toc} au \Package{glossaries}.
+  La \yatcl{} fait figurer les glossaire, listes d'acronymes et de symboles
+  à la fois dans la table des matières et dans les signets. Il devrait donc
+  suffire de ne pas explicitement demander à ce que ce soit le cas, en
+  \emph{ne} passant \emph{pas} l'option \docAuxKey*{toc} au
+  \Package{glossaries}.
 \end{dbfaq}
 
 \begin{dbfaq}{Pourquoi mes signes de ponctuation haute ne sont pas précédés des
