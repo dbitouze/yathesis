@@ -107,17 +107,18 @@ Ce chapitre est une \gls{faq} \phrase{autrement dit une liste des questions
   définies au \vref{cha:caract-du-docum}.
 \end{dbfaq}
 
-\begin{dbfaq}{Pourquoi les signets des glossaire, listes d'acronymes et de
-    symboles apparaissent en double ?}{}
-  Les signets des glossaire, listes d'acronymes et de symboles apparaissent en
-  double. Comment éviter cela ?%
+\begin{dbfaq}{Pourquoi les glossaire, listes d'acronymes et de symboles
+    apparaissent en double dans la table des matières et dans les signets ?}{}
+  Les glossaire, listes d'acronymes et de symboles apparaissent en double dans
+  la table des matières et dans les signets. Comment éviter cela ?%
   \tcblower
   %
   La \yatcl{} fait d'elle-même figurer les glossaire, listes d'acronymes et de
   symboles à la fois dans la table des matières et dans les signets. Pour
-  régler le problème, il devrait donc suffire de ne pas explicitement demander
-  à ce que ce soit le cas, en \emph{ne} passant \emph{pas} l'option
-  \docAuxKey*{toc} au \Package{glossaries}.
+  régler le problème, il devrait donc suffire de \emph{ne pas} explicitement
+  demander que ce soit le cas, en \emph{ne} recourant \emph{ni} à l'option
+  \docAuxKey*{toc} et \emph{ni} à la commande \docAuxCommand*{glstoctrue} du
+  \Package{glossaries}.
 \end{dbfaq}
 
 \begin{dbfaq}{Pourquoi mes signes de ponctuation haute ne sont pas précédés des
