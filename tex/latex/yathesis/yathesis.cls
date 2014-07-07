@@ -3408,15 +3408,12 @@
     \printglossary[type=symbols,style=yadsymbolstyle,#1]%
   }%
 }%
-  \AfterEndPreamble{%
-    \renewcommand*{\glossarysection}[2][]{%
-      \YAD@ORI@chapter*{#2}%
-      \ifglstoc
-      \addcontentsline{toc}{chapter}{#1}%
-      \fi
-    }
-    \let\glossarysection\YAD@ORI@chapter%
+\AtEndPreamble{%
+  \@ifpackageloaded{glossaries}{%
+    \RequirePackage{glossaries-babel}%
+  }{%
   }%
+}%
 }%
 \AtEndPreamble{%
   \shorthandon{;:!?}%
