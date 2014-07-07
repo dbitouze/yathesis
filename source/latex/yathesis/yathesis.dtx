@@ -5959,18 +5959,16 @@ This work consists of the file  yathesis.dtx
 }%
 %    \end{macrocode}
 % \end{macro}
-% Hack pour que les signets des glossaires et objets assimilés soient
-% correctement traduits.
+% On force le chargement du \Package{glossaries-babel} si le
+% \Package{glossaries} l'est, sans quoi les signets des glossaires
+% et objets assimilés ne sont pas correctement traduits.
 %    \begin{macrocode}
-  \AfterEndPreamble{%
-    \renewcommand*{\glossarysection}[2][]{%
-      \YAD@ORI@chapter*{#2}%
-      \ifglstoc
-      \addcontentsline{toc}{chapter}{#1}%
-      \fi
-    }
-    \let\glossarysection\YAD@ORI@chapter%
+\AtEndPreamble{%
+  \@ifpackageloaded{glossaries}{%
+    \RequirePackage{glossaries-babel}%
+  }{%
   }%
+}%
 %    \end{macrocode}
 % On termine le patch du \Package{glossaries}.
 %    \begin{macrocode}
