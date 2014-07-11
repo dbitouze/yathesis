@@ -356,6 +356,25 @@ Les documents composés avec la \yatcl{} peuvent avoir deux formats de sortie :
   leurs cibles ne figureront nulle part en sortie \enquote{papier}.
 \end{dbwarning}
 
+\subsection{Habilitations à diriger les recherches}
+\label{sec:hdr}
+
+Grâce à sa clé \refKey{hdr}, la \yatcl{} peut être utilisée pour
+les habilitations à diriger les recherches.
+
+\begin{docKey}{hdr}{=\docValue{true}\textbar\docValue{false}}{par défaut
+    \docValue{true}, initialement \docValue{false}}
+  Cette clé spécifie que le document est une habilitation à diriger les
+  recherches.
+\end{docKey}
+
+Le seul effet de la clé \refKey{hdr} est d'adapter un certain nombre
+d'expressions clés de la \yatcl{}, en remplaçant par exemple \enquote{Thèse
+  présentée par} par \enquote{Habilitation à diriger les recherches présentée
+  par}. Les expressions propres aux habilitations à diriger les recherches sont
+celles dont le label est suffixé par \enquote{\texttt{-hdr}} dans le
+\vref{tab:expressions-cles}.
+
 \subsection{Expressions séparant les corps et affiliations des membres du jury}
 \label{sec:expr-separ-les}
 

@@ -692,6 +692,7 @@ This work consists of the file  yathesis.dtx
 \YAD@create@boolean{notableofcontents}%
 \YAD@create@boolean{noprintbibliography}%
 \YAD@create@boolean{nofrontcover}%
+\YAD@create@boolean{hdr}%
 %
 % On définit la clé ×version× de la classe qui prend pour valeurs :
 % \begin{itemize}
@@ -2529,9 +2530,21 @@ This work consists of the file  yathesis.dtx
     % Nature des membres du jury
     \DTLiffirstrow{%
       \ifthenelse{\DTLrowcount{\YAD@the@staff}>1}{%
-        \YAD@translation{\YAD@the@staff-pl}%
+        \ifboolexpr{%
+          bool {YAD@hdr} and test {\ifdefstring{\YAD@the@staff}{supervisors-in-committee}}%
+        }{%
+          \YAD@translation{\YAD@the@staff-pl-hdr}%
+        }{%
+          \YAD@translation{\YAD@the@staff-pl}%
+        }%
       }{%
-        \YAD@translation{\YAD@the@staff}%
+        \ifboolexpr{%
+          bool {YAD@hdr} and test {\ifdefstring{\YAD@the@staff}{supervisors-in-committee}}%
+        }{%
+          \YAD@translation{\YAD@the@staff-hdr}%
+        }{%
+          \YAD@translation{\YAD@the@staff}%
+        }%
       }%
     }{%
     }%
@@ -2630,7 +2643,11 @@ This work consists of the file  yathesis.dtx
           \DTLiffirstrow{%
             \hspace{-\tabcolsep}%
             \normalfont\bfseries%
+            \ifYAD@hdr%
+            \YAD@translation{supervisedby-hdr} %
+            \else%
             \YAD@translation{supervisedby}%
+            \fi%
           }{%
           }%
           &
@@ -4193,7 +4210,11 @@ This work consists of the file  yathesis.dtx
       \noindent%
       \ifdefstrequal{\cmdKV@YAD@frametitle}{none}{%
       }{%
+        \ifYAD@hdr
+        \YAD@translation{thesistitle-hdr}%
+        \else%
         \YAD@translation{thesistitle}%
+        \fi
       }%
       \par%
       \centering%
@@ -4317,7 +4338,11 @@ This work consists of the file  yathesis.dtx
       \ifdraft{}{\vspace*{\stretch{1.5}}}%
       \par%
       {\large%
+        \ifYAD@hdr%
+        \YAD@translation{thesisdefendedby-hdr} %
+        \else%
         \YAD@translation{thesisdefendedby} %
+        \fi%
         \YAD@ifemptyorundef{\printauthor}{%
           \YAD@generic@argument@translate{author}%
           \ifYAD@noauthor%
@@ -4357,6 +4382,8 @@ This work consists of the file  yathesis.dtx
           }%
         }%
       }%
+      \ifYAD@hdr%
+      \else%
       \ifdraft{}{\vspace*{\stretch{1}}}%
       \par%
       \YAD@translation{aim}%
@@ -4370,6 +4397,7 @@ This work consists of the file  yathesis.dtx
         \YAD@translation{aimand}%
         \printcoinstitute*%
       }%
+      \fi%
       \ifdraft{}{\vspace*{\stretch{1}}}%
       \par%
       \large%
@@ -4728,9 +4756,17 @@ This work consists of the file  yathesis.dtx
   \fi
   \noindent%
   \ifthenelse{\DTLrowcount{laboratories}>1}{%
+    \ifYAD@hdr
+    \YAD@translation{prepared-at-pl-hdr}%
+    \else%
     \YAD@translation{prepared-at-pl}%
+    \fi
   }{%
+    \ifYAD@hdr
+    \YAD@translation{prepared-at-hdr}%
+    \else%
     \YAD@translation{prepared-at}%
+    \fi
   }%
   \if@tempswa%
   \vspace*{\baselineskip}%
@@ -6122,6 +6158,11 @@ This work consists of the file  yathesis.dtx
 \expression{prepared-at-pl}{Cette th\`ese a \'et\'e pr\'epar\'ee dans les
   laboratoires suivants.}{This thesis has been prepared at the following
   research units.}%
+\expression{prepared-at-hdr}{Cette \textsc{hdr} a \'et\'e pr\'epar\'ee au}{This
+  habilitation to conduct researches has been prepared at}%
+\expression{prepared-at-pl-hdr}{Cette \textsc{hdr} a \'et\'e pr\'epar\'ee dans
+  les laboratoires suivants.}{This habilitation to conduct researches has been
+  prepared at the following research units.}%
 \expression{juniorresearcher}{charg\'e de recherche}{Junior Researcher}%
 \expression{juniorresearcherfem}{charg\'ee de recherche}{Junior Researcher}%
 \expression{juniorresearcher*}{charg\'e de recherche
@@ -6142,6 +6183,8 @@ This work consists of the file  yathesis.dtx
 \expression{seniorresearcherfem}{directrice de recherche}{Senior Researcher}%
 \expression{supervisors-in-committee}{Directeur de th\`ese}{Supervisor}%
 \expression{supervisors-in-committee-pl}{Directeurs de th\`ese}{Supervisors}%
+\expression{supervisors-in-committee-hdr}{Directeur}{Supervisor}%
+\expression{supervisors-in-committee-pl-hdr}{Directeurs}{Supervisors}%
 \expression{academicfield}{Discipline}{Academic Field}%
 \expression{doctoralschool}{\'Ecole doctorale}{Doctoral School}%
 \expression{aim}{En vue de l'obtention du grade de docteur de l'}{In order
@@ -6167,9 +6210,13 @@ This work consists of the file  yathesis.dtx
 \expression{defendedon}{Soutenue le}{Defended on}%
 \expression{speciality}{Sp\'ecialit\'e}{Speciality}%
 \expression{supervisedby}{Th\`ese dirig\'ee par}{Thesis supervised by}%
+\expression{supervisedby-hdr}{Directeurs}{Supervisors}%
 \expression{thesisdefendedby}{Th\`ese pr\'esent\'ee par}{Thesis defended
   by}%
+\expression{thesisdefendedby-hdr}{Habilitation \`a diriger les recherches
+  pr\'esent\'ee par}{Habilitation to conduct researches defended by}%
 \expression{thesistitle}{Titre de la th\`ese}{Thesis Title}%
+\expression{thesistitle-hdr}{Titre de l'habilitation \`a diriger les recherches}{Habilitation to conduct researches Title}%
 \expression{inprogress}{travail en cours}{work in progress}%
 \expression{universitydepartment}{Unit\'e de recherche}{University
   Department}%
