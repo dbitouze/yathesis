@@ -682,7 +682,6 @@ This work consists of the file  yathesis.dtx
 \newcommand{\YAD@create@boolean}[1]{%
   % \yadsetup{#1/.is if = #1}
   \newbool{YAD@#1}%
-  \boolfalse{YAD@#1}%
   \yadsetup{%
     #1/.is choice,
     #1/true/.code={%
@@ -741,6 +740,7 @@ This work consists of the file  yathesis.dtx
   juniorresearcher=false,%
   juniorresearcher*=false,%
   seniorresearcher=false,%
+  male=true,%
   female=false,%
 }%
 % \end{macrocode}
@@ -2362,7 +2362,6 @@ This work consists of the file  yathesis.dtx
 }
 \newcommand*{\YAD@supervisor}[3][]{%
   \booltrue{YAD@supervisor@specified}%
-  \boolfalse{YAD@female}%
   \yadsetup{#1}%
   \ifboolexpr{%
     bool {YAD@female} or %
@@ -2390,7 +2389,6 @@ This work consists of the file  yathesis.dtx
 \newcommand*{\YAD@cosupervisor}[3][]{%
   \booltrue{YAD@supervisor@specified}%
   \booltrue{YAD@cosupervisor@or@comonitor}%
-  \boolfalse{YAD@female}%
   \yadsetup{#1}%
   \ifboolexpr{%
     bool {YAD@female} or %
@@ -2489,7 +2487,6 @@ This work consists of the file  yathesis.dtx
 % \begin{macro}{\committeepresident}
 %    \begin{macrocode}
 \newcommand*{\committeepresident}[3][]{%
-  \boolfalse{YAD@female}%
   \yadsetup{#1}%
   \ifboolexpr{%
     bool {YAD@female} or %
@@ -2569,7 +2566,6 @@ This work consists of the file  yathesis.dtx
 %
 %    \begin{macrocode}
 \newcommand{\YAD@display@staff}[1]{%
-  \boolfalse{YAD@female}%
   \DTLforeach*{#1}{%
     \YAD@committeemember@lastname=lastname,%
     \YAD@committeemember@fistname=firstname,%
