@@ -1935,12 +1935,20 @@ This work consists of the file  yathesis.dtx
 % les fichier permettant de modifier les mots et expressions clés du
 % canevas de thèse et les données de la thèse
 %    \begin{macrocode}
+\definecolor{YAD@configuration@file@color}{rgb}{0.5,0,0.5}%
+\definecolor{YAD@main@file@color}{rgb}{1,0.5,0}%
 \newcommand*{\YAD@reach@file}[2][\YAD@characteristics@file]{%
   \ifdraft{%
     \ifthenelse{\equal{\YAD@configuration@file}{#1}}{%
-      \hypersetup{urlbordercolor={0.5 0 0.5}}%
+      \hypersetup{%
+        urlbordercolor=YAD@configuration@file@color,%
+        urlcolor=YAD@configuration@file@color%
+      }%
     }{%
-      \hypersetup{urlbordercolor={1 0.5 0}}%
+      \hypersetup{%
+        urlbordercolor=YAD@main@file@color,%
+        urlcolor=YAD@main@file@color%
+      }%
     }%
     \IfFileExists{\YAD@configuration@directory/#1}{%
        \YAD@href{\YAD@configuration@directory/#1}{#2}%
