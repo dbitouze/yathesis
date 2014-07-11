@@ -185,6 +185,7 @@
 \YAD@create@boolean{notableofcontents}%
 \YAD@create@boolean{noprintbibliography}%
 \YAD@create@boolean{nofrontcover}%
+\YAD@create@boolean{hdr}%
 \def\YAD@version{inprogress}%
 \define@choicekey*{yathesis.cls}{version}%
 {draft,inprogress,inprogress*,submitted,submitted*,final}[inprogress]%
@@ -982,9 +983,21 @@
     % Nature des membres du jury
     \DTLiffirstrow{%
       \ifthenelse{\DTLrowcount{\YAD@the@staff}>1}{%
-        \YAD@translation{\YAD@the@staff-pl}%
+        \ifboolexpr{%
+          bool {YAD@hdr} and test {\ifdefstring{\YAD@the@staff}{supervisors-in-committee}}%
+        }{%
+          \YAD@translation{\YAD@the@staff-pl-hdr}%
+        }{%
+          \YAD@translation{\YAD@the@staff-pl}%
+        }%
       }{%
-        \YAD@translation{\YAD@the@staff}%
+        \ifboolexpr{%
+          bool {YAD@hdr} and test {\ifdefstring{\YAD@the@staff}{supervisors-in-committee}}%
+        }{%
+          \YAD@translation{\YAD@the@staff-hdr}%
+        }{%
+          \YAD@translation{\YAD@the@staff}%
+        }%
       }%
     }{%
     }%
@@ -1074,7 +1087,11 @@
           \DTLiffirstrow{%
             \hspace{-\tabcolsep}%
             \normalfont\bfseries%
+            \ifYAD@hdr%
+            \YAD@translation{supervisedby-hdr} %
+            \else%
             \YAD@translation{supervisedby}%
+            \fi%
           }{%
           }%
           &
@@ -2231,7 +2248,11 @@
       \noindent%
       \ifdefstrequal{\cmdKV@YAD@frametitle}{none}{%
       }{%
+        \ifYAD@hdr
+        \YAD@translation{thesistitle-hdr}%
+        \else%
         \YAD@translation{thesistitle}%
+        \fi
       }%
       \par%
       \centering%
@@ -2347,7 +2368,11 @@
       \ifdraft{}{\vspace*{\stretch{1.5}}}%
       \par%
       {\large%
+        \ifYAD@hdr%
+        \YAD@translation{thesisdefendedby-hdr} %
+        \else%
         \YAD@translation{thesisdefendedby} %
+        \fi%
         \YAD@ifemptyorundef{\printauthor}{%
           \YAD@generic@argument@translate{author}%
           \ifYAD@noauthor%
@@ -2387,6 +2412,8 @@
           }%
         }%
       }%
+      \ifYAD@hdr%
+      \else%
       \ifdraft{}{\vspace*{\stretch{1}}}%
       \par%
       \YAD@translation{aim}%
@@ -2400,6 +2427,7 @@
         \YAD@translation{aimand}%
         \printcoinstitute*%
       }%
+      \fi%
       \ifdraft{}{\vspace*{\stretch{1}}}%
       \par%
       \large%
@@ -2696,9 +2724,17 @@
   \fi
   \noindent%
   \ifthenelse{\DTLrowcount{laboratories}>1}{%
+    \ifYAD@hdr
+    \YAD@translation{prepared-at-pl-hdr}%
+    \else%
     \YAD@translation{prepared-at-pl}%
+    \fi
   }{%
+    \ifYAD@hdr
+    \YAD@translation{prepared-at-hdr}%
+    \else%
     \YAD@translation{prepared-at}%
+    \fi
   }%
   \if@tempswa%
   \vspace*{\baselineskip}%
@@ -3510,6 +3546,11 @@
 \expression{prepared-at-pl}{Cette th\`ese a \'et\'e pr\'epar\'ee dans les
   laboratoires suivants.}{This thesis has been prepared at the following
   research units.}%
+\expression{prepared-at-hdr}{Cette \textsc{hdr} a \'et\'e pr\'epar\'ee au}{This
+  habilitation to conduct researches has been prepared at}%
+\expression{prepared-at-pl-hdr}{Cette \textsc{hdr} a \'et\'e pr\'epar\'ee dans
+  les laboratoires suivants.}{This habilitation to conduct researches has been
+  prepared at the following research units.}%
 \expression{juniorresearcher}{charg\'e de recherche}{Junior Researcher}%
 \expression{juniorresearcherfem}{charg\'ee de recherche}{Junior Researcher}%
 \expression{juniorresearcher*}{charg\'e de recherche
@@ -3529,6 +3570,8 @@
 \expression{seniorresearcherfem}{directrice de recherche}{Senior Researcher}%
 \expression{supervisors-in-committee}{Directeur de th\`ese}{Supervisor}%
 \expression{supervisors-in-committee-pl}{Directeurs de th\`ese}{Supervisors}%
+\expression{supervisors-in-committee-hdr}{Directeur}{Supervisor}%
+\expression{supervisors-in-committee-pl-hdr}{Directeurs}{Supervisors}%
 \expression{academicfield}{Discipline}{Academic Field}%
 \expression{doctoralschool}{\'Ecole doctorale}{Doctoral School}%
 \expression{aim}{En vue de l'obtention du grade de docteur de l'}{In order
@@ -3552,9 +3595,13 @@
 \expression{defendedon}{Soutenue le}{Defended on}%
 \expression{speciality}{Sp\'ecialit\'e}{Speciality}%
 \expression{supervisedby}{Th\`ese dirig\'ee par}{Thesis supervised by}%
+\expression{supervisedby-hdr}{Directeurs}{Supervisors}%
 \expression{thesisdefendedby}{Th\`ese pr\'esent\'ee par}{Thesis defended
   by}%
+\expression{thesisdefendedby-hdr}{Habilitation \`a diriger les recherches
+  pr\'esent\'ee par}{Habilitation to conduct researches defended by}%
 \expression{thesistitle}{Titre de la th\`ese}{Thesis Title}%
+\expression{thesistitle-hdr}{Titre de l'habilitation \`a diriger les recherches}{Habilitation to conduct researches Title}%
 \expression{inprogress}{travail en cours}{work in progress}%
 \expression{universitydepartment}{Unit\'e de recherche}{University
   Department}%
