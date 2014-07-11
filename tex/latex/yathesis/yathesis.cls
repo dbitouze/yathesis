@@ -162,7 +162,6 @@
 \newcommand{\YAD@create@boolean}[1]{%
   % \yadsetup{#1/.is if = #1}
   \newbool{YAD@#1}%
-  \boolfalse{YAD@#1}%
   \yadsetup{%
     #1/.is choice,
     #1/true/.code={%
@@ -218,6 +217,7 @@
   juniorresearcher=false,%
   juniorresearcher*=false,%
   seniorresearcher=false,%
+  male=true,%
   female=false,%
 }%
 \yadsetup{%
@@ -226,10 +226,10 @@
   version/inprogress*/.code={\booltrue{YAD@inprogress@work@star}},%
   version/draft/.code={%
     \booltrue{YAD@draft}%
-    \ifthenelse{\equal{\XKV@classoptionslist}{}}{%
-      \edef\XKV@classoptionslist{draft}%
+    \ifthenelse{\equal{\@classoptionslist}{}}{%
+      \edef\@classoptionslist{draft}%
     }{%
-      \edef\XKV@classoptionslist{\XKV@classoptionslist,draft}%
+      \edef\@classoptionslist{\@classoptionslist,draft}%
     }%
   },%
   version/submitted/.code={%
@@ -485,12 +485,20 @@
   }{%
   }%
 }%
+\definecolor{YAD@configuration@file@color}{rgb}{0.5,0,0.5}%
+\definecolor{YAD@main@file@color}{rgb}{1,0.5,0}%
 \newcommand*{\YAD@reach@file}[2][\YAD@characteristics@file]{%
   \ifdraft{%
     \ifthenelse{\equal{\YAD@configuration@file}{#1}}{%
-      \hypersetup{urlbordercolor={0.5 0 0.5}}%
+      \hypersetup{%
+        urlbordercolor=YAD@configuration@file@color,%
+        urlcolor=YAD@configuration@file@color%
+      }%
     }{%
-      \hypersetup{urlbordercolor={1 0.5 0}}%
+      \hypersetup{%
+        urlbordercolor=YAD@main@file@color,%
+        urlcolor=YAD@main@file@color%
+      }%
     }%
     \IfFileExists{\YAD@configuration@directory/#1}{%
        \YAD@href{\YAD@configuration@directory/#1}{#2}%
@@ -642,6 +650,21 @@
 \yadsetup{name=\contentsname}%
 \yadsetup{depth=subsubsection}%
 \yadsetup{frametitle=fbox}%
+\yadsetup{reinitialize person/.style={%
+    corps=,%
+    role=,%
+    affiliation=,%
+    affiliationsecondary=,%
+    female=false,%
+    male=true,%
+    professor=false,%
+    mcf=false,%
+    mcf*=false,%
+    juniorresearcher=false,%
+    juniorresearcher*=false,%
+    seniorresearcher=false,%
+  }%
+}%
 \DTLnewdb{YAD@staffs}%
 \DTLnewrow{YAD@staffs}%
 \DTLnewdbentry{YAD@staffs}{YAD@the@staff}{referees}%
@@ -659,19 +682,6 @@
 \DTLnewdb{dedications}%
 \DTLnewdb{frontepigraphs}%
 \newcommand*{\YAD@staff}[4][]{%
-  \boolfalse{YAD@professor}%
-  \boolfalse{YAD@mcf}%
-  \boolfalse{YAD@mcf*}%
-  \boolfalse{YAD@juniorresearcher}%
-  \boolfalse{YAD@juniorresearcher*}%
-  \boolfalse{YAD@seniorresearcher}%
-  \boolfalse{YAD@female}%
-  \booltrue{YAD@male}%
-  %
-  \def\cmdKV@YAD@corps{}%
-  \def\cmdKV@YAD@role{}%
-  \def\cmdKV@YAD@affiliation{}%
-  \def\cmdKV@YAD@affiliationsecondary{}%
   \dtlexpandnewvalue%
   %
   \yadsetup{#1}%
@@ -769,6 +779,7 @@
   }{%
     \DTLnewdbentry{#4}{affiliationsecondary}{\cmdKV@YAD@affiliationsecondary}%
   }%
+  \yadsetup{reinitialize person}%
 }%
 \newcommand{\YAD@error@firstlastnames@empty}[4]{%
   \ifthenelse{\isempty{#2}}{%
@@ -798,7 +809,6 @@
 }
 \newcommand*{\YAD@supervisor}[3][]{%
   \booltrue{YAD@supervisor@specified}%
-  \boolfalse{YAD@female}%
   \yadsetup{#1}%
   \ifboolexpr{%
     bool {YAD@female} or %
@@ -821,7 +831,6 @@
 \newcommand*{\YAD@cosupervisor}[3][]{%
   \booltrue{YAD@supervisor@specified}%
   \booltrue{YAD@cosupervisor@or@comonitor}%
-  \boolfalse{YAD@female}%
   \yadsetup{#1}%
   \ifboolexpr{%
     bool {YAD@female} or %
@@ -895,7 +904,6 @@
   }%
 }%
 \newcommand*{\committeepresident}[3][]{%
-  \boolfalse{YAD@female}%
   \yadsetup{#1}%
   \ifboolexpr{%
     bool {YAD@female} or %
@@ -967,7 +975,6 @@
   }%
 }%
 \newcommand{\YAD@display@staff}[1]{%
-  \boolfalse{YAD@female}%
   \DTLforeach*{#1}{%
     \YAD@committeemember@lastname=lastname,%
     \YAD@committeemember@fistname=firstname,%
@@ -1114,9 +1121,7 @@
             }{%
               \ifthenelse{\DTLrowcount{YAD@supervisors}>1}{%
                 \ifbool{YAD@cosupervisor@or@comonitor}{%
-                  \YAD@translation{%
-                    \YAD@committeemember@role%
-                  }%
+                  \YAD@translation{\YAD@committeemember@role}%
                 }{%
                 }%
               }{%
@@ -2261,7 +2266,8 @@
       }%
       \ifundef{\printsubtitle}{%
       }{%
-        \ifdraft{}{\vspace*{\stretch{.15}}}%
+        % \ifdraft{}{\vspace*{\stretch{.15}}}%
+        \vspace*{\stretch{.15}}%
         \par%
         \centering%
         \Large\printsubtitle%
@@ -2281,21 +2287,23 @@
     bool {YAD@cover@page}%
     or (bool {YAD@nofrontcover} and test {\IfLanguageName{\YAD@mainlanguage}})%
   }{%
-        \raggedleft{%
-          \itshape%
-          \sffamily%
-          \YAD@translation{ordernumber}%
-          \IfLanguageName{french}{%
-            \FBcolonspace%
-          }{%
-          }: \printordernumber%
-        }%
+    \vspace*{\stretch{1}}%
+    \raggedleft{%
+      \itshape%
+      \sffamily%
+      \YAD@translation{ordernumber}%
+      \IfLanguageName{french}{%
+        \FBcolonspace%
       }{%
-      }%
-      \ifdraft{}{\vspace*{\stretch{.5}}}%
-      \par%
-    }{%
+      }: \printordernumber%
     }%
+  }{%
+  }%
+  % \ifdraft{}{\vspace*{\stretch{.5}}}%
+  \vspace*{\stretch{.5}}%
+  \par%
+}{%
+}%
     % \begin{minipage}[c][\YAD@otherboxheight][c]{\YAD@titleboxwidth}
     %   \ifdraft{}{\vspace*{\stretch{.25}}}%
     \begin{center}
@@ -2318,17 +2326,20 @@
       }%
       \ifundef{\printcoinstitute}{%
       }{%
-        \ifdraft{}{\vspace*{\stretch{.5}}}%
+        % \ifdraft{}{\vspace*{\stretch{.5}}}%
+        \vspace*{\stretch{.5}}%
         \par%
         \YAD@translation{coinstitute} \textbf{\textsc{\Large\printcoinstitute}}%
       }%
       \ifundef{\printcompany}{%
       }{%
-        \ifdraft{}{\vspace*{\stretch{.5}}}%
+        % \ifdraft{}{\vspace*{\stretch{.5}}}%
+        \vspace*{\stretch{.5}}%
         \par%
         \YAD@translation{company} \textbf{\textsc{\Large\printcompany}}%
       }%
-      \ifdraft{}{\vspace*{\stretch{1.5}}}%
+      % \ifdraft{}{\vspace*{\stretch{1.5}}}%
+      \vspace*{\stretch{1.5}}%
       \par%
       \YAD@translation{doctoralschool}
       \YAD@ifemptyorundef{\printdoctoralschool}{%
@@ -2348,11 +2359,13 @@
       }{%
         \textbf{\printdoctoralschool}%
       }%
-      \ifdraft{}{\vspace*{\stretch{.5}}}%
+      % \ifdraft{}{\vspace*{\stretch{.5}}}%
+      \vspace*{\stretch{.5}}%
       \par%
       \YAD@translation{universitydepartment}
       \textbf{\printlaboratory{\YAD@main@laboratory@name}{\YAD@main@laboratory@url}}%
-      \ifdraft{}{\vspace*{\stretch{1.5}}}%
+      % \ifdraft{}{\vspace*{\stretch{1.5}}}%
+      \vspace*{\stretch{1.5}}%
       \par%
       {\large%
         \YAD@translation{thesisdefendedby} %
@@ -2385,7 +2398,8 @@
           %   \textbf{\printdate}%
           % }%
         }{%
-          \ifdraft{}{\vspace*{\stretch{1}}}%
+          % \ifdraft{}{\vspace*{\stretch{1}}}%
+          \vspace*{\stretch{1}}%
           \par%
           \YAD@translation{defendedon}
           \YAD@ifemptyorundef{\printdate}{%
@@ -2395,7 +2409,8 @@
           }%
         }%
       }%
-      \ifdraft{}{\vspace*{\stretch{1}}}%
+      % \ifdraft{}{\vspace*{\stretch{1}}}%
+      \vspace*{\stretch{1}}%
       \par%
       \YAD@translation{aim}%
       \ifundef{\printinstitute}{%
@@ -2408,7 +2423,8 @@
         \YAD@translation{aimand}%
         \printcoinstitute*%
       }%
-      \ifdraft{}{\vspace*{\stretch{1}}}%
+      % \ifdraft{}{\vspace*{\stretch{1}}}%
+      \vspace*{\stretch{1}}%
       \par%
       \large%
       \YAD@translation{academicfield}
@@ -2430,7 +2446,8 @@
       }%
       \ifundef{\printspeciality}{%
       }{%
-        \ifdraft{}{\vspace*{\stretch{.5}}}%
+        % \ifdraft{}{\vspace*{\stretch{.5}}}%
+        \vspace*{\stretch{.5}}%
         \par%
         \large%
         \YAD@translation{speciality} \textbf{\printspeciality}%
@@ -2440,12 +2457,15 @@
   \begin{center}
     \ifthenelse{\equal{\YAD@frametitle}{none}}{%
     }{%
-      \ifdraft{}{\vspace*{\stretch{2}}}%
+      % \ifdraft{}{\vspace*{\stretch{2}}}%
+      \vspace*{\stretch{2}}%
     }{%
-      \ifdraft{}{\vspace*{\stretch{.25}}}%
+      % \ifdraft{}{\vspace*{\stretch{.25}}}%
+      \vspace*{\stretch{.25}}%
     }%
     \usebox{\YAD@titlebox}%
-    \ifdraft{}{\vspace*{\stretch{2}}}%
+    % \ifdraft{}{\vspace*{\stretch{2}}}%
+    \vspace*{\stretch{2}}%
   \end{center}
   \noindent%
   \begin{minipage}[c][\YAD@otherboxheight][c]{\YAD@titleboxwidth}
@@ -2459,11 +2479,13 @@
     }{%
       \YAD@committee@tabular%
     }%
-    \ifdraft{}{\vspace*{\stretch{.1}}}%
+    % \ifdraft{}{\vspace*{\stretch{.1}}}%
+    \vspace*{\stretch{.1}}%
   \end{minipage}
   \ifthenelse{\equal{\YAD@frametitle}{none}}{%
   }{%
-    \ifdraft{}{\vspace*{\stretch{2}}}%
+    % \ifdraft{}{\vspace*{\stretch{2}}}%
+    \vspace*{\stretch{2}}%
   }{%
   }%
   \ifbool{YAD@supervisor@specified}{%
