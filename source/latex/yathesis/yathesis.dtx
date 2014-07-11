@@ -772,10 +772,10 @@ This work consists of the file  yathesis.dtx
   version/inprogress*/.code={\booltrue{YAD@inprogress@work@star}},%
   version/draft/.code={%
     \booltrue{YAD@draft}%
-    \ifthenelse{\equal{\XKV@classoptionslist}{}}{%
-      \edef\XKV@classoptionslist{draft}%
+    \ifthenelse{\equal{\@classoptionslist}{}}{%
+      \edef\@classoptionslist{draft}%
     }{%
-      \edef\XKV@classoptionslist{\XKV@classoptionslist,draft}%
+      \edef\@classoptionslist{\@classoptionslist,draft}%
     }%
   },%
   version/submitted/.code={%
