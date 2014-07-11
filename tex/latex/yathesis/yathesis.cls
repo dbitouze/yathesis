@@ -15,7 +15,7 @@
 \def\filedate{2014/06/08}
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesClass{yathesis}[\filedate\space\fileversion\space Yet another class for writing thesis (DB)]
-\RequirePackage{xkeyval}[2012/10/14]%
+\RequirePackage{pgfopts}[2011/06/02]%
 \RequirePackage{etoolbox}[2011/01/03]%
 \RequirePackage{xpatch}[2012/10/02]%
 \AtEndPreamble{%
@@ -25,44 +25,41 @@
 \RequirePackage{hopatch}[2012/05/28]%
 \RequirePackage{xifthen}[2009/04/17]%
 \newif\if@nolink\@nolinkfalse
-\newtoggle{YAD@cosupervisor@or@comonitor}
-\newtoggle{YAD@inprogress@work@star}
-\newtoggle{YAD@inprogress@work}
-\newtoggle{YAD@submitted@work}
-\newtoggle{YAD@submitted@work@star}
-\newtoggle{YAD@final@work}
-\newtoggle{YAD@draft}
-\newtoggle{YAD@nowarning}
-\toggletrue{YAD@nowarning}
-\newtoggle{YAD@noerror}
-\toggletrue{YAD@noerror}
-\newtoggle{YAD@output@paper}
-\newtoggle{YAD@output@paper@star}
-\newtoggle{YAD@in@footnote}
-\newtoggle{YAD@second@title}
-\newtoggle{YAD@second@abstract}
-\newtoggle{YAD@maketitle@used}
-\newtoggle{YAD@keywords@used}
-\newtoggle{YAD@introduction@used}
-\newtoggle{YAD@introduction@empty}
-\newtoggle{YAD@conclusion@used}
-\newtoggle{YAD@conclusion@empty}
-\newtoggle{YAD@makeabstract@used}
-\newtoggle{YAD@second@abstract@used}
-\newtoggle{YAD@abstract@used}
-\newtoggle{YAD@main@abstract@empty}
-\newtoggle{YAD@second@abstract@empty}
-\newtoggle{YAD@tableofcontents@used}
-\newtoggle{YAD@printbibliography@used}
-\newtoggle{YAD@two@titles}
-\newtoggle{YAD@cover@page}
-\newtoggle{YAD@supervisor@specified}
-\newtoggle{YAD@symbols@isolated}
-\newtoggle{YAD@logo@before}
-\newtoggle{YAD@valid@day}
-\newtoggle{YAD@valid@month}
-\newtoggle{YAD@valid@year}
-\newtoggle{YAD@mainmatter@used}
+\newbool{YAD@nolink}
+\newbool{YAD@cosupervisor@or@comonitor}
+\newbool{YAD@inprogress@work@star}
+\newbool{YAD@inprogress@work}
+\newbool{YAD@submitted@work}
+\newbool{YAD@submitted@work@star}
+\newbool{YAD@final@work}
+\newbool{YAD@draft}
+\newbool{YAD@output@paper}
+\newbool{YAD@output@paper@star}
+\newbool{YAD@in@footnote}
+\newbool{YAD@second@title}
+\newbool{YAD@second@abstract}
+\newbool{YAD@maketitle@used}
+\newbool{YAD@keywords@used}
+\newbool{YAD@introduction@used}
+\newbool{YAD@introduction@empty}
+\newbool{YAD@conclusion@used}
+\newbool{YAD@conclusion@empty}
+\newbool{YAD@makeabstract@used}
+\newbool{YAD@second@abstract@used}
+\newbool{YAD@abstract@used}
+\newbool{YAD@main@abstract@empty}
+\newbool{YAD@second@abstract@empty}
+\newbool{YAD@tableofcontents@used}
+\newbool{YAD@printbibliography@used}
+\newbool{YAD@two@titles}
+\newbool{YAD@cover@page}
+\newbool{YAD@supervisor@specified}
+\newbool{YAD@symbols@isolated}
+\newbool{YAD@logo@before}
+\newbool{YAD@valid@day}
+\newbool{YAD@valid@month}
+\newbool{YAD@valid@year}
+\newbool{YAD@mainmatter@used}
 \newlength{\YAD@logo@height}
 \newlength{\YAD@titleboxheight}%
 \newlength{\YAD@titleboxwidth}%
@@ -88,8 +85,7 @@
 \def\YAD@secondarykeywords{\YAD@generic@argument@translate{keywords}}%
 \def\YAD@global@sepcorpaffil@french{}%
 \def\YAD@global@sepcorpaffil@english{}%
-\DeclareOption{nolink}{\YAD@nolinktrue}%
-\DeclareOption{link}{\YAD@nolinkfalse}%
+\def\YAD@frametitle@set{}%
 \newcommand{\YAD@generic@text}{%
   Un texte generique risque d'etre affiche a la place.\MessageBreak%
 }%
@@ -108,49 +104,50 @@
 }%
 \newcommand{\YAD@ClassError}{\@ifstar{\@tempswatrue\@YAD@ClassError}{\@tempswafalse\@YAD@ClassError}}
 \newcommand{\@YAD@ClassError}[3][]{%
-  \ifYAD@noerror%
-  \else%
-  \ifboolexpr{%
-    togl {YAD@inprogress@work}%
-    or togl {YAD@inprogress@work@star}%
-    or togl {YAD@draft}%
-    or togl {YAD@noerror}%
+  \ifbool{YAD@noerror}{%
   }{%
-  }{%
-    \ifthenelse{\isempty{#1}}{%
-      \ClassError{yathesis}{%
-        #2%
-      }{%
-        #3%
-        \MessageBreak
-        \if@tempswa%
-        \else%
-        \YAD@generic@text%
-        \fi%
-        \YAD@extra@help@text%
-      }%
+    \ifboolexpr{%
+      bool {YAD@inprogress@work}%
+      or bool {YAD@inprogress@work@star}%
+      or bool {YAD@draft}%
+      or bool {YAD@noerror}%
     }{%
-      \ClassError{yathesis}{%
-        #2%
+    }{%
+      \ifthenelse{\isempty{#1}}{%
+        \ClassError{yathesis}{%
+          #2%
+        }{%
+          #3%
+          \MessageBreak
+          \if@tempswa%
+          \else%
+          \YAD@generic@text%
+          \fi%
+          \YAD@extra@help@text%
+        }%
       }{%
-        #3%
-        \MessageBreak
-        \if@tempswa%
-        \else%
-        \YAD@generic@text%
-        \fi%
-        \YAD@quiet@text{#1}%
-        \YAD@extra@help@text%
+        \ClassError{yathesis}{%
+          #2%
+        }{%
+          #3%
+          \MessageBreak
+          \if@tempswa%
+          \else%
+          \YAD@generic@text%
+          \fi%
+          \YAD@quiet@text{#1}%
+          \YAD@extra@help@text%
+        }%
       }%
     }%
   }%
-  \fi }%
+}%
 \newcommand{\YAD@ClassWarningNoLine}[1]{%
   \ifboolexpr{%
-    togl {YAD@inprogress@work}%
-    or togl {YAD@inprogress@work@star}%
-    or togl {YAD@draft}%
-    or togl {YAD@nowarning}%
+    bool {YAD@inprogress@work}%
+    or bool {YAD@inprogress@work@star}%
+    or bool {YAD@draft}%
+    or bool {YAD@nowarning}%
   }{%
     \stepcounter{YAD@warnings}%
   }{%
@@ -159,16 +156,33 @@
     }%
   }%
 }%
+\pgfkeys{/yad/.is family}
+\pgfkeys{/yad/.cd}
+\def\yadsetup{\pgfqkeys{/yad}}
 \newcommand{\YAD@create@boolean}[1]{%
-  \define@boolkey+{yathesis.cls}[YAD@]{#1}[true]{%
-  }{%
-    \ClassWarningNoLine{yathesis}{%
-      Valeur passee a la cle `#1' non valide :\MessageBreak%
-      cette valeur ne peut etre que `true' ou `false'%
-    }%
+  % \yadsetup{#1/.is if = #1}
+  \newbool{YAD@#1}%
+  \boolfalse{YAD@#1}%
+  \yadsetup{%
+    #1/.is choice,
+    #1/true/.code={%
+      \booltrue{YAD@#1}%
+    },
+    #1/false/.code={%
+      \boolfalse{YAD@#1}%
+    },
+    #1/.initial=false,
+    #1/.default=true,
   }%
+  % }{%
+  %   \ClassWarningNoLine{yathesis}{%
+  %     Valeur passee a la cle `#1' non valide :\MessageBreak%
+  %     cette valeur ne peut etre que `true' ou `false'%
+  %   }%
+  % }%
 }%
 \YAD@create@boolean{noerror}%
+\YAD@create@boolean{nowarning}%
 \YAD@create@boolean{noauthor}%
 \YAD@create@boolean{notitle}%
 \YAD@create@boolean{noacademicfield}%
@@ -185,44 +199,100 @@
 \YAD@create@boolean{notableofcontents}%
 \YAD@create@boolean{noprintbibliography}%
 \YAD@create@boolean{nofrontcover}%
-\def\YAD@version{inprogress}%
-\define@choicekey*{yathesis.cls}{version}%
-{draft,inprogress,inprogress*,submitted,submitted*,final}[inprogress]%
-{\def\YAD@version{#1}}%
-\def\YAD@output{screen}%
-\define@choicekey*{yathesis.cls}{output}%
-{screen,paper,paper*}[screen]%
-{\def\YAD@output{#1}}%
+\yadsetup{noerror=true}%
+\booltrue{YAD@cover@page}%
+\YAD@create@boolean{nologo}%
+\YAD@create@boolean{professor}%
+\YAD@create@boolean{mcf}%
+\YAD@create@boolean{mcf*}%
+\YAD@create@boolean{juniorresearcher}%
+\YAD@create@boolean{juniorresearcher*}%
+\YAD@create@boolean{seniorresearcher}%
+\YAD@create@boolean{male}%
+\YAD@create@boolean{female}%
+\yadsetup{%
+  nologo=false,%
+  professor=false,%
+  mcf=false,%
+  mcf*=false,%
+  juniorresearcher=false,%
+  juniorresearcher*=false,%
+  seniorresearcher=false,%
+  female=false,%
+}%
+\yadsetup{%
+  version/.is choice,%
+  version/inprogress/.code={\booltrue{YAD@inprogress@work}},%
+  version/inprogress*/.code={\booltrue{YAD@inprogress@work@star}},%
+  version/draft/.code={%
+    \booltrue{YAD@draft}%
+    \ifthenelse{\equal{\XKV@classoptionslist}{}}{%
+      \edef\XKV@classoptionslist{draft}%
+    }{%
+      \edef\XKV@classoptionslist{\XKV@classoptionslist,draft}%
+    }%
+  },%
+  version/submitted/.code={%
+    \boolfalse{YAD@nowarning}%
+    \boolfalse{YAD@noerror}%
+    \booltrue{YAD@submitted@work}%
+  },%
+  version/submitted*/.code={%
+    \boolfalse{YAD@nowarning}%
+    \boolfalse{YAD@noerror}%
+    \booltrue{YAD@submitted@work@star}%
+  },%
+  version/final/.code={%
+    \boolfalse{YAD@nowarning}%
+    \boolfalse{YAD@noerror}%
+    \booltrue{YAD@final@work}%
+  },%
+  version/.default=final%
+}%
+\yadsetup{%
+  output/.is choice,%
+  output/paper/.code={\booltrue{YAD@output@paper}},%
+  output/paper*/.code={%
+    \booltrue{YAD@output@paper}%
+    \booltrue{YAD@output@paper@star}%
+  },%
+  output/screen/.code={},%
+  output/.default=screen%
+}%
 \def\YAD@interligne{single}%
-\define@choicekey*{yathesis.cls}{space}{single,onehalf,double}[single]%
-{\def\YAD@interligne{#1}}%
-\DeclareOptionX{mainlanguage}{%
-  \ifthenelse{\isempty{#1}}{%
-  }{%
-    \def\YAD@mainlanguage{#1}%
-  }%
+\yadsetup{%
+  space/.is choice,%
+  space/single/.code={\def\YAD@interligne{single}},%
+  space/onehalf/.code={\def\YAD@interligne{onehalf}},%
+  space/double/.code={\def\YAD@interligne{double}},%
+  space/.default=single%
 }%
-\DeclareOptionX{secnumdepth}{%
-  \ifthenelse{\isempty{#1}}{%
-  }{%
-    \def\YAD@secnumdepth{#1}%
-  }%
+\yadsetup{%
+  mainlanguage/.store in=\YAD@mainlanguage,%
+  secnumdepth/.store in=\YAD@secnumdepth,%
+  sepcorpaffilfrench/.store in=\YAD@global@sepcorpaffil@french,%
+  sepcorpaffilenglish/.store in=\YAD@global@sepcorpaffil@english,%
+  secnumdepth/.store in=\YAD@secnumdepth,%
+  frametitle/.store in=\YAD@frametitle@set,%
+  chap-style/.code={%
+    \def\YAD@fncychapstyle{#1}%
+    \PassOptionsToPackage{#1}{fncychap}%
+  },%
 }%
-\DeclareOptionX{logoheight}[1.5cm]{\setlength\YAD@logo@height{#1}}%
-\DeclareOptionX{sepcorpaffilfrench}[]{\def\YAD@global@sepcorpaffil@french{#1}}%
-\DeclareOptionX{sepcorpaffilenglish}[ at ]{\def\YAD@global@sepcorpaffil@english{#1}}%
-\DeclareOptionX{chap-style}[PetersLenny]{%
-  \def\YAD@fncychapstyle{#1}%
-  \PassOptionsToPackage{#1}{fncychap}%
+\yadsetup{%
+  sepcorpaffilenglish={\ at\ },%
+  chap-style=PetersLenny,%
 }%
-\DeclareOptionX*{\PassOptionsToClass{\CurrentOption}{book}}%
-\ExecuteOptionsX{logoheight}%
-\ExecuteOptionsX{sepcorpaffilfrench}%
-\ExecuteOptionsX{sepcorpaffilenglish}%
-\ExecuteOptionsX{mainlanguage}%
-\ExecuteOptionsX{secnumdepth}%
-\ExecuteOptionsX{chap-style}%
-\ProcessOptionsX\relax%
+\yadsetup{%
+  xcolor/.code={\PassOptionsToPackage{#1}{xcolor}},%
+  geometry/.code={\PassOptionsToPackage{#1}{geometry}},%
+  tcolorbox/.code={\PassOptionsToPackage{#1}{tcolorbox}},%
+}%
+\pgfkeys{%
+  .unknown/.code =
+  \expandafter\PassOptionsToClass\expandafter{\pgfkeyscurrentname}{book}
+}%
+\ProcessPgfOptions{/yad}%
 \ifthenelse{\equal{\YAD@mainlanguage}{english}}{%
   \def\YAD@secondarylanguage{french}%
 }{%
@@ -235,43 +305,6 @@
   \edef\@classoptionslist{\YAD@secondarylanguage,\YAD@mainlanguage}%
 }{%
   \edef\@classoptionslist{\YAD@secondarylanguage,\YAD@mainlanguage,\@classoptionslist}%
-}%
-\ifthenelse{\equal{\YAD@version}{inprogress}}{%
-  \toggletrue{YAD@inprogress@work}%
-}{%
-  \ifthenelse{\equal{\YAD@version}{inprogress*}}{%
-    \toggletrue{YAD@inprogress@work@star}%
-  }{%
-    \ifthenelse{\equal{\YAD@version}{draft}}{%
-      \toggletrue{YAD@draft}%
-      \ifthenelse{\equal{\@classoptionslist}{}}{%
-        \edef\@classoptionslist{draft}%
-      }{%
-        \edef\@classoptionslist{\@classoptionslist,draft}%
-      }%
-    }{%
-      \togglefalse{YAD@nowarning}%
-      \togglefalse{YAD@noerror}%
-      \ifthenelse{\equal{\YAD@version}{submitted}}{%
-        \toggletrue{YAD@submitted@work}%
-      }{%
-        \ifthenelse{\equal{\YAD@version}{submitted*}}{%
-          \toggletrue{YAD@submitted@work@star}%
-        }{%
-          \toggletrue{YAD@final@work}%
-        }%
-      }%
-    }%
-  }%
-}%
-\ifthenelse{\equal{\YAD@output}{paper}}{%
-  \toggletrue{YAD@output@paper}%
-}{%
-}%
-\ifthenelse{\equal{\YAD@output}{paper*}}{%
-  \toggletrue{YAD@output@paper}%
-  \toggletrue{YAD@output@paper@star}%
-}{%
 }%
 \LoadClass{book}%
 \RequirePackage[a4paper]{geometry}[2010/09/12]%
@@ -313,7 +346,7 @@
   \geometry{showframe}%
   \setlength\overfullrule{5pt}%
 }{%
-  \iftoggle{YAD@inprogress@work@star}{%
+  \ifbool{YAD@inprogress@work@star}{%
     \RequirePackage{draftwatermark}[2006/06/30]%
   }{%
   }%
@@ -378,11 +411,11 @@
   }%
 }%
 \AfterEndDocument{%
-  \iftoggle{YAD@nowarning}{%
+  \ifbool{YAD@nowarning}{%
     \ifboolexpr{%
-      togl {YAD@inprogress@work}%
-      or togl {YAD@inprogress@work@star}%
-      or togl {YAD@draft}%
+      bool {YAD@inprogress@work}%
+      or bool {YAD@inprogress@work@star}%
+      or bool {YAD@draft}%
     }{%
     }{%
       \ifnumgreater{\value{YAD@warnings}}{0}{%
@@ -471,7 +504,7 @@
   \newcommand{\YAD@href}[3][]{%
     \href[#1]{#2}{#3}%
   }%
-\iftoggle{YAD@output@paper}{%
+\ifbool{YAD@output@paper}{%
   \AtEndPreamble{%
     \hypersetup{colorlinks=false}%
   }%
@@ -479,10 +512,10 @@
     #3%
   }%
   \let\YAD@ori@footnote\footnote%
-  \renewcommand{\footnote}[1]{\toggletrue{YAD@in@footnote}\YAD@ori@footnote{#1}\togglefalse{YAD@in@footnote}}%
+  \renewcommand{\footnote}[1]{\booltrue{YAD@in@footnote}\YAD@ori@footnote{#1}\boolfalse{YAD@in@footnote}}%
   \renewcommand*\url[1]{\nolinkurl{#1}}%
   \renewcommand*\href[3][]{%
-    \iftoggle{YAD@in@footnote}{%
+    \ifbool{YAD@in@footnote}{%
       #3 (\url{#2})
     }{%
       #3\footnote{\url{#2}}
@@ -494,7 +527,7 @@
   \SetWatermarkColor{gray!10}%
 }{%
 }%
-\iftoggle{YAD@inprogress@work@star}{%
+\ifbool{YAD@inprogress@work@star}{%
   \SetWatermarkFontSize{3cm}%
   \AfterEndPreamble{\translatelet\YAD@trinprogress{lbl-inprogress}}%
   \SetWatermarkText{\MakeUppercase{\YAD@trinprogress}}%
@@ -582,73 +615,33 @@
 \newcommand*{\YAD@generic@argument@translate}[1]{%
   \texorpdfstring{\YAD@generic@argument{\translate{meta-#1}}}{<#1>}%
 }%
-\newcommand{\YAD@frametitle@set}{}%
-\define@cmdkeys{YAD}{%
-  role,%
-  corporation,%
-  corps,%
-  url,%
-  logoheight,%
-  logo,%
-  address,%
-  telephone,%
-  fax,%
-  email,%
-  % distinction,%
-  % award,%
-  affiliation,%
-  sepcorpaffilfrench,%
-  affiliationsecondary,%
-  sepcorpaffilenglish,%
-  name,%
-  depth,%
-  frametitle%
-}[]%
-\define@boolkeys{YAD}{%
-  nologo,%
-  professor,%
-  mcf,%
-  mcf*,%
-  juniorresearcher,%
-  juniorresearcher*,%
-  seniorresearcher,%
-  male,%
-  female%
-}[true]%
-\presetkeys{YAD}{%
-  role=,%
-  corporation=,%
-  corps=,%
-  url=,%
-  logoheight=\YAD@logo@height,%
-  logo=,%
-  address=,%
-  telephone=,%
-  fax=,%
-  email=,%
-  % distinction=,%
-  % award=,%
-  affiliation=,%
-  sepcorpaffilfrench=\YAD@global@sepcorpaffil@french,%
-  affiliationsecondary=,%
-  sepcorpaffilenglish=\YAD@global@sepcorpaffil@english,%
-  name=\contentsname,%
-  depth=subsubsection,%
-  nologo=false,%
-  professor=false,%
-  mcf=false,%
-  mcf*=false,%
-  juniorresearcher=false,%
-  juniorresearcher*=false,%
-  seniorresearcher=false,%
-  male=true,%
-  female=false,%
-  frametitle=fbox%
-}{}%
-\newcommand*{\yadsetup}[1]{%
-  \presetkeys{YAD}{#1}{}%
+\yadsetup{%
+  role/.store in=\cmdKV@YAD@role,%
+  corporation/.store in=\cmdKV@YAD@corps,%
+  corps/.store in=\cmdKV@YAD@corps,%
+  url/.store in=\cmdKV@YAD@url,%
+  logoheight/.store in=\cmdKV@YAD@logoheight,%
+  logo/.store in=\cmdKV@YAD@logo,%
+  address/.store in=\cmdKV@YAD@address,%
+  telephone/.store in=\cmdKV@YAD@telephone,%
+  fax/.store in=\cmdKV@YAD@fax,%
+  email/.store in=\cmdKV@YAD@email,%
+  % distinction/.store in=\cmdKV@YAD@distinction,%
+  % award/.store in=\cmdKV@YAD@award,%
+  affiliation/.store in=\cmdKV@YAD@affiliation,%
+  affiliationsecondary/.store in=\cmdKV@YAD@affiliationsecondary,%
+  sepcorpaffilfrench/.store in=\cmdKV@YAD@sepcorpaffilfrench,%
+  sepcorpaffilenglish/.store in=\cmdKV@YAD@sepcorpaffilenglish,%
+  name/.store in=\cmdKV@YAD@name,%
+  depth/.store in=\cmdKV@YAD@depth,%
+  frametitle/.store in=\cmdKV@YADframetitle,%
 }%
-\@onlypreamble\yadsetup%
+\yadsetup{logoheight=\YAD@logo@height}%
+\yadsetup{sepcorpaffilfrench=\YAD@global@sepcorpaffil@french}%
+\yadsetup{sepcorpaffilenglish=\YAD@global@sepcorpaffil@english}%
+\yadsetup{name=\contentsname}%
+\yadsetup{depth=subsubsection}%
+\yadsetup{frametitle=fbox}%
 \DTLnewdb{YAD@staffs}%
 \DTLnewrow{YAD@staffs}%
 \DTLnewdbentry{YAD@staffs}{YAD@the@staff}{referees}%
@@ -666,96 +659,112 @@
 \DTLnewdb{dedications}%
 \DTLnewdb{frontepigraphs}%
 \newcommand*{\YAD@staff}[4][]{%
+  \boolfalse{YAD@professor}%
+  \boolfalse{YAD@mcf}%
+  \boolfalse{YAD@mcf*}%
+  \boolfalse{YAD@juniorresearcher}%
+  \boolfalse{YAD@juniorresearcher*}%
+  \boolfalse{YAD@seniorresearcher}%
+  \boolfalse{YAD@female}%
+  \booltrue{YAD@male}%
+  %
+  \def\cmdKV@YAD@corps{}%
+  \def\cmdKV@YAD@role{}%
+  \def\cmdKV@YAD@affiliation{}%
+  \def\cmdKV@YAD@affiliationsecondary{}%
   \dtlexpandnewvalue%
-  \setkeys{YAD}{#1}%
-  \ifboolexpr{ bool {KV@YAD@professor} }{%
+  %
+  \yadsetup{#1}%
+  %
+  \ifbool{YAD@professor}{%
     \ifboolexpr{%
-      bool {KV@YAD@female} or %
-      not bool {KV@YAD@male}%
+      bool {YAD@female} or %
+      not bool {YAD@male}%
     }{%
-      \setkeys{YAD}{corps=professorfem,#1}%
+      \yadsetup{corps=professorfem,#1}%
     }{%
-      \setkeys{YAD}{corps=professor,#1}%
+      \yadsetup{corps=professor,#1}%
     }%
   }{%
   }%
-  \ifboolexpr{ bool {KV@YAD@mcf} }{%
-    \setkeys{YAD}{corps=mcf,#1}%
+  \ifboolexpr{ bool {YAD@mcf} }{%
+    \yadsetup{corps=mcf,#1}%
   }{%
   }%
-  \ifboolexpr{ bool {KV@YAD@mcf*} }{%
-    \setkeys{YAD}{corps=mcf*,#1}%
+  \ifboolexpr{ bool {YAD@mcf*} }{%
+    \yadsetup{corps=mcf*,#1}%
   }{%
   }%
-  \ifboolexpr{ bool {KV@YAD@juniorresearcher} }{%
+  \ifboolexpr{ bool {YAD@juniorresearcher} }{%
     \ifboolexpr{%
-      bool {KV@YAD@female} or %
-      not bool {KV@YAD@male}%
+      bool {YAD@female} or %
+      not bool {YAD@male}%
     }{%
-      \setkeys{YAD}{corps=juniorresearcherfem,#1}%
+      \yadsetup{corps=juniorresearcherfem,#1}%
     }{%
-      \setkeys{YAD}{corps=juniorresearcher,#1}%
+      \yadsetup{corps=juniorresearcher,#1}%
     }%
   }{%
   }%
-  \ifboolexpr{ bool {KV@YAD@juniorresearcher*} }{%
+  \ifboolexpr{ bool {YAD@juniorresearcher*} }{%
     \ifboolexpr{%
-      bool {KV@YAD@female} or %
-      not bool {KV@YAD@male}%
+      bool {YAD@female} or %
+      not bool {YAD@male}%
     }{%
-      \setkeys{YAD}{corps=juniorresearcherfem*,#1}%
+      \yadsetup{corps=juniorresearcherfem*,#1}%
     }{%
-      \setkeys{YAD}{corps=juniorresearcher*,#1}%
+      \yadsetup{corps=juniorresearcher*,#1}%
     }%
   }{%
   }%
-  \ifboolexpr{ bool {KV@YAD@seniorresearcher} }{%
+  \ifboolexpr{ bool {YAD@seniorresearcher} }{%
     \ifboolexpr{%
-      bool {KV@YAD@female} or %
-      not bool {KV@YAD@male}%
+      bool {YAD@female} or %
+      not bool {YAD@male}%
     }{%
-      \setkeys{YAD}{corps=seniorresearcherfem,#1}%
+      \yadsetup{corps=seniorresearcherfem,#1}%
     }{%
-      \setkeys{YAD}{corps=seniorresearcher,#1}%
+      \yadsetup{corps=seniorresearcher,#1}%
     }%
   }{%
   }%
-  \ifthenelse{\equal{\cmdKV@YAD@corporation}{}}{%
-  }{%
-    \ifthenelse{\equal{\cmdKV@YAD@corps}{}}{%
-      \setkeys{YAD}{#1,corps=\cmdKV@YAD@corporation}%
-    }{%
-    }%
-  }%
+  %
+  % \ifthenelse{\equal{\cmdKV@YAD@corporation}{}}{%
+  % }{%
+  %   \ifthenelse{\equal{\cmdKV@YAD@corps}{}}{%
+  %     \yadsetup{#1,corps=\cmdKV@YAD@corporation}%
+  %   }{%
+  %   }%
+  % }%
   \DTLnewrow{#4}%
   \DTLnewdbentry{#4}{firstname}{#2}%
   \DTLnewdbentry{#4}{lastname}{#3}%
-  \ifthenelse{\equal{\cmdKV@YAD@role}{}}{%
+  \YAD@ifemptyorundef{\cmdKV@YAD@role}{%
     \DTLnewdbentry{#4}{role}{}%
   }{%
     \DTLnewdbentry{#4}{role}{\cmdKV@YAD@role}%
   }%
-  \ifthenelse{\equal{\cmdKV@YAD@corps}{}}{%
+  \YAD@ifemptyorundef{\cmdKV@YAD@corps}{%
     \DTLnewdbentry{#4}{corps}{}%
   }{%
     \DTLnewdbentry{#4}{corps}{\cmdKV@YAD@corps}%
   }%
-  \ifthenelse{\equal{\cmdKV@YAD@sepcorpaffilfrench}{}}{%
+  \YAD@ifemptyorundef{\cmdKV@YAD@sepcorpaffilfrench}{%
     \DTLnewdbentry{#4}{sepcorpaffilfrench}{\YAD@global@sepcorpaffil@french}%
   }{%
     \DTLnewdbentry{#4}{sepcorpaffilfrench}{\cmdKV@YAD@sepcorpaffilfrench}%
   }%
-  \ifthenelse{\equal{\cmdKV@YAD@sepcorpaffilenglish}{}}{%
+  \YAD@ifemptyorundef{\cmdKV@YAD@sepcorpaffilenglish}{%
     \DTLnewdbentry{#4}{sepcorpaffilenglish}{\YAD@global@sepcorpaffil@english}%
   }{%
     \DTLnewdbentry{#4}{sepcorpaffilenglish}{\cmdKV@YAD@sepcorpaffilenglish}%
   }%
-  \ifthenelse{\equal{\cmdKV@YAD@affiliation}{}}{%
+  \YAD@ifemptyorundef{\cmdKV@YAD@affiliation}{%
     \DTLnewdbentry{#4}{affiliation}{}%
   }{%
     \DTLnewdbentry{#4}{affiliation}{\cmdKV@YAD@affiliation}%
   }%
-  \ifthenelse{\equal{\cmdKV@YAD@affiliationsecondary}{}}{%
+  \YAD@ifemptyorundef{\cmdKV@YAD@affiliationsecondary}{%
     \DTLnewdbentry{#4}{affiliationsecondary}{\cmdKV@YAD@affiliation}%
   }{%
     \DTLnewdbentry{#4}{affiliationsecondary}{\cmdKV@YAD@affiliationsecondary}%
@@ -788,11 +797,12 @@
   \@ifstar{\@tempswatrue\YAD@supervisor}{\@tempswafalse\YAD@supervisor}%
 }
 \newcommand*{\YAD@supervisor}[3][]{%
-  \toggletrue{YAD@supervisor@specified}%
-  \setkeys{YAD}{#1}%
+  \booltrue{YAD@supervisor@specified}%
+  \boolfalse{YAD@female}%
+  \yadsetup{#1}%
   \ifboolexpr{%
-    bool {KV@YAD@female} or %
-    not bool {KV@YAD@male}%
+    bool {YAD@female} or %
+    not bool {YAD@male}%
   }{%
     \YAD@error@firstlastnames@empty{de la directrice de these}{#2}{#3}{\supervisor}%
     \YAD@staff[role=supervisorfem,#1]{#2}{#3}{YAD@supervisors}%
@@ -804,18 +814,18 @@
   \else%
   \YAD@staff[role=supervisor,#1]{#2}{#3}{supervisors-in-committee}%
   \fi%
-  \setkeys{YAD}{#1,male}%
 }%
 \newcommand{\cosupervisor}{%
   \@ifstar{\@tempswatrue\YAD@cosupervisor}{\@tempswafalse\YAD@cosupervisor}%
 }
 \newcommand*{\YAD@cosupervisor}[3][]{%
-  \toggletrue{YAD@supervisor@specified}%
-  \toggletrue{YAD@cosupervisor@or@comonitor}%
-  \setkeys{YAD}{#1}%
+  \booltrue{YAD@supervisor@specified}%
+  \booltrue{YAD@cosupervisor@or@comonitor}%
+  \boolfalse{YAD@female}%
+  \yadsetup{#1}%
   \ifboolexpr{%
-    bool {KV@YAD@female} or %
-    not bool {KV@YAD@male}%
+    bool {YAD@female} or %
+    not bool {YAD@male}%
   }{%
     \YAD@error@firstlastnames@empty{de la co-directrice de these}{#2}{#3}{\cosupervisor}%
     \YAD@staff[role=cosupervisorfem,#1]{#2}{#3}{YAD@supervisors}%
@@ -827,18 +837,17 @@
   \else%
   \YAD@staff[role=cosupervisor,#1]{#2}{#3}{supervisors-in-committee}%
   \fi%
-  \setkeys{YAD}{#1,male}%
 }%
 \newcommand{\comonitor}{%
   \@ifstar{\@tempswatrue\YAD@comonitor}{\@tempswafalse\YAD@comonitor}%
 }
 \newcommand*{\YAD@comonitor}[3][]{%
-  \toggletrue{YAD@supervisor@specified}%
-  \toggletrue{YAD@cosupervisor@or@comonitor}%
-  \setkeys{YAD}{#1}%
+  \booltrue{YAD@supervisor@specified}%
+  \booltrue{YAD@cosupervisor@or@comonitor}%
+  \yadsetup{#1}%
   \ifboolexpr{%
-    bool {KV@YAD@female} or %
-    not bool {KV@YAD@male}%
+    bool {YAD@female} or %
+    not bool {YAD@male}%
   }{%
     \YAD@error@firstlastnames@empty{de la co-encadrante de these}{#2}{#3}{\comonitor}%
     \YAD@staff[role=comonitorfem,#1]{#2}{#3}{YAD@supervisors}%
@@ -850,17 +859,16 @@
   \else%
   \YAD@staff[role=comonitor,#1]{#2}{#3}{supervisors-in-committee}%
   \fi%
-  \setkeys{YAD}{#1,male}%
 }%
 \newcommand*{\guest}[3][]{%
   \YAD@staff[#1]{#2}{#3}{guests}%
   \YAD@error@firstlastnames@empty{de l'invite}{#2}{#3}{\guest}%
 }%
 \newcommand*{\referee}[3][]{%
-  \setkeys{YAD}{#1}%
+  \yadsetup{#1}%
   \ifboolexpr{%
-    bool {KV@YAD@female} or %
-    not bool {KV@YAD@male}%
+    bool {YAD@female} or %
+    not bool {YAD@male}%
   }{%
     \YAD@error@firstlastnames@empty{de la rapportrice}{#2}{#3}{\referee}%
   }{%
@@ -869,7 +877,7 @@
   \YAD@staff[#1]{#2}{#3}{referees}%
 }%
 \newcommand*{\examiner}[3][]{%
-  \setkeys{YAD}{#1}%
+  \yadsetup{#1}%
   \YAD@staff[#1]{#2}{#3}{examiners}%
   \ifboolexpr{%
     test {\ifdefstring{\cmdKV@YAD@role}{committeepresident}} or %
@@ -877,21 +885,21 @@
   }{%
   }{%
     \ifboolexpr{%
-      bool {KV@YAD@female} or %
-      not bool {KV@YAD@male} or %
+      bool {YAD@female} or %
+      not bool {YAD@male} or %
     }{%
       \YAD@error@firstlastnames@empty{de l'examinatrice}{#2}{#3}{\examiner}%
     }{%
       \YAD@error@firstlastnames@empty{de l'examinateur}{#2}{#3}{\examiner}%
     }%
   }%
-  \setkeys{YAD}{#1,male}%
 }%
 \newcommand*{\committeepresident}[3][]{%
-  \setkeys{YAD}{#1}%
+  \boolfalse{YAD@female}%
+  \yadsetup{#1}%
   \ifboolexpr{%
-    bool {KV@YAD@female} or %
-    not bool {KV@YAD@male}%
+    bool {YAD@female} or %
+    not bool {YAD@male}%
   }{%
     \YAD@error@firstlastnames@empty{de la presidente du jury}{#2}{#3}{\committeepresident}%
     \examiner[role=committeepresidentfem,#1]{#2}{#3}%
@@ -899,7 +907,6 @@
     \YAD@error@firstlastnames@empty{du president du jury}{#2}{#3}{\committeepresident}%
     \examiner[role=committeepresident,#1]{#2}{#3}%
   }%
-  \setkeys{YAD}{#1,male}%
 }%
 \newcommand*{\YAD@al}{ \`a l'}%
 \newcommand*{\YAD@au}{ au }%
@@ -960,6 +967,7 @@
   }%
 }%
 \newcommand{\YAD@display@staff}[1]{%
+  \boolfalse{YAD@female}%
   \DTLforeach*{#1}{%
     \YAD@committeemember@lastname=lastname,%
     \YAD@committeemember@fistname=firstname,%
@@ -1105,7 +1113,7 @@
               }%
             }{%
               \ifthenelse{\DTLrowcount{YAD@supervisors}>1}{%
-                \iftoggle{YAD@cosupervisor@or@comonitor}{%
+                \ifbool{YAD@cosupervisor@or@comonitor}{%
                   \YAD@translation{%
                     \YAD@committeemember@role%
                   }%
@@ -1235,7 +1243,7 @@
       ##2%
     }%
   }%
-  \setkeys{YAD}{##1}%
+  \yadsetup{##1}%
   \ifthenelse{\equal{\cmdKV@YAD@url}{}}{%
     \ifdraft{%
       \YAD@reach@file{%
@@ -1263,7 +1271,7 @@
   }%
 }%
       \csdef{print#2address}{%
-        \setkeys{YAD}{##1}%
+        \yadsetup{##1}%
         \ifthenelse{\equal{\cmdKV@YAD@address}{}}{%
           \YAD@reach@file{\YAD@generic@argument@translate{address#2}}%
         }{%
@@ -1272,7 +1280,7 @@
         %
       }%
       \csdef{print#2telephone}{%
-        \setkeys{YAD}{##1}%
+        \yadsetup{##1}%
         \ifthenelse{\equal{\cmdKV@YAD@telephone}{}}{%
           \YAD@reach@file{\YAD@generic@argument@translate{telephone#2}}%
         }{%
@@ -1281,7 +1289,7 @@
         %
       }%
       \csdef{print#2fax}{%
-        \setkeys{YAD}{##1}%
+        \yadsetup{##1}%
         \ifthenelse{\equal{\cmdKV@YAD@fax}{}}{%
           \YAD@reach@file{\YAD@generic@argument@translate{fax#2}}%
         }{%
@@ -1306,14 +1314,14 @@
     }%
   }%
 }%
-      \setkeys{YAD}{##1}%
-      \ifKV@YAD@nologo%
-      \else%
-      \csdef{print#2logo}{%
+      \yadsetup{##1}%
+      \ifbool{YAD@nologo}{%
+      }{%
+        \csdef{print#2logo}{%
         \@ifstar{\@tempswatrue\csuse{YAD@starnostar@print#2logo}}{\@tempswafalse\csuse{YAD@starnostar@print#2logo}}%
       }%
       \csdef{YAD@starnostar@print#2logo}{%
-        \setkeys{YAD}{##1}%
+        \yadsetup{##1}%
         \renewcommand*\YAD@logo{%
           \ifthenelse{\equal{\cmdKV@YAD@logo}{}}{%
             \YAD@reach@file{\YAD@generic@argument@translate{logo#2}}%
@@ -1336,11 +1344,10 @@
         \fi%
         \fi%
       }%
-      \fi%
-      %
     }%
-  }{%
   }%
+}{%
+}%
 \ifthenelse{\equal{#1}{bilingue}}{%
   \ifthenelse{\isnamedefined{#2}}{%
   }{%
@@ -1387,8 +1394,8 @@
             }%
           }{%
             \ifthenelse{\isempty{##1}}{%
-              \iftoggle{YAD@two@titles}{%
-              \YAD@ClassError[no#2]{%
+              \ifbool{YAD@two@titles}{%
+                \YAD@ClassError[no#2]{%
                   Argument optionnel de \csuse{#2}\space vide%
                 }{%
                   La commande \csuse{#2}\space a ete utilisee\MessageBreak%
@@ -1396,8 +1403,8 @@
                   etre soit non vide soit pas utilise%
                 }%
                 \YAD@reach@file{\YAD@generic@argument@translate{#2}}%
-                }{%
-                }%
+              }{%
+              }%
             }{%
               \YAD@reach@file{##1}%
             }%
@@ -1408,7 +1415,7 @@
       }{%
         \ifthenelse{\equal{#2}{subject}}{%
         }{%
-          \toggletrue{YAD@two@titles}%
+          \booltrue{YAD@two@titles}%
         }%
       }%
     }%
@@ -1526,8 +1533,8 @@
   \csxdef{YAD@monthdate}{#2}%
   \csxdef{YAD@yeardate}{#3}%
   \ifboolexpr{%
-    togl {YAD@submitted@work}%
-    or togl {YAD@submitted@work@star}%
+    bool {YAD@submitted@work}%
+    or bool {YAD@submitted@work@star}%
   }{%
   }{%
     \ifboolexpr{%
@@ -1559,7 +1566,7 @@
           ce doit etre un nombre entier entre 1 et 31.%
         }%
       }{%
-        \toggletrue{YAD@valid@day}%
+        \booltrue{YAD@valid@day}%
       }%
     }%
     % month
@@ -1594,7 +1601,7 @@
           1 (janvier) et 12 (decembre).%
         }%
       }{%
-        \toggletrue{YAD@valid@month}%
+        \booltrue{YAD@valid@month}%
       }%
     }%
     % year
@@ -1625,13 +1632,13 @@
       %   un nombre entier (superieur ou egal a \number\year).%
       % }%
       % }{%
-      \toggletrue{YAD@valid@year}%
+      \booltrue{YAD@valid@year}%
       % }%
     }%
     \ifboolexpr{%
-      togl {YAD@valid@day}%
-      and togl {YAD@valid@month}%
-      and togl {YAD@valid@year}%
+      bool {YAD@valid@day}%
+      and bool {YAD@valid@month}%
+      and bool {YAD@valid@year}%
     }{%
       \csdef{printdate}{%
         % \setdatenumber{\YAD@yeardate}{\YAD@monthdate}{\YAD@daydate}%
@@ -1656,28 +1663,28 @@
         \YAD@generic@argument@translate{date}%
       }%
     }%
-    \togglefalse{YAD@valid@day}%
-    \togglefalse{YAD@valid@month}%
-    \togglefalse{YAD@valid@year}%
+    \boolfalse{YAD@valid@day}%
+    \boolfalse{YAD@valid@month}%
+    \boolfalse{YAD@valid@year}%
   }%
 }%
 \AtEndDocument{%
   \YAD@ifemptyorundef{\printdate}{%
-    \ifYAD@nodate%
-    \else%
-    \ifboolexpr{%
-      togl {YAD@submitted@work}%
-      or togl {YAD@submitted@work@star}%
+    \ifbool{YAD@nodate}{%
     }{%
-    }{%
-      \YAD@ClassError[nodate]{%
-        Date de soutenance non specifiee%
+      \ifboolexpr{%
+        bool {YAD@submitted@work}%
+        or bool {YAD@submitted@work@star}%
       }{%
-        La commande \protect\date\space n'a pas ete utilisee\MessageBreak%
-        (celle-ci est requise).%
+      }{%
+        \YAD@ClassError[nodate]{%
+          Date de soutenance non specifiee%
+        }{%
+          La commande \protect\date\space n'a pas ete utilisee\MessageBreak%
+          (celle-ci est requise).%
+        }%
       }%
     }%
-    \fi%
   }{%
   }%
 }%
@@ -1712,8 +1719,8 @@
   }%
 }%
 \ifboolexpr{%
-  togl {YAD@inprogress@work}%
-  or togl {YAD@inprogress@work@star}%
+  bool {YAD@inprogress@work}%
+  or bool {YAD@inprogress@work@star}%
 }{%
   \newcommand*{\YAD@setfoot}{%
     \footrule%
@@ -1721,7 +1728,7 @@
   }%
 }{%
   \ifboolexpr{%
-    togl {YAD@submitted@work@star}%
+    bool {YAD@submitted@work@star}%
   }{%
     \newcommand*{\YAD@setfoot}{%
       \footrule%
@@ -1745,7 +1752,7 @@
 \let\YAD@ORI@tableofcontents\tableofcontents%
 \newif\if@YAD@knownsect
 \renewcommand{\tableofcontents}{%
-  \toggletrue{YAD@tableofcontents@used}%
+  \booltrue{YAD@tableofcontents@used}%
   \YAD@clearemptydoublepage%
   \phantomsection%
   \let\cmdKV@YAD@name\contentsname%
@@ -1755,7 +1762,7 @@
   \YAD@ORI@tableofcontents%
 }%
 \newcommand\tableofcontents@YAD@with@argument[1][]{%
-  \setkeys{YAD}{#1}%
+  \yadsetup{#1}%
   \renewcommand{\setcounter}[2]{}%
   %
   \ifthenelse{\equal{\cmdKV@YAD@depth}{none}}{%
@@ -1860,29 +1867,29 @@
   {%
     \ifdef{\printpreslogo}{%
       \printpreslogo%
-      \toggletrue{YAD@logo@before}%
+      \booltrue{YAD@logo@before}%
     }{%
     }%
     \ifdef{\printinstitutelogo}{%
-      \iftoggle{YAD@logo@before}{%
+      \ifbool{YAD@logo@before}{%
         \hspace{\stretch{1}}%
       }{%
       }%
       \printinstitutelogo%
-      \toggletrue{YAD@logo@before}%
+      \booltrue{YAD@logo@before}%
     }{%
     }%
     \ifdef{\printcoinstitutelogo}{%
-      \iftoggle{YAD@logo@before}{%
+      \ifbool{YAD@logo@before}{%
         \hspace{\stretch{1}}%
       }{%
       }%
       \printcoinstitutelogo%
-      \toggletrue{YAD@logo@before}%
+      \booltrue{YAD@logo@before}%
     }{%
     }%
     \ifdef{\printcompanylogo}{%
-      \iftoggle{YAD@logo@before}{%
+      \ifbool{YAD@logo@before}{%
         \hspace{\stretch{1}}%
       }{%
       }%
@@ -1971,12 +1978,12 @@
   \YAD@setfoot%
 }%
 \xapptocmd{\mainmatter}{%
-  \toggletrue{YAD@mainmatter@used}%
+  \booltrue{YAD@mainmatter@used}%
   \pagestyle{mainmatter}%
 }{}{}%
 \AtEndDocument{%
   \ifboolexpr{%
-    togl {YAD@mainmatter@used}%
+    bool {YAD@mainmatter@used}%
   }{%
   }{%
     \YAD@ClassError*{%
@@ -2136,16 +2143,16 @@
 \newcommand*{\YAD@laboratory@name@temp}[2]{%
   \ifundef{#1}{%
     \YAD@reach@file{\YAD@generic@argument@translate{laboratory}}%
-    \ifYAD@nolaboratory%
-    \else%
-    \YAD@ClassError[nolaboratory]{%
-      Nom du laboratoire de la these non specifie ou vide%
+    \ifbool{YAD@nolaboratory}{%
     }{%
-      La commande \protect\laboratory\space n'a pas ete utilisee\MessageBreak%
-      (celle-ci est requise) ou son 1er argument est vide\MessageBreak%
-      (celui-ci doit etre renseigne).%
+      \YAD@ClassError[nolaboratory]{%
+        Nom du laboratoire de la these non specifie ou vide%
+      }{%
+        La commande \protect\laboratory\space n'a pas ete utilisee\MessageBreak%
+        (celle-ci est requise) ou son 1er argument est vide\MessageBreak%
+        (celui-ci doit etre renseigne).%
+      }%
     }%
-    \fi%
   }{%
     \ifdraft{%
       \YAD@reach@file{%
@@ -2167,24 +2174,20 @@
 \newcommand*{\printlaboratoryaddress}[1]{%
   \ifundef{#1}{%
     \YAD@reach@file{\YAD@generic@argument@translate{laboratoryaddress}}%
-    \ifYAD@nolaboratoryadress%
-    \else%
-    \YAD@ClassError[nolaboratoryadress]{%
-      Adresse du laboratoire non specifiee ou vide%
+    \ifbool{YAD@nolaboratoryadress}{%
     }{%
-      La commande \protect\laboratory\space n'a pas ete utilisee\MessageBreak%
-      (celle-ci est requise) ou son 2e argument est vide\MessageBreak%
-      (celui-ci doit etre renseigne).%
+      \YAD@ClassError[nolaboratoryadress]{%
+        Adresse du laboratoire non specifiee ou vide%
+      }{%
+        La commande \protect\laboratory\space n'a pas ete utilisee\MessageBreak%
+        (celle-ci est requise) ou son 2e argument est vide\MessageBreak%
+        (celui-ci doit etre renseigne).%
+      }%
     }%
-    \fi%
   }{%
     \YAD@reach@file{#1}%
   }%
 }%
-\ifYAD@nofrontcover%
-\else%
-\toggletrue{YAD@cover@page}%
-\fi%
 \let\origtcb@shadow@prepare=\tcb@shadow@prepare%
 \def\tcb@shadow@prepare#1#2{%
   \origtcb@shadow@prepare{#1}{#2}%
@@ -2199,7 +2202,7 @@
 }{%
 }%
 \renewcommand{\maketitle}{%
-  \toggletrue{YAD@maketitle@used}%
+  \booltrue{YAD@maketitle@used}%
   \setlength{\fboxsep}{10pt}%
   \setlength{\YAD@titleboxwidth}{\linewidth-2\fboxsep-2\fboxrule}%
   \renewcommand*{\do}[1]{%
@@ -2207,19 +2210,24 @@
   \pagestyle{titles}%
 \begingroup%
 \expandafter\selectlanguage\expandafter{##1}%
+\ifthenelse{\equal{\YAD@frametitle@set}{}}{%
+  \gdef\YAD@frametitle{\cmdKV@YAD@frametitle}%
+}{%
+  \gdef\YAD@frametitle{\YAD@frametitle@set}%
+}%
   \begin{lrbox}{\YAD@titlebox}
-    \ifdefstrequal{\cmdKV@YAD@frametitle}{none}{%
+    \ifthenelse{\equal{\YAD@frametitle}{none}}{%
     }{%
       \tcbset{colback=white,boxsep=3pt,boxrule=0.4pt,arc=0mm}%
-      \ifthenelse{\equal{\cmdKV@YAD@frametitle}{shadowbox}}{%
+      \ifthenelse{\equal{\YAD@frametitle}{shadowbox}}{%
         \tcbset{enhanced,drop shadow southeast={black,opacity=1}}%
       }{%
-        \ifthenelse{\equal{\cmdKV@YAD@frametitle}{ovalbox}}{%
+        \ifthenelse{\equal{\YAD@frametitle}{ovalbox}}{%
           \tcbset{arc=3mm}%
         }{%
-          \ifthenelse{\equal{\cmdKV@YAD@frametitle}{fbox}}{%
+          \ifthenelse{\equal{\YAD@frametitle}{fbox}}{%
           }{%
-            \tcbset{code={\pgfkeysalsofrom\cmdKV@YAD@frametitle}}%
+            \tcbset{code={\expandafter\pgfkeysalsofrom\YAD@frametitle}}%
           }%
         }%
       }%
@@ -2229,7 +2237,7 @@
     \begin{minipage}{\linewidth-2\fboxsep-2\fboxrule}
       \onehalfspacing%
       \noindent%
-      \ifdefstrequal{\cmdKV@YAD@frametitle}{none}{%
+      \ifthenelse{\equal{\YAD@frametitle}{none}}{%
       }{%
         \YAD@translation{thesistitle}%
       }%
@@ -2238,16 +2246,16 @@
       \Huge\bfseries%
       \YAD@ifemptyorundef{\printtitle}{%
         \YAD@generic@argument@translate{title}%
-        \ifYAD@notitle%
-        \else%
-        \YAD@ClassError[notitle]{%
-          Titre de la these non specifie%
+        \ifbool{YAD@notitle}{%
         }{%
-          La commande \protect\title\space n'a pas ete utilisee\MessageBreak%
-          (celle-ci est requise) ou son argument obligatoire est vide\MessageBreak%
-          (celui-ci doit etre renseigne).%
+          \YAD@ClassError[notitle]{%
+            Titre de la these non specifie%
+          }{%
+            La commande \protect\title\space n'a pas ete utilisee\MessageBreak%
+            (celle-ci est requise) ou son argument obligatoire est vide\MessageBreak%
+            (celui-ci doit etre renseigne).%
+          }%
         }%
-        \fi%
       }{%
         \printtitle%
       }%
@@ -2259,7 +2267,7 @@
         \Large\printsubtitle%
       }%
     \end{minipage}%
-    \ifdefstrequal{\cmdKV@YAD@frametitle}{none}{%
+    \ifthenelse{\equal{\YAD@frametitle}{none}}{%
     }{%
     \end{tcolorbox}
   }%
@@ -2270,7 +2278,7 @@
   \noindent%
   \ifcsdef{printordernumber}{%
   \ifboolexpr{%
-    togl {YAD@cover@page}%
+    bool {YAD@cover@page}%
     or (bool {YAD@nofrontcover} and test {\IfLanguageName{\YAD@mainlanguage}})%
   }{%
         \raggedleft{%
@@ -2293,18 +2301,18 @@
     \begin{center}
       \YAD@ifemptyorundef{\printinstitute}{%
         \YAD@generic@argument@translate{institute}%
-        \ifYAD@noinstitute%
-        \else%
-        \YAD@ClassError[noinstitute]{%
-          Institut de la these non specifie%
+        \ifbool{YAD@noinstitute}{%
         }{%
-          La commande \protect\institute\space n'a pas ete
-          utilisee\MessageBreak%
-          (celle-ci est requise) ou son argument obligatoire est
-          vide\MessageBreak%
-          (celui-ci doit etre renseigne).%
+          \YAD@ClassError[noinstitute]{%
+            Institut de la these non specifie%
+          }{%
+            La commande \protect\institute\space n'a pas ete
+            utilisee\MessageBreak%
+            (celle-ci est requise) ou son argument obligatoire est
+            vide\MessageBreak%
+            (celui-ci doit etre renseigne).%
+          }%
         }%
-        \fi%
       }{%
         \YAD@translation{institute} \textbf{\textsc{\Large\printinstitute}}%
       }%
@@ -2325,18 +2333,18 @@
       \YAD@translation{doctoralschool}
       \YAD@ifemptyorundef{\printdoctoralschool}{%
         \YAD@generic@argument@translate{doctoralschool}%
-        \ifYAD@nodoctoralschool%
-        \else%
-        \YAD@ClassError[nodoctoralschool]{%
-          Ecole doctorale de la these non specifiee%
+        \ifbool{YAD@nodoctoralschool}{%
         }{%
-          la commande \protect\doctoralschool\space n'a pas ete
-          utilisee\MessageBreak%
-          (celle-ci est requise) ou son argument obligatoire est
-          vide\MessageBreak%
-          (celui-ci doit etre renseigne).%
+          \YAD@ClassError[nodoctoralschool]{%
+            Ecole doctorale de la these non specifiee%
+          }{%
+            la commande \protect\doctoralschool\space n'a pas ete
+            utilisee\MessageBreak%
+            (celle-ci est requise) ou son argument obligatoire est
+            vide\MessageBreak%
+            (celui-ci doit etre renseigne).%
+          }%
         }%
-        \fi%
       }{%
         \textbf{\printdoctoralschool}%
       }%
@@ -2350,23 +2358,23 @@
         \YAD@translation{thesisdefendedby} %
         \YAD@ifemptyorundef{\printauthor}{%
           \YAD@generic@argument@translate{author}%
-          \ifYAD@noauthor%
-          \else%
-          \YAD@ClassError[noauthor]{%
-            Auteur de la these non specifie%
+          \ifbool{YAD@noauthor}{%
           }{%
-            La commande \protect\author\space n'a pas ete utilisee (celle-ci
-            est requise)\MessageBreak%
-            ou ses 2 premiers arguments obligatoires sont vides\MessageBreak%
-            (ceux-ci doivent etre renseignes).%
+            \YAD@ClassError[noauthor]{%
+              Auteur de la these non specifie%
+            }{%
+              La commande \protect\author\space n'a pas ete utilisee (celle-ci
+              est requise)\MessageBreak%
+              ou ses 2 premiers arguments obligatoires sont vides\MessageBreak%
+              (ceux-ci doivent etre renseignes).%
+            }%
           }%
-          \fi%
         }{%
           \textbf{\printauthor}%
         }%
       \ifboolexpr{%
-          togl {YAD@submitted@work}%
-          or togl {YAD@submitted@work@star}%
+          bool {YAD@submitted@work}%
+          or bool {YAD@submitted@work@star}%
         }{%
           % \ifdraft{}{\vspace*{\stretch{1}}}%
           % \par%
@@ -2407,16 +2415,16 @@
       %
       \YAD@ifemptyorundef{\printacademicfield}{%
         \YAD@generic@argument@translate{academicfield}%
-        \ifYAD@noacademicfield%
-        \else%
-        \YAD@ClassError[noacademicfield]{%
-          Champ disciplinaire de la these non specifie%
+        \ifbool{YAD@noacademicfield}{%
         }{%
-          La commande \protect\academicfield\space n'a pas ete utilisee
-          (celle-ci est requise)\MessageBreak%
-          ou son argument obligatoire est vide (celui-ci doit etre renseigne).%
+          \YAD@ClassError[noacademicfield]{%
+            Champ disciplinaire de la these non specifie%
+          }{%
+            La commande \protect\academicfield\space n'a pas ete utilisee
+            (celle-ci est requise)\MessageBreak%
+            ou son argument obligatoire est vide (celui-ci doit etre renseigne).%
+          }%
         }%
-        \fi%
       }{%
         \textbf{\printacademicfield}%
       }%
@@ -2430,26 +2438,22 @@
     \end{center}
   % \end{minipage}%
   \begin{center}
-    \ifdefstrequal{\cmdKV@YAD@frametitle}{none}{%
+    \ifthenelse{\equal{\YAD@frametitle}{none}}{%
     }{%
       \ifdraft{}{\vspace*{\stretch{2}}}%
     }{%
       \ifdraft{}{\vspace*{\stretch{.25}}}%
     }%
     \usebox{\YAD@titlebox}%
-    \ifdefstrequal{\cmdKV@YAD@frametitle}{none}{%
-    }{%
-      \ifdraft{}{\vspace*{\stretch{2}}}%
-    }{%
-    }%
+    \ifdraft{}{\vspace*{\stretch{2}}}%
   \end{center}
   \noindent%
   \begin{minipage}[c][\YAD@otherboxheight][c]{\YAD@titleboxwidth}
     \YAD@supervisors@tabular%
     \par%
     \ifboolexpr{%
-      togl {YAD@submitted@work}%
-      or togl {YAD@submitted@work@star}%
+      bool {YAD@submitted@work}%
+      or bool {YAD@submitted@work@star}%
     }{%
       \vphantom{\YAD@committee@tabular}%
     }{%
@@ -2457,48 +2461,48 @@
     }%
     \ifdraft{}{\vspace*{\stretch{.1}}}%
   \end{minipage}
-  \ifdefstrequal{\cmdKV@YAD@frametitle}{none}{%
+  \ifthenelse{\equal{\YAD@frametitle}{none}}{%
   }{%
     \ifdraft{}{\vspace*{\stretch{2}}}%
   }{%
   }%
-  \iftoggle{YAD@supervisor@specified}{%
+  \ifbool{YAD@supervisor@specified}{%
   }{%
-    \ifYAD@nosupervisor%
-    \else%
-    \YAD@ClassError*[nosupervisor]{%
-      Directeur de these non specifie%
+    \ifbool{YAD@nosupervisor}{%
     }{%
-      La commande \protect\supervisor\space n'a pas ete utilisee\MessageBreak%
-      (celle-ci est requise) ou ses arguments obligatoires sont
-      vides\MessageBreak%
-      (ceux-ci doivent etre renseignes).%
+      \YAD@ClassError*[nosupervisor]{%
+        Directeur de these non specifie%
+      }{%
+        La commande \protect\supervisor\space n'a pas ete utilisee\MessageBreak%
+        (celle-ci est requise) ou ses arguments obligatoires sont
+        vides\MessageBreak%
+        (ceux-ci doivent etre renseignes).%
+      }%
     }%
-    \fi%
   }%
 \YAD@addpagenumber%
 \endgroup%
-\togglefalse{YAD@cover@page}%
+\boolfalse{YAD@cover@page}%
 }%
 \expandafter\docsvlist{\YAD@mainlanguage}%
-\iftoggle{YAD@two@titles}{%
-  \toggletrue{YAD@second@title}%
+\ifbool{YAD@two@titles}{%
+  \booltrue{YAD@second@title}%
   \ifthenelse{\equal{\YAD@mainlanguage}{french}}{%
-    \ifYAD@nofrontcover%
-    \docsvlist{english}%
-    \else%
-    \docsvlist{french,english}%
-    \fi%
+    \ifbool{YAD@nofrontcover}{%
+      \docsvlist{english}%
+    }{%
+      \docsvlist{french,english}%
+    }%
   }{%
-    \ifYAD@nofrontcover%
-    \docsvlist{french}%
-    \else%
-    \docsvlist{english,french}%
-    \fi%
+    \ifbool{YAD@nofrontcover}{%
+      \docsvlist{french}%
+    }{%
+      \docsvlist{english,french}%
+    }%
   }%
 }{%
 }%
-\ifthenelse{\equal{\cmdKV@YAD@frametitle}{shadowbox}}{%
+\ifthenelse{\equal{\YAD@frametitle}{shadowbox}}{%
   \let\tcb@shadow@prepare=\origtcb@shadow@prepare%
 }{%
 }%
@@ -2507,7 +2511,7 @@
 }%
 \AtEndDocument{%
   \ifboolexpr{%
-    togl {YAD@maketitle@used}%
+    bool {YAD@maketitle@used}%
     or bool {YAD@nomaketitle}%
   }{%
   }{%
@@ -2520,7 +2524,7 @@
   }%
 }%
 \newcommand{\keywords}[2]{%
-  \toggletrue{YAD@keywords@used}%
+  \booltrue{YAD@keywords@used}%
   \def\YAD@mainkeywords{#1}%
   \def\YAD@secondarykeywords{#2}%
   \ifthenelse{\isempty{#1}}{%
@@ -2548,16 +2552,16 @@
   }%
 }%
 \AtEndDocument{%
-  \nottoggle{YAD@keywords@used}{%
-    \ifYAD@nokeywords%
-    \else%
-    \YAD@ClassError[nokeywords]{%
-      Commande \protect\keywords\space non utilisee%
+  \notbool{YAD@keywords@used}{%
+    \ifbool{YAD@nokeywords}{%
     }{%
-      La commande \protect\keywords\space n'a pas ete utilisee. Celle-ci est
-      requise.%
+      \YAD@ClassError[nokeywords]{%
+        Commande \protect\keywords\space non utilisee%
+      }{%
+        La commande \protect\keywords\space n'a pas ete utilisee. Celle-ci est
+        requise.%
+      }%
     }%
-    \fi%
   }{%
     \ifdefempty{\YAD@mainkeywords}{%
       \YAD@ClassError[nokeywords]{%
@@ -2622,32 +2626,32 @@
 \newcommand{\laboratory}[3][]{%
   \DTLnewrow{laboratories}%
   \dtlexpandnewvalue%
-  \setkeys{YAD}{#1}%
+  \yadsetup{#1}%
   \DTLnewdbentry{laboratories}{name}{#2}%
   \DTLnewdbentry{laboratories}{address}{#3}%
-  \ifYAD@nolaboratory%
-  \else%
-  \ifthenelse{\isempty{#2}}{%
-    \YAD@ClassError[nolaboratory]{%
-      Nom du laboratoire de la these vide%
-    }{%
-      Le 1er argument obligatoire de la commande
-      \protect\laboratory\MessageBreak%
-      est vide (celui-ci doit etre renseigne).%
-    }%
+  \ifbool{YAD@nolaboratory}{%
   }{%
-  }%
-  \ifthenelse{\isempty{#3}}{%
-    \YAD@ClassError[nolaboratory]{%
-      Adresse du laboratoire de la these vide%
+    \ifthenelse{\isempty{#2}}{%
+      \YAD@ClassError[nolaboratory]{%
+        Nom du laboratoire de la these vide%
+      }{%
+        Le 1er argument obligatoire de la commande
+        \protect\laboratory\MessageBreak%
+        est vide (celui-ci doit etre renseigne).%
+      }%
     }{%
-      Le 2e argument obligatoire de la commande
-      \protect\laboratory\MessageBreak%
-      est vide (celui-ci doit etre renseigne).%
     }%
-  }{%
+    \ifthenelse{\isempty{#3}}{%
+      \YAD@ClassError[nolaboratory]{%
+        Adresse du laboratoire de la these vide%
+      }{%
+        Le 2e argument obligatoire de la commande
+        \protect\laboratory\MessageBreak%
+        est vide (celui-ci doit etre renseigne).%
+      }%
+    }{%
+    }%
   }%
-  \fi%
   \ifthenelse{\equal{\cmdKV@YAD@logo}{}}{%
     \DTLnewdbentry{laboratories}{logo}{}%
   }{%
@@ -2844,9 +2848,9 @@
 \newcommand{\YAD@absract}[1]{%
   \ifthenelse{\isempty{#1}}{
     \ifnumcomp{\value{YAD@abstracts}}{>}{0}{%
-      \global\toggletrue{YAD@second@abstract@empty}%
+      \global\booltrue{YAD@second@abstract@empty}%
     }{%
-      \global\toggletrue{YAD@main@abstract@empty}%
+      \global\booltrue{YAD@main@abstract@empty}%
     }%
   }{%
     \begin{minipage}{\linewidth}
@@ -2856,9 +2860,9 @@
   }%
 }
 \newenvironment{abstract}[1][\abstractname]{%
-  \global\toggletrue{YAD@abstract@used}%
+  \global\booltrue{YAD@abstract@used}%
   \ifnumcomp{\value{YAD@abstracts}}{>}{0}{%
-    \global\toggletrue{YAD@second@abstract@used}%
+    \global\booltrue{YAD@second@abstract@used}%
     \csgdef{YAD@abstractname@secondarylanguage}{#1}%
     \lrbox{\YAD@abstract@secondarylanguage}%
     \expandafter\selectlanguage\expandafter{\YAD@secondarylanguage}%
@@ -2897,8 +2901,8 @@
     }%
     \par%
     \ifboolexpr{%
-      togl {YAD@abstract@used}%
-      and not togl {YAD@main@abstract@empty}%
+      bool {YAD@abstract@used}%
+      and not bool {YAD@main@abstract@empty}%
     }{%
       \usebox{\YAD@abstract@mainlanguage}%
     }{%
@@ -2913,7 +2917,7 @@
       \end{description}
     }%
   \end{minipage}%
-  \iftoggle{YAD@second@abstract@used}{%
+  \ifbool{YAD@second@abstract@used}{%
     \expandafter\selectlanguage\expandafter{\YAD@secondarylanguage}%
     \\[.5\baselineskip]%
     \YAD@abstract@page@rule%
@@ -2940,8 +2944,8 @@
       }%
       \par%
       \ifboolexpr{%
-        togl {YAD@abstract@used}%
-        and not togl {YAD@second@abstract@empty}%
+        bool {YAD@abstract@used}%
+        and not bool {YAD@second@abstract@empty}%
       }{%
         \usebox{\YAD@abstract@secondarylanguage}%
       }{%
@@ -2983,19 +2987,19 @@
   \pagestyle{preliminary}%
   \phantomsection%
   \addcontentsline{toc}{chapter}{\abstractname}%
-  \toggletrue{YAD@makeabstract@used}%
+  \booltrue{YAD@makeabstract@used}%
   \bgroup%
   % \setlength{\footskip}{-15pt}%
   \setfootrule{0pt}%
   \setfoot[][%
   \ifboolexpr{%
-    togl {YAD@inprogress@work}%
-    or togl {YAD@inprogress@work@star}%
+    bool {YAD@inprogress@work}%
+    or bool {YAD@inprogress@work@star}%
   }{%
     \textsc{\translate{lbl-inprogressfoottext} \today}%
   }{%
     \ifboolexpr{%
-      togl {YAD@submitted@work@star}%
+      bool {YAD@submitted@work@star}%
     }{%
       \textsc{\translate{lbl-submittedfoottext} \today}%
     }{%
@@ -3015,22 +3019,22 @@
 }%
 \newcommand{\YAD@abstract@page@rule}[1][black]{\bgroup\color{#1}\noindent\rule[2pt]{\linewidth}{2pt}\egroup}
 \AtEndDocument{%
-  \iftoggle{YAD@makeabstract@used}{%
+  \ifbool{YAD@makeabstract@used}{%
   }{%
-    \ifYAD@nomakeabstract%
-    \else%
-    \YAD@ClassError*[nomakeabstract]{%
-      Commande \protect\makeabstract\space non utilisee%
+    \ifbool{YAD@nomakeabstract}{%
     }{%
-      La commande \protect\makeabstract\space n'a pas ete\MessageBreak%
-      utilisee. Celle-ci est requise.%
+      \YAD@ClassError*[nomakeabstract]{%
+        Commande \protect\makeabstract\space non utilisee%
+      }{%
+        La commande \protect\makeabstract\space n'a pas ete\MessageBreak%
+        utilisee. Celle-ci est requise.%
+      }%
     }%
-    \fi%
   }%
 }%
 \AtEndDocument{%
-  \iftoggle{YAD@abstract@used}{%
-    \iftoggle{YAD@main@abstract@empty}{%
+  \ifbool{YAD@abstract@used}{%
+    \ifbool{YAD@main@abstract@empty}{%
       \ifnumcomp{\value{YAD@abstracts}}{>}{1}{%
         \YAD@ClassError[noabstract]{%
           Contenu de la 1re occurrence de `abstract' vide%
@@ -3050,7 +3054,7 @@
       }%
     }{%
     }%
-    \iftoggle{YAD@second@abstract@empty}{%
+    \ifbool{YAD@second@abstract@empty}{%
       \YAD@ClassError[noabstract]{%
         Contenu de la 2e occurrence de `abstract' vide%
       }{%
@@ -3061,14 +3065,14 @@
     }{%
     }%
   }{%
-    \ifYAD@noabstract%
-    \else%
-    \YAD@ClassError[noabstract]{%
-      Environnement `abstract' non utilise%
+    \ifbool{YAD@noabstract}{%
     }{%
-      L'environnement `abstract' n'a pas ete utilise. Celui-ci est requis.%
+      \YAD@ClassError[noabstract]{%
+        Environnement `abstract' non utilise%
+      }{%
+        L'environnement `abstract' n'a pas ete utilise. Celui-ci est requis.%
+      }%
     }%
-    \fi%
   }%
 }%
 \newcommand{\makebackcover}{%
@@ -3213,7 +3217,7 @@
   \renewcommand\chapter{%
     \YAD@clearemptydoublepage%
     \phantomsection%
-    \iftoggle{YAD@output@paper}{%
+    \ifbool{YAD@output@paper}{%
     }{%
       \bookmarksetup{startatroot}%
     }%
@@ -3317,7 +3321,7 @@
     }%
     \let\YAD@printbibliography@ORI\printbibliography%
     \renewcommand{\printbibliography}[1][]{%
-      \toggletrue{YAD@printbibliography@used}%
+      \booltrue{YAD@printbibliography@used}%
       \pagestyle{biblio}%
       \YAD@printbibliography@ORI[heading=bibintoc,#1]%
       \pagestyle{ordinary}%
@@ -3326,22 +3330,22 @@
   }%
 }%
 \AtEndDocument{%
-  \iftoggle{YAD@printbibliography@used}{%
+  \ifbool{YAD@printbibliography@used}{%
   }{%
-    \ifYAD@noprintbibliography%
-    \else%
-    \YAD@ClassError*[noprintbibliography]{%
-      Commande \protect\printbibliography\space non utilisee%
+    \ifbool{YAD@noprintbibliography}{%
     }{%
-      La commande \protect\printbibliography\space n'a pas ete utilisee. Celle-ci est
-      requise.%
+      \YAD@ClassError*[noprintbibliography]{%
+        Commande \protect\printbibliography\space non utilisee%
+      }{%
+        La commande \protect\printbibliography\space n'a pas ete utilisee. Celle-ci est
+        requise.%
+      }%
     }%
-    \fi%
   }%
 }%
 \hopatch@AfterPackage{glossaries}{%
-  \iftoggle{YAD@output@paper}{%
-    \iftoggle{YAD@output@paper@star}{%
+  \ifbool{YAD@output@paper}{%
+    \ifbool{YAD@output@paper@star}{%
     }{%
       \renewcommand{\glsnavigation}{}%
     }%
@@ -3450,17 +3454,17 @@
   \shorthandoff{;:!?}%
 }%
 \AtEndDocument{%
-  \iftoggle{YAD@tableofcontents@used}{%
+  \ifbool{YAD@tableofcontents@used}{%
   }{%
-    \ifYAD@notableofcontents%
-    \else%
-    \YAD@ClassError*[notableofcontents]{%
-      Commande \protect\tableofcontents\space non utilisee%
+    \ifbool{YAD@notableofcontents}{%
     }{%
-      La commande \protect\tableofcontents\space n'a pas ete utilisee. Celle-ci
-      est requise.%
+      \YAD@ClassError*[notableofcontents]{%
+        Commande \protect\tableofcontents\space non utilisee%
+      }{%
+        La commande \protect\tableofcontents\space n'a pas ete utilisee. Celle-ci
+        est requise.%
+      }%
     }%
-    \fi%
   }%
 }%
 \expression{meta-logopres}{logo PRES}{logo PRES}
