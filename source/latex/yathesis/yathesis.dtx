@@ -2175,6 +2175,24 @@ This work consists of the file  yathesis.dtx
 \yadsetup{name=\contentsname}%
 \yadsetup{depth=subsubsection}%
 \yadsetup{frametitle=fbox}%
+%    \end{macrocode}
+% On crée un style de réinitialisation des caractéristiques des personnes.
+%    \begin{macrocode}
+\yadsetup{reinitialize person/.style={%
+    corps=,%
+    role=,%
+    affiliation=,%
+    affiliationsecondary=,%
+    female=false,%
+    male=true,%
+    professor=false,%
+    mcf=false,%
+    mcf*=false,%
+    juniorresearcher=false,%
+    juniorresearcher*=false,%
+    seniorresearcher=false,%
+  }%
+}%
 %
 % Définition de nouvelles bases de données
 %    \begin{macrocode}
@@ -2201,22 +2219,6 @@ This work consists of the file  yathesis.dtx
 % \begin{macro}{\YAD@staff}
 %    \begin{macrocode}
 \newcommand*{\YAD@staff}[4][]{%
-%    \end{macrocode}
-% On réinitialise les clés locales.
-%    \begin{macrocode}
-  \boolfalse{YAD@professor}%
-  \boolfalse{YAD@mcf}%
-  \boolfalse{YAD@mcf*}%
-  \boolfalse{YAD@juniorresearcher}%
-  \boolfalse{YAD@juniorresearcher*}%
-  \boolfalse{YAD@seniorresearcher}%
-  \boolfalse{YAD@female}%
-  \booltrue{YAD@male}%
-  %
-  \def\cmdKV@YAD@corps{}%
-  \def\cmdKV@YAD@role{}%
-  \def\cmdKV@YAD@affiliation{}%
-  \def\cmdKV@YAD@affiliationsecondary{}%
 %    \end{macrocode}
 % On continue.
 %    \begin{macrocode}
@@ -2326,6 +2328,10 @@ This work consists of the file  yathesis.dtx
   }{%
     \DTLnewdbentry{#4}{affiliationsecondary}{\cmdKV@YAD@affiliationsecondary}%
   }%
+% \end{macrocode}
+% On réinitialise les caractéristiques pour la personne suivante.
+%    \begin{macrocode}
+  \yadsetup{reinitialize person}%
 }%
 %    \end{macrocode}
 % \end{macro}
