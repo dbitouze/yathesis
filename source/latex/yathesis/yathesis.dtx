@@ -2729,9 +2729,7 @@ This work consists of the file  yathesis.dtx
             }{%
               \ifthenelse{\DTLrowcount{YAD@supervisors}>1}{%
                 \ifbool{YAD@cosupervisor@or@comonitor}{%
-                  \YAD@translation{%
-                    \YAD@committeemember@role%
-                  }%
+                  \YAD@translation{\YAD@committeemember@role}%
                 }{%
                 }%
               }{%
