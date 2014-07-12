@@ -534,11 +534,15 @@ This work consists of the file  yathesis.dtx
 \newbool{YAD@valid@month}
 \newbool{YAD@valid@year}
 \newbool{YAD@mainmatter@used}
-\newlength{\YAD@logo@height}
+\newlength{\cmdKV@YAD@logoheight}
+\newlength{\YAD@max@logoheight}
 \newlength{\YAD@titleboxheight}%
 \newlength{\YAD@titleboxwidth}%
 \newlength{\YAD@otherboxheight}%
 \newlength{\YAD@laboratory@width}%
+%
+\setlength\cmdKV@YAD@logoheight{1.5cm}%
+\setlength\YAD@max@logoheight{\cmdKV@YAD@logoheight}%
 %
 \newsavebox{\YAD@titlebox}%
 \newsavebox{\YAD@beforetitlebox}%
@@ -2145,7 +2149,6 @@ This work consists of the file  yathesis.dtx
   corporation/.store in=\cmdKV@YAD@corps,%
   corps/.store in=\cmdKV@YAD@corps,%
   url/.store in=\cmdKV@YAD@url,%
-  logoheight/.store in=\cmdKV@YAD@logoheight,%
   logo/.store in=\cmdKV@YAD@logo,%
   address/.store in=\cmdKV@YAD@address,%
   telephone/.store in=\cmdKV@YAD@telephone,%
@@ -2162,7 +2165,16 @@ This work consists of the file  yathesis.dtx
   frametitle/.store in=\cmdKV@YADframetitle,%
 }%
 %
-\yadsetup{logoheight=\YAD@logo@height}%
+\yadsetup{%
+  logoheight/.code={%
+    \global\setlength\cmdKV@YAD@logoheight{#1}%
+    \ifdimgreater{\cmdKV@YAD@logoheight}{\YAD@max@logoheight}{%
+      \global\setlength\YAD@max@logoheight{\cmdKV@YAD@logoheight}%
+    }{%
+    }%
+  }%
+}%
+%
 \yadsetup{sepcorpaffilfrench=\YAD@global@sepcorpaffil@french}%
 \yadsetup{sepcorpaffilenglish=\YAD@global@sepcorpaffil@english}%
 \yadsetup{name=\contentsname}%
@@ -3722,9 +3734,9 @@ This work consists of the file  yathesis.dtx
   % \settocdepth{none}%
   \setsecnumdepth{none}%
   \ifdraft{%
-    \newgeometry{centering,nomarginpar,bottom=0.1cm,top=0.1cm,headheight=\YAD@logo@height,margin=0.5cm,tmargin=2\YAD@logo@height}%
+    \newgeometry{centering,nomarginpar,bottom=1cm,top=1cm,headheight=\YAD@max@logoheight,margin=0.5cm,tmargin=\YAD@max@logoheight+1cm}%
   }{%
-    \newgeometry{centering,nomarginpar,bottom=1cm,top=1cm,headheight=\YAD@logo@height,hmargin=2cm,includeall}%
+    \newgeometry{centering,nomarginpar,bottom=1cm,top=1cm,headheight=\YAD@max@logoheight,hmargin=2cm,includeall}%
   }%
   \sethead[]%
   []%
@@ -4273,8 +4285,8 @@ This work consists of the file  yathesis.dtx
       }%
       \ifundef{\printsubtitle}{%
       }{%
-        % \ifdraft{}{\vspace*{\stretch{.15}}}%
-        \vspace*{\stretch{.15}}%
+        \ifdraft{}{\vspace*{\stretch{.15}}}%
+        % \vspace*{\stretch{.15}}%
         \par%
         \centering%
         \Large\printsubtitle%
@@ -4302,7 +4314,8 @@ This work consists of the file  yathesis.dtx
     bool {YAD@cover@page}%
     or (bool {YAD@nofrontcover} and test {\IfLanguageName{\YAD@mainlanguage}})%
   }{%
-    \vspace*{\stretch{1}}%
+    \ifdraft{}{\vspace*{\stretch{1}}}%
+    % \vspace*{\stretch{1}}%
     \raggedleft{%
       \itshape%
       \sffamily%
@@ -4314,8 +4327,8 @@ This work consists of the file  yathesis.dtx
     }%
   }{%
   }%
-  % \ifdraft{}{\vspace*{\stretch{.5}}}%
-  \vspace*{\stretch{.5}}%
+  \ifdraft{}{\vspace*{\stretch{.5}}}%
+  % \vspace*{\stretch{.5}}%
   \par%
 }{%
 }%
@@ -4341,20 +4354,20 @@ This work consists of the file  yathesis.dtx
       }%
       \ifundef{\printcoinstitute}{%
       }{%
-        % \ifdraft{}{\vspace*{\stretch{.5}}}%
-        \vspace*{\stretch{.5}}%
+        \ifdraft{}{\vspace*{\stretch{.5}}}%
+        % \vspace*{\stretch{.5}}%
         \par%
         \YAD@translation{coinstitute} \textbf{\textsc{\Large\printcoinstitute}}%
       }%
       \ifundef{\printcompany}{%
       }{%
-        % \ifdraft{}{\vspace*{\stretch{.5}}}%
-        \vspace*{\stretch{.5}}%
+        \ifdraft{}{\vspace*{\stretch{.5}}}%
+        % \vspace*{\stretch{.5}}%
         \par%
         \YAD@translation{company} \textbf{\textsc{\Large\printcompany}}%
       }%
-      % \ifdraft{}{\vspace*{\stretch{1.5}}}%
-      \vspace*{\stretch{1.5}}%
+      \ifdraft{}{\vspace*{\stretch{1.5}}}%
+      % \vspace*{\stretch{1.5}}%
       \par%
       \YAD@translation{doctoralschool}
       \YAD@ifemptyorundef{\printdoctoralschool}{%
@@ -4374,13 +4387,13 @@ This work consists of the file  yathesis.dtx
       }{%
         \textbf{\printdoctoralschool}%
       }%
-      % \ifdraft{}{\vspace*{\stretch{.5}}}%
-      \vspace*{\stretch{.5}}%
+      \ifdraft{}{\vspace*{\stretch{.5}}}%
+      % \vspace*{\stretch{.5}}%
       \par%
       \YAD@translation{universitydepartment}
       \textbf{\printlaboratory{\YAD@main@laboratory@name}{\YAD@main@laboratory@url}}%
-      % \ifdraft{}{\vspace*{\stretch{1.5}}}%
-      \vspace*{\stretch{1.5}}%
+      \ifdraft{}{\vspace*{\stretch{1.5}}}%
+      % \vspace*{\stretch{1.5}}%
       \par%
       {\large%
         \YAD@translation{thesisdefendedby} %
@@ -4413,8 +4426,8 @@ This work consists of the file  yathesis.dtx
           %   \textbf{\printdate}%
           % }%
         }{%
-          % \ifdraft{}{\vspace*{\stretch{1}}}%
-          \vspace*{\stretch{1}}%
+          \ifdraft{}{\vspace*{\stretch{1}}}%
+          % \vspace*{\stretch{1}}%
           \par%
           \YAD@translation{defendedon}
           \YAD@ifemptyorundef{\printdate}{%
@@ -4424,8 +4437,8 @@ This work consists of the file  yathesis.dtx
           }%
         }%
       }%
-      % \ifdraft{}{\vspace*{\stretch{1}}}%
-      \vspace*{\stretch{1}}%
+      \ifdraft{}{\vspace*{\stretch{1}}}%
+      % \vspace*{\stretch{1}}%
       \par%
       \YAD@translation{aim}%
       \ifundef{\printinstitute}{%
@@ -4438,8 +4451,8 @@ This work consists of the file  yathesis.dtx
         \YAD@translation{aimand}%
         \printcoinstitute*%
       }%
-      % \ifdraft{}{\vspace*{\stretch{1}}}%
-      \vspace*{\stretch{1}}%
+      \ifdraft{}{\vspace*{\stretch{1}}}%
+      % \vspace*{\stretch{1}}%
       \par%
       \large%
       \YAD@translation{academicfield}
@@ -4461,22 +4474,23 @@ This work consists of the file  yathesis.dtx
       }%
       \ifundef{\printspeciality}{%
       }{%
-        % \ifdraft{}{\vspace*{\stretch{.5}}}%
-        \vspace*{\stretch{.5}}%
+        \ifdraft{}{\vspace*{\stretch{.5}}}%
+        % \vspace*{\stretch{.5}}%
         \par%
         \large%
         \YAD@translation{speciality} \textbf{\printspeciality}%
       }
     \end{center}
   % \end{minipage}%
+  \vspace*{\stretch{1}}%
   \begin{center}
     \ifthenelse{\equal{\YAD@frametitle}{none}}{%
     }{%
-      % \ifdraft{}{\vspace*{\stretch{2}}}%
-      \vspace*{\stretch{2}}%
+      \ifdraft{}{\vspace*{\stretch{2}}}%
+      % \vspace*{\stretch{2}}%
     }{%
-      % \ifdraft{}{\vspace*{\stretch{.25}}}%
-      \vspace*{\stretch{.25}}%
+      \ifdraft{}{\vspace*{\stretch{.25}}}%
+      % \vspace*{\stretch{.25}}%
     }%
     \usebox{\YAD@titlebox}%
     % \ifdraft{}{\vspace*{\stretch{2}}}%
@@ -4497,8 +4511,8 @@ This work consists of the file  yathesis.dtx
     }{%
       \YAD@committee@tabular%
     }%
-    % \ifdraft{}{\vspace*{\stretch{.1}}}%
-    \vspace*{\stretch{.1}}%
+    \ifdraft{}{\vspace*{\stretch{.1}}}%
+    % \vspace*{\stretch{.1}}%
   \end{minipage}
   \ifthenelse{\equal{\YAD@frametitle}{none}}{%
   }{%
