@@ -536,12 +536,14 @@ This work consists of the file  yathesis.dtx
 \newbool{YAD@mainmatter@used}
 \newlength{\cmdKV@YAD@logoheight}
 \newlength{\YAD@max@logoheight}
+\newlength{\YAD@default@logoheight}
 \newlength{\YAD@titleboxheight}%
 \newlength{\YAD@titleboxwidth}%
 \newlength{\YAD@otherboxheight}%
 \newlength{\YAD@laboratory@width}%
 %
-\setlength\cmdKV@YAD@logoheight{1.5cm}%
+\setlength\YAD@default@logoheight{1.5cm}%
+\setlength\cmdKV@YAD@logoheight{\YAD@default@logoheight}%
 \setlength\YAD@max@logoheight{\cmdKV@YAD@logoheight}%
 %
 \newsavebox{\YAD@titlebox}%
@@ -3013,6 +3015,7 @@ This work consists of the file  yathesis.dtx
           }{%
             \YAD@reach@file{%
               \includegraphics[height=\cmdKV@YAD@logoheight]{\cmdKV@YAD@logo}%
+              \setlength\cmdKV@YAD@logoheight{\YAD@default@logoheight}%
             }%
           }%
         }%
