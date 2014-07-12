@@ -876,15 +876,10 @@ This work consists of the file  yathesis.dtx
 % \section{Execution of Options}
 %
 %    \begin{macrocode}
-% \ExecuteOptionsX{logoheight}%
-% \ExecuteOptionsX{sepcorpaffilfrench}%
-% \ExecuteOptionsX{sepcorpaffilenglish}%
-% \ExecuteOptionsX{frametitle}%
-% \ExecuteOptionsX{mainlanguage}%
-% \ExecuteOptionsX{secnumdepth}%
-% \ExecuteOptionsX{chap-style}%
-% \ProcessOptionsX\relax%
 \ProcessPgfOptions{/yad}%
+%    \end{macrocode}
+%
+%    \begin{macrocode}
 \ifthenelse{\equal{\YAD@mainlanguage}{english}}{%
   \def\YAD@secondarylanguage{french}%
 }{%
@@ -898,44 +893,6 @@ This work consists of the file  yathesis.dtx
 }{%
   \edef\@classoptionslist{\YAD@secondarylanguage,\YAD@mainlanguage,\@classoptionslist}%
 }%
-% \ifthenelse{\equal{\YAD@version}{inprogress}}{%
-%   \booltrue{YAD@inprogress@work}%
-% }{%
-%   \ifthenelse{\equal{\YAD@version}{inprogress*}}{%
-%     \booltrue{YAD@inprogress@work@star}%
-%   }{%
-%     \ifthenelse{\equal{\YAD@version}{draft}}{%
-%       \booltrue{YAD@draft}%
-%       \ifthenelse{\equal{\XKV@classoptionslist}{}}{%
-%         \edef\XKV@classoptionslist{draft}%
-%       }{%
-%         \edef\XKV@classoptionslist{\XKV@classoptionslist,draft}%
-%       }%
-%     }{%
-%       \boolfalse{YAD@nowarning}%
-%       \boolfalse{YAD@noerror}%
-%       \ifthenelse{\equal{\YAD@version}{submitted}}{%
-%         \booltrue{YAD@submitted@work}%
-%       }{%
-%         \ifthenelse{\equal{\YAD@version}{submitted*}}{%
-%           \booltrue{YAD@submitted@work@star}%
-%         }{%
-%           \booltrue{YAD@final@work}%
-%         }%
-%       }%
-%     }%
-%   }%
-% }%
-%
-% \ifthenelse{\equal{\YAD@output}{paper}}{%
-%   \booltrue{YAD@output@paper}%
-% }{%
-% }%
-% \ifthenelse{\equal{\YAD@output}{paper*}}{%
-%   \booltrue{YAD@output@paper}%
-%   \booltrue{YAD@output@paper@star}%
-% }{%
-% }%
 %    \end{macrocode}
 %
 % \section{Class Loading}
