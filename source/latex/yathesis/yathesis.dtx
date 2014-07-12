@@ -914,18 +914,6 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \RequirePackage[a4paper]{geometry}[2010/09/12]%
 %    \end{macrocode}
-% Accès à certaines fontes utiles à la composition des \textquote{méta-informations}
-%    \begin{macrocode}
-\AtEndPreamble{%
-  \@ifpackageloaded{kpfonts}{%
-  }{%
-    \@ifpackageloaded{libertine}{%
-    }{%
-      \RequirePackage[full]{textcomp}[2005/09/27]%
-    }%
-  }%
-}%
-%    \end{macrocode}
 % Pour insérer des images
 %    \begin{macrocode}
 \RequirePackage[final]{graphicx}[1999/02/16]%
@@ -1391,7 +1379,7 @@ This work consists of the file  yathesis.dtx
     \bgroup%
     \normalfont
     \ttfamily%
-    \textcolor{#1}{\textlangle\emph{#2}\textrangle}%
+    \textcolor{#1}{$\langle$\emph{#2}$\rangle$}%
     \egroup%
   }%
 }%
@@ -1991,7 +1979,7 @@ This work consists of the file  yathesis.dtx
 % \begin{macro}{\YAD@generic@argument@}
 %    \begin{macrocode}
 \newcommand*{\YAD@generic@argument}[1]{%
-  \bgroup\color{brown}{\normalfont\textlangle}\textsl{\texttt{#1}}{\normalfont\textrangle}\egroup%
+  \bgroup\color{brown}\normalfont$\langle$\textsl{\texttt{#1}}$\rangle$\egroup%
 }%
 %    \end{macrocode}
 % \end{macro}
