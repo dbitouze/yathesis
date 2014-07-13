@@ -565,17 +565,19 @@
   \ifthenelse{\isempty{#1}}{%
   }{%
     \ifdraft{%
-      \scriptsize%
-      \begin{tabular}{l}
-        {%
-          \normalfont\ttfamily\tiny%
-          (lbl-#1)%
-        }%
-        \\[-.3\baselineskip]
-        \YAD@reach@file[\YAD@configuration@file]{%
-          \translate{lbl-#1}%
-        }%
-      \end{tabular}
+      {%
+        \scriptsize%
+        \begin{tabular}{l}
+          {%
+            \normalfont\ttfamily\tiny%
+            (lbl-#1)%
+          }%
+          \\[-.3\baselineskip]
+          \YAD@reach@file[\YAD@configuration@file]{%
+            \translate{lbl-#1}%
+          }%
+        \end{tabular}
+      }%
     }{%
     \translate{lbl-#1}%
     }%
@@ -1893,9 +1895,11 @@
   }
   \sectiontitle%
 }%
-  \AtBeginDocument{\setsecnumdepth{none}}%
+  \AtBeginDocument{%
+    \setsecnumdepth{none}%
+    \frontmatter%
+  }%
 \newpagestyle{titles}[]{%
-  \frontmatter%
   % \settocdepth{none}%
   \setsecnumdepth{none}%
   \ifdraft{%
