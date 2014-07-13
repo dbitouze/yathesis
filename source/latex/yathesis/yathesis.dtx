@@ -6782,7 +6782,15 @@ run.xml sbl* sl* sym* xdy unq synctex.gz mw *~
 }
 %
 \AfterEndPreamble{%
-  \xpretocmd{\maketitle}{\zlabel{fr-title}}{}{}%
+  % \xpretocmd{\maketitle}{\zlabel{fr-title}}{}{}%
+  \LetLtxMacro{\YAD@maketitle@ORI}{\maketitle}
+  \renewcommand{\maketitle}[1][]{%
+    \ifthenelse{\isempty{#1}}{%
+      \cleardoublepage\zlabel{fr-title}%
+    }{%
+    }%
+    \YAD@maketitle@ORI[{#1}]%
+  }
   \xpatchcmd{\YAD@addpagenumber}{\addtocounter{page}{4}}{\zlabel{en-title}\addtocounter{page}{4}}{}{}%
   %
   \xpretocmd{\makedisclaimer}{\cleardoublepage\zlabel{disclaimer}}{}{}
