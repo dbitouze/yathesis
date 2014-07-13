@@ -923,6 +923,14 @@ This work consists of the file  yathesis.dtx
 % All of the following packages are in the standard modern distributions of
 % \LaTeX.
 %
+% Le \Package{xkeyval} permet aussi de définir des macros dont les arguments
+% puissent être spécifiés sous la forme ×clé=×\meta{valeur} mais ce n'est pas
+% pour cela qu'il est chargé : c'est pour éviter des erreurs qui ont lieu dans
+% certaines circonstances du fait du \Package{keyval} chargé par le
+% \Package{geometry}.
+%    \begin{macrocode}
+\RequirePackage{xkeyval}%
+%    \end{macrocode}
 % Gestion de la géométrie de la page.
 %    \begin{macrocode}
 \RequirePackage{geometry}[2010/09/12]%
