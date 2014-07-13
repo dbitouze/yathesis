@@ -538,38 +538,38 @@ des acronymes\footnote{Les commandes \docAuxCommand{printglossary} et
     \end{enumerate}
   \end{itemize}
 
-\section{Sommaire et/ou table des matières}\label{sec:table-des-matieres}
+  \section{Sommaire et/ou table des matières}\label{sec:table-des-matieres}
 
 \begin{docCommand}[doc description=\mandatory]{tableofcontents}{\oarg{options}}
   Cette commande produit une table des matières dont le \enquote{niveau de
     profondeur} par défaut est celui des sous-sections : les intitulés des
   commandes de structuration qui y figurent sont (seulement) ceux des parties
   (éventuelles), des chapitres, des sections et des sous-sections.
-
-  Son argument optionnel permet de stipuler des \meta{options} sous la forme
-  d'une liste \meta{clé}×=×\meta{valeur} dont les clés disponibles sont les
-  deux suivantes.
-  %
-  {%
-    \tcbset{before lower=\vspace*{\baselineskip}\par}
-    %
-    \begin{docKey}{depth}{=\docValue{part}\textbar\docValue{chapter}\textbar\docValue{section}\textbar\docValue{subsection}\textbar\docValue{subsubsection}\textbar\docValue{paragraph}\textbar\docValue{subparagraph}}{pas
-        de valeur par défaut, initialement \docValue{subsection}}
-      Cette clé permet de modifier le \enquote{niveau de profondeur} de la
-      table des matières, respectivement jusqu'aux : parties, chapitres,
-      sections, sous-sections, sous-sous-sections, paragraphes,
-      sous-paragraphes.
-  \end{docKey}
-  }
-%
-  \begin{docKey}{name}{=\meta{nom alternatif}}{pas de valeur par défaut,
-      initialement \docAuxCommand{contentsname}}
-    Par défaut, le nom de la table des matières est
-    \docAuxCommand{contentsname}, c'est-à-dire \enquote{Table des matières} ou
-    \foreignquote{english}{Contents}\selonlangue{}. Cette clé permet de
-    spécifier un \meta{nom alternatif}.
-  \end{docKey}
 \end{docCommand}
+
+
+L'argument optionnel de la commande \refCom{tableofcontents} permet de stipuler
+des \meta{options} sous la forme d'une liste \meta{clé}×=×\meta{valeur} dont
+les clés disponibles sont les deux suivantes.
+  %
+{%
+  \tcbset{before lower=\vspace*{\baselineskip}\par}
+    %
+  \begin{docKey}{depth}{=\docValue{part}\textbar\docValue{chapter}\textbar\docValue{section}\textbar\docValue{subsection}\textbar\docValue{subsubsection}\textbar\docValue{paragraph}\textbar\docValue{subparagraph}}{pas
+      de valeur par défaut, initialement \docValue{subsection}}
+    Cette clé permet de modifier le \enquote{niveau de profondeur} de la table
+    des matières, respectivement jusqu'aux : parties, chapitres, sections,
+    sous-sections, sous-sous-sections, paragraphes, sous-paragraphes.
+  \end{docKey}
+}
+%
+\begin{docKey}{name}{=\meta{nom alternatif}}{pas de valeur par défaut,
+    initialement \docAuxCommand{contentsname}}
+  Par défaut, le nom de la table des matières est \docAuxCommand{contentsname},
+  c'est-à-dire \enquote{Table des matières} ou
+  \foreignquote{english}{Contents}\selonlangue{}. Cette clé permet de spécifier
+  un \meta{nom alternatif}.
+\end{docKey}
 
 \begin{dbremark}{Tables des matières multiples}{}
   Si la table des matières est longue, elle peut être placée en fin de document
@@ -593,8 +593,7 @@ des acronymes\footnote{Les commandes \docAuxCommand{printglossary} et
   \item la table des matières ;
   \end{enumerate}
   on insérera respectivement :
-  \bodysample{rangeendsuffix=\],linerange={tableofcontents-Sommaire}}{}
-  et :
+  \bodysample{rangeendsuffix=\],linerange={tableofcontents-Sommaire}}{} et :
   \bodysample{rangesuffix=\^^M,linerange={tableofcontents}}{} La
   \vref{fig:tableofcontentsto-tableofcontents} illustre ce code.
 \end{dbexample}
