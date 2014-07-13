@@ -60,11 +60,16 @@
 \newbool{YAD@valid@month}
 \newbool{YAD@valid@year}
 \newbool{YAD@mainmatter@used}
-\newlength{\YAD@logo@height}
+\newlength{\cmdKV@YAD@logoheight}
+\newlength{\YAD@max@logoheight}
+\newlength{\YAD@default@logoheight}
 \newlength{\YAD@titleboxheight}%
 \newlength{\YAD@titleboxwidth}%
 \newlength{\YAD@otherboxheight}%
 \newlength{\YAD@laboratory@width}%
+\setlength\YAD@default@logoheight{1.5cm}%
+\setlength\cmdKV@YAD@logoheight{\YAD@default@logoheight}%
+\setlength\YAD@max@logoheight{\cmdKV@YAD@logoheight}%
 \newsavebox{\YAD@titlebox}%
 \newsavebox{\YAD@beforetitlebox}%
 \newsavebox{\YAD@aftertitlebox}%
@@ -85,7 +90,7 @@
 \def\YAD@secondarykeywords{\YAD@generic@argument@translate{keywords}}%
 \def\YAD@global@sepcorpaffil@french{}%
 \def\YAD@global@sepcorpaffil@english{}%
-\def\YAD@frametitle@set{}%
+\def\cmdKV@YAD@frametitle{fbox}%
 \newcommand{\YAD@generic@text}{%
   Un texte generique risque d'etre affiche a la place.\MessageBreak%
 }%
@@ -272,25 +277,37 @@
   secnumdepth/.store in=\YAD@secnumdepth,%
   sepcorpaffilfrench/.store in=\YAD@global@sepcorpaffil@french,%
   sepcorpaffilenglish/.store in=\YAD@global@sepcorpaffil@english,%
-  secnumdepth/.store in=\YAD@secnumdepth,%
-  frametitle/.store in=\YAD@frametitle@set,%
+  % frametitle/.store in=\cmdKV@YAD@frametitle,%
   chap-style/.code={%
     \def\YAD@fncychapstyle{#1}%
     \PassOptionsToPackage{#1}{fncychap}%
   },%
 }%
+\yadsetup{fncychap/.style={chap-style=#1}}
 \yadsetup{%
   sepcorpaffilenglish={\ at\ },%
   chap-style=PetersLenny,%
 }%
+\PassOptionsToPackage{a4paper}{geometry}%
+\PassOptionsToPackage{columns=1}{idxlayout}%
+\PassOptionsToPackage{nodayofweek}{datetime}%
+\PassOptionsToPackage{export}{adjustbox}%
+\PassOptionsToPackage{numbered}{bookmark}%
 \yadsetup{%
+  graphicx/.code={\PassOptionsToPackage{#1}{graphicx}},%
+  adjustbox/.code={\PassOptionsToPackage{#1}{adjustbox}},%
+  setspace/.code={\PassOptionsToPackage{#1}{setspace}},%
   xcolor/.code={\PassOptionsToPackage{#1}{xcolor}},%
-  geometry/.code={\PassOptionsToPackage{#1}{geometry}},%
-  tcolorbox/.code={\PassOptionsToPackage{#1}{tcolorbox}},%
+  datatool/.code={\PassOptionsToPackage{#1}{datatool}},%
+  titleps/.code={\PassOptionsToPackage{#1}{titleps}},%
+  draftwatermark/.code={\PassOptionsToPackage{#1}{draftwatermark}},%
+  babel/.code={\PassOptionsToPackage{#1}{babel}},%
+  datetime/.code={\PassOptionsToPackage{#1}{datetime}},%
+  varioref/.code={\PassOptionsToPackage{#1}{varioref}},%
+  bookmark/.code={\PassOptionsToPackage{#1}{bookmark}},%
 }%
-\pgfkeys{%
-  .unknown/.code =
-  \expandafter\PassOptionsToClass\expandafter{\pgfkeyscurrentname}{book}
+\yadsetup{%
+  .unknown/.code ={\expandafter\PassOptionsToClass\expandafter{\pgfkeyscurrentname}{book}}%
 }%
 \ProcessPgfOptions{/yad}%
 \ifthenelse{\equal{\YAD@mainlanguage}{english}}{%
@@ -307,19 +324,11 @@
   \edef\@classoptionslist{\YAD@secondarylanguage,\YAD@mainlanguage,\@classoptionslist}%
 }%
 \LoadClass{book}%
-\RequirePackage[a4paper]{geometry}[2010/09/12]%
-\AtEndPreamble{%
-  \@ifpackageloaded{kpfonts}{%
-  }{%
-    \@ifpackageloaded{libertine}{%
-    }{%
-      \RequirePackage[full]{textcomp}[2005/09/27]%
-    }%
-  }%
-}%
-\RequirePackage[final]{graphicx}[1999/02/16]%
+\RequirePackage{xkeyval}%
+\RequirePackage{geometry}[2010/09/12]%
+\RequirePackage{graphicx}[1999/02/16]%
 \RequirePackage{environ}[2013/04/01]%
-\RequirePackage[export]{adjustbox}[2012/05/21]%
+\RequirePackage{adjustbox}[2012/05/21]%
 \RequirePackage{array}[2008/09/09]%
 \RequirePackage{xstring}[2013/10/13]%
 \RequirePackage{textcase}[2004/10/07]%
@@ -352,7 +361,7 @@
   }%
 }%
 \RequirePackage{index}[2004/01/20]%
-\RequirePackage[columns=1]{idxlayout}[2012/03/30]%
+\RequirePackage{idxlayout}[2012/03/30]%
 \RequirePackage{babel}[2014/03/24]
 \RequirePackage{iflang}[2007/11/11]%
 \let\@modulo@SAVED\@modulo
@@ -382,7 +391,7 @@
   \ifnum\@den=0
 }
 \let\@modulo\@modulo@SAVED
-\RequirePackage[nodayofweek]{datetime}[2013/09/10]%
+\RequirePackage{datetime}[2013/09/10]%
 \RequirePackage{varioref}[2011/10/02]%
 \RequirePackage[final,unicode,hyperfootnotes=false,hyperindex=false,plainpages=false,breaklinks,pdfpagemode=UseOutlines,pdfpagelayout=TwoPageRight]{hyperref}[2012/11/06]%
   \RequirePackage[all]{hypcap}[2011/02/16]%
@@ -547,7 +556,7 @@
 }{%
 }%
 \newcommand*{\YAD@generic@argument}[1]{%
-  \bgroup\color{brown}{\normalfont\textlangle}\textsl{\texttt{#1}}{\normalfont\textrangle}\egroup%
+  \bgroup\color{brown}\normalfont$\langle$\textsl{\texttt{#1}}$\rangle$\egroup%
 }%
 \newcommand*{\YAD@translation}[1]{%
   \ifthenelse{\isempty{#1}}{%
@@ -628,7 +637,6 @@
   corporation/.store in=\cmdKV@YAD@corps,%
   corps/.store in=\cmdKV@YAD@corps,%
   url/.store in=\cmdKV@YAD@url,%
-  logoheight/.store in=\cmdKV@YAD@logoheight,%
   logo/.store in=\cmdKV@YAD@logo,%
   address/.store in=\cmdKV@YAD@address,%
   telephone/.store in=\cmdKV@YAD@telephone,%
@@ -642,14 +650,21 @@
   sepcorpaffilenglish/.store in=\cmdKV@YAD@sepcorpaffilenglish,%
   name/.store in=\cmdKV@YAD@name,%
   depth/.store in=\cmdKV@YAD@depth,%
-  frametitle/.store in=\cmdKV@YADframetitle,%
+  frametitle/.store in=\cmdKV@YAD@frametitle,%
 }%
-\yadsetup{logoheight=\YAD@logo@height}%
+\yadsetup{%
+  logoheight/.code={%
+    \global\setlength\cmdKV@YAD@logoheight{#1}%
+    \ifdimgreater{\cmdKV@YAD@logoheight}{\YAD@max@logoheight}{%
+      \global\setlength\YAD@max@logoheight{\cmdKV@YAD@logoheight}%
+    }{%
+    }%
+  }%
+}%
 \yadsetup{sepcorpaffilfrench=\YAD@global@sepcorpaffil@french}%
 \yadsetup{sepcorpaffilenglish=\YAD@global@sepcorpaffil@english}%
 \yadsetup{name=\contentsname}%
 \yadsetup{depth=subsubsection}%
-\yadsetup{frametitle=fbox}%
 \yadsetup{reinitialize person/.style={%
     corps=,%
     role=,%
@@ -763,11 +778,13 @@
     \DTLnewdbentry{#4}{sepcorpaffilfrench}{\YAD@global@sepcorpaffil@french}%
   }{%
     \DTLnewdbentry{#4}{sepcorpaffilfrench}{\cmdKV@YAD@sepcorpaffilfrench}%
+    \def\cmdKV@YAD@sepcorpaffilfrench{}%
   }%
   \YAD@ifemptyorundef{\cmdKV@YAD@sepcorpaffilenglish}{%
     \DTLnewdbentry{#4}{sepcorpaffilenglish}{\YAD@global@sepcorpaffil@english}%
   }{%
     \DTLnewdbentry{#4}{sepcorpaffilenglish}{\cmdKV@YAD@sepcorpaffilenglish}%
+    \def\cmdKV@YAD@sepcorpaffilenglish{}%
   }%
   \YAD@ifemptyorundef{\cmdKV@YAD@affiliation}{%
     \DTLnewdbentry{#4}{affiliation}{}%
@@ -1333,6 +1350,7 @@
           }{%
             \YAD@reach@file{%
               \includegraphics[height=\cmdKV@YAD@logoheight]{\cmdKV@YAD@logo}%
+              \setlength\cmdKV@YAD@logoheight{\YAD@default@logoheight}%
             }%
           }%
         }%
@@ -1862,9 +1880,9 @@
   % \settocdepth{none}%
   \setsecnumdepth{none}%
   \ifdraft{%
-    \newgeometry{centering,nomarginpar,bottom=0.1cm,top=0.1cm,headheight=\YAD@logo@height,margin=0.5cm,tmargin=2\YAD@logo@height}%
+    \newgeometry{centering,nomarginpar,bottom=1cm,top=1cm,headheight=\YAD@max@logoheight,margin=0.5cm,tmargin=\YAD@max@logoheight+1cm}%
   }{%
-    \newgeometry{centering,nomarginpar,bottom=1cm,top=1cm,headheight=\YAD@logo@height,hmargin=2cm,includeall}%
+    \newgeometry{centering,nomarginpar,bottom=1cm,top=1cm,headheight=\YAD@max@logoheight,hmargin=2cm,includeall}%
   }%
   \sethead[]%
   []%
@@ -2202,12 +2220,9 @@
   \ifnumcomp{\value{YAD@titlepages}}{=}{2}{\addtocounter{page}{2}}{}%
   \ifnumcomp{\value{YAD@titlepages}}{=}{3}{\addtocounter{page}{4}}{}%
 }%
-\ifundef{\cmdKV@YAD@frametitle}{%
-  \newcommand{\cmdKV@YAD@frametitle}{fbox}%
-}{%
-}%
-\renewcommand{\maketitle}{%
+\renewcommand{\maketitle}[1][]{%
   \booltrue{YAD@maketitle@used}%
+  \yadsetup{#1}
   \setlength{\fboxsep}{10pt}%
   \setlength{\YAD@titleboxwidth}{\linewidth-2\fboxsep-2\fboxrule}%
   \renewcommand*{\do}[1]{%
@@ -2215,24 +2230,19 @@
   \pagestyle{titles}%
 \begingroup%
 \expandafter\selectlanguage\expandafter{##1}%
-\ifthenelse{\equal{\YAD@frametitle@set}{}}{%
-  \gdef\YAD@frametitle{\cmdKV@YAD@frametitle}%
-}{%
-  \gdef\YAD@frametitle{\YAD@frametitle@set}%
-}%
   \begin{lrbox}{\YAD@titlebox}
-    \ifthenelse{\equal{\YAD@frametitle}{none}}{%
+    \ifthenelse{\equal{\cmdKV@YAD@frametitle}{none}}{%
     }{%
       \tcbset{colback=white,boxsep=3pt,boxrule=0.4pt,arc=0mm}%
-      \ifthenelse{\equal{\YAD@frametitle}{shadowbox}}{%
+      \ifthenelse{\equal{\cmdKV@YAD@frametitle}{shadowbox}}{%
         \tcbset{enhanced,drop shadow southeast={black,opacity=1}}%
       }{%
-        \ifthenelse{\equal{\YAD@frametitle}{ovalbox}}{%
+        \ifthenelse{\equal{\cmdKV@YAD@frametitle}{ovalbox}}{%
           \tcbset{arc=3mm}%
         }{%
-          \ifthenelse{\equal{\YAD@frametitle}{fbox}}{%
+          \ifthenelse{\equal{\cmdKV@YAD@frametitle}{fbox}}{%
           }{%
-            \tcbset{code={\expandafter\pgfkeysalsofrom\YAD@frametitle}}%
+            \tcbset{code={\expandafter\pgfkeysalsofrom{\cmdKV@YAD@frametitle}}}%
           }%
         }%
       }%
@@ -2242,7 +2252,7 @@
     \begin{minipage}{\linewidth-2\fboxsep-2\fboxrule}
       \onehalfspacing%
       \noindent%
-      \ifthenelse{\equal{\YAD@frametitle}{none}}{%
+      \ifthenelse{\equal{\cmdKV@YAD@frametitle}{none}}{%
       }{%
         \YAD@translation{thesistitle}%
       }%
@@ -2266,14 +2276,14 @@
       }%
       \ifundef{\printsubtitle}{%
       }{%
-        % \ifdraft{}{\vspace*{\stretch{.15}}}%
-        \vspace*{\stretch{.15}}%
+        \ifdraft{}{\vspace*{\stretch{.15}}}%
+        % \vspace*{\stretch{.15}}%
         \par%
         \centering%
         \Large\printsubtitle%
       }%
     \end{minipage}%
-    \ifthenelse{\equal{\YAD@frametitle}{none}}{%
+    \ifthenelse{\equal{\cmdKV@YAD@frametitle}{none}}{%
     }{%
     \end{tcolorbox}
   }%
@@ -2287,7 +2297,8 @@
     bool {YAD@cover@page}%
     or (bool {YAD@nofrontcover} and test {\IfLanguageName{\YAD@mainlanguage}})%
   }{%
-    \vspace*{\stretch{1}}%
+    \ifdraft{}{\vspace*{\stretch{1}}}%
+    % \vspace*{\stretch{1}}%
     \raggedleft{%
       \itshape%
       \sffamily%
@@ -2299,8 +2310,8 @@
     }%
   }{%
   }%
-  % \ifdraft{}{\vspace*{\stretch{.5}}}%
-  \vspace*{\stretch{.5}}%
+  \ifdraft{}{\vspace*{\stretch{.5}}}%
+  % \vspace*{\stretch{.5}}%
   \par%
 }{%
 }%
@@ -2326,20 +2337,20 @@
       }%
       \ifundef{\printcoinstitute}{%
       }{%
-        % \ifdraft{}{\vspace*{\stretch{.5}}}%
-        \vspace*{\stretch{.5}}%
+        \ifdraft{}{\vspace*{\stretch{.5}}}%
+        % \vspace*{\stretch{.5}}%
         \par%
         \YAD@translation{coinstitute} \textbf{\textsc{\Large\printcoinstitute}}%
       }%
       \ifundef{\printcompany}{%
       }{%
-        % \ifdraft{}{\vspace*{\stretch{.5}}}%
-        \vspace*{\stretch{.5}}%
+        \ifdraft{}{\vspace*{\stretch{.5}}}%
+        % \vspace*{\stretch{.5}}%
         \par%
         \YAD@translation{company} \textbf{\textsc{\Large\printcompany}}%
       }%
-      % \ifdraft{}{\vspace*{\stretch{1.5}}}%
-      \vspace*{\stretch{1.5}}%
+      \ifdraft{}{\vspace*{\stretch{1.5}}}%
+      % \vspace*{\stretch{1.5}}%
       \par%
       \YAD@translation{doctoralschool}
       \YAD@ifemptyorundef{\printdoctoralschool}{%
@@ -2359,13 +2370,13 @@
       }{%
         \textbf{\printdoctoralschool}%
       }%
-      % \ifdraft{}{\vspace*{\stretch{.5}}}%
-      \vspace*{\stretch{.5}}%
+      \ifdraft{}{\vspace*{\stretch{.5}}}%
+      % \vspace*{\stretch{.5}}%
       \par%
       \YAD@translation{universitydepartment}
       \textbf{\printlaboratory{\YAD@main@laboratory@name}{\YAD@main@laboratory@url}}%
-      % \ifdraft{}{\vspace*{\stretch{1.5}}}%
-      \vspace*{\stretch{1.5}}%
+      \ifdraft{}{\vspace*{\stretch{1.5}}}%
+      % \vspace*{\stretch{1.5}}%
       \par%
       {\large%
         \YAD@translation{thesisdefendedby} %
@@ -2398,8 +2409,8 @@
           %   \textbf{\printdate}%
           % }%
         }{%
-          % \ifdraft{}{\vspace*{\stretch{1}}}%
-          \vspace*{\stretch{1}}%
+          \ifdraft{}{\vspace*{\stretch{1}}}%
+          % \vspace*{\stretch{1}}%
           \par%
           \YAD@translation{defendedon}
           \YAD@ifemptyorundef{\printdate}{%
@@ -2409,8 +2420,8 @@
           }%
         }%
       }%
-      % \ifdraft{}{\vspace*{\stretch{1}}}%
-      \vspace*{\stretch{1}}%
+      \ifdraft{}{\vspace*{\stretch{1}}}%
+      % \vspace*{\stretch{1}}%
       \par%
       \YAD@translation{aim}%
       \ifundef{\printinstitute}{%
@@ -2423,8 +2434,8 @@
         \YAD@translation{aimand}%
         \printcoinstitute*%
       }%
-      % \ifdraft{}{\vspace*{\stretch{1}}}%
-      \vspace*{\stretch{1}}%
+      \ifdraft{}{\vspace*{\stretch{1}}}%
+      % \vspace*{\stretch{1}}%
       \par%
       \large%
       \YAD@translation{academicfield}
@@ -2446,22 +2457,23 @@
       }%
       \ifundef{\printspeciality}{%
       }{%
-        % \ifdraft{}{\vspace*{\stretch{.5}}}%
-        \vspace*{\stretch{.5}}%
+        \ifdraft{}{\vspace*{\stretch{.5}}}%
+        % \vspace*{\stretch{.5}}%
         \par%
         \large%
         \YAD@translation{speciality} \textbf{\printspeciality}%
       }
     \end{center}
   % \end{minipage}%
+  \vspace*{\stretch{1}}%
   \begin{center}
-    \ifthenelse{\equal{\YAD@frametitle}{none}}{%
+    \ifthenelse{\equal{\cmdKV@YAD@frametitle}{none}}{%
     }{%
-      % \ifdraft{}{\vspace*{\stretch{2}}}%
-      \vspace*{\stretch{2}}%
+      \ifdraft{}{\vspace*{\stretch{2}}}%
+      % \vspace*{\stretch{2}}%
     }{%
-      % \ifdraft{}{\vspace*{\stretch{.25}}}%
-      \vspace*{\stretch{.25}}%
+      \ifdraft{}{\vspace*{\stretch{.25}}}%
+      % \vspace*{\stretch{.25}}%
     }%
     \usebox{\YAD@titlebox}%
     % \ifdraft{}{\vspace*{\stretch{2}}}%
@@ -2479,10 +2491,10 @@
     }{%
       \YAD@committee@tabular%
     }%
-    % \ifdraft{}{\vspace*{\stretch{.1}}}%
-    \vspace*{\stretch{.1}}%
+    \ifdraft{}{\vspace*{\stretch{.1}}}%
+    % \vspace*{\stretch{.1}}%
   \end{minipage}
-  \ifthenelse{\equal{\YAD@frametitle}{none}}{%
+  \ifthenelse{\equal{\cmdKV@YAD@frametitle}{none}}{%
   }{%
     % \ifdraft{}{\vspace*{\stretch{2}}}%
     \vspace*{\stretch{2}}%
@@ -2524,7 +2536,7 @@
   }%
 }{%
 }%
-\ifthenelse{\equal{\YAD@frametitle}{shadowbox}}{%
+\ifthenelse{\equal{\cmdKV@YAD@frametitle}{shadowbox}}{%
   \let\tcb@shadow@prepare=\origtcb@shadow@prepare%
 }{%
 }%
