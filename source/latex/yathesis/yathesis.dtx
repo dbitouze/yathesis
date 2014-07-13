@@ -803,10 +803,6 @@ This work consists of the file  yathesis.dtx
 % \item ×paper*×.
 % \end{itemize}
 %    \begin{macrocode}
-% \def\YAD@output{screen}%
-% \define@choicekey*{yathesis.cls}{output}%
-% {screen,paper,paper*}[screen]%
-% {\def\YAD@output{#1}}%
 \yadsetup{%
   output/.is choice,%
   output/paper/.code={\booltrue{YAD@output@paper}},%
@@ -831,7 +827,6 @@ This work consists of the file  yathesis.dtx
   space/double/.code={\def\YAD@interligne{double}},%
   space/.default=single%
 }%
-%
 %    \end{macrocode}
 %
 %    \begin{macrocode}
