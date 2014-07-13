@@ -883,13 +883,12 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\pgfkeys{%
-  .unknown/.code =
-  \expandafter\PassOptionsToClass\expandafter{\pgfkeyscurrentname}{book}
+\yadsetup{%
+  .unknown/.code ={\expandafter\PassOptionsToClass\expandafter{\pgfkeyscurrentname}{book}}%
 }%
 %    \end{macrocode}
 %
-% \section{Execution of Options}
+% \section{Process of Options}
 %
 %    \begin{macrocode}
 \ProcessPgfOptions{/yad}%
@@ -1132,6 +1131,8 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
   \RequirePackage[numbered]{bookmark}[2011/12/02]%
 %    \end{macrocode}
+%
+% \section{Début du code de la classe}
 %
 % Pour éviter certains comportements inattendus, on précise la langue
 % principale au moyen de l'option ×main× du \Package{babel}. Mais, comme
