@@ -2286,11 +2286,13 @@ This work consists of the file  yathesis.dtx
     \DTLnewdbentry{#4}{sepcorpaffilfrench}{\YAD@global@sepcorpaffil@french}%
   }{%
     \DTLnewdbentry{#4}{sepcorpaffilfrench}{\cmdKV@YAD@sepcorpaffilfrench}%
+    \def\cmdKV@YAD@sepcorpaffilfrench{}%
   }%
   \YAD@ifemptyorundef{\cmdKV@YAD@sepcorpaffilenglish}{%
     \DTLnewdbentry{#4}{sepcorpaffilenglish}{\YAD@global@sepcorpaffil@english}%
   }{%
     \DTLnewdbentry{#4}{sepcorpaffilenglish}{\cmdKV@YAD@sepcorpaffilenglish}%
+    \def\cmdKV@YAD@sepcorpaffilenglish{}%
   }%
   \YAD@ifemptyorundef{\cmdKV@YAD@affiliation}{%
     \DTLnewdbentry{#4}{affiliation}{}%
