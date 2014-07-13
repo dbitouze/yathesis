@@ -11,8 +11,8 @@
 %% Released under the LaTeX Project Public License v1.3c or later
 %% See http://www.latex-project.org/lppl.txt
 %% -----------------------------------------------------------------------
-\def\fileversion{v0.99d}
-\def\filedate{2014/06/08}
+\def\fileversion{v0.99g}
+\def\filedate{2014/07/13}
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesClass{yathesis}[\filedate\space\fileversion\space Yet another class for writing thesis (DB)]
 \RequirePackage{pgfopts}[2011/06/02]%
@@ -116,13 +116,8 @@
       or bool {YAD@inprogress@work@star}%
       or bool {YAD@draft}%
       or bool {YAD@noerror}%
-<<<<<<< HEAD
     }{%
     }{%
-=======
-    }{%
-    }{%
->>>>>>> pgfkeys
       \ifthenelse{\isempty{#1}}{%
         \ClassError{yathesis}{%
           #2%
@@ -208,10 +203,7 @@
 \YAD@create@boolean{notableofcontents}%
 \YAD@create@boolean{noprintbibliography}%
 \YAD@create@boolean{nofrontcover}%
-<<<<<<< HEAD
 \YAD@create@boolean{hdr}%
-=======
->>>>>>> pgfkeys
 \yadsetup{noerror=true}%
 \booltrue{YAD@cover@page}%
 \YAD@create@boolean{nologo}%
@@ -234,6 +226,8 @@
   male=true,%
   female=false,%
 }%
+\yadsetup{noerror=true}%
+\booltrue{YAD@cover@page}%
 \yadsetup{%
   version/.is choice,%
   version/inprogress/.code={\booltrue{YAD@inprogress@work}},%
@@ -1723,13 +1717,8 @@
       \ifboolexpr{%
         bool {YAD@submitted@work}%
         or bool {YAD@submitted@work@star}%
-<<<<<<< HEAD
       }{%
       }{%
-=======
-      }{%
-      }{%
->>>>>>> pgfkeys
         \YAD@ClassError[nodate]{%
           Date de soutenance non specifiee%
         }{%
