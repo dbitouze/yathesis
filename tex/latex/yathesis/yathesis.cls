@@ -116,8 +116,13 @@
       or bool {YAD@inprogress@work@star}%
       or bool {YAD@draft}%
       or bool {YAD@noerror}%
+<<<<<<< HEAD
     }{%
     }{%
+=======
+    }{%
+    }{%
+>>>>>>> pgfkeys
       \ifthenelse{\isempty{#1}}{%
         \ClassError{yathesis}{%
           #2%
@@ -203,7 +208,10 @@
 \YAD@create@boolean{notableofcontents}%
 \YAD@create@boolean{noprintbibliography}%
 \YAD@create@boolean{nofrontcover}%
+<<<<<<< HEAD
 \YAD@create@boolean{hdr}%
+=======
+>>>>>>> pgfkeys
 \yadsetup{noerror=true}%
 \booltrue{YAD@cover@page}%
 \YAD@create@boolean{nologo}%
@@ -1715,8 +1723,13 @@
       \ifboolexpr{%
         bool {YAD@submitted@work}%
         or bool {YAD@submitted@work@star}%
+<<<<<<< HEAD
       }{%
       }{%
+=======
+      }{%
+      }{%
+>>>>>>> pgfkeys
         \YAD@ClassError[nodate]{%
           Date de soutenance non specifiee%
         }{%
