@@ -4167,21 +4167,13 @@ This work consists of the file  yathesis.dtx
   \ifnumcomp{\value{YAD@titlepages}}{=}{3}{\addtocounter{page}{4}}{}%
 }%
 %    \end{macrocode}
-% Si la macro ×\cmdKV@YAD@frametitle×, automatiquement créée par la clé
-% ×frametitle×, n'est pas définie (en cas d'éléments du titre non définis), on
-% la crée en lui donnant la valeur par défaut de ×frametitle×.
-%    \begin{macrocode}
-\ifundef{\cmdKV@YAD@frametitle}{%
-  \newcommand{\cmdKV@YAD@frametitle}{fbox}%
-}{%
-}%
-%    \end{macrocode}
 %
 % \begin{macro}{\maketitle}
 % Commande de la page de titre
 %    \begin{macrocode}
-\renewcommand{\maketitle}{%
+\renewcommand{\maketitle}[1][]{%
   \booltrue{YAD@maketitle@used}%
+  \yadsetup{#1}
   \setlength{\fboxsep}{10pt}%
   \setlength{\YAD@titleboxwidth}{\linewidth-2\fboxsep-2\fboxrule}%
   \renewcommand*{\do}[1]{%
