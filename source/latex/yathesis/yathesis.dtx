@@ -571,9 +571,9 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % On définit une marco dans laquelle sera stockée le style du cadre figurant
 % autour du titre de la thèse sur les pages de titre.
-% \begin{macro}{\YAD@frametitle@set}
+% \begin{macro}{\cmdKV@YAD@frametitle}
 %    \begin{macrocode}
-\def\YAD@frametitle@set{}%
+\def\cmdKV@YAD@frametitle{fbox}%
 %    \end{macrocode}
 % \end{macro}
 %
@@ -840,8 +840,7 @@ This work consists of the file  yathesis.dtx
   secnumdepth/.store in=\YAD@secnumdepth,%
   sepcorpaffilfrench/.store in=\YAD@global@sepcorpaffil@french,%
   sepcorpaffilenglish/.store in=\YAD@global@sepcorpaffil@english,%
-  secnumdepth/.store in=\YAD@secnumdepth,%
-  frametitle/.store in=\YAD@frametitle@set,%
+  % frametitle/.store in=\cmdKV@YAD@frametitle,%
   chap-style/.code={%
     \def\YAD@fncychapstyle{#1}%
     \PassOptionsToPackage{#1}{fncychap}%
@@ -2109,7 +2108,7 @@ This work consists of the file  yathesis.dtx
   sepcorpaffilenglish/.store in=\cmdKV@YAD@sepcorpaffilenglish,%
   name/.store in=\cmdKV@YAD@name,%
   depth/.store in=\cmdKV@YAD@depth,%
-  frametitle/.store in=\cmdKV@YADframetitle,%
+  frametitle/.store in=\cmdKV@YAD@frametitle,%
 }%
 %
 \yadsetup{%
@@ -2126,7 +2125,7 @@ This work consists of the file  yathesis.dtx
 \yadsetup{sepcorpaffilenglish=\YAD@global@sepcorpaffil@english}%
 \yadsetup{name=\contentsname}%
 \yadsetup{depth=subsubsection}%
-\yadsetup{frametitle=fbox}%
+% \yadsetup{frametitle=fbox}%
 %    \end{macrocode}
 % On crée un style de réinitialisation des caractéristiques des personnes.
 %    \begin{macrocode}
@@ -4182,24 +4181,24 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \begingroup%
 \expandafter\selectlanguage\expandafter{##1}%
-\ifthenelse{\equal{\YAD@frametitle@set}{}}{%
-  \gdef\YAD@frametitle{\cmdKV@YAD@frametitle}%
-}{%
-  \gdef\YAD@frametitle{\YAD@frametitle@set}%
-}%
+% \YAD@ifemptyorundef{\YAD@frametitle@set}{%
+%   \gdef\YAD@frametitle{\cmdKV@YAD@frametitle}%
+% }{%
+%   \gdef\YAD@frametitle{\YAD@frametitle@set}%
+% }%
   \begin{lrbox}{\YAD@titlebox}
-    \ifthenelse{\equal{\YAD@frametitle}{none}}{%
+    \ifthenelse{\equal{\cmdKV@YAD@frametitle}{none}}{%
     }{%
       \tcbset{colback=white,boxsep=3pt,boxrule=0.4pt,arc=0mm}%
-      \ifthenelse{\equal{\YAD@frametitle}{shadowbox}}{%
+      \ifthenelse{\equal{\cmdKV@YAD@frametitle}{shadowbox}}{%
         \tcbset{enhanced,drop shadow southeast={black,opacity=1}}%
       }{%
-        \ifthenelse{\equal{\YAD@frametitle}{ovalbox}}{%
+        \ifthenelse{\equal{\cmdKV@YAD@frametitle}{ovalbox}}{%
           \tcbset{arc=3mm}%
         }{%
-          \ifthenelse{\equal{\YAD@frametitle}{fbox}}{%
+          \ifthenelse{\equal{\cmdKV@YAD@frametitle}{fbox}}{%
           }{%
-            \tcbset{code={\expandafter\pgfkeysalsofrom\YAD@frametitle}}%
+            \tcbset{code={\expandafter\pgfkeysalsofrom{\cmdKV@YAD@frametitle}}}%
           }%
         }%
       }%
@@ -4209,7 +4208,7 @@ This work consists of the file  yathesis.dtx
     \begin{minipage}{\linewidth-2\fboxsep-2\fboxrule}
       \onehalfspacing%
       \noindent%
-      \ifthenelse{\equal{\YAD@frametitle}{none}}{%
+      \ifthenelse{\equal{\cmdKV@YAD@frametitle}{none}}{%
       }{%
         \YAD@translation{thesistitle}%
       }%
@@ -4240,7 +4239,7 @@ This work consists of the file  yathesis.dtx
         \Large\printsubtitle%
       }%
     \end{minipage}%
-    \ifthenelse{\equal{\YAD@frametitle}{none}}{%
+    \ifthenelse{\equal{\cmdKV@YAD@frametitle}{none}}{%
     }{%
     \end{tcolorbox}
   }%
@@ -4432,7 +4431,7 @@ This work consists of the file  yathesis.dtx
   % \end{minipage}%
   \vspace*{\stretch{1}}%
   \begin{center}
-    \ifthenelse{\equal{\YAD@frametitle}{none}}{%
+    \ifthenelse{\equal{\cmdKV@YAD@frametitle}{none}}{%
     }{%
       \ifdraft{}{\vspace*{\stretch{2}}}%
       % \vspace*{\stretch{2}}%
@@ -4462,7 +4461,7 @@ This work consists of the file  yathesis.dtx
     \ifdraft{}{\vspace*{\stretch{.1}}}%
     % \vspace*{\stretch{.1}}%
   \end{minipage}
-  \ifthenelse{\equal{\YAD@frametitle}{none}}{%
+  \ifthenelse{\equal{\cmdKV@YAD@frametitle}{none}}{%
   }{%
     % \ifdraft{}{\vspace*{\stretch{2}}}%
     \vspace*{\stretch{2}}%
@@ -4519,7 +4518,7 @@ This work consists of the file  yathesis.dtx
   }%
 }{%
 }%
-\ifthenelse{\equal{\YAD@frametitle}{shadowbox}}{%
+\ifthenelse{\equal{\cmdKV@YAD@frametitle}{shadowbox}}{%
   \let\tcb@shadow@prepare=\origtcb@shadow@prepare%
 }{%
 }%
