@@ -460,6 +460,113 @@ redéfinies, globalement ou localement.
 \end{bodycode}
 \end{dbexample}
 
+\section{Options à passer aux packages chargés par la \yatcl{}}
+\label{sec:options-passer-aux}
+
+Pour plusieurs de ses fonctionnalités, la \yatcl s'appuie sur des packages
+qu'elle charge automatiquement (listés
+\vref{sec:packages-charges-par}). Aussi son comportement par défaut et sa
+personnalisation sont-ils également gouvernés par le comportement par défaut et
+la personnalisation de ces packages.
+
+\begin{dbwarning}{Packages automatiquement chargés à ne pas charger
+    manuellement}{packages-a-ne-pas-charger}
+  Les packages qui sont automatiquement chargés par la \yatcl{} ne doivent pas
+  être chargés manuellement (au moyen de la commande
+  \docAuxCommand{usepackage}), sous peine de provoquer des clashs d'options
+  (tel que signalé à la \vref{faq:option-clash}).
+\end{dbwarning}
+
+De ce fait, la personnalisation des packages automatiquement chargés par le
+biais d'arguments optionnels passés à la commande \docAuxCommand{usepackage}
+n'est pas possible. Pour pallier à cela, \yat{} fournit des options de classe
+permettant de passer à certains de ces packages une ou plusieurs options sous
+la forme d'une liste de clés/valeurs. Les packages concernés sont précisément
+ceux :
+\begin{itemize}
+\item (éventuellement) utiles à l'utilisateur final ;
+\item dont la personnalisation se fait habituellement par le biais d'options
+  à passer en argument optionnel de la commande \docAuxCommand{usepackage}, et
+  seulement par ce biais-là\footnote{En particulier, ne sont pas concernés les
+    packages dont les options peuvent être passées indifféremment en argument
+    optionnel de \protect\docAuxCommand{usepackage} ou au moyen d'une commande
+    de configuration propre ; il en est ainsi du \Package{hyperref} qui dispose
+    de la commande \protect\docAuxCommand*{hypersetup}.}.
+\end{itemize}
+Ces options, qui ont pour nom le nom du package concerné, sont les suivantes (à
+charge pour l'utilisateur de consulter la documentation des packages concernés
+pour savoir quelles valeurs peuvent être passées à ces options).
+
+\begin{docKey}{graphicx}{=\marg{option(s)}}{pas valeur par défaut,
+    initialement vide}
+  Cette option permet de passer une ou plusieurs \meta{option(s)} au
+  \Package{graphicx}.
+\end{docKey}
+\begin{docKey}{adjustbox}{=\marg{option(s)}}{pas valeur par défaut,
+    initialement \docValue*{export}}
+  Cette option permet de passer une ou plusieurs \meta{option(s)} au
+  \Package{adjustbox}.
+\end{docKey}
+\begin{docKey}{setspace}{=\marg{option(s)}}{pas valeur par défaut,
+    initialement vide}
+  Cette option permet de passer une ou plusieurs \meta{option(s)} au
+  \Package{setspace}.
+
+  Contrairement à l'option \refKey{space} qui ne prend effet qu'à la partie
+  principale du document et se termine avec elle, l'option \refKey{setspace}
+  a un effet (semi-)global et prend effet dès le début du document
+  (cf. \vref{wa:space-setspace}).
+\end{docKey}
+\begin{docKey}{xcolor}{=\marg{option(s)}}{pas valeur par défaut,
+    initialement vide}
+  Cette option permet de passer une ou plusieurs \meta{option(s)} au
+  \Package{xcolor}.
+\end{docKey}
+\begin{docKey}{datatool}{=\marg{option(s)}}{pas valeur par défaut,
+    initialement vide}
+  Cette option permet de passer une ou plusieurs \meta{option(s)} au
+  \Package{datatool}.
+\end{docKey}
+\begin{docKey}{titleps}{=\marg{option(s)}}{pas valeur par défaut,
+    initialement vide}
+  Cette option permet de passer une ou plusieurs \meta{option(s)} au
+  \Package{titleps}.
+\end{docKey}
+\begin{docKey}{draftwatermark}{=\marg{option(s)}}{pas valeur par défaut,
+    initialement vide}
+  Cette option permet de passer une ou plusieurs \meta{option(s)} au
+  \Package{draftwatermark}.
+\end{docKey}
+\begin{docKey}{babel}{=\marg{option(s)}}{pas valeur par défaut,
+    initialement vide}
+  Cette option permet de passer une ou plusieurs \meta{option(s)} au
+  \Package{babel}.
+\end{docKey}
+\begin{docKey}{datetime}{=\marg{option(s)}}{pas valeur par défaut,
+    initialement \docValue*{nodayofweek}}
+  Cette option permet de passer une ou plusieurs \meta{option(s)} au
+  \Package{datetime}.
+\end{docKey}
+\begin{docKey}{varioref}{=\marg{option(s)}}{pas valeur par défaut,
+    initialement vide}
+  Cette option permet de passer une ou plusieurs \meta{option(s)} au
+  \Package{varioref}.
+\end{docKey}
+\begin{docKey}{bookmark}{=\marg{option(s)}}{pas valeur par défaut,
+    initialement \docValue*{numbered}}
+  Cette option permet de passer une ou plusieurs \meta{option(s)} au
+  \Package{bookmark}.
+\end{docKey}
+
+\begin{dbexample}{Redéfinition (globale) de l'expression séparant corps et
+    affiliations}{}
+  L'exemple suivant montre comment passer au \Package{xcolor} les options
+  \docValue*{dvipsnames} et \docValue*{table}.
+\begin{preamblecode}[listing options={showspaces}]
+\documentclass[xcolor={dvipsnames,table}]{yathesis}
+\end{preamblecode}
+\end{dbexample}
+
 \section{Options de préambule}
 \label{sec:options-de-preambule}
 

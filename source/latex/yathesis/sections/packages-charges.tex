@@ -1,110 +1,160 @@
 \chapter{Packages chargés (ou pas) par la \yatcl}\label{cha:packages-charges}
 
-On notera que, ci-dessous, les packages qui peuvent être utiles dans le cadre
-d'un usage standard de la \yatcl{} sont des hyperliens vers leur page sur le
-\gls{ctan}.
+\section{Packages chargés par la classe}\label{sec:packages-charges-par}
 
-\section{Packages chargés par la \yatcl{}}
-\label{sec:packages-charges-par}
-
-Pour plusieurs de ses fonctionnalités, la \yatcl s'appuie sur des packages
-qu'elle charge automatiquement. La liste suivante répertorie ces packages dans
-l'ordre de chargement, en indiquant les raisons de leur emploi et les options
-avec lesquelles ils sont appelés.
-
-\begin{dbwarning}{Packages automatiquement chargés par la \yatcl{} : à ne pas
-    charger manuellement}{packages-a-ne-pas-charger}
-  Il est préférable de ne pas charger manuellement (au moyen de
-  \docAuxCommand{usepackage}) les packages chargés automatiquement par la
-  \yatcl{} et en tous cas \emph{pas} avec d'autres options que celles indiquées
-  ci-dessous (sous peine d'erreur telle que celle de la
-  \vref{faq:option-clash}). En cas de nécessité d'option particulière de l'un
-  de ces packages, consulter sa documentation pour savoir comment spécifier
-  cette option autrement qu'en argument optionnel de
-  \docAuxCommand{usepackage}\footnote{Par exemple via les commandes
-    \docAuxCommand*{geometry} du \Package{geometry},
-    \docAuxCommand*{hypersetup} du \Package{hyperref}, ou en option de
-    \docAuxCommand*{documentclass} pour les langues du \Package{babel}
-    (cf. \vref{sec:langues} pour plus de détails concernant la gestion des
-    langues).}.
-\end{dbwarning}
+On a vu \vref{sec:options-passer-aux} que, pour plusieurs de ses
+fonctionnalités, la \yatcl s'appuie sur des packages qu'elle charge
+automatiquement. Ceux-ci sont répertoriés, selon leur ordre de chargement, dans
+la liste suivante qui indique leur fonction et le cas échéant :
+\begin{itemize}
+\item la ou les options avec lesquelles ils sont chargés ;
+\item les options de la \yatcl{} ou leurs commandes propres permettant de les
+  personnaliser ;
+\item ceux qui, dans le cadre d'un usage standard de la \yatcl{}, peuvent être
+  utiles à l'utilisateur final : leur nom est alors un hyperlien vers la page
+  qui leur est dédiée sur le \acrshort{ctan}.
+\end{itemize}
 
 \begin{description}
-\item[\package{xkvltxp} :] extension du \Package{xkeyval} ci-dessous ;
-\item[\package{xkeyval} :] gestion d'options sous la forme
+\item[\package{pgfopts} :] gestion d'options sous la forme
   \meta{clé}×=×\meta{valeur} ;
 \item[\package{etoolbox} :] outils de programmation ;
 \item[\package{xpatch} :] extension du package précédent ;
-\item[\package{morewrites} :] disposer d'autant de \enquote{flots} d'écriture
-  dans des fichiers annexes que nécessaire ;
+\item[\package{morewrites} :] accès à autant de \enquote{flots} d'écriture
+  (dans des fichiers annexes) que nécessaire ;
 \item[\package{filehook} :] \enquote{hameçons} (\foreignquote{english}{hooks})
   pour fichiers importés ;
-\item[\package{hopatch} :] emballage de \enquote{hameçons} pour packages et classes ;
+\item[\package{hopatch} :] emballage de \enquote{hameçons} pour packages et
+  classes ;
 \item[\package{xifthen} :] tests conditionnels ;
-\item[\package*{geometry} :] gestion de la géométrie de la page.
-  Option par défaut : \docAuxKey{a4paper} ;
-\item[\package*{graphicx} :] inclusion d'images, notamment des logos.
-  Option par défaut : \docAuxKey{final} ;
-\item[\package*{array} :] mise en forme automatique de colonnes (notamment) ;
-\item[\package{xstring} :] manipulation de chaînes ;
+\item[\package{xkeyval} :] robustification du \Package{keyval} chargé par le
+  \Package{geometry} ;
+\item[\package*{geometry} :] gestion de la géométrie de la page ;
+  \begin{description}
+  \item[option par défaut :] \docAuxKey{a4paper} ;
+  \item[personnalisation :] commande propre \docAuxCommand*{geometry} ;
+  \end{description}
+\item[\package*{graphicx} :] inclusion d'images, notamment des logos ;
+  \begin{description}
+  \item[personnalisation :] option de la \yatcl \refKey{graphicx} ;
+  \end{description}
+\item[\package{environ} :] stockage du contenu d'un environnement dans une
+  macro ;
+\item[\package*{adjustbox} :] ajustement de la position des matériels
+  \LaTeX{} ;
+  \begin{description}
+  \item[option par défaut :] \docAuxKey{export} ;
+  \item[personnalisation :] option de la \yatcl \refKey{adjustbox} ;
+  \end{description}
+\item[\package*{array} :] mise en forme automatique de colonnes de tableaux
+  (notamment) ;
+\item[\package{xstring} :] manipulation de chaînes de caractères ;
+\item[\package*{textcase} :] amélioration des commandes de changement de
+  casse ;
 \item[\package{translator} :] traduction d'expressions ;
 \item[\package{fixltx2e} :] corrections de bogues de \hologo{LaTeX2e} ;
 \item[\package*{epigraph} :] gestion des épigraphes ;
-\item[\package*{tcolorbox} :] boîtes élaborées en couleurs et
-  encadrées. Librairie chargée par défaut : \docValue{skins} ;
+\item[\package*{tcolorbox} :] boîtes élaborées en couleurs et encadrées ;
+  \begin{description}
+  \item[librairie chargée par défaut :] \docValue{skins} ;
+  \item[personnalisation :] commandes propres \docAuxCommand*{tcbuselibrary} et
+    \docAuxCommand*{tcbset} ;
+  \end{description}
 \item[\package*{marvosym} :] accès à des symboles spéciaux ;
 \item[\package*{setspace} :] gestion de l'espace interligne ;
+  \begin{description}
+  \item[personnalisation :] option de la \yatcl \refKey{setspace} ;
+  \end{description}
 \item[\package{shorttoc} :] création de sommaire ;
 \item[\package{tocvsec2} :] gestion des profondeurs de numérotation des
   sections et de la table des matières ;
-\item[\package{tocbibind} :] table des matières et index dans la
-  table des matières ;
+\item[\package{tocbibind} :] table des matières et index dans la table des
+  matières ;
+\item[\package{nonumonpart} :] suppression des numéros de pages sur les pages
+  de garde des parties ;
 \item[\package*{xcolor} :] gestion des couleurs ;
-\item[\package{nonumonpart} :] suppression des numéros de pages sur
-  les pages de garde des parties ;
-\item[\package{datatool} :] gestion de bases de données (membres du
-  jury, etc.) ;
-\item[\package{fncychap} :] têtes de chapitres améliorées. Option par défaut :
-  \docAuxKey{PetersLenny} ;
-\item[\package{titleps} :] gestion des styles de pages ;
+  \begin{description}
+  \item[personnalisation :] option de la \yatcl \refKey{xcolor} ;
+  \end{description}
+\item[\package{datatool} :] gestion de bases de données (membres du jury,
+  etc.) ;
+  \begin{description}
+  \item[personnalisation :] option de la \yatcl \refKey{datatool} ;
+  \end{description}
+\item[\package*{fncychap} :] têtes de chapitres améliorées ;
+  \begin{description}
+  \item[option par défaut :] \docAuxKey{PetersLenny} ;
+  \item[personnalisation :] option de la \yatcl \refKey{fncychap} ;
+  \end{description}
+\item[\package*{titleps} :] gestion des styles de pages ;
+  \begin{description}
+  \item[personnalisation :] option de la \yatcl \refKey{titleps} ;
+  \end{description}
 \item[\package{ifdraft} :] test conditionnel du mode brouillon ;
-\item[\package{draftwatermark} :] texte en filigrane\footnote{Chargé seulement
+\item[\package*{draftwatermark} :] texte en filigrane\footnote{Chargé seulement
     si l'une ou l'autre des valeurs \docValue{draft} ou \docValue{inprogress*}
     est passée à la clé \refKey{version}.} ;
+  \begin{description}
+  \item[personnalisation :] option de la \yatcl \refKey{draftwatermark} ;
+  \end{description}
 \item[\package*{index} :] gestion du ou des index\footnote{Pour la gestion
-    d'index, le \Package{makeidx} est plus courant mais le \Package*{index}
-    l'améliore et offre des fonctionnalités supplémentaires, notamment pour
-    produire des index multiples. Les deux ont des syntaxes très voisines. Le
-    chargement du \Package{index} par la classe est nécessaire pour des raisons
+    d'index, le \Package{makeidx} est plus courant mais le \Package*{index},
+    à la syntaxe très voisine, l'améliore et offre des fonctionnalités
+    supplémentaires, notamment pour produire des index multiples. Le chargement
+    du \Package{index} par la classe est nécessaire pour des raisons
     techniques.} ;
 \item[\package*{idxlayout} :] correction d'un bogue affichant trop haut
-  l'intitulé \enquote{Index} de l'index. Option par défaut
-  \docAuxKey*{columns=1}\footnote{Si on souhaite un index non pas sur $1$ mais
-    sur \meta{n} colonnes, il suffit de le spécifier au moyen de
-    \protect\lstinline+\\idxlayout\{columns=+\meta{n}\protect\lstinline+\}+.} ;
+  l'intitulé \enquote{Index} de l'index ;
+  \begin{description}
+  \item[option par défaut :] \docValue*{columns=1} ;
+  \item[personnalisation :] commande propre \docAuxCommand*{idxlayout} ;
+  \end{description}
+  % ^^A \footnote{Si on souhaite un index non pas sur $1$ mais
+  % ^^A sur \meta{n} colonnes, il suffit de le spécifier au moyen de
+  % ^^A\protect\lstinline+\\idxlayout\{columns=+\meta{n}\protect\lstinline+\}+.} ;
 \item[\package*{babel} :] gestion des langues ;
+  \begin{description}
+  \item[personnalisation :] option de la \yatcl \refKey{babel} ;
+  \end{description}
 \item[\package{iflang} :] test de la langue en cours ;
-\item[\package{datetime} :] gestion de la date. Option par défaut :
-  \docAuxKey{nodayofweek} ;
 \item[\package{datenumber} :] comparaison de dates ;
+\item[\package*{datetime} :] gestion des dates ;
+  \begin{description}
+  \item[personnalisation :] option de la \yatcl \refKey{datetime} ;
+  \end{description}
 \item[\package*{varioref} :] références croisées améliorées ;
-\item[\package*{hyperref} :] liens hypertextes. Options par défaut :
-  \begin{itemize}
-  \item \docAuxKey{final} ;
-  \item \docAuxKey{unicode} ;
-  \item \docAuxKey{breaklinks} ;
-  \item ×hyperfootnotes=false× ;
-  \item ×hyperindex=false×\footnote{Sans quoi certaines fonctionnalités sont
-      ignorées, par exemple \protect\lstinline|see| pour les index.} ;
-  \item ×plainpages=false× ;
-  \item ×pdfpagemode=UseOutlines× ;
-  \item ×pdfpagelayout=TwoPageRight× ;
-  \end{itemize}
+  \begin{description}
+  \item[personnalisation :] option de la \yatcl \refKey{varioref} ;
+  \end{description}
+\item[\package*{hyperref} :] liens hypertextes ;
+  \begin{description}
+  \item[option par défaut :]\
+    \begin{itemize}
+    \item \docAuxKey{final} ;
+    \item \docAuxKey{unicode} ;
+    \item \docAuxKey{breaklinks} ;
+    \item ×hyperfootnotes=false× ;
+    \item ×hyperindex=false×\footnote{Sans quoi certaines fonctionnalités sont
+        ignorées, par exemple \protect\lstinline|see| pour les index.} ;
+    \item ×plainpages=false× ;
+    \item ×pdfpagemode=UseOutlines× ;
+    \item ×pdfpagelayout=TwoPageRight× ;
+    \end{itemize}
+  \item[personnalisation :] commande propre \docAuxCommand*{hypersetup} ;
+  \end{description}
 \item[\package{hypcap} :] liens hypertextes pointant au début des
-  flottants\ifscreenoutput. Option par défaut : \docAuxKey{all} ;
-\item[\package{bookmark} :] gestion des signets\ifscreenoutput. Option par
-  défaut : \docAuxKey{numbered}.
+  flottants\ifscreenoutput ;
+  \begin{description}
+  \item[option par défaut :] \docValue*{all} ;
+  \end{description}
+\item[\package*{bookmark} :] gestion des signets\ifscreenoutput ;
+  \begin{description}
+  \item[personnalisation :] option de la \yatcl \refKey{bookmark} ;
+  \end{description}
+\item[\package{glossaries-babel} :] traduction d'expressions propres aux
+  glossaires\footnote{Chargé seulement si le \Package{glossaries} l'est.}.
 \end{description}
+
 
 \begin{dbremark}{Disposer d'une distribution \TeX{} à jour est fortement
     recommandé}{packages-anciens}
