@@ -140,8 +140,14 @@ différentes versions du document : \enquote{intermédiaire} (par défaut),
       \item l'affichage en pied de page de la mention \enquote{Version
           intermédiaire en date du \meta{date}} ou \foreignquote{english}{Work
           in progress as of \meta{date}} est désactivé ;
-      \item sur les pages de titre, la composition du jury est masquée et la
-        date de soutenance est supprimée\footnote{En versions soumises aux
+      \item
+        %
+        \changes{v0.99f}{2014/07/11}{Modification de la mise en page des pages
+          de titre : les date de soutenance et composition du jury absentes (et
+          non obligatoires) en versions \enquote{à soumettre}}
+        %
+        sur les pages de titre, la composition du jury est masquée et la date
+        de soutenance est supprimée\footnote{En versions soumises aux
           rapporteurs, le doctorant ne peut préjuger ni d'un jury ni d'une date
           de soutenance, ne sachant pas encore s'il va être autorisé
           à soutenir.} ;
@@ -286,6 +292,9 @@ Les documents composés avec la \yatcl{} peuvent avoir deux formats de sortie :
 
 \subsection{Style des têtes de chapitres}\label{sec:style-des-tetes}
 
+\changes{v0.99g}{2014/07/13}{La clé \protect\refAux{chap-style} est remplacée
+  par (et devient un alias de) la clé \protect\refKey{fncychap}}%
+
 Pour gérer les têtes de chapitres, la \yatcl{} s'appuie sur le
 \Package*{fncychap}, par défaut chargé avec le style \docValue{PetersLenny}. La
 clé \refKey{fncychap} suivante permet de spécifier un autre style de ce
@@ -411,7 +420,8 @@ redéfinies, globalement ou localement.
 \subsection{Habilitations à diriger les recherches}
 \label{sec:hdr}
 %
-\changes{v0.99f}{2014/07/11}{Option pour les HDR ajoutée}
+\changes{v0.99f}{2014/07/11}{La classe peut désormais être utilisée pour les
+  \gls{hdr}}
 
 Grâce à sa clé \refKey{hdr}, la \yatcl{} peut être utilisée pour
 les habilitations à diriger les recherches.
@@ -431,6 +441,9 @@ celles dont le label est suffixé par \enquote{\texttt{-hdr}} dans le
 
 \section{Options à passer aux packages chargés par la \yatcl{}}
 \label{sec:options-passer-aux}
+
+\changes{v0.99g}{2014/07/13}{Des options peuvent être passées aux packages
+  chargés par \yat{}}
 
 Pour plusieurs de ses fonctionnalités, la \yatcl s'appuie sur des packages
 qu'elle charge automatiquement (listés
@@ -760,6 +773,9 @@ ou des chargé(e)s de recherche (\gls{hdr} ou pas) du \gls{cnrs}. La clé
 \end{dbexample}
 
 \subsection{Nouveaux rôles}\label{sec:nouveaux-roles}
+
+\changes{v0.99f}{2014/07/11}{Possibilité de spécifier et définir de nouveaux
+  rôles pour les personnes}
 
 On a pu noter \vref{sec:jury} que des rôles, figurant automatiquement sur les
 pages de titre, sont attachés :
