@@ -103,78 +103,6 @@ Par défaut, un mémoire créé avec la \yatcl est composé :
 \end{preamblecode}
 \end{dbexample}
 
-\subsection{Profondeur de la numérotation}\label{sec:profondeur-de-la}
-
-Par défaut, la numérotation des paragraphes a pour \enquote{niveau de
-  profondeur} les sous-sections. Autrement dit, seuls les titres des parties
-(éventuelles), chapitres, sections et sous-sections sont numérotés.  L'option
-\refKey{secnumdepth} suivante permet de spécifier un autre niveau de
-profondeur.
-%
-{%
-  \tcbset{before lower=\vspace*{\baselineskip}\par}
-  \begin{docKey}{secnumdepth}{=\docValue{part}\textbar\docValue{chapter}\textbar\docValue{section}\textbar\docValue{subsection}\textbar\docValue{subsubsection}\textbar\docValue{paragraph}\textbar\docValue{subparagraph}}{pas
-      de valeur par défaut, initialement \docValue{subsection}}
-    Cette clé permet de modifier le \enquote{niveau de profondeur} de la
-    numérotation des paragraphes jusqu'aux, respectivement : parties,
-    chapitres, sections, sous-sections, sous-sous-sections, paragraphes,
-    sous-paragraphes.
-  \end{docKey}
-}
-
-\subsection{Espace interligne}\label{sec:interligne}
-
-L'interligne du document est par défaut \enquote{simple} mais, au moyen de
-l'option \refKey{space} suivante, il est possible de spécifier un interligne
-\enquote{un et demi} ou \enquote{double}.
-
-\begin{docKey}{space}{=\docValue{single}\textbar\docValue{onehalf}\textbar\docValue{double}}{pas de valeur par défaut,
-    initialement \docValue{single}}
-  Cette clé permet de spécifier un interligne \docValue{single} (simple),
-  \docValue{onehalf} (un et demi) ou \docValue{double} (double).
-\end{docKey}
-
-\begin{dbwarning}{Option d'interligne : seulement dans la partie
-    principale}{}
-  L'effet de l'option \refKey{space} ne débute qu'avec la partie principale du
-  document (cf. \vref{cha:corps}) et se termine avec elle, avant la partie
-  annexe (cf. \vref{cha:annexes}). Si on souhaite changer d'interligne ailleurs
-  dans le mémoire, on recourra aux commandes du \Package*{setspace}
-  \phrase*{chargé par la \yatcl}.
-\end{dbwarning}
-
-\subsection{Style des têtes de chapitres}\label{sec:style-des-tetes}
-
-Pour gérer les têtes de chapitres, la \yatcl{} s'appuie sur le
-\Package*{fncychap}, par défaut chargé avec le style \docValue{PetersLenny}. La
-clé \refKey{chap-style} suivante permet de spécifier un autre style de ce
-package.
-%
-{%
-  \tcbset{before lower=\vspace*{\baselineskip}\par}
-  \begin{docKey}{chap-style}{=\docValue{Sonny}\textbar\docValue{Lenny}\textbar\docValue{Glenn}\textbar\docValue{Conny}\textbar\docValue{Rejne}\textbar\docValue{Bjarne}\textbar\docValue{PetersLenny}\textbar\docValue{Bjornstrup}\textbar\docValue{none}}{pas
-      de valeur par défaut, initialement \docValue{PetersLenny}}
-    Cette clé permet de spécifier un autre style du \Package{fncychap}.
-
-    Le \enquote{style} supplémentaire \docValue{none} permet de désactiver le
-    chargement de \package{fncychap} pour retrouver les têtes de chapitres
-    usuelles de la \Class{book}.
-  \end{docKey}
-}
-
-\subsection{(Non-)Production de la page de première de
-  couverture}\label{sec:non-production-de}
-
-Par défaut, la commande \refCom{maketitle} produit une page de 1\iere{} de
-couverture \phrase*{en plus de la ou des pages de titre}. La clé
-\refKey{nofrontcover} suivante permet de s'en affranchir.
-
-\begin{docKey}{nofrontcover}{=\docValue{true}\textbar\docValue{false}}{par défaut
-    \docValue{true}, initialement \docValue{false}}
-  Cette clé permet de désactiver la production de la page de 1\iere{} de
-  couverture.
-\end{docKey}
-
 \subsection{Versions du mémoire}\label{sec:versions}
 
 Au moyen de la clé \refKey{version}, la \yatcl{} permet de facilement produire
@@ -355,6 +283,26 @@ Les documents composés avec la \yatcl{} peuvent avoir deux formats de sortie :
   exemple fournies par ×\href{×\meta{\acrshort*{url}}×}{×\meta{texte}×}×),
   leurs cibles ne figureront nulle part en sortie \enquote{papier}.
 \end{dbwarning}
+
+\subsection{Style des têtes de chapitres}\label{sec:style-des-tetes}
+
+Pour gérer les têtes de chapitres, la \yatcl{} s'appuie sur le
+\Package*{fncychap}, par défaut chargé avec le style \docValue{PetersLenny}. La
+clé \refKey{fncychap} suivante permet de spécifier un autre style de ce
+package\footnote{Par souci de compatibilité ascendante, la clé désormais
+  obsolète \docAuxKey{chap-style} est un alias de la clé \refKey{fncychap}.}.
+%
+{%
+  \tcbset{before lower=\vspace*{\baselineskip}\par}
+  \begin{docKey}{fncychap}{=\docValue{Sonny}\textbar\docValue{Lenny}\textbar\docValue{Glenn}\textbar\docValue{Conny}\textbar\docValue{Rejne}\textbar\docValue{Bjarne}\textbar\docValue{PetersLenny}\textbar\docValue{Bjornstrup}\textbar\docValue{none}}{pas
+      de valeur par défaut, initialement \docValue{PetersLenny}}
+    Cette clé permet de spécifier un autre style du \Package{fncychap}.
+
+    Le \enquote{style} supplémentaire \docValue{none} permet de désactiver le
+    chargement de \package{fncychap} pour retrouver les têtes de chapitres
+    usuelles de la \Class{book}.
+  \end{docKey}
+}
 
 \subsection{Expressions séparant les corps et affiliations des membres du jury}
 \label{sec:expr-separ-les}
@@ -570,71 +518,60 @@ pour savoir quelles valeurs peuvent être passées à ces options).
 \section{Options de préambule}
 \label{sec:options-de-preambule}
 
-Pour des raisons techniques, certaines options de la \yatcl ne peuvent pas être
-passées en argument optionnel de \docAuxCommand{documentclass} et doivent
-l'être en préambule, en argument de la commande \refCom{yadsetup}.  C'est le
-cas des options étudiées dans cette section.
+Pour des raisons techniques, les options de la \yatcl listées à la
+\vref{options-classe}, ne peuvent être passées qu'en argument optionnel de
+\docAuxCommand{documentclass}. Les options de la présente section peuvent être
+passées indifféremment :
+\begin{itemize}
+\item en argument optionnel de \docAuxCommand{documentclass} ;
+\item en préambule, en argument de la commande \refCom{yadsetup}.
+\end{itemize}
 
 \begin{docCommand}{yadsetup}{\marg{options}}
-  Cette commande permet de spécifier les \meta{options} de la \yatcl ne pouvant
-  pas être passées en argument optionnel de \docAuxCommand{documentclass}.
+  Cette commande permet de spécifier certaines \meta{options} de la \yatcl.
 \end{docCommand}
 
-\begin{dbwarning}{Commande \protect\refCom{yadsetup} : seulement en préambule}{}
-  La commande \refCom{yadsetup} ne peut être utilisée qu'en préambule.
-\end{dbwarning}
+\subsection{Profondeur de la numérotation}\label{sec:profondeur-de-la}
 
-
-\subsection{Cadre autour du titre de la thèse}
-\label{sec:cadre-autour-du}
-\changes{v0.99c}{2014/06/06}{Personnalisation possible (p. ex. suppression) du
-  cadre autour du titre}
-
+Par défaut, la numérotation des paragraphes a pour \enquote{niveau de
+  profondeur} les sous-sections. Autrement dit, seuls les titres des parties
+(éventuelles), chapitres, sections et sous-sections sont numérotés.  L'option
+\refKey{secnumdepth} suivante permet de spécifier un autre niveau de
+profondeur.
+%
 {%
   \tcbset{before lower=\vspace*{\baselineskip}\par}
-\begin{docKey}{frametitle}{=\docValue{fbox}\textbar\docValue{shadowbox}\textbar\docValue{ovalbox}\textbar\docValue{none}\textbar\marg{autre}}{pas de valeur par défaut, initialement \docValue{fbox}}
-  Cette clé permet de personnaliser le cadre figurant par défaut autour du
-  titre de la thèse sur les pages de titre :
-  \begin{itemize}
-  \item sa valeur \docValue{fbox} produit un cadre rectangulaire ;
-  \item sa valeur \docValue{shadowbox} produit un cadre ombré ;
-  \item sa valeur \docValue{ovalbox} produit un cadre dont les sommets sont
-    arrondis ;
-  \item sa valeur \docValue{none} permet de supprimer ce cadre. L'affichage des
-    mentions \enquote{Titre de la thèse} et \foreignquote{english}{Thesis
-      Title} est alors désactivé ;
-  \item toute \meta{autre} valeur lui étant passée doit être :
-    \begin{enumerate}
-    \item une liste de clés/valeurs propres à l'environnement
-      \docAuxEnvironment{tcolorbox} du \Package{tcolorbox} (cf. la
-      documentation de ce package) ;
-    \item passée entre paire d'accolades :
-\begin{preamblecode}
-\yadsetup{frametitle={÷\meta{autre}÷}}
-\end{preamblecode}
-    \end{enumerate}
-  \end{itemize}
-\end{docKey}
+  \begin{docKey}{secnumdepth}{=\docValue{part}\textbar\docValue{chapter}\textbar\docValue{section}\textbar\docValue{subsection}\textbar\docValue{subsubsection}\textbar\docValue{paragraph}\textbar\docValue{subparagraph}}{pas
+      de valeur par défaut, initialement \docValue{subsection}}
+    Cette clé permet de modifier le \enquote{niveau de profondeur} de la
+    numérotation des paragraphes jusqu'aux, respectivement : parties,
+    chapitres, sections, sous-sections, sous-sous-sections, paragraphes,
+    sous-paragraphes.
+  \end{docKey}
 }
 
-\begin{dbexample}{Cadre personnalisé autour du titre de la thèse}{}
-  Pour que le cadre entourant le tire de la thèse soit ombré, il suffit de
-  saisir :
-\begin{preamblecode}
-\yadsetup{frametitle=shadowbox}
-\end{preamblecode}
-\end{dbexample}
+\subsection{Espace interligne}\label{sec:interligne}
 
-\begin{dbexample}{Cadre \enquote{fantaisie} autour du titre de la thèse}{}
-  Cet exemple, certainement déconseillé, montre comment exploiter les
-  fonctionnalités du \Package{tcolorbox} pour obtenir un cadre
-  \enquote{fantaisie} autour du titre de la thèse.%
-  \NoAutoSpacing%
-\begin{preamblecode}
-\tcbuselibrary{skins}
-\yadsetup{frametitle={colback=red!50!white,beamer}}
-\end{preamblecode}
-\end{dbexample}
+L'interligne du document est par défaut \enquote{simple} mais, au moyen de
+l'option \refKey{space} suivante, il est possible de spécifier un interligne
+\enquote{un et demi} ou \enquote{double}.
+
+\begin{docKey}{space}{=\docValue{single}\textbar\docValue{onehalf}\textbar\docValue{double}}{pas de valeur par défaut,
+    initialement \docValue{single}}
+  Cette clé permet de spécifier un interligne \docValue{single} (simple),
+  \docValue{onehalf} (un et demi) ou \docValue{double} (double).
+\end{docKey}
+
+\begin{dbwarning}{Option d'interligne : seulement dans la partie
+    principale}{space-setspace}
+  Contrairement à l'option \refKey{setspace} qui a un effet (semi-)global et
+  prend effet dès le début du document, l'option \refKey{space} ne prend effet
+  qu'à la partie principale du document (cf. \vref{cha:corps}) et se termine
+  avec elle, avant la partie annexe (cf. \vref{cha:annexes}).
+\end{dbwarning}
+
+Si on souhaite changer d'interligne ailleurs dans le mémoire, on recourra aux
+commandes du \Package*{setspace} \phrase*{chargé par la \yatcl}.
 
 \section{Commandes et options de commandes de la \yatcl}
 
