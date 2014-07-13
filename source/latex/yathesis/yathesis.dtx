@@ -862,10 +862,23 @@ This work consists of the file  yathesis.dtx
 % \end{enumerate}
 %
 %    \begin{macrocode}
+\PassOptionsToPackage{a4paper}{geometry}%
+\PassOptionsToPackage{columns=1}{idxlayout}%
+\PassOptionsToPackage{nodayofweek}{datetime}%
+\PassOptionsToPackage{export}{adjustbox}%
+\PassOptionsToPackage{numbered}{bookmark}%
 \yadsetup{%
+  graphicx/.code={\PassOptionsToPackage{#1}{graphicx}},%
+  adjustbox/.code={\PassOptionsToPackage{#1}{adjustbox}},%
+  setspace/.code={\PassOptionsToPackage{#1}{setspace}},%
   xcolor/.code={\PassOptionsToPackage{#1}{xcolor}},%
-  geometry/.code={\PassOptionsToPackage{#1}{geometry}},%
-  tcolorbox/.code={\PassOptionsToPackage{#1}{tcolorbox}},%
+  datatool/.code={\PassOptionsToPackage{#1}{datatool}},%
+  titleps/.code={\PassOptionsToPackage{#1}{titleps}},%
+  draftwatermark/.code={\PassOptionsToPackage{#1}{draftwatermark}},%
+  babel/.code={\PassOptionsToPackage{#1}{babel}},%
+  datetime/.code={\PassOptionsToPackage{#1}{datetime}},%
+  varioref/.code={\PassOptionsToPackage{#1}{varioref}},%
+  bookmark/.code={\PassOptionsToPackage{#1}{bookmark}},%
 }%
 %    \end{macrocode}
 %
@@ -913,11 +926,11 @@ This work consists of the file  yathesis.dtx
 %
 % Gestion de la géométrie de la page.
 %    \begin{macrocode}
-\RequirePackage[a4paper]{geometry}[2010/09/12]%
+\RequirePackage{geometry}[2010/09/12]%
 %    \end{macrocode}
 % Pour insérer des images
 %    \begin{macrocode}
-\RequirePackage[final]{graphicx}[1999/02/16]%
+\RequirePackage{graphicx}[1999/02/16]%
 %    \end{macrocode}
 % Pour stocker le contenu d'un environnement dans une macro.
 %    \begin{macrocode}
@@ -926,7 +939,7 @@ This work consists of the file  yathesis.dtx
 % Pour ajuster la position des matériels \LaTeX{}, notamment pour assurer
 % l'alignement vertical des images.
 %    \begin{macrocode}
-\RequirePackage[export]{adjustbox}[2012/05/21]%
+\RequirePackage{adjustbox}[2012/05/21]%
 %    \end{macrocode}
 % Pour disposer d'outils pour les tableaux
 %    \begin{macrocode}
@@ -1041,7 +1054,7 @@ This work consists of the file  yathesis.dtx
 % haut que les intitulés standard tels que \enquote{Table des matières} ou
 % \enquote{Liste des figures}.
 %    \begin{macrocode}
-\RequirePackage[columns=1]{idxlayout}[2012/03/30]%
+\RequirePackage{idxlayout}[2012/03/30]%
 %    \end{macrocode}
 % Pour gérer les langues.
 %    \begin{macrocode}
@@ -1093,7 +1106,7 @@ This work consists of the file  yathesis.dtx
 %
 % Pour générer les dates (sans affichage du jour de la semaine).
 %    \begin{macrocode}
-\RequirePackage[nodayofweek]{datetime}[2013/09/10]%
+\RequirePackage{datetime}[2013/09/10]%
 %    \end{macrocode}
 % Gestion améliorée des références croisées. Le chargement de ce package dans
 % la classe (et non pas dans le document) est nécessaire car il doit être
