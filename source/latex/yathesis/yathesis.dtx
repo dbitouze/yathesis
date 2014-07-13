@@ -2011,17 +2011,19 @@ This work consists of the file  yathesis.dtx
   \ifthenelse{\isempty{#1}}{%
   }{%
     \ifdraft{%
-      \scriptsize%
-      \begin{tabular}{l}
-        {%
-          \normalfont\ttfamily\tiny%
-          (lbl-#1)%
-        }%
-        \\[-.3\baselineskip]
-        \YAD@reach@file[\YAD@configuration@file]{%
-          \translate{lbl-#1}%
-        }%
-      \end{tabular}
+      {%
+        \scriptsize%
+        \begin{tabular}{l}
+          {%
+            \normalfont\ttfamily\tiny%
+            (lbl-#1)%
+          }%
+          \\[-.3\baselineskip]
+          \YAD@reach@file[\YAD@configuration@file]{%
+            \translate{lbl-#1}%
+          }%
+        \end{tabular}
+      }%
     }{%
     \translate{lbl-#1}%
     }%
@@ -3705,7 +3707,10 @@ This work consists of the file  yathesis.dtx
 % \end{macro}
 % Par défaut, rien n'est numéroté au début du document.
 %    \begin{macrocode}
-  \AtBeginDocument{\setsecnumdepth{none}}%
+  \AtBeginDocument{%
+    \setsecnumdepth{none}%
+    \frontmatter%
+  }%
 %    \end{macrocode}
 % Définition du style de page des titres
 %    \begin{macrocode}
@@ -3715,7 +3720,6 @@ This work consists of the file  yathesis.dtx
 % aucun élément de structuration n'est numéroté ni ne figure dans la
 % table des matières
 %    \begin{macrocode}
-  \frontmatter%
   % \settocdepth{none}%
   \setsecnumdepth{none}%
   \ifdraft{%
