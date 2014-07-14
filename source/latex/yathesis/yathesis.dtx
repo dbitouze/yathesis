@@ -794,8 +794,9 @@ This work consists of the file  yathesis.dtx
     \boolfalse{YAD@noerror}%
     \booltrue{YAD@final@work}%
   },%
-  version/.default=final%
+  version/.initial=final%
 }%
+\yadsetup{version=inprogress}%
 %    \end{macrocode}
 %
 % On définit la clé ×output× de la classe qui prend pour valeurs :
@@ -813,7 +814,7 @@ This work consists of the file  yathesis.dtx
     \booltrue{YAD@output@paper@star}%
   },%
   output/screen/.code={},%
-  output/.default=screen%
+  output/.initial=screen%
 }%
 %    \end{macrocode}
 %
@@ -827,7 +828,7 @@ This work consists of the file  yathesis.dtx
   space/single/.code={\def\YAD@interligne{single}},%
   space/onehalf/.code={\def\YAD@interligne{onehalf}},%
   space/double/.code={\def\YAD@interligne{double}},%
-  space/.default=single%
+  space/.initial=single%
 }%
 %    \end{macrocode}
 %
