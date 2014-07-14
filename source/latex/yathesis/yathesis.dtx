@@ -769,29 +769,65 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \yadsetup{%
   version/.is choice,%
-  version/inprogress/.code={\booltrue{YAD@inprogress@work}},%
-  version/inprogress*/.code={\booltrue{YAD@inprogress@work@star}},%
   version/draft/.code={%
     \booltrue{YAD@draft}%
+    \boolfalse{YAD@inprogress@work}%
+    \boolfalse{YAD@inprogress@work@star}%
+    \boolfalse{YAD@submitted@work}%
+    \boolfalse{YAD@submitted@work@star}%
+    \boolfalse{YAD@final@work}%
     \ifthenelse{\equal{\@classoptionslist}{}}{%
       \edef\@classoptionslist{draft}%
     }{%
       \edef\@classoptionslist{\@classoptionslist,draft}%
     }%
   },%
+  version/inprogress/.code={%
+    \boolfalse{YAD@draft}%
+    \booltrue{YAD@inprogress@work}%
+    \boolfalse{YAD@inprogress@work@star}%
+    \boolfalse{YAD@submitted@work}%
+    \boolfalse{YAD@submitted@work@star}%
+    \boolfalse{YAD@final@work}%
+  },%
+  version/inprogress*/.code={%
+    \boolfalse{YAD@draft}%
+    \boolfalse{YAD@inprogress@work}%
+    \booltrue{YAD@inprogress@work@star}%
+    \boolfalse{YAD@submitted@work}%
+    \boolfalse{YAD@submitted@work@star}%
+    \boolfalse{YAD@final@work}%
+  },%
   version/submitted/.code={%
     \boolfalse{YAD@nowarning}%
     \boolfalse{YAD@noerror}%
+    \boolfalse{YAD@nowarning}%
+    \boolfalse{YAD@noerror}%
+    \boolfalse{YAD@draft}%
+    \boolfalse{YAD@inprogress@work}%
+    \boolfalse{YAD@inprogress@work@star}%
     \booltrue{YAD@submitted@work}%
+    \boolfalse{YAD@submitted@work@star}%
+    \boolfalse{YAD@final@work}%
   },%
   version/submitted*/.code={%
     \boolfalse{YAD@nowarning}%
     \boolfalse{YAD@noerror}%
+    \boolfalse{YAD@draft}%
+    \boolfalse{YAD@inprogress@work}%
+    \boolfalse{YAD@inprogress@work@star}%
+    \boolfalse{YAD@submitted@work}%
     \booltrue{YAD@submitted@work@star}%
+    \boolfalse{YAD@final@work}%
   },%
   version/final/.code={%
     \boolfalse{YAD@nowarning}%
     \boolfalse{YAD@noerror}%
+    \boolfalse{YAD@draft}%
+    \boolfalse{YAD@inprogress@work}%
+    \boolfalse{YAD@inprogress@work@star}%
+    \boolfalse{YAD@submitted@work}%
+    \boolfalse{YAD@submitted@work@star}%
     \booltrue{YAD@final@work}%
   },%
   version/.initial=final%
