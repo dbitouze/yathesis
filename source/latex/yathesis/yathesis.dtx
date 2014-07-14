@@ -767,10 +767,6 @@ This work consists of the file  yathesis.dtx
 %   clairement qu'il s'agit d'une version soumise aux rapporteurs.
 % \end{itemize}
 %    \begin{macrocode}
-% \def\YAD@version{inprogress}%
-% \define@choicekey*{yathesis.cls}{version}%
-% {draft,inprogress,inprogress*,submitted,submitted*,final}[inprogress]%
-% {\def\YAD@version{#1}}%
 \yadsetup{%
   version/.is choice,%
   version/inprogress/.code={\booltrue{YAD@inprogress@work}},%
