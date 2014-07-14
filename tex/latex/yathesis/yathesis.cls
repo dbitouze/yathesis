@@ -226,37 +226,72 @@
   male=true,%
   female=false,%
 }%
-\yadsetup{noerror=true}%
-\booltrue{YAD@cover@page}%
 \yadsetup{%
   version/.is choice,%
-  version/inprogress/.code={\booltrue{YAD@inprogress@work}},%
-  version/inprogress*/.code={\booltrue{YAD@inprogress@work@star}},%
   version/draft/.code={%
     \booltrue{YAD@draft}%
+    \boolfalse{YAD@inprogress@work}%
+    \boolfalse{YAD@inprogress@work@star}%
+    \boolfalse{YAD@submitted@work}%
+    \boolfalse{YAD@submitted@work@star}%
+    \boolfalse{YAD@final@work}%
     \ifthenelse{\equal{\@classoptionslist}{}}{%
       \edef\@classoptionslist{draft}%
     }{%
       \edef\@classoptionslist{\@classoptionslist,draft}%
     }%
   },%
+  version/inprogress/.code={%
+    \boolfalse{YAD@draft}%
+    \booltrue{YAD@inprogress@work}%
+    \boolfalse{YAD@inprogress@work@star}%
+    \boolfalse{YAD@submitted@work}%
+    \boolfalse{YAD@submitted@work@star}%
+    \boolfalse{YAD@final@work}%
+  },%
+  version/inprogress*/.code={%
+    \boolfalse{YAD@draft}%
+    \boolfalse{YAD@inprogress@work}%
+    \booltrue{YAD@inprogress@work@star}%
+    \boolfalse{YAD@submitted@work}%
+    \boolfalse{YAD@submitted@work@star}%
+    \boolfalse{YAD@final@work}%
+  },%
   version/submitted/.code={%
     \boolfalse{YAD@nowarning}%
     \boolfalse{YAD@noerror}%
+    \boolfalse{YAD@nowarning}%
+    \boolfalse{YAD@noerror}%
+    \boolfalse{YAD@draft}%
+    \boolfalse{YAD@inprogress@work}%
+    \boolfalse{YAD@inprogress@work@star}%
     \booltrue{YAD@submitted@work}%
+    \boolfalse{YAD@submitted@work@star}%
+    \boolfalse{YAD@final@work}%
   },%
   version/submitted*/.code={%
     \boolfalse{YAD@nowarning}%
     \boolfalse{YAD@noerror}%
+    \boolfalse{YAD@draft}%
+    \boolfalse{YAD@inprogress@work}%
+    \boolfalse{YAD@inprogress@work@star}%
+    \boolfalse{YAD@submitted@work}%
     \booltrue{YAD@submitted@work@star}%
+    \boolfalse{YAD@final@work}%
   },%
   version/final/.code={%
     \boolfalse{YAD@nowarning}%
     \boolfalse{YAD@noerror}%
+    \boolfalse{YAD@draft}%
+    \boolfalse{YAD@inprogress@work}%
+    \boolfalse{YAD@inprogress@work@star}%
+    \boolfalse{YAD@submitted@work}%
+    \boolfalse{YAD@submitted@work@star}%
     \booltrue{YAD@final@work}%
   },%
-  version/.default=final%
+  version/.initial=final%
 }%
+\yadsetup{version=inprogress}%
 \yadsetup{%
   output/.is choice,%
   output/paper/.code={\booltrue{YAD@output@paper}},%
@@ -265,7 +300,7 @@
     \booltrue{YAD@output@paper@star}%
   },%
   output/screen/.code={},%
-  output/.default=screen%
+  output/.initial=screen%
 }%
 \def\YAD@interligne{single}%
 \yadsetup{%
@@ -273,7 +308,7 @@
   space/single/.code={\def\YAD@interligne{single}},%
   space/onehalf/.code={\def\YAD@interligne{onehalf}},%
   space/double/.code={\def\YAD@interligne{double}},%
-  space/.default=single%
+  space/.initial=single%
 }%
 \yadsetup{%
   mainlanguage/.store in=\YAD@mainlanguage,%
