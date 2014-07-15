@@ -2336,7 +2336,11 @@ This work consists of the file  yathesis.dtx
     \DTLnewdbentry{#4}{affiliation}{\cmdKV@YAD@affiliation}%
   }%
   \YAD@ifemptyorundef{\cmdKV@YAD@affiliationsecondary}{%
-    \DTLnewdbentry{#4}{affiliationsecondary}{\cmdKV@YAD@affiliation}%
+    \YAD@ifemptyorundef{\cmdKV@YAD@affiliation}{%
+      \DTLnewdbentry{#4}{affiliationsecondary}{}%
+    }{%
+      \DTLnewdbentry{#4}{affiliationsecondary}{\cmdKV@YAD@affiliation}%
+    }%
   }{%
     \DTLnewdbentry{#4}{affiliationsecondary}{\cmdKV@YAD@affiliationsecondary}%
   }%
