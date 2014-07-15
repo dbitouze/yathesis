@@ -1167,19 +1167,72 @@ This work consists of the file  yathesis.dtx
 % dans les signets. D'autres options peuvent être fixées au moyen de la
 % commande ×\hypersetup×.
 %    \begin{macrocode}
-\RequirePackage[final,unicode,hyperfootnotes=false,hyperindex=false,plainpages=false,breaklinks,pdfpagemode=UseOutlines,pdfpagelayout=TwoPageRight]{hyperref}[2012/11/06]%
+% \RequirePackage[final,unicode,hyperfootnotes=false,hyperindex=false,plainpages=false,breaklinks,pdfpagemode=UseOutlines,pdfpagelayout=TwoPageRight]{hyperref}[2012/11/06]%
+\@ifpackageloaded{hyperref}{%
+  \hypersetup{final,unicode,hyperfootnotes=false,hyperindex=false,plainpages=false,breaklinks,pdfpagemode=UseOutlines,pdfpagelayout=TwoPageRight}%
+}{%
+}%
 %    \end{macrocode}
 % Pour faire pointer les hyperliens au début des flottants plutôt qu'au
 % début des légendes
 %    \begin{macrocode}
+\@ifpackageloaded{hyperref}{%
   \RequirePackage[all]{hypcap}[2011/02/16]%
+}{%
+}%
 %    \end{macrocode}
 % Pour la gestion des signets
 %    \begin{macrocode}
+\@ifpackageloaded{hyperref}{%
   \RequirePackage[numbered]{bookmark}[2011/12/02]%
+  }{%
+  }%
 %    \end{macrocode}
 %
 % \section{Début du code de la classe}
+%
+% On définit les macros ×\YAD@href×, ×\YAD@hypersetup×, ×\YAD@url×,
+% ×\YAD@nolinkurl× identiques aux macros ×\href×, ×\hypersetup×, ×\url×, ×\nolinkurl× du
+% \Package{hyperref} mais sur lesquelles on a plus de contrôle.
+%    \begin{macrocode}
+\AtEndPreamble{%
+  \@ifpackageloaded{hyperref}{%
+    \newcommand{\YAD@href}[3][]{\href[#1]{#2}{#3}}%
+  }{%
+    \newcommand{\YAD@href}[3][]{#3}%
+  }%
+  \@ifpackageloaded{hyperref}{%
+    \newcommand{\YAD@hypersetup}[1]{\hypersetup{#1}}%
+  }{%
+    \newcommand{\YAD@hypersetup}[1]{}%
+  }%
+  \@ifpackageloaded{hyperref}{%
+    \newcommand{\YAD@url}[1]{\url{#1}}%
+  }{%
+    \newcommand{\YAD@url}[1]{\texttt{#1}}%
+  }%
+  \@ifpackageloaded{hyperref}{%
+    \newcommand{\YAD@nolinkurl}[1]{\nolinkurl{#1}}%
+  }{%
+    \newcommand{\YAD@nolinkurl}[1]{\texttt{#1}}%
+  }%
+  \@ifpackageloaded{hyperref}{%
+    \newcommand{\YAD@texorpdfstring}[2]{\texorpdfstring{#1}{#2}}%
+  }{%
+    \newcommand{\YAD@texorpdfstring}[2]{#1}%
+  }%
+  \@ifpackageloaded{hyperref}{%
+    \newcommand{\YAD@phantomsection}{\phantomsection}%
+  }{%
+    \newcommand{\YAD@phantomsection}{}%
+  }%
+  \@ifpackageloaded{bookmark}{%
+    \newcommand{\YAD@bookmarksetup}[1]{\bookmarksetup{#1}}%
+  }{%
+    \newcommand{\YAD@bookmarksetup}[1]{}%
+  }%
+}%
+%    \end{macrocode}
 %
 % Pour éviter certains comportements inattendus, on précise la langue
 % principale au moyen de l'option ×main× du \Package{babel}. Mais, comme
@@ -1930,12 +1983,12 @@ This work consists of the file  yathesis.dtx
 \newcommand*{\YAD@reach@file}[2][\YAD@characteristics@file]{%
   \ifdraft{%
     \ifthenelse{\equal{\YAD@configuration@file}{#1}}{%
-      \hypersetup{%
+      \YAD@hypersetup{%
         urlbordercolor=YAD@configuration@file@color,%
         urlcolor=YAD@configuration@file@color%
       }%
     }{%
-      \hypersetup{%
+      \YAD@hypersetup{%
         urlbordercolor=YAD@main@file@color,%
         urlcolor=YAD@main@file@color%
       }%
@@ -1975,20 +2028,23 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \ifbool{YAD@output@paper}{%
   \AtEndPreamble{%
-    \hypersetup{colorlinks=false}%
+    \YAD@hypersetup{colorlinks=false}%
   }%
   \renewcommand{\YAD@href}[3][]{%
     #3%
   }%
   \let\YAD@ori@footnote\footnote%
   \renewcommand{\footnote}[1]{\booltrue{YAD@in@footnote}\YAD@ori@footnote{#1}\boolfalse{YAD@in@footnote}}%
-  \renewcommand*\url[1]{\nolinkurl{#1}}%
-  \renewcommand*\href[3][]{%
-    \ifbool{YAD@in@footnote}{%
-      #3 (\url{#2})
-    }{%
-      #3\footnote{\url{#2}}
+  \@ifpackageloaded{hyperref}{%
+    \renewcommand*\url[1]{\nolinkurl{#1}}%
+    \renewcommand*\href[3][]{%
+      \ifbool{YAD@in@footnote}{%
+        #3 (\url{#2})
+      }{%
+        #3\footnote{\url{#2}}
+      }%
     }%
+  }{%
   }%
 }{%
 }%
@@ -2128,7 +2184,7 @@ This work consists of the file  yathesis.dtx
 % \begin{macro}{\YAD@generic@argument@translate}
 %    \begin{macrocode}
 \newcommand*{\YAD@generic@argument@translate}[1]{%
-  \texorpdfstring{\YAD@generic@argument{\translate{meta-#1}}}{<#1>}%
+  \YAD@texorpdfstring{\YAD@generic@argument{\translate{meta-#1}}}{<#1>}%
 }%
 %    \end{macrocode}
 % \end{macro}
@@ -2842,9 +2898,9 @@ This work consists of the file  yathesis.dtx
             \fi%
           }{%
             \if@nolink%
-            \nolinkurl{##1}%
+            \YAD@nolinkurl{##1}%
             \else%
-            \YAD@href{mailto:##1}{\nolinkurl{##1}}%
+            \YAD@href{mailto:##1}{\YAD@nolinkurl{##1}}%
             \fi%
           }%
         }%
@@ -2866,15 +2922,15 @@ This work consists of the file  yathesis.dtx
             \if@nolink%
             \YAD@generic@argument@translate{#1#2}%
             \else%
-            \url{%
+            \YAD@url{%
               \YAD@generic@argument@translate{#1#2}%
             }%
             \fi%
           }{%
             \if@nolink%
-            \nolinkurl{##1}%
+            \YAD@nolinkurl{##1}%
             \else%
-            \url{%
+            \YAD@url{%
               ##1%
             }%
             \fi%
@@ -2961,7 +3017,7 @@ This work consists of the file  yathesis.dtx
 % \ifthenelse{\equal{\cmdKV@YAD@url}{}}{%
 % \YAD@reach@file{\YAD@generic@argument@translate{url#2}}%
 % }{%
-% \YAD@reach@file{\nolinkurl{\cmdKV@YAD@url}}%
+% \YAD@reach@file{\YAD@nolinkurl{\cmdKV@YAD@url}}%
 % }%
 % }%
 % \ifthenelse{\equal{\cmdKV@YAD@url}{}}{%
@@ -2975,9 +3031,9 @@ This work consists of the file  yathesis.dtx
 % \YAD@texteurl%
 % }{%
 % \if@nolink%
-% \nolinkurl{\cmdKV@YAD@url}%
+% \YAD@nolinkurl{\cmdKV@YAD@url}%
 % \else%
-% \url{%
+% \YAD@url{%
 % \cmdKV@YAD@url%
 % }%
 % \fi%
@@ -3034,9 +3090,9 @@ This work consists of the file  yathesis.dtx
       \fi%
     }{%
       \if@nolink%
-      \nolinkurl{\cmdKV@YAD@email}%
+      \YAD@nolinkurl{\cmdKV@YAD@email}%
       \else%
-      \YAD@href{mailto:\cmdKV@YAD@email}{\nolinkurl{\cmdKV@YAD@email}}%
+      \YAD@href{mailto:\cmdKV@YAD@email}{\YAD@nolinkurl{\cmdKV@YAD@email}}%
       \fi%
     }%
   }%
@@ -3121,16 +3177,16 @@ This work consists of the file  yathesis.dtx
 }{%
 }%
 \ifthenelse{\equal{#2}{title}}{%
-  \hypersetup{pdftitle=\YAD@metatitle}%
+  \YAD@hypersetup{pdftitle=\YAD@metatitle}%
 }{%
 }%
 \ifundef{\YAD@metasubject}{%
   \ifundef{\YAD@metaacademicfield}{%
   }{%
-    \hypersetup{pdfsubject=\YAD@metaacademicfield}%
+    \YAD@hypersetup{pdfsubject=\YAD@metaacademicfield}%
   }%
 }{%
-  \hypersetup{pdfsubject=\YAD@metasubject}%
+  \YAD@hypersetup{pdfsubject=\YAD@metasubject}%
 }%
 %    \end{macrocode}
 % Création de la commande affichant le résultat de la commande bilingue
@@ -3257,7 +3313,7 @@ This work consists of the file  yathesis.dtx
     }%
   }%
   \YAD@error@firstlastnames@empty{de l'auteur de la these}{#2}{#3}{\author}%
-  \hypersetup{pdfauthor=\YAD@firstname@author{} \YAD@lastname@author}%
+  \YAD@hypersetup{pdfauthor=\YAD@firstname@author{} \YAD@lastname@author}%
   \newcommand*\YAD@email@author{%
     #1%
   }%
@@ -3613,7 +3669,7 @@ This work consists of the file  yathesis.dtx
 \renewcommand{\tableofcontents}{%
   \booltrue{YAD@tableofcontents@used}%
   \YAD@clearemptydoublepage%
-  \phantomsection%
+  \YAD@phantomsection%
   \let\cmdKV@YAD@name\contentsname%
   \@ifnextchar[{\tableofcontents@YAD@with@argument}{\tableofcontents@YAD@without@argument}%]
 }%
@@ -3971,9 +4027,9 @@ This work consists of the file  yathesis.dtx
 % Dans la partie annexe, la numérotation des paragraphes est fixée à
 % son niveau par défaut (sous-sections)
 %    \begin{macrocode}
-  \phantomsection%
+  \YAD@phantomsection%
   \setsecnumdepth{\YAD@secnumdepth}%
-  \bookmarksetup{startatroot}%
+  \YAD@bookmarksetup{startatroot}%
   \YAD@setfoot%
 }%
 %    \end{macrocode}
@@ -4009,8 +4065,8 @@ This work consists of the file  yathesis.dtx
 % signets
 %    \begin{macrocode}
   \YAD@clearemptydoublepage%
-  \phantomsection%
-  \bookmarksetup{startatroot}%
+  \YAD@phantomsection%
+  \YAD@bookmarksetup{startatroot}%
   \YAD@setfoot%
 }%
 %    \end{macrocode}
@@ -4036,9 +4092,9 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % Dans la partie finale, rien n'est numéroté
 %    \begin{macrocode}
-  \phantomsection%
+  \YAD@phantomsection%
   \setsecnumdepth{none}%
-  \bookmarksetup{startatroot}%
+  \YAD@bookmarksetup{startatroot}%
   \YAD@setfoot%
 }%
 %    \end{macrocode}
@@ -4055,8 +4111,8 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \newpagestyle{contents}[]{%
   \YAD@clearemptydoublepage%
-  \phantomsection%
-  \bookmarksetup{startatroot}%
+  \YAD@phantomsection%
+  \YAD@bookmarksetup{startatroot}%
   \singlespacing%
   \sethead[\thepage]%
   []%
@@ -4077,8 +4133,8 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \newpagestyle{glossaire}[]{%
   \YAD@clearemptydoublepage%
-  \phantomsection%
-  \bookmarksetup{startatroot}%
+  \YAD@phantomsection%
+  \YAD@bookmarksetup{startatroot}%
   \singlespacing%
   \sethead[\thepage]%
   []%
@@ -4112,9 +4168,9 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
   \setsecnumdepth{none}%
   \YAD@clearemptydoublepage%
-  \phantomsection%
+  \YAD@phantomsection%
   \setsecnumdepth{\YAD@secnumdepth}%
-  \bookmarksetup{startatroot}%
+  \YAD@bookmarksetup{startatroot}%
   \YAD@setfoot%
 }%
 %    \end{macrocode}
@@ -4629,9 +4685,9 @@ This work consists of the file  yathesis.dtx
   \ifthenelse{\isempty{#1}}{%
   }{%
     \ifthenelse{\isempty{#2}}{%
-      \hypersetup{pdfkeywords={#1}}%
+      \YAD@hypersetup{pdfkeywords={#1}}%
     }{%
-      \hypersetup{pdfkeywords={#1} ({#2})}%
+      \YAD@hypersetup{pdfkeywords={#1} ({#2})}%
     }%
   }%
 }%
@@ -4899,9 +4955,9 @@ This work consists of the file  yathesis.dtx
               \fi%
             }{%
               \if@nolink%
-              \nolinkurl{\YAD@laboratory@email}%
+              \YAD@nolinkurl{\YAD@laboratory@email}%
               \else%
-              \YAD@href{mailto:\YAD@laboratory@email}{\nolinkurl{\YAD@laboratory@email}}%
+              \YAD@href{mailto:\YAD@laboratory@email}{\YAD@nolinkurl{\YAD@laboratory@email}}%
               \fi%
             }%
           }%
@@ -4914,7 +4970,7 @@ This work consists of the file  yathesis.dtx
             \ifthenelse{\equal{\YAD@laboratory@url}{}}{%
               \YAD@reach@file{\YAD@generic@argument@translate{urllaboratory}}%
             }{%
-              \YAD@reach@file{\nolinkurl{\YAD@laboratory@url}}%
+              \YAD@reach@file{\YAD@nolinkurl{\YAD@laboratory@url}}%
             }%
           }%
           \ifthenelse{\equal{\YAD@laboratory@url}{}}{%
@@ -4928,9 +4984,9 @@ This work consists of the file  yathesis.dtx
               \YAD@texteurl%
             }{%
               \if@nolink%
-              \nolinkurl{\YAD@laboratory@url}%
+              \YAD@nolinkurl{\YAD@laboratory@url}%
               \else%
-              \url{%
+              \YAD@url{%
                 \YAD@laboratory@url%
               }%
               \fi%
@@ -5173,7 +5229,7 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \newcommand{\makeabstract}{%
   \pagestyle{preliminary}%
-  \phantomsection%
+  \YAD@phantomsection%
   \addcontentsline{toc}{chapter}{\abstractname}%
   \booltrue{YAD@makeabstract@used}%
   \bgroup%
@@ -5499,10 +5555,10 @@ This work consists of the file  yathesis.dtx
 \AfterPreamble{% delay the redefinition when titlesec has done its own
   \renewcommand\chapter{%
     \YAD@clearemptydoublepage%
-    \phantomsection%
+    \YAD@phantomsection%
     \ifbool{YAD@output@paper}{%
     }{%
-      \bookmarksetup{startatroot}%
+      \YAD@bookmarksetup{startatroot}%
     }%
     \@ifstar{\YAD@starred@chapter}{\YAD@unstarred@chapter}%
   }%
@@ -5823,9 +5879,9 @@ This work consists of the file  yathesis.dtx
 % % ×conclusion×.
 % %    \begin{macrocode}
 % \BeforeBeginEnvironment{conclusion}{%
-%   \phantomsection%
+%   \YAD@phantomsection%
 %   \setsecnumdepth{\YAD@secnumdepth}%
-%   \bookmarksetup{startatroot}%
+%   \YAD@bookmarksetup{startatroot}%
 % }%
 % \AfterEndEnvironment{conclusion}{\appendix}
 % %    \end{macrocode}
@@ -5850,9 +5906,9 @@ This work consists of the file  yathesis.dtx
 % % ×conclusion*×.
 % %    \begin{macrocode}
 % \BeforeBeginEnvironment{conclusion*}{%
-%   \phantomsection%
+%   \YAD@phantomsection%
 %   \setsecnumdepth{\YAD@secnumdepth}%
-%   \bookmarksetup{startatroot}%
+%   \YAD@bookmarksetup{startatroot}%
 % }%
 % \AfterEndEnvironment{conclusion*}{%
 %   \appendix%
@@ -5909,10 +5965,12 @@ This work consists of the file  yathesis.dtx
 %
 % On fixe la métadonnée de la langue.
 %    \begin{macrocode}
-\ifthenelse{\equal{\YAD@mainlanguage}{french}}{%
-  \hypersetup{pdflang=fr}%
-}{%
-  \hypersetup{pdflang=en}%
+\AfterEndPreamble{%
+  \ifthenelse{\equal{\YAD@mainlanguage}{french}}{%
+    \YAD@hypersetup{pdflang=fr}%
+  }{%
+    \YAD@hypersetup{pdflang=en}%
+  }%
 }%
 %    \end{macrocode}
 %
