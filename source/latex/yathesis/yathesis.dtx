@@ -1756,7 +1756,7 @@ This work consists of the file  yathesis.dtx
 % \Package{zref} avec l'option ×xr× dans le \File{.tex} où sont
 % incluses les pages du \File{.pdf} externe.
 %    \begin{macrocode}
-\zexternaldocument{master-slaves-files-sample/these}
+\zexternaldocument{master-slaves-files-sample/these}%
 \newcommand{\screenshot}[2][.45]{%
   \fbox{\includegraphics[bylabel=#2,width=#1\linewidth-2\fboxsep-2\fboxrule]{master-slaves-files-sample/these}}%
 }%
@@ -6938,8 +6938,7 @@ run.xml sbl* sl* sym* xdy unq synctex.gz mw *~
   \RenewDocumentCommand\chapter{som}{%
     \IfBooleanTF{#1}
     {
-      \ifthenelse{\equal{#3}{Introduction g\IeC {\'e}n\IeC {\'e}rale}}{%
-        \cleardoublepage\zlabel{introduction}%
+      \ifthenelse{\equal{#3}{Introduction g\IeC {\'e}n\IeC {\'e}rale}}{\cleardoublepage\zlabel{introduction}%
       }{%
       }%
       \IfNoValueTF{#2}
@@ -6947,16 +6946,13 @@ run.xml sbl* sl* sym* xdy unq synctex.gz mw *~
       {\YAD@demo@chapter@ORI*[#2]{#3}}%
     }
     {%
-      \ifthenelse{\equal{#3}{Introduction g\IeC {\'e}n\IeC {\'e}rale}}{%
-        \cleardoublepage\zlabel{introduction}%
+      \ifthenelse{\equal{#3}{Introduction g\IeC {\'e}n\IeC {\'e}rale}}{\cleardoublepage\zlabel{introduction}%
       }{%
       }%
-      \ifthenelse{\equal{#3}{Contexte du chaos du rire}}{%
-        \cleardoublepage\zlabel{chapter}%
+      \ifthenelse{\equal{#3}{Contexte du chaos du rire}}{\cleardoublepage\zlabel{chapter}%
       }{%
       }%
-      \ifthenelse{\equal{#3}{Documents juridiques}}{%
-        \cleardoublepage\zlabel{appendix}%
+      \ifthenelse{\equal{#3}{Documents juridiques}}{\cleardoublepage\zlabel{appendix}%
       }{%
       }%
       \IfNoValueTF{#2}
@@ -6967,8 +6963,7 @@ run.xml sbl* sl* sym* xdy unq synctex.gz mw *~
   \ifcsdef{printglossary}{%
     \LetLtxMacro{\YAD@printglossary@ORI}{\printglossary}
     \renewcommand{\printglossary}[1][]{%
-      \ifthenelse{\isempty{#1}}{%
-        \cleardoublepage\zlabel{printglossary}%
+      \ifthenelse{\isempty{#1}}{\cleardoublepage\zlabel{printglossary}%
       }{%
       }%
       \YAD@printglossary@ORI[{#1}]%
