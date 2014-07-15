@@ -97,21 +97,6 @@ la liste suivante qui indique leur fonction et le cas échéant :
   \begin{description}
   \item[personnalisation :] option de la \yatcl \refKey{draftwatermark} ;
   \end{description}
-\item[\package*{index} :] gestion du ou des index\footnote{Pour la gestion
-    d'index, le \Package{makeidx} est plus courant mais le \Package*{index},
-    à la syntaxe très voisine, l'améliore et offre des fonctionnalités
-    supplémentaires, notamment pour produire des index multiples. Le chargement
-    du \Package{index} par la classe est nécessaire pour des raisons
-    techniques.} ;
-\item[\package*{idxlayout} :] correction d'un bogue affichant trop haut
-  l'intitulé \enquote{Index} de l'index ;
-  \begin{description}
-  \item[option par défaut :] \docValue*{columns=1} ;
-  \item[personnalisation :] commande propre \docAuxCommand*{idxlayout} ;
-  \end{description}
-  % ^^A \footnote{Si on souhaite un index non pas sur $1$ mais
-  % ^^A sur \meta{n} colonnes, il suffit de le spécifier au moyen de
-  % ^^A\protect\lstinline+\\idxlayout\{columns=+\meta{n}\protect\lstinline+\}+.} ;
 \item[\package*{babel} :] gestion des langues ;
   \begin{description}
   \item[personnalisation :] option de la \yatcl \refKey{babel} ;
@@ -121,26 +106,6 @@ la liste suivante qui indique leur fonction et le cas échéant :
 \item[\package*{datetime} :] gestion des dates ;
   \begin{description}
   \item[personnalisation :] option de la \yatcl \refKey{datetime} ;
-  \end{description}
-\item[\package*{varioref} :] références croisées améliorées ;
-  \begin{description}
-  \item[personnalisation :] option de la \yatcl \refKey{varioref} ;
-  \end{description}
-\item[\package*{hyperref} :] liens hypertextes ;
-  \begin{description}
-  \item[option par défaut :]\
-    \begin{itemize}
-    \item \docAuxKey{final} ;
-    \item \docAuxKey{unicode} ;
-    \item \docAuxKey{breaklinks} ;
-    \item ×hyperfootnotes=false× ;
-    \item ×hyperindex=false×\footnote{Sans quoi certaines fonctionnalités sont
-        ignorées, par exemple \protect\lstinline|see| pour les index.} ;
-    \item ×plainpages=false× ;
-    \item ×pdfpagemode=UseOutlines× ;
-    \item ×pdfpagelayout=TwoPageRight× ;
-    \end{itemize}
-  \item[personnalisation :] commande propre \docAuxCommand*{hypersetup} ;
   \end{description}
 \item[\package{hypcap} :] liens hypertextes pointant au début des
   flottants\ifscreenoutput ;
@@ -210,10 +175,31 @@ les plus notables sont précisés.
 \item[\package*{todonotes} :] insertion de
   \foreignquote{english}{TODOs}\footnote{Rappels de points qu'il ne
     faut pas oublier d'ajouter, de compléter, de réviser, etc.} ;
+\item[\package*{varioref} :] références croisées améliorées ;
+\item[\package*{imakeidx} :] gestion du ou des index\footnote{Pour la gestion
+    d'index, le \Package{makeidx} est plus courant mais le \Package*{imakeidx},
+    à la syntaxe très voisine, l'améliore et offre des fonctionnalités
+    supplémentaires, notamment pour produire des index multiples.} ;
 \item[\package*{csquotes} :] pour les citations informelles et formelles (avec
   citation des sources). Réglage par défaut opéré par la \yatcl (si le
   \package*{biblatex} est chargé) : ×\SetCiteCommand{\autocite}× ;
 \item[\package*{biblatex} :] gestion puissante de la bibliographie ;
+\item[\package*{hyperref} :] liens hypertextes ;
+  \begin{description}
+  \item[option par défaut :]\
+    \begin{itemize}
+    \item \docAuxKey{final} ;
+    \item \docAuxKey{unicode} ;
+    \item \docAuxKey{breaklinks} ;
+    \item ×hyperfootnotes=false× ;
+    \item ×hyperindex=false×\footnote{Sans quoi certaines fonctionnalités sont
+        ignorées, par exemple \protect\lstinline|see| pour les index.} ;
+    \item ×plainpages=false× ;
+    \item ×pdfpagemode=UseOutlines× ;
+    \item ×pdfpagelayout=TwoPageRight× ;
+    \end{itemize}
+  \item[personnalisation :] commande propre \docAuxCommand*{hypersetup} ;
+  \end{description}
 \item[\package*{glossaries} :] gestion puissante des glossaires,
   acronymes et liste de symboles ;
 \item[\package*{cleveref} :] gestion puissante des références croisées.
