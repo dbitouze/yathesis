@@ -75,11 +75,9 @@
 \newsavebox{\YAD@aftertitlebox}%
 \newsavebox{\YAD@abstract@mainlanguage}%
 \newsavebox{\YAD@abstract@secondarylanguage}%
-\newcounter{YAD@titlepages}%
 \newcounter{YAD@abstracts}%
 \newcounter{YAD@warnings}%
 \newcounter{datetoday}
-\setcounter{YAD@titlepages}{0}%
 \setcounter{YAD@abstracts}{0}%
 \setcounter{YAD@warnings}{0}%
 \def\YAD@mainlanguage{french}%
@@ -431,9 +429,55 @@
 \let\@modulo\@modulo@SAVED
 \RequirePackage{datetime}[2013/09/10]%
 \RequirePackage{varioref}[2011/10/02]%
-\RequirePackage[final,unicode,hyperfootnotes=false,hyperindex=false,plainpages=false,breaklinks,pdfpagemode=UseOutlines,pdfpagelayout=TwoPageRight]{hyperref}[2012/11/06]%
+\@ifpackageloaded{hyperref}{%
+  \hypersetup{final,unicode,hyperfootnotes=false,hyperindex=false,plainpages=false,breaklinks,pdfpagemode=UseOutlines,pdfpagelayout=TwoPageRight}%
+}{%
+}%
+\@ifpackageloaded{hyperref}{%
   \RequirePackage[all]{hypcap}[2011/02/16]%
+}{%
+}%
+\@ifpackageloaded{hyperref}{%
   \RequirePackage[numbered]{bookmark}[2011/12/02]%
+  }{%
+  }%
+\AtEndPreamble{%
+  \@ifpackageloaded{hyperref}{%
+    \newcommand{\YAD@href}[3][]{\href[#1]{#2}{#3}}%
+  }{%
+    \newcommand{\YAD@href}[3][]{#3}%
+  }%
+  \@ifpackageloaded{hyperref}{%
+    \newcommand{\YAD@hypersetup}[1]{\hypersetup{#1}}%
+  }{%
+    \newcommand{\YAD@hypersetup}[1]{}%
+  }%
+  \@ifpackageloaded{hyperref}{%
+    \newcommand{\YAD@url}[1]{\url{#1}}%
+  }{%
+    \newcommand{\YAD@url}[1]{\texttt{#1}}%
+  }%
+  \@ifpackageloaded{hyperref}{%
+    \newcommand{\YAD@nolinkurl}[1]{\nolinkurl{#1}}%
+  }{%
+    \newcommand{\YAD@nolinkurl}[1]{\texttt{#1}}%
+  }%
+  \@ifpackageloaded{hyperref}{%
+    \newcommand{\YAD@texorpdfstring}[2]{\texorpdfstring{#1}{#2}}%
+  }{%
+    \newcommand{\YAD@texorpdfstring}[2]{#1}%
+  }%
+  \@ifpackageloaded{hyperref}{%
+    \newcommand{\YAD@phantomsection}{\phantomsection}%
+  }{%
+    \newcommand{\YAD@phantomsection}{}%
+  }%
+  \@ifpackageloaded{bookmark}{%
+    \newcommand{\YAD@bookmarksetup}[1]{\bookmarksetup{#1}}%
+  }{%
+    \newcommand{\YAD@bookmarksetup}[1]{}%
+  }%
+}%
 \@ifpackagelater{babel}{2013/04/15}{%
   \PassOptionsToPackage{main=\YAD@mainlanguage}{babel}%
 }{%
@@ -537,12 +581,12 @@
 \newcommand*{\YAD@reach@file}[2][\YAD@characteristics@file]{%
   \ifdraft{%
     \ifthenelse{\equal{\YAD@configuration@file}{#1}}{%
-      \hypersetup{%
+      \YAD@hypersetup{%
         urlbordercolor=YAD@configuration@file@color,%
         urlcolor=YAD@configuration@file@color%
       }%
     }{%
-      \hypersetup{%
+      \YAD@hypersetup{%
         urlbordercolor=YAD@main@file@color,%
         urlcolor=YAD@main@file@color%
       }%
@@ -556,25 +600,25 @@
     #2%
   }%
 }%
-  \newcommand{\YAD@href}[3][]{%
-    \href[#1]{#2}{#3}%
-  }%
 \ifbool{YAD@output@paper}{%
   \AtEndPreamble{%
-    \hypersetup{colorlinks=false}%
+    \YAD@hypersetup{colorlinks=false}%
   }%
   \renewcommand{\YAD@href}[3][]{%
     #3%
   }%
   \let\YAD@ori@footnote\footnote%
   \renewcommand{\footnote}[1]{\booltrue{YAD@in@footnote}\YAD@ori@footnote{#1}\boolfalse{YAD@in@footnote}}%
-  \renewcommand*\url[1]{\nolinkurl{#1}}%
-  \renewcommand*\href[3][]{%
-    \ifbool{YAD@in@footnote}{%
-      #3 (\url{#2})
-    }{%
-      #3\footnote{\url{#2}}
+  \@ifpackageloaded{hyperref}{%
+    \renewcommand*\url[1]{\nolinkurl{#1}}%
+    \renewcommand*\href[3][]{%
+      \ifbool{YAD@in@footnote}{%
+        #3 (\url{#2})
+      }{%
+        #3\footnote{\url{#2}}
+      }%
     }%
+  }{%
   }%
 }{%
 }%
@@ -670,7 +714,7 @@
   }%
 }%
 \newcommand*{\YAD@generic@argument@translate}[1]{%
-  \texorpdfstring{\YAD@generic@argument{\translate{meta-#1}}}{<#1>}%
+  \YAD@texorpdfstring{\YAD@generic@argument{\translate{meta-#1}}}{<#1>}%
 }%
 \yadsetup{%
   role/.store in=\cmdKV@YAD@role,%
@@ -1254,9 +1298,9 @@
             \fi%
           }{%
             \if@nolink%
-            \nolinkurl{##1}%
+            \YAD@nolinkurl{##1}%
             \else%
-            \YAD@href{mailto:##1}{\nolinkurl{##1}}%
+            \YAD@href{mailto:##1}{\YAD@nolinkurl{##1}}%
             \fi%
           }%
         }%
@@ -1272,15 +1316,15 @@
             \if@nolink%
             \YAD@generic@argument@translate{#1#2}%
             \else%
-            \url{%
+            \YAD@url{%
               \YAD@generic@argument@translate{#1#2}%
             }%
             \fi%
           }{%
             \if@nolink%
-            \nolinkurl{##1}%
+            \YAD@nolinkurl{##1}%
             \else%
-            \url{%
+            \YAD@url{%
               ##1%
             }%
             \fi%
@@ -1385,9 +1429,9 @@
       \fi%
     }{%
       \if@nolink%
-      \nolinkurl{\cmdKV@YAD@email}%
+      \YAD@nolinkurl{\cmdKV@YAD@email}%
       \else%
-      \YAD@href{mailto:\cmdKV@YAD@email}{\nolinkurl{\cmdKV@YAD@email}}%
+      \YAD@href{mailto:\cmdKV@YAD@email}{\YAD@nolinkurl{\cmdKV@YAD@email}}%
       \fi%
     }%
   }%
@@ -1452,16 +1496,16 @@
 }{%
 }%
 \ifthenelse{\equal{#2}{title}}{%
-  \hypersetup{pdftitle=\YAD@metatitle}%
+  \YAD@hypersetup{pdftitle=\YAD@metatitle}%
 }{%
 }%
 \ifundef{\YAD@metasubject}{%
   \ifundef{\YAD@metaacademicfield}{%
   }{%
-    \hypersetup{pdfsubject=\YAD@metaacademicfield}%
+    \YAD@hypersetup{pdfsubject=\YAD@metaacademicfield}%
   }%
 }{%
-  \hypersetup{pdfsubject=\YAD@metasubject}%
+  \YAD@hypersetup{pdfsubject=\YAD@metasubject}%
 }%
 \csdef{print#2}{%
         \YAD@reach@file{%
@@ -1564,7 +1608,7 @@
     }%
   }%
   \YAD@error@firstlastnames@empty{de l'auteur de la these}{#2}{#3}{\author}%
-  \hypersetup{pdfauthor=\YAD@firstname@author{} \YAD@lastname@author}%
+  \YAD@hypersetup{pdfauthor=\YAD@firstname@author{} \YAD@lastname@author}%
   \newcommand*\YAD@email@author{%
     #1%
   }%
@@ -1833,7 +1877,7 @@
 \renewcommand{\tableofcontents}{%
   \booltrue{YAD@tableofcontents@used}%
   \YAD@clearemptydoublepage%
-  \phantomsection%
+  \YAD@phantomsection%
   \let\cmdKV@YAD@name\contentsname%
   \@ifnextchar[{\tableofcontents@YAD@with@argument}{\tableofcontents@YAD@without@argument}%]
 }%
@@ -2110,9 +2154,9 @@
   {}%
   {\thepage}%
   \headrule%
-  \phantomsection%
+  \YAD@phantomsection%
   \setsecnumdepth{\YAD@secnumdepth}%
-  \bookmarksetup{startatroot}%
+  \YAD@bookmarksetup{startatroot}%
   \YAD@setfoot%
 }%
 \xapptocmd{\appendix}{%
@@ -2129,8 +2173,8 @@
   {\thepage}%
   \headrule%
   \YAD@clearemptydoublepage%
-  \phantomsection%
-  \bookmarksetup{startatroot}%
+  \YAD@phantomsection%
+  \YAD@bookmarksetup{startatroot}%
   \YAD@setfoot%
 }%
 \newpagestyle{backmatter}[]{%
@@ -2150,9 +2194,9 @@
   {}%
   {\thepage}%
   \headrule%
-  \phantomsection%
+  \YAD@phantomsection%
   \setsecnumdepth{none}%
-  \bookmarksetup{startatroot}%
+  \YAD@bookmarksetup{startatroot}%
   \YAD@setfoot%
 }%
 \xapptocmd{\backmatter}{%
@@ -2160,8 +2204,8 @@
 }{}{}%
 \newpagestyle{contents}[]{%
   \YAD@clearemptydoublepage%
-  \phantomsection%
-  \bookmarksetup{startatroot}%
+  \YAD@phantomsection%
+  \YAD@bookmarksetup{startatroot}%
   \singlespacing%
   \sethead[\thepage]%
   []%
@@ -2175,8 +2219,8 @@
 }%
 \newpagestyle{glossaire}[]{%
   \YAD@clearemptydoublepage%
-  \phantomsection%
-  \bookmarksetup{startatroot}%
+  \YAD@phantomsection%
+  \YAD@bookmarksetup{startatroot}%
   \singlespacing%
   \sethead[\thepage]%
   []%
@@ -2199,9 +2243,9 @@
   \headrule%
   \setsecnumdepth{none}%
   \YAD@clearemptydoublepage%
-  \phantomsection%
+  \YAD@phantomsection%
   \setsecnumdepth{\YAD@secnumdepth}%
-  \bookmarksetup{startatroot}%
+  \YAD@bookmarksetup{startatroot}%
   \YAD@setfoot%
 }%
 \newpagestyle{backcover}[]{%
@@ -2274,17 +2318,12 @@
   \origtcb@shadow@prepare{#1}{#2}%
   \let\tcb@shadow@arc=\tcb@zpt%
 }%
-\newcommand{\YAD@addpagenumber}{%
-  \ifnumcomp{\value{YAD@titlepages}}{=}{2}{\addtocounter{page}{2}}{}%
-  \ifnumcomp{\value{YAD@titlepages}}{=}{3}{\addtocounter{page}{4}}{}%
-}%
 \renewcommand{\maketitle}[1][]{%
   \booltrue{YAD@maketitle@used}%
   \yadsetup{#1}
   \setlength{\fboxsep}{10pt}%
   \setlength{\YAD@titleboxwidth}{\linewidth-2\fboxsep-2\fboxrule}%
   \renewcommand*{\do}[1]{%
-    \stepcounter{YAD@titlepages}%
   \pagestyle{titles}%
 \begingroup%
 \expandafter\selectlanguage\expandafter{##1}%
@@ -2583,7 +2622,6 @@
       }%
     }%
   }%
-\YAD@addpagenumber%
 \endgroup%
 \boolfalse{YAD@cover@page}%
 }%
@@ -2633,9 +2671,9 @@
   \ifthenelse{\isempty{#1}}{%
   }{%
     \ifthenelse{\isempty{#2}}{%
-      \hypersetup{pdfkeywords={#1}}%
+      \YAD@hypersetup{pdfkeywords={#1}}%
     }{%
-      \hypersetup{pdfkeywords={#1} ({#2})}%
+      \YAD@hypersetup{pdfkeywords={#1} ({#2})}%
     }%
   }%
 }%
@@ -2870,9 +2908,9 @@
               \fi%
             }{%
               \if@nolink%
-              \nolinkurl{\YAD@laboratory@email}%
+              \YAD@nolinkurl{\YAD@laboratory@email}%
               \else%
-              \YAD@href{mailto:\YAD@laboratory@email}{\nolinkurl{\YAD@laboratory@email}}%
+              \YAD@href{mailto:\YAD@laboratory@email}{\YAD@nolinkurl{\YAD@laboratory@email}}%
               \fi%
             }%
           }%
@@ -2885,7 +2923,7 @@
             \ifthenelse{\equal{\YAD@laboratory@url}{}}{%
               \YAD@reach@file{\YAD@generic@argument@translate{urllaboratory}}%
             }{%
-              \YAD@reach@file{\nolinkurl{\YAD@laboratory@url}}%
+              \YAD@reach@file{\YAD@nolinkurl{\YAD@laboratory@url}}%
             }%
           }%
           \ifthenelse{\equal{\YAD@laboratory@url}{}}{%
@@ -2899,9 +2937,9 @@
               \YAD@texteurl%
             }{%
               \if@nolink%
-              \nolinkurl{\YAD@laboratory@url}%
+              \YAD@nolinkurl{\YAD@laboratory@url}%
               \else%
-              \url{%
+              \YAD@url{%
                 \YAD@laboratory@url%
               }%
               \fi%
@@ -3096,7 +3134,7 @@
 }%
 \newcommand{\makeabstract}{%
   \pagestyle{preliminary}%
-  \phantomsection%
+  \YAD@phantomsection%
   \addcontentsline{toc}{chapter}{\abstractname}%
   \booltrue{YAD@makeabstract@used}%
   \bgroup%
@@ -3327,10 +3365,10 @@
 \AfterPreamble{% delay the redefinition when titlesec has done its own
   \renewcommand\chapter{%
     \YAD@clearemptydoublepage%
-    \phantomsection%
+    \YAD@phantomsection%
     \ifbool{YAD@output@paper}{%
     }{%
-      \bookmarksetup{startatroot}%
+      \YAD@bookmarksetup{startatroot}%
     }%
     \@ifstar{\YAD@starred@chapter}{\YAD@unstarred@chapter}%
   }%
@@ -3402,7 +3440,7 @@
     these opinions must be considered to be those of their authors.%
   }%
 }%
-\csdef{makedisclaimer}{%
+\newcommand{\makedisclaimer}{%
   \@ifstar{\@tempswatrue\csuse{YAD@starnostar@makedisclaimer}}{\@tempswafalse\csuse{YAD@starnostar@makedisclaimer}}%
 }%
 \csdef{YAD@starnostar@makedisclaimer}{%
@@ -3417,10 +3455,12 @@
     \vspace*{\stretch{1}}%
     \fi%
 }%
-\ifthenelse{\equal{\YAD@mainlanguage}{french}}{%
-  \hypersetup{pdflang=fr}%
-}{%
-  \hypersetup{pdflang=en}%
+\AfterEndPreamble{%
+  \ifthenelse{\equal{\YAD@mainlanguage}{french}}{%
+    \YAD@hypersetup{pdflang=fr}%
+  }{%
+    \YAD@hypersetup{pdflang=en}%
+  }%
 }%
 \AtEndPreamble{%
   \@ifpackageloaded{biblatex}{%

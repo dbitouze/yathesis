@@ -22,17 +22,7 @@
   \xpretocmd{\tableofcontents@YAD@without@argument}{\cleardoublepage\zlabel{tableofcontents-withoutargument}}{}{}
 }
 \AfterEndPreamble{%
-  % \xpretocmd{\maketitle}{\zlabel{fr-title}}{}{}%
-  \LetLtxMacro{\YAD@maketitle@ORI}{\maketitle}
-  \renewcommand{\maketitle}[1][]{%
-    \ifthenelse{\isempty{#1}}{%
-      \cleardoublepage\zlabel{fr-title}%
-    }{%
-    }%
-    \YAD@maketitle@ORI[{#1}]%
-  }
-  \xpatchcmd{\YAD@addpagenumber}{\addtocounter{page}{4}}{\zlabel{en-title}\addtocounter{page}{4}}{}{}%
-  %
+  \xpretocmd{\maketitle}{\zlabel{fr-title}}{}{}%
   \xpretocmd{\makedisclaimer}{\cleardoublepage\zlabel{disclaimer}}{}{}
   \xpretocmd{\makekeywords}{\cleardoublepage\zlabel{keywords}}{}{}
   \xpretocmd{\makelaboratory}{\cleardoublepage\zlabel{laboratory}}{}{}
@@ -46,8 +36,7 @@
   \RenewDocumentCommand\chapter{som}{%
     \IfBooleanTF{#1}
     {
-      \ifthenelse{\equal{#3}{Introduction g\IeC {\'e}n\IeC {\'e}rale}}{%
-        \cleardoublepage\zlabel{introduction}%
+      \ifthenelse{\equal{#3}{Introduction g\IeC {\'e}n\IeC {\'e}rale}}{\cleardoublepage\zlabel{introduction}%
       }{%
       }%
       \IfNoValueTF{#2}
@@ -55,16 +44,13 @@
       {\YAD@demo@chapter@ORI*[#2]{#3}}%
     }
     {%
-      \ifthenelse{\equal{#3}{Introduction g\IeC {\'e}n\IeC {\'e}rale}}{%
-        \cleardoublepage\zlabel{introduction}%
+      \ifthenelse{\equal{#3}{Introduction g\IeC {\'e}n\IeC {\'e}rale}}{\cleardoublepage\zlabel{introduction}%
       }{%
       }%
-      \ifthenelse{\equal{#3}{Contexte du chaos du rire}}{%
-        \cleardoublepage\zlabel{chapter}%
+      \ifthenelse{\equal{#3}{Contexte du chaos du rire}}{\cleardoublepage\zlabel{chapter}%
       }{%
       }%
-      \ifthenelse{\equal{#3}{Documents juridiques}}{%
-        \cleardoublepage\zlabel{appendix}%
+      \ifthenelse{\equal{#3}{Documents juridiques}}{\cleardoublepage\zlabel{appendix}%
       }{%
       }%
       \IfNoValueTF{#2}
@@ -75,8 +61,7 @@
   \ifcsdef{printglossary}{%
     \LetLtxMacro{\YAD@printglossary@ORI}{\printglossary}
     \renewcommand{\printglossary}[1][]{%
-      \ifthenelse{\isempty{#1}}{%
-        \cleardoublepage\zlabel{printglossary}%
+      \ifthenelse{\isempty{#1}}{\cleardoublepage\zlabel{printglossary}%
       }{%
       }%
       \YAD@printglossary@ORI[{#1}]%
