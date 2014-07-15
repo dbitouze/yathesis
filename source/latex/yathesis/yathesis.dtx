@@ -1136,20 +1136,12 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \RequirePackage{datetime}[2013/09/10]%
 %    \end{macrocode}
-% Gestion améliorée des références croisées. Le chargement de ce package dans
-% la classe (et non pas dans le document) est nécessaire car il doit être
-% chargé \emph{avant} le \Package{hyperref}, sans quoi le \Package{clevref},
-% s'il est chargé dans le document, ne fonctionne pas correctement.
-%    \begin{macrocode}
-\RequirePackage{varioref}[2011/10/02]%
-%    \end{macrocode}
 % Pour la gestion des hyperliens. L'option ×final× assure que les
 % hyperliens seront présents même en mode brouillon ; l'option
 % ×unicode× assure que les accents sont composés de façon conforme
 % dans les signets. D'autres options peuvent être fixées au moyen de la
 % commande ×\hypersetup×.
 %    \begin{macrocode}
-% \RequirePackage[final,unicode,hyperfootnotes=false,hyperindex=false,plainpages=false,breaklinks,pdfpagemode=UseOutlines,pdfpagelayout=TwoPageRight]{hyperref}[2012/11/06]%
 \@ifpackageloaded{hyperref}{%
   \hypersetup{final,unicode,hyperfootnotes=false,hyperindex=false,plainpages=false,breaklinks,pdfpagemode=UseOutlines,pdfpagelayout=TwoPageRight}%
 }{%
@@ -1180,32 +1172,17 @@ This work consists of the file  yathesis.dtx
 \AtEndPreamble{%
   \@ifpackageloaded{hyperref}{%
     \newcommand{\YAD@href}[3][]{\href[#1]{#2}{#3}}%
-  }{%
-    \newcommand{\YAD@href}[3][]{#3}%
-  }%
-  \@ifpackageloaded{hyperref}{%
     \newcommand{\YAD@hypersetup}[1]{\hypersetup{#1}}%
-  }{%
-    \newcommand{\YAD@hypersetup}[1]{}%
-  }%
-  \@ifpackageloaded{hyperref}{%
     \newcommand{\YAD@url}[1]{\url{#1}}%
-  }{%
-    \newcommand{\YAD@url}[1]{\texttt{#1}}%
-  }%
-  \@ifpackageloaded{hyperref}{%
     \newcommand{\YAD@nolinkurl}[1]{\nolinkurl{#1}}%
-  }{%
-    \newcommand{\YAD@nolinkurl}[1]{\texttt{#1}}%
-  }%
-  \@ifpackageloaded{hyperref}{%
     \newcommand{\YAD@texorpdfstring}[2]{\texorpdfstring{#1}{#2}}%
-  }{%
-    \newcommand{\YAD@texorpdfstring}[2]{#1}%
-  }%
-  \@ifpackageloaded{hyperref}{%
     \newcommand{\YAD@phantomsection}{\phantomsection}%
   }{%
+    \newcommand{\YAD@href}[3][]{#3}%
+    \newcommand{\YAD@hypersetup}[1]{}%
+    \newcommand{\YAD@url}[1]{\texttt{#1}}%
+    \newcommand{\YAD@nolinkurl}[1]{\texttt{#1}}%
+    \newcommand{\YAD@texorpdfstring}[2]{#1}%
     \newcommand{\YAD@phantomsection}{}%
   }%
   \@ifpackageloaded{bookmark}{%
@@ -6345,7 +6322,7 @@ This work consists of the file  yathesis.dtx
     listoftables,listoffigures,lstlistingname,si,SI,ohm,num,space,shorthandon,shorthandoff,%
     abstractname,appendixname,contentsname,listfigurename,listtablename,indexname,%
     figurename,tablename,chaptername,pagename,seename,alsoname,proofname,bibname,glossaryname,%
-    addto,captionsenglish,captionsfrench,lipsum,href,url,partname,refname,idxlayout,renewcommand*,%
+    addto,captionsenglish,captionsfrench,lipsum,href,url,partname,refname,renewcommand*,%
     appendix,lstlistoflistings,graphicpath,loadglsentries,hypersetup,detect-all,SetWatermarkColor,%
     @pnumwidth%
   },%
@@ -6353,7 +6330,7 @@ This work consists of the file  yathesis.dtx
     tabular,tabulary,math%
   },%
   morekeywords=[2]{% Keys of key-value lists and packages' names
-    bookmarksdepth,columns,see,babel,colorlinks,linktoc%
+    bookmarksdepth,see,babel,colorlinks,linktoc%
   },%
   morekeywords=[3]{% Values of key-value lists
     german,ngerman,french,english,spanish%
