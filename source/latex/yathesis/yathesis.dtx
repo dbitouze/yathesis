@@ -557,11 +557,9 @@ This work consists of the file  yathesis.dtx
 \newsavebox{\YAD@abstract@mainlanguage}%
 \newsavebox{\YAD@abstract@secondarylanguage}%
 %
-\newcounter{YAD@titlepages}%
 \newcounter{YAD@abstracts}%
 \newcounter{YAD@warnings}%
 \newcounter{datetoday}
-\setcounter{YAD@titlepages}{0}%
 \setcounter{YAD@abstracts}{0}%
 \setcounter{YAD@warnings}{0}%
 %
@@ -4267,16 +4265,6 @@ This work consists of the file  yathesis.dtx
   \let\tcb@shadow@arc=\tcb@zpt%
 }%
 %    \end{macrocode}
-% On crée une commande fixant la numérotation des pages selon le nombre de
-% pages de titres. Si on crée une telle commande, plutôt qu'insérer son code là
-% où elle est utilisée, c'est pour pouvoir la patcher, ce qui est pratique pour
-% la documentation de la classe.
-%    \begin{macrocode}
-\newcommand{\YAD@addpagenumber}{%
-  \ifnumcomp{\value{YAD@titlepages}}{=}{2}{\addtocounter{page}{2}}{}%
-  \ifnumcomp{\value{YAD@titlepages}}{=}{3}{\addtocounter{page}{4}}{}%
-}%
-%    \end{macrocode}
 %
 % \begin{macro}{\maketitle}
 % Commande de la page de titre
@@ -4287,7 +4275,6 @@ This work consists of the file  yathesis.dtx
   \setlength{\fboxsep}{10pt}%
   \setlength{\YAD@titleboxwidth}{\linewidth-2\fboxsep-2\fboxrule}%
   \renewcommand*{\do}[1]{%
-    \stepcounter{YAD@titlepages}%
 %    \end{macrocode}
 % Appel du style de page propre au(x) titre(s)
 %    \begin{macrocode}
@@ -4609,11 +4596,6 @@ This work consists of the file  yathesis.dtx
       }%
     }%
   }%
-%    \end{macrocode}
-% On fixe la numérotation des pages selon le nombre de pages de titres au moyen
-% de la commande ×\YAD@addpagenumber× créée précédemment.
-%    \begin{macrocode}
-\YAD@addpagenumber%
 %    \end{macrocode}
 % On repasse à la langue par défaut
 %    \begin{macrocode}
@@ -6914,17 +6896,7 @@ run.xml sbl* sl* sym* xdy unq synctex.gz mw *~
 }
 %
 \AfterEndPreamble{%
-  % \xpretocmd{\maketitle}{\zlabel{fr-title}}{}{}%
-  \LetLtxMacro{\YAD@maketitle@ORI}{\maketitle}
-  \renewcommand{\maketitle}[1][]{%
-    \ifthenelse{\isempty{#1}}{%
-      \cleardoublepage\zlabel{fr-title}%
-    }{%
-    }%
-    \YAD@maketitle@ORI[{#1}]%
-  }
-  \xpatchcmd{\YAD@addpagenumber}{\addtocounter{page}{4}}{\zlabel{en-title}\addtocounter{page}{4}}{}{}%
-  %
+  \xpretocmd{\maketitle}{\zlabel{fr-title}}{}{}%
   \xpretocmd{\makedisclaimer}{\cleardoublepage\zlabel{disclaimer}}{}{}
   \xpretocmd{\makekeywords}{\cleardoublepage\zlabel{keywords}}{}{}
   \xpretocmd{\makelaboratory}{\cleardoublepage\zlabel{laboratory}}{}{}
