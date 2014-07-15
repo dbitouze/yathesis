@@ -11,28 +11,30 @@
 \usepackage{floatrow}
 \usepackage{caption}
 \usepackage{microtype}
-\usepackage[autostyle]{csquotes}
+\usepackage{varioref}
+%\usepackage[xindy,quiet]{imakeidx}
+%\usepackage[autostyle]{csquotes}
 %\usepackage[backend=biber,safeinputenc]{biblatex}
 \usepackage{hyperref}
-% Pour un éventuel glossaire, une liste d'acronymes et/ou une liste de
-% symboles
-% \usepackage[xindy,acronyms,symbols]{glossaries}
+%\usepackage[xindy,acronyms,symbols]{glossaries}
 %
-% Spécification de la ou des ressources bibliographiques
+% Génération de l'index (facultatif mais obligatoire si un package d'index,
+% par exemple « imakeidx », est chargé) :
+% \makeindex
+%
+% Spécification de la ou des ressources bibliographiques (facultatif mais
+% obligatoire si le package « biblatex » est chargé) :
 % \addbibresource{auxiliaires/bibliographie.bib}
 % \addbibresource{auxiliaires/}
 %
-% Génération du glossaire. Facultatif (mais obligatoire si le package
-% « glossaries » est chargé).
+% Génération du glossaire (facultatif mais obligatoire si le package
+% « glossaries » est chargé) :
 % \makeglossaries
 %
-% Spécification de la ou des ressources terminologiques. Facultatif.
+% Spécification de la ou des ressources terminologiques (facultatif) :
 % \loadglsentries{auxiliaires/}
 % \loadglsentries{auxiliaires/}
 % \loadglsentries{auxiliaires/}
-%
-% Génération de l'index. Facultatif.
-% \makeindex
 %
 % Les réglages figurant habituellement dans le préambule, notamment concernant
 % la bibliographie et les éventuels glossaires et index, peuvent être saisis
@@ -66,52 +68,52 @@
 % Début de la partie liminaire de la thèse
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-% Production de la page de clause de non-responsabilité. Facultatif.
+% Production de la page de clause de non-responsabilité (facultatif) :
 \makedisclaimer
 %
-% Production de la page de mots clés. Facultatif.
+% Production de la page de mots clés (facultatif) :
 \makekeywords
 %
 % Production de la page affichant les logo, nom et coordonnées du ou des
 % laboratoires (ou unités de recherche) où la thèse a été
-% préparée. Facultatif.
+% préparée (facultatif) :
 \makelaboratory
 %
-% Dédicace(s). Facultatif.
+% Dédicace(s) (facultatif) :
 \input{liminaires/dedicaces}
 %
-% Épigraphe(s). Facultatif.
+% Épigraphe(s) (facultatif) :
 \input{liminaires/epigraphes}
 %
-% Résumés succincts.
+% Résumés succincts :
 \input{liminaires/resumes}
 %
-% Chapitre de remerciements. Facultatif.
+% Chapitre de remerciements (facultatif) :
 \include{liminaires/remerciements}
 %
-% Chapitre d'avertissement. Facultatif.
+% Chapitre d'avertissement (facultatif) :
 % \include{liminaires/avertissement}
 %
-% Liste des acronymes. Facultatif.
+% Liste des acronymes (facultatif) :
 % \printacronyms
 %
-% Liste des symboles. Facultatif.
+% Liste des symboles (facultatif) :
 % \printsymbols
 %
-% Chapitre d'avant-propos. Facultatif.
+% Chapitre d'avant-propos (facultatif) :
 % \include{liminaires/avant-propos}
 %
 % Sommaire
 \tableofcontents[depth=chapter,name=Sommaire]
 %
-% Liste des tableaux. Facultatif.
+% Liste des tableaux (facultatif) :
 \listoftables
 %
-% Table des figures. Facultatif.
+% Table des figures (facultatif) :
 \listoffigures
 %
 % Table des listings (nécessite que le package « listings » soit
-% chargé). Facultatif.
+% chargé) (facultatif) :
 % \lstlistoflistings
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -169,16 +171,16 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \backmatter
 %
-% Glossaire (si souhaité distinct de la liste des acronymes). Facultatif.
+% Glossaire (si souhaité distinct de la liste des acronymes) (facultatif) :
 % \printglossary
 %
-% Index. Facultatif.
+% Index (facultatif) :
 % \printindex
 %
 % Table des matières
 \tableofcontents
 %
-% Production de la 4e de couverture. Facultatif.
+% Production de la 4e de couverture (facultatif) :
 \makebackcover
 %
 \end{document}

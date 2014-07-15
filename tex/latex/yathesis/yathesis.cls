@@ -325,7 +325,6 @@
   chap-style=PetersLenny,%
 }%
 \PassOptionsToPackage{a4paper}{geometry}%
-\PassOptionsToPackage{columns=1}{idxlayout}%
 \PassOptionsToPackage{nodayofweek}{datetime}%
 \PassOptionsToPackage{export}{adjustbox}%
 \PassOptionsToPackage{numbered}{bookmark}%
@@ -339,7 +338,6 @@
   draftwatermark/.code={\PassOptionsToPackage{#1}{draftwatermark}},%
   babel/.code={\PassOptionsToPackage{#1}{babel}},%
   datetime/.code={\PassOptionsToPackage{#1}{datetime}},%
-  varioref/.code={\PassOptionsToPackage{#1}{varioref}},%
   bookmark/.code={\PassOptionsToPackage{#1}{bookmark}},%
 }%
 \yadsetup{%
@@ -396,8 +394,6 @@
   }{%
   }%
 }%
-\RequirePackage{index}[2004/01/20]%
-\RequirePackage{idxlayout}[2012/03/30]%
 \RequirePackage{babel}[2014/03/24]
 \RequirePackage{iflang}[2007/11/11]%
 \let\@modulo@SAVED\@modulo
@@ -428,48 +424,37 @@
 }
 \let\@modulo\@modulo@SAVED
 \RequirePackage{datetime}[2013/09/10]%
-\RequirePackage{varioref}[2011/10/02]%
 \@ifpackageloaded{hyperref}{%
   \hypersetup{final,unicode,hyperfootnotes=false,hyperindex=false,plainpages=false,breaklinks,pdfpagemode=UseOutlines,pdfpagelayout=TwoPageRight}%
 }{%
 }%
-\@ifpackageloaded{hyperref}{%
-  \RequirePackage[all]{hypcap}[2011/02/16]%
-}{%
-}%
-\@ifpackageloaded{hyperref}{%
-  \RequirePackage[numbered]{bookmark}[2011/12/02]%
+\AtEndPreamble{%
+  \@ifpackageloaded{hyperref}{%
+    \RequirePackage[all]{hypcap}[2011/02/16]%
   }{%
   }%
+}%
+\AtEndPreamble{%
+  \@ifpackageloaded{hyperref}{%
+    \RequirePackage[numbered]{bookmark}[2011/12/02]%
+  }{%
+  }%
+}%
 \AtEndPreamble{%
   \@ifpackageloaded{hyperref}{%
     \newcommand{\YAD@href}[3][]{\href[#1]{#2}{#3}}%
+    \newcommand{\YAD@hypersetup}[1]{\hypersetup{#1}}%
+    \newcommand{\YAD@url}[1]{\url{#1}}%
+    \newcommand{\YAD@nolinkurl}[1]{\nolinkurl{#1}}%
+    \newcommand{\YAD@texorpdfstring}[2]{\texorpdfstring{#1}{#2}}%
+    \newcommand{\YAD@phantomsection}{\phantomsection}%
+    \hypersetup{final}%
   }{%
     \newcommand{\YAD@href}[3][]{#3}%
-  }%
-  \@ifpackageloaded{hyperref}{%
-    \newcommand{\YAD@hypersetup}[1]{\hypersetup{#1}}%
-  }{%
     \newcommand{\YAD@hypersetup}[1]{}%
-  }%
-  \@ifpackageloaded{hyperref}{%
-    \newcommand{\YAD@url}[1]{\url{#1}}%
-  }{%
     \newcommand{\YAD@url}[1]{\texttt{#1}}%
-  }%
-  \@ifpackageloaded{hyperref}{%
-    \newcommand{\YAD@nolinkurl}[1]{\nolinkurl{#1}}%
-  }{%
     \newcommand{\YAD@nolinkurl}[1]{\texttt{#1}}%
-  }%
-  \@ifpackageloaded{hyperref}{%
-    \newcommand{\YAD@texorpdfstring}[2]{\texorpdfstring{#1}{#2}}%
-  }{%
     \newcommand{\YAD@texorpdfstring}[2]{#1}%
-  }%
-  \@ifpackageloaded{hyperref}{%
-    \newcommand{\YAD@phantomsection}{\phantomsection}%
-  }{%
     \newcommand{\YAD@phantomsection}{}%
   }%
   \@ifpackageloaded{bookmark}{%
@@ -649,7 +634,7 @@
         \begin{tabular}{l}
           {%
             \normalfont\ttfamily\tiny%
-            (lbl-#1)%
+            (#1)%
           }%
           \\[-.3\baselineskip]
           \YAD@reach@file[\YAD@configuration@file]{%
@@ -3440,7 +3425,7 @@
     these opinions must be considered to be those of their authors.%
   }%
 }%
-\newcommand{\makedisclaimer}{%
+\csdef{makedisclaimer}{%
   \@ifstar{\@tempswatrue\csuse{YAD@starnostar@makedisclaimer}}{\@tempswafalse\csuse{YAD@starnostar@makedisclaimer}}%
 }%
 \csdef{YAD@starnostar@makedisclaimer}{%

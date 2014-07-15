@@ -4,29 +4,33 @@
 % Chargement manuel de packages (pas déjà chargés par la classe yathesis)
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{lipsum} % À proscrire dans un vrai mémoire de thèse !
 \usepackage{kpfonts}
 \usepackage{booktabs}
 \usepackage{siunitx}
 \usepackage{pgfplots}
 \usepackage{floatrow}
 \usepackage{caption}
-\usepackage{microtype}
-\usepackage[autostyle]{csquotes}
 \usepackage{listings}
-\usepackage{lipsum} % À proscrire dans un vrai mémoire de thèse !
+\usepackage{microtype}
+\usepackage{varioref}
+\usepackage[xindy,quiet]{imakeidx}
+\usepackage[autostyle]{csquotes}
 \usepackage[backend=biber,safeinputenc]{biblatex}
 \usepackage{hyperref}
 \usepackage[xindy,acronyms,symbols]{glossaries}
 %
-% Spécification de la ou des ressources bibliographiques
-\addbibresource{bibliographie.bib}
-\addbibresource{biblatex-examples.bib} % Fournie par biblatex
+% Génération de l'index :
+\makeindex
 %
-% Génération du glossaire. Facultatif (mais obligatoire si le package
-% « glossaries » est chargé).
+% Spécification de la ou des ressources bibliographiques :
+\addbibresource{bibliographie.bib}
+\addbibresource{biblatex-examples.bib} % Fournie par biblatex.
+%
+% Génération du glossaire :
 \makeglossaries
 %
-% Spécification de la ou des ressources terminologiques. Facultatif.
+% Spécification de la ou des ressources terminologiques (facultatif) :
 % Termes du glossaire
 \newglossaryentry{latex}{%
   name=\LaTeX,%
@@ -93,11 +97,8 @@
 \newglssymbol[constanteplanck]{planck}{\ensuremath{h}}{constante de
   Planck}{\ensuremath{h\approx\SI{6,62606957e-34}{J.s}}}
 %
-% Génération de l'index. Facultatif.
-\makeindex
-%
 % Configuration des styles du glossaire et de la liste
-% d'acronymes. Facultatif.
+% d'acronymes (facultatif) :
 \setglossarystyle{indexhypergroup}
 \setacronymstyle{long-sc-short}
 %
@@ -153,48 +154,48 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Auteur de la thèse : prénom (1er argument obligatoire), nom (2e argument
 % obligatoire) et éventuel courriel (argument optionnel). Les éventuels accents
-% devront figurer et le nom /ne/ doit /pas/ être saisi en capitales.
+% devront figurer et le nom /ne/ doit /pas/ être saisi en capitales :
 \author[aa@zygo.fr]{Alphonse}{Allais}
 %
 % Titre de la thèse dans la langue principale (argument obligatoire) et dans la
-% langue secondaire (argument optionnel).
+% langue secondaire (argument optionnel) :
 \title[Laugh's Chaos]{Le chaos du rire}
 %
 % Sous-titre de la thèse dans la langue principale (argument obligatoire) et
-% dans la langue secondaire (argument optionnel). Facultatif.
+% dans la langue secondaire (argument optionnel) (facultatif) :
 \subtitle[Chaos' laugh]{Le rire du chaos}
 %
 % Champ disciplinaire dans la langue principale (argument obligatoire) et dans
-% la langue secondaire (argument optionnel).
+% la langue secondaire (argument optionnel) :
 \academicfield[Mathematics]{Mathématiques}
 %
 % Spécialité dans la langue principale (argument obligatoire) et dans la langue
-% secondaire (argument optionnel). Facultatif.
+% secondaire (argument optionnel) (facultatif) :
 \speciality[Dynamical systems]{Systèmes dynamiques}
 %
 % Date de la soutenance, au format {jour}{mois}{année} donnés sous forme de
-% nombres.
+% nombres :
 \date{1}{1}{2015}
 %
-% Sujet pour les méta-données du PDF. Facultatif.
+% Sujet pour les méta-données du PDF (facultatif) :
 \subject[Chaotic Laugh]{Rire chaotique}
 %
-% Nom (argument obligatoire) du PRES. Facultatif.
+% Nom (argument obligatoire) du PRES (facultatif) :
 \pres[logo=pres]{Université Lille Nord de France}
 %
-% Nom (argument obligatoire) de l'institut (principal en cas de cotutelle).
+% Nom (argument obligatoire) de l'institut (principal en cas de cotutelle) :
 \institute[logo=ulco,url=http://www.univ-littoral.fr/]{ULCO}
 %
 % En cas de cotutelle (normalement, seulement dans le cas de cotutelle
-% internationale), nom (argument obligatoire) du second institut. Facultatif.
+% internationale), nom (argument obligatoire) du second institut (facultatif) :
 \coinstitute[logo=paris13,url=http://www.univ-paris13.fr/]{Université de Paris~13}
 %
-% Nom (argument obligatoire) de l'école doctorale. Facultatif.
+% Nom (argument obligatoire) de l'école doctorale (facultatif) :
 \doctoralschool[url=http://edspi.univ-lille1.fr/]{ED Régionale SPI 72}
 %
 % Nom (1er argument obligatoire) et adresse (2e argument obligatoire) du
 % laboratoire (ou de l'unité) où la thèse a été préparée, à utiliser /autant de
-% fois que nécessaire/.
+% fois que nécessaire/ :
 \laboratory[
 logo=labo,
 logoheight=1.25cm,
@@ -235,7 +236,7 @@ url=http://www-lmpa.univ-littoral.fr/
 \guest{George}{Sand}
 %
 % Mention du numéro d'ordre de la thèse (s'il est connu, ce numéro est
-% à spécifier en argument optionnel). Facultatif.
+% à spécifier en argument optionnel) (facultatif) :
 \ordernumber[42]
 %
 % Préparation des mots clés dans la langue principale (1er argument) et dans la
@@ -251,35 +252,35 @@ url=http://www-lmpa.univ-littoral.fr/
 % Début de la partie liminaire de la thèse
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-% Production de la page de clause de non-responsabilité. Facultatif.
+% Production de la page de clause de non-responsabilité (facultatif) :
 \makedisclaimer
 %
-% Production de la page de mots clés. Facultatif.
+% Production de la page de mots clés (facultatif) :
 \makekeywords
 %
 % Production de la page affichant les logo, nom et coordonnées du ou des
 % laboratoires (ou unités de recherche) où la thèse a été
-% préparée. Facultatif.
+% préparée (facultatif) :
 \makelaboratory
 %
-% Dédicace(s). Facultatif.
+% Dédicace(s) (facultatif) :
 \dedication{Je dédie ce travail\\à tous ceux qui le méritent}
 \dedication{À mon directeur bien-aimé !}
 \dedication{À mon co-directeur bien-co-aimé !}
-% Production de la page de dédicace(s). Facultatif.
+% Production de la page de dédicace(s) (facultatif) :
 \makededications
 %
-% Épigraphe(s). Facultatif.
+% Épigraphe(s) (facultatif) :
 \frontepigraph{Science sans conscience n'est que ruine de l'âme.}{François Rabelais}
 \frontepigraph[english]{I can resist everything, except temptation!}{Oscar Wilde}
 \frontepigraph{Il est plus facile de désintégrer un atome qu'un préjugé.}{Albert Einstein}
-% Production de la page de d'épigraphe(s). Facultatif.
+% Production de la page de d'épigraphe(s) (facultatif) :
 \makefrontepigraphs
 %
 % Résumés (de 1700 caractères maximum, espaces compris) dans la
 % langue principale (1re occurrence de l'environnement « abstract »)
 % et, facultativement, dans la langue secondaire (2e occurrence de
-% l'environnement « abstract »).
+% l'environnement « abstract ») :
 \begin{abstract}
   \lipsum[1-2]
 \end{abstract}
@@ -287,27 +288,27 @@ url=http://www-lmpa.univ-littoral.fr/
   \lipsum[3-4]
 \end{abstract}
 %
-% Production de la page de résumés.
+% Production de la page de résumés :
 \makeabstract
 %
-% Chapitre de remerciements. Facultatif.
+% Chapitre de remerciements (facultatif) :
 \chapter{Remerciements}
 \section{Une section de remerciements}
 \lipsum[1]
 \section{Une autre section de remerciements}
 \lipsum[2-9]
 %
-% Chapitre d'avertissement. Facultatif.
+% Chapitre d'avertissement (facultatif) :
 \chapter{Avertissement}
 Thèse hilarante, comme le gaz du même nom !
 %
-% Liste des acronymes. Facultatif.
+% Liste des acronymes (facultatif) :
 \printacronyms
 %
-% Liste des symboles. Facultatif.
+% Liste des symboles (facultatif) :
 \printsymbols
 %
-% Chapitre d'avant-propos. Facultatif.
+% Chapitre d'avant-propos (facultatif) :
 \chapter{Avant-propos}
 \section{Une section d'avant-propos}
 \lipsum[30-45]
@@ -317,14 +318,14 @@ Thèse hilarante, comme le gaz du même nom !
 % Sommaire
 \tableofcontents[depth=chapter,name=Sommaire]
 %
-% Liste des tableaux. Facultatif.
+% Liste des tableaux (facultatif) :
 \listoftables
 %
-% Table des figures. Facultatif.
+% Table des figures (facultatif) :
 \listoffigures
 %
 % Table des listings (nécessite que le package « listings » soit
-% chargé). Facultatif.
+% chargé) (facultatif) :
 % \lstlistoflistings
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -496,13 +497,13 @@ résultats fondamentaux qu'on y trouve
 \autocite[chap.~3]{relativite}.
 
 Nous ne manquerons pas de causer de \glspl{vrnc}, d'\gls{af} et de \gls{mf},
-termes définis dans le \index*{glossaire}. Nous recourrons également aux
+termes définis dans le glossaire\index{glossaire}. Nous recourrons également aux
 symboles de l'\gls{ohm}, du \gls{exists} et de la \gls{planck} définis dans la
 liste des symboles. Vous noterez que notre travail a été composé au moyen de
 \gls{latex}\index{\gls{latex}}.
 
 Notre étude a porté sur l'\gls{irm} et la \gls{rmn}, définis dans la
-liste des \index*{acronymes}. Nous pouvons insérer d'autres
+liste des acronymes\index{acronyme}. Nous pouvons insérer d'autres
 acronymes :
 \begin{itemize}
 \item \gls{ascii} ;
@@ -670,8 +671,9 @@ Dans ce chapitre, nous concluons l'étude du chaos du rire.
 % Cinquième chapitre
 \chapter{Développement}
 
-Nous pouvons insérer de beaux graphiques, comme celui de la
-figure\vref{sin-x*sin-y}.
+Nous pouvons faire référence à des graphiques (très jolis au demeurant), comme
+celui de la figure\vref{sin-x*sin-y}.
+\lipsum[3-10]
 \begin{figure}[ht]
   \centering
   \capstart
@@ -685,8 +687,6 @@ figure\vref{sin-x*sin-y}.
     \sin x\times\sin y$}
   \label{sin-x*sin-y}
 \end{figure}
-
-\lipsum[3-10]
 % Sixième chapitre
 \chapter{Conclusion}
 Dans ce chapitre, nous concluons l'étude du rire du chaos.
@@ -788,16 +788,16 @@ int factorielle(int n)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \backmatter
 %
-% Glossaire (si souhaité distinct de la liste des acronymes). Facultatif.
+% Glossaire (si souhaité distinct de la liste des acronymes) (facultatif) :
 \printglossary
 %
-% Index. Facultatif.
+% Index (facultatif) :
 \printindex
 %
 % Table des matières
 \tableofcontents
 %
-% Production de la 4e de couverture. Facultatif.
+% Production de la 4e de couverture (facultatif) :
 \makebackcover
 %
 \end{document}
