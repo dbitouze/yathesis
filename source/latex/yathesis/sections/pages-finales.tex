@@ -39,21 +39,19 @@ des glossaires (\docAuxCommand{printglossaries}) sont détaillées et illustrée
   figurer d'index.
 \end{dbremark*}
 
-Bien que tout package de gestion d'index puisse théoriquement fonctionner avec
-la \yatcl, celle-ci a été conçue plus spécifiquement en vue d'un usage du
-\Package*{index}\footnote{Dans cette section, son fonctionnement est supposé
-  connu du lecteur (sinon, cf. par exemple \cite{en-ligne7}).}.
-
-La \yatcl{} ne définit rien de spécifique concernant l'index. Elle se contente
-de charger le \Package{index}
-\phrase{qu'il est donc inutile de charger manuellement} et de légèrement
-modifier sa commande \docAuxCommand{printindex} (illustrée
-\vref{fig:printindex}) :
+Tout système de gestion d'index\footnote{Dans cette section, le fonctionnement
+  d'un tel système est supposé connu du lecteur (sinon, cf. par exemple
+  \cite{en-ligne7}).} peut théoriquement être mis en œuvre avec la
+\yatcl. Celle-ci ne définit rien de spécifique et se contente de légèrement
+modifier la commande \docAuxCommand{printindex} classique :
 \begin{itemize}
 \item en lui appliquant un style de pages propre à l'index ;
 \item pour que l'index figure automatiquement dans les
   sommaire, table des matières et signets du document.
 \end{itemize}
+
+La \vref{fig:printindex} illustre une page d'index créé au moyen du
+\Package{imakeidx}.
 
 \begin{figure}[htbp]
   \centering
