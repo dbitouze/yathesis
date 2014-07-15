@@ -1150,17 +1150,21 @@ This work consists of the file  yathesis.dtx
 % Pour faire pointer les hyperliens au début des flottants plutôt qu'au
 % début des légendes
 %    \begin{macrocode}
-\@ifpackageloaded{hyperref}{%
-  \RequirePackage[all]{hypcap}[2011/02/16]%
-}{%
+\AtEndPreamble{%
+  \@ifpackageloaded{hyperref}{%
+    \RequirePackage[all]{hypcap}[2011/02/16]%
+  }{%
+  }%
 }%
 %    \end{macrocode}
 % Pour la gestion des signets
 %    \begin{macrocode}
-\@ifpackageloaded{hyperref}{%
-  \RequirePackage[numbered]{bookmark}[2011/12/02]%
+\AtEndPreamble{%
+  \@ifpackageloaded{hyperref}{%
+    \RequirePackage[numbered]{bookmark}[2011/12/02]%
   }{%
   }%
+}%
 %    \end{macrocode}
 %
 % \section{Début du code de la classe}
