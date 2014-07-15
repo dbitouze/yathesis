@@ -711,8 +711,6 @@
   telephone/.store in=\cmdKV@YAD@telephone,%
   fax/.store in=\cmdKV@YAD@fax,%
   email/.store in=\cmdKV@YAD@email,%
-  % distinction/.store in=\cmdKV@YAD@distinction,%
-  % award/.store in=\cmdKV@YAD@award,%
   affiliation/.store in=\cmdKV@YAD@affiliation,%
   affiliationsecondary/.store in=\cmdKV@YAD@affiliationsecondary,%
   sepcorpaffilfrench/.store in=\cmdKV@YAD@sepcorpaffilfrench,%
@@ -861,7 +859,11 @@
     \DTLnewdbentry{#4}{affiliation}{\cmdKV@YAD@affiliation}%
   }%
   \YAD@ifemptyorundef{\cmdKV@YAD@affiliationsecondary}{%
-    \DTLnewdbentry{#4}{affiliationsecondary}{\cmdKV@YAD@affiliation}%
+    \YAD@ifemptyorundef{\cmdKV@YAD@affiliation}{%
+      \DTLnewdbentry{#4}{affiliationsecondary}{}%
+    }{%
+      \DTLnewdbentry{#4}{affiliationsecondary}{\cmdKV@YAD@affiliation}%
+    }%
   }{%
     \DTLnewdbentry{#4}{affiliationsecondary}{\cmdKV@YAD@affiliationsecondary}%
   }%
