@@ -900,7 +900,6 @@ This work consists of the file  yathesis.dtx
 %
 %    \begin{macrocode}
 \PassOptionsToPackage{a4paper}{geometry}%
-\PassOptionsToPackage{columns=1}{idxlayout}%
 \PassOptionsToPackage{nodayofweek}{datetime}%
 \PassOptionsToPackage{export}{adjustbox}%
 \PassOptionsToPackage{numbered}{bookmark}%
@@ -914,7 +913,6 @@ This work consists of the file  yathesis.dtx
   draftwatermark/.code={\PassOptionsToPackage{#1}{draftwatermark}},%
   babel/.code={\PassOptionsToPackage{#1}{babel}},%
   datetime/.code={\PassOptionsToPackage{#1}{datetime}},%
-  varioref/.code={\PassOptionsToPackage{#1}{varioref}},%
   bookmark/.code={\PassOptionsToPackage{#1}{bookmark}},%
 }%
 %    \end{macrocode}
@@ -1085,20 +1083,6 @@ This work consists of the file  yathesis.dtx
   }{%
   }%
 }%
-%    \end{macrocode}
-% Pour la gestion du ou des index. Ce package est préféré au
-% \Package{makeidx} historique car plus robuste. Cependant, pour que
-% les numéros de pages soient des hyperliens, il doit être chargé
-% \emph{avant} le \Package{hyperref}, ce qui nécessite de le faire
-% dans la classe et non pas dans le document.
-%    \begin{macrocode}
-\RequirePackage{index}[2004/01/20]%
-%    \end{macrocode}
-% Pour corriger un bug qui fait que l'intitulé \enquote{Index} est situé plus
-% haut que les intitulés standard tels que \enquote{Table des matières} ou
-% \enquote{Liste des figures}.
-%    \begin{macrocode}
-\RequirePackage{idxlayout}[2012/03/30]%
 %    \end{macrocode}
 % Pour gérer les langues.
 %    \begin{macrocode}
@@ -6407,7 +6391,7 @@ This work consists of the file  yathesis.dtx
     logo,url,nologo,space,mainlanguage,secnumdepth,tocdepth,depth,version,output,logoheight,%
     address,telephone,fax,email,type,acronym,heading,nowarning,noerror,nofrontcover,role,%
     hyperfootnotes,hyperindex,plainpages,pdfpagemode,pdfpagelayout,locale,gray,frametitle,%
-    graphicx,adjustbox,setspace,xcolor,datatool,titleps,draftwatermark,babel,datetime,varioref,%
+    graphicx,adjustbox,setspace,xcolor,datatool,titleps,draftwatermark,babel,datetime,%
     bookmark,fncychap,%
   },%
   morekeywords=[3]{% Values of key-value lists
@@ -6553,13 +6537,10 @@ This work consists of the file  yathesis.dtx
 #include:titleps
 #include:ifdraft
 #include:draftwatermark
-#include:index
-#include:idxlayout
 #include:babel
 #include:datetime
 #include:datenumber
 #include:varioref
-#include:hyperref
 #include:hypcap
 #include:bookmark
 #
