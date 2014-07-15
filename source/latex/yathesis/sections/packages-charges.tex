@@ -157,10 +157,15 @@ les plus notables sont précisés.
 
 \begin{description}
 \item[\package*{booktabs} :] tableaux plus professionnels ;
-\item[\package*{siunitx} :] gestion des nombres, angles et unités. Réglages par
-  défaut opérés par la \yatcl : \docAuxKey{detect-all} et
-  \docAuxKey{locale}×=×\docValue{FR} ou
-  \docAuxKey{locale}×=×\docValue{UK}\selonlangue{} ;
+\item[\package*{siunitx} :] gestion des nombres, angles et unités ;
+  \begin{description}
+  \item[option par défaut :]\
+    \begin{itemize}
+    \item \docAuxKey{detect-all} ;
+    \item \docAuxKey{locale}×=×\docValue{FR} ou
+      \docAuxKey{locale}×=×\docValue{UK}\selonlangue{} ;
+    \end{itemize}
+  \end{description}
 \item[\package*{pgfplots} :] graphiques plus professionnels,
   notamment de données expérimentales ;
 \item[\package*{listings} :] insertion de listings informatiques ;
@@ -181,8 +186,11 @@ les plus notables sont précisés.
     à la syntaxe très voisine, l'améliore et offre des fonctionnalités
     supplémentaires, notamment pour produire des index multiples.} ;
 \item[\package*{csquotes} :] pour les citations informelles et formelles (avec
-  citation des sources). Réglage par défaut opéré par la \yatcl (si le
-  \package*{biblatex} est chargé) : ×\SetCiteCommand{\autocite}× ;
+  citation des sources) ;
+    \begin{description}
+    \item[réglage par défaut] (si le \package*{biblatex} est chargé) :
+      ×\SetCiteCommand{\autocite}× ;
+  \end{description}
 \item[\package*{biblatex} :] gestion puissante de la bibliographie ;
 \item[\package*{hyperref} :] liens hypertextes ;
   \begin{description}
