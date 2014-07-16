@@ -301,9 +301,9 @@ pages de titre, sauf :
 %
 \begin{docKey}{url}{=\meta{\acrshort*{url} de l'institut}}{pas de valeur par
     défaut, initialement vide}
-  Cette option définit l'\acrshort{url} d'un institut. Les noms et
-  éventuels logos des instituts sont alors des hyperliens pointant
-  vers cette \acrshort{url}.
+  Cette option définit l'\acrshort{url} d'un institut. Les noms et éventuels
+  logos des instituts sont alors des liens hypertextes pointant vers cette
+  \acrshort{url}.
   \begin{dbexample}{\acrshort*{url} d'institut}{}
     Si la thèse a été préparée à l'\gls{ulco}, on pourra recourir à :%
     \NoAutoSpacing%
@@ -323,8 +323,7 @@ pages de titre, sauf :
 
 Les options supplémentaires suivantes \emph{ne} sont prévues
 \emph{que} pour l'entité \enquote{laboratoire} qui, contrairement
-aux autres, peut disposer d'une page dédiée\footnote{Produite au
-  moyen de la commande facultative \refCom{makelaboratory}.}.
+aux autres, peut disposer d'une page dédiée\pagededieelabo.
 %
 \begin{docKey}{telephone}{=\meta{numéro}}{pas de valeur par défaut,
     initialement vide}
@@ -335,9 +334,19 @@ aux autres, peut disposer d'une page dédiée\footnote{Produite au
     initialement vide}
   Cette option définit le numéro de fax du laboratoire.
 \end{docKey}
+%
 \begin{docKey}{email}{=\meta{adresse courriel}}{pas de valeur par
     défaut, initialement vide}
   Cette option définit l'adresse courriel du laboratoire.
+\end{docKey}
+%
+\begin{docKey}{nolaboratorynamelink}{=\docValue{true}\textbar\docValue{false}}{par défaut
+    \docValue{true}, initialement \docValue{false}}
+  Cette option a pour effet que, si l'\acrshort{url} du laboratoire a été
+  définie au moyen de l'option \refKey{url}, le nom de celui-ci n'est pas un
+  lien hypertexte : seuls l'\acrshort{url} en regard de la mention du site Web
+  et l'éventuel logo figurant la page dédiée aux laboratoires\pagededieelabo{}
+  sont des liens hypertextes pointant vers cette \acrshort{url}.
 \end{docKey}
 %
 \begin{dbexample}{Laboratoire}{}
