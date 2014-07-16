@@ -2938,6 +2938,7 @@ This work consists of the file  yathesis.dtx
       ##2%
     }%
   }%
+  \boolfalse{YAD@nolink}%
   \yadsetup{##1}%
   \ifthenelse{\equal{\cmdKV@YAD@url}{}}{%
     \ifdraft{%
@@ -3042,14 +3043,13 @@ This work consists of the file  yathesis.dtx
         \@ifstar{\@tempswatrue\csuse{YAD@starnostar@print#2logo}}{\@tempswafalse\csuse{YAD@starnostar@print#2logo}}%
       }%
       \csdef{YAD@starnostar@print#2logo}{%
-        \yadsetup{##1}%
+        \yadsetup{url=,##1}%
         \renewcommand*\YAD@logo{%
           \ifthenelse{\equal{\cmdKV@YAD@logo}{}}{%
             \YAD@reach@file{\YAD@generic@argument@translate{logo#2}}%
           }{%
             \YAD@reach@file{%
               \includegraphics[height=\cmdKV@YAD@logoheight]{\cmdKV@YAD@logo}%
-              \setlength\cmdKV@YAD@logoheight{\YAD@default@logoheight}%
             }%
           }%
         }%
@@ -3058,10 +3058,16 @@ This work consists of the file  yathesis.dtx
         \ifbool{YAD@nolink}{%
           \YAD@logo%
         }{%
-          \YAD@href{\cmdKV@YAD@url}{\YAD@logo}%
+          \ifthenelse{\equal{\cmdKV@YAD@url}{}}{%
+            % \YAD@href{www.#2.fr}{
+              \YAD@logo%
+            % }%
+          }{%
+            \YAD@href{\cmdKV@YAD@url}{\YAD@logo}%
+          }%
         }%
         \fi%
-        \fi%
+        \setlength\cmdKV@YAD@logoheight{\YAD@default@logoheight}%
       }%
     }%
   }%
@@ -4145,7 +4151,9 @@ This work consists of the file  yathesis.dtx
         #1%
       }{%
         \YAD@ifemptyorundef{#2}{%
-          \YAD@href{www.laboratory.fr}{#1}%
+          % \YAD@href{www.laboratory.fr}{%
+            #1%
+          % }%
         }{%
           \YAD@href{#2}{#1}%
         }%
@@ -4708,7 +4716,14 @@ This work consists of the file  yathesis.dtx
 \newcommand{\laboratory}[3][]{%
   \DTLnewrow{laboratories}%
   \dtlexpandnewvalue%
-  \yadsetup{#1}%
+  \yadsetup{%
+    logo=,%
+    url=,%
+    telephone=,%
+    fax=,%
+    email=,%
+    #1%
+  }%
   \DTLnewdbentry{laboratories}{name}{#2}%
   \DTLnewdbentry{laboratories}{address}{#3}%
   \ifbool{YAD@nolaboratory}{%
@@ -4739,8 +4754,8 @@ This work consists of the file  yathesis.dtx
   }{%
     \DTLnewdbentry{laboratories}{logo}{\cmdKV@YAD@logo}%
   }%
-  \ifthenelse{\equal{\cmdKV@YAD@logoheight}{}}{%
-    \DTLnewdbentry{laboratories}{logoheight}{}%
+  \YAD@ifemptyorundef{\cmdKV@YAD@logoheight}{%
+    \DTLnewdbentry{laboratories}{logoheight}{\YAD@default@logoheight}%
   }{%
     \DTLnewdbentry{laboratories}{logoheight}{\cmdKV@YAD@logoheight}%
   }%
@@ -4881,7 +4896,9 @@ This work consists of the file  yathesis.dtx
             \ifbool{YAD@nolink}{%
             \YAD@texteurl%
             }{%
-            \YAD@href{www.laboratory.fr}{\YAD@texteurl}%
+              % \YAD@href{www.laboratory.fr}{%
+                \YAD@texteurl%
+              % }%
             }%
           }{%
             \ifdraft{%
@@ -4919,7 +4936,9 @@ This work consists of the file  yathesis.dtx
           \YAD@logo%
         }{%
           \YAD@ifemptyorundef{\YAD@laboratory@url}{%
-            \YAD@href{www.laboratory.fr}{\YAD@logo}%
+            % \YAD@href{www.laboratory.fr}{%
+              \YAD@logo%
+            % }%
           }{%
             \YAD@href{\YAD@laboratory@url}{\YAD@logo}%
           }%
@@ -4937,6 +4956,7 @@ This work consists of the file  yathesis.dtx
       \vspace*{\stretch{.25}}%
       \fi%
     }%
+    \setlength\cmdKV@YAD@logoheight{\YAD@default@logoheight}%
   }%
   \ifthenelse{\DTLrowcount{laboratories}<1}{%
     \vspace*{\stretch{1}}%
