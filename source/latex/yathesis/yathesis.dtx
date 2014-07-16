@@ -1995,9 +1995,7 @@ This work consists of the file  yathesis.dtx
   \AtEndPreamble{%
     \YAD@hypersetup{colorlinks=false}%
   }%
-  \renewcommand{\YAD@href}[3][]{%
-    #3%
-  }%
+  \newcommand{\YAD@href}[3][]{#3}%
   \let\YAD@ori@footnote\footnote%
   \renewcommand{\footnote}[1]{\booltrue{YAD@in@footnote}\YAD@ori@footnote{#1}\boolfalse{YAD@in@footnote}}%
   \@ifpackageloaded{hyperref}{%
