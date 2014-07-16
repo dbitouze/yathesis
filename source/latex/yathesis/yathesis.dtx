@@ -701,7 +701,7 @@ This work consists of the file  yathesis.dtx
   % }%
 }%
 % \YAD@create@boolean{nolink}%
-\YAD@create@boolean{nolaboratorylink}%
+\YAD@create@boolean{nolaboratorynamelink}%
 \YAD@create@boolean{noerror}%
 \YAD@create@boolean{nowarning}%
 \YAD@create@boolean{noauthor}%
@@ -4155,7 +4155,7 @@ This work consists of the file  yathesis.dtx
         #1%
       }%
     }{%
-      % \ifboolexpr{ bool {@tempswa} or bool {YAD@nolaboratorylink} }{%
+      % \ifboolexpr{ bool {@tempswa} or bool {YAD@nolaboratorynamelink} }{%
       \ifboolexpr{%
         bool {@tempswa} %
         or test {\ifdefstring{\YAD@laboratory@nolink}{true}}%
@@ -4786,17 +4786,17 @@ This work consists of the file  yathesis.dtx
   }{%
     \DTLnewdbentry{laboratories}{email}{\cmdKV@YAD@email}%
   }%
-  \ifbool{YAD@nolaboratorylink}{%
-    \DTLnewdbentry{laboratories}{nolaboratorylink}{true}%
+  \ifbool{YAD@nolaboratorynamelink}{%
+    \DTLnewdbentry{laboratories}{nolaboratorynamelink}{true}%
   }{%
-    \DTLnewdbentry{laboratories}{nolaboratorylink}{false}%
+    \DTLnewdbentry{laboratories}{nolaboratorynamelink}{false}%
   }%
   %
   \DTLgetvalue{\YAD@main@laboratory@name}{laboratories}{1}{\dtlcolumnindex{laboratories}{name}}%
   \DTLgetvalue{\YAD@main@laboratory@address}{laboratories}{1}{\dtlcolumnindex{laboratories}{address}}%
   \DTLgetvalue{\YAD@main@laboratory@url}{laboratories}{1}{\dtlcolumnindex{laboratories}{url}}%
   %
-  \boolfalse{YAD@nolaboratorylink}%
+  \boolfalse{YAD@nolaboratorynamelink}%
   \yadsetup{%
     logo=,%
     url=,%
@@ -4862,7 +4862,7 @@ This work consists of the file  yathesis.dtx
     \YAD@laboratory@telephone=telephone,%
     \YAD@laboratory@fax=fax,%
     \YAD@laboratory@email=email,%
-    \YAD@laboratory@nolink=nolaboratorylink%
+    \YAD@laboratory@nolink=nolaboratorynamelink%
   }{%
     \ifthenelse{\DTLiseq{\YAD@laboratory@logo}{}}{%
       \setlength{\YAD@laboratory@width}{\linewidth-\parindent}%
