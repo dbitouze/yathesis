@@ -2966,38 +2966,6 @@ This work consists of the file  yathesis.dtx
   }%
 }%
 %    \end{macrocode}
-% Création de la commande affichant l'URL de l'entité
-%    \begin{macrocode}
-% \csdef{print#2url}{%
-% \yadsetup{##1}%
-% \newcommand*\YAD@texteurl{%
-% \ifthenelse{\equal{\cmdKV@YAD@url}{}}{%
-% \YAD@reach@file{\YAD@generic@argument@translate{url#2}}%
-% }{%
-% \YAD@reach@file{\YAD@nolinkurl{\cmdKV@YAD@url}}%
-% }%
-% }%
-% \ifthenelse{\equal{\cmdKV@YAD@url}{}}{%
-% \if@nolink%
-% \YAD@texteurl%
-% \else%
-% \YAD@href{www.#2.fr}{\YAD@texteurl}%
-% \fi%
-% }{%
-% \ifdraft{%
-% \YAD@texteurl%
-% }{%
-% \if@nolink%
-% \YAD@nolinkurl{\cmdKV@YAD@url}%
-% \else%
-% \YAD@url{%
-% \cmdKV@YAD@url%
-% }%
-% \fi%
-% }%
-% }%
-% }%
-%    \end{macrocode}
 % Création de la commande affichant l'adresse de l'entité
 %    \begin{macrocode}
       \csdef{print#2address}{%
@@ -3057,7 +3025,6 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % Création de la commande affichant le logo de l'entité (sauf si ×nologo× est demandé).
 %    \begin{macrocode}
-      \yadsetup{##1}%
       \ifbool{YAD@nologo}{%
       }{%
         \csdef{print#2logo}{%
@@ -3289,7 +3256,6 @@ This work consists of the file  yathesis.dtx
           }%
         }%
       }%
-      %
     }%
   }{%
     \newcommand*{\printauthor}{%
@@ -3306,7 +3272,6 @@ This work consists of the file  yathesis.dtx
           }%
         }%
       }%
-      %
     }%
   }%
 }%
@@ -3620,7 +3585,7 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \let\YAD@ORI@setcounter\setcounter%
 \let\YAD@ORI@tableofcontents\tableofcontents%
-\newif\if@YAD@knownsect
+\newif\if@YAD@knownsect%
 \renewcommand{\tableofcontents}{%
   \booltrue{YAD@tableofcontents@used}%
   \YAD@clearemptydoublepage%
@@ -5416,12 +5381,12 @@ This work consists of the file  yathesis.dtx
         \DTLiflastrow{%
         }{%
           \if@tempswa%
-        % \vspace*{2cm}%
-        \else%
-        % \vspace*{\stretch{1}}%
-        \fi
+          % \vspace*{2cm}%
+          \else%
+          % \vspace*{\stretch{1}}%
+          \fi
+        }%
       }%
-    }%
     \end{epigraphs}
   }%
   \if@tempswa%
