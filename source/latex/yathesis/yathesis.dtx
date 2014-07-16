@@ -700,7 +700,8 @@ This work consists of the file  yathesis.dtx
   %   }%
   % }%
 }%
-\YAD@create@boolean{nolink}%
+% \YAD@create@boolean{nolink}%
+\YAD@create@boolean{nolaboratorylink}%
 \YAD@create@boolean{noerror}%
 \YAD@create@boolean{nowarning}%
 \YAD@create@boolean{noauthor}%
@@ -2848,17 +2849,17 @@ This work consists of the file  yathesis.dtx
       \csdef{print#1#2}{%
         \YAD@reach@file{%
           \ifthenelse{\isempty{##1}}{%
-            \ifbool{YAD@nolink}{%
-            \YAD@generic@argument@translate{#1#2}%
-            }{%
-            \YAD@href{mailto:#1.#2@institute.fr}{\YAD@generic@argument@translate{#1#2}}%
-            }%
+            % \ifbool{YAD@nolink}{%
+            %   \YAD@generic@argument@translate{#1#2}%
+            % }{%
+              \YAD@href{mailto:#1.#2@institute.fr}{\YAD@generic@argument@translate{#1#2}}%
+            % }%
           }{%
-            \ifbool{YAD@nolink}{%
-            \YAD@nolinkurl{##1}%
-            }{%
-            \YAD@href{mailto:##1}{\YAD@nolinkurl{##1}}%
-            }%
+            % \ifbool{YAD@nolink}{%
+            %   \YAD@nolinkurl{##1}%
+            % }{%
+              \YAD@href{mailto:##1}{\YAD@nolinkurl{##1}}%
+            % }%
           }%
         }%
       }%
@@ -2876,21 +2877,19 @@ This work consists of the file  yathesis.dtx
       \csdef{print#1#2}{%
         \YAD@reach@file{%
           \ifthenelse{\isempty{##1}}{%
-            \ifbool{YAD@nolink}{%
-            \YAD@generic@argument@translate{#1#2}%
-            }{%
-            \YAD@url{%
-              \YAD@generic@argument@translate{#1#2}%
-            }%
-            }%
+            % \ifbool{YAD@nolink}{%
+            %   \YAD@generic@argument@translate{#1#2}%
+            % }{%
+              \YAD@url{%
+                \YAD@generic@argument@translate{#1#2}%
+              }%
+            % }%
           }{%
-            \ifbool{YAD@nolink}{%
-            \YAD@nolinkurl{##1}%
-            }{%
-            \YAD@url{%
-              ##1%
-            }%
-            }%
+            % \ifbool{YAD@nolink}{%
+            %   \YAD@nolinkurl{##1}%
+            % }{%
+              \YAD@url{##1}%
+            % }%
           }%
         }%
       }%
@@ -2938,7 +2937,7 @@ This work consists of the file  yathesis.dtx
       ##2%
     }%
   }%
-  \boolfalse{YAD@nolink}%
+  % \boolfalse{YAD@nolink}%
   \yadsetup{##1}%
   \ifthenelse{\equal{\cmdKV@YAD@url}{}}{%
     \ifdraft{%
@@ -2958,11 +2957,11 @@ This work consists of the file  yathesis.dtx
         \YAD@texte%
       }%
     }{%
-      \ifbool{YAD@nolink}{%
-        \YAD@texte%
-      }{%
+      % \ifbool{YAD@nolink}{%
+      %   \YAD@texte%
+      % }{%
         \YAD@href{\cmdKV@YAD@url}{\YAD@texte}%
-      }%
+      % }%
     }%
   }%
 }%
@@ -3009,17 +3008,17 @@ This work consists of the file  yathesis.dtx
 \csdef{print#2email}{%
   \YAD@reach@file{%
     \ifthenelse{\equal{\cmdKV@YAD@email}{}}{%
-      \ifbool{YAD@nolink}{%
-      \YAD@generic@argument@translate{#2email}%
-      }{%
-      \YAD@href{mailto:#2@institute.fr}{\YAD@generic@argument@translate{#2email}}%
-      }%
+      % \ifbool{YAD@nolink}{%
+      %   \YAD@generic@argument@translate{#2email}%
+      % }{%
+        \YAD@href{mailto:#2@institute.fr}{\YAD@generic@argument@translate{#2email}}%
+      % }%
     }{%
-      \ifbool{YAD@nolink}{%
-      \YAD@nolinkurl{\cmdKV@YAD@email}%
-      }{%
-      \YAD@href{mailto:\cmdKV@YAD@email}{\YAD@nolinkurl{\cmdKV@YAD@email}}%
-      }%
+      % \ifbool{YAD@nolink}{%
+      %   \YAD@nolinkurl{\cmdKV@YAD@email}%
+      % }{%
+        \YAD@href{mailto:\cmdKV@YAD@email}{\YAD@nolinkurl{\cmdKV@YAD@email}}%
+      % }%
     }%
   }%
 }%
@@ -3055,9 +3054,9 @@ This work consists of the file  yathesis.dtx
         }%
         \if@tempswa%
         \else%
-        \ifbool{YAD@nolink}{%
-          \YAD@logo%
-        }{%
+        % \ifbool{YAD@nolink}{%
+        %   \YAD@logo%
+        % }{%
           \ifthenelse{\equal{\cmdKV@YAD@url}{}}{%
             % \YAD@href{www.#2.fr}{
               \YAD@logo%
@@ -3065,7 +3064,7 @@ This work consists of the file  yathesis.dtx
           }{%
             \YAD@href{\cmdKV@YAD@url}{\YAD@logo}%
           }%
-        }%
+        % }%
         \fi%
         \setlength\cmdKV@YAD@logoheight{\YAD@default@logoheight}%
       }%
@@ -3252,7 +3251,7 @@ This work consists of the file  yathesis.dtx
           \YAD@generic@argument@translate{lastname}%
         }%
       }{%
-        \ifbool{YAD@nolink}{%
+        \ifthenelse{\isempty{#1}}{%
           \YAD@generic@argument@translate{firstname}
           \YAD@generic@argument@translate{lastname}%
         }{%
@@ -3268,15 +3267,15 @@ This work consists of the file  yathesis.dtx
       \ifdraft{%
         \YAD@reach@file{\YAD@firstname@author{} \bsc{\YAD@lastname@author}}%
       }{%
-        \ifbool{YAD@nolink}{%
-          \YAD@firstname@author{} \bsc{\YAD@lastname@author}%
+        % \ifbool{YAD@nolink}{%
+        % \YAD@firstname@author{} \bsc{\YAD@lastname@author}%
+        % }{%
+        \ifthenelse{\isempty{#1}}{%
+          \YAD@firstname@author{} \bsc{\YAD@lastname@author}
         }{%
-          \ifthenelse{\isempty{#1}}{%
-            \YAD@firstname@author{} \bsc{\YAD@lastname@author}
-          }{%
-            \YAD@href{mailto:\YAD@email@author}{\YAD@firstname@author{} \bsc{\YAD@lastname@author}}%
-          }%
+          \YAD@href{mailto:\YAD@email@author}{\YAD@firstname@author{} \bsc{\YAD@lastname@author}}%
         }%
+        % }%
       }%
     }%
   }%
@@ -4147,12 +4146,16 @@ This work consists of the file  yathesis.dtx
         #1%
       }%
     }{%
-      \ifboolexpr{ bool {@tempswa} or bool {YAD@nolink} }{%
+      % \ifboolexpr{ bool {@tempswa} or bool {YAD@nolaboratorylink} }{%
+      \ifboolexpr{%
+        bool {@tempswa} %
+        or test {\ifdefstring{\YAD@laboratory@nolink}{true}}%
+      }{%
         #1%
       }{%
         \YAD@ifemptyorundef{#2}{%
           % \YAD@href{www.laboratory.fr}{%
-            #1%
+          #1%
           % }%
         }{%
           \YAD@href{#2}{#1}%
@@ -4717,11 +4720,6 @@ This work consists of the file  yathesis.dtx
   \DTLnewrow{laboratories}%
   \dtlexpandnewvalue%
   \yadsetup{%
-    logo=,%
-    url=,%
-    telephone=,%
-    fax=,%
-    email=,%
     #1%
   }%
   \DTLnewdbentry{laboratories}{name}{#2}%
@@ -4779,11 +4777,24 @@ This work consists of the file  yathesis.dtx
   }{%
     \DTLnewdbentry{laboratories}{email}{\cmdKV@YAD@email}%
   }%
+  \ifbool{YAD@nolaboratorylink}{%
+    \DTLnewdbentry{laboratories}{nolaboratorylink}{true}%
+  }{%
+    \DTLnewdbentry{laboratories}{nolaboratorylink}{false}%
+  }%
   %
   \DTLgetvalue{\YAD@main@laboratory@name}{laboratories}{1}{\dtlcolumnindex{laboratories}{name}}%
   \DTLgetvalue{\YAD@main@laboratory@address}{laboratories}{1}{\dtlcolumnindex{laboratories}{address}}%
   \DTLgetvalue{\YAD@main@laboratory@url}{laboratories}{1}{\dtlcolumnindex{laboratories}{url}}%
   %
+  \boolfalse{YAD@nolaboratorylink}%
+  \yadsetup{%
+    logo=,%
+    url=,%
+    telephone=,%
+    fax=,%
+    email=,%
+  }%
 }%
 %    \end{macrocode}
 % \end{macro}
@@ -4841,7 +4852,8 @@ This work consists of the file  yathesis.dtx
     \YAD@laboratory@logoheight=logoheight,%
     \YAD@laboratory@telephone=telephone,%
     \YAD@laboratory@fax=fax,%
-    \YAD@laboratory@email=email%
+    \YAD@laboratory@email=email,%
+    \YAD@laboratory@nolink=nolaboratorylink%
   }{%
     \ifthenelse{\DTLiseq{\YAD@laboratory@logo}{}}{%
       \setlength{\YAD@laboratory@width}{\linewidth-\parindent}%
@@ -4867,17 +4879,17 @@ This work consists of the file  yathesis.dtx
           \YAD@translation{email} &
           \YAD@reach@file{%
             \YAD@ifemptyorundef{\YAD@laboratory@email}{%
-              \ifbool{YAD@nolink}{%
-              \YAD@generic@argument@translate{laboratoryemail}%
-              }{%
-              \YAD@href{mailto:laboratory@institute.fr}{\YAD@generic@argument@translate{laboratoryemail}}%
-              }%
+              % \ifbool{YAD@nolink}{%
+                \YAD@generic@argument@translate{laboratoryemail}%
+              % }{%
+              %   \YAD@href{mailto:laboratory@institute.fr}{\YAD@generic@argument@translate{laboratoryemail}}%
+              % }%
             }{%
-              \ifbool{YAD@nolink}{%
-              \YAD@nolinkurl{\YAD@laboratory@email}%
-              }{%
-              \YAD@href{mailto:\YAD@laboratory@email}{\YAD@nolinkurl{\YAD@laboratory@email}}%
-              }%
+              % \ifbool{YAD@nolink}{%
+              %   \YAD@nolinkurl{\YAD@laboratory@email}%
+              % }{%
+                \YAD@href{mailto:\YAD@laboratory@email}{\YAD@nolinkurl{\YAD@laboratory@email}}%
+              % }%
             }%
           }%
           \\%
@@ -4893,13 +4905,13 @@ This work consists of the file  yathesis.dtx
             }%
           }%
           \YAD@ifemptyorundef{\YAD@laboratory@url}{%
-            \ifbool{YAD@nolink}{%
-              \YAD@texteurl%
-            }{%
+            % \ifbool{YAD@nolink}{%
+            %   \YAD@texteurl%
+            % }{%
               % \YAD@href{www.laboratory.fr}{%
                 \YAD@texteurl%
               % }%
-            }%
+            % }%
           }{%
             \ifdraft{%
               \YAD@texteurl%
@@ -4932,9 +4944,9 @@ This work consists of the file  yathesis.dtx
         \if@tempswa%
         \else%
         \hspace{\stretch{1}}%
-        \ifbool{YAD@nolink}{%
-          \YAD@logo%
-        }{%
+        % \ifbool{YAD@nolink}{%
+        %   \YAD@logo%
+        % }{%
           \YAD@ifemptyorundef{\YAD@laboratory@url}{%
             % \YAD@href{www.laboratory.fr}{%
               \YAD@logo%
@@ -4942,7 +4954,7 @@ This work consists of the file  yathesis.dtx
           }{%
             \YAD@href{\YAD@laboratory@url}{\YAD@logo}%
           }%
-        }%
+        % }%
         \fi%
       \end{minipage}%
     }%
