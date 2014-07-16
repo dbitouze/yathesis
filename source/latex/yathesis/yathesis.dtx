@@ -5173,6 +5173,10 @@ This work consists of the file  yathesis.dtx
 % Page de présentation (résumés)
 %    \begin{macrocode}
 \newcommand{\makeabstract}{%
+  \ifbool{YAD@nomakeabstract}{%
+  }{%
+    \YAD@alarm@noabstract%
+  }%
   \pagestyle{preliminary}%
   \YAD@phantomsection%
   \addcontentsline{toc}{chapter}{\abstractname}%
@@ -5242,7 +5246,7 @@ This work consists of the file  yathesis.dtx
 %
 % Si l'environnement ×abstract× n'a pas été utilisé, une erreur est émise.
 %    \begin{macrocode}
-\AtEndDocument{%
+\newcommand{\YAD@alarm@noabstract}{%
   \ifbool{YAD@abstract@used}{%
     \ifbool{YAD@main@abstract@empty}{%
       \ifnumcomp{\value{YAD@abstracts}}{>}{1}{%
@@ -5291,6 +5295,7 @@ This work consists of the file  yathesis.dtx
 % Éléments communs de la page de présentation
 %    \begin{macrocode}
 \newcommand{\makebackcover}{%
+  \YAD@alarm@noabstract%
   \YAD@clearemptydoublepage%
   \pagestyle{backcover}%
   \YAD@abstract@page%
