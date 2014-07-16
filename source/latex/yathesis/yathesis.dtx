@@ -4749,7 +4749,7 @@ This work consists of the file  yathesis.dtx
     }{%
     }%
   }%
-  \ifthenelse{\equal{\cmdKV@YAD@logo}{}}{%
+  \YAD@ifemptyorundef{\cmdKV@YAD@logo}{%
     \DTLnewdbentry{laboratories}{logo}{}%
   }{%
     \DTLnewdbentry{laboratories}{logo}{\cmdKV@YAD@logo}%
@@ -4759,22 +4759,22 @@ This work consists of the file  yathesis.dtx
   }{%
     \DTLnewdbentry{laboratories}{logoheight}{\cmdKV@YAD@logoheight}%
   }%
-  \ifthenelse{\equal{\cmdKV@YAD@url}{}}{%
+  \YAD@ifemptyorundef{\cmdKV@YAD@url}{%
     \DTLnewdbentry{laboratories}{url}{}%
   }{%
     \DTLnewdbentry{laboratories}{url}{\cmdKV@YAD@url}%
   }%
-  \ifthenelse{\equal{\cmdKV@YAD@telephone}{}}{%
+  \YAD@ifemptyorundef{\cmdKV@YAD@telephone}{%
     \DTLnewdbentry{laboratories}{telephone}{}%
   }{%
     \DTLnewdbentry{laboratories}{telephone}{\cmdKV@YAD@telephone}%
   }%
-  \ifthenelse{\equal{\cmdKV@YAD@fax}{}}{%
+  \YAD@ifemptyorundef{\cmdKV@YAD@fax}{%
     \DTLnewdbentry{laboratories}{fax}{}%
   }{%
     \DTLnewdbentry{laboratories}{fax}{\cmdKV@YAD@fax}%
   }%
-  \ifthenelse{\equal{\cmdKV@YAD@email}{}}{%
+  \YAD@ifemptyorundef{\cmdKV@YAD@email}{%
     \DTLnewdbentry{laboratories}{email}{}%
   }{%
     \DTLnewdbentry{laboratories}{email}{\cmdKV@YAD@email}%
@@ -4886,7 +4886,7 @@ This work consists of the file  yathesis.dtx
         }{%
           \YAD@translation{website} & % \printlaboratoryurl
           \def\YAD@texteurl{%
-            \ifthenelse{\equal{\YAD@laboratory@url}{}}{%
+            \YAD@ifemptyorundef{\YAD@laboratory@url}{%
               \YAD@reach@file{\YAD@generic@argument@translate{urllaboratory}}%
             }{%
               \YAD@reach@file{\YAD@nolinkurl{\YAD@laboratory@url}}%
@@ -4921,7 +4921,7 @@ This work consists of the file  yathesis.dtx
       \hspace{\stretch{1}}%
       \begin{minipage}[t]{.325\linewidth}
         \def\YAD@logo{%
-          \ifthenelse{\equal{\YAD@laboratory@logo}{}}{%
+          \YAD@ifemptyorundef{\YAD@laboratory@logo}{%
             \YAD@reach@file{\YAD@generic@argument@translate{logolaboratory}}%
           }{%
             \YAD@reach@file{%
