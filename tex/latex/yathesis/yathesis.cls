@@ -24,8 +24,6 @@
 \RequirePackage{filehook}[2011/10/12]%
 \RequirePackage{hopatch}[2012/05/28]%
 \RequirePackage{xifthen}[2009/04/17]%
-\newif\if@nolink\@nolinkfalse
-\newbool{YAD@nolink}
 \newbool{YAD@cosupervisor@or@comonitor}
 \newbool{YAD@inprogress@work@star}
 \newbool{YAD@inprogress@work}
@@ -183,6 +181,7 @@
   %   }%
   % }%
 }%
+\YAD@create@boolean{nolaboratorynamelink}%
 \YAD@create@boolean{noerror}%
 \YAD@create@boolean{nowarning}%
 \YAD@create@boolean{noauthor}%
@@ -425,7 +424,16 @@
 \let\@modulo\@modulo@SAVED
 \RequirePackage{datetime}[2013/09/10]%
 \@ifpackageloaded{hyperref}{%
-  \hypersetup{final,unicode,hyperfootnotes=false,hyperindex=false,plainpages=false,breaklinks,pdfpagemode=UseOutlines,pdfpagelayout=TwoPageRight}%
+  \hypersetup{%
+    final,%
+    unicode,%
+    hyperfootnotes=false,%
+    hyperindex=false,%
+    plainpages=false,%
+    breaklinks,%
+    pdfpagemode=UseOutlines,%
+    pdfpagelayout=TwoPageRight%
+  }%
 }{%
 }%
 \AtEndPreamble{%
@@ -1278,17 +1286,17 @@
       \csdef{print#1#2}{%
         \YAD@reach@file{%
           \ifthenelse{\isempty{##1}}{%
-            \if@nolink%
-            \YAD@generic@argument@translate{#1#2}%
-            \else%
-            \YAD@href{mailto:#1.#2@institute.fr}{\YAD@generic@argument@translate{#1#2}}%
-            \fi%
+            % \ifbool{YAD@nolink}{%
+            %   \YAD@generic@argument@translate{#1#2}%
+            % }{%
+              \YAD@href{mailto:#1.#2@institute.fr}{\YAD@generic@argument@translate{#1#2}}%
+            % }%
           }{%
-            \if@nolink%
-            \YAD@nolinkurl{##1}%
-            \else%
-            \YAD@href{mailto:##1}{\YAD@nolinkurl{##1}}%
-            \fi%
+            % \ifbool{YAD@nolink}{%
+            %   \YAD@nolinkurl{##1}%
+            % }{%
+              \YAD@href{mailto:##1}{\YAD@nolinkurl{##1}}%
+            % }%
           }%
         }%
       }%
@@ -1300,21 +1308,19 @@
       \csdef{print#1#2}{%
         \YAD@reach@file{%
           \ifthenelse{\isempty{##1}}{%
-            \if@nolink%
-            \YAD@generic@argument@translate{#1#2}%
-            \else%
-            \YAD@url{%
-              \YAD@generic@argument@translate{#1#2}%
-            }%
-            \fi%
+            % \ifbool{YAD@nolink}{%
+            %   \YAD@generic@argument@translate{#1#2}%
+            % }{%
+              \YAD@url{%
+                \YAD@generic@argument@translate{#1#2}%
+              }%
+            % }%
           }{%
-            \if@nolink%
-            \YAD@nolinkurl{##1}%
-            \else%
-            \YAD@url{%
-              ##1%
-            }%
-            \fi%
+            % \ifbool{YAD@nolink}{%
+            %   \YAD@nolinkurl{##1}%
+            % }{%
+              \YAD@url{##1}%
+            % }%
           }%
         }%
       }%
@@ -1352,6 +1358,7 @@
       ##2%
     }%
   }%
+  % \boolfalse{YAD@nolink}%
   \yadsetup{##1}%
   \ifthenelse{\equal{\cmdKV@YAD@url}{}}{%
     \ifdraft{%
@@ -1359,11 +1366,11 @@
         \YAD@texte%
       }%
     }{%
-      \if@nolink%
+      % \ifbool{YAD@nolink}{%
       \YAD@texte%
-      \else%
-      \YAD@href{www.#2.fr}{\YAD@texte}%
-      \fi%
+      % }{%
+      %   \YAD@href{www.#2.fr}{\YAD@texte}%
+      % }%
     }%
   }{%
     \ifdraft{%
@@ -1371,11 +1378,11 @@
         \YAD@texte%
       }%
     }{%
-      \if@nolink%
-      \YAD@texte%
-      \else%
-      \YAD@href{\cmdKV@YAD@url}{\YAD@texte}%
-      \fi%
+      % \ifbool{YAD@nolink}{%
+      %   \YAD@texte%
+      % }{%
+        \YAD@href{\cmdKV@YAD@url}{\YAD@texte}%
+      % }%
     }%
   }%
 }%
@@ -1409,50 +1416,51 @@
 \csdef{print#2email}{%
   \YAD@reach@file{%
     \ifthenelse{\equal{\cmdKV@YAD@email}{}}{%
-      \if@nolink%
-      \YAD@generic@argument@translate{#2email}%
-      \else%
-      \YAD@href{mailto:#2@institute.fr}{\YAD@generic@argument@translate{#2email}}%
-      \fi%
+      % \ifbool{YAD@nolink}{%
+      %   \YAD@generic@argument@translate{#2email}%
+      % }{%
+        \YAD@href{mailto:#2@institute.fr}{\YAD@generic@argument@translate{#2email}}%
+      % }%
     }{%
-      \if@nolink%
-      \YAD@nolinkurl{\cmdKV@YAD@email}%
-      \else%
-      \YAD@href{mailto:\cmdKV@YAD@email}{\YAD@nolinkurl{\cmdKV@YAD@email}}%
-      \fi%
+      % \ifbool{YAD@nolink}{%
+      %   \YAD@nolinkurl{\cmdKV@YAD@email}%
+      % }{%
+        \YAD@href{mailto:\cmdKV@YAD@email}{\YAD@nolinkurl{\cmdKV@YAD@email}}%
+      % }%
     }%
   }%
 }%
-      \yadsetup{##1}%
       \ifbool{YAD@nologo}{%
       }{%
         \csdef{print#2logo}{%
         \@ifstar{\@tempswatrue\csuse{YAD@starnostar@print#2logo}}{\@tempswafalse\csuse{YAD@starnostar@print#2logo}}%
       }%
       \csdef{YAD@starnostar@print#2logo}{%
-        \yadsetup{##1}%
+        \yadsetup{url=,##1}%
         \renewcommand*\YAD@logo{%
           \ifthenelse{\equal{\cmdKV@YAD@logo}{}}{%
             \YAD@reach@file{\YAD@generic@argument@translate{logo#2}}%
           }{%
             \YAD@reach@file{%
               \includegraphics[height=\cmdKV@YAD@logoheight]{\cmdKV@YAD@logo}%
-              \setlength\cmdKV@YAD@logoheight{\YAD@default@logoheight}%
             }%
           }%
         }%
         \if@tempswa%
         \else%
-        \if@nolink%
-        \YAD@logo%
-        \else%
-        \ifthenelse{\equal{\cmdKV@YAD@url}{}}{%
-          \YAD@href{www.#2.fr}{\YAD@logo}%
-        }{%
-          \YAD@href{\cmdKV@YAD@url}{\YAD@logo}%
-        }%
+        % \ifbool{YAD@nolink}{%
+        %   \YAD@logo%
+        % }{%
+          \ifthenelse{\equal{\cmdKV@YAD@url}{}}{%
+            % \YAD@href{www.#2.fr}{
+              \YAD@logo%
+            % }%
+          }{%
+            \YAD@href{\cmdKV@YAD@url}{\YAD@logo}%
+          }%
+        % }%
         \fi%
-        \fi%
+        \setlength\cmdKV@YAD@logoheight{\YAD@default@logoheight}%
       }%
     }%
   }%
@@ -1607,33 +1615,32 @@
           \YAD@generic@argument@translate{lastname}%
         }%
       }{%
-        \if@nolink%
+        \ifthenelse{\isempty{#1}}{%
           \YAD@generic@argument@translate{firstname}
           \YAD@generic@argument@translate{lastname}%
-        \else%
-        \YAD@href{mailto:\YAD@email@author}{%
-          \YAD@generic@argument@translate{firstname}
-          \YAD@generic@argument@translate{lastname}%
+        }{%
+          \YAD@href{mailto:\YAD@email@author}{%
+            \YAD@generic@argument@translate{firstname}
+            \YAD@generic@argument@translate{lastname}%
+          }%
         }%
-        \fi%
       }%
-      %
     }%
   }{%
     \newcommand*{\printauthor}{%
       \ifdraft{%
         \YAD@reach@file{\YAD@firstname@author{} \bsc{\YAD@lastname@author}}%
       }{%
-        \if@nolink%
-        \YAD@firstname@author{} \bsc{\YAD@lastname@author}%
-        \fi%
+        % \ifbool{YAD@nolink}{%
+        % \YAD@firstname@author{} \bsc{\YAD@lastname@author}%
+        % }{%
         \ifthenelse{\isempty{#1}}{%
           \YAD@firstname@author{} \bsc{\YAD@lastname@author}
         }{%
           \YAD@href{mailto:\YAD@email@author}{\YAD@firstname@author{} \bsc{\YAD@lastname@author}}%
         }%
+        % }%
       }%
-      %
     }%
   }%
 }%
@@ -1860,7 +1867,7 @@
 \AtEndDocument{\YAD@starttoctoc}
 \let\YAD@ORI@setcounter\setcounter%
 \let\YAD@ORI@tableofcontents\tableofcontents%
-\newif\if@YAD@knownsect
+\newif\if@YAD@knownsect%
 \renewcommand{\tableofcontents}{%
   \booltrue{YAD@tableofcontents@used}%
   \YAD@clearemptydoublepage%
@@ -2271,11 +2278,17 @@
         #1%
       }%
     }{%
-      \ifboolexpr{ bool {@tempswa} or bool {@nolink} }{%
+      % \ifboolexpr{ bool {@tempswa} or bool {YAD@nolaboratorynamelink} }{%
+      \ifboolexpr{%
+        bool {@tempswa} %
+        or test {\ifdefstring{\YAD@laboratory@nolink}{true}}%
+      }{%
         #1%
       }{%
         \YAD@ifemptyorundef{#2}{%
-          \YAD@href{www.laboratory.fr}{#1}%
+          % \YAD@href{www.laboratory.fr}{%
+          #1%
+          % }%
         }{%
           \YAD@href{#2}{#1}%
         }%
@@ -2754,7 +2767,9 @@
 \newcommand{\laboratory}[3][]{%
   \DTLnewrow{laboratories}%
   \dtlexpandnewvalue%
-  \yadsetup{#1}%
+  \yadsetup{%
+    #1%
+  }%
   \DTLnewdbentry{laboratories}{name}{#2}%
   \DTLnewdbentry{laboratories}{address}{#3}%
   \ifbool{YAD@nolaboratory}{%
@@ -2780,41 +2795,54 @@
     }{%
     }%
   }%
-  \ifthenelse{\equal{\cmdKV@YAD@logo}{}}{%
+  \YAD@ifemptyorundef{\cmdKV@YAD@logo}{%
     \DTLnewdbentry{laboratories}{logo}{}%
   }{%
     \DTLnewdbentry{laboratories}{logo}{\cmdKV@YAD@logo}%
   }%
-  \ifthenelse{\equal{\cmdKV@YAD@logoheight}{}}{%
-    \DTLnewdbentry{laboratories}{logoheight}{}%
+  \YAD@ifemptyorundef{\cmdKV@YAD@logoheight}{%
+    \DTLnewdbentry{laboratories}{logoheight}{\YAD@default@logoheight}%
   }{%
     \DTLnewdbentry{laboratories}{logoheight}{\cmdKV@YAD@logoheight}%
   }%
-  \ifthenelse{\equal{\cmdKV@YAD@url}{}}{%
+  \YAD@ifemptyorundef{\cmdKV@YAD@url}{%
     \DTLnewdbentry{laboratories}{url}{}%
   }{%
     \DTLnewdbentry{laboratories}{url}{\cmdKV@YAD@url}%
   }%
-  \ifthenelse{\equal{\cmdKV@YAD@telephone}{}}{%
+  \YAD@ifemptyorundef{\cmdKV@YAD@telephone}{%
     \DTLnewdbentry{laboratories}{telephone}{}%
   }{%
     \DTLnewdbentry{laboratories}{telephone}{\cmdKV@YAD@telephone}%
   }%
-  \ifthenelse{\equal{\cmdKV@YAD@fax}{}}{%
+  \YAD@ifemptyorundef{\cmdKV@YAD@fax}{%
     \DTLnewdbentry{laboratories}{fax}{}%
   }{%
     \DTLnewdbentry{laboratories}{fax}{\cmdKV@YAD@fax}%
   }%
-  \ifthenelse{\equal{\cmdKV@YAD@email}{}}{%
+  \YAD@ifemptyorundef{\cmdKV@YAD@email}{%
     \DTLnewdbentry{laboratories}{email}{}%
   }{%
     \DTLnewdbentry{laboratories}{email}{\cmdKV@YAD@email}%
+  }%
+  \ifbool{YAD@nolaboratorynamelink}{%
+    \DTLnewdbentry{laboratories}{nolaboratorynamelink}{true}%
+  }{%
+    \DTLnewdbentry{laboratories}{nolaboratorynamelink}{false}%
   }%
   %
   \DTLgetvalue{\YAD@main@laboratory@name}{laboratories}{1}{\dtlcolumnindex{laboratories}{name}}%
   \DTLgetvalue{\YAD@main@laboratory@address}{laboratories}{1}{\dtlcolumnindex{laboratories}{address}}%
   \DTLgetvalue{\YAD@main@laboratory@url}{laboratories}{1}{\dtlcolumnindex{laboratories}{url}}%
   %
+  \boolfalse{YAD@nolaboratorynamelink}%
+  \yadsetup{%
+    logo=,%
+    url=,%
+    telephone=,%
+    fax=,%
+    email=,%
+  }%
 }%
 \csdef{makelaboratory}{%
   \@ifstar{\@tempswatrue\csuse{YAD@starnostar@makelaboratory}}{\@tempswafalse\csuse{YAD@starnostar@makelaboratory}}%
@@ -2862,7 +2890,8 @@
     \YAD@laboratory@logoheight=logoheight,%
     \YAD@laboratory@telephone=telephone,%
     \YAD@laboratory@fax=fax,%
-    \YAD@laboratory@email=email%
+    \YAD@laboratory@email=email,%
+    \YAD@laboratory@nolink=nolaboratorynamelink%
   }{%
     \ifthenelse{\DTLiseq{\YAD@laboratory@logo}{}}{%
       \setlength{\YAD@laboratory@width}{\linewidth-\parindent}%
@@ -2887,18 +2916,18 @@
         }{%
           \YAD@translation{email} &
           \YAD@reach@file{%
-            \ifthenelse{\equal{\YAD@laboratory@email}{}}{%
-              \if@nolink%
-              \YAD@generic@argument@translate{laboratoryemail}%
-              \else%
-              \YAD@href{mailto:laboratory@institute.fr}{\YAD@generic@argument@translate{laboratoryemail}}%
-              \fi%
+            \YAD@ifemptyorundef{\YAD@laboratory@email}{%
+              % \ifbool{YAD@nolink}{%
+                \YAD@generic@argument@translate{laboratoryemail}%
+              % }{%
+              %   \YAD@href{mailto:laboratory@institute.fr}{\YAD@generic@argument@translate{laboratoryemail}}%
+              % }%
             }{%
-              \if@nolink%
-              \YAD@nolinkurl{\YAD@laboratory@email}%
-              \else%
-              \YAD@href{mailto:\YAD@laboratory@email}{\YAD@nolinkurl{\YAD@laboratory@email}}%
-              \fi%
+              % \ifbool{YAD@nolink}{%
+              %   \YAD@nolinkurl{\YAD@laboratory@email}%
+              % }{%
+                \YAD@href{mailto:\YAD@laboratory@email}{\YAD@nolinkurl{\YAD@laboratory@email}}%
+              % }%
             }%
           }%
           \\%
@@ -2907,29 +2936,31 @@
         }{%
           \YAD@translation{website} & % \printlaboratoryurl
           \def\YAD@texteurl{%
-            \ifthenelse{\equal{\YAD@laboratory@url}{}}{%
+            \YAD@ifemptyorundef{\YAD@laboratory@url}{%
               \YAD@reach@file{\YAD@generic@argument@translate{urllaboratory}}%
             }{%
               \YAD@reach@file{\YAD@nolinkurl{\YAD@laboratory@url}}%
             }%
           }%
-          \ifthenelse{\equal{\YAD@laboratory@url}{}}{%
-            \if@nolink%
-            \YAD@texteurl%
-            \else%
-            \YAD@href{www.laboratory.fr}{\YAD@texteurl}%
-            \fi%
+          \YAD@ifemptyorundef{\YAD@laboratory@url}{%
+            % \ifbool{YAD@nolink}{%
+            %   \YAD@texteurl%
+            % }{%
+              % \YAD@href{www.laboratory.fr}{%
+                \YAD@texteurl%
+              % }%
+            % }%
           }{%
             \ifdraft{%
               \YAD@texteurl%
             }{%
-              \if@nolink%
-              \YAD@nolinkurl{\YAD@laboratory@url}%
-              \else%
-              \YAD@url{%
-                \YAD@laboratory@url%
-              }%
-              \fi%
+              % \ifbool{YAD@nolink}{%
+              %   \YAD@nolinkurl{\YAD@laboratory@url}%
+              % }{%
+                \YAD@url{%
+                  \YAD@laboratory@url%
+                }%
+              % }%
             }%
           }%
         }%
@@ -2940,7 +2971,7 @@
       \hspace{\stretch{1}}%
       \begin{minipage}[t]{.325\linewidth}
         \def\YAD@logo{%
-          \ifthenelse{\equal{\YAD@laboratory@logo}{}}{%
+          \YAD@ifemptyorundef{\YAD@laboratory@logo}{%
             \YAD@reach@file{\YAD@generic@argument@translate{logolaboratory}}%
           }{%
             \YAD@reach@file{%
@@ -2951,15 +2982,17 @@
         \if@tempswa%
         \else%
         \hspace{\stretch{1}}%
-        \if@nolink%
-        \YAD@logo%
-        \else%
-        \ifthenelse{\equal{\YAD@laboratory@url}{}}{%
-          \YAD@href{www.laboratory.fr}{\YAD@logo}%
-        }{%
-          \YAD@href{\YAD@laboratory@url}{\YAD@logo}%
-        }%
-        \fi%
+        % \ifbool{YAD@nolink}{%
+        %   \YAD@logo%
+        % }{%
+          \YAD@ifemptyorundef{\YAD@laboratory@url}{%
+            % \YAD@href{www.laboratory.fr}{%
+              \YAD@logo%
+            % }%
+          }{%
+            \YAD@href{\YAD@laboratory@url}{\YAD@logo}%
+          }%
+        % }%
         \fi%
       \end{minipage}%
     }%
@@ -2973,6 +3006,7 @@
       \vspace*{\stretch{.25}}%
       \fi%
     }%
+    \setlength\cmdKV@YAD@logoheight{\YAD@default@logoheight}%
   }%
   \ifthenelse{\DTLrowcount{laboratories}<1}{%
     \vspace*{\stretch{1}}%
@@ -3325,12 +3359,12 @@
         \DTLiflastrow{%
         }{%
           \if@tempswa%
-        % \vspace*{2cm}%
-        \else%
-        % \vspace*{\stretch{1}}%
-        \fi
+          % \vspace*{2cm}%
+          \else%
+          % \vspace*{\stretch{1}}%
+          \fi
+        }%
       }%
-    }%
     \end{epigraphs}
   }%
   \if@tempswa%
