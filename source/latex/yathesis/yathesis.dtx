@@ -4904,13 +4904,13 @@ This work consists of the file  yathesis.dtx
             \ifdraft{%
               \YAD@texteurl%
             }{%
-              \ifbool{YAD@nolink}{%
-              \YAD@nolinkurl{\YAD@laboratory@url}%
-              }{%
-              \YAD@url{%
-                \YAD@laboratory@url%
-              }%
-              }%
+              % \ifbool{YAD@nolink}{%
+              %   \YAD@nolinkurl{\YAD@laboratory@url}%
+              % }{%
+                \YAD@url{%
+                  \YAD@laboratory@url%
+                }%
+              % }%
             }%
           }%
         }%
