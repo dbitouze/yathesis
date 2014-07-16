@@ -181,7 +181,7 @@
   %   }%
   % }%
 }%
-\YAD@create@boolean{nolaboratorynamelink}%
+\YAD@create@boolean{nonamelink}%
 \YAD@create@boolean{noerror}%
 \YAD@create@boolean{nowarning}%
 \YAD@create@boolean{noauthor}%
@@ -597,9 +597,7 @@
   \AtEndPreamble{%
     \YAD@hypersetup{colorlinks=false}%
   }%
-  \renewcommand{\YAD@href}[3][]{%
-    #3%
-  }%
+  \newcommand{\YAD@href}[3][]{#3}%
   \let\YAD@ori@footnote\footnote%
   \renewcommand{\footnote}[1]{\booltrue{YAD@in@footnote}\YAD@ori@footnote{#1}\boolfalse{YAD@in@footnote}}%
   \@ifpackageloaded{hyperref}{%
@@ -2278,7 +2276,7 @@
         #1%
       }%
     }{%
-      % \ifboolexpr{ bool {@tempswa} or bool {YAD@nolaboratorynamelink} }{%
+      % \ifboolexpr{ bool {@tempswa} or bool {YAD@nonamelink} }{%
       \ifboolexpr{%
         bool {@tempswa} %
         or test {\ifdefstring{\YAD@laboratory@nolink}{true}}%
@@ -2648,7 +2646,7 @@
 }{%
 }%
 \expandafter\selectlanguage\expandafter{\YAD@mainlanguage}%
-\pagestyle{prepreliminary}%
+\pagestyle{preliminary}%
 }%
 \AtEndDocument{%
   \ifboolexpr{%
@@ -2762,6 +2760,7 @@
   \vspace*{\stretch{1}}%
   \fi
   \expandafter\selectlanguage\expandafter{\YAD@mainlanguage}%
+  \pagestyle{preliminary}%
 }%
 \DTLnewdb{laboratories}%
 \newcommand{\laboratory}[3][]{%
@@ -2825,17 +2824,17 @@
   }{%
     \DTLnewdbentry{laboratories}{email}{\cmdKV@YAD@email}%
   }%
-  \ifbool{YAD@nolaboratorynamelink}{%
-    \DTLnewdbentry{laboratories}{nolaboratorynamelink}{true}%
+  \ifbool{YAD@nonamelink}{%
+    \DTLnewdbentry{laboratories}{nonamelink}{true}%
   }{%
-    \DTLnewdbentry{laboratories}{nolaboratorynamelink}{false}%
+    \DTLnewdbentry{laboratories}{nonamelink}{false}%
   }%
   %
   \DTLgetvalue{\YAD@main@laboratory@name}{laboratories}{1}{\dtlcolumnindex{laboratories}{name}}%
   \DTLgetvalue{\YAD@main@laboratory@address}{laboratories}{1}{\dtlcolumnindex{laboratories}{address}}%
   \DTLgetvalue{\YAD@main@laboratory@url}{laboratories}{1}{\dtlcolumnindex{laboratories}{url}}%
   %
-  \boolfalse{YAD@nolaboratorynamelink}%
+  \boolfalse{YAD@nonamelink}%
   \yadsetup{%
     logo=,%
     url=,%
@@ -2891,7 +2890,7 @@
     \YAD@laboratory@telephone=telephone,%
     \YAD@laboratory@fax=fax,%
     \YAD@laboratory@email=email,%
-    \YAD@laboratory@nolink=nolaboratorynamelink%
+    \YAD@laboratory@nolink=nonamelink%
   }{%
     \ifthenelse{\DTLiseq{\YAD@laboratory@logo}{}}{%
       \setlength{\YAD@laboratory@width}{\linewidth-\parindent}%
@@ -3012,6 +3011,7 @@
     \vspace*{\stretch{1}}%
   }{%
   }%
+  \pagestyle{preliminary}%
 }%
 \csgdef{YAD@abstractname@mainlanguage}{\abstractname}%
 \csgdef{YAD@abstractname@secondarylanguage}{\abstractname}%
@@ -3154,6 +3154,10 @@
   \end{minipage}%
 }%
 \newcommand{\makeabstract}{%
+  \ifbool{YAD@nomakeabstract}{%
+  }{%
+    \YAD@alarm@noabstract%
+  }%
   \pagestyle{preliminary}%
   \YAD@phantomsection%
   \addcontentsline{toc}{chapter}{\abstractname}%
@@ -3202,7 +3206,7 @@
     }%
   }%
 }%
-\AtEndDocument{%
+\newcommand{\YAD@alarm@noabstract}{%
   \ifbool{YAD@abstract@used}{%
     \ifbool{YAD@main@abstract@empty}{%
       \ifnumcomp{\value{YAD@abstracts}}{>}{1}{%
@@ -3246,6 +3250,7 @@
   }%
 }%
 \newcommand{\makebackcover}{%
+  \YAD@alarm@noabstract%
   \YAD@clearemptydoublepage%
   \pagestyle{backcover}%
   \YAD@abstract@page%
@@ -3254,6 +3259,7 @@
   \@ifstar{\@tempswatrue\csuse{YAD@starnostar@makededications}}{\@tempswafalse\csuse{YAD@starnostar@makededications}}%
 }%
 \csdef{YAD@starnostar@makededications}{%
+  \pagestyle{prepreliminary}%
   \YAD@clearemptydoublepage%
   \if@tempswa%
   \else%
@@ -3382,6 +3388,9 @@
 \BeforeBeginEnvironment{epigraphspage}{%
   \pagestyle{prepreliminary}%
 }%
+\AfterEndEnvironment{epigraphspage}{%
+  \pagestyle{preliminary}%
+}%
 \let\YAD@ORI@chapter\chapter%
 \AfterPreamble{% delay the redefinition when titlesec has done its own
   \renewcommand\chapter{%
@@ -3465,16 +3474,17 @@
   \@ifstar{\@tempswatrue\csuse{YAD@starnostar@makedisclaimer}}{\@tempswafalse\csuse{YAD@starnostar@makedisclaimer}}%
 }%
 \csdef{YAD@starnostar@makedisclaimer}{%
-    \pagestyle{prepreliminary}%
-    \if@tempswa%
-    \else%
-    \vspace*{\stretch{1}}%
-    \fi%
-    \printdisclaimer%
-    \if@tempswa%
-    \else%
-    \vspace*{\stretch{1}}%
-    \fi%
+  \pagestyle{prepreliminary}%
+  \if@tempswa%
+  \else%
+  \vspace*{\stretch{1}}%
+  \fi%
+  \printdisclaimer%
+  \if@tempswa%
+  \else%
+  \vspace*{\stretch{1}}%
+  \fi%
+  \pagestyle{preliminary}%
 }%
 \AfterEndPreamble{%
   \ifthenelse{\equal{\YAD@mainlanguage}{french}}{%
