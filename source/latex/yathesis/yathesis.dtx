@@ -4573,7 +4573,7 @@ This work consists of the file  yathesis.dtx
 }{%
 }%
 \expandafter\selectlanguage\expandafter{\YAD@mainlanguage}%
-\pagestyle{prepreliminary}%
+\pagestyle{preliminary}%
 }%
 %    \end{macrocode}
 % \end{macro}
@@ -4716,6 +4716,7 @@ This work consists of the file  yathesis.dtx
   \vspace*{\stretch{1}}%
   \fi
   \expandafter\selectlanguage\expandafter{\YAD@mainlanguage}%
+  \pagestyle{preliminary}%
 }%
 %    \end{macrocode}
 % \end{macro}
@@ -4981,6 +4982,7 @@ This work consists of the file  yathesis.dtx
     \vspace*{\stretch{1}}%
   }{%
   }%
+  \pagestyle{preliminary}%
 }%
 %    \end{macrocode}
 % \end{macro}
@@ -5308,6 +5310,7 @@ This work consists of the file  yathesis.dtx
   \@ifstar{\@tempswatrue\csuse{YAD@starnostar@makededications}}{\@tempswafalse\csuse{YAD@starnostar@makededications}}%
 }%
 \csdef{YAD@starnostar@makededications}{%
+  \pagestyle{prepreliminary}%
   \YAD@clearemptydoublepage%
   \if@tempswa%
   \else%
@@ -5463,6 +5466,9 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \BeforeBeginEnvironment{epigraphspage}{%
   \pagestyle{prepreliminary}%
+}%
+\AfterEndEnvironment{epigraphspage}{%
+  \pagestyle{preliminary}%
 }%
 %    \end{macrocode}
 % \end{environment}
@@ -5671,16 +5677,17 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % Appel du style de page propre à la partie préliminaire
 %    \begin{macrocode}
-    \pagestyle{prepreliminary}%
-    \if@tempswa%
-    \else%
-    \vspace*{\stretch{1}}%
-    \fi%
-    \printdisclaimer%
-    \if@tempswa%
-    \else%
-    \vspace*{\stretch{1}}%
-    \fi%
+  \pagestyle{prepreliminary}%
+  \if@tempswa%
+  \else%
+  \vspace*{\stretch{1}}%
+  \fi%
+  \printdisclaimer%
+  \if@tempswa%
+  \else%
+  \vspace*{\stretch{1}}%
+  \fi%
+  \pagestyle{preliminary}%
 }%
 %    \end{macrocode}
 % \end{macro}
