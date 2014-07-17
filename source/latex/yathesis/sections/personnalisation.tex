@@ -684,9 +684,16 @@ sont listées dans le \vref{tab:expressions-cles} et y sont identifiées par un
 \subsubsection{Expressions standard}
 \label{sec:expressions-standard}
 
-Les commandes ×\addto×, ×\captionsfrench× et ×\captionsenglish× du
-\Package{babel} permettent de redéfinir les expressions standard listées
-\vref{tab:expressions-standard} au moyen de la syntaxe suivante.
+Le \vref{tab:expressions-standard} liste les expressions standard de \LaTeX{}
+fournies par la \yatcl{}. Il s'agit en fait des traductions fournies par les
+modules \package{frenchb} et \package{english} du \Package{babel},
+à l'exception de l'expression des tableaux flottants qui, en français, est
+\enquote{Tableau} au lieu de \enquote{Table}.
+
+Si on souhaite redéfinir ces expressions, il suffit de recourir aux commandes
+×\addto×, ×\captionsfrench× et ×\captionsenglish× du \Package{babel} au moyen
+de la syntaxe suivante.
+
 \begin{preamblecode}[title=Par exemple dans le \File{\configurationfile}]
 \addto\captionsfrench{\def\÷\meta{commande}÷{÷\meta{en français}÷}}
 \addto\captionsenglish{\def\÷\meta{commande}÷{÷\meta{en anglais}÷}}
@@ -694,7 +701,7 @@ Les commandes ×\addto×, ×\captionsfrench× et ×\captionsenglish× du
 \begin{table}[hb]
   \centering
   \input{tableaux/expressions-standard}
-  \caption{Valeurs et commandes d'expressions standard du \Package{babel}}
+  \caption{Valeurs et commandes d'expressions \LaTeX{} standard fournies par la \yatcl{}}
   \label{tab:expressions-standard}
 \end{table}
 \begin{dbexample}{Redéfinition d'expressions du \Package{babel}}{}
