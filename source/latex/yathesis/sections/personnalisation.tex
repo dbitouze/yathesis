@@ -140,12 +140,10 @@ différentes versions du document : \enquote{intermédiaire} (par défaut),
       \item l'affichage en pied de page de la mention \enquote{Version
           intermédiaire en date du \meta{date}} ou \foreignquote{english}{Work
           in progress as of \meta{date}} est désactivé ;
-      \item
-        %
-        \changes{v0.99f}{2014/07/11}{Modification de la mise en page des pages
-          de titre : les date de soutenance et composition du jury absentes (et
-          non obligatoires) en versions \enquote{à soumettre}}
-        %
+      \item \changes*{v0.99f}{2014/07/11}{Date de soutenance et composition du
+          jury absentes des pages de titre (et non obligatoires) en versions
+          \enquote{à soumettre}}% ^^A
+        % ^^A
         sur les pages de titre, la composition du jury est masquée et la date
         de soutenance est supprimée\footnote{En versions soumises aux
           rapporteurs, le doctorant ne peut préjuger ni d'un jury ni d'une date
@@ -292,19 +290,20 @@ Les documents composés avec la \yatcl{} peuvent avoir deux formats de sortie :
 
 \subsection{Style des têtes de chapitres}\label{sec:style-des-tetes}
 
-\changes{v0.99g}{2014/07/13}{La clé \protect\refAux{chap-style} est remplacée
-  par (et devient un alias de) la clé \protect\refKey{fncychap}}%
-
 Pour gérer les têtes de chapitres, la \yatcl{} s'appuie sur le
 \Package*{fncychap}, par défaut chargé avec le style \docValue{PetersLenny}. La
 clé \refKey{fncychap} suivante permet de spécifier un autre style de ce
 package\footnote{Par souci de compatibilité ascendante, la clé désormais
-  obsolète \docAuxKey{chap-style} est un alias de la clé \refKey{fncychap}.}.
+  obsolète \docAuxKey{chap-style} est un alias de la clé
+  \refKey{fncychap}.}.%^^A
 %
 {%
   \tcbset{before lower=\vspace*{\baselineskip}\par}
   \begin{docKey}{fncychap}{=\docValue{Sonny}\textbar\docValue{Lenny}\textbar\docValue{Glenn}\textbar\docValue{Conny}\textbar\docValue{Rejne}\textbar\docValue{Bjarne}\textbar\docValue{PetersLenny}\textbar\docValue{Bjornstrup}\textbar\docValue{none}}{pas
       de valeur par défaut, initialement \docValue{PetersLenny}}
+    \changes{v0.99g}{2014/07/13}{Clé \protect\refAux{chap-style} remplacée par
+      (et alias de) la clé \protect\refKey{fncychap}}%^^A
+    % ^^A
     Cette clé permet de spécifier un autre style du \Package{fncychap}.
 
     Le \enquote{style} supplémentaire \docValue{none} permet de désactiver le
@@ -420,14 +419,14 @@ redéfinies, globalement ou localement.
 \subsection{Habilitations à diriger les recherches}
 \label{sec:hdr}
 %
-\changes{v0.99f}{2014/07/11}{La classe peut désormais être utilisée pour les
-  \gls{hdr}}
-
 Grâce à sa clé \refKey{hdr}, la \yatcl{} peut être utilisée pour
 les habilitations à diriger les recherches.
 
 \begin{docKey}{hdr}{=\docValue{true}\textbar\docValue{false}}{par défaut
     \docValue{true}, initialement \docValue{false}}
+  \changes{v0.99f}{2014/07/11}{Nouvelle clé \protect\refKey{hdr} permettant de
+    d'utiliser la \yatcl{} pour une \gls{hdr}}%^^A
+  % ^^A
   Cette clé spécifie que le document est une habilitation à diriger les
   recherches.
 \end{docKey}
@@ -443,8 +442,8 @@ celles dont le label est suffixé par \enquote{\texttt{-hdr}} dans le
 \label{sec:options-passer-aux}
 
 \changes{v0.99g}{2014/07/13}{Des options peuvent être passées aux packages
-  chargés par \yat{}}
-
+  chargés par \yat{}}%^^A
+%^^A
 Pour plusieurs de ses fonctionnalités, la \yatcl s'appuie sur des packages
 qu'elle charge automatiquement (listés
 \vref{sec:packages-charges-par}). Aussi son comportement par défaut et sa
@@ -740,13 +739,11 @@ ou des chargé(e)s de recherche (\gls{hdr} ou pas) du \gls{cnrs}. La clé
 \refKey{corps} suivante permet de spécifier de \emph{nouveaux} corps
 à \emph{définir} au moyen de la commande \refCom{expression}.
 
-\changes{v0.99e}{2014/06/15}{La clé \protect\refAux{corporation} est remplacée
-  par (et devient un alias de) la clé \protect\refKey{corps}}
-% ^^A \marginpar{Nouveau (2014/06/15) : la clé \protect\refAux{corporation} est
-% ^^A remplacée par (et devient un alias de) la clé \protect\refKey{corps}}
-%
 \begin{docKey}{corps}{=\meta{label}}{pas de
     valeur par défaut, initialement vide}
+  \changes{v0.99e}{2014/06/15}{Clé \protect\refAux{corporation} remplacée par
+    (et alias de) la clé \protect\refKey{corps}}%^^A
+  % ^^A
   L'option ×corps=×\meta{label} permet de stipuler un \meta{corps en français}
   et un \meta{corps en anglais} où \meta{label} identifie une expression listée
   au \vref{tab:expressions-cles} ou à définir au moyen de la commande
@@ -770,9 +767,6 @@ ou des chargé(e)s de recherche (\gls{hdr} ou pas) du \gls{cnrs}. La clé
 
 \subsection{Nouveaux rôles}\label{sec:nouveaux-roles}
 
-\changes{v0.99f}{2014/07/11}{Possibilité de spécifier et définir de nouveaux
-  rôles pour les personnes}
-
 On a pu noter \vref{sec:jury} que des rôles, figurant automatiquement sur les
 pages de titre, sont attachés :
 \begin{itemize}
@@ -790,6 +784,9 @@ La clé \refKey{role} suivante permet de spécifier de \emph{nouveaux} rôles
 
 \begin{docKey}{role}{=\meta{label}}{pas de valeur par défaut, initialement
     vide}
+  \changes{v0.99f}{2014/07/11}{Nouvelle clé \protect\refKey{role} permettant de
+    spécifier ou définir de nouveaux rôles pour les personnes}%^^A
+  % ^^A
   L'option ×role=×\meta{label} permet de stipuler un \meta{rôle en français} et
   un \meta{rôle en anglais} où \meta{label} identifie une expression listée au
   \vref{tab:expressions-cles} ou à définir au moyen de la commande

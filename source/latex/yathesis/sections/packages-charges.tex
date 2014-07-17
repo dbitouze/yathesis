@@ -191,7 +191,14 @@ les plus notables sont précisés.
       ×\SetCiteCommand{\autocite}× ;
   \end{description}
 \item[\package*{biblatex} :] gestion puissante de la bibliographie ;
-\item[\package*{hyperref} :] liens hypertextes ;
+\item[\package*{hyperref} :] \changes*{v0.99h}{2014/07/14}{Package
+    \package{hyperref}, ainsi que \package{varioref}, \package{index} et
+    \package{idxlayout}, plus automatiquement chargés par la
+    \yatcl{}\protect\footnote{Les utilisateurs qui ont l'usage de ces packages
+      doivent donc désormais les charger manuellement (au moyen de la commande
+      \protect\docAuxCommand{usepackage}).}.}%^^A
+%^^A
+  liens hypertextes ;
   \begin{description}
   \item[option par défaut :]\
     \begin{itemize}

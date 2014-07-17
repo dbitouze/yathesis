@@ -30,14 +30,12 @@ les pages de titre de la thèse.
 
 La commande \refCom{maketitle} admet un argument optionnel permettant de
 personnaliser les pages de titre au moyen des clés \refKey{nofrontcover} et
-\refKey{frametitle}.
-  %
-\changes{v0.99c}{2014/06/06}{Personnalisation possible (p. ex. suppression) du
-  cadre autour du titre}%
-\changes{v0.99g}{2014/07/13}{La personnalisation des pages de titre (cadre
-  autour du tire, page de 1\iere{} de couverture ou pas) peut se faire en
-  option de \protect\docAuxCommand{maketitle}}%
-%
+\refKey{frametitle}.%^^A
+%^^A
+\changes{v0.99g}{2014/07/13}{Personnalisation des pages de titre (\emph{via}
+  \protect\refKey{frametitle} et \protect\refKey{nofrontcover}) possible en
+  option de \protect\docAuxCommand{maketitle}}%^^A
+
 \begin{docKey}{nofrontcover}{=\docValue{true}\textbar\docValue{false}}{par défaut
     \docValue{true}, initialement \docValue{false}}
   Cette clé permet de désactiver la production de la page de 1\iere{} de
@@ -47,6 +45,10 @@ personnaliser les pages de titre au moyen des clés \refKey{nofrontcover} et
 {%
   \tcbset{before lower=\vspace*{\baselineskip}\par}
 \begin{docKey}{frametitle}{=\docValue{fbox}\textbar\docValue{shadowbox}\textbar\docValue{ovalbox}\textbar\docValue{none}\textbar\marg{autre}}{pas de valeur par défaut, initialement \docValue{fbox}}
+  \changes{v0.99c}{2014/06/06}{Nouvelle clé \protect\refKey{frametitle}
+    permettant de personnalisation (p. ex. supprimer) le cadre autour du
+    titre}%^^A
+  %^^A
   Cette clé permet de personnaliser le cadre figurant par défaut autour du
   titre de la thèse sur les pages de titre :
   \begin{itemize}
@@ -98,7 +100,11 @@ personnaliser les pages de titre au moyen des clés \refKey{nofrontcover} et
   \begin{enumerate}
   \item en langue principale (ici le français),
     \begin{enumerate}
-    \item une page de 1\iere{} de couverture illustrée \vref{fig:maketitle-fr} ;
+    \item \changes*{v0.99f}{2014/07/11}{Directeurs de thèse désormais dans un
+        tableau indépendant de celui des membres du jury sur les pages de
+        titre}%^^A
+      %^^A
+      une page de 1\iere{} de couverture illustrée \vref{fig:maketitle-fr} ;
     \item une page de titre ;
     \end{enumerate}
   \item en langue secondaire (ici l'anglais), une page de titre illustrée
