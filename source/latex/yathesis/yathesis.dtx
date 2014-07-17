@@ -904,6 +904,21 @@ This work consists of the file  yathesis.dtx
 \PassOptionsToPackage{nodayofweek}{datetime}%
 \PassOptionsToPackage{export}{adjustbox}%
 \PassOptionsToPackage{numbered}{bookmark}%
+%    \end{macrocode}
+% On passe au \Package{hyperref} (s'il est chargé par l'utilisteur final) des
+% options qui nous semblent pertinentes.
+%    \begin{macrocode}
+\PassOptionsToPackage{%
+  final,%
+  unicode,%
+  hyperfootnotes=false,%
+  hyperindex=false,%
+  plainpages=false,%
+  breaklinks,%
+  pdfpagemode=UseOutlines,%
+  pdfpagelayout=TwoPageRight%
+}{hyperref}%
+%
 \yadsetup{%
   graphicx/.code={\PassOptionsToPackage{#1}{graphicx}},%
   adjustbox/.code={\PassOptionsToPackage{#1}{adjustbox}},%
@@ -1137,26 +1152,6 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \RequirePackage{datetime}[2013/09/10]%
 %    \end{macrocode}
-% Pour la gestion des hyperliens. L'option ×final× assure que les
-% hyperliens seront présents même en mode brouillon ; l'option
-% ×unicode× assure que les accents sont composés de façon conforme
-% dans les signets. D'autres options peuvent être fixées au moyen de la
-% commande ×\hypersetup×.
-%    \begin{macrocode}
-\@ifpackageloaded{hyperref}{%
-  \hypersetup{%
-    final,%
-    unicode,%
-    hyperfootnotes=false,%
-    hyperindex=false,%
-    plainpages=false,%
-    breaklinks,%
-    pdfpagemode=UseOutlines,%
-    pdfpagelayout=TwoPageRight%
-  }%
-}{%
-}%
-%    \end{macrocode}
 % Pour faire pointer les hyperliens au début des flottants plutôt qu'au
 % début des légendes
 %    \begin{macrocode}
@@ -1192,7 +1187,6 @@ This work consists of the file  yathesis.dtx
     \newcommand{\YAD@nolinkurl}[1]{\nolinkurl{#1}}%
     \newcommand{\YAD@texorpdfstring}[2]{\texorpdfstring{#1}{#2}}%
     \newcommand{\YAD@phantomsection}{\phantomsection}%
-    \hypersetup{final}%
   }{%
     \newcommand{\YAD@href}[3][]{#3}%
     \newcommand{\YAD@hypersetup}[1]{}%
