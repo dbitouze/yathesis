@@ -1180,8 +1180,9 @@ This work consists of the file  yathesis.dtx
 % \section{Début du code de la classe}
 %
 % On définit les macros ×\YAD@href×, ×\YAD@hypersetup×, ×\YAD@url×,
-% ×\YAD@nolinkurl× identiques aux macros ×\href×, ×\hypersetup×, ×\url×, ×\nolinkurl× du
-% \Package{hyperref} mais sur lesquelles on a plus de contrôle.
+% ×\YAD@nolinkurl× identiques aux macros ×\href×, ×\hypersetup×, ×\url×,
+% ×\nolinkurl× du \Package{hyperref} mais sur lesquelles on a plus de
+% contrôle.
 %    \begin{macrocode}
 \AtEndPreamble{%
   \@ifpackageloaded{hyperref}{%
@@ -1341,7 +1342,6 @@ This work consists of the file  yathesis.dtx
 \RequirePackage[backend=biber,style=authortitle,autopunct=false,useprefix=true,backref,dashed=false]{biblatex}%
 \RequirePackage{listings}%
 \RequirePackage{varioref}%
-\RequirePackage{marginnote}%
 \RequirePackage{xspace}%
 \RequirePackage{booktabs}%
 \RequirePackage[xr]{zref}%
@@ -1381,7 +1381,6 @@ This work consists of the file  yathesis.dtx
 \renewcommand{\changes}{%
   \@ifstar{\@tempswatrue\YAD@changes}{\@tempswafalse\YAD@changes}%
 }%
-\setlength{\marginparwidth}{2cm}%
 \newcommand{\YAD@changes}[3]{%
   \YAD@ORI@changes{#1}{#2}{%
     \if@tempswa%
@@ -2436,7 +2435,7 @@ This work consists of the file  yathesis.dtx
     \YAD@error@firstlastnames@empty{du directeur de these}{#2}{#3}{\supervisor}%
     \YAD@staff[role=supervisor,#1]{#2}{#3}{YAD@supervisors}%
   }%
-\if@tempswa%
+  \if@tempswa%
   \else%
   \YAD@staff[role=supervisor,#1]{#2}{#3}{supervisors-in-committee}%
   \fi%
