@@ -2019,21 +2019,19 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \ifbool{YAD@output@paper}{%
   \AtEndPreamble{%
-    \YAD@hypersetup{colorlinks=false}%
-  }%
-  \newcommand{\YAD@href}[3][]{#3}%
-  \let\YAD@ori@footnote\footnote%
-  \renewcommand{\footnote}[1]{\booltrue{YAD@in@footnote}\YAD@ori@footnote{#1}\boolfalse{YAD@in@footnote}}%
-  \@ifpackageloaded{hyperref}{%
-    \renewcommand*\url[1]{\nolinkurl{#1}}%
-    \renewcommand*\href[3][]{%
-      \ifbool{YAD@in@footnote}{%
-        #3 (\url{#2})
-      }{%
-        #3\footnote{\url{#2}}
+    \@ifpackageloaded{hyperref}{%
+      \YAD@hypersetup{colorlinks=false}%
+      \renewcommand{\YAD@href}[3][]{#3}%
+      \let\YAD@ori@footnote\footnote%
+      \renewcommand{\footnote}[1]{\booltrue{YAD@in@footnote}\YAD@ori@footnote{#1}\boolfalse{YAD@in@footnote}}%
+      \renewcommand*\url[1]{\nolinkurl{#1}}%
+      \renewcommand*\href[3][]{%
+        \ifbool{YAD@in@footnote}{%
+          #3 (\url{#2}) }{%
+          #3\footnote{\url{#2}} }%
       }%
+    }{%
     }%
-  }{%
   }%
 }{%
 }%
