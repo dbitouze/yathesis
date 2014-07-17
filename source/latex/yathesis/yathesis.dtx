@@ -1371,6 +1371,31 @@ This work consists of the file  yathesis.dtx
 %
 \hypersetup{colorlinks}%
 %
+\newbool{afterbegindocument}%
+\AtBeginDocument{%
+  \booltrue{afterbegindocument}%
+}%
+\presetkeys{todonotes}{fancyline, color=white}{}%
+\newcommand{\alert}[1]{\begingroup\color{red}#1\endgroup}%
+\let\YAD@ORI@changes\changes%
+\renewcommand{\changes}{%
+  \@ifstar{\@tempswatrue\YAD@changes}{\@tempswafalse\YAD@changes}%
+}%
+\setlength{\marginparwidth}{2cm}%
+\newcommand{\YAD@changes}[3]{%
+  \YAD@ORI@changes{#1}{#2}{%
+    \if@tempswa%
+    \alert{#3}%
+    \else%
+    #3%
+    \fi%
+  }%
+  % \if@tempswa%
+  % % \protect\marginpar{\scriptsize NEW ! (#1, #2)}%
+  % \else%
+  % \fi%
+}%
+%
 \newcommand{\includeall}{%
   \renewcommand\includeonly[1]{}%
   % \let\include\input%
