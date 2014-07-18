@@ -904,6 +904,7 @@ This work consists of the file  yathesis.dtx
 \PassOptionsToPackage{nodayofweek}{datetime}%
 \PassOptionsToPackage{export}{adjustbox}%
 \PassOptionsToPackage{numbered}{bookmark}%
+\PassOptionsToPackage{pagestyles}{titlesec}%
 %    \end{macrocode}
 % On passe au \Package{hyperref} (s'il est chargé par l'utilisteur final) des
 % options qui nous semblent pertinentes.
@@ -925,7 +926,7 @@ This work consists of the file  yathesis.dtx
   setspace/.code={\PassOptionsToPackage{#1}{setspace}},%
   xcolor/.code={\PassOptionsToPackage{#1}{xcolor}},%
   datatool/.code={\PassOptionsToPackage{#1}{datatool}},%
-  titleps/.code={\PassOptionsToPackage{#1}{titleps}},%
+  titlesec/.code={\PassOptionsToPackage{#1}{titlesec}},%
   draftwatermark/.code={\PassOptionsToPackage{#1}{draftwatermark}},%
   babel/.code={\PassOptionsToPackage{#1}{babel}},%
   datetime/.code={\PassOptionsToPackage{#1}{datetime}},%
@@ -1075,7 +1076,7 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % Pour gérer les titres courants (entêtes) et bas de page
 %    \begin{macrocode}
-\RequirePackage{titleps}[2011/12/15]%
+\RequirePackage{titlesec}[2011/12/15]%
 %    \end{macrocode}
 % Pour distinguer le mode \enquote{draft} des autres modes.
 %    \begin{macrocode}
