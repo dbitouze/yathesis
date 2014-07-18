@@ -327,7 +327,6 @@
 \PassOptionsToPackage{nodayofweek}{datetime}%
 \PassOptionsToPackage{export}{adjustbox}%
 \PassOptionsToPackage{numbered}{bookmark}%
-\PassOptionsToPackage{pagestyles}{titlesec}%
 \PassOptionsToPackage{%
   final,%
   unicode,%
@@ -344,7 +343,7 @@
   setspace/.code={\PassOptionsToPackage{#1}{setspace}},%
   xcolor/.code={\PassOptionsToPackage{#1}{xcolor}},%
   datatool/.code={\PassOptionsToPackage{#1}{datatool}},%
-  titleps/.code={\PassOptionsToPackage{#1}{titlesec}},%
+  titleps/.code={\PassOptionsToPackage{#1}{titleps}},%
   titlesec/.code={\PassOptionsToPackage{#1}{titlesec}},%
   draftwatermark/.code={\PassOptionsToPackage{#1}{draftwatermark}},%
   babel/.code={\PassOptionsToPackage{#1}{babel}},%
@@ -390,7 +389,7 @@
 }{%
   \RequirePackage{fncychap}[2007/07/30]%
 }%
-\RequirePackage{titlesec}[2011/12/15]%
+\RequirePackage{titleps}[2011/12/15]%
 \RequirePackage{nonumonpart}[2011/04/15]%
 \RequirePackage{xcolor}[2007/01/21]%
 \RequirePackage{datatool}[2014/03/08]%
@@ -704,6 +703,7 @@
 \newcommand*{\YAD@generic@argument@translate}[1]{%
   \YAD@texorpdfstring{\YAD@generic@argument{\translate{meta-#1}}}{<#1>}%
 }%
+\newcommand{\cmdKV@YAD@numlaboratories}{1}%
 \yadsetup{%
   role/.store in=\cmdKV@YAD@role,%
   corporation/.store in=\cmdKV@YAD@corps,%
@@ -721,6 +721,7 @@
   name/.store in=\cmdKV@YAD@name,%
   depth/.store in=\cmdKV@YAD@depth,%
   frametitle/.store in=\cmdKV@YAD@frametitle,%
+  numlaboratories/.store in=\cmdKV@YAD@numlaboratories,%
 }%
 \yadsetup{%
   logoheight/.code={%
@@ -2260,9 +2261,8 @@
   {}%
   \setsecnumdepth{none}%
 }%
-\newcommand*{\printlaboratory}{\@ifstar{\@tempswatrue\YAD@laboratory@name@temp}{\@tempswafalse\YAD@laboratory@name@temp}}%
-\newcommand*{\YAD@laboratory@name@temp}[2]{%
-  \ifundef{#1}{%
+\newcommand*{\printlaboratory}[2][]{%
+  \YAD@ifemptyorundef{#2}{%
     \YAD@reach@file{\YAD@generic@argument@translate{laboratory}}%
     \ifbool{YAD@nolaboratory}{%
     }{%
@@ -2277,23 +2277,17 @@
   }{%
     \ifdraft{%
       \YAD@reach@file{%
-        #1%
+        #2%
       }%
     }{%
-      % \ifboolexpr{ bool {@tempswa} or bool {YAD@nonamelink} }{%
       \ifboolexpr{%
-        bool {@tempswa} %
-        or test {\ifdefstring{\YAD@laboratory@nolink}{true}}%
+        test {\expandafter\ifstrempty\expandafter{#1}}
+        or %
+        test {\ifdefstring{\YAD@laboratory@nonamelink}{true}}%
       }{%
-        #1%
+        #2%
       }{%
-        \YAD@ifemptyorundef{#2}{%
-          % \YAD@href{www.laboratory.fr}{%
-          #1%
-          % }%
-        }{%
-          \YAD@href{#2}{#1}%
-        }%
+        \YAD@href{#1}{#2}%
       }%
     }%
   }%
@@ -2477,7 +2471,11 @@
       % \vspace*{\stretch{.5}}%
       \par%
       \YAD@translation{universitydepartment}
-      \textbf{\printlaboratory{\YAD@main@laboratory@name}{\YAD@main@laboratory@url}}%
+      \ifdefstring{\YAD@main@laboratory@nonamelink}{true}{%
+        \textbf{\printlaboratory{\YAD@main@laboratory@name}}%
+      }{%
+        \textbf{\printlaboratory[\YAD@main@laboratory@url]{\YAD@main@laboratory@name}}%
+      }%
       \ifdraft{}{\vspace*{\stretch{1.5}}}%
       % \vspace*{\stretch{1.5}}%
       \par%
@@ -2837,6 +2835,7 @@
   \DTLgetvalue{\YAD@main@laboratory@name}{laboratories}{1}{\dtlcolumnindex{laboratories}{name}}%
   \DTLgetvalue{\YAD@main@laboratory@address}{laboratories}{1}{\dtlcolumnindex{laboratories}{address}}%
   \DTLgetvalue{\YAD@main@laboratory@url}{laboratories}{1}{\dtlcolumnindex{laboratories}{url}}%
+  \DTLgetvalue{\YAD@main@laboratory@nonamelink}{laboratories}{1}{\dtlcolumnindex{laboratories}{nonamelink}}%
   %
   \boolfalse{YAD@nonamelink}%
   \yadsetup{%
@@ -2894,7 +2893,7 @@
     \YAD@laboratory@telephone=telephone,%
     \YAD@laboratory@fax=fax,%
     \YAD@laboratory@email=email,%
-    \YAD@laboratory@nolink=nonamelink%
+    \YAD@laboratory@nonamelink=nonamelink%
   }{%
     \ifthenelse{\DTLiseq{\YAD@laboratory@logo}{}}{%
       \setlength{\YAD@laboratory@width}{\linewidth-\parindent}%
@@ -2902,7 +2901,7 @@
       \setlength{\YAD@laboratory@width}{.625\linewidth-\parindent}%
     }%
     \begin{minipage}[t]{\YAD@laboratory@width}
-      \textbf{\printlaboratory{\YAD@laboratory@name}{\YAD@laboratory@url}}%
+      \textbf{\printlaboratory[\YAD@laboratory@url]{\YAD@laboratory@name}}%
       \\[.1cm]
       \printlaboratoryaddress{\YAD@laboratory@address}%
       \\[.25cm]
@@ -3148,14 +3147,27 @@
   \egroup%
 }%
 \newcommand{\YAD@laboratory@abstract@page}{%
-  \begin{minipage}[t]{\linewidth}
-    \textbf{\printlaboratory*{\YAD@main@laboratory@name}{\YAD@main@laboratory@url}}%
-    \\%
-    \let\YAD@ORI@doublebackslash\\%
-    \renewcommand{\\}{ -- }%
-    \printlaboratoryaddress{\YAD@main@laboratory@address}%
-    \let\\\YAD@ORI@doublebackslash%
-  \end{minipage}%
+  \ifnumgreater{\cmdKV@YAD@numlaboratories}{0}{%
+    \begin{minipage}[t]{\linewidth}
+      \let\YAD@ORI@doublebackslash\\%
+      \renewcommand{\\}{ -- }%
+      \DTLforeach*{laboratories}{%
+        \YAD@laboratory@name=name,%
+        \YAD@laboratory@address=address%
+      }{%
+        \DTLiffirstrow{}{\newline}%
+        \textbf{\printlaboratory{\YAD@laboratory@name}}%
+        \ifnumgreater{\cmdKV@YAD@numlaboratories}{1}{%
+          \\%
+        }{%
+          \newline%
+        }
+        \printlaboratoryaddress{\YAD@laboratory@address}%
+        \ifthenelse{\value{DTLrowi}=\cmdKV@YAD@numlaboratories}{\dtlbreak}{}%
+      }%
+    \end{minipage}%
+  }{%
+  }%
 }%
 \newcommand{\makeabstract}{%
   \ifbool{YAD@nomakeabstract}{%
