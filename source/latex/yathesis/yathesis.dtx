@@ -3555,9 +3555,7 @@ This work consists of the file  yathesis.dtx
     \setfoot{}{\textsc{\translate{lbl-inprogressfoottext} \today}}{}%
   }%
 }{%
-  \ifboolexpr{%
-    bool {YAD@submitted@work@star}%
-  }{%
+  \ifbool{YAD@submitted@work@star}{%
     \newcommand*{\YAD@setfoot}{%
       \footrule%
       \setfoot{}{\textsc{\translate{lbl-submittedfoottext} \today}}{}%
