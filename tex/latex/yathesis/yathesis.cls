@@ -11,7 +11,7 @@
 %% Released under the LaTeX Project Public License v1.3c or later
 %% See http://www.latex-project.org/lppl.txt
 %% -----------------------------------------------------------------------
-\def\fileversion{v0.99i}
+\def\fileversion{v0.99j}
 \def\filedate{2014/07/17}
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesClass{yathesis}[\filedate\space\fileversion\space Yet another class for writing thesis (DB)]
@@ -327,6 +327,7 @@
 \PassOptionsToPackage{nodayofweek}{datetime}%
 \PassOptionsToPackage{export}{adjustbox}%
 \PassOptionsToPackage{numbered}{bookmark}%
+\PassOptionsToPackage{pagestyles}{titlesec}%
 \PassOptionsToPackage{%
   final,%
   unicode,%
@@ -343,7 +344,8 @@
   setspace/.code={\PassOptionsToPackage{#1}{setspace}},%
   xcolor/.code={\PassOptionsToPackage{#1}{xcolor}},%
   datatool/.code={\PassOptionsToPackage{#1}{datatool}},%
-  titleps/.code={\PassOptionsToPackage{#1}{titleps}},%
+  titleps/.code={\PassOptionsToPackage{#1}{titlesec}},%
+  titlesec/.code={\PassOptionsToPackage{#1}{titlesec}},%
   draftwatermark/.code={\PassOptionsToPackage{#1}{draftwatermark}},%
   babel/.code={\PassOptionsToPackage{#1}{babel}},%
   datetime/.code={\PassOptionsToPackage{#1}{datetime}},%
@@ -384,14 +386,14 @@
 \RequirePackage{shorttoc}[2002/08/20]%
 \RequirePackage{tocvsec2}[2014/03/10]%
 \RequirePackage{tocbibind}[2010/10/13]%
-\RequirePackage{nonumonpart}[2011/04/15]%
-\RequirePackage{xcolor}[2007/01/21]%
-\RequirePackage{datatool}[2014/03/08]%
 \ifthenelse{\equal{\YAD@fncychapstyle}{none}}{%
 }{%
   \RequirePackage{fncychap}[2007/07/30]%
 }%
-\RequirePackage{titleps}[2011/12/15]%
+\RequirePackage{titlesec}[2011/12/15]%
+\RequirePackage{nonumonpart}[2011/04/15]%
+\RequirePackage{xcolor}[2007/01/21]%
+\RequirePackage{datatool}[2014/03/08]%
 \RequirePackage{ifdraft}[2008/08/11]%
 \ifdraft{%
   \RequirePackage{draftwatermark}[2006/06/30]%
@@ -1861,6 +1863,13 @@
 \let\YAD@ORI@setcounter\setcounter%
 \let\YAD@ORI@tableofcontents\tableofcontents%
 \newif\if@YAD@knownsect%
+\def\shorttableofcontents#1#2{\bgroup\c@tocdepth=#2\@restonecolfalse
+  \if@tightshtoc
+     \parsep\z@
+  \fi
+  \if@twocolumn\@restonecoltrue\onecolumn\fi
+  \chapter*{#1}%
+  \@startshorttoc{toc}\if@restonecol\twocolumn\fi\egroup}
 \renewcommand{\tableofcontents}{%
   \booltrue{YAD@tableofcontents@used}%
   \YAD@clearemptydoublepage%
