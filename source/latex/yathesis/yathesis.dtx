@@ -2186,6 +2186,7 @@ This work consists of the file  yathesis.dtx
 % \meta{valeur} (grâce au package \package{pgfkeys}). La famille est nommée
 % \lstinline|yad| (comme \foreignquote{english}{yet antoher document}).
 %    \begin{macrocode}
+\newcommand{\cmdKV@YAD@numlaboratories}{1}%
 \yadsetup{%
   role/.store in=\cmdKV@YAD@role,%
   corporation/.store in=\cmdKV@YAD@corps,%
@@ -2203,6 +2204,7 @@ This work consists of the file  yathesis.dtx
   name/.store in=\cmdKV@YAD@name,%
   depth/.store in=\cmdKV@YAD@depth,%
   frametitle/.store in=\cmdKV@YAD@frametitle,%
+  numlaboratories/.store in=\cmdKV@YAD@numlaboratories,%
 }%
 %
 \yadsetup{%
@@ -5198,14 +5200,35 @@ This work consists of the file  yathesis.dtx
 % \begin{macro}{\YAD@laboratory@abstract@page}
 %    \begin{macrocode}
 \newcommand{\YAD@laboratory@abstract@page}{%
-  \begin{minipage}[t]{\linewidth}
-    \textbf{\printlaboratory*{\YAD@main@laboratory@name}{\YAD@main@laboratory@url}}%
-    \\%
-    \let\YAD@ORI@doublebackslash\\%
-    \renewcommand{\\}{ -- }%
-    \printlaboratoryaddress{\YAD@main@laboratory@address}%
-    \let\\\YAD@ORI@doublebackslash%
-  \end{minipage}%
+  \ifnumgreater{\cmdKV@YAD@numlaboratories}{0}{%
+    \begin{minipage}[t]{\linewidth}
+      \let\YAD@ORI@doublebackslash\\%
+      \renewcommand{\\}{ -- }%
+      \DTLforeach*{laboratories}{%
+        \YAD@laboratory@name=name,%
+        \YAD@laboratory@address=address%
+      }{%
+        \DTLiffirstrow{}{\newline}%
+        \textbf{\printlaboratory{\YAD@laboratory@name}}%
+        \ifnumgreater{\cmdKV@YAD@numlaboratories}{1}{%
+          \\%
+        }{%
+          \newline%
+        }
+        \printlaboratoryaddress{\YAD@laboratory@address}%
+        \ifthenelse{\value{DTLrowi}=\cmdKV@YAD@numlaboratories}{\dtlbreak}{}%
+      }%
+    %
+      % \textbf{\printlaboratory{\YAD@main@laboratory@name}}%
+      % \\%
+      % \let\YAD@ORI@doublebackslash\\%
+      % \renewcommand{\\}{ -- }%
+      % \printlaboratoryaddress{\YAD@main@laboratory@address}%
+      % \let\\\YAD@ORI@doublebackslash%
+      \let\\\YAD@ORI@doublebackslash%
+    \end{minipage}%
+  }{%
+  }%
 }%
 %    \end{macrocode}
 % \end{macro}
@@ -5213,11 +5236,12 @@ This work consists of the file  yathesis.dtx
 % \begin{macro}{\makeabstract}
 % Page de présentation (résumés)
 %    \begin{macrocode}
-\newcommand{\makeabstract}{%
+\newcommand{\makeabstract}[1][]{%
   \ifbool{YAD@nomakeabstract}{%
   }{%
     \YAD@alarm@noabstract%
   }%
+  \yadsetup{#1}%
   \pagestyle{preliminary}%
   \YAD@phantomsection%
   \addcontentsline{toc}{chapter}{\abstractname}%
