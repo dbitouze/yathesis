@@ -288,6 +288,31 @@ Les documents composés avec la \yatcl{} peuvent avoir deux formats de sortie :
   leurs cibles ne figureront nulle part en sortie \enquote{papier}.
 \end{dbwarning}
 
+\subsection{Nombre de laboratoires sur les pages de résumés et de 4\ieme{} de couverture}
+\label{sec:nombre-de-labor}
+
+Par défaut, seul le laboratoire principal (avec son adresse) est affiché sur
+les pages de résumés et de 4\ieme{} de couverture
+(cf. \vref{sec:abstract,sec:quatr-de-couv}). Mais la clé
+\refKey{numlaboratories} suivante permet de faire figurer un nombre arbitraire
+de laboratoires parmi ceux définis au moyen de la commande
+\refCom{laboratory}.%^^A
+%^^A
+\changes{v0.99j}{2014/07/18}{Nouvelle clé \protect\refKey{numlaboratories}
+  permettant de spécifier le nombre ($\geqslant 0$) de laboratoires devant
+  figurer sur les pages de résumés et de 4\ieme{} de couverture}%^^A
+
+\begin{docKey}{numlaboratories}{=\meta{nombre}}{pas de valeur par
+    défaut, initialement \docValue*{1}}
+  Cette clé permet de spécifier le \meta{nombre} (entier positif ou nul) de
+  laboratoires dont les noms et adresses doivent figurer sur la page de résumés
+  et de 4\ieme{} de couverture. Ces laboratoires sont pris dans l'ordre de
+  leurs définitions au moyen de la commande \refCom{laboratory}.
+\end{docKey}
+
+Pour gagner de la place sur les pages concernées, la composition des noms et
+adresses des laboratoires est un peu condensée si \meta{nombre} dépasse $1$.
+
 \subsection{Style des têtes de chapitres}\label{sec:style-des-tetes}
 
 Pour gérer les têtes de chapitres, la \yatcl{} s'appuie sur le

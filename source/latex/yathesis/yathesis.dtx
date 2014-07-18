@@ -1356,6 +1356,7 @@ This work consists of the file  yathesis.dtx
 \RequirePackage{hologo}%
 \RequirePackage{xifthen}%
 \RequirePackage{iflang}%
+\RequirePackage{amssymb}%
 \RequirePackage{tocvsec2}%
 \RequirePackage[autostyle=once]{csquotes}%
 \RequirePackage{tcolorbox}%
@@ -5236,12 +5237,11 @@ This work consists of the file  yathesis.dtx
 % \begin{macro}{\makeabstract}
 % Page de présentation (résumés)
 %    \begin{macrocode}
-\newcommand{\makeabstract}[1][]{%
+\newcommand{\makeabstract}{%
   \ifbool{YAD@nomakeabstract}{%
   }{%
     \YAD@alarm@noabstract%
   }%
-  \yadsetup{#1}%
   \pagestyle{preliminary}%
   \YAD@phantomsection%
   \addcontentsline{toc}{chapter}{\abstractname}%

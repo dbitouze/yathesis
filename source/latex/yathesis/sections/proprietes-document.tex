@@ -238,15 +238,22 @@ de titre\footnote{Le ou les laboratoires apparaissent en outre sur les pages
 \begin{dbremark}{Laboratoires multiples}{}
   Si la thèse a été préparée dans plusieurs laboratoires, il est possible de
   tous les spécifier en utilisant la commande \refCom{laboratory} autant de
-  fois que nécessaire.
+  fois que nécessaire. Par convention, le laboratoire stipulé à la première
+  \phrase{et éventuellement seule} occurrence de la commande
+  \refCom{laboratory} est le laboratoire \emph{principal}.
 
-  Dans tous les cas, le seul laboratoire à figurer sur les pages de titre, de
-  résumés (cf. \vref{sec:abstract}) et de 4\ieme{} de couverture
-  (cf. \vref{sec:quatr-de-couv}) est le laboratoire \emph{principal}, qui est
-  celui stipulé à la première \phrase{et éventuellement seule} occurrence de la
-  commande \refCom{laboratory}. En revanche, tous les laboratoires stipulés
-  figurent sur la page \phrase{facultative} qui leur est dédiée
-  (cf. \vref{sec:laboratoires}).
+  En cas de laboratoires multiples, tous ne figurent pas systématiquement :
+  \begin{itemize}
+  \item sur les pages de titre, le seul laboratoire affiché est le
+    laboratoire principal ;
+  \item sur les pages de résumés et de 4\ieme{} de couverture
+    (cf. \vref{sec:abstract,sec:quatr-de-couv}), par défaut seul le laboratoire
+    principal est affiché (mais un nombre arbitraire de laboratoires peut être
+    affiché grâce à la clé \refKey{numlaboratories}) ;
+  \item sur la page \phrase{facultative} qui leur est dédiée
+    (cf. \vref{sec:laboratoires}), tous les laboratoires stipulés sont
+    affichés.
+  \end{itemize}
 \end{dbremark}
 
 \subsubsection{Précisions}
