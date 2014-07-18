@@ -685,10 +685,14 @@ sont listées dans le \vref{tab:expressions-cles} et y sont identifiées par un
 \label{sec:expressions-standard}
 
 Le \vref{tab:expressions-standard} liste les expressions \LaTeX{} standard
-telles que traduites par la \yatcl{}. Il s'agit en fait des traductions
-fournies par les modules \package{frenchb} et \package{english} du
-\Package{babel}, à l'exception de l'expression des tableaux flottants qui, en
-français, est \enquote{Tableau} au lieu de \enquote{Table}.
+telles que traduites par la \yatcl{}. Il s'agit en fait des traductions en
+français et en anglais fournies par les modules \package{frenchb} et
+\package{english} du \Package{babel}, à l'exception de l'expression française
+figurant en légende des tableaux flottants (\enquote{Table} est remplacée par
+\enquote{Tableau}).% ^^A
+\changes*{v0.99i}{2014/07/17}{Les légendes des tableaux flottants sont
+  introduites par l'expression \enquote{\textsc{Tableau}} et non plus plus
+  \enquote{\textsc{Table}}}% ^^A
 
 Si on souhaite redéfinir ces expressions, il suffit de recourir aux commandes
 ×\addto×, ×\captionsfrench× et ×\captionsenglish× du \Package{babel} au moyen

@@ -11,8 +11,8 @@
 %% Released under the LaTeX Project Public License v1.3c or later
 %% See http://www.latex-project.org/lppl.txt
 %% -----------------------------------------------------------------------
-\def\fileversion{v0.99g}
-\def\filedate{2014/07/13}
+\def\fileversion{v0.99i}
+\def\filedate{2014/07/17}
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesClass{yathesis}[\filedate\space\fileversion\space Yet another class for writing thesis (DB)]
 \RequirePackage{pgfopts}[2011/06/02]%
@@ -327,6 +327,16 @@
 \PassOptionsToPackage{nodayofweek}{datetime}%
 \PassOptionsToPackage{export}{adjustbox}%
 \PassOptionsToPackage{numbered}{bookmark}%
+\PassOptionsToPackage{%
+  final,%
+  unicode,%
+  hyperfootnotes=false,%
+  hyperindex=false,%
+  plainpages=false,%
+  breaklinks,%
+  pdfpagemode=UseOutlines,%
+  pdfpagelayout=TwoPageRight%
+}{hyperref}%
 \yadsetup{%
   graphicx/.code={\PassOptionsToPackage{#1}{graphicx}},%
   adjustbox/.code={\PassOptionsToPackage{#1}{adjustbox}},%
@@ -423,19 +433,6 @@
 }
 \let\@modulo\@modulo@SAVED
 \RequirePackage{datetime}[2013/09/10]%
-\@ifpackageloaded{hyperref}{%
-  \hypersetup{%
-    final,%
-    unicode,%
-    hyperfootnotes=false,%
-    hyperindex=false,%
-    plainpages=false,%
-    breaklinks,%
-    pdfpagemode=UseOutlines,%
-    pdfpagelayout=TwoPageRight%
-  }%
-}{%
-}%
 \AtEndPreamble{%
   \@ifpackageloaded{hyperref}{%
     \RequirePackage[all]{hypcap}[2011/02/16]%
@@ -456,7 +453,6 @@
     \newcommand{\YAD@nolinkurl}[1]{\nolinkurl{#1}}%
     \newcommand{\YAD@texorpdfstring}[2]{\texorpdfstring{#1}{#2}}%
     \newcommand{\YAD@phantomsection}{\phantomsection}%
-    \hypersetup{final}%
   }{%
     \newcommand{\YAD@href}[3][]{#3}%
     \newcommand{\YAD@hypersetup}[1]{}%
@@ -484,6 +480,7 @@
   }%
   % }%
 }%
+\addto\captionsfrench{\def\tablename{{\scshape Tableau}}}%
 \newcommand{\YAD@ifemptyorundef}[3]{%
   \ifboolexpr{%
     test {\ifundef{#1}} or %
@@ -595,21 +592,19 @@
 }%
 \ifbool{YAD@output@paper}{%
   \AtEndPreamble{%
-    \YAD@hypersetup{colorlinks=false}%
-  }%
-  \newcommand{\YAD@href}[3][]{#3}%
-  \let\YAD@ori@footnote\footnote%
-  \renewcommand{\footnote}[1]{\booltrue{YAD@in@footnote}\YAD@ori@footnote{#1}\boolfalse{YAD@in@footnote}}%
-  \@ifpackageloaded{hyperref}{%
-    \renewcommand*\url[1]{\nolinkurl{#1}}%
-    \renewcommand*\href[3][]{%
-      \ifbool{YAD@in@footnote}{%
-        #3 (\url{#2})
-      }{%
-        #3\footnote{\url{#2}}
+    \@ifpackageloaded{hyperref}{%
+      \YAD@hypersetup{colorlinks=false}%
+      \renewcommand{\YAD@href}[3][]{#3}%
+      \let\YAD@ori@footnote\footnote%
+      \renewcommand{\footnote}[1]{\booltrue{YAD@in@footnote}\YAD@ori@footnote{#1}\boolfalse{YAD@in@footnote}}%
+      \renewcommand*\url[1]{\nolinkurl{#1}}%
+      \renewcommand*\href[3][]{%
+        \ifbool{YAD@in@footnote}{%
+          #3 (\url{#2}) }{%
+          #3\footnote{\url{#2}} }%
       }%
+    }{%
     }%
-  }{%
   }%
 }{%
 }%
@@ -914,7 +909,7 @@
     \YAD@error@firstlastnames@empty{du directeur de these}{#2}{#3}{\supervisor}%
     \YAD@staff[role=supervisor,#1]{#2}{#3}{YAD@supervisors}%
   }%
-\if@tempswa%
+  \if@tempswa%
   \else%
   \YAD@staff[role=supervisor,#1]{#2}{#3}{supervisors-in-committee}%
   \fi%
