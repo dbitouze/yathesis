@@ -5962,7 +5962,7 @@ This work consists of the file  yathesis.dtx
 %
 % On fixe la métadonnée de la langue.
 %    \begin{macrocode}
-\AfterEndPreamble{%
+\AtBeginDocument{%
   \ifthenelse{\equal{\YAD@mainlanguage}{french}}{%
     \YAD@hypersetup{pdflang=fr}%
   }{%
