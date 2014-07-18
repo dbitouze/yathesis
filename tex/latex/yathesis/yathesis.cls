@@ -3490,7 +3490,7 @@
   \fi%
   \pagestyle{preliminary}%
 }%
-\AfterEndPreamble{%
+\AtBeginDocument{%
   \ifthenelse{\equal{\YAD@mainlanguage}{french}}{%
     \YAD@hypersetup{pdflang=fr}%
   }{%
