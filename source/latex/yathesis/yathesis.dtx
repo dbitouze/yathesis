@@ -3622,6 +3622,20 @@ This work consists of the file  yathesis.dtx
 \let\YAD@ORI@setcounter\setcounter%
 \let\YAD@ORI@tableofcontents\tableofcontents%
 \newif\if@YAD@knownsect%
+%    \end{macrocode}
+% On redéfinit la commande ×\shorttableofcontents× du \Package{shorttoc} en
+% retirant ×\@mkboth{\uppercase{#1}}{\uppercase{#1}}× qui provoque sinon une
+% erreur au niveau de la commande ×\tableofcontents× si elle est employée avec
+% un argument optionnel.
+%    \begin{macrocode}
+\def\shorttableofcontents#1#2{\bgroup\c@tocdepth=#2\@restonecolfalse
+  \if@tightshtoc
+     \parsep\z@
+  \fi
+  \if@twocolumn\@restonecoltrue\onecolumn\fi
+  \chapter*{#1}%
+  \@startshorttoc{toc}\if@restonecol\twocolumn\fi\egroup}
+%    \end{macrocode}
 \renewcommand{\tableofcontents}{%
   \booltrue{YAD@tableofcontents@used}%
   \YAD@clearemptydoublepage%
