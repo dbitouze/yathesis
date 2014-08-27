@@ -1619,8 +1619,9 @@ This work consists of the file  yathesis.dtx
   }%
 }%
 \newtcblisting{origpreamblecode}[1][]{%
-  beamer,%
+  % beamer,%
   codes,%
+  drop lifted shadow,
   #1%
 }%
 \newtcblisting{origbodycode}[1][]{%
@@ -1662,7 +1663,7 @@ This work consists of the file  yathesis.dtx
 }%
 \newtcbinputlisting{\preamblesample}[3][these.tex]{%
   samples,
-  drop shadow,
+  drop lifted shadow,
   listing file={master-slaves-files-sample/#1},
   listing options={rangebeginprefix=\\,rangeendsuffix=\},#2},
   #3,
