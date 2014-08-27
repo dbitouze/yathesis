@@ -1840,9 +1840,7 @@
     \setfoot{}{\textsc{\translate{lbl-inprogressfoottext} \today}}{}%
   }%
 }{%
-  \ifboolexpr{%
-    bool {YAD@submitted@work@star}%
-  }{%
+  \ifbool{YAD@submitted@work@star}{%
     \newcommand*{\YAD@setfoot}{%
       \footrule%
       \setfoot{}{\textsc{\translate{lbl-submittedfoottext} \today}}{}%
@@ -2308,11 +2306,6 @@
   }{%
     \YAD@reach@file{#1}%
   }%
-}%
-\let\origtcb@shadow@prepare=\tcb@shadow@prepare%
-\def\tcb@shadow@prepare#1#2{%
-  \origtcb@shadow@prepare{#1}{#2}%
-  \let\tcb@shadow@arc=\tcb@zpt%
 }%
 \renewcommand{\maketitle}[1][]{%
   \booltrue{YAD@maketitle@used}%

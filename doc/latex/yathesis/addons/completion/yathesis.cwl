@@ -61,6 +61,22 @@ output=#screen,paper,paper*
 leqno
 fleqn
 oneside
+noerror
+noauthor
+notitle
+noacademicfield
+nodate
+noinstitute
+nodoctoralschool
+nolaboratory
+nolaboratoryadress
+nosupervisor
+nomaketitle
+nokeywords
+noabstract
+nomakeabstract
+notableofcontents
+noprintbibliography
 #endkeyvals
 #
 \yadsetup{%<options%>}#n
@@ -132,6 +148,7 @@ url=
 telephone=
 fax=
 email=
+nonamelink
 #endkeyvals
 #
 # Committee
@@ -224,7 +241,7 @@ juniorresearcher*
 \disclaimer{%<clause%>}#n
 \makedisclaimer#n
 \makedisclaimer*#n
-\keywords{%<mots clés dans la langue secondaire%>}{%<mots clés dans la langue principale%>}#n
+\keywords{%<mots clés dans la langue principale%>}{%<mots clés dans la langue secondaire%>}#n
 \makekeywords#n
 \makekeywords*#n
 \makelaboratory#n
