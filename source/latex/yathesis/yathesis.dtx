@@ -4233,16 +4233,6 @@ This work consists of the file  yathesis.dtx
 }%
 %    \end{macrocode}
 % \end{macro}
-% Utilisation d'un hack fourni par l'auteur du \Package{tcolorbox} de sorte
-% que, lorsqu'une ×tcolorbox× est à sommets non arrondis, il en soit
-% de même de son ombre.
-%    \begin{macrocode}
-\let\origtcb@shadow@prepare=\tcb@shadow@prepare%
-\def\tcb@shadow@prepare#1#2{%
-  \origtcb@shadow@prepare{#1}{#2}%
-  \let\tcb@shadow@arc=\tcb@zpt%
-}%
-%    \end{macrocode}
 %
 % \begin{macro}{\maketitle}
 % Commande de la page de titre
