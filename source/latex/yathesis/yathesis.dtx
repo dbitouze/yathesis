@@ -3283,22 +3283,26 @@ This work consists of the file  yathesis.dtx
 %
 % \begin{macro}{\date}
 %    \begin{macrocode}
-\csdef{date}#1#2#3{%
+\csdef{YAD@checkdate}#1#2#3#4#5{%
+  \boolfalse{YAD@valid@day}%
+  \boolfalse{YAD@valid@month}%
+  \boolfalse{YAD@valid@year}%
+  %
   \csxdef{YAD@daydate}{#1}%
   \csxdef{YAD@monthdate}{#2}%
   \csxdef{YAD@yeardate}{#3}%
-  \ifboolexpr{%
-    bool {YAD@submitted@work}%
-    or bool {YAD@submitted@work@star}%
-  }{%
-  }{%
+  % \ifboolexpr{%
+  %   bool {YAD@submitted@work}%
+  %   or bool {YAD@submitted@work@star}%
+  % }{%
+  % }{%
     \ifboolexpr{%
       not (test {\IfInteger{\YAD@daydate}})%
     }{%
       \YAD@ClassError[nodate]{%
-        Jour de la date de soutenance non valide%
+        Jour de la date de #5 non valide%
       }{%
-        La commande \protect\date{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
+        La commande \string#4{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
         n'a pas ete correctement saisie car le\MessageBreak%
         jour (`\YAD@daydate') n'est pas valide :\MessageBreak%
         ce doit etre un nombre entier entre 1 et 31.%
@@ -3313,15 +3317,15 @@ This work consists of the file  yathesis.dtx
         or test {\ifnumgreater{\YAD@daydate}{31}}%
       }{%
         \YAD@ClassError[nodate]{%
-          Jour de la date de soutenance non valide%
+          Jour de la date de #5 non valide%
         }{%
-          La commande \protect\date{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
+          La commande \string#4{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
           n'a pas ete correctement saisie car le\MessageBreak%
           numero de jour (`\YAD@daydate') n'est pas valide :\MessageBreak%
           ce doit etre un nombre entier entre 1 et 31.%
         }%
       }{%
-        \booltrue{YAD@valid@day}%
+        \global\booltrue{YAD@valid@day}%
       }%
     }%
     % month
@@ -3329,9 +3333,9 @@ This work consists of the file  yathesis.dtx
       not (test {\IfInteger{\YAD@monthdate}})%
     }{%
       \YAD@ClassError[nodate]{%
-        Mois de la date de soutenance non valide%
+        Mois de la date de #5 non valide%
       }{%
-        La commande \protect\date{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
+        La commande \string#4{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
         n'a pas ete correctement saisie car le\MessageBreak%
         mois (`\YAD@monthdate') n'est pas valide :\MessageBreak%
         ce doit etre un nombre entier entre\MessageBreak%
@@ -3347,16 +3351,16 @@ This work consists of the file  yathesis.dtx
         or test {\ifnumgreater{\YAD@monthdate}{12}}%
       }{%
         \YAD@ClassError[nodate]{%
-          Mois de la date de soutenance non valide%
+          Mois de la date de #5 non valide%
         }{%
-          La commande \protect\date{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
+          La commande \string#4{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
           n'a pas ete correctement saisie car le\MessageBreak%
           numero de mois (`\YAD@monthdate') n'est pas valide :\MessageBreak%
           ce doit etre un nombre entier entre\MessageBreak%
           1 (janvier) et 12 (decembre).%
         }%
       }{%
-        \booltrue{YAD@valid@month}%
+        \global\booltrue{YAD@valid@month}%
       }%
     }%
     % year
@@ -3364,18 +3368,25 @@ This work consists of the file  yathesis.dtx
       not (test {\IfInteger{\YAD@yeardate}})%
     }{%
       \YAD@ClassError[nodate]{%
-        Annee de la date de soutenance non valide%
+        Annee de la date de #5 non valide%
       }{%
-        La commande
-        \protect\date{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
+        La commande \string#4{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
         n'a pas ete correctement saisie car l'annee\MessageBreak%
         (`\YAD@yeardate') n'est pas valide : ce doit etre\MessageBreak%
         un nombre entier.%
       }%
     }{%
-      \booltrue{YAD@valid@year}%
+      \global\booltrue{YAD@valid@year}%
     }%
-    \ifboolexpr{%
+  % }%
+}%
+%    \end{macrocode}
+%
+% \begin{macro}{\date}
+%    \begin{macrocode}
+\csdef{date}#1#2#3{%
+  \YAD@checkdate{#1}{#2}{#3}{\date}{soutenance}%
+  \ifboolexpr{%
       bool {YAD@valid@day}%
       and bool {YAD@valid@month}%
       and bool {YAD@valid@year}%
@@ -3388,10 +3399,6 @@ This work consists of the file  yathesis.dtx
         \YAD@generic@argument@translate{date}%
       }%
     }%
-    \boolfalse{YAD@valid@day}%
-    \boolfalse{YAD@valid@month}%
-    \boolfalse{YAD@valid@year}%
-  }%
 }%
 \AtEndDocument{%
   \YAD@ifemptyorundef{\printdate}{%
@@ -3414,7 +3421,6 @@ This work consists of the file  yathesis.dtx
   }%
 }%
 %    \end{macrocode}
-% \end{macro}
 %
 % \begin{macro}{\dedication}
 %    \begin{macrocode}
