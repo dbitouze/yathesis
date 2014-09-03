@@ -110,7 +110,7 @@ différentes versions du document : \enquote{intermédiaire} (par défaut),
 \enquote{à soumettre}, \enquote{finale} et \enquote{brouillon}.
 
 {\tcbset{before lower=\vspace*{\baselineskip}\par}
-\begin{docKey}{version}{=\docValue{inprogress}\textbar\docValue{inprogress*}\textbar\docValue{submitted}\textbar\docValue{submitted*}\textbar\docValue{final}\textbar\docValue{draft}}{pas
+  \begin{docKey}{version}{=\docValue{inprogress}\textbar\docValue{inprogress*}\textbar\docValue{submitted}\textbar\docValue{submitted*}\textbar\docValue{final}\textbar\docValue{draft}}{pas
       de valeur par défaut, initialement \docValue{inprogress}}
     Cette clé permet de spécifier la version du document à produire, au moyen
     des valeurs suivantes.
@@ -120,11 +120,12 @@ différentes versions du document : \enquote{intermédiaire} (par défaut),
         éventuellement destinée à être diffusée à des relecteurs.}. Ses
       caractéristiques sont les suivantes.
       \begin{enumerate}
-      \item\label{item:inprogress:1} Pour indiquer clairement qu'il s'agit
-        d'une version \enquote{intermédiaire}, la mention \enquote{Version
-          intermédiaire en date du \meta{date}} ou \foreignquote{english}{Work
-          in progress as of \meta{date}}\selonlangue{}, est affichée en petites
-        capitales sur (presque) tous les pieds de page.
+      \item\label{item:inprogress:1} Pour indiquer clairement qu'il s'agit d'une
+        version \enquote{intermédiaire}, (presque) tous les pieds de page
+        contiennent en petites capitales la mention \enquote{Version
+          intermédiaire en date du \meta{date du jour}} ou
+        \foreignquote{english}{Work in progress as of \meta{date du
+            jour}}\selonlangue{}.
       \item\label{item:inprogress:2} Aucun élément \enquote{obligatoire}
         (cf. \vref{sec:comm-oblig}) manquant n'est signalé.
       \end{enumerate}
@@ -138,17 +139,17 @@ différentes versions du document : \enquote{intermédiaire} (par défaut),
       la version par défaut :
       \begin{enumerate}
       \item l'affichage en pied de page de la mention \enquote{Version
-          intermédiaire en date du \meta{date}} ou \foreignquote{english}{Work
-          in progress as of \meta{date}} est désactivé ;
+          intermédiaire en date du \meta{date du jour}} ou
+        \foreignquote{english}{Work in progress as of \meta{date du jour}} est
+        désactivé ;
       \item \changes*{v0.99f}{2014/07/11}{En versions \enquote{à soumettre},
           date de soutenance et composition du jury absentes des pages de titre
           (et non obligatoires)}% ^^A
         % ^^A
-        sur les pages de titre, la composition du jury est masquée et la date
-        de soutenance est supprimée\footnote{En versions soumises aux
-          rapporteurs, le doctorant ne peut préjuger ni d'un jury ni d'une date
-          de soutenance, ne sachant pas encore s'il va être autorisé
-          à soutenir.} ;
+        sur les pages de titre, la composition du jury est masquée et la date de
+        soutenance est supprimée\footnote{En versions soumises aux rapporteurs,
+          le doctorant ne peut préjuger ni d'un jury ni d'une date de
+          soutenance, ne sachant pas encore s'il va être autorisé à soutenir.} ;
       \item tout élément \enquote{obligatoire} (cf. \vref{sec:comm-oblig})
         manquant est signalé par une erreur de compilation\footnote{La date de
           soutenance est normalement \enquote{obligatoire}, sauf dans les
@@ -164,8 +165,9 @@ différentes versions du document : \enquote{intermédiaire} (par défaut),
       du document. \emph{Contrairement à} la version par défaut :
       \begin{enumerate}
       \item l'affichage en pied de page de la mention \enquote{Version
-          intermédiaire en date du \meta{date}} ou \foreignquote{english}{Work
-          in progress as of \meta{date}} est désactivé ;
+          intermédiaire en date du \meta{date du jour}} ou
+        \foreignquote{english}{Work in progress as of \meta{date du jour}} est
+        désactivé ;
       \item si un élément \enquote{obligatoire} (cf. \vref{sec:comm-oblig})
         manque, une erreur de compilation signale l'omission.
       \end{enumerate}
@@ -174,33 +176,34 @@ différentes versions du document : \enquote{intermédiaire} (par défaut),
           priori} à usage exclusif de l'utilisateur et n'est en particulier pas
         destinée à être diffusée.}. Ses caractéristiques sont les suivantes :
       \begin{itemize}
-      \item \emph{comme} la version par défaut, si un élément \enquote{obligatoire}
-        (cf. \vref{sec:comm-oblig}) manque, aucune erreur de compilation ne
-        signale l'omission ;
-      \item \emph{contrairement à} la version par défaut, la mention \enquote{Version
-          intermédiaire en date du \meta{date}} ou \foreignquote{english}{Work
-          in progress as of \meta{date}} ne figure pas ;
+      \item \emph{comme} la version par défaut, si un élément
+        \enquote{obligatoire} (cf. \vref{sec:comm-oblig}) manque, aucune erreur
+        de compilation ne signale l'omission ;
+      \item \emph{contrairement à} la version par défaut, la mention
+        \enquote{Version intermédiaire en date du \meta{date du jour}} ou
+        \foreignquote{english}{Work in progress as of \meta{date du jour}} ne
+        figure pas ;
       \item \emph{en plus de} la version par défaut :
         \begin{enumerate}
         \item Les différentes zones de la page, notamment celle allouée au
           texte, sont matérialisées et les dépassements de marges sont signalés
           par une barre verticale noire dans la marge.
         \item La mention \enquote{brouillon} ou
-          \foreignquote{english}{draft}\selonlangue{} figure en filigrane (et
-          en capitales) sur toutes les pages du document.
+          \foreignquote{english}{draft}\selonlangue{} figure en filigrane (et en
+          capitales) sur toutes les pages du document.
         \item Sur certaines pages, notamment celles de titre :
           \begin{enumerate}
           \item les données caractéristiques de la thèse\footnote{Auteur,
               (sous-)titre, institut(s), directeurs, rapporteurs, examinateurs,
               etc.} sont des hyperliens vers le fichier de configuration de la
-            thèse\footnote{Cf. \vref{sec:lieu-de-saisie}.} où il est possible
-            de les (re)définir (cf. \vref{sec:expressions-cles});
+            thèse\footnote{Cf. \vref{sec:lieu-de-saisie}.} où il est possible de
+            les (re)définir (cf. \vref{sec:expressions-cles});
           \item\label{item-expression} les expressions fournies par la
             \yatcl\footnote{\enquote{Thèse présentée par},
               \foreignquote{english}{In order to become Doctor from},
               \foreignquote{english}{draft}, \enquote{Version intermédiaire en
-                date du}, etc. insérées de façon automatique sur certaines
-              pages du mémoire.} sont :
+                date du}, etc. insérées de façon automatique sur certaines pages
+              du mémoire.} sont :
             \begin{itemize}
             \item estampillées du label qui les identifie;
             \item des hyperliens vers le fichier de configuration de la thèse
