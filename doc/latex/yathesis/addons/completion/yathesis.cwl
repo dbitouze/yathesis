@@ -38,7 +38,6 @@
 #include:draftwatermark
 #include:babel
 #include:iflang
-#include:datenumber
 #include:datetime
 #include:hypcap
 #include:bookmark
@@ -235,6 +234,7 @@ juniorresearcher*
 # Misc
 \ordernumber[%<numéro d'ordre%>]#n
 \ordernumber#n*
+\submissiondate{%<jour%>}{%<mois%>}{%<année%>}#n
 #
 # Preliminary pages
 #

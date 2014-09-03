@@ -75,7 +75,6 @@
 \newsavebox{\YAD@abstract@secondarylanguage}%
 \newcounter{YAD@abstracts}%
 \newcounter{YAD@warnings}%
-\newcounter{datetoday}
 \setcounter{YAD@abstracts}{0}%
 \setcounter{YAD@warnings}{0}%
 \def\YAD@mainlanguage{french}%
@@ -406,33 +405,6 @@
 }%
 \RequirePackage{babel}[2014/03/24]
 \RequirePackage{iflang}[2007/11/11]%
-\let\@modulo@SAVED\@modulo
-\RequirePackage{datenumber}[2001/08/06]%
-\let\DATENUMBER@modulo\@modulo
-\def\setdaynamebynumber#1{%
-  \@tempcnta=#1\relax
-  \ifnum\the@startyear=1800\advance \@tempcnta by 1\fi
-  \ifnum\the@startyear=1900\advance \@tempcnta by 6\fi
-  \ifnum\the@startyear=2000\advance \@tempcnta by 4\fi
-  \DATENUMBER@modulo{\the\@tempcnta}{7}%
-  \setcounter{datedayname}{\the\@den}%
-  \addtocounter{datedayname}{1}%
-  \setdayname{\thedatedayname}%
-}
-\def\ifleapyear#1{%#1 year
-  \ifnum#1>1500
-    \DATENUMBER@modulo{#1}{100}%
-    \ifnum\@den=0
-      \DATENUMBER@modulo{#1}{400}%
-    \else
-      \DATENUMBER@modulo{#1}{4}%
-    \fi
-  \else
-    \DATENUMBER@modulo{#1}{4}%
-  \fi
-  \ifnum\@den=0
-}
-\let\@modulo\@modulo@SAVED
 \RequirePackage{datetime}[2013/09/10]%
 \AtEndPreamble{%
   \@ifpackageloaded{hyperref}{%
@@ -1640,23 +1612,26 @@
     }%
   }%
 }%
-\setmydatenumber{datetoday}{\the\year}{\the\month}{\the\day}
-\csdef{date}#1#2#3{%
+\csdef{YAD@checkdate}#1#2#3#4#5{%
+  \boolfalse{YAD@valid@day}%
+  \boolfalse{YAD@valid@month}%
+  \boolfalse{YAD@valid@year}%
+  %
   \csxdef{YAD@daydate}{#1}%
   \csxdef{YAD@monthdate}{#2}%
   \csxdef{YAD@yeardate}{#3}%
-  \ifboolexpr{%
-    bool {YAD@submitted@work}%
-    or bool {YAD@submitted@work@star}%
-  }{%
-  }{%
+  % \ifboolexpr{%
+  %   bool {YAD@submitted@work}%
+  %   or bool {YAD@submitted@work@star}%
+  % }{%
+  % }{%
     \ifboolexpr{%
       not (test {\IfInteger{\YAD@daydate}})%
     }{%
       \YAD@ClassError[nodate]{%
-        Jour de la date de soutenance non valide%
+        Jour de la date de #5 non valide%
       }{%
-        La commande \protect\date{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
+        La commande \string#4{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
         n'a pas ete correctement saisie car le\MessageBreak%
         jour (`\YAD@daydate') n'est pas valide :\MessageBreak%
         ce doit etre un nombre entier entre 1 et 31.%
@@ -1671,15 +1646,15 @@
         or test {\ifnumgreater{\YAD@daydate}{31}}%
       }{%
         \YAD@ClassError[nodate]{%
-          Jour de la date de soutenance non valide%
+          Jour de la date de #5 non valide%
         }{%
-          La commande \protect\date{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
+          La commande \string#4{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
           n'a pas ete correctement saisie car le\MessageBreak%
           numero de jour (`\YAD@daydate') n'est pas valide :\MessageBreak%
           ce doit etre un nombre entier entre 1 et 31.%
         }%
       }{%
-        \booltrue{YAD@valid@day}%
+        \global\booltrue{YAD@valid@day}%
       }%
     }%
     % month
@@ -1687,9 +1662,9 @@
       not (test {\IfInteger{\YAD@monthdate}})%
     }{%
       \YAD@ClassError[nodate]{%
-        Mois de la date de soutenance non valide%
+        Mois de la date de #5 non valide%
       }{%
-        La commande \protect\date{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
+        La commande \string#4{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
         n'a pas ete correctement saisie car le\MessageBreak%
         mois (`\YAD@monthdate') n'est pas valide :\MessageBreak%
         ce doit etre un nombre entier entre\MessageBreak%
@@ -1705,16 +1680,16 @@
         or test {\ifnumgreater{\YAD@monthdate}{12}}%
       }{%
         \YAD@ClassError[nodate]{%
-          Mois de la date de soutenance non valide%
+          Mois de la date de #5 non valide%
         }{%
-          La commande \protect\date{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
+          La commande \string#4{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
           n'a pas ete correctement saisie car le\MessageBreak%
           numero de mois (`\YAD@monthdate') n'est pas valide :\MessageBreak%
           ce doit etre un nombre entier entre\MessageBreak%
           1 (janvier) et 12 (decembre).%
         }%
       }{%
-        \booltrue{YAD@valid@month}%
+        \global\booltrue{YAD@valid@month}%
       }%
     }%
     % year
@@ -1722,64 +1697,49 @@
       not (test {\IfInteger{\YAD@yeardate}})%
     }{%
       \YAD@ClassError[nodate]{%
-        Annee de la date de soutenance non valide%
+        Annee de la date de #5 non valide%
       }{%
-        La commande
-        \protect\date{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
+        La commande \string#4{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
         n'a pas ete correctement saisie car l'annee\MessageBreak%
         (`\YAD@yeardate') n'est pas valide : ce doit etre\MessageBreak%
         un nombre entier.%
       }%
     }{%
-      % \IfDecimal{\YAD@yeardate}{%
-      % \csxdef{YAD@yeardate}{\number\integerpart}%
-      % }{%
-      % }%
-      %   \ifnumless{\YAD@yeardate}{\number\year}{%
-      %   \YAD@ClassError[nodate]{%
-      %   Annee de la date de soutenance non valide%
-      % }{%
-      %   La commande \protect\date{#1}{#2}{#3}\space\MessageBreak%
-      %   n'a pas ete correctement saisie car le numero de\MessageBreak%
-      %   l'annee (`#3') n'est pas valide : ce doit etre\MessageBreak%
-      %   un nombre entier (superieur ou egal a \number\year).%
-      % }%
-      % }{%
-      \booltrue{YAD@valid@year}%
-      % }%
+      \global\booltrue{YAD@valid@year}%
     }%
-    \ifboolexpr{%
+  % }%
+}%
+\csdef{date}#1#2#3{%
+  \YAD@checkdate{#1}{#2}{#3}{\date}{soutenance}%
+  \ifboolexpr{%
       bool {YAD@valid@day}%
       and bool {YAD@valid@month}%
       and bool {YAD@valid@year}%
     }{%
       \csdef{printdate}{%
-        % \setdatenumber{\YAD@yeardate}{\YAD@monthdate}{\YAD@daydate}%
-        % \ifnumgreater{\value{datetoday}}{\value{datenumber}}{%
-        % \YAD@generic@argument@translate{date}%
-        % \YAD@ClassError[nodate]{%
-        % Date de soutenance non valide%
-        % }{%
-        %   La date saisie
-        %   (`\protect\date{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}') n'est
-        %   pas\MessageBreak%
-        %   correcte car elle ne doit pas etre anterieure\MessageBreak%
-        %   a la date du jour
-        %   (\protect\date{\number\day}{\number\month}{\number\year}).%
-        % }%
-        % }{%
         \formatdate{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}%
-        % }%
       }%
     }{%
       \csdef{printdate}{%
         \YAD@generic@argument@translate{date}%
       }%
     }%
-    \boolfalse{YAD@valid@day}%
-    \boolfalse{YAD@valid@month}%
-    \boolfalse{YAD@valid@year}%
-  }%
+}%
+\csdef{submissiondate}#1#2#3{%
+  \YAD@checkdate{#1}{#2}{#3}{\submissiondate}{soumission}%
+  \ifboolexpr{%
+      bool {YAD@valid@day}%
+      and bool {YAD@valid@month}%
+      and bool {YAD@valid@year}%
+    }{%
+      \csdef{printsubmissiondate}{%
+        \formatdate{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}%
+      }%
+    }{%
+      \csdef{printsubmissiondate}{%
+        \YAD@generic@argument@translate{submissiondate}%
+      }%
+    }%
 }%
 \AtEndDocument{%
   \YAD@ifemptyorundef{\printdate}{%
@@ -1843,7 +1803,11 @@
   \ifbool{YAD@submitted@work@star}{%
     \newcommand*{\YAD@setfoot}{%
       \footrule%
-      \setfoot{}{\textsc{\translate{lbl-submittedfoottext} \today}}{}%
+      \YAD@ifemptyorundef{\printsubmissiondate}{%
+        \setfoot{}{\textsc{\translate{lbl-submittedfoottext} \today}}{}%
+      }{%
+        \setfoot{}{\textsc{\translate{lbl-submittedfoottext} \printsubmissiondate}}{}%
+      }%
     }%
   }{%
     \newcommand*{\YAD@setfoot}{}%
@@ -3667,7 +3631,8 @@
 \expression{meta-laboratory}{nom du laboratoire}{nom du laboratoire}
 \expression{meta-logolaboratory}{logo du laboratoire}{logo du laboratoire}
 \expression{meta-author}{pr\'enom et nom de l'auteur}{pr\'enom et nom de l'auteur}
-\expression{meta-date}{date de la soutenance}{date de la soutenance}
+\expression{meta-date}{date de la soutenance}{defense date}
+\expression{meta-submissiondate}{date de la soumission}{submission date}
 \expression{meta-academicfield}{discipline}{academic field}
 \expression{meta-speciality}{sp\'ecialit\'e}{speciality}
 \expression{meta-title}{titre du m\'emoire de th\`ese}{thesis title}
