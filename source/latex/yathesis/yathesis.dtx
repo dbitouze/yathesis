@@ -3400,6 +3400,31 @@ This work consists of the file  yathesis.dtx
       }%
     }%
 }%
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\submissiondate}
+%    \begin{macrocode}
+\csdef{submissiondate}#1#2#3{%
+  \YAD@checkdate{#1}{#2}{#3}{\submissiondate}{soumission}%
+  \ifboolexpr{%
+      bool {YAD@valid@day}%
+      and bool {YAD@valid@month}%
+      and bool {YAD@valid@year}%
+    }{%
+      \csdef{printsubmissiondate}{%
+        \formatdate{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}%
+      }%
+    }{%
+      \csdef{printsubmissiondate}{%
+        \YAD@generic@argument@translate{submissiondate}%
+      }%
+    }%
+}%
+%    \end{macrocode}
+% \end{macro}
+%
+%    \begin{macrocode}
 \AtEndDocument{%
   \YAD@ifemptyorundef{\printdate}{%
     \ifbool{YAD@nodate}{%
@@ -3489,7 +3514,11 @@ This work consists of the file  yathesis.dtx
   \ifbool{YAD@submitted@work@star}{%
     \newcommand*{\YAD@setfoot}{%
       \footrule%
-      \setfoot{}{\textsc{\translate{lbl-submittedfoottext} \today}}{}%
+      \YAD@ifemptyorundef{\printsubmissiondate}{%
+        \setfoot{}{\textsc{\translate{lbl-submittedfoottext} \today}}{}%
+      }{%
+        \setfoot{}{\textsc{\translate{lbl-submittedfoottext} \printsubmissiondate}}{}%
+      }%
     }%
   }{%
     \newcommand*{\YAD@setfoot}{}%
@@ -6174,7 +6203,8 @@ This work consists of the file  yathesis.dtx
 \expression{meta-laboratory}{nom du laboratoire}{nom du laboratoire}
 \expression{meta-logolaboratory}{logo du laboratoire}{logo du laboratoire}
 \expression{meta-author}{pr\'enom et nom de l'auteur}{pr\'enom et nom de l'auteur}
-\expression{meta-date}{date de la soutenance}{date de la soutenance}
+\expression{meta-date}{date de la soutenance}{defense date}
+\expression{meta-submissiondate}{date de la soumission}{submission date}
 \expression{meta-academicfield}{discipline}{academic field}
 \expression{meta-speciality}{sp\'ecialit\'e}{speciality}
 \expression{meta-title}{titre du m\'emoire de th\`ese}{thesis title}
@@ -6343,7 +6373,7 @@ This work consists of the file  yathesis.dtx
   moretexcs={% Control sequences' names
     author,title,subtitle,academicfield,speciality,date,supervisor,cosupervisor,comonitor,%
     referee,guest,examiner,committeepresident,pres,institute,coinstitute,company,doctoralschool,%
-    laboratory,dedication,frontepigraph,keywords,subject,expression,tableofcontents,%
+    laboratory,dedication,frontepigraph,keywords,subject,expression,tableofcontents,submissiondate.%
     maketitle,makedisclaimer,makekeywords,makelaboratory,makeabstract,makededications,makefrontepigraphs,%
     % acknowledgements,frenchabstract,foreword,preface,caution,
     makebackcover,ordernumber,chapter*,%
@@ -6706,6 +6736,7 @@ juniorresearcher*
 # Misc
 \ordernumber[%<numéro d'ordre%>]#n
 \ordernumber#n*
+\submissiondate{%<jour%>}{%<mois%>}{%<année%>}#n
 #
 # Preliminary pages
 #

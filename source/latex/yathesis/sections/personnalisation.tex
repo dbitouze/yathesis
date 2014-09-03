@@ -156,11 +156,17 @@ différentes versions du document : \enquote{intermédiaire} (par défaut),
           versions soumises aux rapporteurs où elle ne figure nulle part.}.
       \end{enumerate}
     \item[\docValue{submitted*}.] Cette valeur produit le même effet que la
-      valeur \docValue{submitted} sauf que le caractère \enquote{à soumettre}
-      de la version est renforcé par l'affichage en petites capitales, sur
-      (presque) tous les pieds de pages, de la mention \enquote{Version soumise
-        en date du} ou \foreignquote{english}{Submitted work as
-        of}\selonlangue{}.
+      valeur \docValue{submitted} sauf que le caractère \enquote{à soumettre} de
+      la version est renforcé par l'affichage, sur (presque) tous les pieds de
+      pages et en petites capitales, de la mention \enquote{Version soumise en
+        date du \meta{date}} ou \foreignquote{english}{Submitted work as of
+        \meta{date}}\selonlangue{}, \meta{date} étant :
+      \begin{itemize}
+      \item celle du jour si la commande \refCom{submissiondate} n'est pas
+        employée ;
+      \item celle spécifiée au moyen de la commande \refCom{submissiondate} si
+        elle est employée.
+      \end{itemize}
     \item[\docValue{final}.] Cette valeur produit une version \enquote{finale}
       du document. \emph{Contrairement à} la version par défaut :
       \begin{enumerate}
@@ -219,6 +225,13 @@ différentes versions du document : \enquote{intermédiaire} (par défaut),
     \end{description}
   \end{docKey}
 }
+
+\begin{docCommand}{submissiondate}{\marg{jour}\marg{mois}\marg{année}}
+  Cette commande définit la date de la soumission du mémoire (qui ne figure
+  qu'en version \enquote{\docValue*{submitted*}}). Ses arguments sont soumis aux
+  mêmes contraintes que ceux de la commande \refCom{date}
+  (cf. \vref{wa:format-date}).
+\end{docCommand}
 
 Les versions \enquote{à soumettre} et \enquote{finale} d'un mémoire de thèse ne
 sont à produire qu'exceptionnellement, en toute fin de rédaction. De ce fait :
