@@ -259,6 +259,35 @@ où \meta{autre niveau} est l'une des valeurs possibles de la clé
   précisions.
 \end{dbfaq}
 
+\section{Validation}
+\label{sec:validation}
+
+\begin{dbfaq}{Le \acrshort{pdf} de mon mémoire n'est pas valide au yeux du
+    \acrshort{cines}. Comment y remédier ?}{}
+  Conformément aux dispositions propres au dépôt sur support électronique
+  \autocite{guidoct-abes}, j'ai testé sur le site \url{http://facile.cines.fr/}
+  la validité du fichier \acrshort{pdf} de mon mémoire de thèse créé avec la
+  \yatcl{}, et il s'avère que celui-ci n'est pas valide. Comment y remédier ?
+  %
+  \tcblower
+  %
+  Il devrait suffire d'installer le logiciel libre \program{PDFtk}\footnote{Ce
+    logiciel devrait être disponible :
+    \begin{itemize}
+    \item sous Linux : sous forme de paquet de la distribution utilisée ;
+    \item sous Mac OS X : comme indiqué
+      \href{http://stackoverflow.com/q/20804441}{ici} par exemple ;
+    \item sous Windows : \href{https://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/}{ici}.
+    \end{itemize}
+  }%
+  puis de lancer dans un terminal la commande suivante, le fichier
+  \acrshort{pdf} original du mémoire étant \file{these.pdf} : le fichier
+  \file{these-valide.pdf} généré devrait être valide.
+\begin{lstlisting}[language=bash]
+pdftk these.pdf output these-valide.pdf
+\end{lstlisting}
+\end{dbfaq}
+
 %
 \iffalse
 %%% Local Variables:
