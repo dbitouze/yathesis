@@ -560,7 +560,6 @@ This work consists of the file  yathesis.dtx
 %
 \newcounter{YAD@abstracts}%
 \newcounter{YAD@warnings}%
-\newcounter{datetoday}
 \setcounter{YAD@abstracts}{0}%
 \setcounter{YAD@warnings}{0}%
 %
@@ -1112,46 +1111,6 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \RequirePackage{iflang}[2007/11/11]%
 %    \end{macrocode}
-% Pour comparer des dates, on utilise le \Package{datenumber}. Du fait d'une
-% incompatibilité avec le \Package{datetime}, on recourt au hack fourni ici :
-% \url{http://tex.stackexchange.com/a/178850/18401}. Début du hack.
-%    \begin{macrocode}
-\let\@modulo@SAVED\@modulo
-%    \end{macrocode}
-% Chargement du \Package{datenumber}.
-%    \begin{macrocode}
-\RequirePackage{datenumber}[2001/08/06]%
-%    \end{macrocode}
-% Suite du hack.
-%    \begin{macrocode}
-\let\DATENUMBER@modulo\@modulo
-\def\setdaynamebynumber#1{%
-  \@tempcnta=#1\relax
-  \ifnum\the@startyear=1800\advance \@tempcnta by 1\fi
-  \ifnum\the@startyear=1900\advance \@tempcnta by 6\fi
-  \ifnum\the@startyear=2000\advance \@tempcnta by 4\fi
-  \DATENUMBER@modulo{\the\@tempcnta}{7}%
-  \setcounter{datedayname}{\the\@den}%
-  \addtocounter{datedayname}{1}%
-  \setdayname{\thedatedayname}%
-}
-\def\ifleapyear#1{%#1 year
-  \ifnum#1>1500
-    \DATENUMBER@modulo{#1}{100}%
-    \ifnum\@den=0
-      \DATENUMBER@modulo{#1}{400}%
-    \else
-      \DATENUMBER@modulo{#1}{4}%
-    \fi
-  \else
-    \DATENUMBER@modulo{#1}{4}%
-  \fi
-  \ifnum\@den=0
-}
-\let\@modulo\@modulo@SAVED
-%    \end{macrocode}
-% Fin du hack.
-%
 % Pour générer les dates (sans affichage du jour de la semaine).
 %    \begin{macrocode}
 \RequirePackage{datetime}[2013/09/10]%
@@ -3323,11 +3282,6 @@ This work consists of the file  yathesis.dtx
 % \end{macro}
 %
 % \begin{macro}{\date}
-%   Définition d'un compteur permettant de comparer à la date du jour.
-%    \begin{macrocode}
-\setmydatenumber{datetoday}{\the\year}{\the\month}{\the\day}
-%    \end{macrocode}
-%
 %    \begin{macrocode}
 \csdef{date}#1#2#3{%
   \csxdef{YAD@daydate}{#1}%
@@ -3419,22 +3373,7 @@ This work consists of the file  yathesis.dtx
         un nombre entier.%
       }%
     }{%
-      % \IfDecimal{\YAD@yeardate}{%
-      % \csxdef{YAD@yeardate}{\number\integerpart}%
-      % }{%
-      % }%
-      %   \ifnumless{\YAD@yeardate}{\number\year}{%
-      %   \YAD@ClassError[nodate]{%
-      %   Annee de la date de soutenance non valide%
-      % }{%
-      %   La commande \protect\date{#1}{#2}{#3}\space\MessageBreak%
-      %   n'a pas ete correctement saisie car le numero de\MessageBreak%
-      %   l'annee (`#3') n'est pas valide : ce doit etre\MessageBreak%
-      %   un nombre entier (superieur ou egal a \number\year).%
-      % }%
-      % }{%
       \booltrue{YAD@valid@year}%
-      % }%
     }%
     \ifboolexpr{%
       bool {YAD@valid@day}%
@@ -3442,22 +3381,7 @@ This work consists of the file  yathesis.dtx
       and bool {YAD@valid@year}%
     }{%
       \csdef{printdate}{%
-        % \setdatenumber{\YAD@yeardate}{\YAD@monthdate}{\YAD@daydate}%
-        % \ifnumgreater{\value{datetoday}}{\value{datenumber}}{%
-        % \YAD@generic@argument@translate{date}%
-        % \YAD@ClassError[nodate]{%
-        % Date de soutenance non valide%
-        % }{%
-        %   La date saisie
-        %   (`\protect\date{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}') n'est
-        %   pas\MessageBreak%
-        %   correcte car elle ne doit pas etre anterieure\MessageBreak%
-        %   a la date du jour
-        %   (\protect\date{\number\day}{\number\month}{\number\year}).%
-        % }%
-        % }{%
         \formatdate{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}%
-        % }%
       }%
     }{%
       \csdef{printdate}{%
