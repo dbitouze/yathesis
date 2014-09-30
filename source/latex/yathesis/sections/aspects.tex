@@ -26,8 +26,15 @@ numérotation des chapitres des documents composés avec la \yatcl{}.
       résumés}%^^A
     % ^^A\item des chapitres ordinaires figurant avant la page dédiée aux
     % ^^Arésumés (cf. \vref{rq:titrecourant}) ;
-  \item qui ouvrent les parties (et leurs versos);
-  \item qui ouvrent les chapitres;
+  \item qui ouvrent les parties (et leurs versos) ;
+  \item qui ouvrent les chapitres\footnote{%
+      \changes*{v0.99k}{2014/09/30}{%
+        Numéros de page affichés sur les premières pages des chapitres (dont les
+        pages sont numérotées)%
+      }%
+      S'il s'agit d'un chapitre dont les pages sont numérotées, la page
+      d'ouverture contient néanmoins sont numéro en pied de page.%
+    } ;
   \item de 4\ieme{} de couverture (et son recto).
   \end{itemize}
 \item La \gls{pagination} commence dès la 1\iere{} page, de façon
