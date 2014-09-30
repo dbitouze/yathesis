@@ -44,16 +44,16 @@
 %<<COMMENT
 %
 %COMMENT
-%<single-template|these-master>% Génération de l'index (facultatif mais obligatoire si un package d'index,
-%<single-template|these-master>% par exemple « imakeidx », est chargé) :
+%<single-template|these-master>% (Facultatif) Génération de l'index (obligatoire si un package d'index, par
+%<single-template|these-master>% exemple « imakeidx », est chargé):
 %<single-template|these-master>% \makeindex
 %<these-sample|single-sample>% Génération de l'index :
 %<these-sample|single-sample>\makeindex
 %<<COMMENT
 %
 %COMMENT
-%<single-template|these-master>% Spécification de la ou des ressources bibliographiques (facultatif mais
-%<single-template|these-master>% obligatoire si le package « biblatex » est chargé) :
+%<single-template|these-master>% (Facultatif) Spécification de la ou des ressources bibliographiques
+%<single-template|these-master>% (obligatoire si le package « biblatex » est chargé) :
 %<single-template>% \addbibresource{}
 %<single-template>% \addbibresource{}
 %<these-master>% \addbibresource{auxiliaires/bibliographie.bib}
@@ -65,14 +65,14 @@
 %<<COMMENT
 %
 %COMMENT
-%<single-template|these-master>% Génération du glossaire (facultatif mais obligatoire si le package
-%<single-template|these-master>% « glossaries » est chargé) :
+%<single-template|these-master>% (Facultatif) Génération du glossaire (obligatoire si le package « glossaries »
+%<single-template|these-master>% est chargé) :
 %<single-template|these-master>% \makeglossaries
 %<these-sample|single-sample>% Génération du glossaire :
 %<these-sample|single-sample>\makeglossaries
 %<<COMMENT
 %
-% Spécification de la ou des ressources terminologiques (facultatif) :
+% (Facultatif) Spécification de la ou des ressources terminologiques :
 %COMMENT
 %<single-template>% \loadglsentries{}
 %<single-template>% \loadglsentries{}
@@ -175,8 +175,8 @@
 %<*single-template|single-sample|cfg-master|cfg-sample>
 %<<COMMENT
 %
-% Configuration des styles du glossaire et de la liste
-% d'acronymes (facultatif) :
+% (Facultatif) Configuration des styles du glossaire et de la liste
+% d'acronymes :
 %COMMENT
 %<single-template|cfg-master>% \setglossarystyle{}
 %<single-template|cfg-master>% \setacronymstyle{}
@@ -295,8 +295,8 @@
 %<characteristics-sample|single-sample>\title[Laugh's Chaos]{Le chaos du rire}
 %<<COMMENT
 %
-% Sous-titre de la thèse dans la langue principale (argument obligatoire) et
-% dans la langue secondaire (argument optionnel) (facultatif) :
+% (Facultatif) Sous-titre de la thèse dans la langue principale (argument
+% obligatoire) et dans la langue secondaire (argument optionnel) :
 %COMMENT
 %<single-template|characteristics-master>% \subtitle[]{}
 %<characteristics-sample|single-sample>\subtitle[Chaos' laugh]{Le rire du chaos}
@@ -309,8 +309,8 @@
 %<characteristics-sample|single-sample>\academicfield[Mathematics]{Mathématiques}
 %<<COMMENT
 %
-% Spécialité dans la langue principale (argument obligatoire) et dans la langue
-% secondaire (argument optionnel) (facultatif) :
+% (Facultatif) Spécialité dans la langue principale (argument obligatoire) et
+% dans la langue secondaire (argument optionnel) :
 %COMMENT
 %<single-template|characteristics-master>\speciality[]{}
 %<characteristics-sample|single-sample>\speciality[Dynamical systems]{Systèmes dynamiques}
@@ -323,20 +323,20 @@
 %<characteristics-sample|single-sample>\date{1}{1}{2015}
 %<<COMMENT
 %
-% Date de la soumission, au format {jour}{mois}{année} donnés sous forme de
-% nombres (facultatif) :
+% (Facultatif) Date de la soumission, au format {jour}{mois}{année} donnés sous
+% forme de nombres :
 %COMMENT
 %<single-template|characteristics-master>%\submissiondate{}{}{}
 %<characteristics-sample|single-sample>\submissiondate{1}{10}{2014}
 %<<COMMENT
 %
-% Sujet pour les méta-données du PDF (facultatif) :
+% (Facultatif) Sujet pour les méta-données du PDF :
 %COMMENT
 %<single-template|characteristics-master>\subject[]{}
 %<characteristics-sample|single-sample>\subject[Chaotic Laugh]{Rire chaotique}
 %<<COMMENT
 %
-% Nom (argument obligatoire) du PRES (facultatif) :
+% (Facultatif) Nom (argument obligatoire) du PRES :
 %COMMENT
 %<single-template|characteristics-master>\pres[logo=,url=]{}
 %<characteristics-sample>\pres[logo=images/pres]{Université Lille Nord de France}
@@ -350,15 +350,15 @@
 %<single-sample>\institute[logo=ulco,url=http://www.univ-littoral.fr/]{ULCO}
 %<<COMMENT
 %
-% En cas de cotutelle (normalement, seulement dans le cas de cotutelle
-% internationale), nom (argument obligatoire) du second institut (facultatif) :
+% (Facultatif) En cas de cotutelle (normalement, seulement dans le cas de
+% cotutelle internationale), nom (argument obligatoire) du second institut :
 %COMMENT
 %<single-template|characteristics-master>% \coinstitute[logo=]{}
 %<characteristics-sample>\coinstitute[logo=images/paris13,url=http://www.univ-paris13.fr/]{Université de Paris~13}
 %<single-sample>\coinstitute[logo=paris13,url=http://www.univ-paris13.fr/]{Université de Paris~13}
 %<<COMMENT
 %
-% Nom (argument obligatoire) de l'école doctorale (facultatif) :
+% (Facultatif) Nom (argument obligatoire) de l'école doctorale :
 %COMMENT
 %<single-template|characteristics-master>\doctoralschool[url=]{}
 %<characteristics-sample|single-sample>\doctoralschool[url=http://edspi.univ-lille1.fr/]{ED Régionale SPI 72}
@@ -433,8 +433,8 @@
 %<characteristics-sample|single-sample>\guest{George}{Sand}
 %<<COMMENT
 %
-% Mention du numéro d'ordre de la thèse (s'il est connu, ce numéro est
-% à spécifier en argument optionnel) (facultatif) :
+% (Facultatif) Mention du numéro d'ordre de la thèse (s'il est connu, ce numéro
+% est à spécifier en argument optionnel) :
 %COMMENT
 %<single-template|characteristics-master>% \ordernumber[]
 %<characteristics-sample|single-sample>\ordernumber[42]
@@ -460,24 +460,23 @@
 % Début de la partie liminaire de la thèse
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-% Production de la page de clause de non-responsabilité (facultatif) :
+% (Facultatif) Production de la page de clause de non-responsabilité :
 %COMMENT
 \makedisclaimer
 %<<COMMENT
 %
-% Production de la page de mots clés (facultatif) :
+% (Facultatif) Production de la page de mots clés :
 %COMMENT
 \makekeywords
 %<<COMMENT
 %
-% Production de la page affichant les logo, nom et coordonnées du ou des
-% laboratoires (ou unités de recherche) où la thèse a été
-% préparée (facultatif) :
+% (Facultatif) Production de la page affichant les logo, nom et coordonnées du
+% ou des laboratoires (ou unités de recherche) où la thèse a été préparée :
 %COMMENT
 \makelaboratory
 %<<COMMENT
 %
-% Dédicace(s) (facultatif) :
+% (Facultatif) Dédicace(s) :
 %COMMENT
 %<these-sample|these-master>\input{liminaires/dedicaces}
 %</these-sample|single-template|single-sample|these-master>
@@ -489,13 +488,13 @@
 %<dedications-sample|single-sample>\dedication{À mon directeur bien-aimé !}
 %<dedications-sample|single-sample>\dedication{À mon co-directeur bien-co-aimé !}
 %<dedications-sample|dedications-master>% Production de la page de dédicace(s) :
-%<single-template|single-sample>% Production de la page de dédicace(s) (facultatif) :
+%<single-template|single-sample>% (Facultatif) Production de la page de dédicace(s) :
 \makededications
 %</single-template|single-sample|dedications-sample|dedications-master>
 %<*these-sample|single-sample|single-template|these-master>
 %<<COMMENT
 %
-% Épigraphe(s) (facultatif) :
+% (Facultatif) Épigraphe(s) :
 %COMMENT
 %<these-sample|these-master>\input{liminaires/epigraphes}
 %</these-sample|single-sample|single-template|these-master>
@@ -507,7 +506,7 @@
 %<single-sample|epigraphs-sample>\frontepigraph[english]{I can resist everything, except temptation!}{Oscar Wilde}
 %<single-sample|epigraphs-sample>\frontepigraph{Il est plus facile de désintégrer un atome qu'un préjugé.}{Albert Einstein}
 %<epigraphs-sample|epigraphs-master>% Production de la page de d'épigraphe(s) :
-%<single-template|single-sample>% Production de la page de d'épigraphe(s) (facultatif) :
+%<single-template|single-sample>% (Facultatif) Production de la page de d'épigraphe(s) :
 \makefrontepigraphs
 %</single-template|single-sample|epigraphs-sample|epigraphs-master>
 %<*single-template|single-sample|abstract-sample|abstract-master>
@@ -542,7 +541,7 @@
 %<*these-sample|single-template|single-sample|these-master>
 %<<COMMENT
 %
-% Chapitre de remerciements (facultatif) :
+% (Facultatif) Chapitre de remerciements :
 %COMMENT
 %<these-sample|these-master>\include{liminaires/remerciements}
 %</these-sample|single-template|single-sample|these-master>
@@ -557,7 +556,7 @@
 %<*these-sample|single-template|single-sample|these-master>
 %<<COMMENT
 %
-% Chapitre d'avertissement (facultatif) :
+% (Facultatif) Chapitre d'avertissement :
 %COMMENT
 %<these-master>% \include{liminaires/avertissement}
 %<these-sample>\include{liminaires/avertissement}
@@ -571,19 +570,19 @@
 %<*these-sample|single-sample|single-template|these-master>
 %<<COMMENT
 %
-% Liste des acronymes (facultatif) :
+% (Facultatif) Liste des acronymes :
 %COMMENT
 %<single-template|these-master>% \printacronyms
 %<these-sample|single-sample>\printacronyms
 %<<COMMENT
 %
-% Liste des symboles (facultatif) :
+% (Facultatif) Liste des symboles :
 %COMMENT
 %<single-template|these-master>% \printsymbols
 %<these-sample|single-sample>\printsymbols
 %<<COMMENT
 %
-% Chapitre d'avant-propos (facultatif) :
+% (Facultatif) Chapitre d'avant-propos :
 %COMMENT
 %<these-master>% \include{liminaires/avant-propos}
 %<these-sample>\include{liminaires/avant-propos}
@@ -605,18 +604,18 @@
 \tableofcontents[depth=chapter,name=Sommaire]
 %<<COMMENT
 %
-% Liste des tableaux (facultatif) :
+% (Facultatif) Liste des tableaux :
 %COMMENT
 \listoftables
 %<<COMMENT
 %
-% Table des figures (facultatif) :
+% (Facultatif) Table des figures :
 %COMMENT
 \listoffigures
 %<<COMMENT
 %
-% Table des listings (nécessite que le package « listings » soit
-% chargé) (facultatif) :
+% (Facultatif) Table des listings (nécessite que le package « listings » soit
+% chargé) :
 % \lstlistoflistings
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1247,13 +1246,13 @@ int factorielle(int n)
 \backmatter
 %<<COMMENT
 %
-% Glossaire (si souhaité distinct de la liste des acronymes) (facultatif) :
+% (Facultatif) Glossaire (si souhaité distinct de la liste des acronymes) :
 %COMMENT
 %<single-template|these-master>% \printglossary
 %<these-sample|single-sample>\printglossary
 %<<COMMENT
 %
-% Index (facultatif) :
+% (Facultatif) Index :
 %COMMENT
 %<single-template|these-master>% \printindex
 %<these-sample|single-sample>\printindex
@@ -1264,7 +1263,7 @@ int factorielle(int n)
 \tableofcontents
 %<<COMMENT
 %
-% Production de la 4e de couverture (facultatif) :
+% (Facultatif) Production de la 4e de couverture :
 %COMMENT
 \makebackcover
 %<<COMMENT
