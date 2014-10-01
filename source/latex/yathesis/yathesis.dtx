@@ -3481,20 +3481,6 @@ This work consists of the file  yathesis.dtx
 }%
 %    \end{macrocode}
 %
-% Test pour pages blanches
-% \begin{macro}{\YAD@clearemptydoublepage}
-%    \begin{macrocode}
-\let\YAD@ORI@cleardoublepage\cleardoublepage
-\newcommand*{\YAD@clearemptydoublepage}{%
-  \clearpage%
-  {%
-    \pagestyle{empty}%
-    \YAD@ORI@cleardoublepage%
-  }%
-}%
-%    \end{macrocode}
-% \end{macro}
-%
 % \begin{macro}{\YAD@setfoot}
 %   Définition d'une commande affichant un texte fixe en bas de page en cas de
 %   version ×inprogess(*)× ou ×submitted*× de la thèse.
@@ -3600,7 +3586,7 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 \renewcommand{\tableofcontents}{%
   \booltrue{YAD@tableofcontents@used}%
-  \YAD@clearemptydoublepage%
+  \cleardoublepage%
   \YAD@phantomsection%
   \let\cmdKV@YAD@name\contentsname%
   \@ifnextchar[{\tableofcontents@YAD@with@argument}{\tableofcontents@YAD@without@argument}%]
@@ -3995,7 +3981,7 @@ This work consists of the file  yathesis.dtx
 % On demande que la bibliographie apparaisse au plus haut niveau des
 % signets
 %    \begin{macrocode}
-  \YAD@clearemptydoublepage%
+  \cleardoublepage%
   \YAD@phantomsection%
   \YAD@bookmarksetup{startatroot}%
   \YAD@setfoot%
@@ -4041,7 +4027,7 @@ This work consists of the file  yathesis.dtx
 % Définition du style de page de la table des matières
 %    \begin{macrocode}
 \newpagestyle{contents}[]{%
-  \YAD@clearemptydoublepage%
+  \cleardoublepage%
   \YAD@phantomsection%
   \YAD@bookmarksetup{startatroot}%
   \singlespacing%
@@ -4063,7 +4049,7 @@ This work consists of the file  yathesis.dtx
 % Définition du style de page de la partie glossaire
 %    \begin{macrocode}
 \newpagestyle{glossaire}[]{%
-  \YAD@clearemptydoublepage%
+  \cleardoublepage%
   \YAD@phantomsection%
   \YAD@bookmarksetup{startatroot}%
   \singlespacing%
@@ -4098,7 +4084,7 @@ This work consists of the file  yathesis.dtx
 % numéroté
 %    \begin{macrocode}
   \setsecnumdepth{none}%
-  \YAD@clearemptydoublepage%
+  \cleardoublepage%
   \YAD@phantomsection%
   \setsecnumdepth{\YAD@secnumdepth}%
   \YAD@bookmarksetup{startatroot}%
@@ -4669,7 +4655,7 @@ This work consists of the file  yathesis.dtx
   \@ifstar{\@tempswatrue\csuse{YAD@starnostar@makekeywords}}{\@tempswafalse\csuse{YAD@starnostar@makekeywords}}%
 }%
 \csdef{YAD@starnostar@makekeywords}{%
-  \YAD@clearemptydoublepage%
+  \cleardoublepage%
 %    \end{macrocode}
 % Appel du style de page propre à la partie préliminaire
 %    \begin{macrocode}
@@ -4802,7 +4788,7 @@ This work consists of the file  yathesis.dtx
   \@ifstar{\@tempswatrue\csuse{YAD@starnostar@makelaboratory}}{\@tempswafalse\csuse{YAD@starnostar@makelaboratory}}%
 }%
 \csdef{YAD@starnostar@makelaboratory}{%
-  \YAD@clearemptydoublepage%
+  \cleardoublepage%
 %    \end{macrocode}
 % Appel du style de page propre à la partie préliminaire
 %    \begin{macrocode}
@@ -5202,11 +5188,11 @@ This work consists of the file  yathesis.dtx
   ][]{%
     \YAD@laboratory@abstract@page%
   }{}{}%
-  \YAD@clearemptydoublepage%
+  \cleardoublepage%
   \renewcommand{\YAD@chapter@header}{\abstractname}%
   \renewcommand{\YAD@section@header}{\abstractname}%
   \YAD@abstract@page%
-  \YAD@clearemptydoublepage%
+  \cleardoublepage%
   \egroup%
 %    \end{macrocode}
 % La commande de production de la page de résumés émet les erreurs signalant
@@ -5297,7 +5283,7 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \newcommand{\makebackcover}{%
   \YAD@alarm@noabstract%
-  \YAD@clearemptydoublepage%
+  \cleardoublepage%
   \pagestyle{backcover}%
   \YAD@abstract@page%
 }%
@@ -5312,7 +5298,7 @@ This work consists of the file  yathesis.dtx
 }%
 \csdef{YAD@starnostar@makededications}{%
   \pagestyle{prepreliminary}%
-  \YAD@clearemptydoublepage%
+  \cleardoublepage%
   \if@tempswa%
   \else%
   \vspace*{\stretch{2}}%
@@ -5375,7 +5361,7 @@ This work consists of the file  yathesis.dtx
 }%
 \csdef{YAD@starnostar@makefrontepigraphs}{%
   \patchcmd{\epigraphs}{\qitemlabel}{\qitemlabel\itemsep=1.5\baselineskip}{}{}%
-  \YAD@clearemptydoublepage%
+  \cleardoublepage%
   \if@tempswa%
   \else%
   \vspace*{\stretch{2}}%
@@ -5453,7 +5439,7 @@ This work consists of the file  yathesis.dtx
 % Redéfinition locale de la commande d'épigraphe
 %    \begin{macrocode}
   \patchcmd{\epigraphs}{\qitemlabel}{\qitemlabel\itemsep=1.5\baselineskip}{}{}
-  \YAD@clearemptydoublepage%
+  \cleardoublepage%
   \vspace*{\stretch{1}}%
 }{%
   \vspace*{\stretch{1}}%
@@ -5509,7 +5495,7 @@ This work consists of the file  yathesis.dtx
 \let\YAD@ORI@chapter\chapter%
 \AfterPreamble{% delay the redefinition when titlesec has done its own
   \renewcommand\chapter{%
-    \YAD@clearemptydoublepage%
+    \cleardoublepage%
     \YAD@phantomsection%
     \ifbool{YAD@output@paper}{%
     }{%
@@ -5772,7 +5758,7 @@ This work consists of the file  yathesis.dtx
 % %   ×introduction*×.
 % %    \begin{macrocode}
 % \newcommand{\YAD@introduction@end}{%
-%   \YAD@clearemptydoublepage%
+%   \cleardoublepage%
 % }%
 % %    \end{macrocode}
 % % \end{macro}
@@ -5889,7 +5875,7 @@ This work consists of the file  yathesis.dtx
 % %   ×conclusion*×.
 % %    \begin{macrocode}
 % \newcommand{\YAD@conclusion@end}{%
-%   \YAD@clearemptydoublepage%
+%   \cleardoublepage%
 % }%
 % %    \end{macrocode}
 % % \end{macro}
