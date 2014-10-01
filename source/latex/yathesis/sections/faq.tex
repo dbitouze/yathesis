@@ -79,6 +79,23 @@ Ce chapitre est une \gls{faq} \phrase{autrement dit une liste des questions
   le problème (cf. également l'\vref{wa:packages-a-ne-pas-charger}).
 \end{dbfaq}
 
+\begin{dbfaq}{Comment éviter l'erreur \enquote{Command
+      \protect\docAuxCommand*{nobreakspace} unavailable in encoding T1} ?}{}
+  Lorsque je compile ma thèse avec \hologo{XeLaTeX} ou \hologo{LuaLaTeX}, je
+  suis confronté à l'erreur \enquote{Command
+    \docAuxCommand*{nobreakspace} unavailable in encoding T1}. Comment
+  l'éviter ?
+  %
+  \tcblower
+  %
+  (Cette question ne concerne pas directement la \yatcl{}.) Il suffit d'insérer,
+  en préambule du fichier (maître) de la thèse, la
+  ligne :
+\begin{preamblecode}[title=Par exemple dans le \File{\configurationfile}]
+\DeclareTextCommand{\nobreakspace}{T1}{\leavevmode\nobreak\ }
+\end{preamblecode}
+\end{dbfaq}
+
 % ^^A \begin{dbfaq}{Comment éviter l'erreur \enquote{No room for a new%
 %   ^^A \protect\docAuxCommand*{write}} ?}{}%
 %   ^^A Je suis confronté à l'erreur \enquote{no room for a new%
