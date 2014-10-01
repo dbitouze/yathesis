@@ -1506,6 +1506,49 @@ This work consists of the file  yathesis.dtx
 \lstMakeShortInline[style=dbtex]×
 %
 \tcbuselibrary{documentation,theorems,breakable,skins}
+%    \end{macrocode}
+% Début du hack fourni par Thomas Sturm pour circonvenir à deux bugs récemment
+% introduits dans le \Package{tcolorbox}.
+%    \begin{macrocode}
+\RenewDocumentEnvironment{docKey}{ O{} +O{} m m +m }{\tcbset{#2,doc
+description={#5}}%
+  \begin{tcb@manual@entry}%
+  \begin{tcb@doc@head}{doc@head@key}%
+  \ifblank{#1}{%
+    \tcb@Print@Key{#3}\tcb@index@Key{#3}\protected@edef\@currentlabel{#3}\label{key:#3}{\ttfamily
+#4}%
+  }{%
+    \tcb@Print@Key{/#1/#3}\tcb@index@KeyPath{#1}{#3}\protected@edef\@currentlabel{/#1/#3}\label{key:/#1/#3}{\ttfamily
+#4}%
+  }%
+  \tcb@doc@do@description%
+  \end{tcb@doc@head}\tcbset{before upper=}}%
+  {\end{tcb@manual@entry}}
+
+\def\tcbmakedocSubKey#1#2{%
+  \NewDocumentEnvironment{#1}{ O{} +O{} m m +m }{%
+    \ifblank{##1}{\def\tcb@key@path{#2}}{\def\tcb@key@path{#2/##1}}%
+    \begin{docKey}[\tcb@key@path][##2]{##3}{##4}{##5}}%
+      {\end{docKey}}%
+  \newenvironment{#1*}{\bgroup\tcb@doc@toindexfalse\begin{#1}}{\end{#1}\egroup}%
+}
+
+\renewcommand{\docAuxKey@}[2][]{%
+  \ifblank{#1}{%
+    \tcb@Print@Key{#2}\tcb@index@Key{#2}%
+  }{%
+    \tcb@Print@Key{/#1/#2}\tcb@index@KeyPath{#1}{#2}%
+}}%
+
+\renewcommand{\docAuxKey@star}[2][]{%
+  \ifblank{#1}{%
+    \tcb@Print@Key{#2}%
+  }{%
+    \tcb@Print@Key{/#1/#2}%
+}}%
+%    \end{macrocode}
+% Fin du hack fourni par Thomas Sturm.
+%    \begin{macrocode}
 \tcbset{dbtcb/.style={%
     breakable,
     fonttitle=\bfseries,
