@@ -5018,8 +5018,8 @@ description={#5}}%
 \csgdef{YAD@abstractname@mainlanguage}{\abstractname}%
 \csgdef{YAD@abstractname@secondarylanguage}{\abstractname}%
 %
-\newcommand{\YAD@absract}[1]{%
-  \ifthenelse{\isempty{#1}}{
+\newcommand{\YAD@abstract}[1]{%
+  \ifstrempty{#1}{%
     \ifnumcomp{\value{YAD@abstracts}}{>}{0}{%
       \global\booltrue{YAD@second@abstract@empty}%
     }{%
@@ -5043,7 +5043,7 @@ description={#5}}%
     \csgdef{YAD@abstractname@mainlanguage}{#1}%
     \lrbox{\YAD@abstract@mainlanguage}%
   }%
-  \Collect@Body\YAD@absract%
+  \Collect@Body\YAD@abstract%
 }{%
   \endlrbox%
   \stepcounter{YAD@abstracts}%
