@@ -394,8 +394,9 @@ Au moyen des clés \refKey{sepcorpaffilfrench} et \refKey{sepcorpaffilenglish}
 suivantes, les expressions séparatrices en français et en anglais peuvent être
 redéfinies, globalement ou localement.
 
-\begin{docKey}{sepcorpaffilfrench}{=\meta{expression}}{pas de valeur par
-    défaut, initialement \lstinline[showspaces]+\ à l'+ ou \lstinline[showspaces]+\ au\ +}
+\begin{docKey}{sepcorpaffilfrench}{=\meta{expression}}{pas de valeur par défaut,
+    initialement \lstinline[showspaces]+\ à l'+ ou
+    \lstinline[showspaces]+\ au\ +}
   Cette option permet de redéfinir l'\meta{expression} employée en français
   pour séparer les corps et affiliations des membres du jury. Elle peut
   être employée :
@@ -509,12 +510,13 @@ ceux :
 \begin{itemize}
 \item (éventuellement) utiles à l'utilisateur final ;
 \item dont la personnalisation se fait habituellement par le biais d'options
-  à passer en argument optionnel de la commande \docAuxCommand{usepackage}, et
-  seulement par ce biais-là\footnote{En particulier, ne sont pas concernés les
-    packages dont les options peuvent être passées indifféremment en argument
-    optionnel de \protect\docAuxCommand{usepackage} ou au moyen d'une commande
-    de configuration propre ; il en est ainsi du \Package{hyperref} qui dispose
-    de la commande \protect\docAuxCommand*{hypersetup}.}.
+  à passer en argument optionnel de la commande \docAuxCommand{usepackage} (et
+  seulement par ce biais-là).%^^A
+  % ^^A\footnote{En particulier, ne sont pas concernés les
+  % ^^Apackages dont les options peuvent être passées indifféremment en argument
+  % ^^Aoptionnel de \protect\docAuxCommand{usepackage} ou au moyen d'une
+  % ^^Acommande de configuration propre ; il en est ainsi du \Package{geometry}
+  % ^^Aqui dispose de la commande \protect\docAuxCommand*{geometry}.}.
 \end{itemize}
 Ces options, qui ont pour nom le nom du package concerné, sont les suivantes (à
 charge pour l'utilisateur de consulter la documentation des packages concernés
