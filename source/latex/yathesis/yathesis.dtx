@@ -1022,6 +1022,10 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \RequirePackage{fixltx2e}[2006/09/13]%
 %    \end{macrocode}
+% Pour tester le moteur employé
+%    \begin{macrocode}
+\RequirePackage{iftex}[2013/04/04]%
+%    \end{macrocode}
 % Pour les épigraphes
 %    \begin{macrocode}
 \RequirePackage{epigraph}[2009/09/02]%
@@ -6094,7 +6098,9 @@ This work consists of the file  yathesis.dtx
 %
 %    \begin{macrocode}
 \AtEndPreamble{%
+  \ifPDFTeX
   \shorthandon{;:!?}%
+  \fi
   \InputIfFileExists{\YAD@configuration@directory/\YAD@configuration@file}%
   {\ClassInfo{yathesis}{%
     Fichier de configuration local \YAD@configuration@file\space
@@ -6106,7 +6112,9 @@ This work consists of the file  yathesis.dtx
     %   \YAD@configuration@file\space introuvable%
     % }%
   }%
+  \ifPDFTeX
   \shorthandoff{;:!?}%
+  \fi
 }%
 %    \end{macrocode}
 %
@@ -6114,7 +6122,9 @@ This work consists of the file  yathesis.dtx
 %
 %    \begin{macrocode}
 \AtEndPreamble{%
+  \ifPDFTeX
   \shorthandon{;:!?}%
+  \fi
   \InputIfFileExists{\YAD@configuration@directory/\YAD@characteristics@file}%
   {%
     \ClassInfo{yathesis}{%
@@ -6130,7 +6140,9 @@ This work consists of the file  yathesis.dtx
     %   \YAD@characteristics@file\space peut faciliter l'usage\MessageBreak de la classe%
     % }%
   }%
+  \ifPDFTeX
   \shorthandoff{;:!?}%
+  \fi
 }%
 %    \end{macrocode}
 %
@@ -6138,7 +6150,9 @@ This work consists of the file  yathesis.dtx
 % %
 % %    \begin{macrocode}
 % \AtEndPreamble{%
+%   \ifPDFTeX
 %   \shorthandon{;:!?}%
+%   \fi
 %   \InputIfFileExists{\YAD@configuration@directory/\macrosfile}%
 %   {\ClassInfo{yathesis}{%
 %       Fichier \macrosfile\space trouve%
@@ -6150,7 +6164,9 @@ This work consists of the file  yathesis.dtx
 %     %   dans le dossier `\YAD@configuration@directory'%
 %     % }%
 %   }%
+%   \ifPDFTeX
 %   \shorthandoff{;:!?}%
+%   \fi
 % }%
 % %    \end{macrocode}
 %
