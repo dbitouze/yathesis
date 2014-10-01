@@ -146,19 +146,15 @@ Ce chapitre est une \gls{faq} \phrase{autrement dit une liste des questions
 
 \begin{dbfaq}{Comment faire en sorte que, dans la table des matières, seuls
     les numéros de page soient des liens hypertextes ?}{}
-  Par défaut, les entrées de la table des matières sont toutes entières des
-  liens hypertextes, ce qui est trop envahissant. Comment faire en sorte que
-  seuls les numéros de page soient des liens hypertextes ?
+  J'ai chargé le \Package{hyperref} et, par défaut, les entrées de la table des
+  matières sont toutes entières des liens hypertextes, ce qui est trop
+  envahissant. Comment faire en sorte que seuls les numéros de page soient des
+  liens hypertextes ?
   %
   \tcblower
   %
-  Cette question ne concerne pas directement la \yatcl{} : il suffit de passer
-  l'option ×linktoc=false× au \Package{hyperref}. Comme celui-ci est déjà
-  chargé par la \yatcl{}, cette option est à passer (de préférence en
-  préambule) en argument de \docAuxCommand{hypersetup} :
-\begin{preamblecode}
-\hypersetup{linktoc=false}
-\end{preamblecode}
+  (Cette question ne concerne pas directement la \yatcl{}.) Il suffit de passer
+  l'option ×linktoc=false× au \Package{hyperref}.
 \end{dbfaq}
 
 \begin{dbfaq}{Comment supprimer la bibliographie des sommaire, table des
@@ -177,17 +173,17 @@ Ce chapitre est une \gls{faq} \phrase{autrement dit une liste des questions
 
 \begin{dbfaq}{Comment affecter des profondeurs différentes aux signets et à la
     table des matières ?}{}
-  Par défaut, les signets du fichier \acrshort{pdf} ont même niveau de
-  profondeur que la table des matières. Comment leur affecter une profondeur
-  différente ?
+  Grâce au chargement du \Package{hyperref}, mon fichier \acrshort{pdf} dispose
+  de signets mais, par défaut, ceux-ci ont même niveau de profondeur que la
+  table des matières. Comment leur affecter une profondeur différente ?
   %
   \tcblower
   %
-  Cette question ne concerne pas directement la \yatcl{} : l'option
-  \docAuxKey{bookmarksdepth} du \Package*{hyperref} permet d'affecter aux
-  signets un autre niveau que celui par défaut.
+  (Cette question ne concerne pas directement la \yatcl{}.) L'option
+  \docAuxKey{depth} du \Package*{bookmark} permet d'affecter aux signets un
+  autre niveau que celui par défaut.
 \begin{preamblecode}[title=Par exemple dans le \File{\configurationfile}]
-\hypersetup{bookmarksdepth=÷\meta{autre niveau}÷}
+\bookmarksetup{depth=÷\meta{autre niveau}÷}
 \end{preamblecode}
 où \meta{autre niveau} est l'une des valeurs possibles de la clé
 \refKey{depth}.
