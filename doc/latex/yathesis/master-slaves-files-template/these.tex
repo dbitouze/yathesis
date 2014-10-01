@@ -2,8 +2,8 @@
 \documentclass{yathesis}
 %
 % Chargement manuel de packages (pas déjà chargés par la classe yathesis)
-\usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
 \usepackage{kpfonts}
 \usepackage{booktabs}
 \usepackage{siunitx}
@@ -18,20 +18,20 @@
 \usepackage{hyperref}
 %\usepackage[xindy,acronyms,symbols]{glossaries}
 %
-% Génération de l'index (facultatif mais obligatoire si un package d'index,
-% par exemple « imakeidx », est chargé) :
+% (Facultatif) Génération de l'index (obligatoire si un package d'index, par
+% exemple « imakeidx », est chargé):
 % \makeindex
 %
-% Spécification de la ou des ressources bibliographiques (facultatif mais
-% obligatoire si le package « biblatex » est chargé) :
+% (Facultatif) Spécification de la ou des ressources bibliographiques
+% (obligatoire si le package « biblatex » est chargé) :
 % \addbibresource{auxiliaires/bibliographie.bib}
 % \addbibresource{auxiliaires/}
 %
-% Génération du glossaire (facultatif mais obligatoire si le package
-% « glossaries » est chargé) :
+% (Facultatif) Génération du glossaire (obligatoire si le package « glossaries »
+% est chargé) :
 % \makeglossaries
 %
-% Spécification de la ou des ressources terminologiques (facultatif) :
+% (Facultatif) Spécification de la ou des ressources terminologiques :
 % \loadglsentries{auxiliaires/}
 % \loadglsentries{auxiliaires/}
 % \loadglsentries{auxiliaires/}
@@ -68,52 +68,51 @@
 % Début de la partie liminaire de la thèse
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-% Production de la page de clause de non-responsabilité (facultatif) :
+% (Facultatif) Production de la page de clause de non-responsabilité :
 \makedisclaimer
 %
-% Production de la page de mots clés (facultatif) :
+% (Facultatif) Production de la page de mots clés :
 \makekeywords
 %
-% Production de la page affichant les logo, nom et coordonnées du ou des
-% laboratoires (ou unités de recherche) où la thèse a été
-% préparée (facultatif) :
+% (Facultatif) Production de la page affichant les logo, nom et coordonnées du
+% ou des laboratoires (ou unités de recherche) où la thèse a été préparée :
 \makelaboratory
 %
-% Dédicace(s) (facultatif) :
+% (Facultatif) Dédicace(s) :
 \input{liminaires/dedicaces}
 %
-% Épigraphe(s) (facultatif) :
+% (Facultatif) Épigraphe(s) :
 \input{liminaires/epigraphes}
 %
 % Résumés succincts :
 \input{liminaires/resumes}
 %
-% Chapitre de remerciements (facultatif) :
+% (Facultatif) Chapitre de remerciements :
 \include{liminaires/remerciements}
 %
-% Chapitre d'avertissement (facultatif) :
+% (Facultatif) Chapitre d'avertissement :
 % \include{liminaires/avertissement}
 %
-% Liste des acronymes (facultatif) :
+% (Facultatif) Liste des acronymes :
 % \printacronyms
 %
-% Liste des symboles (facultatif) :
+% (Facultatif) Liste des symboles :
 % \printsymbols
 %
-% Chapitre d'avant-propos (facultatif) :
+% (Facultatif) Chapitre d'avant-propos :
 % \include{liminaires/avant-propos}
 %
 % Sommaire
 \tableofcontents[depth=chapter,name=Sommaire]
 %
-% Liste des tableaux (facultatif) :
+% (Facultatif) Liste des tableaux :
 \listoftables
 %
-% Table des figures (facultatif) :
+% (Facultatif) Table des figures :
 \listoffigures
 %
-% Table des listings (nécessite que le package « listings » soit
-% chargé) (facultatif) :
+% (Facultatif) Table des listings (nécessite que le package « listings » soit
+% chargé) :
 % \lstlistoflistings
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -171,16 +170,16 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \backmatter
 %
-% Glossaire (si souhaité distinct de la liste des acronymes) (facultatif) :
+% (Facultatif) Glossaire (si souhaité distinct de la liste des acronymes) :
 % \printglossary
 %
-% Index (facultatif) :
+% (Facultatif) Index :
 % \printindex
 %
 % Table des matières
 \tableofcontents
 %
-% Production de la 4e de couverture (facultatif) :
+% (Facultatif) Production de la 4e de couverture :
 \makebackcover
 %
 \end{document}

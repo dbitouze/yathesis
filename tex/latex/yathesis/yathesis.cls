@@ -11,8 +11,8 @@
 %% Released under the LaTeX Project Public License v1.3c or later
 %% See http://www.latex-project.org/lppl.txt
 %% -----------------------------------------------------------------------
-\def\fileversion{v0.99j}
-\def\filedate{2014/07/17}
+\def\fileversion{v0.99k}
+\def\filedate{2014/10/01}
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesClass{yathesis}[\filedate\space\fileversion\space Yet another class for writing thesis (DB)]
 \RequirePackage{pgfopts}[2011/06/02]%
@@ -346,8 +346,7 @@
   titlesec/.code={\PassOptionsToPackage{#1}{titlesec}},%
   draftwatermark/.code={\PassOptionsToPackage{#1}{draftwatermark}},%
   babel/.code={\PassOptionsToPackage{#1}{babel}},%
-  datetime/.code={\PassOptionsToPackage{#1}{datetime}},%
-  bookmark/.code={\PassOptionsToPackage{#1}{bookmark}},%
+  datetime/.code={\PassOptionsToPackage{#1}{datetime}}%
 }%
 \yadsetup{%
   .unknown/.code ={\expandafter\PassOptionsToClass\expandafter{\pgfkeyscurrentname}{book}}%
@@ -377,6 +376,7 @@
 \RequirePackage{textcase}[2004/10/07]%
 \RequirePackage{translator}[2010/06/12]%
 \RequirePackage{fixltx2e}[2006/09/13]%
+\RequirePackage{iftex}[2013/04/04]%
 \RequirePackage{epigraph}[2009/09/02]%
 \RequirePackage{tcolorbox}[2014/03/31]%
 \RequirePackage{marvosym}[2011/07/20]%
@@ -524,7 +524,6 @@
 }%
 {\if@restonecol\twocolumn \else \newpage \fi
 }%
-\patchcmd{\chapter}{plain}{empty}{}{}%
 \newcommand*{\YAD@configuration@directory}{configuration}
 \newcommand*{\YAD@configuration@file}{thesis.cfg}
 \newcommand*{\YAD@characteristics@file}{characteristics.tex}
@@ -1783,14 +1782,6 @@
   }{%
   }%
 }%
-\let\YAD@ORI@cleardoublepage\cleardoublepage
-\newcommand*{\YAD@clearemptydoublepage}{%
-  \clearpage%
-  {%
-    \pagestyle{empty}%
-    \YAD@ORI@cleardoublepage%
-  }%
-}%
 \ifboolexpr{%
   bool {YAD@inprogress@work}%
   or bool {YAD@inprogress@work@star}%
@@ -1835,7 +1826,7 @@
   \@startshorttoc{toc}\if@restonecol\twocolumn\fi\egroup}
 \renewcommand{\tableofcontents}{%
   \booltrue{YAD@tableofcontents@used}%
-  \YAD@clearemptydoublepage%
+  \cleardoublepage%
   \YAD@phantomsection%
   \let\cmdKV@YAD@name\contentsname%
   \@ifnextchar[{\tableofcontents@YAD@with@argument}{\tableofcontents@YAD@without@argument}%]
@@ -2131,7 +2122,7 @@
   {}%
   {\thepage}%
   \headrule%
-  \YAD@clearemptydoublepage%
+  \cleardoublepage%
   \YAD@phantomsection%
   \YAD@bookmarksetup{startatroot}%
   \YAD@setfoot%
@@ -2162,7 +2153,7 @@
   \pagestyle{backmatter}%
 }{}{}%
 \newpagestyle{contents}[]{%
-  \YAD@clearemptydoublepage%
+  \cleardoublepage%
   \YAD@phantomsection%
   \YAD@bookmarksetup{startatroot}%
   \singlespacing%
@@ -2177,7 +2168,7 @@
   \YAD@setfoot%
 }%
 \newpagestyle{glossaire}[]{%
-  \YAD@clearemptydoublepage%
+  \cleardoublepage%
   \YAD@phantomsection%
   \YAD@bookmarksetup{startatroot}%
   \singlespacing%
@@ -2201,7 +2192,7 @@
   {\thepage}%
   \headrule%
   \setsecnumdepth{none}%
-  \YAD@clearemptydoublepage%
+  \cleardoublepage%
   \YAD@phantomsection%
   \setsecnumdepth{\YAD@secnumdepth}%
   \YAD@bookmarksetup{startatroot}%
@@ -2688,7 +2679,7 @@
   \@ifstar{\@tempswatrue\csuse{YAD@starnostar@makekeywords}}{\@tempswafalse\csuse{YAD@starnostar@makekeywords}}%
 }%
 \csdef{YAD@starnostar@makekeywords}{%
-  \YAD@clearemptydoublepage%
+  \cleardoublepage%
   \pagestyle{prepreliminary}%
   % \YAD@astuce@expressioncle%
   \if@tempswa%
@@ -2807,7 +2798,7 @@
   \@ifstar{\@tempswatrue\csuse{YAD@starnostar@makelaboratory}}{\@tempswafalse\csuse{YAD@starnostar@makelaboratory}}%
 }%
 \csdef{YAD@starnostar@makelaboratory}{%
-  \YAD@clearemptydoublepage%
+  \cleardoublepage%
   \pagestyle{prepreliminary}%
   \if@tempswa%
   \else%
@@ -2975,8 +2966,8 @@
 }%
 \csgdef{YAD@abstractname@mainlanguage}{\abstractname}%
 \csgdef{YAD@abstractname@secondarylanguage}{\abstractname}%
-\newcommand{\YAD@absract}[1]{%
-  \ifthenelse{\isempty{#1}}{
+\newcommand{\YAD@abstract}[1]{%
+  \ifstrempty{#1}{%
     \ifnumcomp{\value{YAD@abstracts}}{>}{0}{%
       \global\booltrue{YAD@second@abstract@empty}%
     }{%
@@ -3000,7 +2991,7 @@
     \csgdef{YAD@abstractname@mainlanguage}{#1}%
     \lrbox{\YAD@abstract@mainlanguage}%
   }%
-  \Collect@Body\YAD@absract%
+  \Collect@Body\YAD@abstract%
 }{%
   \endlrbox%
   \stepcounter{YAD@abstracts}%
@@ -3155,11 +3146,11 @@
   ][]{%
     \YAD@laboratory@abstract@page%
   }{}{}%
-  \YAD@clearemptydoublepage%
+  \cleardoublepage%
   \renewcommand{\YAD@chapter@header}{\abstractname}%
   \renewcommand{\YAD@section@header}{\abstractname}%
   \YAD@abstract@page%
-  \YAD@clearemptydoublepage%
+  \cleardoublepage%
   \egroup%
   \YAD@nolaboratorytrue%
   \YAD@nolaboratoryadresstrue%
@@ -3224,7 +3215,7 @@
 }%
 \newcommand{\makebackcover}{%
   \YAD@alarm@noabstract%
-  \YAD@clearemptydoublepage%
+  \cleardoublepage%
   \pagestyle{backcover}%
   \YAD@abstract@page%
 }%
@@ -3233,7 +3224,7 @@
 }%
 \csdef{YAD@starnostar@makededications}{%
   \pagestyle{prepreliminary}%
-  \YAD@clearemptydoublepage%
+  \cleardoublepage%
   \if@tempswa%
   \else%
   \vspace*{\stretch{2}}%
@@ -3287,7 +3278,7 @@
 }%
 \csdef{YAD@starnostar@makefrontepigraphs}{%
   \patchcmd{\epigraphs}{\qitemlabel}{\qitemlabel\itemsep=1.5\baselineskip}{}{}%
-  \YAD@clearemptydoublepage%
+  \cleardoublepage%
   \if@tempswa%
   \else%
   \vspace*{\stretch{2}}%
@@ -3353,7 +3344,7 @@
 }%
 \newenvironment{epigraphspage}{%
   \patchcmd{\epigraphs}{\qitemlabel}{\qitemlabel\itemsep=1.5\baselineskip}{}{}
-  \YAD@clearemptydoublepage%
+  \cleardoublepage%
   \vspace*{\stretch{1}}%
 }{%
   \vspace*{\stretch{1}}%
@@ -3367,7 +3358,7 @@
 \let\YAD@ORI@chapter\chapter%
 \AfterPreamble{% delay the redefinition when titlesec has done its own
   \renewcommand\chapter{%
-    \YAD@clearemptydoublepage%
+    \cleardoublepage%
     \YAD@phantomsection%
     \ifbool{YAD@output@paper}{%
     }{%
@@ -3575,7 +3566,9 @@
 }%
 }%
 \AtEndPreamble{%
+  \ifPDFTeX
   \shorthandon{;:!?}%
+  \fi
   \InputIfFileExists{\YAD@configuration@directory/\YAD@configuration@file}%
   {\ClassInfo{yathesis}{%
     Fichier de configuration local \YAD@configuration@file\space
@@ -3587,10 +3580,14 @@
     %   \YAD@configuration@file\space introuvable%
     % }%
   }%
+  \ifPDFTeX
   \shorthandoff{;:!?}%
+  \fi
 }%
 \AtEndPreamble{%
+  \ifPDFTeX
   \shorthandon{;:!?}%
+  \fi
   \InputIfFileExists{\YAD@configuration@directory/\YAD@characteristics@file}%
   {%
     \ClassInfo{yathesis}{%
@@ -3606,7 +3603,9 @@
     %   \YAD@characteristics@file\space peut faciliter l'usage\MessageBreak de la classe%
     % }%
   }%
+  \ifPDFTeX
   \shorthandoff{;:!?}%
+  \fi
 }%
 \AtEndDocument{%
   \ifbool{YAD@tableofcontents@used}{%
