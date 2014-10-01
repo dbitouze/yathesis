@@ -200,9 +200,9 @@ où \meta{autre niveau} est l'une des valeurs possibles de la clé
   %
   \tcblower
   %
-  Il suffit d'insérer, en préambule du fichier (maître) de la thèse ou dans le
-  \File{\configurationfile}, les lignes :
-\begin{preamblecode}
+  Il suffit d'insérer, en préambule du fichier (maître) de la thèse, les
+  lignes :
+\begin{preamblecode}[title=Par exemple dans le \File{\configurationfile}]
 \makeatletter
 \renewcommand*\@pnumwidth{÷\meta{distance}÷}
 \makeatother
@@ -230,9 +230,9 @@ où \meta{autre niveau} est l'une des valeurs possibles de la clé
   %
   \tcblower
   %
-  Cette question ne concerne pas directement la \yatcl{} mais plutôt le
-  \Package{babel} et les caractères actifs de son module \package{frenchb}. Si
-  ces éléments concernent :
+  (Cette question ne concerne pas directement la \yatcl{}.) Le problème est dû
+  aux caractères actifs du module \package{frenchb} du \Package{babel}. Si ces
+  éléments concernent :
   \begin{enumerate}
   \item les caractéristiques du document (cf. \vref{cha:caract-du-docum}), il
     suffit de les saisir\footnote{Cf. \vref{sec:lieu-de-saisie}.} :
@@ -288,8 +288,11 @@ où \meta{autre niveau} est l'une des valeurs possibles de la clé
   %
   \tcblower
   %
-  Il devrait suffire d'installer le logiciel libre \program{PDFtk}\footnote{Ce
-    logiciel devrait être disponible :
+  (Cette question ne concerne pas directement la \yatcl{}.) Le problème vient de
+  ce que le site \url{http://facile.cines.fr/} reconnaît mal les méta-données
+  des fichiers \acrshort{pdf} produits par \LaTeX{}, \hologo{XeLaTeX} ou
+  \hologo{LuaLaTeX}. Il devrait suffire d'installer le logiciel libre
+  \program{PDFtk}\footnote{Ce logiciel devrait être disponible :
     \begin{itemize}
     \item sous Linux : sous forme de paquet de la distribution utilisée ;
     \item sous Mac OS X : comme indiqué
@@ -297,12 +300,13 @@ où \meta{autre niveau} est l'une des valeurs possibles de la clé
     \item sous Windows : \href{https://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/}{ici}.
     \end{itemize}
   }%
-  puis de lancer dans un terminal la commande suivante, le fichier
-  \acrshort{pdf} original du mémoire étant \file{these.pdf} : le fichier
-  \file{these-valide.pdf} généré devrait être valide.
+  puis de lancer dans un terminal la commande suivante :
 \begin{lstlisting}[language=bash]
 pdftk these.pdf output these-valide.pdf
 \end{lstlisting}
+où \file{these.pdf} est le fichier \acrshort{pdf} original du mémoire. Le
+fichier généré, \file{these-valide.pdf}, est à la fois valide et identique dans
+la forme à l'original.
 \end{dbfaq}
 
 %
