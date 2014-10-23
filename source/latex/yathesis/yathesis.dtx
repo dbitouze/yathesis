@@ -1730,15 +1730,16 @@ description={#5}}%
 \DeclareRobustCommand*{\yat}{\textsl{\texttt{yathesis}}}
 \DeclareRobustCommand*{\yatpa}{package \textsl{\texttt{yathesisdoc}}\xspace}
 \DeclareRobustCommand*{\yatcl}{classe \yat\xspace}
-\DeclareRobustCommand*{\unixtldirectory}{\directory{/usr/local/}}
-\DeclareRobustCommand*{\wintldirectory}{\directory{c:/}}
-\DeclareRobustCommand*{\tldistdirectory}{\directory{texlive/2013/texmf-dist/}}
-\DeclareRobustCommand*{\miktexdistdirectory}{[TODO]}
-\DeclareRobustCommand*{\docdirectory}{\directory{doc/}}
-\DeclareRobustCommand*{\texdirectory}{\directory{tex/}}
-\DeclareRobustCommand*{\sourcedirectory}{\directory{source/}}
-\DeclareRobustCommand*{\jobdirectory}{\directory{latex/\jobname}}
-\DeclareRobustCommand*{\jobdocdirectory}{\docdirectory\jobdirectory}
+\newcommand*{\unixtldirectory}{/usr/local/}
+\newcommand*{\tlversion}{2014}
+\newcommand*{\wintldirectory}{c:/}
+\newcommand*{\tldistdirectory}{texlive/\tlversion/texmf-dist/}
+\newcommand*{\miktexdistdirectory}{[TODO]}
+\newcommand*{\docdirectory}{doc/}
+\newcommand*{\texdirectory}{tex/}
+\newcommand*{\sourcedirectory}{source/}
+\newcommand*{\jobdirectory}{latex/\jobname}
+\newcommand*{\jobdocdirectory}{\docdirectory\jobdirectory}
 %
 \newcommand{\phrase}{%
   \@ifstar{\phrase@star}{\phrase@nostar}%
