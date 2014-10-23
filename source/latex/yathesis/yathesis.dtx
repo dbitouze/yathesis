@@ -342,16 +342,16 @@ This work consists of the file  yathesis.dtx
 \includeall
 \includeonly{%
   % sections/introduction,
-  sections/proprietes-document,
+  % sections/proprietes-document,
   % sections/pages-titre,
   % sections/pages-liminaires,
   % sections/pages-corps,
   % sections/pages-annexes,
   % sections/pages-finales,
-  sections/personnalisation,
+  % sections/personnalisation,
   % sections/recommandations,
   % sections/installation,
-  % sections/specimens-canevas,
+  sections/specimens-canevas,
   % sections/add-ons,
   % sections/faq,
   % sections/fichiers-charges,
@@ -6917,6 +6917,8 @@ sub makeglossaries{
 %<class-latexmkrc>sub makeindex{
 %<class-latexmkrc>  system( "makeindex -s gglo.ist -o \"$_[0].gls\" \"$_[0].glo\"" );
 %<class-latexmkrc>}
+
+$makeindex = 'texindy -L french';
 
 add_cus_dep('idx', 'ind', 0, 'texindy');
 sub texindy{

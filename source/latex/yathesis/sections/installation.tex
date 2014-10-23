@@ -9,81 +9,26 @@
 }%^^A
 %^^A
 La procédure d'installation de la \yatcl{} dépend de la version souhaitée :
-stable, de test ou de développement.
+stable
+%^^A , de test
+ou de développement.
 
 \section{Version stable}
 \label{sec:version-stable}
 
-La version stable de la classe devrait être fournie d'emblée par les
-distributions \TeX{} \enquote{\TeX~Live\footnote{Ce devrait être le cas
-    à partir de la version \texttt{2014} de la \TeX~Live dont la sortie est
-    annoncée pour le début du mois de juillet 2014.}} et
-\enquote{MiK\TeX{}}\footnote{Pour s'assurer que cette version stable est la
-  plus récente, il est conseillé de mettre sa distribution \TeX{} à jour.},
-sinon par défaut, du moins après mise à jour.
-
-Si tel n'est pas le cas, on pourra installer sa version de test comme suit.
-
-\section{Version de test}
-\label{sec:version-de-test}
-
-La procédure pour installer une version de test de la classe n'est décrite ici
-que pour la distribution \TeX~Live\footnote{Bien qu'une procédure analogue
-  existe certainement pour la distribution MiK\TeX{}, l'auteur ne la connaît
-  pas : contributions bienvenues !}. Elle utilise des lignes de commandes,
-méthode simple et automatisée:
-\begin{enumerate}
-\item Ouvrir un terminal\footnote{Sous Linux, c'est en général simple
-    à trouver. Sous Mac OS X, il devrait suffire de visiter le menu
-    \enquote{Applications} puis \enquote{Utilitaires} puis
-    \enquote{Terminal}. Sous Windows, il devrait suffire de visiter le menu
-    \enquote{Tous les programmes} puis \enquote{Accessoires} puis
-    \enquote{Invite de commandes}.}.
-\item Dans ce terminal, lancer successivement les trois commandes
-  suivantes\footnote{On évitera de les recopier manuellement : il est possible
-    de les copier (\texttt{CTRL~+~C} ou assimilé) et de les coller
-    (\texttt{CTRL~+~V} ou assimilé, ou clic droit).} (à faire éventuellement
-  précéder de \enquote{\protect\lstinline|sudo|} sous Linux et Mac OS X) :
-\begin{lstlisting}[numbers=left]
-tlmgr repository add http://tlcontrib.metatex.org/2013 tlcontrib
-tlmgr pinning add tlcontrib yathesis
-tlmgr install yathesis
-\end{lstlisting}
-  Ne pas s'inquiéter pas de messages du type :
-\begin{lstlisting}
-TeX Live 2013 is frozen forever and will no longer be updated. This
-happens in preparation for a new release. [...]
-\end{lstlisting}
-  et être patient lorsqu'apparaissent les lignes :
-\begin{lstlisting}
-running mktexlsr ...
-done running mktexlsr.
-running mtxrun --generate
-...
-\end{lstlisting}
-\item Pour vérifier que la classe a été correctement installée, lancer la
-  commande :
-\begin{lstlisting}
-kpsewhich yathesis.cls
-\end{lstlisting}
-  qui devrait renvoyer un message \emph{non} vide tel que, sous Linux et sous
-  Mac OS X :
-\begin{lstlisting}
-/usr/local/texlive/2013/texmf-dist/tex/latex/yathesis/yathesis.cls
-\end{lstlisting}
-  et, sous Windows :
-\begin{lstlisting}
-c:/texlive/2013/texmf-dist/tex/latex/yathesis/yathesis.cls
-\end{lstlisting}
-\end{enumerate}
-
-\lstset{frame=none}
+La version stable de la classe est normalement fournie par les distributions de
+\TeX{}, notamment \program{\TeX~Live}\footnote{Par mise à jour de sa version
+  \texttt{2014}, et d'emblée pour les versions suivantes.} et
+\program{MiK\TeX{}\footnote{Par mise à jour de sa version \texttt{2.9}, et
+    d'emblée pour les versions suivantes.}}. Pour s'assurer que cette version
+stable est la plus récente, il est de toute façon conseillé de mettre à jour sa
+distribution \TeX{}.
 
 \section{Version de développement}
 \label{sec:vers-de-devel}
 
-Si on souhaite utiliser la version de développement de la \yatcl{} (à ses
-risques et périls !), on clonera son dépôt Git à la page
+Si on souhaite utiliser (à ses risques et périls !) la version de développement
+de la \yatcl{}, on clonera son dépôt \program{Git} à la page
 \url{https://github.com/dbitouze/yathesis}. La procédure pour ce faire, hors
 sujet ici, n'est pas détaillée.
 
