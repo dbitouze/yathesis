@@ -1458,16 +1458,16 @@ This work consists of the file  yathesis.dtx
   % \xspace%
 }%
 %
-\DeclareRobustCommand*{\file}[1]{\bgroup% \color{magenta}
+\newcommand*{\file}[1]{\bgroup% \color{magenta}
   \texttt{#1}\egroup}
-\DeclareRobustCommand*{\File}[1]{%
+\newcommand*{\File}[1]{%
   \IfLanguageName{french}{fichier }{}%
   \file{#1}%
   \IfLanguageName{english}{ file}{}%
   \xspace%
 }%
-\DeclareRobustCommand*{\directory}{\file}
-\DeclareRobustCommand*{\Directory}[1]{%
+\newcommand*{\directory}{\file}
+\newcommand*{\Directory}[1]{%
   \IfLanguageName{french}{répertoire }{}%
   \directory{#1}%
   \IfLanguageName{english}{ directory}{}%
