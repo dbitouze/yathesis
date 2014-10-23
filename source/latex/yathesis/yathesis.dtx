@@ -1468,6 +1468,22 @@ This work consists of the file  yathesis.dtx
   \IfLanguageName{english}{ directory}{}%
   \xspace%
 }%
+%
+\newcommand{\links}[3][]{\href{#2#3#1}{\texttt{#3}} \href{http://mirror.ctan.org/macros/latex/contrib/yathesis/#2#3#1}{\faExternalLink}}%
+\newcommand{\etctree}{...}
+\newcommand{\filetree}[1]{\links{\folder/\subfolder/}{#1}}
+\newcommand{\pdffiletree}[1]{\filetree{#1.pdf}}
+\newcommand{\texfiletree}[1]{\filetree{#1.tex}}
+\newcommand{\zipfiletree}{\bfseries\color{red}\links{\folder/}{\subfolder.zip}}
+\newcommand{\directorytree}{\bfseries\color{blue}\links[.]{}{\folder/}}
+\newcommand{\subdirectorytree}{{\bfseries\color{blue}\links[.]{\folder/}{\subfolder/}}}
+%
+\colorlet{specimens}{yellow!30}
+\colorlet{canevas}{green!30}
+\colorlet{doc}{specimens!50!canevas}
+\colorlet{en-arborescence}{red!20}
+\colorlet{a-plat}{blue!20}
+%
 \DeclareRobustCommand*{\program}{\file}
 \DeclareUrlCommand\urldirectory{\urlstyle{tt}}
 %

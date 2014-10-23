@@ -1,29 +1,79 @@
 \chapter{Specimens et canevas de thèse}\label{cha:specimen-canevas}%
 
-Pour aider à sa mise en œuvre, la \yatcl fournit deux specimens (produisant des
-\acrshort{pdf} identiques) et deux canevas de thèse (produisant des
-\acrshort{pdf} identiques) :
+La \yatcl, pour aider à se figurer ses fonctionnalités et pour faciliter sa mise
+en œuvre, fournit :
+\begin{enumerate}
+\item un spécimen ;
+\item un canevas.
+\end{enumerate}
+Chacun de ces specimens et canevas est proposé selon deux types d'organisation :
 \begin{description}
-\item[un spécimen et un canevas \enquote{à plat}] dont les sources \file{.tex}
-  respectifs sont tout entier situés dans un unique fichier\footnote{Mis à part
-    le fichier de bibliographie et les fichiers images pour le spécimen.} ;
-\item[un spécimen et un canevas \enquote{en relief}] dont les sources
-  \file{.tex} respectifs sont scindés en fichiers maître et
-  esclaves\footnote{La scission du mémoire de thèse en différents fichiers
-    maître et esclaves est hautement recommandée :
-    cf. \vref{sec:repart-du-memo}.}, répartis dans différents sous-dossiers.
+\item[\enquote{à plat} :] le source \file{.tex} est tout entier dans un unique
+  fichier, situé dans le même dossier que les fichiers annexes (bibliographie et
+  images) ;
+\item[\enquote{en arborescence} :] le source \file{.tex} est scindé en fichiers
+  maître et esclaves\footnote{Comme cela est en général recommandé,
+    cf. \vref{sec:repart-du-memo}.}, situés (ainsi que l'ensemble des fichiers
+  annexes) dans différents (sous-)dossiers.
 \end{description}
-Les canevas ne sont rien d'autre que les (quasi-)répliques des spécimens
-correspondants dont les données ont été vidées : pour les exploiter, il suffit
-donc de remplir \enquote{les cases vides}.
+Au total, deux specimens et deux canevas sont donc fournis et :
+\begin{description}
+\item[pour se figurer les fonctionnalités] de la classe, on pourra consulter le
+  contenu de leurs dossiers et notamment les fichiers \acrshort{pdf} du mémoire
+  de thèse qu'ils produisent ;
+\item[pour aider à la mise en œuvre] de la classe, on pourra choisir l'un d'eux
+  et s'en servir comme d'une base. Pour ce faire, \emph{on copiera dans un
+    répertoire personnel} son dossier (éventuellement en désarchivant son
+  archive \gls{zip} fournie) et on adaptera son contenu.
+  \begin{dbwarning}{Spécimens et canevas : à copier dans un répertoire
+      personnel}{}
+  Si on souhaite utiliser l'un de ces spécimens ou canevas, il est
+  \emph{essentiel} de \emph{ne pas} travailler directement avec (ou dans) le
+  dossier fourni par la distribution \TeX{} utilisée (\TeX{} Live ou
+  MiK\TeX{}) : toute adaptation personnelle serait en effet écrasée lors d'une
+  prochaine mise à jour de la \yatcl{}. Avant d'utiliser l'un de ces dossiers
+  (ou archives \gls{zip}), il est donc nécessaire de le copier préalablement
+  dans un répertoire personnel.
+\end{dbwarning}
+\end{description}
 
-\changes{v0.99a}{2014/06/02}{Spécimens et canevas enrichis}%^^A
-\changes{v0.99b}{2014/06/02}{Réorganisation des spécimens et canevas}%^^A
+Les dossiers, fichiers \acrshort{pdf} et archives \gls{zip} des specimens et
+canevas sont répertoriés à la \vref{fig:specimens-canevas}. Pour aisément
+atteindre leurs versions locales et en ligne, il devrait suffire de cliquer
+respectivement sur les noms correspondants\footnote{Les \enquote{\directory{/}}
+  en fin de noms indiquent qu'il s'agit d'un répertoire et non d'un fichier.} et
+sur les icones \faExternalLink{} en regard.
+
+\begin{figure}[ht]
+  \centering
+  \input{figures/specimens-canevas}
+  \caption{Dossiers, fichiers \acrshort{pdf} et archives \gls{zip} (et
+    hyperliens) des spécimens et canevas fournis}
+  \label{fig:specimens-canevas}
+\end{figure}
+
+% ^^A\footnote{La scission du mémoire de thèse en fichiers maître et esclaves
+% ^^Aest hautement recommandée : cf. \vref{sec:repart-du-memo}.}
+
+\begin{comment}
+  \begin{table}[ht]
+    \centering
+    \input{tableaux/specimens-canevas}
+    \caption{(Liens vers les )Dossiers, fichiers \acrshort{pdf} et archives \textsc{zip} des
+      spécimens et canevas fournis
+      avec la \yatcl{}}
+    \label{tab:specimens-canevas}
+  \end{table}
+\end{comment}
+
+%
+\changes{v0.99l}{2014/10/04}{Réorganisation et changement de noms des spécimens
+  et canevas}%^^A
 \changes{v0.99c}{2014/06/06}{Spécimens et canevas fournis sous forme d'archives
   \file{.zip}}%^^A
-Ces spécimens et canevas se trouvent dans les sous-dossiers du dossier de
-documentation de la \yatcl{}\footnote{Le dossier de documentation de la
-  \yatcl{} est, pour la distribution :
+\changes{v0.99b}{2014/06/02}{Réorganisation des spécimens et canevas}%^^A
+\changes{v0.99a}{2014/06/02}{Spécimens et canevas enrichis}%^^A
+\begin{comment}
   \begin{itemize}
   \item pour la distribution \TeX{} Live\versiontl, sur les systèmes :
     \begin{itemize}
@@ -34,25 +84,21 @@ documentation de la \yatcl{}\footnote{Le dossier de documentation de la
     \end{itemize}
   \item pour la distribution MiK\TeX{} : \directory{\miktexdistdirectory}.
   \end{itemize}
-  \label{fn:yathesisdocfolder}} indiqués au \vref{tab:specimens-canevas}. Ils
-sont également fournis sous forme d'archives \file{.zip} qui devraient être
-accessibles par simples clics sur les liens hypertextes de ce tableau.
-\begin{table}
-  \centering
-  \input{tableaux/specimens-canevas}
-  \caption{Dossiers et archives \file{.zip} des spécimens et canevas fournis
-    avec la \yatcl{}}
-  \label{tab:specimens-canevas}
-\end{table}
+\end{comment}
 
-\begin{dbwarning}{Ne pas travailler directement dans les dossiers de
-    spécimens et de canevas !}{}
-  Si on souhaite utiliser l'un de ces spécimens ou canevas, il est
-  \emph{essentiel} de \emph{ne pas} travailler directement dans le dossier
-  fourni : toutes les modifications seraient en effet écrasées lors d'une mise
-  à jour de la classe. Il faut donc copier le dossier ou l'archive \file{.zip}
-  correspondant dans un répertoire de travail habituel.
-\end{dbwarning}
+Les \vref{sec:specimens,sec:canevas} détaillent les fichiers qui constituent
+chacun de ces specimens et canevas.
+
+% ^^AParmi eux, \file{latexmkrc}, fichier de configuration du programme
+% ^^A\program{latexmk} qui permet d'automatiser le processus de compilation
+% ^^Acomplète de la thèse (cf. \vref{sec:autom-des-comp} pour plus de détails).
+
+% ^^ALes \vref{sec:specimens,sec:canevas} détaillent davantage ces specimens et
+% ^^Acanevas, en indiquant notamment tous les fichiers qui les
+% ^^Aconstituent. Chacun des spécimens et canevas fournit un fichier, nommé
+% ^^A\file{latexmkrc}, de configuration du programme \program{latexmk} qui
+% ^^Apermet d'automatiser le processus de compilation complète de la thèse
+% ^^A(cf. \vref{sec:autom-des-comp} pour plus de détails).
 
 % ^^A La commande à utiliser pour lister le contenu du répertoire est :%
 % ^^A tree -A -F -I \ %
@@ -61,48 +107,78 @@ accessibles par simples clics sur les liens hypertextes de ce tableau.
 \section{Spécimens}
 \label{sec:specimens}
 
+Sur la base de données plus ou moins fictives, de textes arbitraires et de
+\gls{fauxtexte}, les spécimens mettent en évidence l'ensemble des possibilités
+offertes par la \yatcl{}.
+
 \subsection{Spécimen \enquote{à plat}}
 \label{sec:specimen-a-plat}
 
-Le dossier \directory{single-file-sample} de ce spécimen contient les
-fichiers :
+\def\folder{specimens}
+\def\subfolder{a-plat}
+
+Le dossier de ce spécimen (\directory{.../\folder/}\subdirectorytree) contient
+les fichiers :
 \begin{enumerate}
-\item \file{these.tex}, source \file{.tex} (unique) de la thèse  ;
+\item \file{these.tex} qui est le source \file{.tex} (unique) de la thèse ;
 \item \file{bibliographie.bib}, contenant les références bibliographiques de
   la thèse ;
 \item \file{these.pdf} produit par compilation du \File{these.tex} ;
 \item \file{labo.pdf}, \file{paris13.pdf}, \file{pres.pdf}, \file{tiger.pdf},
   \file{ulco.pdf}, contenant des images (logos, etc.) ;
-\item \file{latexmkrc}, fichier de configuration du programme \program{latexmk}
-  qui permet d'automatiser le processus de compilation complète de la thèse.
+\item \file{latexmkrc}\latexmkrc.
 \end{enumerate}
 
 [TODO]
 
-\subsection{Spécimen \enquote{en relief}}
-\label{sec:specimen-relief}
+\subsection{Spécimen en \enquote{arborescence}}
+\label{sec:specimen-arborescence}
+
+\def\subfolder{en-arborescence}
+
+Le dossier de ce spécimen (\directory{.../\folder/}\subdirectorytree) contient
+les fichiers :
+\begin{enumerate}
+\item ...
+\item \file{latexmkrc}\latexmkrc.
+\end{enumerate}
 
 [TODO]
 
 \section{Canevas}
 \label{sec:canevas}
 
+Les \emph{canevas} fournis ne sont rien d'autre que les (quasi-)répliques des
+\emph{spécimens} correspondants dont les données ont été vidées : pour les
+exploiter, il suffit donc de remplir les \enquote{cases} vides.
+
 \subsection{Canevas \enquote{à plat}}
 \label{sec:canevas-a-plat}
 
-Le dossier \directory{single-file-template} de ce canevas ne contient que trois
-fichiers :
+\def\folder{canevas}
+\def\subfolder{a-plat}
+
+Le dossier de ce canevas (\directory{.../\folder/}\subdirectorytree) ne contient
+que trois fichiers :
 \begin{enumerate}
 \item \file{these.tex}, source \file{.tex} (unique) de la thèse  ;
 \item \file{these.pdf} produit par compilation du \File{these.tex} ;
-\item \file{latexmkrc}, fichier de configuration du programme \program{latexmk}
-  qui permet d'automatiser le processus de compilation complète de la thèse.
+\item \file{latexmkrc}\latexmkrc.
 \end{enumerate}
 
 [TODO]
 
-\subsection{Canevas \enquote{en relief}}
-\label{sec:canevas-relief}
+\subsection{Canevas en \enquote{arborescence}}
+\label{sec:canevas-arborescence}
+
+\def\subfolder{en-arborescence}
+
+Le dossier de ce spécimen (\directory{.../\folder/}\subdirectorytree) contient
+les fichiers :
+\begin{enumerate}
+\item ...
+\item \file{latexmkrc}\latexmkrc.
+\end{enumerate}
 
 [TODO]
 
