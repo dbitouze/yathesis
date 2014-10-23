@@ -1,91 +1,91 @@
 % Canevas et spécimen de thèse.
 %
 %    \begin{macrocode}
-%<*single-template|these-master>
+%<*flat-template|these-master>
 %<<COMMENT
 % Document de classe yathesis
 %COMMENT
 \documentclass{yathesis}
-%</single-template|these-master>
-%<*these-sample|single-sample>
+%</flat-template|these-master>
+%<*these-sample|flat-sample>
 %<<COMMENT
 % Document de classe yathesis, en 12 points, interligne un et demi, et version finale
 %COMMENT
 \documentclass[12pt,space=onehalf,version=final]{yathesis}
-%</these-sample|single-sample>
-%<*these-sample|single-sample|single-template|these-master>
+%</these-sample|flat-sample>
+%<*these-sample|flat-sample|flat-template|these-master>
 %<<COMMENT
 %
 % Chargement manuel de packages (pas déjà chargés par la classe yathesis)
 %COMMENT
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-%<these-sample|single-sample>\usepackage{lipsum} % À proscrire dans un vrai mémoire de thèse !
+%<these-sample|flat-sample>\usepackage{lipsum} % À proscrire dans un vrai mémoire de thèse !
 \usepackage{kpfonts}
 \usepackage{booktabs}
 \usepackage{siunitx}
 \usepackage{pgfplots}
 \usepackage{floatrow}
 \usepackage{caption}
-%<these-sample|single-sample>\usepackage{listings}
+%<these-sample|flat-sample>\usepackage{listings}
 \usepackage{microtype}
 \usepackage{varioref}
-%<these-sample|single-sample>\usepackage[xindy,quiet]{imakeidx}
-%<these-master|single-template>%\usepackage[xindy,quiet]{imakeidx}
-%<these-sample|single-sample>\usepackage[autostyle]{csquotes}
-%<these-master|single-template>%\usepackage[autostyle]{csquotes}
-%<these-sample|single-sample>\usepackage[backend=biber,safeinputenc]{biblatex}
-%<these-master|single-template>%\usepackage[backend=biber,safeinputenc]{biblatex}
+%<these-sample|flat-sample>\usepackage[xindy,quiet]{imakeidx}
+%<these-master|flat-template>%\usepackage[xindy,quiet]{imakeidx}
+%<these-sample|flat-sample>\usepackage[autostyle]{csquotes}
+%<these-master|flat-template>%\usepackage[autostyle]{csquotes}
+%<these-sample|flat-sample>\usepackage[backend=biber,safeinputenc]{biblatex}
+%<these-master|flat-template>%\usepackage[backend=biber,safeinputenc]{biblatex}
 \usepackage{hyperref}
-%</these-sample|single-sample|single-template|these-master>
-%<these-sample|single-sample>\usepackage[xindy,acronyms,symbols]{glossaries}
-%<these-master|single-template>%\usepackage[xindy,acronyms,symbols]{glossaries}
-%<*single-template|single-sample|these-master|these-sample>
+%</these-sample|flat-sample|flat-template|these-master>
+%<these-sample|flat-sample>\usepackage[xindy,acronyms,symbols]{glossaries}
+%<these-master|flat-template>%\usepackage[xindy,acronyms,symbols]{glossaries}
+%<*flat-template|flat-sample|these-master|these-sample>
 %<<COMMENT
 %
 %COMMENT
-%<single-template|these-master>% (Facultatif) Génération de l'index (obligatoire si un package d'index, par
-%<single-template|these-master>% exemple « imakeidx », est chargé):
-%<single-template|these-master>% \makeindex
-%<these-sample|single-sample>% Génération de l'index :
-%<these-sample|single-sample>\makeindex
+%<flat-template|these-master>% (Facultatif) Génération de l'index (obligatoire si un package d'index, par
+%<flat-template|these-master>% exemple « imakeidx », est chargé):
+%<flat-template|these-master>% \makeindex
+%<these-sample|flat-sample>% Génération de l'index :
+%<these-sample|flat-sample>\makeindex
 %<<COMMENT
 %
 %COMMENT
-%<single-template|these-master>% (Facultatif) Spécification de la ou des ressources bibliographiques
-%<single-template|these-master>% (obligatoire si le package « biblatex » est chargé) :
-%<single-template>% \addbibresource{}
-%<single-template>% \addbibresource{}
+%<flat-template|these-master>% (Facultatif) Spécification de la ou des ressources bibliographiques
+%<flat-template|these-master>% (obligatoire si le package « biblatex » est chargé) :
+%<flat-template>% \addbibresource{}
+%<flat-template>% \addbibresource{}
 %<these-master>% \addbibresource{auxiliaires/bibliographie.bib}
 %<these-master>% \addbibresource{auxiliaires/}
-%<these-sample|single-sample>% Spécification de la ou des ressources bibliographiques :
-%<single-sample>\addbibresource{bibliographie.bib}
+%<these-sample|flat-sample>% Spécification de la ou des ressources bibliographiques :
+%<flat-sample>\addbibresource{bibliographie.bib}
 %<these-sample>\addbibresource{auxiliaires/bibliographie.bib}
-%<these-sample|single-sample>\addbibresource{biblatex-examples.bib} % Fournie par biblatex.
+%<these-sample|flat-sample>\addbibresource{biblatex-examples.bib} % Fournie par biblatex.
 %<<COMMENT
 %
 %COMMENT
-%<single-template|these-master>% (Facultatif) Génération du glossaire (obligatoire si le package « glossaries »
-%<single-template|these-master>% est chargé) :
-%<single-template|these-master>% \makeglossaries
-%<these-sample|single-sample>% Génération du glossaire :
-%<these-sample|single-sample>\makeglossaries
+%<flat-template|these-master>% (Facultatif) Génération du glossaire (obligatoire si le package « glossaries »
+%<flat-template|these-master>% est chargé) :
+%<flat-template|these-master>% \makeglossaries
+%<these-sample|flat-sample>% Génération du glossaire :
+%<these-sample|flat-sample>\makeglossaries
 %<<COMMENT
 %
 % (Facultatif) Spécification de la ou des ressources terminologiques :
 %COMMENT
-%<single-template>% \loadglsentries{}
-%<single-template>% \loadglsentries{}
-%<single-template>% \loadglsentries{}
+%<flat-template>% \loadglsentries{}
+%<flat-template>% \loadglsentries{}
+%<flat-template>% \loadglsentries{}
 %<these-master>% \loadglsentries{auxiliaires/}
 %<these-master>% \loadglsentries{auxiliaires/}
 %<these-master>% \loadglsentries{auxiliaires/}
 %<these-sample>\loadglsentries{auxiliaires/glossaire}
 %<these-sample>\loadglsentries{auxiliaires/acronymes}
 %<these-sample>\loadglsentries{auxiliaires/symboles}
-%</single-template|single-sample|these-master|these-sample>
-%<single-sample>% Termes du glossaire
-%<*single-sample|glossary-sample>
+%</flat-template|flat-sample|these-master|these-sample>
+%<flat-sample>% Termes du glossaire
+%<*flat-sample|glossary-sample>
 \newglossaryentry{latex}{%
   name=\LaTeX,%
   description=système de composition de beaux documents%
@@ -105,9 +105,9 @@
   description= état du français médiéval du \textsc{xiv}\ieme{} au \textsc{xv}\ieme{}
   siècles inclus%
 }
-%</single-sample|glossary-sample>
-%<single-sample>% Acronymes
-%<*single-sample|acronyms-sample>
+%</flat-sample|glossary-sample>
+%<flat-sample>% Acronymes
+%<*flat-sample|acronyms-sample>
 \newacronym{pres}{pres}{Pôle de Recherche et d'Enseignement
   Supérieur}
 \newacronym{ulco}{ulco}{Université du Littoral Côte d'Opale}
@@ -147,14 +147,14 @@
 \newacronym{xhtml}{xhtml}{Extensible HyperText Markup Language}
 \newacronym{fsf}{fsf}{Free Software Foundation}
 \newacronym{gui}{gui}{Graphical User Interface}
-%</single-sample|acronyms-sample>
-%<single-sample>% Symboles
-%<*single-sample|symbols-sample>
+%</flat-sample|acronyms-sample>
+%<flat-sample>% Symboles
+%<*flat-sample|symbols-sample>
 \newglssymbol{ohm}{\si{\ohm}}{ohm}{unité de résistance électrique}
 \newglssymbol{exists}{\ensuremath{\exists}}{quantificateur existentiel}{}
 \newglssymbol[constanteplanck]{planck}{\ensuremath{h}}{constante de
   Planck}{\ensuremath{h\approx\SI{6,62606957e-34}{\joule\second}}}
-%</single-sample|symbols-sample>
+%</flat-sample|symbols-sample>
 %<*these-sample|these-master>
 %<<COMMENT
 %
@@ -172,17 +172,17 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %COMMENT
 %</cfg-master|cfg-sample>
-%<*single-template|single-sample|cfg-master|cfg-sample>
+%<*flat-template|flat-sample|cfg-master|cfg-sample>
 %<<COMMENT
 %
 % (Facultatif) Configuration des styles du glossaire et de la liste
 % d'acronymes :
 %COMMENT
-%<single-template|cfg-master>% \setglossarystyle{}
-%<single-template|cfg-master>% \setacronymstyle{}
-%<cfg-sample|single-sample>\setglossarystyle{indexhypergroup}
-%<cfg-sample|single-sample>\setacronymstyle{long-sc-short}
-%<*cfg-sample|single-sample>
+%<flat-template|cfg-master>% \setglossarystyle{}
+%<flat-template|cfg-master>% \setacronymstyle{}
+%<cfg-sample|flat-sample>\setglossarystyle{indexhypergroup}
+%<cfg-sample|flat-sample>\setacronymstyle{long-sc-short}
+%<*cfg-sample|flat-sample>
 %<<COMMENT
 %
 % Configuration globale de l'apparence des listings informatiques
@@ -218,18 +218,18 @@
 \makeatother
 %<<COMMENT
 %COMMENT
-%</cfg-sample|single-sample>
-%</single-template|single-sample|cfg-master|cfg-sample>
-%<*single-sample|these-sample|these-master>
+%</cfg-sample|flat-sample>
+%</flat-template|flat-sample|cfg-master|cfg-sample>
+%<*flat-sample|these-sample|these-master>
 %<<COMMENT
 %
 %COMMENT
 %<these-sample|these-master>% Importation manuelle du fichier de macros personnelles
-%<!single-sample>\input{configuration/macros}
-%</single-sample|these-sample|these-master>
+%<!flat-sample>\input{configuration/macros}
+%</flat-sample|these-sample|these-master>
 %<*macros-master>
 %</macros-master>
-%<*single-sample|macros-sample>
+%<*flat-sample|macros-sample>
 %<<COMMENT
 % Macro pour mettre en forme les noms de fichiers
 %COMMENT
@@ -242,8 +242,8 @@
 % Macro pour mettre en forme des locutions étrangères
 %COMMENT
 \newcommand{\locution}[1]{\emph{#1}}
-%</single-sample|macros-sample>
-%<*these-sample|single-sample>
+%</flat-sample|macros-sample>
+%<*these-sample|flat-sample>
 %<<COMMENT
 %
 % Commande permettant de faire figurer d'un seul coup toutes les références des
@@ -251,8 +251,8 @@
 % explicitement (à proscrire dans un vrai mémoire de thèse !)
 %COMMENT
 \nocite{*}
-%</these-sample|single-sample>
-%<*these-sample|single-sample|single-template|these-master>
+%</these-sample|flat-sample>
+%<*these-sample|flat-sample|flat-template|these-master>
 %<<COMMENT
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -271,97 +271,97 @@
 % Préparation des pages de couverture et de titre
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %COMMENT
-%</these-sample|single-sample|single-template|these-master>
+%</these-sample|flat-sample|flat-template|these-master>
 %<*these-sample|these-master>
 %<<COMMENT
 % Les caractéristiques de la thèse sont saisies dans le fichier
 % « characteristics.tex » (situé dans le dossier « configuration »).
 %COMMENT
 %</these-sample|these-master>
-%<*single-template|single-sample|characteristics-sample|characteristics-master>
+%<*flat-template|flat-sample|characteristics-sample|characteristics-master>
 %<<COMMENT
 % Auteur de la thèse : prénom (1er argument obligatoire), nom (2e argument
 % obligatoire) et éventuel courriel (argument optionnel). Les éventuels accents
 % devront figurer et le nom /ne/ doit /pas/ être saisi en capitales :
 %COMMENT
-%<single-template|characteristics-master>\author[]{}{}
-%<characteristics-sample|single-sample>\author[aa@zygo.fr]{Alphonse}{Allais}
+%<flat-template|characteristics-master>\author[]{}{}
+%<characteristics-sample|flat-sample>\author[aa@zygo.fr]{Alphonse}{Allais}
 %<<COMMENT
 %
 % Titre de la thèse dans la langue principale (argument obligatoire) et dans la
 % langue secondaire (argument optionnel) :
 %COMMENT
-%<single-template|characteristics-master>\title[]{}
-%<characteristics-sample|single-sample>\title[Laugh's Chaos]{Le chaos du rire}
+%<flat-template|characteristics-master>\title[]{}
+%<characteristics-sample|flat-sample>\title[Laugh's Chaos]{Le chaos du rire}
 %<<COMMENT
 %
 % (Facultatif) Sous-titre de la thèse dans la langue principale (argument
 % obligatoire) et dans la langue secondaire (argument optionnel) :
 %COMMENT
-%<single-template|characteristics-master>% \subtitle[]{}
-%<characteristics-sample|single-sample>\subtitle[Chaos' laugh]{Le rire du chaos}
+%<flat-template|characteristics-master>% \subtitle[]{}
+%<characteristics-sample|flat-sample>\subtitle[Chaos' laugh]{Le rire du chaos}
 %<<COMMENT
 %
 % Champ disciplinaire dans la langue principale (argument obligatoire) et dans
 % la langue secondaire (argument optionnel) :
 %COMMENT
-%<single-template|characteristics-master>\academicfield[]{}
-%<characteristics-sample|single-sample>\academicfield[Mathematics]{Mathématiques}
+%<flat-template|characteristics-master>\academicfield[]{}
+%<characteristics-sample|flat-sample>\academicfield[Mathematics]{Mathématiques}
 %<<COMMENT
 %
 % (Facultatif) Spécialité dans la langue principale (argument obligatoire) et
 % dans la langue secondaire (argument optionnel) :
 %COMMENT
-%<single-template|characteristics-master>\speciality[]{}
-%<characteristics-sample|single-sample>\speciality[Dynamical systems]{Systèmes dynamiques}
+%<flat-template|characteristics-master>\speciality[]{}
+%<characteristics-sample|flat-sample>\speciality[Dynamical systems]{Systèmes dynamiques}
 %<<COMMENT
 %
 % Date de la soutenance, au format {jour}{mois}{année} donnés sous forme de
 % nombres :
 %COMMENT
-%<single-template|characteristics-master>\date{}{}{}
-%<characteristics-sample|single-sample>\date{1}{1}{2015}
+%<flat-template|characteristics-master>\date{}{}{}
+%<characteristics-sample|flat-sample>\date{1}{1}{2015}
 %<<COMMENT
 %
 % (Facultatif) Date de la soumission, au format {jour}{mois}{année} donnés sous
 % forme de nombres :
 %COMMENT
-%<single-template|characteristics-master>%\submissiondate{}{}{}
-%<characteristics-sample|single-sample>\submissiondate{1}{10}{2014}
+%<flat-template|characteristics-master>%\submissiondate{}{}{}
+%<characteristics-sample|flat-sample>\submissiondate{1}{10}{2014}
 %<<COMMENT
 %
 % (Facultatif) Sujet pour les méta-données du PDF :
 %COMMENT
-%<single-template|characteristics-master>\subject[]{}
-%<characteristics-sample|single-sample>\subject[Chaotic Laugh]{Rire chaotique}
+%<flat-template|characteristics-master>\subject[]{}
+%<characteristics-sample|flat-sample>\subject[Chaotic Laugh]{Rire chaotique}
 %<<COMMENT
 %
 % (Facultatif) Nom (argument obligatoire) du PRES :
 %COMMENT
-%<single-template|characteristics-master>\pres[logo=,url=]{}
+%<flat-template|characteristics-master>\pres[logo=,url=]{}
 %<characteristics-sample>\pres[logo=images/pres]{Université Lille Nord de France}
-%<single-sample>\pres[logo=pres]{Université Lille Nord de France}
+%<flat-sample>\pres[logo=pres]{Université Lille Nord de France}
 %<<COMMENT
 %
 % Nom (argument obligatoire) de l'institut (principal en cas de cotutelle) :
 %COMMENT
-%<single-template|characteristics-master>\institute[logo=,url=]{}
+%<flat-template|characteristics-master>\institute[logo=,url=]{}
 %<characteristics-sample>\institute[logo=images/ulco,url=http://www.univ-littoral.fr/]{ULCO}
-%<single-sample>\institute[logo=ulco,url=http://www.univ-littoral.fr/]{ULCO}
+%<flat-sample>\institute[logo=ulco,url=http://www.univ-littoral.fr/]{ULCO}
 %<<COMMENT
 %
 % (Facultatif) En cas de cotutelle (normalement, seulement dans le cas de
 % cotutelle internationale), nom (argument obligatoire) du second institut :
 %COMMENT
-%<single-template|characteristics-master>% \coinstitute[logo=]{}
+%<flat-template|characteristics-master>% \coinstitute[logo=]{}
 %<characteristics-sample>\coinstitute[logo=images/paris13,url=http://www.univ-paris13.fr/]{Université de Paris~13}
-%<single-sample>\coinstitute[logo=paris13,url=http://www.univ-paris13.fr/]{Université de Paris~13}
+%<flat-sample>\coinstitute[logo=paris13,url=http://www.univ-paris13.fr/]{Université de Paris~13}
 %<<COMMENT
 %
 % (Facultatif) Nom (argument obligatoire) de l'école doctorale :
 %COMMENT
-%<single-template|characteristics-master>\doctoralschool[url=]{}
-%<characteristics-sample|single-sample>\doctoralschool[url=http://edspi.univ-lille1.fr/]{ED Régionale SPI 72}
+%<flat-template|characteristics-master>\doctoralschool[url=]{}
+%<characteristics-sample|flat-sample>\doctoralschool[url=http://edspi.univ-lille1.fr/]{ED Régionale SPI 72}
 %<<COMMENT
 %
 % Nom (1er argument obligatoire) et adresse (2e argument obligatoire) du
@@ -369,31 +369,31 @@
 % fois que nécessaire/ :
 %COMMENT
 \laboratory[
-%<single-template|characteristics-master>logo=,
-%<single-template|characteristics-master>telephone=,
-%<single-template|characteristics-master>fax=,
-%<single-template|characteristics-master>email=,
-%<single-template|characteristics-master>url=
-%<single-template|characteristics-master>]{}{%
-%<single-template|characteristics-master>  \\
-%<single-template|characteristics-master>  \\
-%<single-template|characteristics-master>  \\
-%<single-template|characteristics-master>  \\
-%<single-template|characteristics-master>  \\
-%<single-template|characteristics-master>  }
+%<flat-template|characteristics-master>logo=,
+%<flat-template|characteristics-master>telephone=,
+%<flat-template|characteristics-master>fax=,
+%<flat-template|characteristics-master>email=,
+%<flat-template|characteristics-master>url=
+%<flat-template|characteristics-master>]{}{%
+%<flat-template|characteristics-master>  \\
+%<flat-template|characteristics-master>  \\
+%<flat-template|characteristics-master>  \\
+%<flat-template|characteristics-master>  \\
+%<flat-template|characteristics-master>  \\
+%<flat-template|characteristics-master>  }
 %<characteristics-sample>logo=images/labo,
-%<single-sample>logo=labo,
-%<characteristics-sample|single-sample>logoheight=1.25cm,
-%<characteristics-sample|single-sample>telephone=(33)(0)3 21 46 55 86,
-%<characteristics-sample|single-sample>fax=(33)(0)3 21 46 55 75,
-%<characteristics-sample|single-sample>email=secretariat@lmpa.univ-littoral.fr,
-%<characteristics-sample|single-sample>url=http://www-lmpa.univ-littoral.fr/
-%<characteristics-sample|single-sample>]{LMPA Joseph Liouville}{%
-%<characteristics-sample|single-sample>  Maison de la Recherche Blaise Pascal \\
-%<characteristics-sample|single-sample>  50, rue Ferdinand Buisson            \\
-%<characteristics-sample|single-sample>  CS 80699                             \\
-%<characteristics-sample|single-sample>  62228 Calais Cedex                   \\
-%<characteristics-sample|single-sample>  France}
+%<flat-sample>logo=labo,
+%<characteristics-sample|flat-sample>logoheight=1.25cm,
+%<characteristics-sample|flat-sample>telephone=(33)(0)3 21 46 55 86,
+%<characteristics-sample|flat-sample>fax=(33)(0)3 21 46 55 75,
+%<characteristics-sample|flat-sample>email=secretariat@lmpa.univ-littoral.fr,
+%<characteristics-sample|flat-sample>url=http://www-lmpa.univ-littoral.fr/
+%<characteristics-sample|flat-sample>]{LMPA Joseph Liouville}{%
+%<characteristics-sample|flat-sample>  Maison de la Recherche Blaise Pascal \\
+%<characteristics-sample|flat-sample>  50, rue Ferdinand Buisson            \\
+%<characteristics-sample|flat-sample>  CS 80699                             \\
+%<characteristics-sample|flat-sample>  62228 Calais Cedex                   \\
+%<characteristics-sample|flat-sample>  France}
 %<<COMMENT
 %
 % Directeur(s) de thèse et membres du jury, saisis au moyen des commandes
@@ -411,43 +411,43 @@
 %   mots clés soient accordés en genre.
 %
 %COMMENT
-%<single-template|characteristics-master>\supervisor[,affiliation=]{}{}
-%<characteristics-sample|single-sample>\supervisor[professor,affiliation=ULCO]{Michel}{de Montaigne}
-%<single-template|characteristics-master>% \cosupervisor[,affiliation=]{}{}
-%<characteristics-sample|single-sample>\cosupervisor[mcf*,affiliation=ULCO]{Charles}{Baudelaire}
-%<single-template|characteristics-master>% \comonitor[,affiliation=]{}{}
-%<characteristics-sample|single-sample>\comonitor[mcf,affiliation=ULCO]{Étienne}{de la Boétie}
-%<single-template|characteristics-master>\referee[,affiliation=]{}{}
-%<characteristics-sample|single-sample>\referee[professor,affiliation=IHP]{René}{Descartes}
-%<single-template|characteristics-master>\referee[,affiliation=]{}{}
-%<characteristics-sample|single-sample>\referee[seniorresearcher,affiliation=CNRS]{Denis}{Diderot}
-%<single-template|characteristics-master>\committeepresident[,affiliation=]{}{}
-%<characteristics-sample|single-sample>\committeepresident[professor,affiliation=ENS Lyon]{Victor}{Hugo}
-%<single-template|characteristics-master>\examiner[,affiliation=]{}{}
-%<characteristics-sample|single-sample>\examiner[mcf,affiliation=Université de Paris~13]{Sophie}{Germain}
-%<single-template|characteristics-master>\examiner[,affiliation=]{}{}
-%<characteristics-sample|single-sample>\examiner[juniorresearcher,affiliation=INRIA]{Joseph}{Fourier}
-%<single-template|characteristics-master>\examiner[,affiliation=]{}{}
-%<characteristics-sample|single-sample>\examiner[juniorresearcher*,affiliation=CNRS]{Paul}{Verlaine}
-%<single-template|characteristics-master>% \guest{}{}
-%<characteristics-sample|single-sample>\guest{George}{Sand}
+%<flat-template|characteristics-master>\supervisor[,affiliation=]{}{}
+%<characteristics-sample|flat-sample>\supervisor[professor,affiliation=ULCO]{Michel}{de Montaigne}
+%<flat-template|characteristics-master>% \cosupervisor[,affiliation=]{}{}
+%<characteristics-sample|flat-sample>\cosupervisor[mcf*,affiliation=ULCO]{Charles}{Baudelaire}
+%<flat-template|characteristics-master>% \comonitor[,affiliation=]{}{}
+%<characteristics-sample|flat-sample>\comonitor[mcf,affiliation=ULCO]{Étienne}{de la Boétie}
+%<flat-template|characteristics-master>\referee[,affiliation=]{}{}
+%<characteristics-sample|flat-sample>\referee[professor,affiliation=IHP]{René}{Descartes}
+%<flat-template|characteristics-master>\referee[,affiliation=]{}{}
+%<characteristics-sample|flat-sample>\referee[seniorresearcher,affiliation=CNRS]{Denis}{Diderot}
+%<flat-template|characteristics-master>\committeepresident[,affiliation=]{}{}
+%<characteristics-sample|flat-sample>\committeepresident[professor,affiliation=ENS Lyon]{Victor}{Hugo}
+%<flat-template|characteristics-master>\examiner[,affiliation=]{}{}
+%<characteristics-sample|flat-sample>\examiner[mcf,affiliation=Université de Paris~13]{Sophie}{Germain}
+%<flat-template|characteristics-master>\examiner[,affiliation=]{}{}
+%<characteristics-sample|flat-sample>\examiner[juniorresearcher,affiliation=INRIA]{Joseph}{Fourier}
+%<flat-template|characteristics-master>\examiner[,affiliation=]{}{}
+%<characteristics-sample|flat-sample>\examiner[juniorresearcher*,affiliation=CNRS]{Paul}{Verlaine}
+%<flat-template|characteristics-master>% \guest{}{}
+%<characteristics-sample|flat-sample>\guest{George}{Sand}
 %<<COMMENT
 %
 % (Facultatif) Mention du numéro d'ordre de la thèse (s'il est connu, ce numéro
 % est à spécifier en argument optionnel) :
 %COMMENT
-%<single-template|characteristics-master>% \ordernumber[]
-%<characteristics-sample|single-sample>\ordernumber[42]
+%<flat-template|characteristics-master>% \ordernumber[]
+%<characteristics-sample|flat-sample>\ordernumber[42]
 %<<COMMENT
 %
 % Préparation des mots clés dans la langue principale (1er argument) et dans la
 % langue secondaire (2e argument)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %COMMENT
-%<single-template|characteristics-master>\keywords{}{}
-%<characteristics-sample|single-sample>\keywords{chaos, rire}{chaos, laugh}
-%</single-template|single-sample|characteristics-sample|characteristics-master>
-%<*these-sample|single-template|single-sample|these-master>
+%<flat-template|characteristics-master>\keywords{}{}
+%<characteristics-sample|flat-sample>\keywords{chaos, rire}{chaos, laugh}
+%</flat-template|flat-sample|characteristics-sample|characteristics-master>
+%<*these-sample|flat-template|flat-sample|these-master>
 %<<COMMENT
 %
 % Production des pages de couverture et de titre
@@ -479,38 +479,38 @@
 % (Facultatif) Dédicace(s) :
 %COMMENT
 %<these-sample|these-master>\input{liminaires/dedicaces}
-%</these-sample|single-template|single-sample|these-master>
-%<*single-template|single-sample|dedications-sample|dedications-master>
+%</these-sample|flat-template|flat-sample|these-master>
+%<*flat-template|flat-sample|dedications-sample|dedications-master>
 %<dedications-sample|dedications-master>% Dédicace(s) :
-%<single-template|dedications-master>\dedication{}
-%<single-template|dedications-master>\dedication{}
-%<dedications-sample|single-sample>\dedication{Je dédie ce travail\\à tous ceux qui le méritent}
-%<dedications-sample|single-sample>\dedication{À mon directeur bien-aimé !}
-%<dedications-sample|single-sample>\dedication{À mon co-directeur bien-co-aimé !}
+%<flat-template|dedications-master>\dedication{}
+%<flat-template|dedications-master>\dedication{}
+%<dedications-sample|flat-sample>\dedication{Je dédie ce travail\\à tous ceux qui le méritent}
+%<dedications-sample|flat-sample>\dedication{À mon directeur bien-aimé !}
+%<dedications-sample|flat-sample>\dedication{À mon co-directeur bien-co-aimé !}
 %<dedications-sample|dedications-master>% Production de la page de dédicace(s) :
-%<single-template|single-sample>% (Facultatif) Production de la page de dédicace(s) :
+%<flat-template|flat-sample>% (Facultatif) Production de la page de dédicace(s) :
 \makededications
-%</single-template|single-sample|dedications-sample|dedications-master>
-%<*these-sample|single-sample|single-template|these-master>
+%</flat-template|flat-sample|dedications-sample|dedications-master>
+%<*these-sample|flat-sample|flat-template|these-master>
 %<<COMMENT
 %
 % (Facultatif) Épigraphe(s) :
 %COMMENT
 %<these-sample|these-master>\input{liminaires/epigraphes}
-%</these-sample|single-sample|single-template|these-master>
-%<*single-template|single-sample|epigraphs-sample|epigraphs-master>
+%</these-sample|flat-sample|flat-template|these-master>
+%<*flat-template|flat-sample|epigraphs-sample|epigraphs-master>
 %<epigraphs-sample|epigraphs-master>% Épigraphes(s) :
-%<single-template|epigraphs-master>\frontepigraph{}{}
-%<single-template|epigraphs-master>\frontepigraph{}{}
-%<single-sample|epigraphs-sample>\frontepigraph{Science sans conscience n'est que ruine de l'âme.}{François Rabelais}
-%<single-sample|epigraphs-sample>\frontepigraph[english]{I can resist everything, except temptation!}{Oscar Wilde}
-%<single-sample|epigraphs-sample>\frontepigraph{Il est plus facile de désintégrer un atome qu'un préjugé.}{Albert Einstein}
+%<flat-template|epigraphs-master>\frontepigraph{}{}
+%<flat-template|epigraphs-master>\frontepigraph{}{}
+%<flat-sample|epigraphs-sample>\frontepigraph{Science sans conscience n'est que ruine de l'âme.}{François Rabelais}
+%<flat-sample|epigraphs-sample>\frontepigraph[english]{I can resist everything, except temptation!}{Oscar Wilde}
+%<flat-sample|epigraphs-sample>\frontepigraph{Il est plus facile de désintégrer un atome qu'un préjugé.}{Albert Einstein}
 %<epigraphs-sample|epigraphs-master>% Production de la page de d'épigraphe(s) :
-%<single-template|single-sample>% (Facultatif) Production de la page de d'épigraphe(s) :
+%<flat-template|flat-sample>% (Facultatif) Production de la page de d'épigraphe(s) :
 \makefrontepigraphs
-%</single-template|single-sample|epigraphs-sample|epigraphs-master>
-%<*single-template|single-sample|abstract-sample|abstract-master>
-%<single-template|single-sample>%
+%</flat-template|flat-sample|epigraphs-sample|epigraphs-master>
+%<*flat-template|flat-sample|abstract-sample|abstract-master>
+%<flat-template|flat-sample>%
 %<<COMMENT
 % Résumés (de 1700 caractères maximum, espaces compris) dans la
 % langue principale (1re occurrence de l'environnement « abstract »)
@@ -518,19 +518,19 @@
 % l'environnement « abstract ») :
 %COMMENT
 \begin{abstract}
-%<single-template|abstract-master>% ...
-%<single-sample|abstract-sample>  \lipsum[1-2]
+%<flat-template|abstract-master>% ...
+%<flat-sample|abstract-sample>  \lipsum[1-2]
 \end{abstract}
 \begin{abstract}
-%<single-template|abstract-master>% ...
-%<single-sample|abstract-sample>  \lipsum[3-4]
+%<flat-template|abstract-master>% ...
+%<flat-sample|abstract-sample>  \lipsum[3-4]
 \end{abstract}
 %<<COMMENT
 %
 % Production de la page de résumés :
 %COMMENT
 \makeabstract
-%</single-template|single-sample|abstract-sample|abstract-master>
+%</flat-template|flat-sample|abstract-sample|abstract-master>
 %<*these-sample|these-master>
 %<<COMMENT
 %
@@ -538,65 +538,65 @@
 %COMMENT
 \input{liminaires/resumes}
 %</these-sample|these-master>
-%<*these-sample|single-template|single-sample|these-master>
+%<*these-sample|flat-template|flat-sample|these-master>
 %<<COMMENT
 %
 % (Facultatif) Chapitre de remerciements :
 %COMMENT
 %<these-sample|these-master>\include{liminaires/remerciements}
-%</these-sample|single-template|single-sample|these-master>
-%<*single-template|single-sample|acknowledgments-sample|acknowledgments-master>
+%</these-sample|flat-template|flat-sample|these-master>
+%<*flat-template|flat-sample|acknowledgments-sample|acknowledgments-master>
 \chapter{Remerciements}
-%<single-template|acknowledgments-master>% ...
-%<acknowledgments-sample|single-sample>\section{Une section de remerciements}
-%<acknowledgments-sample|single-sample>\lipsum[1]
-%<acknowledgments-sample|single-sample>\section{Une autre section de remerciements}
-%<acknowledgments-sample|single-sample>\lipsum[2-9]
-%</single-template|single-sample|acknowledgments-sample|acknowledgments-master>
-%<*these-sample|single-template|single-sample|these-master>
+%<flat-template|acknowledgments-master>% ...
+%<acknowledgments-sample|flat-sample>\section{Une section de remerciements}
+%<acknowledgments-sample|flat-sample>\lipsum[1]
+%<acknowledgments-sample|flat-sample>\section{Une autre section de remerciements}
+%<acknowledgments-sample|flat-sample>\lipsum[2-9]
+%</flat-template|flat-sample|acknowledgments-sample|acknowledgments-master>
+%<*these-sample|flat-template|flat-sample|these-master>
 %<<COMMENT
 %
 % (Facultatif) Chapitre d'avertissement :
 %COMMENT
 %<these-master>% \include{liminaires/avertissement}
 %<these-sample>\include{liminaires/avertissement}
-%</these-sample|single-template|single-sample|these-master>
-%<*single-template|caution-sample|single-sample|caution-master>
-%<single-template|caution-master>% \chapter{Avertissement}
-%<caution-sample|single-sample>\chapter{Avertissement}
-%<single-template|caution-master>% ...
-%<caution-sample|single-sample>Thèse hilarante, comme le gaz du même nom !
-%</single-template|caution-sample|single-sample|caution-master>
-%<*these-sample|single-sample|single-template|these-master>
+%</these-sample|flat-template|flat-sample|these-master>
+%<*flat-template|caution-sample|flat-sample|caution-master>
+%<flat-template|caution-master>% \chapter{Avertissement}
+%<caution-sample|flat-sample>\chapter{Avertissement}
+%<flat-template|caution-master>% ...
+%<caution-sample|flat-sample>Thèse hilarante, comme le gaz du même nom !
+%</flat-template|caution-sample|flat-sample|caution-master>
+%<*these-sample|flat-sample|flat-template|these-master>
 %<<COMMENT
 %
 % (Facultatif) Liste des acronymes :
 %COMMENT
-%<single-template|these-master>% \printacronyms
-%<these-sample|single-sample>\printacronyms
+%<flat-template|these-master>% \printacronyms
+%<these-sample|flat-sample>\printacronyms
 %<<COMMENT
 %
 % (Facultatif) Liste des symboles :
 %COMMENT
-%<single-template|these-master>% \printsymbols
-%<these-sample|single-sample>\printsymbols
+%<flat-template|these-master>% \printsymbols
+%<these-sample|flat-sample>\printsymbols
 %<<COMMENT
 %
 % (Facultatif) Chapitre d'avant-propos :
 %COMMENT
 %<these-master>% \include{liminaires/avant-propos}
 %<these-sample>\include{liminaires/avant-propos}
-%</these-sample|single-sample|single-template|these-master>
-%<*single-template|single-sample|foreword-sample|foreword-master>
-%<single-template|foreword-master>% \chapter{Avant-propos}
-%<foreword-sample|single-sample>\chapter{Avant-propos}
-%<single-template|foreword-master>% ...
-%<foreword-sample|single-sample>\section{Une section d'avant-propos}
-%<foreword-sample|single-sample>\lipsum[30-45]
-%<foreword-sample|single-sample>\section{Une autre section d'avant-propos}
-%<foreword-sample|single-sample>\lipsum[30-35]
-%</single-template|single-sample|foreword-sample|foreword-master>
-%<*these-sample|single-sample|single-template|these-master>
+%</these-sample|flat-sample|flat-template|these-master>
+%<*flat-template|flat-sample|foreword-sample|foreword-master>
+%<flat-template|foreword-master>% \chapter{Avant-propos}
+%<foreword-sample|flat-sample>\chapter{Avant-propos}
+%<flat-template|foreword-master>% ...
+%<foreword-sample|flat-sample>\section{Une section d'avant-propos}
+%<foreword-sample|flat-sample>\lipsum[30-45]
+%<foreword-sample|flat-sample>\section{Une autre section d'avant-propos}
+%<foreword-sample|flat-sample>\lipsum[30-35]
+%</flat-template|flat-sample|foreword-sample|foreword-master>
+%<*these-sample|flat-sample|flat-template|these-master>
 %<<COMMENT
 %
 % Sommaire
@@ -628,12 +628,12 @@
 % Chapitre d'introduction (générale)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %COMMENT
-%</these-sample|single-sample|single-template|these-master>
-%<*these-sample|single-sample|single-template|these-master|introduction-master|introduction-sample>
-%<single-template|introduction-master>\chapter*{Introduction}
-%<single-template|introduction-master>% ...
+%</these-sample|flat-sample|flat-template|these-master>
+%<*these-sample|flat-sample|flat-template|these-master|introduction-master|introduction-sample>
+%<flat-template|introduction-master>\chapter*{Introduction}
+%<flat-template|introduction-master>% ...
 %<these-sample|these-master>\include{corps/introduction}
-%<*introduction-sample|single-sample>
+%<*introduction-sample|flat-sample>
 \chapter*{Introduction générale}
 \lipsum[26]
 \section{Une section d'introduction}
@@ -656,9 +656,9 @@
 \lipsum[36]
 \section{Une autre section d'introduction}
 \lipsum[37]
-%</introduction-sample|single-sample>
-%</these-sample|single-sample|single-template|these-master|introduction-master|introduction-sample>
-%<*these-sample|single-sample|single-template|these-master>
+%</introduction-sample|flat-sample>
+%</these-sample|flat-sample|flat-template|these-master|introduction-master|introduction-sample>
+%<*these-sample|flat-sample|flat-template|these-master>
 %<<COMMENT
 %
 % Chapitres ordinaires (avec parties éventuelles)
@@ -666,19 +666,19 @@
 %
 % Première partie éventuelle
 %COMMENT
-%<single-template|these-master>% \part{...}
-%<these-sample|single-sample>\part{Le chaos du rire}
+%<flat-template|these-master>% \part{...}
+%<these-sample|flat-sample>\part{Le chaos du rire}
 %<<COMMENT
 %
 % Premier chapitre
 %COMMENT
-%</these-sample|single-sample|single-template|these-master>
-%<*these-sample|single-sample|single-template|these-master|position-problemeI-sample>
-%<single-template>% \chapter{...}
-%<single-template>% ...
+%</these-sample|flat-sample|flat-template|these-master>
+%<*these-sample|flat-sample|flat-template|these-master|position-problemeI-sample>
+%<flat-template>% \chapter{...}
+%<flat-template>% ...
 %<these-master>% \include{corps/}
 %<these-sample>\include{corps/position-problemeI}
-%<*position-problemeI-sample|single-sample>
+%<*position-problemeI-sample|flat-sample>
 \chapter{Contexte du chaos du rire}
 \epigraphhead[30]{\selectlanguage{english}\epigraph{I have not failed. I've
     just found 10.000 ways that won't work.}{Thomas A. Edison}}
@@ -803,19 +803,19 @@ suis certain qu'il sera \og hors-texte\fg{} :
   vous avez brisé les fers, et des acclamations des hommes éclairés
   dont vous avez surpassé les espérances.
 \end{displaycquote}
-%</position-problemeI-sample|single-sample>
-%</these-sample|single-sample|single-template|these-master|position-problemeI-sample>
-%<*these-sample|single-sample|single-template|these-master>
+%</position-problemeI-sample|flat-sample>
+%</these-sample|flat-sample|flat-template|these-master|position-problemeI-sample>
+%<*these-sample|flat-sample|flat-template|these-master>
 %<<COMMENT
 % Deuxième chapitre
 %COMMENT
-%</these-sample|single-sample|single-template|these-master>
-%<*these-sample|single-sample|single-template|these-master|developpementI-sample>
-%<single-template>% \chapter{...}
-%<single-template>% ...
+%</these-sample|flat-sample|flat-template|these-master>
+%<*these-sample|flat-sample|flat-template|these-master|developpementI-sample>
+%<flat-template>% \chapter{...}
+%<flat-template>% ...
 %<these-master>% \include{corps/}
 %<these-sample>\include{corps/developpementI}
-%<*developpementI-sample|single-sample>
+%<*developpementI-sample|flat-sample>
 \chapter{Développement}
 \label{chap-developpement}
 
@@ -943,7 +943,7 @@ pas là pour faire joli, mais bien pour éclairer notre propos.
   \centering
   \capstart
 %<developpementI-sample>  \includegraphics[width=.35\linewidth]{images/tiger}
-%<single-sample>  \includegraphics[width=.35\linewidth]{tiger}
+%<flat-sample>  \includegraphics[width=.35\linewidth]{tiger}
   \caption[Un tigre]{Une figure avec une légende assez longue qui peut
     même, au besoin, s'étaler sur plusieurs lignes.}
   \label{fig-tigre}
@@ -977,19 +977,19 @@ apparaît en entête et dans la table des matières : c'est l'argument
 optionnel de la commande de sectionnement qui a permis cela.
 
 \lipsum[43-52]
-%</developpementI-sample|single-sample>
-%</these-sample|single-sample|single-template|these-master|developpementI-sample>
-%<*these-sample|single-sample|single-template|these-master>
+%</developpementI-sample|flat-sample>
+%</these-sample|flat-sample|flat-template|these-master|developpementI-sample>
+%<*these-sample|flat-sample|flat-template|these-master>
 %<<COMMENT
 % Troisième chapitre
 %COMMENT
-%</these-sample|single-sample|single-template|these-master>
-%<*these-sample|single-sample|single-template|these-master|conclusionI-sample>
-%<single-template>% \chapter{...}
-%<single-template>% ...
+%</these-sample|flat-sample|flat-template|these-master>
+%<*these-sample|flat-sample|flat-template|these-master|conclusionI-sample>
+%<flat-template>% \chapter{...}
+%<flat-template>% ...
 %<these-master>% \include{corps/}
 %<these-sample>\include{corps/conclusionI}
-%<*conclusionI-sample|single-sample>
+%<*conclusionI-sample|flat-sample>
 \chapter{Conclusion}
 Dans ce chapitre, nous concluons l'étude du chaos du rire.
 
@@ -1014,45 +1014,45 @@ Dans ce chapitre, nous concluons l'étude du chaos du rire.
 \lipsum[29-31]
 \section{Une autre section}
 \lipsum[28-29]
-%</conclusionI-sample|single-sample>
-%</these-sample|single-sample|single-template|these-master|conclusionI-sample>
-%<*these-sample|single-sample|single-template|these-master>
+%</conclusionI-sample|flat-sample>
+%</these-sample|flat-sample|flat-template|these-master|conclusionI-sample>
+%<*these-sample|flat-sample|flat-template|these-master>
 %<<COMMENT
 %
 %
 % Deuxième partie éventuelle
 %COMMENT
-%<single-template|these-master>% \part{...}
-%<these-sample|single-sample>\part{Le rire du chaos}
+%<flat-template|these-master>% \part{...}
+%<these-sample|flat-sample>\part{Le rire du chaos}
 %<<COMMENT
 %
 % Quatrième chapitre
 %COMMENT
-%</these-sample|single-sample|single-template|these-master>
-%<*these-sample|single-sample|single-template|these-master|position-problemeII-sample>
-%<single-template>% \chapter{...}
-%<single-template>% ...
+%</these-sample|flat-sample|flat-template|these-master>
+%<*these-sample|flat-sample|flat-template|these-master|position-problemeII-sample>
+%<flat-template>% \chapter{...}
+%<flat-template>% ...
 %<these-master>% \include{corps/}
 %<these-sample>\include{corps/position-problemeII}
-%<*position-problemeII-sample|single-sample>
+%<*position-problemeII-sample|flat-sample>
 \chapter{Contexte du rire du chaos}
 \epigraphhead[30]{\epigraph{La science a fait de nous des dieux avant même que
     nous méritions d'être des hommes.}{Jean Rostand}}
 
 \lipsum[26-32]
-%</position-problemeII-sample|single-sample>
-%</these-sample|single-sample|single-template|these-master|position-problemeII-sample>
-%<*these-sample|single-sample|single-template|these-master>
+%</position-problemeII-sample|flat-sample>
+%</these-sample|flat-sample|flat-template|these-master|position-problemeII-sample>
+%<*these-sample|flat-sample|flat-template|these-master>
 %<<COMMENT
 % Cinquième chapitre
 %COMMENT
-%</these-sample|single-sample|single-template|these-master>
-%<*these-sample|single-sample|single-template|these-master|developpementII-sample>
-%<single-template>% \chapter{...}
-%<single-template>% ...
+%</these-sample|flat-sample|flat-template|these-master>
+%<*these-sample|flat-sample|flat-template|these-master|developpementII-sample>
+%<flat-template>% \chapter{...}
+%<flat-template>% ...
 %<these-master>% \include{corps/}
 %<these-sample>\include{corps/developpementII}
-%<*developpementII-sample|single-sample>
+%<*developpementII-sample|flat-sample>
 \chapter{Développement}
 
 Nous pouvons faire référence à des graphiques (très jolis au demeurant), comme
@@ -1072,37 +1072,37 @@ celui de la figure\vref{sin-x*sin-y}.
     \sin x\times\sin y$}
   \label{sin-x*sin-y}
 \end{figure}
-%</developpementII-sample|single-sample>
-%</these-sample|single-sample|single-template|these-master|developpementII-sample>
-%<*these-sample|single-sample|single-template|these-master>
+%</developpementII-sample|flat-sample>
+%</these-sample|flat-sample|flat-template|these-master|developpementII-sample>
+%<*these-sample|flat-sample|flat-template|these-master>
 %<<COMMENT
 % Sixième chapitre
 %COMMENT
-%</these-sample|single-sample|single-template|these-master>
-%<*these-sample|single-sample|single-template|these-master|conclusionII-sample>
-%<single-template>% \chapter{...}
-%<single-template>% ...
+%</these-sample|flat-sample|flat-template|these-master>
+%<*these-sample|flat-sample|flat-template|these-master|conclusionII-sample>
+%<flat-template>% \chapter{...}
+%<flat-template>% ...
 %<these-master>% \include{corps/}
 %<these-sample>\include{corps/conclusionII}
-%<*conclusionII-sample|single-sample>
+%<*conclusionII-sample|flat-sample>
 \chapter{Conclusion}
 Dans ce chapitre, nous concluons l'étude du rire du chaos.
 
 \lipsum[6-9]
-%</conclusionII-sample|single-sample>
-%</these-sample|single-sample|single-template|these-master|conclusionII-sample>
-%<*these-sample|single-sample|single-template|these-master>
+%</conclusionII-sample|flat-sample>
+%</these-sample|flat-sample|flat-template|these-master|conclusionII-sample>
+%<*these-sample|flat-sample|flat-template|these-master>
 %<<COMMENT
 %
 % Chapitre  de conclusion (générale)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %COMMENT
-%</these-sample|single-sample|single-template|these-master>
-%<*these-sample|single-sample|single-template|these-master|conclusion-master|conclusion-sample>
-%<single-template|conclusion-master>\chapter*{Conclusion}
-%<single-template|conclusion-master>% ...
+%</these-sample|flat-sample|flat-template|these-master>
+%<*these-sample|flat-sample|flat-template|these-master|conclusion-master|conclusion-sample>
+%<flat-template|conclusion-master>\chapter*{Conclusion}
+%<flat-template|conclusion-master>% ...
 %<these-sample|these-master>\include{corps/conclusion}
-%<*conclusion-sample|single-sample>
+%<*conclusion-sample|flat-sample>
 \chapter*{Conclusion générale}
 \lipsum[26-27]
 \section{Une section de conclusion}
@@ -1125,39 +1125,39 @@ Dans ce chapitre, nous concluons l'étude du rire du chaos.
 \lipsum[29-31]
 \section{Une autre section de conclusion}
 \lipsum[28-43]
-%</conclusion-sample|single-sample>
-%</these-sample|single-sample|single-template|these-master|conclusion-master|conclusion-sample>
-%<*these-sample|single-sample|single-template|these-master>
+%</conclusion-sample|flat-sample>
+%</these-sample|flat-sample|flat-template|these-master|conclusion-master|conclusion-sample>
+%<*these-sample|flat-sample|flat-template|these-master>
 %<<COMMENT
 %
 % Liste des références bibliographiques
 %COMMENT
-%<single-sample|these-sample>\printbibliography
-%<single-template|these-master>%\printbibliography
+%<flat-sample|these-sample>\printbibliography
+%<flat-template|these-master>%\printbibliography
 %<<COMMENT
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Début de la partie annexe éventuelle
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %COMMENT
-%<single-template|these-master>% \appendix
-%<these-sample|single-sample>\appendix
+%<flat-template|these-master>% \appendix
+%<these-sample|flat-sample>\appendix
 %<<COMMENT
 %
 % Premier chapitre annexe (éventuel)
 %COMMENT
-%</these-sample|single-sample|single-template|these-master>
-%<*single-template|annexe-masterI>
+%</these-sample|flat-sample|flat-template|these-master>
+%<*flat-template|annexe-masterI>
 %<<COMMENT
 % \chapter{...}
 % ...
 %COMMENT
-%</single-template|annexe-masterI>
-%<*these-sample|single-sample|single-template|these-master>
+%</flat-template|annexe-masterI>
+%<*these-sample|flat-sample|flat-template|these-master>
 %<these-master>% \include{annexes/annexeI}
 %<these-sample>\include{annexes/juridique}
-%</these-sample|single-sample|single-template|these-master>
-%<*juridique-sample|single-sample>
+%</these-sample|flat-sample|flat-template|these-master>
+%<*juridique-sample|flat-sample>
 \chapter{Documents juridiques}
 \label{chap-juridique}
 
@@ -1172,32 +1172,32 @@ Cette partie regroupe les documents juridiques officiels.
 \label{sec-autre-discours}
 
 \lipsum[31-50]
-%</juridique-sample|single-sample>
-%<*these-sample|single-sample|single-template|these-master>
+%</juridique-sample|flat-sample>
+%<*these-sample|flat-sample|flat-template|these-master>
 %<<COMMENT
 % Deuxième chapitre annexe (éventuel)
 %COMMENT
-%</these-sample|single-sample|single-template|these-master>
-%<*single-template|annexe-masterII>
+%</these-sample|flat-sample|flat-template|these-master>
+%<*flat-template|annexe-masterII>
 %<<COMMENT
 % \chapter{...}
 % ...
 %COMMENT
-%</single-template|annexe-masterII>
-%<*these-sample|single-sample|single-template|these-master>
+%</flat-template|annexe-masterII>
+%<*these-sample|flat-sample|flat-template|these-master>
 %<these-master>% \include{annexes/annexeII}
 %<these-sample>\include{annexes/listings}
-%</these-sample|single-sample|single-template|these-master>
-%<*listings-sample|single-sample>
+%</these-sample|flat-sample|flat-template|these-master>
+%<*listings-sample|flat-sample>
 \chapter{Programmes informatiques}
 \label{chap-listings}
 
 Les listings suivants sont au cœur de notre travail.
 
-%</listings-sample|single-sample>
+%</listings-sample|flat-sample>
 %<listings-sample>\lstinputlisting[caption={Il est l'heure}]{annexes/programmes/heure.c}
-%<*single-sample|heure-sample>
-%<single-sample>\begin{lstlisting}[caption={Il est l'heure}]
+%<*flat-sample|heure-sample>
+%<flat-sample>\begin{lstlisting}[caption={Il est l'heure}]
 #include <stdio.h>
 int heures, minutes, secondes;
 
@@ -1224,19 +1224,19 @@ void print_heure(void)
   if (secondes > 1) printf("s");
   printf("\n");
 }
-%<single-sample>\end{lstlisting}
-%</single-sample|heure-sample>
+%<flat-sample>\end{lstlisting}
+%</flat-sample|heure-sample>
 %<listings-sample>\lstinputlisting[caption={Factorielle}]{annexes/programmes/factorielle.c}
-%<*single-sample|factorielle-sample>
-%<single-sample>\begin{lstlisting}[caption={Factorielle}]
+%<*flat-sample|factorielle-sample>
+%<flat-sample>\begin{lstlisting}[caption={Factorielle}]
 int factorielle(int n)
 {
   if (n > 2) return n * factorielle(n - 1);
   return n;
 }
-%<single-sample>\end{lstlisting}
-%</single-sample|factorielle-sample>
-%<*these-sample|single-sample|single-template|these-master>
+%<flat-sample>\end{lstlisting}
+%</flat-sample|factorielle-sample>
+%<*these-sample|flat-sample|flat-template|these-master>
 %<<COMMENT
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1248,14 +1248,14 @@ int factorielle(int n)
 %
 % (Facultatif) Glossaire (si souhaité distinct de la liste des acronymes) :
 %COMMENT
-%<single-template|these-master>% \printglossary
-%<these-sample|single-sample>\printglossary
+%<flat-template|these-master>% \printglossary
+%<these-sample|flat-sample>\printglossary
 %<<COMMENT
 %
 % (Facultatif) Index :
 %COMMENT
-%<single-template|these-master>% \printindex
-%<these-sample|single-sample>\printindex
+%<flat-template|these-master>% \printindex
+%<these-sample|flat-sample>\printindex
 %<<COMMENT
 %
 % Table des matières
@@ -1273,7 +1273,7 @@ int factorielle(int n)
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-%</these-sample|single-sample|single-template|these-master>
+%</these-sample|flat-sample|flat-template|these-master>
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -1344,4 +1344,16 @@ int factorielle(int n)
 %
 %    \begin{macrocode}
 %</bibliography-sample>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%<*README-images-master>
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+Vous pouvez stocker les images de votre thèse dans le présent répertoire.
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+%</README-images-master>
 %    \end{macrocode}

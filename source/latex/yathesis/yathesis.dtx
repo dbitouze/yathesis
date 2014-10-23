@@ -157,10 +157,20 @@ This work consists of the file  yathesis.dtx
 \def\YAD@packagename{\YAD@classname doc}
 \def\YAD@sampletemplates{\jobname-samples-templates}
 \def\YAD@addons{addons}
-\def\YAD@singlefiletemplate{single-file-template}
-\def\YAD@singlefilesample{single-file-sample}
-\def\YAD@masterslavesfilestemplate{master-slaves-files-template}
-\def\YAD@sample{master-slaves-files-sample}
+% \def\YAD@flattemplate{flat-template}
+% \def\YAD@flatsample{flat-sample}
+% \def\YAD@treetemplate{tree-template}
+% \def\YAD@sample{tree-sample}
+%</install>
+%<*install|class-doc-package>
+\def\YAD@sample{specimens}
+\def\YAD@template{canevas}
+\def\YAD@flattemplate{\YAD@template/a-plat}
+\def\YAD@flatsample{\YAD@sample/a-plat}
+\def\YAD@treetemplate{\YAD@template/en-arborescence}
+\def\YAD@treesample{\YAD@sample/en-arborescence}
+%</install|class-doc-package>
+%<*install>
 \usedir{/}
 \generate{
   \nopreamble\nopostamble
@@ -189,33 +199,33 @@ This work consists of the file  yathesis.dtx
   \nopreamble\nopostamble
   \file{README}{\from{\jobname.dtx}{readme}}
 }%
-\usedir{doc/latex/\YAD@classname/\YAD@singlefiletemplate}
+\usedir{doc/latex/\YAD@classname/\YAD@flattemplate}
 \generate{
   \nopreamble\nopostamble
   \file{latexmkrc}{\from{\jobname.dtx}{samples-templates-latexmkrc}}
-  \file{these.tex}{\from{\YAD@sampletemplates.dtx}{single-template}}
+  \file{these.tex}{\from{\YAD@sampletemplates.dtx}{flat-template}}
 }%
-\usedir{doc/latex/\YAD@classname/\YAD@singlefilesample}
+\usedir{doc/latex/\YAD@classname/\YAD@flatsample}
 \generate{
   \nopreamble\nopostamble
   \file{latexmkrc}{\from{\jobname.dtx}{samples-templates-latexmkrc}}
-  \file{these.tex}{\from{\YAD@sampletemplates.dtx}{single-sample}}
+  \file{these.tex}{\from{\YAD@sampletemplates.dtx}{flat-sample}}
   \file{bibliographie.bib}{\from{\YAD@sampletemplates.dtx}{bibliography-sample}}
 }%
-\usedir{doc/latex/\YAD@classname/\YAD@sample}
+\usedir{doc/latex/\YAD@classname/\YAD@treesample}
 \generate{
   \nopreamble\nopostamble
   \file{latexmkrc}{\from{\jobname.dtx}{samples-templates-latexmkrc}}
   \file{these.tex}{\from{\YAD@sampletemplates.dtx}{these-sample}}
 }%
-\usedir{doc/latex/\YAD@classname/\YAD@sample/configuration}
+\usedir{doc/latex/\YAD@classname/\YAD@treesample/configuration}
 \generate{
   \nopreamble\nopostamble
   \file{characteristics.tex}{\from{\YAD@sampletemplates.dtx}{characteristics-sample}}
   \file{thesis.cfg}{\from{\YAD@sampletemplates.dtx}{cfg-sample}}
   \file{macros.tex}{\from{\YAD@sampletemplates.dtx}{macros-sample}}
 }%
-\usedir{doc/latex/\YAD@classname/\YAD@sample/corps}
+\usedir{doc/latex/\YAD@classname/\YAD@treesample/corps}
 \generate{
   \nopreamble\nopostamble
   \file{conclusion.tex}{\from{\YAD@sampletemplates.dtx}{conclusion-sample}}
@@ -227,7 +237,7 @@ This work consists of the file  yathesis.dtx
   \file{developpementII.tex}{\from{\YAD@sampletemplates.dtx}{developpementII-sample}}
   \file{introduction.tex}{\from{\YAD@sampletemplates.dtx}{introduction-sample}}
 }%
-\usedir{doc/latex/\YAD@classname/\YAD@sample/liminaires}
+\usedir{doc/latex/\YAD@classname/\YAD@treesample/liminaires}
 \generate{
   \nopreamble\nopostamble
   \file{dedicaces.tex}{\from{\YAD@sampletemplates.dtx}{dedications-sample}}
@@ -237,19 +247,19 @@ This work consists of the file  yathesis.dtx
   \file{remerciements.tex}{\from{\YAD@sampletemplates.dtx}{acknowledgments-sample}}
   \file{resumes.tex}{\from{\YAD@sampletemplates.dtx}{abstract-sample}}
 }%
-\usedir{doc/latex/\YAD@classname/\YAD@sample/annexes}
+\usedir{doc/latex/\YAD@classname/\YAD@treesample/annexes}
 \generate{
   \nopreamble\nopostamble
   \file{juridique.tex}{\from{\YAD@sampletemplates.dtx}{juridique-sample}}
   \file{listings.tex}{\from{\YAD@sampletemplates.dtx}{listings-sample}}
 }%
-\usedir{doc/latex/\YAD@classname/\YAD@sample/annexes/programmes}
+\usedir{doc/latex/\YAD@classname/\YAD@treesample/annexes/programmes}
 \generate{
   \nopreamble\nopostamble
   \file{factorielle.c}{\from{\YAD@sampletemplates.dtx}{factorielle-sample}}
   \file{heure.c}{\from{\YAD@sampletemplates.dtx}{heure-sample}}
 }%
-\usedir{doc/latex/\YAD@classname/\YAD@sample/auxiliaires}
+\usedir{doc/latex/\YAD@classname/\YAD@treesample/auxiliaires}
 \generate{
   \nopreamble\nopostamble
   \file{acronymes.tex}{\from{\YAD@sampletemplates.dtx}{acronyms-sample}}
@@ -257,37 +267,42 @@ This work consists of the file  yathesis.dtx
   \file{symboles.tex}{\from{\YAD@sampletemplates.dtx}{symbols-sample}}
   \file{bibliographie.bib}{\from{\YAD@sampletemplates.dtx}{bibliography-sample}}
 }%
-\usedir{doc/latex/\YAD@classname/\YAD@masterslavesfilestemplate}
+\usedir{doc/latex/\YAD@classname/\YAD@treetemplate}
 \generate{
   \nopreamble\nopostamble
   \file{latexmkrc}{\from{\jobname.dtx}{samples-templates-latexmkrc}}
   \file{these.tex}{\from{\YAD@sampletemplates.dtx}{these-master}}
 }%
-\usedir{doc/latex/\YAD@classname/\YAD@masterslavesfilestemplate/configuration}
+\usedir{doc/latex/\YAD@classname/\YAD@treetemplate/configuration}
 \generate{
   \nopreamble\nopostamble
   \file{characteristics.tex}{\from{\YAD@sampletemplates.dtx}{characteristics-master}}
   \file{thesis.cfg}{\from{\YAD@sampletemplates.dtx}{cfg-master}}
   \file{macros.tex}{\from{\YAD@sampletemplates.dtx}{macros-master}}
 }%
-\usedir{doc/latex/\YAD@classname/\YAD@masterslavesfilestemplate/auxiliaires}
+\usedir{doc/latex/\YAD@classname/\YAD@treetemplate/auxiliaires}
 \generate{
   \nopreamble\nopostamble
   \file{bibliographie.bib}{\from{\YAD@sampletemplates.dtx}{bibliography-master}}
 }%
-\usedir{doc/latex/\YAD@classname/\YAD@masterslavesfilestemplate/annexes}
+\usedir{doc/latex/\YAD@classname/\YAD@treetemplate/annexes}
 \generate{
   \nopreamble\nopostamble
   \file{annexeI.tex}{\from{\YAD@sampletemplates.dtx}{annexe-masterI}}
   \file{annexeII.tex}{\from{\YAD@sampletemplates.dtx}{annexe-masterII}}
 }%
-\usedir{doc/latex/\YAD@classname/\YAD@masterslavesfilestemplate/corps}
+\usedir{doc/latex/\YAD@classname/\YAD@treetemplate/corps}
 \generate{
   \nopreamble\nopostamble
   \file{conclusion.tex}{\from{\YAD@sampletemplates.dtx}{conclusion-master}}
   \file{introduction.tex}{\from{\YAD@sampletemplates.dtx}{introduction-master}}
 }%
-\usedir{doc/latex/\YAD@classname/\YAD@masterslavesfilestemplate/liminaires}
+\usedir{doc/latex/\YAD@classname/\YAD@treetemplate/images}
+\generate{
+  \nopreamble\nopostamble
+  \file{README.txt}{\from{\YAD@sampletemplates.dtx}{README-images-master}}
+}%
+\usedir{doc/latex/\YAD@classname/\YAD@treetemplate/liminaires}
 \generate{
   \nopreamble\nopostamble
   \file{dedicaces.tex}{\from{\YAD@sampletemplates.dtx}{dedications-master}}
@@ -1670,13 +1685,13 @@ description={#5}}%
 \newtcbinputlisting{\preamblesample}[3][these.tex]{%
   samples,
   drop lifted shadow,
-  listing file={master-slaves-files-sample/#1},
+  listing file={\YAD@treesample/#1},
   listing options={rangebeginprefix=\\,rangeendsuffix=\},#2},
   #3,
 }%
 \newtcbinputlisting{\bodysample}[3][these.tex]{%
   samples,
-  listing file={master-slaves-files-sample/#1},
+  listing file={\YAD@treesample/#1},
   listing options={rangebeginprefix=\\,rangeendsuffix=\},#2},
   #3,
 }%
@@ -1767,9 +1782,9 @@ description={#5}}%
 % \Package{zref} avec l'option ×xr× dans le \File{.tex} où sont
 % incluses les pages du \File{.pdf} externe.
 %    \begin{macrocode}
-\zexternaldocument{master-slaves-files-sample/these}%
+\zexternaldocument{\YAD@treesample/these}%
 \newcommand{\screenshot}[2][.45]{%
-  \fbox{\includegraphics[bylabel=#2,width=#1\linewidth-2\fboxsep-2\fboxrule]{master-slaves-files-sample/these}}%
+  \fbox{\includegraphics[bylabel=#2,width=#1\linewidth-2\fboxsep-2\fboxrule]{\YAD@treesample/these}}%
 }%
 %    \end{macrocode}
 %
