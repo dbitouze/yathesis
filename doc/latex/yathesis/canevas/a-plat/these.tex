@@ -1,0 +1,305 @@
+% Document de classe yathesis
+\documentclass{yathesis}
+%
+% Chargement manuel de packages (pas déjà chargés par la classe yathesis)
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{kpfonts}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{pgfplots}
+\usepackage{floatrow}
+\usepackage{caption}
+\usepackage{microtype}
+\usepackage{varioref}
+%\usepackage[xindy,quiet]{imakeidx}
+%\usepackage[autostyle]{csquotes}
+%\usepackage[backend=biber,safeinputenc]{biblatex}
+\usepackage{hyperref}
+%\usepackage[xindy,acronyms,symbols]{glossaries}
+%
+% (Facultatif) Génération de l'index (obligatoire si un package d'index, par
+% exemple « imakeidx », est chargé):
+% \makeindex
+%
+% (Facultatif) Spécification de la ou des ressources bibliographiques
+% (obligatoire si le package « biblatex » est chargé) :
+% \addbibresource{}
+% \addbibresource{}
+%
+% (Facultatif) Génération du glossaire (obligatoire si le package « glossaries »
+% est chargé) :
+% \makeglossaries
+%
+% (Facultatif) Spécification de la ou des ressources terminologiques :
+% \loadglsentries{}
+% \loadglsentries{}
+% \loadglsentries{}
+%
+% (Facultatif) Configuration des styles du glossaire et de la liste
+% d'acronymes :
+% \setglossarystyle{}
+% \setacronymstyle{}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Début du document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Caractéristiques du document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Préparation des pages de couverture et de titre
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Auteur de la thèse : prénom (1er argument obligatoire), nom (2e argument
+% obligatoire) et éventuel courriel (argument optionnel). Les éventuels accents
+% devront figurer et le nom /ne/ doit /pas/ être saisi en capitales :
+\author[]{}{}
+%
+% Titre de la thèse dans la langue principale (argument obligatoire) et dans la
+% langue secondaire (argument optionnel) :
+\title[]{}
+%
+% (Facultatif) Sous-titre de la thèse dans la langue principale (argument
+% obligatoire) et dans la langue secondaire (argument optionnel) :
+% \subtitle[]{}
+%
+% Champ disciplinaire dans la langue principale (argument obligatoire) et dans
+% la langue secondaire (argument optionnel) :
+\academicfield[]{}
+%
+% (Facultatif) Spécialité dans la langue principale (argument obligatoire) et
+% dans la langue secondaire (argument optionnel) :
+\speciality[]{}
+%
+% Date de la soutenance, au format {jour}{mois}{année} donnés sous forme de
+% nombres :
+\date{}{}{}
+%
+% (Facultatif) Date de la soumission, au format {jour}{mois}{année} donnés sous
+% forme de nombres :
+%\submissiondate{}{}{}
+%
+% (Facultatif) Sujet pour les méta-données du PDF :
+\subject[]{}
+%
+% (Facultatif) Nom (argument obligatoire) du PRES :
+\pres[logo=,url=]{}
+%
+% Nom (argument obligatoire) de l'institut (principal en cas de cotutelle) :
+\institute[logo=,url=]{}
+%
+% (Facultatif) En cas de cotutelle (normalement, seulement dans le cas de
+% cotutelle internationale), nom (argument obligatoire) du second institut :
+% \coinstitute[logo=]{}
+%
+% (Facultatif) Nom (argument obligatoire) de l'école doctorale :
+\doctoralschool[url=]{}
+%
+% Nom (1er argument obligatoire) et adresse (2e argument obligatoire) du
+% laboratoire (ou de l'unité) où la thèse a été préparée, à utiliser /autant de
+% fois que nécessaire/ :
+\laboratory[
+logo=,
+telephone=,
+fax=,
+email=,
+url=
+]{}{%
+  \\
+  \\
+  \\
+  \\
+  \\
+  }
+%
+% Directeur(s) de thèse et membres du jury, saisis au moyen des commandes
+% \supervisor, \cosupervisor, \comonitor, \referee, \committeepresident,
+% \examiner, \guest, à utiliser /autant de fois que nécessaire/ et /seulement
+% si nécessaire/. Toutes basées sur le même modèle, ces commandes ont
+% 2 arguments obligatoires, successivement les prénom et nom de chaque
+% personne. Si besoin est, on peut apporter certaines précisions en argument
+% optionnel, essentiellement au moyen des clés suivantes :
+% - « professor », « seniorresearcher », « mcf », « mcf* »,
+%   « juniorresearcher », « juniorresearcher* » (qui peuvent ne pas prendre de
+%   valeur) pour stipuler le corps auquel appartient la personne ;
+% - « affiliation » pour stipuler l'institut auquel est affiliée la personne ;
+% - « female » pour stipuler que la personne est une femme pour que certains
+%   mots clés soient accordés en genre.
+%
+\supervisor[,affiliation=]{}{}
+% \cosupervisor[,affiliation=]{}{}
+% \comonitor[,affiliation=]{}{}
+\referee[,affiliation=]{}{}
+\referee[,affiliation=]{}{}
+\committeepresident[,affiliation=]{}{}
+\examiner[,affiliation=]{}{}
+\examiner[,affiliation=]{}{}
+\examiner[,affiliation=]{}{}
+% \guest{}{}
+%
+% (Facultatif) Mention du numéro d'ordre de la thèse (s'il est connu, ce numéro
+% est à spécifier en argument optionnel) :
+% \ordernumber[]
+%
+% Préparation des mots clés dans la langue principale (1er argument) et dans la
+% langue secondaire (2e argument)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\keywords{}{}
+%
+% Production des pages de couverture et de titre
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\maketitle
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Début de la partie liminaire de la thèse
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% (Facultatif) Production de la page de clause de non-responsabilité :
+\makedisclaimer
+%
+% (Facultatif) Production de la page de mots clés :
+\makekeywords
+%
+% (Facultatif) Production de la page affichant les logo, nom et coordonnées du
+% ou des laboratoires (ou unités de recherche) où la thèse a été préparée :
+\makelaboratory
+%
+% (Facultatif) Dédicace(s) :
+\dedication{}
+\dedication{}
+% (Facultatif) Production de la page de dédicace(s) :
+\makededications
+%
+% (Facultatif) Épigraphe(s) :
+\frontepigraph{}{}
+\frontepigraph{}{}
+% (Facultatif) Production de la page de d'épigraphe(s) :
+\makefrontepigraphs
+%
+% Résumés (de 1700 caractères maximum, espaces compris) dans la
+% langue principale (1re occurrence de l'environnement « abstract »)
+% et, facultativement, dans la langue secondaire (2e occurrence de
+% l'environnement « abstract ») :
+\begin{abstract}
+% ...
+\end{abstract}
+\begin{abstract}
+% ...
+\end{abstract}
+%
+% Production de la page de résumés :
+\makeabstract
+%
+% (Facultatif) Chapitre de remerciements :
+\chapter{Remerciements}
+% ...
+%
+% (Facultatif) Chapitre d'avertissement :
+% \chapter{Avertissement}
+% ...
+%
+% (Facultatif) Liste des acronymes :
+% \printacronyms
+%
+% (Facultatif) Liste des symboles :
+% \printsymbols
+%
+% (Facultatif) Chapitre d'avant-propos :
+% \chapter{Avant-propos}
+% ...
+%
+% Sommaire
+\tableofcontents[depth=chapter,name=Sommaire]
+%
+% (Facultatif) Liste des tableaux :
+\listoftables
+%
+% (Facultatif) Table des figures :
+\listoffigures
+%
+% (Facultatif) Table des listings (nécessite que le package « listings » soit
+% chargé) :
+% \lstlistoflistings
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Début de la partie principale (du « corps ») de la thèse
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mainmatter
+%
+% Chapitre d'introduction (générale)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter*{Introduction}
+% ...
+%
+% Chapitres ordinaires (avec parties éventuelles)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Première partie éventuelle
+% \part{...}
+%
+% Premier chapitre
+% \chapter{...}
+% ...
+% Deuxième chapitre
+% \chapter{...}
+% ...
+% Troisième chapitre
+% \chapter{...}
+% ...
+%
+%
+% Deuxième partie éventuelle
+% \part{...}
+%
+% Quatrième chapitre
+% \chapter{...}
+% ...
+% Cinquième chapitre
+% \chapter{...}
+% ...
+% Sixième chapitre
+% \chapter{...}
+% ...
+%
+% Chapitre  de conclusion (générale)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter*{Conclusion}
+% ...
+%
+% Liste des références bibliographiques
+%\printbibliography
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Début de la partie annexe éventuelle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \appendix
+%
+% Premier chapitre annexe (éventuel)
+% \chapter{...}
+% ...
+% Deuxième chapitre annexe (éventuel)
+% \chapter{...}
+% ...
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Début de la partie finale
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\backmatter
+%
+% (Facultatif) Glossaire (si souhaité distinct de la liste des acronymes) :
+% \printglossary
+%
+% (Facultatif) Index :
+% \printindex
+%
+% Table des matières
+\tableofcontents
+%
+% (Facultatif) Production de la 4e de couverture :
+\makebackcover
+%
+\end{document}
