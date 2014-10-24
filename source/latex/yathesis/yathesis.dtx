@@ -344,8 +344,8 @@ This work consists of the file  yathesis.dtx
 % (×\includeall×/×\includeonly×) des différents fichiers esclaves de la
 % documentation soient versionnées, elles ne se font désormais plus directement
 % dans le présent \File{yathesis.dtx}, mais dans le fichier non versionné
-% \File{includeall-includeonly.tex}. En cas d'absence de ce fichier, tous les
-% fichiers esclaves sont inclus.
+% \File{includeall-includeonly.tex}. Ce fichier n'est inclus que s'il existe et,
+% dans le cas contraire, tous les fichiers esclaves sont inclus.
 \InputIfFileExists{includeall-includeonly}{}{}
 %
 \begin{document}
