@@ -340,28 +340,14 @@ This work consists of the file  yathesis.dtx
 \documentclass[english,french]{ltxdoc}
 \usepackage{yathesisdoc}
 %
-\includeall
-\includeonly{%
-  % sections/introduction,
-  % sections/proprietes-document,
-  % sections/pages-titre,
-  % sections/pages-liminaires,
-  % sections/pages-corps,
-  % sections/pages-annexes,
-  % sections/pages-finales,
-  % sections/personnalisation,
-  % sections/recommandations,
-  % sections/installation,
-  sections/specimens-canevas,
-  % sections/add-ons,
-  % sections/faq,
-  % sections/fichiers-charges,
-  % sections/packages-charges,
-  % sections/aspects,
-  % sections/notations,
-  % sections/usage-avance,
-  % sections/developpements
-}%
+% Comme il est inutile que les modifications d'inclusion/exclusion
+% (×\includeall×/×\includeonly×) des différents fichiers esclaves de la
+% documentation soient versionnées, elles ne se font désormais plus directement
+% dans le présent \File{yathesis.dtx}, mais dans le fichier non versionné
+% \File{includeall-includeonly.tex}. En cas d'absence de ce fichier, tous les
+% fichiers esclaves sont inclus.
+\InputIfFileExists{includeall-includeonly}{}{}
+%
 \begin{document}
 \DocInput{\jobname.dtx}
 \end{document}
@@ -1384,11 +1370,6 @@ This work consists of the file  yathesis.dtx
   % % \protect\marginpar{\scriptsize NEW ! (#1, #2)}%
   % \else%
   % \fi%
-}%
-%
-\newcommand{\includeall}{%
-  \renewcommand\includeonly[1]{}%
-  % \let\include\input%
 }%
 %
 \setlength\bibinitsep{1.25\baselineskip}
