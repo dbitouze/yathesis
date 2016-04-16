@@ -1,6 +1,6 @@
 % \iffalse meta-comment
 %
-% Copyright (C) 2012, 2013, 2014 by Denis Bitouz'e <denis.bitouze@lmpa.univ-littoral.fr>
+% Copyright (C) 2012, 2013, 2014, 2015, 2016 by Denis Bitouz'e <denis.bitouze@lmpa.univ-littoral.fr>
 % --------------------------------------------------------------------------------------
 % This work may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License, either version 1.3
@@ -28,15 +28,16 @@ Released under the LaTeX Project Public License v1.3c or later
 See http://www.latex-project.org/lppl.txt
 -----------------------------------------------------------------------
 
-The yathesis bundle provides a LaTeX class file to help to write a
-thesis following French rules.
+The `yathesis' bundle provides a LaTeX class file to help to write a thesis
+following French rules.
 
 Installation
 ------------
 
-The class is supplied in dtx format. If you want to unpack the dtx yourself,
-running 'xetex yathesis.dtx' will extract the class whereas 'xelatex
-yathesis.dtx will extract it and also typeset the documentation.
+The class is supplied in `.dtx' format. If you want to unpack the `.dtx'
+yourself, running 'xetex yathesis.dtx' will extract the class whereas
+%
+'xelatex yathesis.dtx will extract it and also typeset the documentation.
 
              ******************************
              *                            *
@@ -96,7 +97,7 @@ To compile the documentation without error, you will need the packages:
 - cleveref
 
 2. a complete pdflatex run of these.tex to be found in the
-'specimen/en-arborescence' subdirectory of the current directory, with
+'specimens/en-arborescence' subdirectory of the current directory, with
 'yathesis-demo' package load at first place. If latexmk is available, it is
 easier to run:
 
@@ -150,7 +151,6 @@ This work consists of the file  yathesis.dtx
           and the derived files yathesis.cls,
                                 yathesis.ins,
                                 yathesis.pdf,
-                                yathesisdoc.sty,
                                 and a number of configuration files.
 \endpostamble
 %
@@ -163,19 +163,19 @@ This work consists of the file  yathesis.dtx
 % \def\YAD@treetemplate{tree-template}
 % \def\YAD@sample{tree-sample}
 %</install>
-%<*install|class-doc-package>
+%<*install>
 \def\YAD@sample{specimens}
 \def\YAD@template{canevas}
 \def\YAD@flattemplate{\YAD@template/a-plat}
 \def\YAD@flatsample{\YAD@sample/a-plat}
 \def\YAD@treetemplate{\YAD@template/en-arborescence}
 \def\YAD@treesample{\YAD@sample/en-arborescence}
-%</install|class-doc-package>
+%</install>
 %<*install>
 \usedir{/}
 \generate{
   \nopreamble\nopostamble
-  \file{README}{\from{\jobname.dtx}{readme}}
+  \file{README.md}{\from{\jobname.dtx}{readme}}
 }%
 \usedir{tex/latex/\YAD@classname}
 \generate{%
@@ -188,17 +188,11 @@ This work consists of the file  yathesis.dtx
 \usedir{source/latex/\YAD@classname}
 \generate{
   \file{\YAD@classname.ins}{\from{\jobname.dtx}{install}}
-  \file{\YAD@packagename.sty}{\from{\jobname.dtx}{class-doc-package}}
   \file{\YAD@classname.drv}{\from{\jobname.dtx}{driver}}%
   \nopreamble\nopostamble
   \file{lstlang0.sty}{\from{\jobname.dtx}{class-lstlang0}}
   \file{latexmkrc}{\from{\jobname.dtx}{class-latexmkrc}}
   \file{translations.tex}{\from{\jobname.dtx}{translations}}
-}%
-\usedir{doc/latex/\YAD@classname}
-\generate{
-  \nopreamble\nopostamble
-  \file{README}{\from{\jobname.dtx}{readme}}
 }%
 \usedir{doc/latex/\YAD@classname/\YAD@flattemplate}
 \generate{
@@ -338,14 +332,28 @@ This work consists of the file  yathesis.dtx
 \ReplaceClass{article}{report}
 \BeforePackage{doc}{\let\oldmaketitle\maketitle}
 \documentclass[english,french]{ltxdoc}
-\usepackage{yathesisdoc}
+\usepackage{denisbdoc}
+\usepackage[lining]{libertine}
+\renewcommand{\ttdefault}{lmtt}
+\makeatletter
+\@ifpackageloaded{glossaries}{%
+}{%
+  \usepackage[xindy,toc,hyperfirst=false]{glossaries}%
+  \makeglossaries
+  \setglossarystyle{indexhypergroup}
+  \setacronymstyle{long-sc-short}
+}
+\makeatother
+\loadglsentries{glossaries/glossary}
+\loadglsentries{glossaries/acronyms}
+\addbibresource{yathesis.bib}
 %
 % Comme il est inutile que les modifications d'inclusion/exclusion
 % (×\includeall×/×\includeonly×) des différents fichiers esclaves de la
 % documentation soient versionnées, elles ne se font désormais plus directement
-% dans le présent \File{yathesis.dtx}, mais dans le fichier non versionné
-% \File{includeall-includeonly.tex}. Ce fichier n'est inclus que s'il existe et,
-% dans le cas contraire, tous les fichiers esclaves sont inclus.
+% incluses dans le présent \File{yathesis.dtx}, mais dans le fichier non
+% versionné \File{includeall-includeonly.tex}. Ce fichier n'est inclus que s'il
+% existe et, dans le cas contraire, tous les fichiers esclaves sont inclus.
 \InputIfFileExists{includeall-includeonly}{}{}
 %
 \begin{document}
@@ -1272,491 +1280,6 @@ This work consists of the file  yathesis.dtx
 %</class>
 %    \end{macrocode}
 %
-%    \begin{macrocode}
-%<*class-doc-package>
-%    \end{macrocode}
-%
-%    \begin{macrocode}
-\let\maketitle\oldmaketitle
-%    \end{macrocode}
-%
-%    \begin{macrocode}
-\PassOptionsToPackage{obeyspaces}{url}
-%    \end{macrocode}
-%
-%    \begin{macrocode}
-\RequirePackage{xpatch}%
-% Pour pouvoir disposer disposer d'autant de \enquote{flots} d'écriture dans
-% des fichiers annexes que nécessaire. Il est chargé en fin de préambule sans
-% quoi la compilation s'arrête longuement à la ligne
-% ×(/usr/local/texlive/2013/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg)×
-% (problème rapporté à l'auteur du package).
-%    \begin{macrocode}
-\AtEndPreamble{\RequirePackage{morewrites}}%
-%
-\let\YAD@ORI@task\task
-\let\task\relax
-\RequirePackage{exsheets}
-\let\task\YAD@ORI@task
-\RequirePackage{parskip}%
-\RequirePackage{amsthm}%
-\RequirePackage{thmtools}%
-\RequirePackage{fixfoot}%
-\RequirePackage[inline]{enumitem}%
-\RequirePackage{afterpage}%
-\RequirePackage{tabulary}%
-\RequirePackage{calc}%
-\RequirePackage[lining]{libertine}%
-\RequirePackage[a4paper]{geometry}%
-\RequirePackage{siunitx}%
-\RequirePackage[notindex]{tocbibind}%
-\RequirePackage[backend=biber,style=authortitle,autopunct=false,useprefix=true,backref,dashed=false]{biblatex}%
-\RequirePackage{listings}%
-\RequirePackage{varioref}%
-\RequirePackage{xspace}%
-\RequirePackage{booktabs}%
-\RequirePackage[xr]{zref}%
-\RequirePackage[multiple,bottom]{footmisc}%
-\RequirePackage{rotating}%
-\RequirePackage{pdflscape}%
-\RequirePackage{hologo}%
-\RequirePackage{xifthen}%
-\RequirePackage{iflang}%
-\RequirePackage{amssymb}%
-\RequirePackage{tocvsec2}%
-\RequirePackage[autostyle=once]{csquotes}%
-%
-\RequirePackage{tikz}%
-\usetikzlibrary{trees,backgrounds,fit,calc,positioning}
-%
-\RequirePackage{tcolorbox}%
-\RequirePackage{comment}%
-\RequirePackage{path}%
-\RequirePackage{fontawesome}%
-\RequirePackage{textcase}%
-\RequirePackage{multicol}%
-\RequirePackage{babel}%
-\RequirePackage[nodayofweek]{datetime}%
-\RequirePackage{floatrow}%
-\RequirePackage{subcaption}%
-\RequirePackage{hyperref}%
-\RequirePackage{nameref}%
-\RequirePackage[all]{hypcap}%
-\RequirePackage[numbered]{bookmark}%
-\RequirePackage[xindy,toc,hyperfirst=false]{glossaries}%
-\RequirePackage{cleveref}%
-%
-\hypersetup{colorlinks}%
-%
-\newbool{afterbegindocument}%
-\AtBeginDocument{%
-  \booltrue{afterbegindocument}%
-}%
-\presetkeys{todonotes}{fancyline, color=white}{}%
-\newcommand{\alert}[1]{\begingroup\color{red}#1\endgroup}%
-\let\YAD@ORI@changes\changes%
-\renewcommand{\changes}{%
-  \@ifstar{\@tempswatrue\YAD@changes}{\@tempswafalse\YAD@changes}%
-}%
-\newcommand{\YAD@changes}[3]{%
-  \YAD@ORI@changes{#1}{#2}{%
-    \if@tempswa%
-    \alert{#3}%
-    \else%
-    #3%
-    \fi%
-  }%
-  % \if@tempswa%
-  % % \protect\marginpar{\scriptsize NEW ! (#1, #2)}%
-  % \else%
-  % \fi%
-}%
-%
-\setlength\bibinitsep{1.25\baselineskip}
-%
-\setglossarystyle{indexhypergroup}
-\setacronymstyle{long-sc-short}
-%
-\SetupExSheets[question]{type=exam}
-\SetupExSheets[solution]{print=true}
-%
-\SetCiteCommand{\autocite}
-%
-\renewcommand{\ttdefault}{lmtt}
-%
-\renewcommand{\generalname}{Général}%
-%
-\xapptocmd{\@chapter}{%
-  \addtocontents{dbwarninglist}{\protect\addvspace{10\p@}}%
-  \addtocontents{dbremarklist}{\protect\addvspace{10\p@}}%
-  \addtocontents{dbexamplelist}{\protect\addvspace{10\p@}}%
-  \addtocontents{dbfaqlist}{\protect\addvspace{10\p@}}%
-}{}{}
-%
-\sisetup{locale=FR,detect-all}
-\floatsetup[table]{style=plaintop}
-%
-% \DeclareRobustCommand*{\package}{\textsf}
-% \DeclareRobustCommand*{\Package}[1]{%
-%   \IfLanguageName{french}{package }{}%
-%   \package{#1}%
-%   \IfLanguageName{english}{ package}{}%
-%   \xspace%
-% }%
-\DeclareRobustCommand*{\package}{%
-  \texorpdfstring{%
-    \@ifstar{\package@star}{\package@nostar}%
-  }{%
-    \package@nostar%
-  }%
-}
-\DeclareRobustCommand*{\package@star}[2][]{%
-  \ifthenelse{\isempty{#1}}{%
-    \href{http://www.ctan.org/pkg/#2}{\textsf{#2}}%
-  }{%
-    \href{#1}{\textsf{#2}}%
-  }%
-}
-\DeclareRobustCommand*{\package@nostar}[2][]{%
-  \textsf{#2}%
-}
-\DeclareRobustCommand*{\Package}{%
-  \IfLanguageName{french}{package }{}%
-  \@ifstar{\package@star}{\package@nostar}%
-  % \IfLanguageName{english}{ package}{}%
-  % \xspace%
-}
-%
-\DeclareRobustCommand*{\class}{\package}
-\DeclareRobustCommand*{\Class}{%
-  \texorpdfstring{%
-    \IfLanguageName{french}{classe }{}%
-    \@ifstar{\package@star}{\package@nostar}%
-  }{%
-    \IfLanguageName{french}{classe }{}%
-    \package@nostar%
-  }%
-  % \@ifstar{\package@star}{\package@nostar}%
-  % \IfLanguageName{english}{ class}{}%
-  % \xspace%
-}%
-%
-\newcommand*{\file}[1]{\bgroup% \color{magenta}
-  \texttt{#1}\egroup}
-\newcommand*{\File}[1]{%
-  \IfLanguageName{french}{fichier }{}%
-  \file{#1}%
-  \IfLanguageName{english}{ file}{}%
-  \xspace%
-}%
-\newcommand*{\directory}{\file}
-\newcommand*{\Directory}[1]{%
-  \IfLanguageName{french}{répertoire }{}%
-  \directory{#1}%
-  \IfLanguageName{english}{ directory}{}%
-  \xspace%
-}%
-%
-\newcommand{\links}[3][]{\href{#2#3#1}{\texttt{#3}} \href{http://mirror.ctan.org/macros/latex/contrib/yathesis/#2#3#1}{\faExternalLink}}%
-\newcommand{\etctree}{...}
-\newcommand{\filetree}[1]{\links{\folder/\subfolder/}{#1}}
-\newcommand{\pdffiletree}[1]{\filetree{#1.pdf}}
-\newcommand{\texfiletree}[1]{\filetree{#1.tex}}
-\newcommand{\zipfiletree}{\bfseries\color{red}\links{\folder/}{\subfolder.zip}}
-\newcommand{\directorytree}{\bfseries\color{blue}\links[.]{}{\folder/}}
-\newcommand{\subdirectorytree}{{\bfseries\color{blue}\links[.]{\folder/}{\subfolder/}}}
-%
-\colorlet{specimens}{yellow!30}
-\colorlet{canevas}{green!30}
-\colorlet{doc}{specimens!50!canevas}
-\colorlet{en-arborescence}{red!20}
-\colorlet{a-plat}{blue!20}
-%
-\DeclareRobustCommand*{\program}{\file}
-\DeclareUrlCommand\urldirectory{\urlstyle{tt}}
-%
-\AtBeginDocument{%
-  \renewcommand*{\meta}[2][meta]{%
-    \bgroup%
-    \normalfont
-    \ttfamily%
-    \textcolor{#1}{$\langle$\emph{#2}$\rangle$}%
-    \egroup%
-  }%
-}%
-%
-\colorlet{texcs}{blue}
-\colorlet{environment}{teal}
-\colorlet{key}{purple}
-\colorlet{value}{violet}
-\colorlet{keyword4}{key}
-\colorlet{keyword5}{magenta}
-\colorlet{comment}{gray}
-\colorlet{string}{cyan}
-\colorlet{meta}{brown}
-\colorlet{preamble}{violet}
-\lstset{%
-  escapeinside=÷÷,
-  breaklines=true,
-  basicstyle=\normalfont\ttfamily,
-  commentstyle=\color{comment},
-  keywordstyle=\color{environment},
-  keywordstyle=[2]\color{key},
-  keywordstyle=[3]\color{value},
-  keywordstyle=[4]\color{keyword4},
-  keywordstyle=[5]\color{keyword5},
-  stringstyle=\color{string},
-  columns=flexible,
-  % prebreak={\space\Righttorque},
-  % postbreak={\space\Lefttorque}
-}%
-\lstdefinestyle{dbtex}{%
-  language=[LaTeX]TeX,
-  alsolanguage=[extLaTeX]TeX,
-  alsolanguage=[yad]TeX,
-  alsolanguage=[glossaries]TeX,
-  alsolanguage=[biblatex]TeX,
-  alsolanguage=[tcolorbox]TeX,
-  texcsstyle=*\color{texcs},
-  % numbers=left,
-  numberstyle=\small,
-}%
-\lstset{style=dbtex}
-\lstMakeShortInline[style=dbtex]×
-%
-\tcbuselibrary{documentation,theorems,breakable,skins}
-%    \end{macrocode}
-%
-%    \begin{macrocode}
-\tcbset{dbtcb/.style={%
-    breakable,
-    fonttitle=\bfseries,
-    enlarge top by=1mm,
-    separator sign dash
-  }%
-}%
-%
-\newtcbtheorem[list inside=dbwarninglist,number within=chapter]{dbwarning}{Avertissement}{%
-  colback=red!5!white,
-  colframe=red!75!black,
-  dbtcb
-}{wa}
-%
-\newtcbtheorem[list inside=dbexamplelist,number within=chapter]{dbexample}{Exemple}{%
-  colback=lime!5!white,
-  colframe=lime!75!black,
-  dbtcb
-}{ex}
-%
-\newtcbtheorem[list inside=dbremarklist,number within=chapter]{dbremark}{Remarque}{%
-  colback=cyan!5!white,
-  colframe=cyan!75!black,
-  dbtcb
-}{rq}
-% FAQs sous forme de \enquote{théorème}.
-\newtcbtheorem[list inside=dbfaqlist,number within=chapter]{dbfaq}{Question}{%
-  colback=lightgray!5!white,
-  colframe=lightgray!75!black,
-  fontupper=\slshape,
-  dbtcb
-}{faq}
-%
-% Déclaration des nouveaux noms de \enquote{théorèmes} en vue d'en faciliter le
-% référencement grâce au \Package{cleveref}.
-\AtEndPreamble{%
-  \crefname{tcb@cnt@dbexample}{exemple}{exemples}%
-  \crefname{tcb@cnt@dbremark}{remarque}{remarques}%
-  \crefname{tcb@cnt@dbwarning}{avertissement}{avertissements}%
-  \crefname{tcb@cnt@dbfaq}{question}{questions}%
-}%
-%
-\tcbset{%
-  /tcb/doclang/environment content=contenu de l'environnement,
-  /tcb/doclang/color= (couleur),
-  /tcb/doclang/colors=Couleurs,
-  /tcb/doclang/environments=Environnements,
-  /tcb/doclang/keys=Clés,
-  /tcb/doclang/values=Valeurs,
-  /tcb/doclang/pageshort=p.,
-  /tcb/documentation listing style=dbtex,
-  /tcb/color command=texcs,
-  /tcb/color environment=environment,
-  /tcb/color key=key,
-  /tcb/color value=value,
-  index format=pgfchapter,
-  index colorize,
-  index annotate=false,
-  enhanced,
-  % index actual={},
-  every box/.style={documentation listing style=dbtex},
-  % doc left indent=-15mm,
-  % doc right indent=-15mm+2em
-}%
-\tcbset{codes/.style={%
-    listing only,
-    enlarge top by=1mm,
-    colframe=ExampleFrame,
-    colback=ExampleBack,
-    fonttitle=\bfseries,
-    fontupper=\small,
-    enhanced,
-    listing options={style=dbtex}
-  }%
-}%
-\newtcblisting{origpreamblecode}[1][]{%
-  % beamer,%
-  codes,%
-  drop lifted shadow,
-  #1%
-}%
-\newtcblisting{origbodycode}[1][]{%
-  codes,%
-  #1%
-}%
-\begingroup%
-\catcode`\^^M\active%
-\global\def\activeeol{^^M}%
-\endgroup%
-\newenvironment{preamblecode}{%
-  \@ifnextchar[\YAD@preamblecode@\YAD@preamblecode@noargs%]
-}{%
-  \endorigpreamblecode%
-}%
-\def\YAD@preamblecode@[#1]{%
-  \origpreamblecode[#1]%
-}%
-\def\YAD@preamblecode@noargs#1{%
-  \edef\temp{[]\activeeol\string#1}%
-  \expandafter\YAD@preamblecode@\temp%
-}%
-\newenvironment{bodycode}{%
-  \@ifnextchar[\YAD@bodycode@\YAD@bodycode@noargs%
-}{%
-  \endorigbodycode%
-}%
-\def\YAD@bodycode@[#1]{%
-  \origbodycode[#1]%
-}%
-\def\YAD@bodycode@noargs#1{%
-  \edef\temp{[]\activeeol\string#1}%
-  \expandafter\YAD@bodycode@\temp%
-}%
-\tcbset{samples/.style={%
-    codes,
-    % listing options={rangebeginprefix=\\,rangeendsuffix=\}}
-  }%
-}%
-\newtcbinputlisting{\preamblesample}[3][these.tex]{%
-  samples,
-  drop lifted shadow,
-  listing file={\YAD@treesample/#1},
-  listing options={rangebeginprefix=\\,rangeendsuffix=\},#2},
-  #3,
-}%
-\newtcbinputlisting{\bodysample}[3][these.tex]{%
-  samples,
-  listing file={\YAD@treesample/#1},
-  listing options={rangebeginprefix=\\,rangeendsuffix=\},#2},
-  #3,
-}%
-\newcommand{\obligatoire}{%
-  \marginpar{%
-    \scriptsize%
-    \raggedleft%
-    % \bfseries%
-    \hyperref[sec:comm-oblig]{%
-      % \colorbox{red!75!black}{%
-        % \textcolor{white}{%
-        \textcolor{red!75!black}{\faLock}%
-          \ifnum\getpagerefnumber{sec:comm-oblig}=\thepage%
-          \else%
-          \textsuperscript{\ding{213}\,\kvtcb@text@pageshort\,\pageref*{sec:comm-oblig}}%
-          \fi%
-          % Obligatoire%
-        % }%
-      % }%
-    }%
-  }%
-}%
-\newcommand{\mandatory}{%
-  \hyperref[sec:comm-oblig]{%
-    \textcolor{red!75!black}{\faLock}%
-    \ifnum\getpagerefnumber{sec:comm-oblig}=\thepage%
-    \else%
-    \textsuperscript{\ding{213}\,\kvtcb@text@pageshort\,\pageref*{sec:comm-oblig}}%
-    \fi%
-  }%
-}%
-%
-% Suppression du gras dans la commande ×\docAuxCommand× :
-\def\disp@com#1{\colDef{\ttfamily#1}}
-%
-\DeclareRobustCommand*{\yat}{\textsl{\texttt{yathesis}}}
-\DeclareRobustCommand*{\yatpa}{package \textsl{\texttt{yathesisdoc}}\xspace}
-\DeclareRobustCommand*{\yatcl}{classe \yat\xspace}
-\newcommand*{\unixtldirectory}{/usr/local/}
-\newcommand*{\tlversion}{2014}
-\newcommand*{\wintldirectory}{c:/}
-\newcommand*{\tldistdirectory}{texlive/\tlversion/texmf-dist/}
-\newcommand*{\miktexdistdirectory}{[TODO]}
-\newcommand*{\docdirectory}{doc/}
-\newcommand*{\texdirectory}{tex/}
-\newcommand*{\sourcedirectory}{source/}
-\newcommand*{\jobdirectory}{latex/\jobname}
-\newcommand*{\jobdocdirectory}{\docdirectory\jobdirectory}
-%
-\newcommand{\phrase}{%
-  \@ifstar{\phrase@star}{\phrase@nostar}%
-}
-\newcommand{\phrase@star}[1]{--- #1}
-\newcommand{\phrase@nostar}[1]{--- #1 ---}
-%
-\makeglossaries
-\loadglsentries{glossaries/glossary}
-\loadglsentries{glossaries/acronyms}
-\addbibresource{\jobname.bib}
-%
-\newcommand{\pdf}{\acrshort{pdf}\xspace}
-%    \end{macrocode}
-% For the \yatcl' documentation, using \Class{ltxdoc}, we need to
-% perform some changes in \Package{glossaries} provided by its author.
-%    \begin{macrocode}
-\renewcommand*{\newacronymhook}{%
-\edef\tmp{\noexpand\textsc{\the\glsshorttok}}%
-\expandafter\glsshorttok\expandafter{\tmp}%
-}%
-\renewcommand*{\acrpluralsuffix}{\textup{\glspluralsuffix}}
-%    \end{macrocode}
-% On définit une nouvelle clé pour la commande ×\includegraphics× de
-% sorte à pouvoir inclure les pages d'un \File{.pdf} externe en
-% indiquant non pas des numéros de pages absolus, mais plutôt des
-% références qui devront être labellisées au moyen de la commande
-% ×\zlabel× du \Package{zref} (ce dernier devant être chargé dans le
-% \File{.tex} externe du \File{.pdf} avec les options ×user× et
-% ×abspage×).
-%    \begin{macrocode}
-\define@key{Gin}{bylabel}{%
-    \edef\@tempa{{Gin}{page=\zref@extract{#1}{abspage}}}%
-    \expandafter\setkeys\@tempa%
-}%
-%    \end{macrocode}
-% On définit une commande d'inclusion de \enquote{copie d'écran} qui
-% inclut une page d'un \File{.pdf} externe en indiquant non pas des
-% numéros de pages absolus, mais plutôt des références stipulées au
-% moyen de la clé ×bylabel× ci-dessus. Ceci nécessite de charger le
-% \Package{zref} avec l'option ×xr× dans le \File{.tex} où sont
-% incluses les pages du \File{.pdf} externe.
-%    \begin{macrocode}
-\zexternaldocument{\YAD@treesample/these}%
-\newcommand{\screenshot}[2][.45]{%
-  \fbox{\includegraphics[bylabel=#2,width=#1\linewidth-2\fboxsep-2\fboxrule]{\YAD@treesample/these}}%
-}%
-%    \end{macrocode}
-%
-%    \begin{macrocode}
-%</class-doc-package>
-%    \end{macrocode}
-%
 % \section{Main Code}
 %
 %    \begin{macrocode}
@@ -1811,7 +1334,7 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-%<*class|class-doc-package>
+%<*class>
 %    \end{macrocode}
 %
 % On définit la macro privée où est stocké le nom du répertoire des
@@ -1840,98 +1363,7 @@ This work consists of the file  yathesis.dtx
 % \end{macro}
 %
 %    \begin{macrocode}
-%</class|class-doc-package>
-%    \end{macrocode}
-%
-%    \begin{macrocode}
-%<*class-doc-package>
-%    \end{macrocode}
-%
-% On définit la macro publique où est stocké le nom du répertoire des
-% \enquote{réglages} où se trouvent les divers fichiers de configuration.
-% \begin{macro}{\configurationdirectory}
-%    \begin{macrocode}
-\newcommand*{\configurationdirectory}{\YAD@configuration@directory}
-%    \end{macrocode}
-% \end{macro}
-%
-% On définit la macro publique où est stocké le nom du fichier
-% de configuration \emph{local} de la thèse.
-% \begin{macro}{\configurationfile}
-%    \begin{macrocode}
-\newcommand*{\configurationfile}{\YAD@configuration@file}
-%    \end{macrocode}
-% \end{macro}
-%
-% On définit la macro publique où est stocké le nom du fichier esclave
-% contenant les données caractéristiques du document (ce qui doit figurer sur
-% les pages de couverture et de titre, les mots clés, etc.).
-% \begin{macro}{\characteristicsfile}
-%    \begin{macrocode}
-\newcommand*{\characteristicsfile}{\YAD@characteristics@file}
-%    \end{macrocode}
-% \end{macro}
-%
-% On définit les macros (privée et publique) où est stocké le nom du fichier
-% esclave dédiées aux macros personnelles.
-% \begin{macro}{\macrosfile}
-%    \begin{macrocode}
-\newcommand*{\macrosfile}{macros.tex}
-%    \end{macrocode}
-% \end{macro}
-%
-% On définit la macro publique où est stocké le nom du répertoire des fichiers
-% auxiliaires, par exemple de base bibliographique (fichier(s) \file{.bib}) et
-% de base terminologique (fichier(s) \file{.tex} contenant les définitions par
-% exemple du glossaire, des acronymes, des symboles).
-% \begin{macro}{\configurationdirectory}
-%    \begin{macrocode}
-\newcommand*{\auxiliarydirectory}{auxiliaires}
-%    \end{macrocode}
-% \end{macro}
-%
-% On définit la macro (publique) où est stocké le nom du fichier contenant les
-% définitions des termes du glossaire.
-% \begin{macro}{\glossaryfile}
-%    \begin{macrocode}
-\newcommand*{\glossaryfile}{glossaire.tex}
-%    \end{macrocode}
-% \end{macro}
-%
-% On définit la macro (publique) où est stocké le nom du fichier contenant les
-% définitions des acronymes.
-% \begin{macro}{\acronymsfile}
-%    \begin{macrocode}
-\newcommand*{\acronymsfile}{acronymes.tex}
-%    \end{macrocode}
-% \end{macro}
-%
-% On définit la macro (publique) où est stocké le nom du fichier contenant les
-% définitions des acronymes.
-% \begin{macro}{\symbolsfile}
-%    \begin{macrocode}
-\newcommand*{\symbolsfile}{symboles.tex}
-%    \end{macrocode}
-% \end{macro}
-%
-% On définit la macro (publique) où est stocké le nom du répertoire des images
-% de la thèse.
-% \begin{macro}{\imagesdirectory}
-%    \begin{macrocode}
-\newcommand*{\imagesdirectory}{images}
-%    \end{macrocode}
-% \end{macro}
-%
-% On définit la macro (publique) où est stocké le nom du fichier maître de la
-% thèse.
-% \begin{macro}{\thesismasterfile}
-%    \begin{macrocode}
-\newcommand*{\thesismasterfile}{these}
-%    \end{macrocode}
-% \end{macro}
-%
-%    \begin{macrocode}
-%</class-doc-package>
+%</class>
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -3062,7 +2494,13 @@ This work consists of the file  yathesis.dtx
 %           }%
 %         }{%
 %         }%
-        \@ifstar{\@tempswatrue\csuse{YAD@starnostar@print#2logo}}{\@tempswafalse\csuse{YAD@starnostar@print#2logo}}%
+        \@ifstar{%
+        \@tempswatrue%
+        \csuse{YAD@starnostar@print#2logo}%
+        }{%
+        \@tempswafalse%
+        \csuse{YAD@starnostar@print#2logo}%
+        }%
       }%
       \csdef{YAD@starnostar@print#2logo}{%
         \yadsetup{url=,##1}%
@@ -5197,7 +4635,7 @@ This work consists of the file  yathesis.dtx
   \addcontentsline{toc}{chapter}{\abstractname}%
   \booltrue{YAD@makeabstract@used}%
   \bgroup%
-  % \setlength{\footskip}{-15pt}%
+  \addtolength{\footskip}{6pt minus 6pt}%
   \setfootrule{0pt}%
   \setfoot[][%
   \ifboolexpr{%
@@ -5214,6 +4652,7 @@ This work consists of the file  yathesis.dtx
     }%
   }%
   ][]{%
+    % \medskip\par%
     \YAD@laboratory@abstract@page%
   }{}{}%
   \cleardoublepage%
@@ -5321,63 +4760,64 @@ This work consists of the file  yathesis.dtx
 % Commande de la page de la ou des dédicaces
 % \begin{macro}{\makededications}
 %    \begin{macrocode}
-\csdef{makededications}{%
-  \@ifstar{\@tempswatrue\csuse{YAD@starnostar@makededications}}{\@tempswafalse\csuse{YAD@starnostar@makededications}}%
-}%
-\csdef{YAD@starnostar@makededications}{%
-  \pagestyle{prepreliminary}%
-  \cleardoublepage%
-  \if@tempswa%
-  \else%
-  \vspace*{\stretch{2}}%
-  \fi \DTLifdbempty{dedications}{%
-    \YAD@generic@argument@translate{dedications}%
-    \YAD@ClassError{%
-      \protect\makededications\space utilisee/\protect\dedication\space non
-      utilisee%
-    }{%
-      La commande \protect\makededications\space a ete utilisee mais la
-      commande \protect\dedication,\MessageBreak%
-      permettant de preparer des dedicaces, n'a pas ete utilisee.%
-    }%
-  }{%
+        \csdef{makededications}{%
+        \@ifstar{\@tempswatrue\csuse{YAD@starnostar@makededications}}{\@tempswafalse\csuse{YAD@starnostar@makededications}}%
+        }%
+        \csdef{YAD@starnostar@makededications}{%
+        \pagestyle{prepreliminary}%
+        \cleardoublepage%
+        \if@tempswa%
+        \else%
+        \vspace*{\stretch{2}}%
+        \fi%
+        \DTLifdbempty{dedications}{%
+        \YAD@generic@argument@translate{dedications}%
+        \YAD@ClassError{%
+        \protect\makededications\space utilisee/\protect\dedication\space non
+        utilisee%
+        }{%
+        La commande \protect\makededications\space a ete utilisee mais la
+        commande \protect\dedication,\MessageBreak%
+        permettant de preparer des dedicaces, n'a pas ete utilisee.%
+        }%
+        }{%
 %    \end{macrocode}
 % Appel du style de page propre à la partie préliminaire
 %    \begin{macrocode}
-    \begin{flushright}
-      \itshape%
-      \DTLforeach*{dedications}{%
-        \YAD@dedication=dedication%
-      }{%
-        \YAD@ifemptyorundef{\YAD@dedication}{%
-          \YAD@generic@argument@translate{dedication}%
-          \YAD@ClassError{%
-            Dedicace vide%
+        \begin{flushright}
+          \itshape%
+          \DTLforeach*{dedications}{%
+            \YAD@dedication=dedication%
           }{%
-            L'argument obligatoire d'une commande \protect\dedication\space est
-            vide\MessageBreak%
-            (celui-ci doit etre renseigne).%
+            \YAD@ifemptyorundef{\YAD@dedication}{%
+              \YAD@generic@argument@translate{dedication}%
+              \YAD@ClassError{%
+                Dedicace vide%
+              }{%
+                L'argument obligatoire d'une commande \protect\dedication\space est
+                vide\MessageBreak%
+                (celui-ci doit etre renseigne).%
+              }%
+            }{%
+              \YAD@dedication%
+            }%
+            \par%
+            \DTLiflastrow{%
+            }{%
+              \if@tempswa%
+              \vspace*{\baselineskip}%
+              \else%
+              \vspace*{\stretch{1}}%
+              \fi
+            }%
           }%
-        }{%
-          \YAD@dedication%
+        \end{flushright}
         }%
-        \par%
-        \DTLiflastrow{%
-        }{%
-          \if@tempswa%
-          \vspace*{\baselineskip}%
-          \else%
-          \vspace*{\stretch{1}}%
-          \fi
+        \if@tempswa%
+        \else%
+        \vspace*{\stretch{2}}%
+        \fi
         }%
-      }%
-    \end{flushright}
-  }%
-  \if@tempswa%
-  \else%
-  \vspace*{\stretch{2}}%
-  \fi
-}%
 %    \end{macrocode}
 % \end{macro}
 %
@@ -5968,6 +5408,10 @@ This work consists of the file  yathesis.dtx
     \let\YAD@printbibliography@ORI\printbibliography%
     \renewcommand{\printbibliography}[1][]{%
       \booltrue{YAD@printbibliography@used}%
+% TODO: The ×biblio× page style (which starts a new page) should be used except
+% in case of ×refsection× \package{biblatex}'s option, otherwise the
+% bibliographies by chapters (that should be considered as sections) don't
+% behave as sections: they start a newpage!
       \pagestyle{biblio}%
       \YAD@printbibliography@ORI[heading=bibintoc,#1]%
       \pagestyle{ordinary}%
@@ -6195,7 +5639,7 @@ This work consists of the file  yathesis.dtx
 % %    \end{macrocode}
 %
 % \section{Avertissements}
-% \label{cha:yadr}
+% \label{cha-yadr}
 %
 % Si la commande ×\tableofcontents× n'a pas été utilisée, une erreur est émise.
 %    \begin{macrocode}
@@ -6276,9 +5720,9 @@ This work consists of the file  yathesis.dtx
   laboratoires suivants.}{This thesis has been prepared at the following
   research units.}%
 \expression{prepared-at-hdr}{Cette \textsc{hdr} a \'et\'e pr\'epar\'ee au}{This
-  habilitation to conduct researches has been prepared at}%
+  habilitation to conduct research has been prepared at}%
 \expression{prepared-at-pl-hdr}{Cette \textsc{hdr} a \'et\'e pr\'epar\'ee dans
-  les laboratoires suivants.}{This habilitation to conduct researches has been
+  les laboratoires suivants.}{This habilitation to conduct research has been
   prepared at the following research units.}%
 \expression{juniorresearcher}{charg\'e de recherche}{Junior Researcher}%
 \expression{juniorresearcherfem}{charg\'ee de recherche}{Junior Researcher}%
@@ -6331,9 +5775,9 @@ This work consists of the file  yathesis.dtx
 \expression{thesisdefendedby}{Th\`ese pr\'esent\'ee par}{Thesis defended
   by}%
 \expression{thesisdefendedby-hdr}{Habilitation \`a diriger les recherches
-  pr\'esent\'ee par}{Habilitation to conduct researches defended by}%
+  pr\'esent\'ee par}{Habilitation to conduct research defended by}%
 \expression{thesistitle}{Titre de la th\`ese}{Thesis Title}%
-\expression{thesistitle-hdr}{Titre de l'habilitation \`a diriger les recherches}{Habilitation to conduct researches Title}%
+\expression{thesistitle-hdr}{Titre de l'habilitation \`a diriger les recherches}{Habilitation to conduct research's Title}%
 \expression{inprogress}{travail en cours}{work in progress}%
 \expression{universitydepartment}{Unit\'e de recherche}{University
   Department}%
@@ -6348,169 +5792,6 @@ This work consists of the file  yathesis.dtx
 %
 %    \begin{macrocode}
 %</class|translations>
-%    \end{macrocode}
-%
-% \subsection{Local language definitions for \Package{listings}}
-%
-% Now, we create some \file{lstlang0.sty} files where are extended
-% some (or defined new) languages.
-%
-% \subsubsection{Extension of the \enquote{LaTeX} TeX dialect}
-%
-%    \begin{macrocode}
-%<*class-lstlang0>
-%    \end{macrocode}
-%
-%    \begin{macrocode}
-\lst@definelanguage[extLaTeX]{TeX}[LaTeX]{TeX}{%
-  moretexcs={%
-    footnotesize,huge,Huge,large,Large,LARGE,large,Large,scriptsize,tiny,%
-    includegraphics,cite,ttwplink,vref,LTXtable,tableofcontents,frontmatter,mainmatter,%
-    part,chapter,section,subsection,subsubsection,paragraph,subparagraph,RequirePackage,%
-    listoftables,listoffigures,lstlistingname,si,SI,ohm,num,space,shorthandon,shorthandoff,%
-    abstractname,appendixname,contentsname,listfigurename,listtablename,indexname,%
-    figurename,tablename,chaptername,pagename,seename,alsoname,proofname,bibname,glossaryname,%
-    addto,captionsenglish,captionsfrench,lipsum,href,url,partname,refname,renewcommand*,%
-    appendix,lstlistoflistings,graphicpath,loadglsentries,hypersetup,detect-all,SetWatermarkColor,%
-    @pnumwidth,bookmarksetup,DeclareTextCommand%
-  },%
-  morekeywords=[1]{% Environments' names
-    tabular,tabulary,math%
-  },%
-  morekeywords=[2]{% Keys of key-value lists and packages' names
-    bookmarksdepth,see,babel,colorlinks,linktoc%
-  },%
-  morekeywords=[3]{% Values of key-value lists
-    german,ngerman,french,english,spanish%
-  },
-  alsoletter={-*@1234560}%
-}%
-%    \end{macrocode}
-%
-% \subsubsection{Definition of the \enquote{yad} \TeX{} dialect}
-%
-%    \begin{macrocode}
-\lst@definelanguage[yad]{TeX}[LaTeX]{TeX}{%
-  % yathesis% TODO : à mettre ailleurs
-  moretexcs={% Control sequences' names
-    author,title,subtitle,academicfield,speciality,date,supervisor,cosupervisor,comonitor,%
-    referee,guest,examiner,committeepresident,pres,institute,coinstitute,company,doctoralschool,%
-    laboratory,dedication,frontepigraph,keywords,subject,expression,tableofcontents,submissiondate,%
-    maketitle,makedisclaimer,makekeywords,makelaboratory,makeabstract,makededications,makefrontepigraphs,%
-    % acknowledgements,frenchabstract,foreword,preface,caution,
-    makebackcover,ordernumber,chapter*,%
-    disclaimer,newglssymbol,yadsetup%
-  },%
-  % Environments' names
-  morekeywords={%
-    yathesis%
-  },%
-  morekeywords=[1]{% Environments' names
-    abstract,dedicationspage,epigraphspage,epigraphs,%
-    glossaries,otherlanguage%
-  },%
-  morekeywords=[2]{% Keys of key-value lists
-    professor,seniorresearcher,mcf,juniorresearcher,mcf*,%
-    juniorresearcher*,corporation,corps,male,female,%
-    distinction,award,affiliation,sepcorpaffilfrench,affiliationsecondary,sepcorpaffilenglish,%
-    logo,url,nologo,space,mainlanguage,secnumdepth,tocdepth,depth,version,output,logoheight,%
-    address,telephone,fax,email,type,acronym,heading,nowarning,noerror,nofrontcover,role,%
-    hyperfootnotes,hyperindex,plainpages,pdfpagemode,pdfpagelayout,locale,gray,frametitle,%
-    graphicx,adjustbox,setspace,xcolor,datatool,titleps,draftwatermark,babel,datetime,%
-    bookmark,fncychap,%
-  },%
-  morekeywords=[3]{% Values of key-value lists
-    single,onehalf,double,doctor,yadsymbolstyle,%
-    part,chapter,section,subsection,subsubsection,paragraph,subparagraph,%
-    none,true,false,UseOutlines,TwoPageRight,UK,FR,dvipsnames,table,%
-    Sonny,Lenny,Glenn,Conny,Rejne,Bjarne,PetersLenny,Bjornstrup,%
-    screen,draft,inprogress,inprogress*,submitted,submitted*,final,paper,paper*,%
-    fbox,shadowbox,ovalbox,supervisor*,cosupervisor*,comonitor*,%
-  },%
-  morekeywords=[4]{% Class and packages options
-    warn,nodayofweek,unicode,nostamp,all,numbered,a4paper,leqno,fleqn,10pt,11pt,12pt,%
-    detect-all,breaklinks,oneside%
-  },%
-  morekeywords=[5]{% Translation labels
-    email,phone,fax,caution,draft,prepared-at,prepared-at-pl,juniorresearcher,juniorresearcher*,%
-    committeemembers,estimateddefensedate,seniorresearcher,supervisors-in-committee,%
-    supervisors-in-committee-pl,aim,aimand,examiners,examiners-pl,guests,guests-pl,mcf,mcf*,%
-    professor,referees,referees-pl,website,defendedon,supervisedby,thesisdefendedby,thesistitle,%
-    inprogress,universitydepartment,inprogressfoottext,submittedfoottext
-  },%
-  alsoletter={!-*1234560}%
-}%
-\lst@definelanguage[glossaries]{TeX}[LaTeX]{TeX}%
-{%
-  % Séquences de contrôles (communément appelées commandes ou macros)
-  moretexcs={%
-    makeglossaries,printglossaries,printglossary,newglossaryentry,gls,Gls,GLS,glspl,Glspl,GLSpl,newacronym,%
-    glsuseri,glsuserii,glsuseriii,glsuseriv,glsuserv,glsuservi,glsshortpluralkey,glslongpluralkey,loadglsentries,%
-    glsadd,glstextformat,glsnamefont,glossarypreamble,glossarypostamble,acrshort,acrshort*,acrlong,acrfull,%
-    Acrshort,ACRshort,Acrlong,ACRlong,Acrfull,ACRfull,acrshortpl,Acrshortpl,acrlongpl,Acrlongpl,acrfullpl,Acrfullpl,%
-    Acrlong*,acronymtype,printacronyms,printsymbols%
-  },%
-  % Environments' names
-  morekeywords={%
-  },%
-  % Mots-clés de niveau 2 : arguments obligatoires et environnements
-  morekeywords=[2]{%
-    first,firstplural,plural,sort,nonumberlist,name,acronym,acronyms,symbols,%
-    user1,user2,user3,user4,user5,user6,hyper,style,xindy,toc,%
-    useri,userii,useriii,useriv,userv,uservi%
-  },%
-  % Mots-clés de niveau 3 : arguments optionnels valeurs de clés dans clé=valeur
-  morekeywords=[3]{%
-    listgroup,listhypergroup,%
-    textrm,textit,textsf,textsl,texttt,textup,textbf,textsc,textmd,emph,%
-    hyperrm,hyperit,hypersf,hypersl,hypertt,hyperup,hyperbf,hypersc,hypermd,hyperemph%
-  },%
-  sensitive%
-}[keywords,tex,comments]%
-%
-\lst@definelanguage[biblatex]{TeX}[LaTeX]{TeX}%
-{%
-  % Séquences de contrôles (communément appelées commandes ou macros)
-  moretexcs={%
-    printbibliography,SetCiteCommand,autocite%
-  },%
-  % Mots-clés de niveau 1 : arguments optionnels
-  morekeywords={%
-  },%
-  % Mots-clés de niveau 2 : arguments obligatoires et environnements
-  morekeywords=[2]{%
-    title,heading%
-  },%
-  % Mots-clés de niveau 3 : arguments optionnels valeurs de clés dans clé=valeur
-  morekeywords=[3]{%
-    bibintoc%
-  },%
-  sensitive%
-}[keywords,tex,comments]%
-%
-\lst@definelanguage[tcolorbox]{TeX}[LaTeX]{TeX}%
-{%
-  % Séquences de contrôles (communément appelées commandes ou macros)
-  moretexcs={%
-    tcbset,tcbuselibrary%
-  },%
-  % Mots-clés de niveau 1 : arguments optionnels
-  morekeywords={%
-  },%
-  % Mots-clés de niveau 2 : arguments obligatoires et environnements
-  morekeywords=[2]{%
-    colback,beamer,skins%
-  },%
-  % Mots-clés de niveau 3 : arguments optionnels valeurs de clés dans clé=valeur
-  morekeywords=[3]{%
-    lightgray,red!50!white%
-  },%
-  sensitive,%
-}[keywords,tex,comments]%
-%    \end{macrocode}
-%
-%    \begin{macrocode}
-%</class-lstlang0>
 %    \end{macrocode}
 %
 % \chapter{Fichier de complétion}
@@ -6892,6 +6173,8 @@ sub texindy{
 
 @generated_exts = qw(aux idx ind lo* out toc acn acr alg bbl bcf fls gl* ist
 run.xml sbl* sl* sym* xdy unq synctex.gz mw *~
+
+$clean_ext = 'synctex.gz synctex.gz(busy) run.xml tex.bak bbl bcf fdb_latexmk run tdo listing'
 %<class-latexmkrc>db* listing tcbtemp ins drv
 );
 %<class-latexmkrc>$pdflatex = 'xelatex %O %S';
