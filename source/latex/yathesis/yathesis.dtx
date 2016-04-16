@@ -164,12 +164,14 @@ This work consists of the file  yathesis.dtx
 % \def\YAD@sample{tree-sample}
 %</install>
 %<*install>
+\def\YAD@documentation{documentation}
+\def\YAD@examples{exemples}
 \def\YAD@sample{specimens}
 \def\YAD@template{canevas}
-\def\YAD@flattemplate{\YAD@template/a-plat}
-\def\YAD@flatsample{\YAD@sample/a-plat}
-\def\YAD@treetemplate{\YAD@template/en-arborescence}
-\def\YAD@treesample{\YAD@sample/en-arborescence}
+\def\YAD@flattemplate{\YAD@examples/\YAD@template/a-plat}
+\def\YAD@flatsample{\YAD@examples/\YAD@sample/a-plat}
+\def\YAD@treetemplate{\YAD@examples/\YAD@template/en-arborescence}
+\def\YAD@treesample{\YAD@examples/\YAD@sample/en-arborescence}
 %</install>
 %<*install>
 \usedir{/}
@@ -189,9 +191,11 @@ This work consists of the file  yathesis.dtx
 \generate{
   \file{\YAD@classname.ins}{\from{\jobname.dtx}{install}}
   \file{\YAD@classname.drv}{\from{\jobname.dtx}{driver}}%
+}%
+\usedir{doc/latex/\YAD@classname/\YAD@documentation}
+\generate{
   \nopreamble\nopostamble
-  \file{lstlang0.sty}{\from{\jobname.dtx}{class-lstlang0}}
-  \file{latexmkrc}{\from{\jobname.dtx}{class-latexmkrc}}
+  % \file{latexmkrc}{\from{\jobname.dtx}{class-latexmkrc}}
   \file{translations.tex}{\from{\jobname.dtx}{translations}}
 }%
 \usedir{doc/latex/\YAD@classname/\YAD@flattemplate}
@@ -6143,7 +6147,7 @@ name=
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-%<*class-latexmkrc|samples-templates-latexmkrc>
+%<*samples-templates-latexmkrc>
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -6152,17 +6156,13 @@ $pdf_mode = 1;
 $bibtex_use = 1;
 $bibtex = 'biber %O %B';
 
-%<class-latexmkrc>add_cus_dep('glo', 'gls', 0, 'makeindex');
-%<samples-templates-latexmkrc>add_cus_dep('glo', 'gls', 0, 'makeglossaries');
+add_cus_dep('glo', 'gls', 0, 'makeglossaries');
 add_cus_dep('glo2', 'gls2', 0, 'makeglossaries');
 add_cus_dep('acn', 'acr', 0, 'makeglossaries');
 add_cus_dep('slo', 'sls', 0, 'makeglossaries');
 sub makeglossaries{
     system( "makeglossaries \"$_[0]\"" );
 }
-%<class-latexmkrc>sub makeindex{
-%<class-latexmkrc>  system( "makeindex -s gglo.ist -o \"$_[0].gls\" \"$_[0].glo\"" );
-%<class-latexmkrc>}
 
 $makeindex = 'texindy -L french';
 
@@ -6175,15 +6175,11 @@ sub texindy{
 run.xml sbl* sl* sym* xdy unq synctex.gz mw *~
 
 $clean_ext = 'synctex.gz synctex.gz(busy) run.xml tex.bak bbl bcf fdb_latexmk run tdo listing'
-%<class-latexmkrc>db* listing tcbtemp ins drv
 );
-%<class-latexmkrc>$pdflatex = 'xelatex %O %S';
-%<class-latexmkrc>$postscript_mode = $dvi_mode = 0;
-%<class-latexmkrc>$quote_filenames = 0;
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-%</class-latexmkrc|samples-templates-latexmkrc>
+%</samples-templates-latexmkrc>
 %    \end{macrocode}
 %
 %    \begin{macrocode}
