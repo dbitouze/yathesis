@@ -1,0 +1,806 @@
+% Document de classe yathesis, en 12 points, interligne un et demi, et version finale
+\documentclass[12pt,space=onehalf,version=final]{yathesis}
+%
+% Chargement manuel de packages (pas déjà chargés par la classe yathesis)
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lipsum} % À proscrire dans un vrai mémoire de thèse !
+\usepackage{kpfonts}
+\usepackage{booktabs}
+\usepackage{siunitx}
+\usepackage{pgfplots}
+\usepackage{floatrow}
+\usepackage{caption}
+\usepackage{listings}
+\usepackage{microtype}
+\usepackage{varioref}
+\usepackage[xindy,quiet]{imakeidx}
+\usepackage[autostyle]{csquotes}
+\usepackage[backend=biber,safeinputenc]{biblatex}
+\usepackage{hyperref}
+\usepackage[xindy,acronyms,symbols]{glossaries}
+%
+% Génération de l'index
+\makeindex
+%
+% Spécification de la ou des ressources bibliographiques
+\addbibresource{bibliographie.bib}
+\addbibresource{biblatex-examples.bib} % Fournie par biblatex.
+%
+% Génération du glossaire
+\makeglossaries
+%
+% (Facultatif) Configuration des styles du glossaire et de la liste d'acronymes
+% (à n'utiliser que si le package « glossaries » est chargé)
+\setglossarystyle{indexhypergroup}
+\setacronymstyle{long-sc-short}
+%
+% Entrées du glossaire, des acronymes et des symboles
+% Glossaire
+\newglossaryentry{latex}{%
+  name=\LaTeX,%
+  description=système de composition de beaux documents%
+}
+\newglossaryentry{vrnc}{%
+  name=langue vernaculaire,%
+  plural=langues vernaculaires,%
+  description=langue locale parlée au sein d'une communauté%
+}
+\newglossaryentry{af}{%
+  name=ancien français,%
+  description= état du français médiéval du \textsc{ix}\ieme{} au
+  \textsc{xiii}\ieme{} siècles inclus%
+}
+\newglossaryentry{mf}{%
+  name= moyen français,%
+  description= état du français médiéval du \textsc{xiv}\ieme{} au \textsc{xv}\ieme{}
+  siècles inclus%
+}
+% Acronymes
+\newacronym{pres}{pres}{Pôle de Recherche et d'Enseignement
+  Supérieur}
+\newacronym{ulco}{ulco}{Université du Littoral Côte d'Opale}
+\newacronym{edspi}{edspi}{École Doctorale Sciences Pour
+  l'Ingénieur}
+\newacronym{lmpa}{lmpa}{Laboratoire de Mathématiques Pures et
+  Appliquées Joseph Liouville}
+\newacronym{laser}{laser}{Light Amplification by Stimulated Emission
+  of Radiation soit \enquote{amplification de la lumière par
+    émission stimulée de rayonnement}}
+\newacronym{irm}{irm}{Imagerie par Résonance Magnétique}
+\newacronym{rmn}{rmn}{Résonance Magnétique Nucléaire}
+\newacronym{ascii}{ascii}{American Standard Code for Information Interchange}
+\newacronym{bios}{bios}{Basic Input Output System}
+\newacronym{ctan}{ctan}{Comprehensive \TeX{} Archive Network}
+\newacronym{dvd}{dvd}{Digital Video Disc}
+\newacronym{erp}{erp}{Enterprise Resource Planning}
+\newacronym{faq}{faq}{Frequently Asked Questions, traduit en français par
+  \enquote{Foire Aux Questions}}
+\newacronym{gnu}{gnu}{GNU's Not Unix (acronyme récursif)}
+\newacronym{http}{http}{Hypertext Transfer Protocol}
+\newacronym{ip}{ip}{Internet Protocol}
+\newacronym{jpeg}{jpeg}{Joint Photographic Experts Group}
+\newacronym{kdm}{kdm}{KDE Display Manager}
+\newacronym{lug}{lug}{Linux Users Group}
+\newacronym{mac}{mac}{Medium Access Control}
+\newacronym{nfs}{nfs}{Network File System}
+\newacronym{ocr}{ocr}{Optical Character Recognition}
+\newacronym{p2p}{p2p}{Peer to Peer}
+\newacronym{ram}{ram}{Random Access Memory}
+\newacronym{radar}{radar}{RAdio Detection And Ranging}
+\newacronym{svg}{svg}{Scalable Vector Graphics}
+\newacronym{tft}{tft}{Thin-Film Transistor}
+\newacronym{utf-8}{utf-8}{Unicode Transformation Format 8 bits}
+\newacronym{vga}{vga}{Video Graphics Array}
+\newacronym{wpa}{wpa}{Wi-Fi Protected Access}
+\newacronym{xhtml}{xhtml}{Extensible HyperText Markup Language}
+\newacronym{fsf}{fsf}{Free Software Foundation}
+\newacronym{gui}{gui}{Graphical User Interface}
+% Symboles
+\newglssymbol{ohm}{\si{\ohm}}{ohm}{unité de résistance électrique}
+\newglssymbol{exists}{\ensuremath{\exists}}{quantificateur existentiel}{}
+\newglssymbol[constanteplanck]{planck}{\ensuremath{h}}{constante de
+  Planck}{\ensuremath{h\approx\SI{6,62606957e-34}{\joule\second}}}
+%
+% Configuration globale de l'apparence des listings informatiques
+\lstset{%
+  language=C,
+  numbers=left,
+  frame=leftline,
+  framerule=0.8pt,
+  rulecolor=\color{red},
+  basicstyle=\ttfamily,
+  keywordstyle=\color{blue}\bfseries,
+  stringstyle=\color{cyan},
+  commentstyle=\color{gray}\itshape
+}
+%
+% Les figures flottantes et leurs légendes sont dans un (même) cadre
+\floatsetup[figure]{style=BOXED}%
+%
+% Numéro de version du package pgfplots
+\pgfplotsset{compat=1.13}
+%
+% Ajustement pour éviter, dans la table des matières, des débordements de
+% numéros de pages dans la marge de droite
+\makeatletter
+\renewcommand*\@pnumwidth{29pt}
+\makeatother
+%
+% Macro pour mettre en forme les noms de fichiers
+\newcommand\fichier[1]{\texttt{#1}}
+% Macro pour mettre en forme les noms de packages LaTeX
+\newcommand\package[1]{\textsf{#1}}
+% Macro pour mettre en forme des locutions étrangères
+\newcommand{\locution}[1]{\emph{#1}}
+%
+% Commande permettant de faire figurer d'un seul coup toutes les références des
+% ressources bibliographiques ci-dessus, même si elles ne sont pas citées
+% explicitement (à proscrire dans un vrai mémoire de thèse !)
+\nocite{*}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Début du document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Caractéristiques du document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Préparation des pages de couverture et de titre
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Auteur de la thèse : prénom (1er argument obligatoire), nom (2e argument
+% obligatoire) et éventuel courriel (argument optionnel). Les éventuels accents
+% devront figurer et le nom /ne/ doit /pas/ être saisi en capitales
+\author[aa@zygo.fr]{Alphonse}{Allais}
+%
+% Titre de la thèse dans la langue principale (argument obligatoire) et dans la
+% langue secondaire (argument optionnel)
+\title[Laugh's Chaos]{Le chaos du rire}
+%
+% (Facultatif) Sous-titre de la thèse dans la langue principale (argument
+% obligatoire) et dans la langue secondaire (argument optionnel)
+\subtitle[Chaos' laugh]{Le rire du chaos}
+%
+% Champ disciplinaire dans la langue principale (argument obligatoire) et dans
+% la langue secondaire (argument optionnel)
+\academicfield[Mathematics]{Mathématiques}
+%
+% (Facultatif) Spécialité dans la langue principale (argument obligatoire) et
+% dans la langue secondaire (argument optionnel)
+\speciality[Dynamical systems]{Systèmes dynamiques}
+%
+% Date de la soutenance, au format {jour}{mois}{année} donnés sous forme de
+% nombres
+\date{1}{1}{2015}
+%
+% (Facultatif) Date de la soumission, au format {jour}{mois}{année} donnés sous
+% forme de nombres
+\submissiondate{1}{10}{2014}
+%
+% (Facultatif) Sujet pour les méta-données du PDF
+\subject[Chaotic Laugh]{Rire chaotique}
+%
+% (Facultatif) Nom (argument obligatoire) du PRES
+\pres[logo=pres]{Université Lille Nord de France}
+%
+% Nom (argument obligatoire) de l'institut (principal en cas de cotutelle)
+\institute[logo=ulco,url=http://www.univ-littoral.fr/]{ULCO}
+%
+% (Facultatif) En cas de cotutelle (normalement, seulement dans le cas de
+% cotutelle internationale), nom (argument obligatoire) du second institut
+\coinstitute[logo=paris13,url=http://www.univ-paris13.fr/]{Université de Paris~13}
+%
+% (Facultatif) Nom (argument obligatoire) de l'école doctorale
+\doctoralschool[url=http://edspi.univ-lille1.fr/]{ED Régionale SPI 72}
+%
+% Nom (1er argument obligatoire) et adresse (2e argument obligatoire) du
+% laboratoire (ou de l'unité) où la thèse a été préparée, à utiliser /autant de
+% fois que nécessaire/
+\laboratory[
+logo=labo,
+logoheight=1.25cm,
+telephone=(33)(0)3 21 46 55 86,
+fax=(33)(0)3 21 46 55 75,
+email=secretariat@lmpa.univ-littoral.fr,
+url=http://www-lmpa.univ-littoral.fr/
+]{LMPA Joseph Liouville}{%
+  Maison de la Recherche Blaise Pascal \\
+  50, rue Ferdinand Buisson            \\
+  CS 80699                             \\
+  62228 Calais Cedex                   \\
+  France}
+%
+% Directeur(s) de thèse et membres du jury, saisis au moyen des commandes
+% \supervisor, \cosupervisor, \comonitor, \referee, \committeepresident,
+% \examiner, \guest, à utiliser /autant de fois que nécessaire/ et /seulement
+% si nécessaire/. Toutes basées sur le même modèle, ces commandes ont
+% 2 arguments obligatoires, successivement les prénom et nom de chaque
+% personne. Si besoin est, on peut apporter certaines précisions en argument
+% optionnel, essentiellement au moyen des clés suivantes :
+% - « professor », « seniorresearcher », « mcf », « mcf* »,
+%   « juniorresearcher », « juniorresearcher* » (qui peuvent ne pas prendre de
+%   valeur) pour stipuler le corps auquel appartient la personne ;
+% - « affiliation » pour stipuler l'institut auquel est affiliée la personne ;
+% - « female » pour stipuler que la personne est une femme pour que certains
+%   mots clés soient accordés en genre.
+%
+\supervisor[professor,affiliation=ULCO]{Michel}{de Montaigne}
+\cosupervisor[mcf*,affiliation=ULCO]{Charles}{Baudelaire}
+\comonitor[mcf,affiliation=ULCO]{Étienne}{de la Boétie}
+\referee[professor,affiliation=IHP]{René}{Descartes}
+\referee[seniorresearcher,affiliation=CNRS]{Denis}{Diderot}
+\committeepresident[professor,affiliation=ENS Lyon]{Victor}{Hugo}
+\examiner[mcf,affiliation=Université de Paris~13]{Sophie}{Germain}
+\examiner[juniorresearcher,affiliation=INRIA]{Joseph}{Fourier}
+\examiner[juniorresearcher*,affiliation=CNRS]{Paul}{Verlaine}
+\guest{George}{Sand}
+%
+% (Facultatif) Mention du numéro d'ordre de la thèse (s'il est connu, ce numéro
+% est à spécifier en argument optionnel)
+\ordernumber[42]
+%
+% Préparation des mots clés dans la langue principale (1er argument) et dans la
+% langue secondaire (2e argument)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\keywords{chaos, rire}{chaos, laugh}
+%
+% Production des pages de couverture et de titre
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\maketitle
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Début de la partie liminaire de la thèse
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% (Facultatif) Production de la page de clause de non-responsabilité
+\makedisclaimer
+%
+% (Facultatif) Production de la page de mots clés
+\makekeywords
+%
+% (Facultatif) Production de la page affichant les logo, nom et coordonnées du
+% ou des laboratoires (ou unités de recherche) où la thèse a été préparée
+\makelaboratory
+%
+% (Facultatif) Dédicace(s)
+\dedication{Je dédie ce travail\\à tous ceux qui le méritent}
+\dedication{À mon directeur bien-aimé !}
+\dedication{À mon co-directeur bien-co-aimé !}
+% (Facultatif) Production de la page de dédicace(s)
+\makededications
+%
+% (Facultatif) Épigraphe(s)
+\frontepigraph{Science sans conscience n'est que ruine de l'âme.}{François Rabelais}
+\frontepigraph[english]{I can resist everything, except temptation!}{Oscar Wilde}
+\frontepigraph{Il est plus facile de désintégrer un atome qu'un préjugé.}{Albert Einstein}
+% (Facultatif) Production de la page de d'épigraphe(s)
+\makefrontepigraphs
+%
+% Résumés (de 1700 caractères maximum, espaces compris) dans la
+% langue principale (1re occurrence de l'environnement « abstract »)
+% et, facultativement, dans la langue secondaire (2e occurrence de
+% l'environnement « abstract »)
+\begin{abstract}
+  \lipsum[1-2]
+\end{abstract}
+\begin{abstract}
+  \lipsum[3-4]
+\end{abstract}
+%
+% Production de la page de résumés
+\makeabstract
+%
+% (Facultatif) Chapitre de remerciements
+\chapter{Remerciements}
+\section{Une section de remerciements}
+\lipsum[1]
+\section{Une autre section de remerciements}
+\lipsum[2-9]
+%
+% (Facultatif) Chapitre d'avertissement
+\chapter{Avertissement}
+Thèse hilarante, comme le gaz du même nom !
+%
+% (Facultatif) Liste des acronymes
+\printacronyms
+%
+% (Facultatif) Liste des symboles
+\printsymbols
+%
+% (Facultatif) Chapitre d'avant-propos
+\chapter{Avant-propos}
+\section{Une section d'avant-propos}
+\lipsum[30-45]
+\section{Une autre section d'avant-propos}
+\lipsum[30-35]
+%
+% Sommaire
+\tableofcontents[depth=chapter,name=Sommaire]
+%
+% (Facultatif) Liste des tableaux
+\listoftables
+%
+% (Facultatif) Table des figures
+\listoffigures
+%
+% (Facultatif) Table des listings (nécessite que le package « listings » soit
+% chargé)
+% \lstlistoflistings
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Début de la partie principale (du « corps ») de la thèse
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\mainmatter
+%
+% Chapitre d'introduction (générale)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter*{Introduction générale}
+\lipsum[26]
+\section{Une section d'introduction}
+\lipsum[28]
+\subsection{Une sous-section d'introduction}
+\lipsum[29]
+\subsubsection{Une sous-sous-section d'introduction}
+\lipsum[30]
+\paragraph{Un paragraphe d'introduction}
+\lipsum[31]
+\subparagraph{Un sous-paragraphe d'introduction}
+\lipsum[32]
+\subparagraph{Un autre sous-paragraphe d'introduction}
+\lipsum[33]
+\paragraph{Un autre paragraphe d'introduction}
+\lipsum[34]
+\subsubsection{Une autre sous-sous-section d'introduction}
+\lipsum[35]
+\subsection{Une autre sous-section d'introduction}
+\lipsum[36]
+\section{Une autre section d'introduction}
+\lipsum[37]
+%
+% Chapitres ordinaires (avec parties éventuelles)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Première partie éventuelle
+\part{Le chaos du rire}
+%
+% Premier chapitre
+\chapter{Contexte du chaos du rire}
+\epigraphhead[30]{\selectlanguage{english}\epigraph{I have not failed. I've
+    just found 10.000 ways that won't work.}{Thomas A. Edison}}
+
+Je peux citer\index{citation}\index{citation!formelle} des extraits de
+documents. J'ai par exemple reproduit ci-dessous, par extraits, le discours de
+\citeauthor{cond}, prononcé à l'Assemblée Nationale au nom de l'Académie des
+Sciences.
+
+Voici tout d'abord un extrait composé automatiquement\footnote{Car il dépasse
+  trois lignes.} \og hors-texte\fg{}\index{citation!longue}.
+%
+\blockcquote[pp.~508-509]{cond}{%
+  Messieurs,
+
+  Vous avez daigné nous associer en quelque sorte à vos nobles
+  travaux; et, en nous permettant de concourir au succès de vos vues
+  bienfaisantes, vous avez montré que les sages représentants d'une
+  nation éclairée ne pouvaient méconnaître ni le prix des sciences, ni
+  l'utilité des compagnies occupées d'en accélérer le progrès et d'en
+  multiplier l'application.
+
+  Depuis son institution, l'Académie a toujours saisi et même
+  recherché les occasions d'employer pour le bien des hommes, les
+  connaissances acquises par la méditation, ou par l'étude de la
+  nature : c'est dans son sein qu'un étranger
+  illustre\footnote{Huygens}, à qui une théorie profonde avait révélé
+  le moyen d'obtenir une unité de longueur naturelle et invariable,
+  forma le premier le plan d'y rapporter toutes les mesures pour les
+  rendre par là uniformes et inaltérables.
+}
+
+Ensuite, je peux citer un long extrait en étant certain qu'il ne
+sera pas \og hors-texte\fg{}\index{citation!courte} :
+\textcquote[p.~509]{cond}{L'Académie s'est toujours honorée dans ses
+  annales d'un préjugé détruit, d'un établissement public
+  perfectionné, d'un procédé économique ou salutaire introduit dans
+  les arts, que d'une découverte difficile ou brillante; et son
+  zèle, encouragé par votre confiance, va doubler d'activité et de
+  force.}. Il est bien entendu possible de citer de courts extraits
+de manière informelle\index{citation!informelle} : \citeauthor{cond}
+insiste sur \enquote{la loi de la nature\textins{, qui} a voulu que
+  l'homme fût éclairé pour qu'il pût être juste, et libre pour qu'il
+  pût être heureux} de façon à ce que les membres de l'assemblée
+nationale n'oublient pas l'importance de l'instruction.
+
+Un petit aparté : il est possible de citer des
+citations\index{citation!imbriquée}. Ainsi, le zygomaticien
+s'exclama : \enquote{Pierre Dac ne disait-il pas : \enquote{Je suis
+    pour tout ce qui est contre et contre tout ce qui est pour!}?
+  Si, si, il le disait\ldots{}}, ce qui ne nous surprît guère.
+
+Et maintenant la suite (et fin) du discours, dans un extrait dont je
+suis certain qu'il sera \og hors-texte\fg{} :
+%
+\begin{displaycquote}[pp.~509-511]{cond}
+  Et comment pourrions nous oublier jamais que les premiers honneurs
+  publics, décernés par vous, l'ont été à la mémoire d'un de nos
+  confrères? Ne nous est-il permis de croire que les sciences ont eu
+  droit aussi quelque part à ces marques glorieuses de votre estime
+  pour un sage qui, célèbre dans les deux mondes par de grandes
+  découvertes, n'a jamais chéri dans l'éclat de sa renommée que le
+  moyen d'appeler ses concitoyens à l'indépendance d'une voix plus
+  imposante, et de rallier en Europe, à une si noble cause, tout ce
+  que son génie lui avait mérité de disciples et d'admirateurs?
+
+  Chacun de nous, comme homme, comme citoyen, vous doit une éternelle
+  reconnaissance pour le bienfait d'une constitution égale et libre,
+  bienfait dont aucune grande nation de l'Europe n'avait encore joui;
+  et pour celui de cette déclaration des droits, qui, enchaînant les
+  législateurs eux-mêmes par les principes de la justesse universelle,
+  rend l'homme indépendant de l'homme, et ne soumet sa volonté qu'à
+  l'empire de sa raison.  Mais des citoyens voués par état à la
+  recherche de la vérité, instruits par l'expérience, et ce que
+  peuvent les lumières pour la félicité générale, et de tout ce que
+  les préjugés y opposent d'obstacles, en égarant ou en dégradant les
+  esprits, doivent porter plus loin leurs regards, et, sans doute, ont
+  le droit de vous remercier au nom de l'humanité, comme au nom de la
+  patrie.
+
+  Ils sentent combien, en ordonnant que les hommes ne seraient plus
+  rien par des qualités étrangères, et tout par leurs par leurs
+  qualités personnelles, vous avez assuré le progrès de l'espèce
+  humaine, puisque vous avez forcé l'ambition et la vanité même à ne
+  plus attendre les distinctions ou le pouvoir que du talent et des
+  lumières; puisque le soin de fortifier sa raison, de cultiver son
+  esprit, d'étendre ses connaissances, est devenu le seul moyen
+  d'obtenir une considération indépendante et une supériorité réelle.
+
+  Ils savent que vous n'avez pas moins fait pour le bonheur des
+  générations futures, en rétablissant l'esprit humain dans son
+  indépendance naturelle, que pour celui de la génération présente, en
+  mettant les propriétés et la vie des hommes à l'abri des attentats
+  du despotisme.
+
+  Ils voient, dans les commissions dont vous les avez chargé, avec
+  quelle profondeur de vues vous avez voulu simplifier toutes les
+  opérations nécessaires dans les conventions, dans les échanges, dans
+  les actions de la vie commune, de peur que l'ignorance ne rendit
+  esclave celui que vous aviez déclaré libre, et ne réduisit l'égalité
+  prononcée par vos lois à n'être jamais qu'un vain nom.
+
+  Pourraient-ils enfin ne pas apercevoir qu'en établissant pour la
+  première fois, le système entier de la société sur des bases
+  immuables de la vérité et de la justice, en attachant ainsi par une
+  chaîne éternelle les progrès de l'art social au progrès de la
+  raison, vous avez étendu vos bienfaits à tous les pays, à tous les
+  siècles, et dévoué toutes les erreurs, comme toutes les tyrannies à
+  une destruction rapide?
+
+  Ainsi, grâce à la générosité, à la pureté de vos principes, la
+  force, l'avarice, ou la séduction, cesseront bientôt de contrarier,
+  par des institutions arbitraires, la loi de la nature, qui a voulu
+  que l'homme fût éclairé pour qu'il pût être juste, et libre pour
+  qu'il pût être heureux. Ainsi, vous jouirez à la fois et du bien que
+  vous faites, et du bien que vous préparez, et vous achèverez votre
+  ouvrage au milieu des bénédictions de la foule des opprimés dont
+  vous avez brisé les fers, et des acclamations des hommes éclairés
+  dont vous avez surpassé les espérances.
+\end{displaycquote}
+% Deuxième chapitre
+\chapter{Développement}
+\label{chap-developpement}
+
+Dans ce chapitre, nous développons notre travail. Nous citons une
+référence\index{référence!bibliographique|see{bibliographie}}
+bibliographique\index{bibliographie!référence} \autocite{relativite}
+car, en effet, nous nous appuierons dans cette partie sur des
+résultats fondamentaux qu'on y trouve
+\autocite[chap.~3]{relativite}.
+
+Nous ne manquerons pas de causer de \glspl{vrnc}, d'\gls{af} et de \gls{mf},
+termes définis dans le glossaire\index{glossaire}. Nous recourrons également aux
+symboles de l'\gls{ohm}, du \gls{exists} et de la \gls{planck} définis dans la
+liste des symboles. Vous noterez que notre travail a été composé au moyen de
+\gls{latex}\index{\gls{latex}}.
+
+Notre étude a porté sur l'\gls{irm} et la \gls{rmn}, définis dans la
+liste des acronymes\index{acronyme}. Nous pouvons insérer d'autres
+acronymes :
+\begin{itemize}
+\item \gls{ascii} ;
+\item \gls{bios} ;
+\item \gls{ctan} ;
+\item \gls{dvd} ;
+\item \gls{erp} ;
+\item \gls{faq} ;
+\item \gls{gnu} ;
+\item \gls{http} ;
+\item \gls{ip} ;
+\item \gls{jpeg} ;
+\item \gls{kdm} ;
+\item \gls{lug} ;
+\item \gls{mac} ;
+\item \gls{nfs} ;
+\item \gls{ocr} ;
+\item \gls{p2p} ;
+\item \gls{ram} ;
+\item \gls{radar} ;
+\item \gls{svg} ;
+\item \gls{tft} ;
+\item \gls{utf-8} ;
+\item \gls{vga} ;
+\item \gls{wpa} ;
+\item \gls{xhtml}.
+\end{itemize}
+On notera que les acronymes précédents, dont ce sont les premières
+occurrences dans le document, figurent sous leur forme complète,
+c'est-à-dire sous leur forme développée suivie entre parenthèses de
+leur forme abrégée. Ceci est assuré de façon automatique par
+\gls{latex} et le package \textsf{glossaries} qui, en outre, vont
+composer toutes les occurrences suivantes de ces acronymes
+uniquement sous leur forme abrégée\footnote{Sauf contre-ordre.} :
+\begin{itemize}
+\item \gls{ascii} ;
+\item \gls{bios} ;
+\item \gls{ctan} ;
+\item \gls{dvd} ;
+\item \gls{erp} ;
+\item \gls{faq} ;
+\item \gls{gnu} ;
+\item \gls{http} ;
+\item \gls{ip} ;
+\item \gls{jpeg} ;
+\item \gls{kdm} ;
+\item \gls{lug} ;
+\item \gls{mac} ;
+\item \gls{nfs} ;
+\item \gls{ocr} ;
+\item \gls{p2p} ;
+\item \gls{ram} ;
+\item \gls{radar} ;
+\item \gls{svg} ;
+\item \gls{tft} ;
+\item \gls{utf-8} ;
+\item \gls{vga} ;
+\item \gls{wpa} ;
+\item \gls{xhtml}.
+\end{itemize}
+%
+\section{Cadre de travail}\label{sec-cadre}
+%
+Si on examine, dans le fichier\index{\gls{latex}!fichier}
+\fichier{developpementI.tex} du répertoire \fichier{corps}, le code source
+du tableau\vref{tab-passionnant}\index{\gls{latex}!tableau}, on verra l'usage
+de commandes permettant d'obtenir des tableaux d'allure
+professionnelle\footnote{Pour obtenir de tels tableaux sous \LaTeX{}, on
+  \href{http://www.tug.org/pracjourn/2007-1/mori/mori.pdf}{trouvera sur
+    Internet} comment procéder.}.
+%
+\begin{table}[ht]
+  \centering
+  \begin{tabular}{ccc}
+    \toprule
+    \multicolumn{1}{c}{} & Word & \LaTeX{} \\
+    \midrule
+    Libre                & Non  & Oui      \\
+    Gratuit              & Non  & Oui      \\
+    Élégant              & Non  & Oui      \\
+    Efficace             & Non  & Oui      \\
+    Puissant             & Non  & Oui      \\
+    \bottomrule
+  \end{tabular}
+  \caption{Un tableau passionnant}
+  \label{tab-passionnant}
+\end{table}
+
+\lipsum[3-22]
+%
+\section{Méthode de travail}
+\label{sec-methode}
+%
+Nous incluons la figure\vref{fig-tigre}\index{\gls{latex}!figure} qui n'est
+pas là pour faire joli, mais bien pour éclairer notre propos.
+\begin{figure}
+  \centering
+  \capstart
+  \includegraphics[width=.35\linewidth]{tiger}
+  \caption[Un tigre]{Une figure avec une légende assez longue qui peut
+    même, au besoin, s'étaler sur plusieurs lignes.}
+  \label{fig-tigre}
+\end{figure}
+On note qu'on peut mettre, en argument optionnel de la commande
+permettant de créer la légende, une légende \og courte\fg{} qui sera
+celle qui figurera, par exemple, dans la liste des figures.
+
+On pourra se convaincre, à la lecture des pages~86 à~89 de la
+\href{http://mirrors.ctan.org/graphics/pgf/base/doc/generic/pgf/pgfmanual.pdf}{documentation
+  du package \package{TikZ}}, de ce qu'une figure\index{\gls{latex}!figure}
+n'est pas toujours préférable à un tableau\index{\gls{latex}!tableau}. Plus
+généralement, on pourra lire toute la section~7, intitulée \emph{Guidelines on
+  Graphics} (pages~84 à~90).
+
+Avec \LaTeX{}\index{\gls{latex}|textbf}, il est extrêmement aisé de créer
+un index\index{\gls{latex}!index}, comme dans les documents les mieux
+composés.
+
+\lipsum[23-42]
+%
+\section[Discussion]{Discussion et interprétation des résultats}
+\label{sec-discussion}
+%
+On constate que le titre de cette section est différent de ce qui
+apparaît en entête et dans la table des matières : c'est l'argument
+optionnel de la commande de sectionnement qui a permis cela.
+
+\lipsum[43-52]
+% Troisième chapitre
+\chapter{Conclusion}
+Dans ce chapitre, nous concluons l'étude du chaos du rire.
+
+\lipsum[26-27]
+\section{Une section}
+\lipsum[28-29]
+\subsection{Une sous-section}
+\lipsum[29-31]
+\subsubsection{Une sous-sous-section}
+\lipsum[31-35]
+\paragraph{Un paragraphe}
+\lipsum[36-38]
+\paragraph{Un sous-paragraphe}
+\lipsum[39-41]
+\paragraph{Un autre sous-paragraphe}
+\lipsum[39-41]
+\paragraph{Un autre paragraphe}
+\lipsum[36-38]
+\subsubsection{Une autre sous-sous-section}
+\lipsum[31-35]
+\subsection{Une autre sous-section}
+\lipsum[29-31]
+\section{Une autre section}
+\lipsum[28-29]
+%
+%
+% Deuxième partie éventuelle
+\part{Le rire du chaos}
+%
+% Quatrième chapitre
+\chapter{Contexte du rire du chaos}
+\epigraphhead[30]{\epigraph{La science a fait de nous des dieux avant même que
+    nous méritions d'être des hommes.}{Jean Rostand}}
+
+\lipsum[26-32]
+% Cinquième chapitre
+\chapter{Développement}
+
+Nous pouvons faire référence à des graphiques (très jolis au demeurant), comme
+celui de la figure\vref{sin-x*sin-y}.
+\lipsum[3-10]
+\begin{figure}[ht]
+  \centering
+  \capstart
+  \begin{tikzpicture}
+    \begin{axis}[colorbar]
+      \addplot3[surf,domain=0:360]
+      {sin(x)*sin(y)};
+    \end{axis}
+  \end{tikzpicture}
+  \caption{Représentation graphique de la fonction $f:(x,y)\mapsto
+    \sin x\times\sin y$}
+  \label{sin-x*sin-y}
+\end{figure}
+% Sixième chapitre
+\chapter{Conclusion}
+Dans ce chapitre, nous concluons l'étude du rire du chaos.
+
+\lipsum[6-9]
+%
+% Chapitre  de conclusion (générale)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter*{Conclusion générale}
+\lipsum[26-27]
+\section{Une section de conclusion}
+\lipsum[28-29]
+\subsection{Une sous-section de conclusion}
+\lipsum[29-31]
+\subsubsection{Une sous-sous-section de conclusion}
+\lipsum[31-35]
+\paragraph{Un paragraphe de conclusion}
+\lipsum[36-38]
+\subparagraph{Un sous-paragraphe de conclusion}
+\lipsum[39-41]
+\subparagraph{Un autre sous-paragraphe de conclusion}
+\lipsum[39-41]
+\paragraph{Un autre paragraphe de conclusion}
+\lipsum[36-38]
+\subsubsection{Une autre sous-sous-section de conclusion}
+\lipsum[31-37]
+\subsection{Une autre sous-section de conclusion}
+\lipsum[29-31]
+\section{Une autre section de conclusion}
+\lipsum[28-43]
+%
+% Liste des références bibliographiques
+\printbibliography
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Début de la partie annexe éventuelle
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\appendix
+%
+% Premier chapitre annexe (éventuel)
+\chapter{Documents juridiques}
+\label{chap-juridique}
+
+Cette partie regroupe les documents juridiques officiels.
+
+\section{Licence sous laquelle est publié notre travail}
+\label{sec-discours}
+
+\lipsum[11-30]
+
+\section{Transposition de la licence précédente en droit français}
+\label{sec-autre-discours}
+
+\lipsum[31-50]
+% Deuxième chapitre annexe (éventuel)
+\chapter{Programmes informatiques}
+\label{chap-listings}
+
+Les listings suivants sont au cœur de notre travail.
+
+\begin{lstlisting}[caption={Il est l'heure}]
+#include <stdio.h>
+int heures, minutes, secondes;
+
+/****************************************************/
+/*                                                  */
+/*            print_heure                           */
+/*                                                  */
+/*   But:                                           */
+/*      Imprime l'heure                             */
+/*                                                  */
+/*   Interface:                                     */
+/*      Utilise les variables globales              */
+/*           heures, minutes, secondes              */
+/*                                                  */
+/****************************************************/
+
+void print_heure(void)
+{
+  printf("Il est %d heure",heures);
+  if (heures > 1) printf("s");
+  printf(" %d minute",minutes);
+  if (minutes > 1) printf("s");
+  printf(" %d seconde",secondes);
+  if (secondes > 1) printf("s");
+  printf("\n");
+}
+\end{lstlisting}
+\begin{lstlisting}[caption={Factorielle}]
+int factorielle(int n)
+{
+  if (n > 2) return n * factorielle(n - 1);
+  return n;
+}
+\end{lstlisting}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Début de la partie finale
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\backmatter
+%
+% (Facultatif) Glossaire (si souhaité distinct de la liste des acronymes) :
+\printglossary
+%
+% (Facultatif) Index :
+\printindex
+%
+% Table des matières
+\tableofcontents
+%
+% (Facultatif) Production de la 4e de couverture :
+\makebackcover
+%
+\end{document}

@@ -1,0 +1,41 @@
+\chapter{Fichiers automatiquement importés par la \yatcl{}}
+\label{cha:fichiers-importes-par}
+
+Pour faciliter son utilisation, la \yatcl{} importe automatiquement deux
+fichiers :
+\begin{enumerate}
+\item un fichier nommé \file{\characteristicsfile} dédié aux données
+  caractéristiques du document amenées à figurer en divers emplacements ou
+  comme métadonnées du fichier \pdf produit (cf. \vref{sec:lieu-de-saisie}) ;
+\item un fichier nommé \file{\configurationfile} dédié à la configuration du
+  document, où stocker notamment les réglages :
+  \begin{itemize}
+  \item de la \yatcl (cf. \vref{cha:configuration}) ;
+  \item des différents packages chargés soit par la classe, soit manuellement
+    (cf. \vref{cha:packages-charges}).
+  \end{itemize}
+  % ^^A \item un fichier nommé \file{\macrosfile} dédié aux macros personnelles
+  % ^^A créées pour le document.
+\end{enumerate}
+\begin{dbwarning}{Fichiers de données et de configuration automatiquement importés}{import-sous-cond}
+  Pour que ces fichiers
+  % ^^A \file{\characteristicsfile} et \file{\configurationfile}
+  soient automatiquement importés, il est nécessaire :
+  \begin{enumerate}
+  \item qu'ils existent\footnote{Ces fichiers et sous-répertoire sont donc
+      à créer au besoin mais le canevas de thèse \enquote{en arborescence} livré avec
+      la classe, décrit \vref{sec:canevas-arborescence}, les fournit d'emblée.} ;
+  \item qu'ils soient situés dans le répertoire \emph{ad hoc}, à savoir un
+    sous-répertoire nommé \directory{\configurationdirectory} du répertoire où
+    se trouve le fichier (maître) du document.
+  \end{enumerate}
+\end{dbwarning}
+%^^A
+\begin{dbwarning}{Fichiers de données et de configuration à ne pas importer manuellement}{}
+  Si ces fichiers
+  % ^^A \file{\characteristicsfile} et \file{\configurationfile}
+  vérifient les conditions de l'avertissement précédent, la \yatcl{} les
+  importe \emph{automatiquement} : ils doivent donc \emph{ne pas} être
+  explicitement importés \phrase*{au moyen d'une commande \docAuxCommand{input}
+    ou assimilée}.
+\end{dbwarning}

@@ -1,0 +1,103 @@
+\chapter{Pages finales}
+\label{cha:pages-finales}
+
+Ce chapitre indique comment produire les pages finales de la thèse,
+à savoir :
+\begin{enumerate}
+\item la liste éventuelle des acronymes et/ou
+  termes du glossaire ;
+\item l'éventuel index;
+\item la table des matières, en cas de sommaire en \glspl{liminaire};
+\item la quatrième de couverture (le dos de la thèse).
+\end{enumerate}
+
+\begin{docCommand}{backmatter}{}
+  Les éventuelles pages finales de la thèse doivent être manuellement
+  introduites au moyen de la commande usuelle
+  \docAuxCommand{backmatter}\footnote{Cette commande n'est pas obligatoire en
+    soi mais elle est fortement recommandée si la thèse contient des pages
+    finales.} de la \Class{book}\nofrontmatter.
+\end{docCommand}
+
+\section{Glossaire}
+
+Les commandes de production du glossaire (\docAuxCommand{printglossary}) ou
+des glossaires (\docAuxCommand{printglossaries}) sont détaillées et illustrées
+\vref{sec:sigl-gloss-nomencl,fig:printglossary}.
+
+\begin{figure}[htbp]
+  \centering
+  \screenshot{printglossary}
+  \caption{Glossaire}
+  \label{fig:printglossary}
+\end{figure}
+
+\section{Index}
+
+\begin{dbremark*}{Section à passer en 1\iere{} lecture}
+  Cette section est à passer en 1\iere{} lecture si on ne compte pas faire
+  figurer d'index.
+\end{dbremark*}
+
+Tout système de gestion d'index\footnote{Dans cette section, le fonctionnement
+  d'un tel système est supposé connu du lecteur (sinon, cf. par exemple
+  \cite{en-ligne7}).} peut théoriquement être mis en œuvre avec la
+\yatcl. Celle-ci ne définit rien de spécifique et se contente de légèrement
+modifier la commande \docAuxCommand{printindex} classique :
+\begin{itemize}
+\item en lui appliquant un style de pages propre à l'index ;
+\item pour que l'index figure automatiquement dans les
+  sommaire, table des matières et signets du document.
+\end{itemize}
+
+La \vref{fig:printindex} illustre une page d'index créé au moyen du
+\Package{imakeidx}.
+
+\begin{figure}[htbp]
+  \centering
+  \screenshot{printindex}
+  \caption{Index}
+  \label{fig:printindex}
+\end{figure}
+
+\section{Table des matières}
+
+Si la table des matières est longue, elle peut être placée en
+annexe. Nous renvoyons ici à la \vref{sec:table-des-matieres} et à
+la \vref{fig:tableofcontents} qui traite déjà cette question.
+
+\section{Quatrième de couverture}\label{sec:quatr-de-couv}
+
+La quatrième de couverture s'obtient au moyen de la commande
+\refCom{makebackcover} suivante.
+
+\begin{docCommand}{makebackcover}{}
+  Cette commande a le même effet que la commande \refCom{makeabstract}
+  % ^^A (elle affiche entre autres les résumés succincts en français et en
+  % ^^A anglais),
+  à ceci près que :
+  \begin{enumerate}
+  \item elle ne produit pas de titre courants (non souhaités au dos d'un
+    document) ;
+  \item la page est imprimée sur une page paire, son recto étant
+    laissé entièrement vide.
+  \end{enumerate}
+\end{docCommand}
+
+\begin{figure}[htbp]
+  \centering
+  \screenshot{makebackcover}
+  \caption{Quatrième de couverture}
+  \label{fig:makebackcover}
+\end{figure}
+
+%
+\iffalse
+%%% Local Variables:
+%%% mode: latex
+%%% eval: (latex-mode)
+%%% ispell-local-dictionary: "fr_FR"
+%%% TeX-engine: xetex
+%%% TeX-master: "../yathesis.dtx"
+%%% End:
+\fi
