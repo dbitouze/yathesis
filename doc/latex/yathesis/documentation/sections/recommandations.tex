@@ -1,6 +1,5 @@
-
 \chapter{Recommandations et astuces}
-\label{cha:recomm-et-astuc}
+\label{cha-recomm-et-astuc}
 
 \section{Images}
 
@@ -36,7 +35,7 @@ est conseillé, selon qu'il s'agit d'images dont :
 On a vu \vref{rq:acronymes} que si un institut (par exemple) doit figurer
 sous la forme d'un acronyme, on aura intérêt à ne pas le saisir tel
 quel, mais à recourir aux fonctionnalités du
-\Package{glossaries}\footnote{Cf. \vref{sec:sigl-gloss-nomencl} pour
+\Package{glossaries}\footnote{Cf. \vref{sec-sigl-gloss-nomencl} pour
   son usage avec la \yatcl.}. L'exemple suivant illustre la
 procédure.
 %
@@ -71,19 +70,19 @@ on peut recourir, non pas à ×\institute{ULCO}×, mais à :
 \end{dbremark}
 
 \section{Scission du mémoire en fichiers maître et esclaves}
-\label{sec:repart-du-memo}
+\label{sec-repart-du-memo}
 
 La scission du mémoire de thèse en différents fichiers maître et esclaves,
 hautement recommandée, suppose de :
 \begin{enumerate}
 \item créer un fichier \enquote{maître}\footnote{Dans les spécimens et canevas
-    de thèse fournis avec la classe, décrits \vref{cha:specimen-canevas}, le
+    de thèse fournis avec la classe, décrits \vref{cha-specimen-canevas}, le
     fichier maître est nommé \file{\thesismasterfile.tex}.};
 \item stocker le contenu des chapitres, chacun dans un fichier
   \enquote{esclave}
   % ^^A \footnote{Dans les spécimens et canevas de thèse fournis avec la
-  % ^^A classe, décrit \vref{cha:specimen-canevas}, l'inclusion des fichiers
-  % ^^A esclaves, situés dans le \Directory{\dossiercorps}, est gérée dans
+  % ^^A classe, décrit \vref{cha-specimen-canevas}, l'inclusion des fichiers
+  % ^^A esclaves, situés dans le \Folder{\dossiercorps}, est gérée dans
   % ^^A le \File{\fichiercorps} situé dans le même répertoire que le
   % ^^A fichier maître.}
   et d'inclure ceux-ci au moyen de la commande
@@ -144,11 +143,11 @@ maître\footnote{C'est-à-dire à la racine du répertoire contenant le fichier
 \end{bodycode}
 \end{dbexample}
 %
-Le canevas \enquote{en arborescence}, détaillé \vref{sec:canevas-arborescence},
+Le canevas \enquote{en arborescence}, détaillé \vref{sec-canevas-arborescence},
 suit ce type d'organisation.
 
 \section{Automatisation des compilations avec \program{latexmk}}
-\label{sec:autom-des-comp}
+\label{sec-autom-des-comp}
 
 Le programme \program{latexmk} qui permet d'automatiser le processus de
 compilation complète de la thèse.

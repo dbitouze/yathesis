@@ -1,4 +1,4 @@
-\chapter{Personnalisation}\label{cha:configuration}
+\chapter{Personnalisation}\label{cha-configuration}
 
 Cette section passe en revue les outils de personnalisation propres ou pas à la
 \yatcl{} :
@@ -22,7 +22,7 @@ usuelle :
 % ^^A La \yatcl accepte, en sus des options qui lui sont propres, celles de la
 % ^^A \Class{book} sur laquelle est elle basée.
 
-\subsection{Options de la classe \textsf{book}}\label{sec:options-usuelles-de}
+\subsection{Options de la classe \textsf{book}}\label{sec-options-usuelles-de}
 
 Parmi les \meta{options} de la \yatcl figurent celles de la \Class{book},
 notamment :
@@ -44,13 +44,13 @@ notamment :
   ci-dessus : cela risquerait de produire des résultats non souhaités.
 \end{dbwarning}
 
-% ^^A \subsection{Options de la \yatcl}\label{sec:options-yatcl}
+% ^^A \subsection{Options de la \yatcl}\label{sec-options-yatcl}
 %
 % ^^A Les \meta{options} discutées dans cette section, propres à la \yatcl{},
 % ^^A permettent de contrôler les grandes lignes du document.
 
 \subsection{Langues (principale, secondaire,
-  supplémentaires)}\label{sec:langues}
+  supplémentaires)}\label{sec-langues}
 
 Par défaut, un mémoire créé avec la \yatcl est composé :
 \begin{itemize}
@@ -103,7 +103,7 @@ Par défaut, un mémoire créé avec la \yatcl est composé :
 \end{preamblecode}
 \end{dbexample}
 
-\subsection{Versions du mémoire}\label{sec:versions}
+\subsection{Versions du mémoire}\label{sec-versions}
 
 Au moyen de la clé \refKey{version}, la \yatcl{} permet de facilement produire
 différentes versions du document : \enquote{intermédiaire} (par défaut),
@@ -127,7 +127,7 @@ différentes versions du document : \enquote{intermédiaire} (par défaut),
         \foreignquote{english}{Work in progress as of \meta{date du
             jour}}\selonlangue{}.
       \item\label{item:inprogress:2} Aucun élément \enquote{obligatoire}
-        (cf. \vref{sec:comm-oblig}) manquant n'est signalé.
+        (cf. \vref{sec-comm-oblig}) manquant n'est signalé.
       \end{enumerate}
     \item[\docValue{inprogress*}.] Cette valeur produit le même effet que la
       valeur \docValue{inprogress} sauf que le caractère non définitif de la
@@ -150,7 +150,7 @@ différentes versions du document : \enquote{intermédiaire} (par défaut),
         soutenance est supprimée\footnote{En versions soumises aux rapporteurs,
           le doctorant ne peut préjuger ni d'un jury ni d'une date de
           soutenance, ne sachant pas encore s'il va être autorisé à soutenir.} ;
-      \item tout élément \enquote{obligatoire} (cf. \vref{sec:comm-oblig})
+      \item tout élément \enquote{obligatoire} (cf. \vref{sec-comm-oblig})
         manquant est signalé par une erreur de compilation\footnote{La date de
           soutenance est normalement \enquote{obligatoire}, sauf dans les
           versions soumises aux rapporteurs où elle ne figure nulle part.}.
@@ -175,7 +175,7 @@ différentes versions du document : \enquote{intermédiaire} (par défaut),
           intermédiaire en date du \meta{date du jour}} ou
         \foreignquote{english}{Work in progress as of \meta{date du jour}} est
         désactivé ;
-      \item si un élément \enquote{obligatoire} (cf. \vref{sec:comm-oblig})
+      \item si un élément \enquote{obligatoire} (cf. \vref{sec-comm-oblig})
         manque, une erreur de compilation signale l'omission.
       \end{enumerate}
     \item[\docValue{draft}.] Cette valeur produit une version
@@ -184,7 +184,7 @@ différentes versions du document : \enquote{intermédiaire} (par défaut),
         destinée à être diffusée.}. Ses caractéristiques sont les suivantes :
       \begin{itemize}
       \item \emph{comme} la version par défaut, si un élément
-        \enquote{obligatoire} (cf. \vref{sec:comm-oblig}) manque, aucune erreur
+        \enquote{obligatoire} (cf. \vref{sec-comm-oblig}) manque, aucune erreur
         de compilation ne signale l'omission ;
       \item \emph{contrairement à} la version par défaut, la mention
         \enquote{Version intermédiaire en date du \meta{date du jour}} ou
@@ -203,8 +203,8 @@ différentes versions du document : \enquote{intermédiaire} (par défaut),
           \item les données caractéristiques de la thèse\footnote{Auteur,
               (sous-)titre, institut(s), directeurs, rapporteurs, examinateurs,
               etc.} sont des hyperliens vers le fichier de configuration de la
-            thèse\footnote{Cf. \vref{sec:lieu-de-saisie}.} où il est possible de
-            les (re)définir (cf. \vref{sec:expressions-cles});
+            thèse\footnote{Cf. \vref{sec-lieu-de-saisie}.} où il est possible de
+            les (re)définir (cf. \vref{sec-expressions-cles});
           \item\label{item-expression} les expressions fournies par la
             \yatcl\footnote{\enquote{Thèse présentée par},
               \foreignquote{english}{In order to become Doctor from},
@@ -214,8 +214,8 @@ différentes versions du document : \enquote{intermédiaire} (par défaut),
             \begin{itemize}
             \item estampillées du label qui les identifie;
             \item des hyperliens vers le fichier de configuration de la thèse
-              (cf.  \vref{rq:configurationfile}) où il est possible de les
-              (re)définir (cf. \vref{sec:expressions-cles}).
+              (cf.  {\NoAutoSpacing\vref{rq:configurationfile}}) où il est possible de les
+              (re)définir (cf. \vref{sec-expressions-cles}).
             \end{itemize}
           \end{enumerate}
           Si le système d'exploitation est correctement configuré, un simple
@@ -243,7 +243,7 @@ sont à produire qu'exceptionnellement, en toute fin de rédaction. De ce fait :
 \end{dbwarning}
 
 \subsection{Formats de sortie}
-\label{sec:formats-de-sortie}
+\label{sec-formats-de-sortie}
 
 Les documents composés avec la \yatcl{} peuvent avoir deux formats de sortie :
 \enquote{écran} (par défaut) et \enquote{papier}, stipulés au moyen de la clé
@@ -283,19 +283,19 @@ Les documents composés avec la \yatcl{} peuvent avoir deux formats de sortie :
         besoin de modifier ce choix pour que, en sortie \enquote{papier}, cette
         coloration soit désactivée ;
       \end{enumerate}
-      \item\label{item:paper:2} les barres de navigation affichées par certains
+      \item\label{item-paper-2} les barres de navigation affichées par certains
         styles de glossaires\footnote{Telles qu'on peut en voir
-          \vref{fig:printacronyms,fig:printglossary}.} \emph{sont} masquées.
+          \vref{fig-printacronyms,fig-printglossary}.} \emph{sont} masquées.
     \end{enumerate}
   \item[\docValue{paper*}.] Cette valeur produit le même effet que la valeur
-    \docValue{paper} sauf que son \vref{item:paper:2} est inversé : les barres
+    \docValue{paper} sauf que son \vref{item-paper-2} est inversé : les barres
     de navigation \emph{ne} sont \emph{pas} masquées.
   \end{description}
 \end{docKey}
 
 \begin{dbwarning}{Mises en page éventuellement différentes en sortie
     \enquote{écran} et \enquote{papier}}{}
-  Du fait des \cref{item:paper:1,item:paper:2} précédents, les mises en page
+  Du fait des \cref{item-paper-1,item-paper-2} précédents, les mises en page
   des sorties \enquote{écran} et \enquote{papier} peuvent être différentes, et
   il pourra être opportun de les comparer, par exemple à l'aide d'un logiciel
   comparateur de fichiers \acrshort{pdf}. Si on souhaite que les sorties
@@ -311,7 +311,7 @@ Les documents composés avec la \yatcl{} peuvent avoir deux formats de sortie :
 
 Par défaut, seul le laboratoire principal (avec son adresse) est affiché sur
 les pages de résumés et de 4\ieme{} de couverture
-(cf. \vref{sec:abstract,sec:quatr-de-couv}). Mais la clé
+(cf. \vref{sec-abstract,sec-quatr-de-couv}). Mais la clé
 \refKey{numlaboratories} suivante permet de faire figurer un nombre arbitraire
 de laboratoires parmi ceux définis au moyen de la commande
 \refCom{laboratory}.%^^A
@@ -331,7 +331,7 @@ de laboratoires parmi ceux définis au moyen de la commande
 Pour gagner de la place sur les pages concernées, la composition des noms et
 adresses des laboratoires est un peu condensée si \meta{nombre} dépasse $1$.
 
-\subsection{Style des têtes de chapitres}\label{sec:style-des-tetes}
+\subsection{Style des têtes de chapitres}\label{sec-style-des-tetes}
 
 Pour gérer les têtes de chapitres, la \yatcl{} s'appuie sur le
 \Package*{fncychap}, par défaut chargé avec le style \docValue{PetersLenny}. La
@@ -356,7 +356,7 @@ package\footnote{Par souci de compatibilité ascendante, la clé désormais
 }
 
 \subsection{Expressions séparant les corps et affiliations des membres du jury}
-\label{sec:expr-separ-les}
+\label{sec-expr-separ-les}
 
 Sur les pages de titre, chaque membre du jury peut être précisé notamment par :
 \begin{itemize}
@@ -365,7 +365,7 @@ Sur les pages de titre, chaque membre du jury peut être précisé notamment par
   \refKey{juniorresearcher*} ;
 \item son affiliation, cf. \refKey{affiliation}.
 \end{itemize}
-Comme illustré \vref{fig:maketitle}, si ces deux précisions sont présentes,
+Comme illustré \vref{fig-maketitle}, si ces deux précisions sont présentes,
 elles sont par défaut séparées :
 \begin{description}
 \item[en français] par l'une des deux expressions contextuelles suivantes :
@@ -406,7 +406,7 @@ redéfinies, globalement ou localement.
     document ;
   \item[localement:] elle est alors à spécifier en option de l'une des
     commandes de définition des membres du jury (cf.
-    \vref{sec:definition-jury}).
+    \vref{sec-definition-jury}).
   \end{description}
 \end{docKey}
 
@@ -461,7 +461,7 @@ redéfinies, globalement ou localement.
 \end{dbexample}
 
 \subsection{Habilitations à diriger les recherches}
-\label{sec:hdr}
+\label{sec-hdr}
 %
 Grâce à sa clé \refKey{hdr}, la \yatcl{} peut être utilisée pour
 les habilitations à diriger les recherches.
@@ -480,17 +480,17 @@ d'expressions clés de la \yatcl{}, en remplaçant par exemple \enquote{Thèse
   présentée par} par \enquote{Habilitation à diriger les recherches présentée
   par}. Les expressions propres aux habilitations à diriger les recherches sont
 celles dont le label est suffixé par \enquote{\texttt{-hdr}} dans le
-\vref{tab:expressions-cles}.
+\vref{tab-expressions-cles}.
 
 \section{Options à passer aux packages chargés par la \yatcl{}}
-\label{sec:options-passer-aux}
+\label{sec-options-passer-aux}
 
 \changes{v0.99g}{2014/07/13}{Des options peuvent être passées aux packages
   chargés par \yat{}}%^^A
 %^^A
 Pour plusieurs de ses fonctionnalités, la \yatcl s'appuie sur des packages
 qu'elle charge automatiquement (listés
-\vref{sec:packages-charges-par}). Aussi son comportement par défaut et sa
+\vref{sec-packages-charges-par}). Aussi son comportement par défaut et sa
 personnalisation sont-ils également gouvernés par le comportement par défaut et
 la personnalisation de ces packages.
 
@@ -589,7 +589,7 @@ peuvent être passées à leurs options).
 \end{dbexample}
 
 \section{Options de préambule}
-\label{sec:options-de-preambule}
+\label{sec-options-de-preambule}
 
 Pour des raisons techniques, les options de la \yatcl listées à la
 \vref{options-classe}, ne peuvent être passées qu'en argument optionnel de
@@ -604,7 +604,7 @@ passées indifféremment :
   Cette commande permet de spécifier certaines \meta{options} de la \yatcl.
 \end{docCommand}
 
-\subsection{Profondeur de la numérotation}\label{sec:profondeur-de-la}
+\subsection{Profondeur de la numérotation}\label{sec-profondeur-de-la}
 
 Par défaut, la numérotation des paragraphes a pour \enquote{niveau de
   profondeur} les sous-sections. Autrement dit, seuls les titres des parties
@@ -623,7 +623,7 @@ profondeur.
   \end{docKey}
 }
 
-\subsection{Espace interligne}\label{sec:interligne}
+\subsection{Espace interligne}\label{sec-interligne}
 
 L'interligne du document est par défaut \enquote{simple} mais, au moyen de
 l'option \refKey{space} suivante, il est possible de spécifier un interligne
@@ -639,8 +639,8 @@ l'option \refKey{space} suivante, il est possible de spécifier un interligne
     principale}{space-setspace}
   Contrairement à l'option \refKey{setspace} qui a un effet (semi-)global et
   prend effet dès le début du document, l'option \refKey{space} ne prend effet
-  qu'à la partie principale du document (cf. \vref{cha:corps}) et se termine
-  avec elle, avant la partie annexe (cf. \vref{cha:annexes}).
+  qu'à la partie principale du document (cf. \vref{cha-corps}) et se termine
+  avec elle, avant la partie annexe (cf. \vref{cha-annexes}).
 \end{dbwarning}
 
 Si on souhaite changer d'interligne ailleurs dans le mémoire, on recourra aux
@@ -658,7 +658,7 @@ commandes du \Package*{setspace} \phrase*{chargé par la \yatcl}.
     \file{\configurationfile} et à placer dans un sous-dossier (prévu à cet
     effet) à nommer \directory{\configurationdirectory}\footnote{Ces fichier et
       sous-dossier sont à créer au besoin mais le canevas de thèse \enquote{en
-        arborescence} livré avec la \yatcl, décrit \vref{sec:canevas-arborescence}, les
+        arborescence} livré avec la \yatcl, décrit \vref{sec-canevas-arborescence}, les
       fournit.}.
   \end{itemize}
 \end{dbremark}
@@ -667,12 +667,12 @@ commandes du \Package*{setspace} \phrase*{chargé par la \yatcl}.
   Le \File{\configurationfile} est \emph{automatiquement} importé par la
   \yatcl{} et il doit donc \emph{ne pas} être explicitement importé : on
   \emph{ne} recourra donc \emph{pas} à la commande
-  ×\input{×\file{\configurationfile}×}× (ou autre commande d'importation
+  |\input{|\file{\characteristicsfile}|}| (ou autre commande d'importation
   similaire à \docAuxCommand{input}).
 \end{dbwarning}
 
 \subsection{(Re)Définition des expressions de la
-  thèse}\label{sec:expressions-cles}
+  thèse}\label{sec-expressions-cles}
 
 Un mémoire de thèse composé avec la \yatcl est émaillé d'expressions insérées
 de façon automatique sur certaines pages (titre, mots clés, laboratoire,
@@ -680,10 +680,10 @@ résumés, etc.). Que ces expressions soient définies par la \yatcl ou bien
 standard, il est possible de les redéfinir.
 
 \subsubsection{Expressions définies par la classe}
-\label{sec:expr-defin-par}
+\label{sec-expr-defin-par}
 
 Les expressions \meta{en français} et \meta{en anglais} définies par la \yatcl
-sont listées dans le \vref{tab:expressions-cles} et y sont identifiées par un
+sont listées dans le \vref{tab-expressions-cles} et y sont identifiées par un
 \meta{label} permettant de les redéfinir (voire de les définir, cf.
 \vref{ex:doctor}) au moyen de la commande \refCom{expression} suivante.
 %
@@ -697,7 +697,7 @@ sont listées dans le \vref{tab:expressions-cles} et y sont identifiées par un
   \input{tableaux/expressions}
   \caption{Expressions de la \yatcl et labels correspondants (classés par ordre
     alphabétique des valeurs en français)}
-  \label{tab:expressions-cles}
+  \label{tab-expressions-cles}
 \end{table}
 
 \begin{dbexample}{Modification d'expression définie par la classe}{}
@@ -721,15 +721,15 @@ sont listées dans le \vref{tab:expressions-cles} et y sont identifiées par un
 
 \begin{dbremark}{Modification d'expressions facilitée par la version
     \enquote{brouillon}}{}
-  On a vu \vref{sec:versions} que l'option ×version=draft× permet de facilement
+  On a vu \vref{sec-versions} que l'option |version=draft| permet de facilement
   retrouver les labels des expressions et atteindre le \File{\configurationfile}
   pour y modifier celles-ci.
 \end{dbremark}
 
 \subsubsection{Expressions standard}
-\label{sec:expressions-standard}
+\label{sec-expressions-standard}
 
-Le \vref{tab:expressions-standard} liste les expressions \LaTeX{} standard
+Le \vref{tab-expressions-standard} liste les expressions \LaTeX{} standard
 telles que traduites par la \yatcl{}. Il s'agit en fait des traductions en
 français et en anglais fournies par les modules \package{frenchb} et
 \package{english} du \Package{babel}, à l'exception de l'expression française
@@ -751,7 +751,7 @@ de la syntaxe suivante.
   \centering
   \input{tableaux/expressions-standard}
   \caption{Valeurs et commandes d'expressions \LaTeX{} standard fournies par la \yatcl{}}
-  \label{tab:expressions-standard}
+  \label{tab-expressions-standard}
 \end{table}
 \begin{dbexample}{Redéfinition d'expressions du \Package{babel}}{}
 \begin{preamblecode}[title=Par exemple dans le \File{\configurationfile}]
@@ -785,9 +785,9 @@ pourra être donné à la liste des listings, au moyen de:
 \renewcommand\lstlistingname{÷\meta{titre alternatif}÷}
 \end{preamblecode}
 
-\subsection{Nouveaux corps}\label{sec:nouveaux-corps}
+\subsection{Nouveaux corps}\label{sec-nouveaux-corps}
 
-On a vu \vref{sec:jury} que des options des commandes définissant les
+On a vu \vref{sec-jury} que des options des commandes définissant les
 directeurs de thèse et membres du jury permettent de spécifier si ceux-ci
 appartiennent aux corps \emph{prédéfinis} des professeurs ou des maîtres de
 conférences (\gls{hdr} ou pas) des universités et des directeurs de recherche
@@ -802,7 +802,7 @@ ou des chargé(e)s de recherche (\gls{hdr} ou pas) du \gls{cnrs}. La clé
   % ^^A
   L'option ×corps=×\meta{label} permet de stipuler un \meta{corps en français}
   et un \meta{corps en anglais} où \meta{label} identifie une expression listée
-  au \vref{tab:expressions-cles} ou à définir au moyen de la commande
+  au \vref{tab-expressions-cles} ou à définir au moyen de la commande
   \refCom{expression}.
 \end{docKey}
 
@@ -821,9 +821,9 @@ ou des chargé(e)s de recherche (\gls{hdr} ou pas) du \gls{cnrs}. La clé
 \end{bodycode}
 \end{dbexample}
 
-\subsection{Nouveaux rôles}\label{sec:nouveaux-roles}
+\subsection{Nouveaux rôles}\label{sec-nouveaux-roles}
 
-On a pu noter \vref{sec:jury} que des rôles, figurant automatiquement sur les
+On a pu noter \vref{sec-jury} que des rôles, figurant automatiquement sur les
 pages de titre, sont attachés :
 \begin{itemize}
 \item aux directeurs de thèse définis au moyen des commandes
@@ -845,13 +845,13 @@ La clé \refKey{role} suivante permet de spécifier de \emph{nouveaux} rôles
   % ^^A
   L'option ×role=×\meta{label} permet de stipuler un \meta{rôle en français} et
   un \meta{rôle en anglais} où \meta{label} identifie une expression listée au
-  \vref{tab:expressions-cles} ou à définir au moyen de la commande
+  \vref{tab-expressions-cles} ou à définir au moyen de la commande
   \refCom{expression}.
 \end{docKey}
 
 
 \section{Packages chargés manuellement}
-\label{sec:options-de-classes}
+\label{sec-options-de-classes}
 Si on souhaite recourir à des packages qui ne sont pas appelés par la \yatcl{},
 on les chargera manuellement, par exemple en préambule du fichier (maître) de
 la thèse.

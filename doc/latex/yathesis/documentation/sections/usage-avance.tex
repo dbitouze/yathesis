@@ -1,18 +1,18 @@
-\chapter{Usage avancé}\label{cha:usage-avance}
+\chapter{Usage avancé}\label{cha-usage-avance}
 
 \section{(Dés)Activation des erreurs ciblées propres aux éléments
-  \enquote{obligatoires}}\label{sec:desact-des-erre}
+  \enquote{obligatoires}}\label{sec-desact-des-erre}
 
-On a vu \vref{sec:comm-oblig} que la \yatcl{} considère comme
+On a vu \vref{sec-comm-oblig} que la \yatcl{} considère comme
 \enquote{obligatoires} certains éléments (commandes et environnements) et que,
 parmi eux, certains ne le sont que modérément. La liste complète de ces
-derniers figure à la 1\iere{} colonne du \vref{tab:no-warnings}.
+derniers figure à la 1\iere{} colonne du \vref{tab-no-warnings}.
 \begin{table}[ht]
   \centering
   \input{tableaux/no-warnings}
   \caption{Éléments modérément \enquote{obligatoires} et options de désactivation des erreurs
     ciblées associées}
-  \label{tab:no-warnings}
+  \label{tab-no-warnings}
 \end{table}
 
 Cependant, au cours de la rédaction, certains éléments \enquote{obligatoires}
@@ -51,7 +51,7 @@ correspondantes, la \yatcl{} propose de désactiver ces erreurs de façon :
     \docValue{final}. L'employer la rend égale à \docValue{true} et désactive
     donc, dans tous les cas, toutes les erreurs propres à la \yatcl{}.
   \end{docKey}
-\item[soit individuelle] au moyen des clés listées au \vref{tab:no-warnings} et
+\item[soit individuelle] au moyen des clés listées au \vref{tab-no-warnings} et
   dont le rôle est précisé ci-après.
   \begin{docKey}{noauthor}{=\docValue{true}\textbar\docValue{false}}{par défaut
       \docValue{true}, initialement \docValue{false}}

@@ -1,4 +1,4 @@
-\chapter{Pages liminaires}\label{cha:liminaires}
+\chapter{Pages liminaires}\label{cha-liminaires}
 
 Cette section détaille les commandes permettant de préparer et produire les
 \glspl{liminaire}, à savoir :
@@ -36,7 +36,7 @@ Cette section détaille les commandes permettant de préparer et produire les
 \end{dbremark}
 
 \section{Clause de non-responsabilité}
-\label{sec:clause-de-non}
+\label{sec-clause-de-non}
 
 \changes{v0.99d}{2014/06/08}{Élision \enquote{automatique} des articles définis
   précédant \meta{institut} et \meta{co-institut} dans la clause de
@@ -74,15 +74,15 @@ La page dédiée à la clause de non-responsabilité est produite par la command
     non-responsabilité}{}
   \NoAutoSpacing%
 %
-  \bodysample{rangesuffix=\^^M,linerange={makedisclaimer}}{}
-  Le résultat de ce code est illustré \vref{fig:disclaimerpage}.
+\bodysample{rangesuffix=\^^M,linerange={makedisclaimer}}{}%
+  Le résultat de ce code est illustré \vref{fig-disclaimerpage}.
 \end{dbexample}
 
 \begin{figure}[htbp]
   \centering
   \screenshot{disclaimer}%
   \caption{Page de clause de non-responsabilité}
-  \label{fig:disclaimerpage}
+  \label{fig-disclaimerpage}
 \end{figure}
 
 \begin{dbwarning}{Élision automatique non robuste}{elision-disclaimer}
@@ -107,7 +107,7 @@ par défaut si elle ne convient pas, on pourra recourir à la commande
   le contenu par défaut de la \meta{clause} de non-responsabilité.
 \end{docCommand}
 
-\section{Mots clés}\label{sec:mots-cles}
+\section{Mots clés}\label{sec-mots-cles}
 
 \begin{docCommand}{makekeywords}{}
   Cette commande produit une page où figurent, seuls et centrés
@@ -122,8 +122,8 @@ par défaut si elle ne convient pas, on pourra recourir à la commande
 \end{docCommand}
 
 \begin{dbexample}{Préparation et production de la page dédiée aux mots clés}{}
-  Les codes suivants produisent la page illustrée \vref{fig:makekeywords}.
-  \preamblesample[\configurationdirectory/\characteristicsfile]{linerange={keywords-laugh}}{title=Préparation}
+  Les codes suivants produisent la page illustrée \vref{fig-makekeywords}.
+  \preamblesample[configuration/characteristics]{linerange={keywords-laugh}}{title=Préparation}
 %
   \bodysample{rangesuffix=\^^M,linerange={makekeywords}}{title=Production}
 \end{dbexample}
@@ -131,11 +131,11 @@ par défaut si elle ne convient pas, on pourra recourir à la commande
 \begin{figure}[htbp]
   \centering \screenshot{keywords}%
   \caption{Page dédiée aux mots clés}
-  \label{fig:makekeywords}
+  \label{fig-makekeywords}
 \end{figure}
 
 \section{Laboratoire(s)}
-\label{sec:laboratoires}
+\label{sec-laboratoires}
 
 \begin{docCommand}{makelaboratory}{}
   Cette commande produit une page où figure, seul(s) et centré(s)
@@ -152,7 +152,7 @@ par défaut si elle ne convient pas, on pourra recourir à la commande
 \end{docCommand}
 
 \begin{dbexample}{Préparation et production de la page dédiée au(x) laboratoire(s)}{}
-  Les codes suivants produisent la page illustrée \vref{fig:makelaboratory}.
+  Les codes suivants produisent la page illustrée \vref{fig-makelaboratory}.
   \NoAutoSpacing%
   \preamblesample[\configurationdirectory/\characteristicsfile]{linerange={laboratory-Liouville}}{title=Préparation}
 %
@@ -162,7 +162,7 @@ par défaut si elle ne convient pas, on pourra recourir à la commande
 \begin{figure}[htbp]
   \centering \screenshot{laboratory}
   \caption{Page dédiée au(x) laboratoire(s)}
-  \label{fig:makelaboratory}
+  \label{fig-makelaboratory}
 \end{figure}
 
 \section{Dédicaces}
@@ -189,13 +189,13 @@ par défaut si elle ne convient pas, on pourra recourir à la commande
   \preamblesample[liminaires/dedicaces]{linerange={dedication-{co-aimé\ !}}}{title=Préparation}
 %
   \bodysample[liminaires/dedicaces]{rangesuffix=\^^M,linerange={makededications}}{title=Production}
-  Le résultat de ce code est illustré \vref{fig:dedicationspage}.
+  Le résultat de ce code est illustré \vref{fig-dedicationspage}.
 \end{dbexample}
 
 \begin{figure}[htbp]
   \centering \screenshot{dedications}%
   \caption{Page de dédicaces}
-  \label{fig:dedicationspage}
+  \label{fig-dedicationspage}
 \end{figure}
 
 \section{Épigraphes liminaires}
@@ -228,7 +228,7 @@ par défaut si elle ne convient pas, on pourra recourir à la commande
 \begin{dbexample}{Préparation et production de la page dédiée aux épigraphes
     liminaires}{}
   \NoAutoSpacing%
-  Les codes suivants produisent la page illustrée \vref{fig:epigraphspage}.
+  Les codes suivants produisent la page illustrée \vref{fig-epigraphspage}.
   \preamblesample[liminaires/epigraphes]{linerange={frontepigraph-Einstein}}{title=Préparation}
   %
   \bodysample[liminaires/epigraphes]{rangesuffix=\^^M,linerange={makefrontepigraphs}}{title=Production}
@@ -237,7 +237,7 @@ par défaut si elle ne convient pas, on pourra recourir à la commande
 \begin{figure}[htbp]
   \centering \screenshot{frontepigraphs}
   \caption{Page d'épigraphes liminaires}
-  \label{fig:epigraphspage}
+  \label{fig-epigraphspage}
 \end{figure}
 
 \begin{dbremark}{Épigraphes ailleurs dans le document}{}
@@ -267,10 +267,10 @@ des remerciements, un résumé substantiel en français
 %   ^^A\protect\glspl{liminaire}}{titrecourant}%
 %   ^^ALes chapitres \enquote{ordinaires} sont pourvus de \glspl{titrecourant}
 %   ^^Asi (et seulement si) ils figurent après la page dédiée aux résumés
-%   ^^A(cf. \vref{sec:abstract}).
+%   ^^A(cf. \vref{sec-abstract}).
 % ^^A\end{dbremark}
 
-\section{Résumés succincts en français et en anglais}\label{sec:abstract}
+\section{Résumés succincts en français et en anglais}\label{sec-abstract}
 
 Une page contenant de courts résumés en français et en anglais est requise.
 L'environnement \refEnv{abstract} suivant permet de préparer une telle
@@ -317,7 +317,7 @@ page.
 \end{docCommand}
 
 \begin{dbexample}{Préparation et production de la page dédiée aux résumés}{}
-  Les codes suivants produisent la page illustrée \vref{fig:resumes-succincts}.
+  Les codes suivants produisent la page illustrée \vref{fig-resumes-succincts}.
 %^^A \preamblesample{%
 %^^A   includerangemarker=false,%
 %^^A   rangebeginprefix={»).\^^M},%
@@ -340,7 +340,7 @@ page.
 \begin{figure}[htbp]
   \centering \screenshot{abstract}%
   \caption{Page de résumés succincts en français et en anglais}
-  \label{fig:resumes-succincts}
+  \label{fig-resumes-succincts}
 \end{figure}
 
 \begin{dbwarning}{Résumés nécessairement courts dans l'environnement
@@ -396,7 +396,7 @@ page.
 % ^^A \end{dbremark}
 
 \section{Liste d'acronymes, liste de symboles,
-  glossaire}\label{sec:sigl-gloss-nomencl}
+  glossaire}\label{sec-sigl-gloss-nomencl}
 
 \begin{dbremark*}{Section à passer en 1\iere{} lecture}
   Cette section est à passer en 1\iere{} lecture si on ne compte faire figurer
@@ -429,11 +429,11 @@ la \yatcl. Cependant, celle-ci fournit des fonctionnalités propres au
 % ^^A   \begin{itemize}
 % ^^A   \item \docAuxCommand{printglossary} et \docAuxCommand{printglossaries} qui
 % ^^A     produisent la liste des termes du ou des glossaires\termesdefinisutilises{}
-% ^^A     (cf. \vref{fig:printglossary}) ;
+% ^^A     (cf. \vref{fig-printglossary}) ;
 % ^^A   \item \docAuxCommand{printacronyms}\footnote{L'usage de la commande
 % ^^A       \docAuxCommand{printacronyms} nécessite que l'option \docAuxKey{acronyms}
 % ^^A       soit passée au \Package{glossaries}.} qui produit la liste des
-% ^^A     acronymes\termesdefinisutilises{} (cf. \vref{fig:printacronyms}) ;
+% ^^A     acronymes\termesdefinisutilises{} (cf. \vref{fig-printacronyms}) ;
 % ^^A   \end{itemize}
 % ^^A \item les commande et style propres \refCom{newglssymbol}, et
 % ^^A   \docValue{yadsymbolstyle}, précisés ci-dessous, sont définis.
@@ -485,7 +485,7 @@ la \yatcl. Cependant, celle-ci fournit des fonctionnalités propres au
   Le code suivant produit la liste de ces symboles \phrase*{composée avec le
     style \docValue{yadsymbolstyle}}.
   \bodysample{rangesuffix=\^^M,linerange={printsymbols}}{} Le résultat de ce
-  code est illustré \vref{fig:printsymbols}.
+  code est illustré \vref{fig-printsymbols}.
 \end{dbexample}
 
 % \afterpage{%
@@ -496,17 +496,17 @@ la \yatcl. Cependant, celle-ci fournit des fonctionnalités propres au
         \centering
         \screenshot[1]{printacronyms}
         \caption{Acronymes}
-        \label{fig:printacronyms}
+        \label{fig-printacronyms}
       \end{subfigure}%
       \hspace{\stretch{1}}%
       \begin{subfigure}[b]{.45\linewidth}
         \centering
         \screenshot[1]{printsymbols}
         \caption{Symboles}
-        \label{fig:printsymbols}
+        \label{fig-printsymbols}
       \end{subfigure}%
       \caption{Listes des acronymes et des symboles}
-      \label{fig:printacronyms-printsymbols}
+      \label{fig-printacronyms-printsymbols}
     \end{figure}
   \end{landscape}
 % }
@@ -520,9 +520,9 @@ la \yatcl. Cependant, celle-ci fournit des fonctionnalités propres au
 % ^^A   \emph{avec} l'option ×acronym×. et on recourra à la commande
 % ^^A   \begin{enumerate}
 % ^^A   \item \refCom{printacronyms} pour celle des acronymes (cf.
-% ^^A     \vref{fig:acronymes}) ;
+% ^^A     \vref{fig-acronymes}) ;
 % ^^A   \item\label{item:1} \docAuxCommand{printglossary} pour celle des termes du
-% ^^A     glossaire (cf. \vref{fig:printglossary}).
+% ^^A     glossaire (cf. \vref{fig-printglossary}).
 % ^^A   \end{enumerate}
 % ^^A \end{enumerate}
 
@@ -530,7 +530,7 @@ Dans un mémoire de thèse, les emplacements des listes des termes du glossaire,
 des acronymes\footnote{Les commandes \docAuxCommand{printglossary} et
   \docAuxCommand{printacronyms} du \Package{glossaries}, produisant les listes
   des termes du glossaire et des acronymes, sont illustrées
-  \vref{fig:printglossary,fig:printacronyms}.} et des symboles sont \emph{a
+  \vref{fig-printglossary,fig-printacronyms}.} et des symboles sont \emph{a
   priori} arbitraires. Il est cependant parfois conseillé de placer :
   \begin{itemize}
   \item si elles sont \emph{communes}, \emph{la} liste résultante en partie finale ;
@@ -542,7 +542,7 @@ des acronymes\footnote{Les commandes \docAuxCommand{printglossary} et
     \end{enumerate}
   \end{itemize}
 
-  \section{Sommaire et/ou table des matières}\label{sec:table-des-matieres}
+  \section{Sommaire et/ou table des matières}\label{sec-table-des-matieres}
 
 \begin{docCommand}[doc description=\mandatory]{tableofcontents}{\oarg{options}}
   Cette commande produit une table des matières dont le \enquote{niveau de
@@ -599,7 +599,7 @@ les clés disponibles sont les deux suivantes.
   on insérera respectivement :
   \bodysample{rangeendsuffix=\],linerange={tableofcontents-Sommaire}}{} et :
   \bodysample{rangesuffix=\^^M,linerange={tableofcontents}}{} La
-  \vref{fig:tableofcontentsto-tableofcontents} illustre ce code.
+  \vref{fig-tableofcontentsto-tableofcontents} illustre ce code.
 \end{dbexample}
 
 \afterpage{%
@@ -609,17 +609,17 @@ les clés disponibles sont les deux suivantes.
       \begin{subfigure}[b]{.45\linewidth}
         \centering \screenshot[1]{tableofcontents-withargument}
         \caption{Sommaire allant jusqu'aux chapitres}
-        \label{fig:tableofcontentsto}
+        \label{fig-tableofcontentsto}
       \end{subfigure}%
       \hspace{\stretch{1}}%
       \begin{subfigure}[b]{.45\linewidth}
         \centering \screenshot[1]{tableofcontents-withoutargument}
         \caption{Table des matières allant jusqu'aux sous-sections}
-        \label{fig:tableofcontents}
+        \label{fig-tableofcontents}
       \end{subfigure}%
       \caption[Sommaire et table des matières]{Sommaire et table des matières
         de profondeurs différentes dans un même document}
-      \label{fig:tableofcontentsto-tableofcontents}
+      \label{fig-tableofcontentsto-tableofcontents}
     \end{figure}
   \end{landscape}
 }

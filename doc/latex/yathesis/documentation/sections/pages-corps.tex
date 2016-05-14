@@ -1,4 +1,4 @@
-\chapter{Corps}\label{cha:corps}
+\chapter{Corps}\label{cha-corps}
 
 Le corps de la thèse, c'est-à-dire sa partie principale, comprend :
 \begin{enumerate}
@@ -16,7 +16,7 @@ une conclusion \enquote{ordinaires}.
   Il est vivement recommandé de scinder le mémoire de thèse,
   notamment son corps, en fichiers maître et esclaves (ces derniers
   correspondants chacun à un chapitre). La procédure
-  pour ce faire, standard, est rappelée \vref{sec:repart-du-memo}.
+  pour ce faire, standard, est rappelée \vref{sec-repart-du-memo}.
 \end{dbremark}
 
 \begin{docCommand}[doc description=\mandatory]{mainmatter}{}
@@ -26,7 +26,7 @@ une conclusion \enquote{ordinaires}.
 \end{docCommand}
 
 \section{Chapitres non numérotés}
-\label{sec:chap-non-numer}
+\label{sec-chap-non-numer}
 
 Si certains chapitres du corps de la thèse \phrase{notamment d'introduction de
   conclusion \enquote{générales}} doivent être \emph{non} numérotés, on recourra de
@@ -66,7 +66,7 @@ d'en simplifier l'usage.
 \end{dbremark}
 
 \begin{dbexample}{Introduction}{}
-  Le code suivant produit la \vref{fig:introduction} illustrant une
+  Le code suivant produit la \vref{fig-introduction} illustrant une
   introduction (générale) non numérotée. On constate que, bien que seule la
   commande \docAuxCommand{chapter} figure sous sa forme étoilée, aucun élément
   de structuration de ce chapitre n'est numéroté.
@@ -85,26 +85,26 @@ d'en simplifier l'usage.
   \centering
   \screenshot{introduction}
   \caption{Introduction (non numérotée)}
-  \label{fig:introduction}
+  \label{fig-introduction}
 \end{figure}
 
 \section{Chapitres numérotés}
-\label{sec:chapitres-numerotes}
+\label{sec-chapitres-numerotes}
 
 Les chapitres numérotés du corps de la thèse sont introduits par la commande
-usuelle \docAuxCommand{chapter} (cf. \vref{fig:chapitre}).
+usuelle \docAuxCommand{chapter} (cf. \vref{fig-chapitre}).
 
 \begin{figure}[ht]
   \centering
   \screenshot{chapter}
   \caption[Chapitre \enquote{ordinaire}]{(Première) Page de chapitre
     \enquote{ordinaire}}
-  \label{fig:chapitre}
+  \label{fig-chapitre}
 \end{figure}
 
 \begin{dbremark}{Style des têtes de chapitres numérotés personnalisable}{}
   Les têtes de chapitres numérotés sont par défaut composées avec le style
-  ×PetersLenny× du \Package*{fncychap}. La \vref{sec:style-des-tetes} explique
+  |PetersLenny| du \Package*{fncychap}. La \vref{sec-style-des-tetes} explique
   comment ceci peut être modifié.
 \end{dbremark}
 
@@ -122,7 +122,7 @@ remplaçant fortement conseillé de \hologo{BibTeX}\footnote{Dans cette section,
 \begin{docCommand}[doc description=\mandatory]{printbibliography}{\oarg{options}}
   Cette commande, fournie par \package{biblatex}, produit la liste des
   références bibliographiques saisies selon la syntaxe de ce package (cf.
-  \vref{fig:printbibliography}). Mais elle a été légèrement redéfinie de sorte
+  \vref{fig-printbibliography}). Mais elle a été légèrement redéfinie de sorte
   que la bibliographie figure automatiquement dans les sommaire, table des
   matières et signets du document.
 \end{docCommand}
@@ -132,7 +132,7 @@ remplaçant fortement conseillé de \hologo{BibTeX}\footnote{Dans cette section,
   \screenshot{printbibliography}
   \caption[Bibliographie]{Bibliographie (ici composée avec le style
     bibliographique par défaut)}
-  \label{fig:printbibliography}
+  \label{fig-printbibliography}
 \end{figure}
 
 \begin{dbwarning}{Package \package{biblatex} non chargé par défaut}{}

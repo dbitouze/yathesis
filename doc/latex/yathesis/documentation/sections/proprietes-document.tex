@@ -1,5 +1,5 @@
 \chapter{Caractéristiques du document}
-\label{cha:caract-du-docum}
+\label{cha-caract-du-docum}
 
 Ce chapitre liste les commandes et options permettant de spécifier les données
 caractéristiques du document. La plupart d'entre elles sont ensuite affichées
@@ -18,7 +18,7 @@ Certaines de ces caractéristiques figurent également comme métadonnées du fi
 \pdf produit.
 
 \section{Où spécifier les caractéristiques du document ?}
-\label{sec:lieu-de-saisie}
+\label{sec-lieu-de-saisie}
 
 Les commandes permettant de définir les caractéristiques du document peuvent être
 saisies, au choix :
@@ -40,7 +40,7 @@ saisies, au choix :
   \directory{\configurationdirectory}. Ces fichier et sous-dossier \phrase{tous
     deux prévus à cet effet} sont à créer au besoin mais ils sont fournis par le
   canevas de thèse \enquote{en arborescence} livré avec la classe, décrit
-  \vref{sec:canevas-arborescence}.
+  \vref{sec-canevas-arborescence}.
   \begin{dbwarning}{Fichier de caractéristiques à ne pas importer manuellement}{}
     Le \File{\characteristicsfile} est \emph{automatiquement} importé par la
     \yatcl{} et il doit donc \emph{ne pas} être explicitement importé : on
@@ -51,7 +51,7 @@ saisies, au choix :
 \end{description}
 
 \section{Caractéristiques de titre}
-\label{sec:proprietes-de-titre}
+\label{sec-proprietes-de-titre}
 
 Cette section liste les commandes et options permettant de \emph{préparer} les
 pages de 1\iere{} de couverture et de titre de la thèse\footnote{Sauf cas
@@ -59,14 +59,14 @@ pages de 1\iere{} de couverture et de titre de la thèse\footnote{Sauf cas
   \enquote{pages de titre}.}.
 
 \subsection{Auteur, (sous-)titre, spécialité, sujet,
-  date}\label{sec:caracteristiques}
+  date}\label{sec-caracteristiques}
 
 Les commandes suivantes permettent de stipuler les auteur, titre et éventuel
 sous-titre, champ disciplinaire, spécialité, date et sujet de la thèse. Toutes
 ces données, sauf le sujet, figureront automatiquement sur les pages de
 titre\footnote{En outre, les titres et éventuels sous-titres figureront sur les
-  pages de résumé (cf. \vref{sec:abstract}) et de 4\ieme{} de couverture (cf.
-  \vref{sec:quatr-de-couv}).}.
+  pages de résumé (cf. \vref{sec-abstract}) et de 4\ieme{} de couverture (cf.
+  \vref{sec-quatr-de-couv}).}.
 %
 \begin{docCommand}[doc description=\mandatory]{author}{\oarg{adresse
       courriel}\marg{prénom}\marg{nom}}
@@ -124,7 +124,7 @@ titre\footnote{En outre, les titres et éventuels sous-titres figureront sur les
   ces commandes admet un argument optionnel permettant de stipuler la donnée
   correspondante \emph{dans la langue secondaire} de la thèse \phrase*{par
     défaut l'anglais\footnote{Les langues principale et secondaire de la thèse
-      sont détaillées \vref{sec:langues}.}}.
+      sont détaillées \vref{sec-langues}.}}.
 
   Dès lors qu'une au moins des ces commandes est employée avec son argument
   optionnel, la commande \refCom{maketitle}, qui produit les pages de titre
@@ -169,7 +169,7 @@ titre\footnote{En outre, les titres et éventuels sous-titres figureront sur les
 \end{bodycode}
 \end{dbexample}
 
-\subsection{Instituts et entités}\label{sec:entites}
+\subsection{Instituts et entités}\label{sec-entites}
 
 Les instituts et entités dans lesquels \phrase{ou grâce auxquels} la thèse
 a été préparée sont définis et précisés au moyen des commandes et options
@@ -247,11 +247,11 @@ de titre\footnote{Le ou les laboratoires apparaissent en outre sur les pages
   \item sur les pages de titre, le seul laboratoire affiché est le
     laboratoire principal ;
   \item sur les pages de résumés et de 4\ieme{} de couverture
-    (cf. \vref{sec:abstract,sec:quatr-de-couv}), par défaut seul le laboratoire
+    (cf. \vref{sec-abstract,sec-quatr-de-couv}), par défaut seul le laboratoire
     principal est affiché (mais un nombre arbitraire de laboratoires peut être
     affiché grâce à la clé \refKey{numlaboratories}) ;
-  \item sur la page \phrase{facultative} qui leur est dédiée
-    (cf. \vref{sec:laboratoires}), tous les laboratoires stipulés sont
+  \item sur la page \aside{facultative} qui leur est dédiée
+    (cf. \vref{sec-laboratoires}), tous les laboratoires stipulés sont
     affichés.
   \end{itemize}
 \end{dbremark}
@@ -392,7 +392,7 @@ url=http://www-lmpa.univ-littoral.fr/
   de la procédure.
 \end{dbremark}
 
-\subsection{Directeur(s) de thèse et membres du jury}\label{sec:jury}
+\subsection{Directeur(s) de thèse et membres du jury}\label{sec-jury}
 
 Les directeur(s) et membres du jury de la thèse sont définis et précisés au
 moyen des commandes et options listés dans cette section. Ils figurent
@@ -402,9 +402,9 @@ automatiquement sur la ou les pages de titre\footnote{En versions \enquote{à
   membres du jury ne figurent pas car le doctorant ne peut alors préjuger d'un
   jury, ne sachant pas encore s'il va être autorisé à soutenir.}.
 
-\subsubsection{Définition}\label{sec:definition-directeurs-jury}
+\subsubsection{Définition}\label{sec-definition-directeurs-jury}
 
-\paragraph{Directeurs}\label{sec:definition-directeurs}
+\paragraph{Directeurs}\label{sec-definition-directeurs}
 
 \changes{v0.99f}{2014/07/11}{Nouvelles commandes \protect\refCom{supervisor*},
   \protect\refCom{cosupervisor*} et \protect\refCom{comonitor*} permettant de
@@ -440,7 +440,7 @@ les seconds au moyen des variantes étoilées de ces commandes.
   Cette commande définit un éventuel co-encadrant de la thèse (non membre du jury).
 \end{docCommand}
 
-\paragraph{Membres du jury}\label{sec:definition-jury}
+\paragraph{Membres du jury}\label{sec-definition-jury}
 
 \begin{docCommand}{referee}{\oarg{précision(s)}\marg{prénom}\marg{nom}}
   Cette commande définit un rapporteur de la thèse.
@@ -500,7 +500,7 @@ les seconds au moyen des variantes étoilées de ces commandes.
   \end{enumerate}
 \end{dbwarning}
 
-\subsubsection{Précisions}\label{sec:options-staff}
+\subsubsection{Précisions}\label{sec-options-staff}
 
 Toutes les commandes précédentes admettent un argument optionnel permettant
 d'apporter sur les membres du jury des \meta{précisions}\footnote{Pour les
@@ -509,7 +509,7 @@ d'apporter sur les membres du jury des \meta{précisions}\footnote{Pour les
 \meta{clé}×=×\meta{valeur}.
 
 \paragraph{Corps de métier}
-\label{sec:corps}
+\label{sec-corps}
 
 Les clés suivantes\syntaxeoptions{} permettent de spécifier les corps (de
 métier) des membres du jury parmi celles prédéfinies par la \yatcl{}.
@@ -567,7 +567,7 @@ métier) des membres du jury parmi celles prédéfinies par la \yatcl{}.
 %
 \begin{dbremark}{Corps non prédéfinis}{}
   Il est possible de spécifier d'autres corps que ceux prédéfinis ci-dessus. La
-  \vref{sec:nouveaux-corps} explique comment procéder.
+  \vref{sec-nouveaux-corps} explique comment procéder.
 \end{dbremark}
 %
 % ^^A \begin{docKey}{distinction}{=\meta{distinction}}{pas de valeur par
@@ -590,7 +590,7 @@ métier) des membres du jury parmi celles prédéfinies par la \yatcl{}.
 % ^^A \end{dbexample}
 
 \paragraph{Affiliation}
-\label{sec:inst-de-prov}
+\label{sec-inst-de-prov}
 
 \begin{docKey}{affiliation}{=\meta{institut}}{pas de valeur par défaut,
     initialement vide}
@@ -665,24 +665,24 @@ effet que d'accorder en genre féminin un certain nombre de mots clés de la
 \end{dbexample}
 
 \subsection{Numéro d'ordre}
-\label{sec:numero-dordre}
+\label{sec-numero-dordre}
 
 Certains instituts exigent que le numéro d'ordre de la thèse figure sur la page
 de 1\iere{} de couverture.
 
 \begin{docCommand}{ordernumber}{\oarg{numéro d'ordre}}
   Cette commande définit le \meta{numéro d'ordre} de la thèse et s'utilise sans
-  son argument optionnel si on ne connaît pas \phrase{encore} le \meta{numéro
+  son argument optionnel si on ne connaît pas \aside{encore} le \meta{numéro
     d'ordre} : ce dernier est alors remplacé par une espace horizontale vide
   permettant de l'inscrire à la main \emph{a posteriori}. Vide ou pas, le
-  \meta{numéro d'ordre} figure sur \phrase{et seulement sur} la 1\iere{} page
+  \meta{numéro d'ordre} figure sur \aside{et seulement sur} la 1\iere{} page
   du document\footnote{Première de couverture s'il y a, page de titre en langue
     principale sinon.}, précédé de l'expression \enquote{Num\'ero d'ordre :} ou
   \foreignquote{english}{Order Number:}\selonlangue.
 \end{docCommand}
 
 \section{Caractéristiques de mots clés}
-\label{sec:proprietes-de-mots}
+\label{sec-proprietes-de-mots}
 
 Les mots clés de la thèse sont stipulés au moyen de la commande
 \refCom{keywords} suivante.
