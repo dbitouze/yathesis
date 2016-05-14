@@ -17,7 +17,7 @@ la liste suivante qui indique leur fonction et le cas échéant :
 
 \begin{description}
 \item[\package{pgfopts} :] gestion d'options sous la forme
-  \meta{clé}×=×\meta{valeur} ;
+  \meta{clé}|=|\meta{valeur} ;
 \item[\package{etoolbox} :] outils de programmation ;
 \item[\package{xpatch} :] extension du package précédent ;
 \item[\package{morewrites} :] accès à autant de \enquote{flots} d'écriture
@@ -178,8 +178,8 @@ les plus notables sont précisés.
   \item[option par défaut :]\
     \begin{itemize}
     \item \docAuxKey{detect-all} ;
-    \item \docAuxKey{locale}×=×\docValue{FR} ou
-      \docAuxKey{locale}×=×\docValue{UK}\selonlangue{} ;
+    \item \docAuxKey{locale}|=|\docValue{FR} ou
+      \docAuxKey{locale}|=|\docValue{UK}\selonlangue{} ;
     \end{itemize}
   \end{description}
 \item[\package*{pgfplots} :] graphiques plus professionnels,
@@ -206,7 +206,7 @@ les plus notables sont précisés.
   citation des sources) ;
     \begin{description}
     \item[réglage par défaut] (si le \Package*{biblatex} est chargé) :
-      ×\SetCiteCommand{\autocite}× ;
+      |\SetCiteCommand{\autocite}| ;
   \end{description}
 \item[\package*{biblatex} :] gestion puissante de la bibliographie ;
 \item[\package*{hyperref} :] \changes*{v0.99h}{2014/07/14}{Packages
@@ -223,12 +223,12 @@ les plus notables sont précisés.
     \item \docAuxKey{final} ;
     \item \docAuxKey{unicode} ;
     \item \docAuxKey{breaklinks} ;
-    \item ×hyperfootnotes=false× ;
-    \item ×hyperindex=false×\footnote{Sans quoi certaines fonctionnalités sont
-        ignorées, par exemple \protect\lstinline|see| pour les index.} ;
-    \item ×plainpages=false× ;
-    \item ×pdfpagemode=UseOutlines× ;
-    \item ×pdfpagelayout=TwoPageRight× ;
+    \item |hyperfootnotes=false| ;
+    \item |hyperindex=false|\footnote{Sans quoi certaines fonctionnalités sont
+        ignorées, par exemple \protect\lstinline+see+ pour les index.} ;
+    \item |plainpages=false| ;
+    \item |pdfpagemode=UseOutlines| ;
+    \item |pdfpagelayout=TwoPageRight| ;
     \end{itemize}
   \end{description}
 \item[\package*{glossaries} :] gestion puissante des glossaires,

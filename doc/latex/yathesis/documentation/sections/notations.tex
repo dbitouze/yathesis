@@ -124,16 +124,16 @@ Ces codes sources figurent dans des cadres de couleur bleu :
 Ces cadres pourront en outre comporter d'éventuels titres :
 \begin{multicols}{2}
 \begin{bodycode}
-÷\meta{code source}÷
+"\meta{code source}"
 \end{bodycode}
 \begin{bodycode}[title=\meta{titre}]
-÷\meta{code source}÷
+"\meta{code source}"
 \end{bodycode}
 \begin{preamblecode}
-÷\meta{code source à insérer en préambule}÷
+"\meta{code source à insérer en préambule}"
 \end{preamblecode}
 \begin{preamblecode}[title=\meta{titre}]
-÷\meta{code source à insérer en préambule}÷
+"\meta{code source à insérer en préambule}"
 \end{preamblecode}
 \end{multicols}
 
@@ -150,7 +150,7 @@ Pour éviter certaines confusions, les espaces dans les codes sources devant
 La \yatcl{} ainsi que certaines de ses commandes et certains de ses
 environnements peuvent être modulés au moyen d'options, ou listes d'options
 (séparées par des virgules). Ces options se présentent sous la forme
-\meta{clé}×=×\meta{valeur} et la \meta{valeur} passée à une \meta{clé} peut
+\meta{clé}|=|\meta{valeur} et la \meta{valeur} passée à une \meta{clé} peut
 être :
 %^^A \begin{description}
 %^^A \item[ne prennent pas de valeur.] Une telle option, par exemple nommée
@@ -159,7 +159,7 @@ environnements peuvent être modulés au moyen d'options, ou listes d'options
 %^^A       \meta{Description de \refKey{option}}
 %^^A     \end{docKey*}
 %^^A \item[prennent des valeurs.] Une telle option se présente alors sous la forme
-%^^A   \meta{clé}×=×\meta{valeur}. Les valeurs passées à une clé peuvent être :
+%^^A   \meta{clé}|=|\meta{valeur}. Les valeurs passées à une clé peuvent être :
 \begin{description}
 \item[libre.] Si une telle \meta{clé} est (pour l'exemple) nommée
   \refKey{freekey}, elle est alors documentée selon la syntaxe suivante :
@@ -187,7 +187,7 @@ Les \meta{valeurs par défaut et initiale} d'une clé sont souvent précisées
 %^^A
 Ainsi certaines clés, appelées booléennes parce qu'elles ne peuvent prendre que
 deux valeurs (\docValue*{true} et \docValue*{false}), portent la précision par
-exemple \enquote{par défaut \lstinline|true|, initialement \lstinline|false|}
+exemple \enquote{par défaut \lstinline+true+, initialement \lstinline+false+}
 car elles valent :
 \begin{enumerate}
 \item \docValue*{true} si elles sont employées mais sans qu'une valeur leur
@@ -199,7 +199,7 @@ car elles valent :
 Une telle clé, par exemple nommée \refKey{booleankey}, est alors documentée selon la
 syntaxe suivante :
 \begin{docKey*}{booleankey}{=\docValue*{true}\textbar\docValue*{false}}{par
-    défaut \lstinline|true|, initialement \lstinline|false|}
+    défaut \lstinline+true+, initialement \lstinline+false+}
   \meta{Description de \refKey{booleankey}}
 \end{docKey*}
 
@@ -210,20 +210,20 @@ et initialement \docValue*{false}, c'est-à-dire :
 \item \docValue*{true} si l'utilisateur l'emploie en option de la \yatcl mais
   sans lui passer de valeur :
 \begin{preamblecode}
-\documentclass[nofrontcover,÷\meta{autres options}÷]{yathesis}
+\documentclass[nofrontcover,"\meta{autres options}"]{yathesis}
 \end{preamblecode}
 \item \docValue*{false} si l'utilisateur ne l'emploie pas en option de la \yatcl :
 \begin{preamblecode}
-\documentclass[÷\meta{toutes options sauf \refKey*{nofrontcover}}÷]{yathesis}
+\documentclass["\meta{toutes options sauf \refKey*{nofrontcover}}"]{yathesis}
 \end{preamblecode}
 \item la valeur \docValue*{true} ou \docValue*{false} que l'utilisateur lui
   passe le cas échéant en option de la \yatcl :
 \begin{preamblecode}
-\documentclass[nofrontcover=true,÷\meta{autres options}÷]{yathesis}
+\documentclass[nofrontcover=true,"\meta{autres options}"]{yathesis}
 \end{preamblecode}
 ou
 \begin{preamblecode}
-\documentclass[nofrontcover=false,÷\meta{autres options}÷]{yathesis}
+\documentclass[nofrontcover=false,"\meta{autres options}"]{yathesis}
 \end{preamblecode}
 \end{enumerate}
 
@@ -231,7 +231,7 @@ ou
 \label{sec-faux-texte}
 
 Certains exemples comportent des paragraphes de \gls{fauxtexte}, obtenus au
-moyen de la commande ×\lipsum× du \Package*{lipsum}.
+moyen de la commande |\lipsum| du \Package*{lipsum}.
 
 %
 \iffalse

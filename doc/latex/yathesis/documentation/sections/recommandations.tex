@@ -86,7 +86,7 @@ hautement recommandée, suppose de :
   % ^^A le \File{\fichiercorps} situé dans le même répertoire que le
   % ^^A fichier maître.}
   et d'inclure ceux-ci au moyen de la commande
-  standard ×\include×\marg{fichier esclave}, le nom du \meta{fichier
+  standard |\include|\marg{fichier esclave}, le nom du \meta{fichier
     esclave} devant le cas échéant être précédé du chemin qui y
   conduit.
 \end{enumerate}
@@ -112,34 +112,34 @@ maître\footnote{C'est-à-dire à la racine du répertoire contenant le fichier
   maître.}.
 \begin{dbexample}{Structure d'une thèse en une seule partie}{sans-parties}
 \begin{bodycode}
-\include{corps/÷\meta{introduction}÷}
-\include{corps/÷\meta{premier chapitre}÷}
+\include{corps/"\meta{introduction}"}
+\include{corps/"\meta{premier chapitre}"}
 ...
-\include{corps/÷\meta{dernier chapitre}÷}
-\include{corps/÷\meta{conclusion}÷}
+\include{corps/"\meta{dernier chapitre}"}
+\include{corps/"\meta{conclusion}"}
 \end{bodycode}
 \end{dbexample}
 %
 \begin{dbexample}{Structure d'une thèse en deux parties}{avec-parties}
   \lstset{keywordstyle=[3]\color{texcs}}%
 \begin{bodycode}
-\include{corps/÷\meta{introduction générale}÷}
+\include{corps/"\meta{introduction générale}"}
 %
-\part{÷\meta{titre de la partie 1}÷}
-\include{corps/÷\meta{introduction de la partie 1}÷}
-\include{corps/÷\meta{premier chapitre de la partie 1}÷}
+\part{"\meta{titre de la partie 1}"}
+\include{corps/"\meta{introduction de la partie 1}"}
+\include{corps/"\meta{premier chapitre de la partie 1}"}
 ...
-\include{corps/÷\meta{dernier chapitre de la partie 1}÷}
-\include{corps/÷\meta{conclusion de la partie 1}÷}
+\include{corps/"\meta{dernier chapitre de la partie 1}"}
+\include{corps/"\meta{conclusion de la partie 1}"}
 %
-\part{÷\meta{titre de la partie 2}÷}
-\include{corps/÷\meta{introduction de la partie 2}÷}
-\include{corps/÷\meta{premier chapitre de la partie 2}÷}
+\part{"\meta{titre de la partie 2}"}
+\include{corps/"\meta{introduction de la partie 2}"}
+\include{corps/"\meta{premier chapitre de la partie 2}"}
 ...
-\include{corps/÷\meta{dernier chapitre de la partie 2}÷}
-\include{corps/÷\meta{conclusion de la partie 2}÷}
+\include{corps/"\meta{dernier chapitre de la partie 2}"}
+\include{corps/"\meta{conclusion de la partie 2}"}
 %
-\include{corps/÷\meta{conclusion générale}÷}
+\include{corps/"\meta{conclusion générale}"}
 \end{bodycode}
 \end{dbexample}
 %

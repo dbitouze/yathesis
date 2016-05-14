@@ -380,7 +380,7 @@ page.
 % ^^A \begin{dbexample}{Résumé substantiel en français}{}
 % ^^A \begin{bodycode}
 % ^^A \frenchabstract
-% ^^A ÷\meta{résumé substantiel de la thèse en français}÷
+% ^^A "\meta{résumé substantiel de la thèse en français}"
 % ^^A \end{bodycode}
 % ^^A \end{dbexample}
 % ^^A
@@ -514,10 +514,10 @@ la \yatcl. Cependant, celle-ci fournit des fonctionnalités propres au
 % ^^A Si on souhaite faire figurer :
 % ^^A \begin{enumerate}
 % ^^A \item une liste \emph{commune} des acronymes et des termes du glossaire, on
-% ^^A   chargera \package{glossaries} \emph{sans} l'option ×acronym× et on recourra à
+% ^^A   chargera \package{glossaries} \emph{sans} l'option |acronym| et on recourra à
 % ^^A   la commande \docAuxCommand{printglossary} ;
 % ^^A \item deux listes \emph{distinctes}, on chargera \package{glossaries}
-% ^^A   \emph{avec} l'option ×acronym×. et on recourra à la commande
+% ^^A   \emph{avec} l'option |acronym|. et on recourra à la commande
 % ^^A   \begin{enumerate}
 % ^^A   \item \refCom{printacronyms} pour celle des acronymes (cf.
 % ^^A     \vref{fig-acronymes}) ;
@@ -553,7 +553,7 @@ des acronymes\footnote{Les commandes \docAuxCommand{printglossary} et
 
 
 L'argument optionnel de la commande \refCom{tableofcontents} permet de stipuler
-des \meta{options} sous la forme d'une liste \meta{clé}×=×\meta{valeur} dont
+des \meta{options} sous la forme d'une liste \meta{clé}|=|\meta{valeur} dont
 les clés disponibles sont les deux suivantes.
   %
 {%
@@ -626,11 +626,11 @@ les clés disponibles sont les deux suivantes.
 
 \section{Tables et listes et usuelles}
 
-Les commandes usuelles ×\listoftables× et ×\listoffigures× produisent les
+Les commandes usuelles |\listoftables| et |\listoffigures| produisent les
 listes respectivement des tableaux et des figures.
 %
 On peut faire figurer d'autres listes, par exemple celle des listings
-informatiques au moyen de la commande ×\lstlistoflistings× du
+informatiques au moyen de la commande |\lstlistoflistings| du
 \Package*{listings}.
 %
 Nous n'illustrons pas ces commandes, classiques.

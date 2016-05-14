@@ -66,15 +66,15 @@ Ce chapitre est une \gls{faq} \phrase{autrement dit une liste des questions
 \begin{dbfaq}{Comment éviter l'erreur \enquote{Option clash for package
       \meta{package}} ?}{option-clash}
   Je suis confronté à l'erreur \enquote{Option clash for package
-    \meta{package}} (notamment avec \meta{package}×=×\package{babel}). Comment
+    \meta{package}} (notamment avec \meta{package}|=|\package{babel}). Comment
   l'éviter ?
   %
   \tcblower
   %
   Cette erreur est probablement due au fait que le \meta{package} a été
   manuellement chargé au moyen de la commande
-  ×\usepackage[...]{×\meta{package}×}×, alors que la \yatcl{} le charge déjà
-  automatiquement (cf. l'\vref{sec:packages-charges-par} pour la liste des
+  |\usepackage[...]{|\meta{package}|}|, alors que la \yatcl{} le charge déjà
+  automatiquement (cf. l'\vref{sec-packages-charges-par} pour la liste des
   packages automatiquement chargés). Supprimer cette commande devrait résoudre
   le problème (cf. également l'\vref{wa:packages-a-ne-pas-charger}).
 \end{dbfaq}
@@ -154,7 +154,7 @@ Ce chapitre est une \gls{faq} \phrase{autrement dit une liste des questions
   \tcblower
   %
   (Cette question ne concerne pas directement la \yatcl{}.) Il suffit de passer
-  l'option ×linktoc=false× au \Package{hyperref}.
+  l'option |linktoc=false| au \Package{hyperref}.
 \end{dbfaq}
 
 \begin{dbfaq}{Comment supprimer la bibliographie des sommaire, table des
@@ -166,7 +166,7 @@ Ce chapitre est une \gls{faq} \phrase{autrement dit une liste des questions
   %
   (Cette question ne concerne pas directement la \yatcl{}.) Il suffit de passer
   à la commande \docAuxCommand{printbibliography} l'option
-  ×heading=×\meta{entête}, où \meta{entête} vaut par exemple
+  |heading=|\meta{entête}, où \meta{entête} vaut par exemple
   \docValue*{bibliography} (cf. la documentation du \Package{biblatex} pour plus
   de détails).
 \end{dbfaq}
@@ -183,7 +183,7 @@ Ce chapitre est une \gls{faq} \phrase{autrement dit une liste des questions
   \docAuxKey{depth} du \Package*{bookmark} permet d'affecter aux signets un
   autre niveau que celui par défaut.
 \begin{preamblecode}[title=Par exemple dans le \File{\configurationfile}]
-\bookmarksetup{depth=÷\meta{autre niveau}÷}
+\bookmarksetup{depth="\meta{autre niveau}"}
 \end{preamblecode}
 où \meta{autre niveau} est l'une des valeurs possibles de la clé
 \refKey{depth}.
@@ -200,10 +200,10 @@ où \meta{autre niveau} est l'une des valeurs possibles de la clé
   lignes :
 \begin{preamblecode}[title=Par exemple dans le \File{\configurationfile}]
 \makeatletter
-\renewcommand*\@pnumwidth{÷\meta{distance}÷}
+\renewcommand*\@pnumwidth{"\meta{distance}"}
 \makeatother
 \end{preamblecode}
-  où \meta{distance}, à exprimer par exemple en points (par exemple ×27pt×),
+  où \meta{distance}, à exprimer par exemple en points (par exemple |27pt|),
   est à déterminer par \enquote{essais/erreurs} de sorte que \meta{distance}
   soit :
   \begin{enumerate}
@@ -237,7 +237,7 @@ où \meta{autre niveau} est l'une des valeurs possibles de la clé
       thèse\footnote{Mais cf. alors \vref{wa:avant-maketitle}.} (et donc
       \emph{pas} dans son \emph{préambule}) ;
     \item soit dans le \File{\characteristicsfile} prévu à cet effet ;
-    \item soit entre ×\shorthandon{;:!?}× et ×\shorthandoff{;:!?}× si on tient
+    \item soit entre |\shorthandon{;:!?}| et |\shorthandoff{;:!?}| si on tient
       absolument à ce qu'ils soient saisis en préambule.
     \end{itemize}
   \item les termes du glossaire, des acronymes ou des symboles, il suffit de
@@ -245,8 +245,8 @@ où \meta{autre niveau} est l'une des valeurs possibles de la clé
     \docAuxCommand{loadglsentries} :
     \begin{itemize}
     \item soit dans le \File{\configurationfile}
-      (cf. \vref{rq:configurationfile}) ;
-    \item soit entre ×\shorthandon{;:!?}× et ×\shorthandoff{;:!?}×. Cette
+      (cf. \vref{rq\string:configurationfile}) ;
+    \item soit entre |\shorthandon{;:!?}| et |\shorthandoff{;:!?}|. Cette
       solution peut être préférée à la précédente pour ne pas perdre les
       fonctionnalités de complétion pour les labels des termes de glossaire
       fournies par certains éditeurs de texte orientés \LaTeX{}.
@@ -260,7 +260,7 @@ où \meta{autre niveau} est l'une des valeurs possibles de la clé
   spécifiant la valeur du compteur \docAuxKey*{secnumdepth} au moyen de la
   commande :
 \begin{preamblecode}
-\setcounter{secnumdepth}{÷\meta{nombre}÷}
+\setcounter{secnumdepth}{"\meta{nombre}"}
 \end{preamblecode}
   mais cela n'a aucun effet. Pourquoi ?
   %

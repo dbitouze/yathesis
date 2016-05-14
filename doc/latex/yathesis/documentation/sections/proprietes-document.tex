@@ -45,7 +45,7 @@ saisies, au choix :
     Le \File{\characteristicsfile} est \emph{automatiquement} importé par la
     \yatcl{} et il doit donc \emph{ne pas} être explicitement importé : on
     \emph{ne} recourra donc \emph{pas} à la commande
-    ×\input{×\file{\characteristicsfile}×}× (ou autre commande d'importation
+    |\input{|\file{\characteristicsfile}|}| (ou autre commande d'importation
     similaire à \docAuxCommand{input}).
   \end{dbwarning}
 \end{description}
@@ -139,8 +139,8 @@ titre\footnote{En outre, les titres et éventuels sous-titres figureront sur les
     Les \meta{jour}, \meta{mois} et \meta{année} doivent être des nombres
     (entiers), \meta{jour} et \meta{mois} étant compris respectivement :
     \begin{itemize}
-    \item entre ×1× et ×31× ;
-    \item entre ×1× et ×12×.
+    \item entre |1| et |31| ;
+    \item entre |1| et |12|.
     \end{itemize}
   \end{dbwarning}
 \end{docCommand}
@@ -215,7 +215,7 @@ de titre\footnote{Le ou les laboratoires apparaissent en outre sur les pages
 %
 \begin{dbremark}{Changements de ligne dans l'adresse du laboratoire}{}
   Il est possible de composer l'\meta{adresse} du laboratoire sur plusieurs
-  lignes au moyen de la commande ×\\×.
+  lignes au moyen de la commande |\\|.
 \end{dbremark}
 %
 \begin{dbexample}{Instituts et entités}{}
@@ -260,7 +260,7 @@ de titre\footnote{Le ou les laboratoires apparaissent en outre sur les pages
 
 Toutes les commandes précédentes admettent un argument optionnel permettant
 d'apporter sur les instituts ou entités des \meta{précisions} --- sous la forme
-d'une liste \meta{clé}×=×\meta{valeur}.
+d'une liste \meta{clé}|=|\meta{valeur}.
 %
 \paragraph{Pour tout institut ou entité}
 
@@ -303,7 +303,7 @@ pages de titre, sauf :
 \end{docKey}
 %
 % ^^A \DescribeOption{nologo}
-% ^^A L'option ×nologo× (qui ne prend pas de valeur) pour que le logo d'un
+% ^^A L'option |nologo| (qui ne prend pas de valeur) pour que le logo d'un
 % ^^A institut ne figure pas, même s'il a été précisé.
 %
 \begin{docKey}{url}{=\meta{\acrshort*{url} de l'institut}}{pas de valeur par
@@ -320,9 +320,9 @@ pages de titre, sauf :
 \end{dbexample}
 \begin{dbwarning}{Caractère \protect\lstinline+\#+ à protéger dans les
     \acrshortpl*{url} d'instituts et entités}{}
-  Au cas (peu probable) où le caractère ×#× doive figurer dans ces
+  Au cas (peu probable) où le caractère |#| doive figurer dans ces
   \acrshortpl{url}, il doit être \enquote{protégé} au moyen d'une
-  contre-oblique le précédant : ×\#×.
+  contre-oblique le précédant : |\#|.
 \end{dbwarning}
 \end{docKey}
 
@@ -387,7 +387,7 @@ url=http://www-lmpa.univ-littoral.fr/
 \begin{dbremark}{Instituts sous forme d'acronymes}{acronymes}
   Si l'institut ou l'entité doit figurer sous la forme d'un acronyme, on aura
   intérêt à ne pas les saisir tels quel comme on l'a fait jusqu'ici
-  (×\institute{ULCO}× ou ×\laboratory{LMPA}×) mais à recourir aux
+  (|\institute{ULCO}| ou |\laboratory{LMPA}|) mais à recourir aux
   fonctionnalités du \Package{glossaries}. L'\vref{acronymes} donne un aperçu
   de la procédure.
 \end{dbremark}
@@ -506,7 +506,7 @@ Toutes les commandes précédentes admettent un argument optionnel permettant
 d'apporter sur les membres du jury des \meta{précisions}\footnote{Pour les
   directeurs de thèse \emph{non} membres du jury, ces \meta{précisions} sont
   inutiles car elles ne figureront nulle part.} --- sous la forme d'une liste
-\meta{clé}×=×\meta{valeur}.
+\meta{clé}|=|\meta{valeur}.
 
 \paragraph{Corps de métier}
 \label{sec-corps}
@@ -606,9 +606,9 @@ métier) des membres du jury parmi celles prédéfinies par la \yatcl{}.
 \end{dbexample}
 %
 \begin{dbwarning}{Virgule(s) dans les valeurs des clés}{virgule}
-  Dans toute option de la forme \meta{clé}×=×\meta{valeur}, si \meta{valeur}
+  Dans toute option de la forme \meta{clé}|=|\meta{valeur}, si \meta{valeur}
   contient une ou plusieurs virgules, il faut \emph{impérativement} la placer
-  entre paire d'accolades ainsi : \meta{clé}×={×\meta{valeur}×}×. Cela peut
+  entre paire d'accolades ainsi : \meta{clé}|={|\meta{valeur}|}|. Cela peut
   notamment être le cas de la \meta{valeur} de la clé \refKey{affiliation}.
 \end{dbwarning}
 %
@@ -649,8 +649,8 @@ un membre du jury est un homme ou une femme au moyen des clés \refKey{male} et
   Cette clé permet de spécifier qu'une personne est ou pas de sexe féminin.
 \end{docKey}
 
-L'option ×female×\footnote{Ou, de façons équivalentes,
-  \protect\lstinline|male=false| ou \protect\lstinline|female=true|.} n'a pour
+L'option |female|\footnote{Ou, de façons équivalentes,
+  \protect\lstinline+male=false+ ou \protect\lstinline+female=true+.} n'a pour
 effet que d'accorder en genre féminin un certain nombre de mots clés de la
 \yatcl{} (\enquote{directrice} au lieu \enquote{directeur}, \enquote{chargée de
   recherche} au lieu \enquote{chargé de recherche}, etc.).

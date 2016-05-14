@@ -15,9 +15,9 @@ Cette section passe en revue les outils de personnalisation propres ou pas à la
 Les \meta{options} de classe de la \yatcl sont à passer selon la syntaxe
 usuelle :
 \begin{preamblecode}
-\documentclass[÷\meta{options}÷]{yathesis}
+\documentclass["\meta{options}"]{yathesis}
 \end{preamblecode}
-% ^^A Tester et documenter la commande ×\yasetup×.
+% ^^A Tester et documenter la commande |\yasetup|.
 
 % ^^A La \yatcl accepte, en sus des options qui lui sont propres, celles de la
 % ^^A \Class{book} sur laquelle est elle basée.
@@ -64,7 +64,7 @@ Par défaut, un mémoire créé avec la \yatcl est composé :
     de valeur par défaut, initialement \docValue{french}}
   Pour que la langue principale \phrase{et activée par défaut} du mémoire soit
   l'anglais, il suffit de le stipuler au moyen de l'option
-  ×mainlanguage=english×. Le français devient alors automatiquement la langue
+  |mainlanguage=english|. Le français devient alors automatiquement la langue
   secondaire de la thèse.
 \end{docKey}
 
@@ -263,22 +263,22 @@ Les documents composés avec la \yatcl{} peuvent avoir deux formats de sortie :
     \begin{enumerate}
     \item si le \Package{hyperref} est chargé par l'utilisateur,
       \begin{enumerate}
-      \item\label{item:paper:1} sa commande
-        ×\href{×\meta{\acrshort*{url}}×}{×\meta{texte}×}× est automatiquement
+      \item\label{item-paper-1} sa commande
+        |\href{|\meta{\acrshort*{url}}|}{|\meta{texte}|}| est automatiquement
         remplacée par :
         \begin{itemize}
         \item
-          \meta{texte}\lstinline[deletekeywords={[2]url}]+\footnote{\url{+\meta{\acrshort*{url}}×}}×
+          \meta{texte}\lstinline[deletekeywords={[2]url}]+\footnote{\url{+\meta{\acrshort*{url}}|}}|
           si elle figure dans le texte ordinaire ;
         \item \meta{texte}
-          \lstinline[deletekeywords={[2]url}]+(\url{+\meta{\acrshort*{url}}×})×
+          \lstinline[deletekeywords={[2]url}]+(\url{+\meta{\acrshort*{url}}|})|
           si elle figure en note de bas de page ;
         \end{itemize}
       \item les liens hypertextes sont systématiquement matérialisés comme le
         fait par défaut le \Package{hyperref}, c'est-à-dire par des cadres
         rectangulaires de couleurs (qui ne figurent pas sur le document
         papier). Ainsi, si l'utilisateur recourt à la commande
-        ×\hypersetup{colorlinks=true}× pour que, en sortie \enquote{écran}, les
+        |\hypersetup{colorlinks=true}| pour que, en sortie \enquote{écran}, les
         hyperliens soient composés en couleur et non pas encadrés, il n'a pas
         besoin de modifier ce choix pour que, en sortie \enquote{papier}, cette
         coloration soit désactivée ;
@@ -302,12 +302,12 @@ Les documents composés avec la \yatcl{} peuvent avoir deux formats de sortie :
   \enquote{écran} et \enquote{papier} soient absolument identiques, il suffit
   d'imprimer la première ; mais il faut avoir conscience du fait que, dans ce
   cas, si le mémoire contient des références vers des \acrshort{url} (par
-  exemple fournies par ×\href{×\meta{\acrshort*{url}}×}{×\meta{texte}×}×),
+  exemple fournies par |\href{|\meta{\acrshort*{url}}|}{|\meta{texte}|}|),
   leurs cibles ne figureront nulle part en sortie \enquote{papier}.
 \end{dbwarning}
 
 \subsection{Nombre de laboratoires sur les pages de résumés et de 4\ieme{} de couverture}
-\label{sec:nombre-de-labor}
+\label{sec-nombre-de-labor}
 
 Par défaut, seul le laboratoire principal (avec son adresse) est affiché sur
 les pages de résumés et de 4\ieme{} de couverture
@@ -702,7 +702,7 @@ sont listées dans le \vref{tab-expressions-cles} et y sont identifiées par un
 
 \begin{dbexample}{Modification d'expression définie par la classe}{}
   Pour remplacer l'expression en français \enquote{Unit\'e de recherche} (dont le label est
-  ×universitydepartment×) par \enquote{Laboratoire}, il suffit de
+  |universitydepartment|) par \enquote{Laboratoire}, il suffit de
   saisir :
   %
 \begin{preamblecode}[title=Par exemple dans le \File{\configurationfile}]
@@ -713,7 +713,7 @@ sont listées dans le \vref{tab-expressions-cles} et y sont identifiées par un
 \begin{dbexample}{Suppression d'expression définie par la classe}{}
   Si on souhaite supprimer des pages de titre les mentions \enquote{Titre de la
     thèse} et \foreignquote{english}{Thesis Title} (expressions dont le label
-  est ×thesistitle×), il suffit de saisir :
+  est |thesistitle|), il suffit de saisir :
 \begin{preamblecode}[title=Par exemple dans le \File{\configurationfile}]
 \expression{thesistitle}{}{}
 \end{preamblecode}
@@ -740,12 +740,12 @@ figurant en légende des tableaux flottants (\enquote{Table} est remplacée par
   \enquote{\textsc{Table}}}% ^^A
 
 Si on souhaite redéfinir ces expressions, il suffit de recourir aux commandes
-×\addto×, ×\captionsfrench× et ×\captionsenglish× du \Package{babel} au moyen
+|\addto|, |\captionsfrench| et |\captionsenglish| du \Package{babel} au moyen
 de la syntaxe suivante.
 
 \begin{preamblecode}[title=Par exemple dans le \File{\configurationfile}]
-\addto\captionsfrench{\def\÷\meta{commande}÷{÷\meta{en français}÷}}
-\addto\captionsenglish{\def\÷\meta{commande}÷{÷\meta{en anglais}÷}}
+\addto\captionsfrench{\def\"\meta{commande}"{"\meta{en français}"}}
+\addto\captionsenglish{\def\"\meta{commande}"{"\meta{en anglais}"}}
 \end{preamblecode}
 \begin{table}[hb]
   \centering
@@ -761,28 +761,28 @@ de la syntaxe suivante.
 \end{dbexample}
 
 En cas d'usage des packages \package{glossaries} et \package{biblatex}, la
-syntaxe précédente est inopérante avec les commandes ×\glossaryname× et
-×\bibname× (ainsi que ×\refname×). Dans ce cas, pour donner un \meta{titre
+syntaxe précédente est inopérante avec les commandes |\glossaryname| et
+|\bibname| (ainsi que |\refname|). Dans ce cas, pour donner un \meta{titre
   alternatif} :
 \begin{itemize}
 \item aux glossaire, liste d'acronymes et liste de symboles, on recourra
   à l'une ou l'autre des instructions suivantes :
 \begin{bodycode}
-\printglossary[title=÷\meta{titre alternatif}÷]
-\printglossaries[title=÷\meta{titre alternatif}÷]
-\printacronyms[title=÷\meta{titre alternatif}÷]
-\printsymbols[title=÷\meta{titre alternatif}÷]
+\printglossary[title="\meta{titre alternatif}"]
+\printglossaries[title="\meta{titre alternatif}"]
+\printacronyms[title="\meta{titre alternatif}"]
+\printsymbols[title="\meta{titre alternatif}"]
 \end{bodycode}
 \item à la bibliographie, on recourra à :
 \begin{bodycode}
-\printbibliography[title=÷\meta{titre alternatif}÷]
+\printbibliography[title="\meta{titre alternatif}"]
 \end{bodycode}
 \end{itemize}
 
 En outre, en cas d'usage du \Package*{listings}, un \meta{titre alternatif}
 pourra être donné à la liste des listings, au moyen de:
 \begin{preamblecode}[title=Par exemple dans le \File{\configurationfile}]
-\renewcommand\lstlistingname{÷\meta{titre alternatif}÷}
+\renewcommand\lstlistingname{"\meta{titre alternatif}"}
 \end{preamblecode}
 
 \subsection{Nouveaux corps}\label{sec-nouveaux-corps}
@@ -800,7 +800,7 @@ ou des chargé(e)s de recherche (\gls{hdr} ou pas) du \gls{cnrs}. La clé
   \changes{v0.99e}{2014/06/15}{Clé \protect\refAux{corporation} remplacée par
     (et alias de) la clé \protect\refKey{corps}}%^^A
   % ^^A
-  L'option ×corps=×\meta{label} permet de stipuler un \meta{corps en français}
+  L'option |corps=|\meta{label} permet de stipuler un \meta{corps en français}
   et un \meta{corps en anglais} où \meta{label} identifie une expression listée
   au \vref{tab-expressions-cles} ou à définir au moyen de la commande
   \refCom{expression}.
@@ -843,7 +843,7 @@ La clé \refKey{role} suivante permet de spécifier de \emph{nouveaux} rôles
   \changes{v0.99f}{2014/07/11}{Nouvelle clé \protect\refKey{role} permettant de
     spécifier ou définir de nouveaux rôles pour les personnes}%^^A
   % ^^A
-  L'option ×role=×\meta{label} permet de stipuler un \meta{rôle en français} et
+  L'option |role=|\meta{label} permet de stipuler un \meta{rôle en français} et
   un \meta{rôle en anglais} où \meta{label} identifie une expression listée au
   \vref{tab-expressions-cles} ou à définir au moyen de la commande
   \refCom{expression}.

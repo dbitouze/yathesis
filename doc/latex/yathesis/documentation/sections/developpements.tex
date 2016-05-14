@@ -65,7 +65,7 @@
   \docAuxCommand*{supervisor}, \docAuxCommand*{examiner}, etc. de la \yatcl{},
   d'obtenir une page de couverture adaptée à telle ou telle université (ou
   \gls{pres}), rien qu'en ajoutant une option de classe telle que
-  \docAuxKey*{style}×=×\docValue*{lille-1}. Pour ce faire, documenter la
+  \docAuxKey*{style}|=|\docValue*{lille-1}. Pour ce faire, documenter la
   production des pages de titres et les macros publiques
   (\docAuxCommand*{print...}) qui permettent de faire apparaître les éléments
   qui les constituent ; ainsi, des contributeurs pourront eux-mêmes coder la
@@ -107,22 +107,23 @@
   traite des éléments \enquote{obligatoires}.
 \item Indiquer la présence du \File{latexmkrc} pour les spécimen et canevas, et
   expliquer l'usage de \program{latexmk} dans les \enquote{trucs et astuces}.
-\item Utiliser le \Package{tcolorbox} pour s'affranchir des raccourcis
-  % ^^A
-  \lstDeleteShortInline×%^^A
-  % ^^A
-  \lstinline|×|
-  %^^A
-  \lstMakeShortInline[style=dbtex]×%^^A
-  %^^A
-  et ×÷× ainsi pouvoir compiler la documentation avec \program{pdflatex} et non
-  plus \program{xelatex} (il faudra alors renoncer au \Package*{fontawesome}
-  qui fournit l'icône en forme de canevas).
+% \item Utiliser le \Package{tcolorbox} pour s'affranchir des raccourcis
+%   % ^^A
+%   \lstDeleteShortInline×%^^A
+%   % ^^A
+%   \lstinline|×|
+%   %^^A
+%   \lstMakeShortInline[style=dbtex]×%^^A
+%   %^^A
+%   et ×÷× ainsi pouvoir compiler la documentation avec \program{pdflatex} et non
+%   plus \program{xelatex} (il faudra alors renoncer au \Package*{fontawesome}
+%   qui fournit l'icône en forme de canevas).
 \item Prévoir un index des concepts en plus de celui des commandes.
 \item Prévoir un \File{.el} (pour \program{Emacs+AUCTeX}) et voir le format
   pour \program{TeXworks}.
 \item Indiquer comment obtenir un nom de fichier \acrshort{pdf} différent de
-  ×\jobname×, par exemple pour le fichier à imprimer :
+  |\jobname|, par exemple pour le fichier à imprimer :
+  \lstset{escapechar=}
 \begin{lstlisting}
 pdflatex -jobname=these_a_imprimer "\PassOptionsToClass{output=paper}{yathesis}\input{these}"
 \end{lstlisting}
