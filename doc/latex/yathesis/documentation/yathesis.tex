@@ -1,0 +1,90 @@
+% Pour imprimer la présente documentation 2 pages sur 1 :
+% pdfnup --nup 2x1 --landscape yathesis.pdf --trim '1.9cm 3.5cm 1.9cm 1.9cm' --suffix 2x1
+%
+\RequirePackage{scrlfile}
+\ReplaceClass{article}{report}
+\BeforePackage{doc}{\let\oldmaketitle\maketitle}
+\documentclass[english,french]{ltxdoc}
+% \documentclass[english,french]{report}
+\usepackage{denisbdoc}
+\usepackage[a4paper]{geometry}%
+\usepackage[lining]{libertine}
+\renewcommand{\ttdefault}{lmtt}
+\indexsetup{level=\section*,toclevel=section,noclearpage}
+\makeindex[columns=2]
+\tcbset{index format=off}
+%
+\lstMakeShortInline[style=dbtex]|
+% \tcbset{listing options={escapechar=+}}
+%
+\loadglsentries{glossaries/glossary}
+\loadglsentries{glossaries/acronyms}
+\addbibresource{yathesis.bib}
+%
+\InputIfFileExists{includeall-includeonly}{}{}
+%
+\AfterEndPreamble{%
+  \RecordChanges%
+  \GlossaryPrologue{%
+    \chapter{Historique des changements}\label{cha-history}
+    L'auteur a eu le souci constant d'assurer la compatibilité ascendante de la
+    \yatcl{}. Cependant, pour répondre à des demandes de fonctionnalités jugées
+    légitimes, quelques rares changements (signalés \alert{en rouge}
+    ci-dessous) cassent cette compatibilté en ce sens que certains anciens
+    documents peuvent éventuellement :
+    \begin{itemize}
+    \item soit ne plus compiler sans quelques ajustements. Dans ce cas, les
+      remèdes sont indiqués en note de bas de page du changement concerné ;
+    \item soit voir leur mise en page modifiée, en général légèrement. Dans ce
+      cas, les pages concernées sont indiquées.
+    \end{itemize}
+  }%
+}%
+\begin{document}
+% ^^A\settocdepth{subparagraph}
+\input{sections/fixed-footnotes}
+\include{sections/titre}
+\include{sections/abstract}
+\tableofcontents
+\setsecnumdepth{none}%
+\include{sections/introduction}
+\setsecnumdepth{subsection}
+\include{sections/proprietes-document}
+\include{sections/pages-titre}
+\include{sections/pages-liminaires}
+\include{sections/pages-corps}
+\include{sections/pages-annexes}
+\include{sections/pages-finales}
+\include{sections/personnalisation}
+\appendix
+\include{sections/installation}
+\include{sections/specimens-canevas}
+\include{sections/recommandations}
+\include{sections/faq}
+\include{sections/fichiers-charges}
+\include{sections/packages-charges}
+\include{sections/incompatibilites-connues}
+\include{sections/aspects}
+\include{sections/notations}
+\include{sections/add-ons}
+\include{sections/usage-avance}
+\include{sections/developpements}
+\PrintChanges%
+\printbibliography[heading=bibintoc]
+\printglossaries\label{glossaire}
+\begingroup
+\setlength{\parskip}{0pt plus .1pt}
+\listoffigures
+\listoftables
+\endgroup
+\tcblistof[\chapter*]{dbwarninglist}{Table des avertissements\addcontentsline{toc}{chapter}{Table des avertissements}}%
+\tcblistof[\chapter*]{dbremarklist}{Table des remarques\addcontentsline{toc}{chapter}{Table des remarques}}%
+\tcblistof[\chapter*]{dbexamplelist}{Table des exemples\addcontentsline{toc}{chapter}{Table des exemples}}%
+\tcblistof[\chapter*]{dbfaqlist}{Table des questions\addcontentsline{toc}{chapter}{Table des questions}}%
+\printindex
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
