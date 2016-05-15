@@ -54,7 +54,7 @@ a pour contenu par défaut une phrase semblable à\selonlangue{} :
       must be considered to be those of their authors.}
   \end{itemize}
   où l'\meta{institut} est celui défini par la commande \refCom{institute}
-  \phrase*{auquel est adjoint l'éventuel institut de cotutelle}.
+  \aside*{auquel est adjoint l'éventuel institut de cotutelle}.
 
 La page dédiée à la clause de non-responsabilité est produite par la commande
 \refCom{makedisclaimer}.
@@ -205,7 +205,7 @@ par défaut si elle ne convient pas, on pourra recourir à la commande
   souhaité\hauteurpage{}, permet de préparer une épigraphe destinée à
   apparaître sur une \gls{liminaire} dédiée.
 
-  Si l'épigraphe est exprimée dans une \meta{langue} \phrase{connue du
+  Si l'épigraphe est exprimée dans une \meta{langue} \aside{connue du
     \Package{babel}} autre que la langue principale du document, on peut le
   spécifier en argument optionnel% {\NoAutoSpacing
     \footnote{Si cette \meta{langue} est autre que
@@ -246,7 +246,7 @@ par défaut si elle ne convient pas, on pourra recourir à la commande
 
 \begin{dbremark}{Épigraphes ailleurs dans le document}{}
   Pour gérer les épigraphes liminaires, la \yatcl{} exploite le
-  \Package*{epigraph} \phrase*{qui est automatiquement chargé}. Il est bien sûr
+  \Package*{epigraph} \aside*{qui est automatiquement chargé}. Il est bien sûr
   possible de recourir aux commandes de ce package pour faire figurer, ailleurs
   dans le mémoire, d'autres épigraphes.
 \end{dbremark}
@@ -360,7 +360,7 @@ page.
 
 \begin{dbwarning}{Résumé en français nécessaire en cas de mémoire en langue
     étrangère}{frenchabstract}
-  Un mémoire composé principalement en langue étrangère \phrase{notamment dans
+  Un mémoire composé principalement en langue étrangère \aside{notamment dans
     le cadre d'une cotutelle internationale} requiert, en sus de la page de
   résumé(s) ci-dessus, un résumé \emph{en français} de la thèse. Celui-ci doit
   être \emph{substantiel}, d'une dizaine de pages environ.
@@ -368,7 +368,7 @@ page.
 
 % ^^A \section[Résumé substantiel en français]{Résumé substantiel en français (éventuel)}
 % ^^A
-% ^^A Un mémoire composé principalement en langue étrangère \phrase{notamment dans le
+% ^^A Un mémoire composé principalement en langue étrangère \aside{notamment dans le
 % ^^A   cadre d'une cotutelle internationale} requiert, en sus de la page de
 % ^^A résumé(s) ci-dessus, un résumé \emph{en français} de la thèse
 % ^^A \emph{substantiel}\footnote{Une dizaine de pages suffisent.}.
@@ -448,7 +448,7 @@ la \yatcl. Cependant, celle-ci fournit des fonctionnalités propres au
   \begin{itemize}
   \item de son \meta{label}\footnote{Ce \meta{label}, qui identifie le symbole de
       manière unique dans la base terminologique, est notamment utilisé dans
-      les commandes qui produisent celui-ci dans le texte \phrase*{par exemple
+      les commandes qui produisent celui-ci dans le texte \aside*{par exemple
       \docAuxCommand{gls}\marg{label}}.} ;
 \item du \meta{symbole} proprement dit\footnote{Ce symbole peut notamment être
     composé au moyen de la commande \docAuxCommand{ensuremath}\marg{symbole
@@ -486,7 +486,7 @@ la \yatcl. Cependant, celle-ci fournit des fonctionnalités propres au
 \begin{dbexample}{Définitions et liste des symboles}{}
   Le code suivant définit certains symboles.
   \preamblesample[auxiliaires/symboles.tex]{}{}%
-  Le code suivant produit la liste de ces symboles \phrase*{composée avec le
+  Le code suivant produit la liste de ces symboles \aside*{composée avec le
     style \docValue{yadsymbolstyle}}.
   \bodysample{rangesuffix=\^^M,linerange={printsymbols}}{} Le résultat de ce
   code est illustré \vref{fig-printsymbols}.
