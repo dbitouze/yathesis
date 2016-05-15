@@ -1400,7 +1400,13 @@
       \ifbool{YAD@nologo}{%
       }{%
         \csdef{print#2logo}{%
-        \@ifstar{\@tempswatrue\csuse{YAD@starnostar@print#2logo}}{\@tempswafalse\csuse{YAD@starnostar@print#2logo}}%
+        \@ifstar{%
+        \@tempswatrue%
+        \csuse{YAD@starnostar@print#2logo}%
+        }{%
+        \@tempswafalse%
+        \csuse{YAD@starnostar@print#2logo}%
+        }%
       }%
       \csdef{YAD@starnostar@print#2logo}{%
         \yadsetup{url=,##1}%
@@ -3127,7 +3133,7 @@
   \addcontentsline{toc}{chapter}{\abstractname}%
   \booltrue{YAD@makeabstract@used}%
   \bgroup%
-  % \setlength{\footskip}{-15pt}%
+  \addtolength{\footskip}{6pt minus 6pt}%
   \setfootrule{0pt}%
   \setfoot[][%
   \ifboolexpr{%
@@ -3144,6 +3150,7 @@
     }%
   }%
   ][]{%
+    % \medskip\par%
     \YAD@laboratory@abstract@page%
   }{}{}%
   \cleardoublepage%
@@ -3219,60 +3226,61 @@
   \pagestyle{backcover}%
   \YAD@abstract@page%
 }%
-\csdef{makededications}{%
-  \@ifstar{\@tempswatrue\csuse{YAD@starnostar@makededications}}{\@tempswafalse\csuse{YAD@starnostar@makededications}}%
-}%
-\csdef{YAD@starnostar@makededications}{%
-  \pagestyle{prepreliminary}%
-  \cleardoublepage%
-  \if@tempswa%
-  \else%
-  \vspace*{\stretch{2}}%
-  \fi \DTLifdbempty{dedications}{%
-    \YAD@generic@argument@translate{dedications}%
-    \YAD@ClassError{%
-      \protect\makededications\space utilisee/\protect\dedication\space non
-      utilisee%
-    }{%
-      La commande \protect\makededications\space a ete utilisee mais la
-      commande \protect\dedication,\MessageBreak%
-      permettant de preparer des dedicaces, n'a pas ete utilisee.%
-    }%
-  }{%
-    \begin{flushright}
-      \itshape%
-      \DTLforeach*{dedications}{%
-        \YAD@dedication=dedication%
-      }{%
-        \YAD@ifemptyorundef{\YAD@dedication}{%
-          \YAD@generic@argument@translate{dedication}%
-          \YAD@ClassError{%
-            Dedicace vide%
+        \csdef{makededications}{%
+        \@ifstar{\@tempswatrue\csuse{YAD@starnostar@makededications}}{\@tempswafalse\csuse{YAD@starnostar@makededications}}%
+        }%
+        \csdef{YAD@starnostar@makededications}{%
+        \pagestyle{prepreliminary}%
+        \cleardoublepage%
+        \if@tempswa%
+        \else%
+        \vspace*{\stretch{2}}%
+        \fi%
+        \DTLifdbempty{dedications}{%
+        \YAD@generic@argument@translate{dedications}%
+        \YAD@ClassError{%
+        \protect\makededications\space utilisee/\protect\dedication\space non
+        utilisee%
+        }{%
+        La commande \protect\makededications\space a ete utilisee mais la
+        commande \protect\dedication,\MessageBreak%
+        permettant de preparer des dedicaces, n'a pas ete utilisee.%
+        }%
+        }{%
+        \begin{flushright}
+          \itshape%
+          \DTLforeach*{dedications}{%
+            \YAD@dedication=dedication%
           }{%
-            L'argument obligatoire d'une commande \protect\dedication\space est
-            vide\MessageBreak%
-            (celui-ci doit etre renseigne).%
+            \YAD@ifemptyorundef{\YAD@dedication}{%
+              \YAD@generic@argument@translate{dedication}%
+              \YAD@ClassError{%
+                Dedicace vide%
+              }{%
+                L'argument obligatoire d'une commande \protect\dedication\space est
+                vide\MessageBreak%
+                (celui-ci doit etre renseigne).%
+              }%
+            }{%
+              \YAD@dedication%
+            }%
+            \par%
+            \DTLiflastrow{%
+            }{%
+              \if@tempswa%
+              \vspace*{\baselineskip}%
+              \else%
+              \vspace*{\stretch{1}}%
+              \fi
+            }%
           }%
-        }{%
-          \YAD@dedication%
+        \end{flushright}
         }%
-        \par%
-        \DTLiflastrow{%
-        }{%
-          \if@tempswa%
-          \vspace*{\baselineskip}%
-          \else%
-          \vspace*{\stretch{1}}%
-          \fi
+        \if@tempswa%
+        \else%
+        \vspace*{\stretch{2}}%
+        \fi
         }%
-      }%
-    \end{flushright}
-  }%
-  \if@tempswa%
-  \else%
-  \vspace*{\stretch{2}}%
-  \fi
-}%
 \csdef{makefrontepigraphs}{%
   \@ifstar{\@tempswatrue\csuse{YAD@starnostar@makefrontepigraphs}}{\@tempswafalse\csuse{YAD@starnostar@makefrontepigraphs}}%
 }%
@@ -3670,9 +3678,9 @@
   laboratoires suivants.}{This thesis has been prepared at the following
   research units.}%
 \expression{prepared-at-hdr}{Cette \textsc{hdr} a \'et\'e pr\'epar\'ee au}{This
-  habilitation to conduct researches has been prepared at}%
+  habilitation to conduct research has been prepared at}%
 \expression{prepared-at-pl-hdr}{Cette \textsc{hdr} a \'et\'e pr\'epar\'ee dans
-  les laboratoires suivants.}{This habilitation to conduct researches has been
+  les laboratoires suivants.}{This habilitation to conduct research has been
   prepared at the following research units.}%
 \expression{juniorresearcher}{charg\'e de recherche}{Junior Researcher}%
 \expression{juniorresearcherfem}{charg\'ee de recherche}{Junior Researcher}%
@@ -3722,9 +3730,9 @@
 \expression{thesisdefendedby}{Th\`ese pr\'esent\'ee par}{Thesis defended
   by}%
 \expression{thesisdefendedby-hdr}{Habilitation \`a diriger les recherches
-  pr\'esent\'ee par}{Habilitation to conduct researches defended by}%
+  pr\'esent\'ee par}{Habilitation to conduct research defended by}%
 \expression{thesistitle}{Titre de la th\`ese}{Thesis Title}%
-\expression{thesistitle-hdr}{Titre de l'habilitation \`a diriger les recherches}{Habilitation to conduct researches Title}%
+\expression{thesistitle-hdr}{Titre de l'habilitation \`a diriger les recherches}{Habilitation to conduct research's Title}%
 \expression{inprogress}{travail en cours}{work in progress}%
 \expression{universitydepartment}{Unit\'e de recherche}{University
   Department}%
@@ -3750,7 +3758,6 @@ du}{Work in progress as of}%
 %%           and the derived files yathesis.cls,
 %%                                 yathesis.ins,
 %%                                 yathesis.pdf,
-%%                                 yathesisdoc.sty,
 %%                                 and a number of configuration files.
 %%
 %% End of file `yathesis.cls'.
