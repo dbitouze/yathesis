@@ -295,7 +295,7 @@ pages de titre, sauf :
   mais la clé \refKey{logoheight} permet de spécifier une hauteur
   différente.
   \begin{dbexample}{Hauteur du logo d'institut}{}
-    La commande de l'\vref{ex:logoinst} aurait ainsi pu contenir :
+    La commande de l'{\NoAutoSpacing\vref{ex:logoinst}} aurait ainsi pu contenir :
 \begin{bodycode}
 \institute[logoheight=1cm,logo=images/ulco]{ULCO}
 \end{bodycode}
@@ -594,10 +594,14 @@ métier) des membres du jury parmi celles prédéfinies par la \yatcl{}.
 
 \begin{docKey}{affiliation}{=\meta{institut}}{pas de valeur par défaut,
     initialement vide}
-  Cette clé définit l'\meta{institut}\footnote{La \vref{rq:acronymes}
-    s'applique également ici : plutôt que spécifié tel quel, l'acronyme d'un
-    \meta{institut} peut être géré par le \Package{glossaries}.} auquel est
-  affilié un membre du jury.
+  Cette clé définit l'\meta{institut}% {\NoAutoSpacing
+    \footnote{La
+      \vref{rq\string:acronymes}
+      % remarque \ref{rq:acronymes}
+      s'applique également ici : plutôt que spécifié tel quel, l'acronyme d'un
+      \meta{institut} peut être géré par le \Package{glossaries}.}
+    % }
+    auquel est affilié un membre du jury.
 \end{docKey}
 \begin{dbexample}{Institut d'affiliation}{}
 \begin{bodycode}
@@ -619,13 +623,13 @@ métier) des membres du jury parmi celles prédéfinies par la \yatcl{}.
 \referee[affiliation={ULCO, CNRS}]{René}{Descartes}
 \end{bodycode}
 On notera la paire d'accolades, nécessaire conformément
-à l'\vref{wa:virgule}. De façon générale, il n'est pas indispensable de faire
+à l'{\NoAutoSpacing\vref{wa:virgule}}. De façon générale, il n'est pas indispensable de faire
 figurer tant de précisions et, ne serait-ce que pour des raisons de place, on
 veillera à ne pas multiplier celles-ci.
 \end{dbexample}
 
 \paragraph{Homme/femme}
-\label{sec:hommefemme}
+\label{sec-hommefemme}
 
 \changes{v0.99f}{2014/07/11}{Nouvelles clés \protect\refKey{male} et
   \protect\refKey{female} permettant de spécifier si une personne est un homme
