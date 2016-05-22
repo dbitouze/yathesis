@@ -1,25 +1,8 @@
 \chapter{Specimens et canevas de thèse}\label{cha-specimen-canevas}%
 
-% Pour aider à se figurer ses fonctionnalités et pour faciliter sa mise
-% en œuvre, l
-% La \yatcl fournit :% sous forme d'archives \gls{zip} :
-% \begin{enumerate}
-% \item un spécimen ;
-% \item un canevas ;
-% \end{enumerate}
- % sous forme d'archives \gls{zip} :
 Un spécimen et un canevas de mémoires de thèse créés avec la \yatcl sont
 fournis, chacun en deux versions selon la façon dont le source \file{.tex} est
 organisé :
-% \begin{enumerate}
-% \item une \enquote{à plat} dans laquelle le source \file{.tex} est tout entier
-%   dans un unique fichier, situé dans le même dossier que les fichiers annexes
-%   (bibliographie et images) ;
-% \item une \enquote{en arborescence} dans laquelle le source \file{.tex} est
-%   scindé en fichiers maître et esclaves\footnote{Comme cela est en général
-%     recommandé, cf. \vref{sec-repart-du-memo}.}, situés (ainsi que l'ensemble
-%   des fichiers annexes) dans différents (sous-)dossiers.
-% \end{enumerate}
 \begin{description}
 \item[une \enquote{à plat} :] le source est tout entier dans un unique fichier,
   situé dans le même dossier que les fichiers annexes (bibliographie et
@@ -34,19 +17,7 @@ Les deux specimens et deux canevas ainsi proposés ont pour but :
 \item d'illustrer les fonctionnalités de la classe ;
 \item d'aider à la mise en œuvre de la classe en fournissant une base de départ
   que chacun peut progressivement adapter à ses propres
-  besoins.% Pour ce faire, \emph{on copiera dans un
-  %   répertoire personnel} son dossier (éventuellement en désarchivant son
-  % archive \gls{zip} fournie) et on adaptera son contenu.
-%   \begin{dbwarning}{Spécimens et canevas : à copier dans un répertoire
-%       personnel}{}
-%     Si on souhaite utiliser l'un de ces spécimens ou canevas, il est
-%     \emph{essentiel} de \emph{ne pas} travailler directement avec (ou dans) le
-%     dossier fourni par la distribution \TeX{} utilisée (\TeX{} Live ou
-%     MiK\TeX{}) : toute adaptation personnelle risquerait en effet écrasée lors
-%     d'une prochaine mise à jour de la \yatcl{}. Avant d'utiliser l'un de ces
-%     dossiers (ou archives \gls{zip}), il est donc nécessaire de le copier
-%     préalablement dans un répertoire personnel.
-% \end{dbwarning}
+  besoins.
 \end{itemize}
 
 La version électronique (\pdf{}) de la présente
@@ -76,8 +47,6 @@ accessibles par simple clic sur les liens figurant au
     \label{tab-specimens-canevas}
     \input{tableaux/specimens-canevas}
   \end{table}
-% \end{comment}
-
 %
 \changes{v0.99l}{2014/10/23}{Réorganisation et changement de noms des spécimens
   et canevas}%^^A
@@ -126,11 +95,7 @@ offertes par la \yatcl{}.
 \subsection[Spécimen \enquote{à plat}]{Spécimen \enquote{à plat} \attachfile{../exemples/specimen-a-plat.zip}}
 \label{sec-specimen-a-plat}
 
-% \def\repertoire{specimens}
-% \def\subrepertoire{a-plat}
-
-Le dossier de ce spécimen % (\folder{.../\repertoire/}\subdirectorytree{})
-contient les fichiers :
+Le dossier de ce spécimen contient les fichiers :
 \begin{enumerate}
 \item \file{these.tex} qui est le source \file{.tex} (unique) de la thèse ;
 \item \file{bibliographie.bib}, contenant les références bibliographiques de
@@ -146,10 +111,7 @@ contient les fichiers :
 \subsection[Spécimen en \enquote{arborescence}]{Spécimen en \enquote{arborescence} \attachfile{../exemples/specimen-en-arborescence.zip}}
 \label{sec-specimen-arborescence}
 
-% \def\subdirectory{en-arborescence}
-
-Le dossier de ce spécimen % (\folder{.../\directory/}\subdirectorytree)
-contient les fichiers :
+Le dossier de ce spécimen contient les fichiers :
 \begin{enumerate}
 \item ...
 \item \file{latexmkrc}.
@@ -167,11 +129,7 @@ exploiter, il suffit donc de remplir les \enquote{cases} vides.
 \subsection[Canevas \enquote{à plat}]{Canevas \enquote{à plat} \attachfile{../exemples/canevas-a-plat.zip}}
 \label{sec-canevas-a-plat}
 
-% \def\directory{canevas}
-% \def\subdirectory{a-plat}
-
-Le dossier de ce canevas % (\folder{.../\directory/}\subdirectorytree)
-ne contient que trois fichiers :
+Le dossier de ce canevas ne contient que trois fichiers :
 \begin{enumerate}
 \item \file{these.tex}, source \file{.tex} (unique) de la thèse  ;
 \item \file{these.pdf} produit par compilation du \File{these.tex} ;
@@ -183,10 +141,7 @@ ne contient que trois fichiers :
 \subsection[Canevas en \enquote{arborescence}]{Canevas en \enquote{arborescence} \attachfile{../exemples/canevas-en-arborescence.zip}}
 \label{sec-canevas-arborescence}
 
-% \def\subdirectory{en-arborescence}
-
-Le dossier de ce spécimen % (\folder{.../\directory/}\subdirectorytree)
-contient les fichiers :
+Le dossier de ce spécimen contient les fichiers :
 \begin{enumerate}
 \item ...
 \item \file{latexmkrc}.
