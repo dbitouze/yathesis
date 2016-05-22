@@ -44,7 +44,7 @@ ls-R
 *.slo
 *.sls
 *.snm
-*.synctex
+*.synctex.gz
 *.tcbtemp
 *.tdo
 *.toc
