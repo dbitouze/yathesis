@@ -332,6 +332,7 @@ This work consists of the file  yathesis.dtx
 \BeforePackage{doc}{\let\oldmaketitle\maketitle}
 \documentclass[english,french]{ltxdoc}
 \usepackage{denisbdoc}
+\lstMakeShortInline[style=dbtex]"
 \usepackage[lining]{libertine}
 \renewcommand{\ttdefault}{lmtt}
 \makeatletter
@@ -346,7 +347,7 @@ This work consists of the file  yathesis.dtx
 \addbibresource{yathesis.bib}
 %
 % Comme il est inutile que les modifications d'inclusion/exclusion
-% (×\includeall×/×\includeonly×) des différents fichiers esclaves de la
+% ("\includeall"/"\includeonly") des différents fichiers esclaves de la
 % documentation soient versionnées, elles ne se font désormais plus directement
 % incluses dans le présent \File{yathesis.dtx}, mais dans le fichier non
 % versionné \File{includeall-includeonly.tex}. Ce fichier n'est inclus que s'il
@@ -418,8 +419,8 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 %
 % Pour pouvoir définir des macros dont les arguments puissent être
-% spécifiés sous la forme ×clé=×\meta{valeur}, tant en argument de
-% ×\documentclass× que de macros et environnements de la classe.
+% spécifiés sous la forme "clé="\meta{valeur}, tant en argument de
+% "\documentclass" que de macros et environnements de la classe.
 %    \begin{macrocode}
 \RequirePackage{pgfopts}[2011/06/02]%
 %    \end{macrocode}
@@ -530,10 +531,10 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % \end{macro}
 %
-% On définit la macro ×\YAD@ClassError× qui est essentiellement identique
-% à ×\ClassError×, sauf que les erreurs définies par elle sont désactivées si
-% l'une ou l'autre des options ×noerror×, ×version=draft×, ×version=inprogress×
-% ou ×version=inprogress*× est passée à la \yatcl{}.
+% On définit la macro "\YAD@ClassError" qui est essentiellement identique
+% à "\ClassError", sauf que les erreurs définies par elle sont désactivées si
+% l'une ou l'autre des options "noerror", "version=draft", "version=inprogress"
+% ou "version=inprogress*" est passée à la \yatcl{}.
 %    \begin{macrocode}
 \newcommand{\YAD@generic@text}{%
   Un texte generique risque d'etre affiche a la place.\MessageBreak%
@@ -592,12 +593,12 @@ This work consists of the file  yathesis.dtx
   }%
 }%
 %    \end{macrocode}
-% On définit la macro ×\YAD@ClassWarningNoLine× qui est essentiellement
-% identique à ×\ClassWarningNoLine×, sauf que les messages de warnings :
+% On définit la macro "\YAD@ClassWarningNoLine" qui est essentiellement
+% identique à "\ClassWarningNoLine", sauf que les messages de warnings :
 % \begin{itemize}
 % \item apparaissent en fin de log ;
-% \item sont désactivés si l'une ou l'autre des options ×nowarning×,
-%   ×version=draft×, ×version=inprogress× ou ×version=inprogress*× est passée
+% \item sont désactivés si l'une ou l'autre des options "nowarning",
+%   "version=draft", "version=inprogress" ou "version=inprogress*" est passée
 %   à la \yatcl{}.
 % \end{itemize}
 %
@@ -626,7 +627,7 @@ This work consists of the file  yathesis.dtx
 \pgfkeys{/yad/.cd}
 \def\yadsetup{\pgfqkeys{/yad}}
 %    \end{macrocode}
-% On interdit l'utilisation de ×\yadsetup× ailleurs qu'en préambule.
+% On interdit l'utilisation de "\yadsetup" ailleurs qu'en préambule.
 %    \begin{macrocode}
 % \@onlypreamble\yadsetup%
 %    \end{macrocode}
@@ -700,20 +701,20 @@ This work consists of the file  yathesis.dtx
 }%
 % \end{macrocode}
 %
-% On définit la clé ×version× de la classe qui prend pour valeurs :
+% On définit la clé "version" de la classe qui prend pour valeurs :
 % \begin{itemize}
-% \item (par défaut) ×inprogress× qui indique clairement qu'il s'agit d'une
+% \item (par défaut) "inprogress" qui indique clairement qu'il s'agit d'une
 %   version de travail et désactive les erreurs pour éléments
 %   \enquote{obligatoires} manquants ;
-% \item ×inprogress*×, identique à ×inprogress× avec un filigrane en plus ;
-% \item ×draft× » ;
-% \item ×final×, qui active les erreurs pour éléments \enquote{obligatoires}
+% \item "inprogress*", identique à "inprogress" avec un filigrane en plus ;
+% \item "draft" » ;
+% \item "final", qui active les erreurs pour éléments \enquote{obligatoires}
 %   manquants, à spécifier pour la version finale du document qui ne compose
 %   pas en pied de page la mention \enquote{Version intermédiaire en date du
 %   ...} ;
-% \item ×submitted×, analogue à ×final×, sauf que la date de soutenance n'est
+% \item "submitted", analogue à "final", sauf que la date de soutenance n'est
 %   pas affichée ;
-% \item ×submitted*×, identique à ×submitted×, mais qui en plus indique
+% \item "submitted*", identique à "submitted", mais qui en plus indique
 %   clairement qu'il s'agit d'une version soumise aux rapporteurs.
 % \end{itemize}
 %    \begin{macrocode}
@@ -785,11 +786,11 @@ This work consists of the file  yathesis.dtx
 \yadsetup{version=inprogress}%
 %    \end{macrocode}
 %
-% On définit la clé ×output× de la classe qui prend pour valeurs :
+% On définit la clé "output" de la classe qui prend pour valeurs :
 % \begin{itemize}
-% \item (par défaut) ×screen× ;
-% \item ×paper× » ;
-% \item ×paper*×.
+% \item (par défaut) "screen" ;
+% \item "paper" » ;
+% \item "paper*".
 % \end{itemize}
 %    \begin{macrocode}
 \yadsetup{%
@@ -844,7 +845,7 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 %
 % On crée des \enquote{hooks} permettant de passer, en option de
-% ×\documentclass×, des options aux packages chargés par la classe qui :
+% "\documentclass", des options aux packages chargés par la classe qui :
 % \begin{enumerate}
 % \item présentent un intérêt en soi pour l'utilisateur final ;
 % \item dont les options peuvent être utiles à l'utilisateur final.
@@ -927,7 +928,7 @@ This work consists of the file  yathesis.dtx
 % \LaTeX.
 %
 % Le \Package{xkeyval} permet aussi de définir des macros dont les arguments
-% puissent être spécifiés sous la forme ×clé=×\meta{valeur} mais ce n'est pas
+% puissent être spécifiés sous la forme "clé="\meta{valeur} mais ce n'est pas
 % pour cela qu'il est chargé : c'est pour éviter des erreurs qui ont lieu dans
 % certaines circonstances du fait du \Package{keyval} chargé par le
 % \Package{geometry}.
@@ -1090,9 +1091,9 @@ This work consists of the file  yathesis.dtx
 %
 % \section{Début du code de la classe}
 %
-% On définit les macros ×\YAD@href×, ×\YAD@hypersetup×, ×\YAD@url×,
-% ×\YAD@nolinkurl× identiques aux macros ×\href×, ×\hypersetup×, ×\url×,
-% ×\nolinkurl× du \Package{hyperref} mais sur lesquelles on a plus de
+% On définit les macros "\YAD@href", "\YAD@hypersetup", "\YAD@url",
+% "\YAD@nolinkurl" identiques aux macros "\href", "\hypersetup", "\url",
+% "\nolinkurl" du \Package{hyperref} mais sur lesquelles on a plus de
 % contrôle.
 %    \begin{macrocode}
 \AtEndPreamble{%
@@ -1120,7 +1121,7 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 %
 % Pour éviter certains comportements inattendus, on précise la langue
-% principale au moyen de l'option ×main× du \Package{babel}. Mais, comme
+% principale au moyen de l'option "main" du \Package{babel}. Mais, comme
 % celle-ci n'est apparue que récemment, on n'y recourt que si la version du
 % package est assez récente.
 %    \begin{macrocode}
@@ -1146,7 +1147,7 @@ This work consists of the file  yathesis.dtx
 \addto\captionsfrench{\def\tablename{{\scshape Tableau}}}%
 %    \end{macrocode}
 %
-% On définit la macro ×\YAD@ifemptyorundef× qui teste si le nom passé est celui
+% On définit la macro "\YAD@ifemptyorundef" qui teste si le nom passé est celui
 % d'une macro inexistante ou dont le texte de remplacement est vide (ou
 % constitué d'espaces seulement).
 %    \begin{macrocode}
@@ -1224,7 +1225,7 @@ This work consists of the file  yathesis.dtx
 %<*class>
 %    \end{macrocode}
 %
-% On charge la libraire ×skins× du \Package{tcolorbox}.
+% On charge la libraire "skins" du \Package{tcolorbox}.
 %    \begin{macrocode}
   \tcbuselibrary{skins}%
 %    \end{macrocode}
@@ -1364,17 +1365,17 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % \end{macro}
 %
-% Si on est en format de sortie ×paper× (impression sur papier) la macro
-% ×\YAD@href×\meta{\acrshort*{url}}×}{×\meta{texte}×}× n'affiche que le
+% Si on est en format de sortie "paper" (impression sur papier) la macro
+% "\YAD@href"\meta{\textsc{url}}"}{"\meta{texte}"}" n'affiche que le
 % \meta{texte} et les hyperliens des macros
-% ×\url× sont supprimés. En outre, les commandes
-% ×\href{×\meta{\acrshort*{url}}×}{×\meta{texte}×}× du \Package{hyperref} sont
+% "\url" sont supprimés. En outre, les commandes
+% "\href{"\meta{\textsc{url}}"}{"\meta{texte}"}" du \Package{hyperref} sont
 % automatiquement remplacées par :
 % \begin{itemize}
-% \item \meta{texte}×\footnote{×\meta{\acrshort*{url}}×}× ;
-% \item \meta{texte} ×(×\meta{\acrshort*{url}}×)× ;
+% \item \meta{texte}"\footnote{"\meta{\textsc{url}}"}" ;
+% \item \meta{texte} "("\meta{\textsc{url}}")" ;
 % \end{itemize}
-% selon que ×\href{×\meta{\acrshort*{url}}×}{×\meta{texte}×}× est dans le texte
+% selon que "\href{"\meta{\textsc{url}}"}{"\meta{texte}"}" est dans le texte
 % ordinaire ou elle-même en note de bas de page.
 %    \begin{macrocode}
 \ifbool{YAD@output@paper}{%
@@ -1414,7 +1415,7 @@ This work consists of the file  yathesis.dtx
 }{%
 }%
 %    \end{macrocode}
-% Si l'option ×draft× est activée, on indique clairement qu'on est en
+% Si l'option "draft" est activée, on indique clairement qu'on est en
 % mode brouillon au moyen d'un texte en filigrane
 %    \begin{macrocode}
 \ifdraft{%
@@ -1434,7 +1435,7 @@ This work consists of the file  yathesis.dtx
 % \end{macro}
 %
 % \begin{macro}{\YAD@translation}
-%   Commande adjoignant à ×\translate× les hyperliens vers le fichier
+%   Commande adjoignant à "\translate" les hyperliens vers le fichier
 %   de configuration où peuvent être surchargées les traductions
 %    \begin{macrocode}
 \newcommand*{\YAD@translation}[1]{%
@@ -1619,7 +1620,6 @@ This work consists of the file  yathesis.dtx
 \DTLnewdb{frontepigraphs}%
 %    \end{macrocode}
 %
-% \begin{macro}{\YAD@staff}
 %    \begin{macrocode}
 \newcommand*{\YAD@staff}[4][]{%
 %    \end{macrocode}
@@ -1683,10 +1683,8 @@ This work consists of the file  yathesis.dtx
   }%
   %
 %    \end{macrocode}
-% On fait en sorte que la clé ×corporation×, obsolète et remplacée par la clé
-% ×corps×,  soit un alias de ce dernier.
-% \changes{v0.99e}{2014/06/15}{La clé \protect\refAux{corporation} est remplacée
-%   par (et devient un alias de) la clé \protect\refKey{corps}}
+% On fait en sorte que la clé "corporation", obsolète et remplacée par la clé
+% "corps",  soit un alias de ce dernier.
 %    \begin{macrocode}
   % \ifthenelse{\equal{\cmdKV@YAD@corporation}{}}{%
   % }{%
@@ -1743,7 +1741,6 @@ This work consists of the file  yathesis.dtx
   \yadsetup{reinitialize person}%
 }%
 %    \end{macrocode}
-% \end{macro}
 %
 % \begin{macro}{\YAD@error@firstlastnames@empty}
 %    \begin{macrocode}
@@ -2039,7 +2036,7 @@ This work consists of the file  yathesis.dtx
         \YAD@committeemember@fistname%
       }%
 %    \end{macrocode}
-% L'accolade suivante ne doit pas être suivie d'un ×%× sans quoi il
+% L'accolade suivante ne doit pas être suivie d'un "%" sans quoi il
 % n'y aura pas d'espace entre le prénom et le nom.
 %    \begin{macrocode}
     }
@@ -2416,7 +2413,7 @@ This work consists of the file  yathesis.dtx
   }%
 }%
 %    \end{macrocode}
-% Création de la commande affichant le logo de l'entité (sauf si ×nologo× est demandé).
+% Création de la commande affichant le logo de l'entité (sauf si "nologo" est demandé).
 %    \begin{macrocode}
       \ifbool{YAD@nologo}{%
       }{%
@@ -2682,7 +2679,6 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\date}
 %    \begin{macrocode}
 \csdef{YAD@checkdate}#1#2#3#4#5{%
   \boolfalse{YAD@valid@day}%
@@ -2887,7 +2883,7 @@ This work consists of the file  yathesis.dtx
 %
 % \begin{macro}{\YAD@setfoot}
 %   Définition d'une commande affichant un texte fixe en bas de page en cas de
-%   version ×inprogess(*)× ou ×submitted*× de la thèse.
+%   version "inprogess(*)" ou "submitted*" de la thèse.
 %    \begin{macrocode}
 \ifboolexpr{%
   bool {YAD@inprogress@work}%
@@ -2928,9 +2924,9 @@ This work consists of the file  yathesis.dtx
 % \end{macro}
 %
 % \begin{macro}{\YAD@starttoc}
-%   On définit la commande ×\YAD@starttoctoc×, analogue à
-%   ×\starttoc× fournie par \file{latex.ltx}, ne concernant que la
-%   table des matières (×toc×), qui génère mais n'importe pas le
+%   On définit la commande "\YAD@starttoctoc", analogue à
+%   "\starttoc" fournie par \file{latex.ltx}, ne concernant que la
+%   table des matières ("toc"), qui génère mais n'importe pas le
 %   \File{.toc}.
 %    \begin{macrocode}
 \newcommand{\YAD@starttoctoc}{%
@@ -2943,15 +2939,15 @@ This work consists of the file  yathesis.dtx
   \endgroup}
 %    \end{macrocode}
 % On fait générer le \File{.toc}, en s'assurant que cela se fera
-% après la commande ×\shorttableofcontents× du \Package{shorttoc}
-% utilisée dans la redéfinition de la commande ×\tableofcontents×
+% après la commande "\shorttableofcontents" du \Package{shorttoc}
+% utilisée dans la redéfinition de la commande "\tableofcontents"
 % ci-après (obligation de ce package).
 %    \begin{macrocode}
 \AtEndDocument{\YAD@starttoctoc}
 %    \end{macrocode}
 % \end{macro}
 %
-% Redéfinition de la commande ×\tableofcontents× de sorte qu'elle
+% Redéfinition de la commande "\tableofcontents" de sorte qu'elle
 % admette un argument optionnel permettant d'afficher une table des
 % matières supplémentaire jusqu'à un niveau donné. Cette commande
 % s'appuie sur le \Package{shorttoc}, avec hack de sorte qu'elle
@@ -2962,8 +2958,8 @@ This work consists of the file  yathesis.dtx
 % des matières.
 %
 % % Pour commencer, on doit faire en sorte que la commande
-% % ×\shorttableofcontents× utilise la définition originale de la commande
-% % ×\chapter× et pas celle qu'on a patchée dans le but de simplifier l'usage de
+% % "\shorttableofcontents" utilise la définition originale de la commande
+% % "\chapter" et pas celle qu'on a patchée dans le but de simplifier l'usage de
 % % sa version étoilée.
 % %    \begin{macrocode}
 % \xpatchcmd{\shorttableofcontents}{\chapter}{\YAD@ORI@chapter}{}{}
@@ -2975,9 +2971,9 @@ This work consists of the file  yathesis.dtx
 \let\YAD@ORI@tableofcontents\tableofcontents%
 \newif\if@YAD@knownsect%
 %    \end{macrocode}
-% On redéfinit la commande ×\shorttableofcontents× du \Package{shorttoc} en
-% retirant ×\@mkboth{\uppercase{#1}}{\uppercase{#1}}× qui provoque sinon une
-% erreur au niveau de la commande ×\tableofcontents× si elle est employée avec
+% On redéfinit la commande "\shorttableofcontents" du \Package{shorttoc} en
+% retirant "\@mkboth{\uppercase{#1}}{\uppercase{#1}}" qui provoque sinon une
+% erreur au niveau de la commande "\tableofcontents" si elle est employée avec
 % un argument optionnel.
 %    \begin{macrocode}
 \def\shorttableofcontents#1#2{\bgroup\c@tocdepth=#2\@restonecolfalse
@@ -2987,7 +2983,6 @@ This work consists of the file  yathesis.dtx
   \if@twocolumn\@restonecoltrue\onecolumn\fi
   \chapter*{#1}%
   \@startshorttoc{toc}\if@restonecol\twocolumn\fi\egroup}
-%    \end{macrocode}
 \renewcommand{\tableofcontents}{%
   \booltrue{YAD@tableofcontents@used}%
   \cleardoublepage%
@@ -3052,7 +3047,7 @@ This work consists of the file  yathesis.dtx
   \shorttableofcontents{\cmdKV@YAD@name}{3}%
   \YAD@ClassWarningNoLine{%
     La valeur (`\cmdKV@YAD@depth') passee a la cle `depth'\MessageBreak%
-    en argument de la commande \protect\tableofcontents\space n'est
+    en argument de la commande \string\tableofcontents\space n'est
     pas\MessageBreak%
     un des niveaux de sectionnement connus (`part', `chapter',\MessageBreak%
     `section', `subsection', `subsubsection', `paragraph',\MessageBreak%
@@ -3064,7 +3059,6 @@ This work consists of the file  yathesis.dtx
   \let\setcounter\YAD@ORI@setcounter%
   \resettocdepth*%
 }%
-%
 %    \end{macrocode}
 % \end{macro}
 %
@@ -3282,15 +3276,15 @@ This work consists of the file  yathesis.dtx
   \YAD@setfoot%
 }%
 %    \end{macrocode}
-% Extension de la commande ×\mainmatter× de sorte qu'elle applique le style de
-% page ×mainmatter×.
+% Extension de la commande "\mainmatter" de sorte qu'elle applique le style de
+% page "mainmatter".
 %    \begin{macrocode}
 \xapptocmd{\mainmatter}{%
   \booltrue{YAD@mainmatter@used}%
   \pagestyle{mainmatter}%
 }{}{}%
 %    \end{macrocode}
-% Vérification, en fin de document, de l'usage de la commande ×\mainmatter× et
+% Vérification, en fin de document, de l'usage de la commande "\mainmatter" et
 % émission d'une erreur si ça n'est pas le cas.
 %    \begin{macrocode}
 \AtEndDocument{%
@@ -3354,8 +3348,8 @@ This work consists of the file  yathesis.dtx
   \YAD@setfoot%
 }%
 %    \end{macrocode}
-% Extension de la commande ×\appendix× de sorte qu'elle applique le style de
-% page ×appendix×.
+% Extension de la commande "\appendix" de sorte qu'elle applique le style de
+% page "appendix".
 % \begin{macro}{\appendix}
 %    \begin{macrocode}
 \xapptocmd{\appendix}{%
@@ -3419,8 +3413,8 @@ This work consists of the file  yathesis.dtx
   \YAD@setfoot%
 }%
 %    \end{macrocode}
-% Extension de la commande ×\backmatter× de sorte qu'elle applique le style de
-% page ×backmatter×.
+% Extension de la commande "\backmatter" de sorte qu'elle applique le style de
+% page "backmatter".
 % \begin{macro}{\backmatter}
 %    \begin{macrocode}
 \xapptocmd{\backmatter}{%
@@ -3919,7 +3913,7 @@ This work consists of the file  yathesis.dtx
 \endgroup%
 %    \end{macrocode}
 % Maintenant que la 1\iere{} page de titre (celle de 1\iere{} de couverture)
-% a été créée, le booléen ×YAD@cover@page× est faux.
+% a été créée, le booléen "YAD@cover@page" est faux.
 %    \begin{macrocode}
 \boolfalse{YAD@cover@page}%
 %    \end{macrocode}
@@ -3955,7 +3949,7 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % \end{macro}
 %
-% Si la commande ×\maketitle× n'a pas été utilisée, une erreur est émise.
+% Si la commande "\maketitle" n'a pas été utilisée, une erreur est émise.
 %    \begin{macrocode}
 \AtEndDocument{%
   \ifboolexpr{%
@@ -3973,7 +3967,7 @@ This work consists of the file  yathesis.dtx
 }%
 %    \end{macrocode}
 %
-% Définition de ×\keywords×.
+% Définition de "\keywords".
 % \begin{macro}{\keywords}
 % \begin{macro}{\YAD@metakeywords}
 %    \begin{macrocode}
@@ -3994,7 +3988,7 @@ This work consists of the file  yathesis.dtx
 % \end{macro}
 % \end{macro}
 % \begin{macro}{\printkeywords}
-% Définition de ×\printkeywords×.
+% Définition de "\printkeywords".
 %    \begin{macrocode}
 \csdef{printkeywords}{%
   \expandafter\IfLanguageName{\YAD@mainlanguage}{%
@@ -4618,7 +4612,7 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % \end{macro}
 %
-% Si la commande ×\makeabstract× n'a pas été utilisée, une erreur est émise.
+% Si la commande "\makeabstract" n'a pas été utilisée, une erreur est émise.
 %    \begin{macrocode}
 \AtEndDocument{%
   \ifbool{YAD@makeabstract@used}{%
@@ -4636,7 +4630,7 @@ This work consists of the file  yathesis.dtx
 }%
 %    \end{macrocode}
 %
-% Si l'environnement ×abstract× n'a pas été utilisé, une erreur est émise.
+% Si l'environnement "abstract" n'a pas été utilisé, une erreur est émise.
 %    \begin{macrocode}
 \newcommand{\YAD@alarm@noabstract}{%
   \ifbool{YAD@abstract@used}{%
@@ -4853,8 +4847,8 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % Appel du style de page propre à la partie préliminaire du
 % document, notamment début de l'insertion des titres courants (on
-% ajoute le style de page ×prepreliminary× avant que l'environnement
-% ×epigraphspage× ne débute, de sorte que sa portée ne soit pas
+% ajoute le style de page "prepreliminary" avant que l'environnement
+% "epigraphspage" ne débute, de sorte que sa portée ne soit pas
 % limitée à cet environnement).
 %    \begin{macrocode}
 \BeforeBeginEnvironment{epigraphspage}{%
@@ -4865,21 +4859,21 @@ This work consists of the file  yathesis.dtx
 }%
 %    \end{macrocode}
 % \end{environment}
-% On redéfinit la commande ×\chapter× de sorte que, dans un chapitre non
-% numéroté (×\chapter*×) :
+% On redéfinit la commande "\chapter" de sorte que, dans un chapitre non
+% numéroté ("\chapter*") :
 % \begin{itemize}
 % \item les (sous-(sous-))sections n'aient pas besoin d'être étoilées à leur
 %   tour pour être non numérotées ;
 % \item il ne soit pas nécessaire de faire appel aux commandes cryptiques
-% ×\addcontentsline{toc}{...}{...}× ;
+% "\addcontentsline{toc}{...}{...}" ;
 % \item les titres courants soient corrects (par défaut, les titres courants
 %   des chapitres et sections non numérotés sont ceux des chapitre et section
 %   numérotés précédents).
 % \end{itemize}
-% Pour ce faire, on recourt aux bascules ×\setsecnumdepth{none}× and
-% ×\resetsecnumdepth× du \Package{tocvsec2}.
+% Pour ce faire, on recourt aux bascules "\setsecnumdepth{none}" and
+% "\resetsecnumdepth" du \Package{tocvsec2}.
 % % Mais, avant cela, on redéfinit la
-% % macro ×\resetsecnumdepth× qui souffre de \enquote{spurious spaces} dans les
+% % macro "\resetsecnumdepth" qui souffre de \enquote{spurious spaces} dans les
 % % versions antérieures à celles en date du 2014/03/10.
 % %    \begin{macrocode}
 % \@ifpackagelater{tocvsec2}{2014/03/10}{%
@@ -4916,8 +4910,8 @@ This work consists of the file  yathesis.dtx
   \newcommand{\YAD@unstarred@chapter}{%
 %    \end{macrocode}
 % La numérotation des chapitres non étoilés au niveau initial
-% (×\resetsecnumdepth*×) n'est activée qu'à partir de la partie principale
-% (×\mainmatter×), sans quoi les (sous-)sections de la partie ×\frontmatter×
+% ("\resetsecnumdepth*") n'est activée qu'à partir de la partie principale
+% ("\mainmatter"), sans quoi les (sous-)sections de la partie "\frontmatter"
 % sont numérotées, alors que rien ne doit l'être dans cette partie.
 %    \begin{macrocode}
     \if@mainmatter%
@@ -4939,8 +4933,8 @@ This work consists of the file  yathesis.dtx
   %   \def\chaptertitle{#1}%
   % }%
 %    \end{macrocode}
-% On ne veut pas utiliser cette nouvelle définition de ×\chapter*× pour
-% ×\tableofcontents× et les listes similaires.
+% On ne veut pas utiliser cette nouvelle définition de "\chapter*" pour
+% "\tableofcontents" et les listes similaires.
 %    \begin{macrocode}
   % \xpatchcmd{\tableofcontents}{\chapter}{\YAD@ORI@chapter}{}{}%
   % \xpatchcmd{\shorttableofcontents}{\chapter}{\YAD@ORI@chapter}{}{}%
@@ -4948,7 +4942,7 @@ This work consists of the file  yathesis.dtx
   % \xpatchcmd{\listoffigures}{\chapter}{\YAD@ORI@chapter}{}{}%
 %    \end{macrocode}
 % Si le \Package{floatrow} est chargé, on doit aussi ne pas utiliser cette
-% nouvelle définition de ×\chapter*× pour les listes de flottants personnalisés
+% nouvelle définition de "\chapter*" pour les listes de flottants personnalisés
 % qui peuvent être créées.
 %    \begin{macrocode}
   \@ifpackageloaded{floatrow}{%
@@ -4956,7 +4950,7 @@ This work consists of the file  yathesis.dtx
   }{%
   }%
 %    \end{macrocode}
-% On doit modifier la commande ×\toc@chapter× du \Package{tocbibind} sans quoi
+% On doit modifier la commande "\toc@chapter" du \Package{tocbibind} sans quoi
 % les éléments qu'il ajoute apparaissent en double.
 %    \begin{macrocode}
   \@ifpackageloaded{tocbibind}{%
@@ -4974,7 +4968,7 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 %
 % % On crée une commande créant des chapitres. Celle-ci a un argument optionnel,
-% % par défaut égal à ×preliminary× qui définit le style de page s'appliquant au
+% % par défaut égal à "preliminary" qui définit le style de page s'appliquant au
 % % chapitre créé.
 % % \begin{macro}{\YAD@create@chapter}
 % %    \begin{macrocode}
@@ -5027,7 +5021,7 @@ This work consists of the file  yathesis.dtx
 % }%
 % %    \end{macrocode}
 %
-% On définit la valeur, en anglais et en français, de la macro ×\disclaimer× de
+% On définit la valeur, en anglais et en français, de la macro "\disclaimer" de
 % clause de non-responsabilité définie précédemment.
 %
 %    \begin{macrocode}
@@ -5085,8 +5079,8 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % \end{macro}
 %
-% % Le contenu de l'environnement ×introduction× est collecté dans la macro
-% % ×\YAD@introduction× pour tester s'il est vide.
+% % Le contenu de l'environnement "introduction" est collecté dans la macro
+% % "\YAD@introduction" pour tester s'il est vide.
 % % \begin{macro}{\YAD@introduction}
 % %    \begin{macrocode}
 % \newcommand{\YAD@introduction}[1]{%
@@ -5102,7 +5096,7 @@ This work consists of the file  yathesis.dtx
 % %
 % % \begin{environment}{introduction}
 % %   Environnement d'introduction générale numérotée, qui permet de
-% %   masquer l'appel du style de page ×mainmatter× chargé avant
+% %   masquer l'appel du style de page "mainmatter" chargé avant
 % %   qu'elle ne commence. La numérotation des paragraphes y est fixée
 % %   à son niveau par défaut (par défaut sous-sections).
 % %    \begin{macrocode}
@@ -5117,14 +5111,14 @@ This work consists of the file  yathesis.dtx
 % % \end{environment}
 % % Appel du style de page propre à la partie principale du document,
 % % notamment début de la numérotation des chapitres, chargé avant
-% % l'environnement ×introduction×.
+% % l'environnement "introduction".
 % %    \begin{macrocode}
 % \BeforeBeginEnvironment{introduction}{\pagestyle{mainmatter}}
 % %    \end{macrocode}
 % %
 % % \begin{environment}{introduction*}
 % %   Environnement d'introduction générale \emph{non} numérotée, qui
-% %   permet de masquer l'appel du style de page ×mainmatter× chargé
+% %   permet de masquer l'appel du style de page "mainmatter" chargé
 % %   avant qu'elle ne commence.
 % %    \begin{macrocode}
 % \newenvironment{introduction*}[1][\YAD@trintroduction]{%
@@ -5148,8 +5142,8 @@ This work consists of the file  yathesis.dtx
 % %    \end{macrocode}
 % %
 % % \begin{macro}{\@introduction@begin}
-% %   Commande de début d'environnement commune à ×introduction× et à
-% %   ×introduction*×.
+% %   Commande de début d'environnement commune à "introduction" et à
+% %   "introduction*".
 % %    \begin{macrocode}
 % \newcommand{\YAD@introduction@begin}[1][\YAD@trintroduction]{%
 %   \translatelet\YAD@trintroduction{lbl-introduction}%
@@ -5160,8 +5154,8 @@ This work consists of the file  yathesis.dtx
 % % \end{macro}
 % %
 % % \begin{macro}{\@introduction@end}
-% %   Commande de fin d'environnement commune à ×introduction× et à
-% %   ×introduction*×.
+% %   Commande de fin d'environnement commune à "introduction" et à
+% %   "introduction*".
 % %    \begin{macrocode}
 % \newcommand{\YAD@introduction@end}{%
 %   \cleardoublepage%
@@ -5169,8 +5163,8 @@ This work consists of the file  yathesis.dtx
 % %    \end{macrocode}
 % % \end{macro}
 % %
-% % Si l'environnement ×introduction× n'a pas été utilisé, une erreur est émise
-% % (car la commande ×mainmatter× n'aura alors pas été insérée).
+% % Si l'environnement "introduction" n'a pas été utilisé, une erreur est émise
+% % (car la commande "mainmatter" n'aura alors pas été insérée).
 % %    \begin{macrocode}
 % \AtEndDocument{%
 %   \ifbool{YAD@introduction@used}{%
@@ -5194,8 +5188,8 @@ This work consists of the file  yathesis.dtx
 % }
 % %    \end{macrocode}
 % %
-% % Le contenu de l'environnement ×conclusion× est collecté dans la macro
-% % ×\YAD@conclusion× pour tester s'il est vide.
+% % Le contenu de l'environnement "conclusion" est collecté dans la macro
+% % "\YAD@conclusion" pour tester s'il est vide.
 % % \begin{macro}{\YAD@conclusion}
 % %    \begin{macrocode}
 % \newcommand{\YAD@conclusion}[1]{%
@@ -5224,7 +5218,7 @@ This work consists of the file  yathesis.dtx
 % % Appel du style de page propre à la partie conclusion générale du
 % % document, notamment pour s'assurer que celle-ci va figurer au plus
 % % haut niveau des signets, chargé avant l'environnement
-% % ×conclusion×.
+% % "conclusion".
 % %    \begin{macrocode}
 % \BeforeBeginEnvironment{conclusion}{%
 %   \YAD@phantomsection%
@@ -5236,7 +5230,7 @@ This work consists of the file  yathesis.dtx
 % %
 % % \begin{environment}{conclusion*}
 % %   Environnement d'conclusion générale \emph{non} numérotée, qui
-% %   permet de masquer l'appel du style de page ×conclusion-generale×
+% %   permet de masquer l'appel du style de page "conclusion-generale"
 % %   chargé avant qu'elle ne commence.
 % %    \begin{macrocode}
 % \newenvironment{conclusion*}[1][\YAD@trconclusion]{%
@@ -5251,7 +5245,7 @@ This work consists of the file  yathesis.dtx
 % % Appel du style de page propre à la partie conclusion générale du
 % % document, notamment pour s'assurer que celle-ci va figurer au plus
 % % haut niveau des signets, chargé avant l'environnement
-% % ×conclusion*×.
+% % "conclusion*".
 % %    \begin{macrocode}
 % \BeforeBeginEnvironment{conclusion*}{%
 %   \YAD@phantomsection%
@@ -5265,8 +5259,8 @@ This work consists of the file  yathesis.dtx
 % %    \end{macrocode}
 % %
 % % \begin{macro}{\@conclusion@begin}
-% %   Commande de début d'environnement commune à ×conclusion× et à
-% %   ×conclusion*×.
+% %   Commande de début d'environnement commune à "conclusion" et à
+% %   "conclusion*".
 % %    \begin{macrocode}
 % \newcommand{\YAD@conclusion@begin}[1][\YAD@trconclusion]{%
 %   \translatelet\YAD@trconclusion{lbl-conclusion}%
@@ -5277,8 +5271,8 @@ This work consists of the file  yathesis.dtx
 % % \end{macro}
 % %
 % % \begin{macro}{\@conclusion@end}
-% %   Commande de fin d'environnement commune à ×conclusion× et à
-% %   ×conclusion*×.
+% %   Commande de fin d'environnement commune à "conclusion" et à
+% %   "conclusion*".
 % %    \begin{macrocode}
 % \newcommand{\YAD@conclusion@end}{%
 %   \cleardoublepage%
@@ -5286,8 +5280,8 @@ This work consists of the file  yathesis.dtx
 % %    \end{macrocode}
 % % \end{macro}
 % %
-% % Si l'environnement ×conclusion× n'a pas été utilisé, une erreur est émise
-% % (car la commande ×appendix× n'aura alors pas été insérée).
+% % Si l'environnement "conclusion" n'a pas été utilisé, une erreur est émise
+% % (car la commande "appendix" n'aura alors pas été insérée).
 % %    \begin{macrocode}
 % \AtEndDocument{%
 %   \ifbool{YAD@conclusion@used}{%
@@ -5346,8 +5340,8 @@ This work consists of the file  yathesis.dtx
     \let\YAD@printbibliography@ORI\printbibliography%
     \renewcommand{\printbibliography}[1][]{%
       \booltrue{YAD@printbibliography@used}%
-% TODO: The ×biblio× page style (which starts a new page) should be used except
-% in case of ×refsection× \package{biblatex}'s option, otherwise the
+% TODO: The "biblio" page style (which starts a new page) should be used except
+% in case of "refsection" \package{biblatex}'s option, otherwise the
 % bibliographies by chapters (that should be considered as sections) don't
 % behave as sections: they start a newpage!
       \pagestyle{biblio}%
@@ -5360,7 +5354,7 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % \end{macro}
 %
-% Si la commande ×\printbibliography× n'a pas été utilisée, une erreur est émise.
+% Si la commande "\printbibliography" n'a pas été utilisée, une erreur est émise.
 %    \begin{macrocode}
 \AtEndDocument{%
   \ifbool{YAD@printbibliography@used}{%
@@ -5384,7 +5378,7 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \hopatch@AfterPackage{glossaries}{%
 %    \end{macrocode}
-% Si on est en sortie ×output=paper× (et pas en sortie ×output=paper*×), on
+% Si on est en sortie "output=paper" (et pas en sortie "output=paper*"), on
 % supprime la barre de navigation des glossaires qui ne sert que par ses liens
 % hypertextes et donc \emph{a priori} pas en version imprimée.
 %    \begin{macrocode}
@@ -5396,8 +5390,8 @@ This work consists of the file  yathesis.dtx
   }{%
   }%
 %    \end{macrocode}
-% Création d'une commande ×\newglssymbol× pour définir des symboles,
-% dans l'esprit de ×\newacronym× (×\newsymbol× ne peut pas être
+% Création d'une commande "\newglssymbol" pour définir des symboles,
+% dans l'esprit de "\newacronym" ("\newsymbol" ne peut pas être
 % employée car elle existe déjà dans le \Package{amsfonts})
 %    \begin{macrocode}
   \newcommand{\newglssymbol}[5][]{%
@@ -5415,7 +5409,7 @@ This work consists of the file  yathesis.dtx
           sort={#2}%
         }%
 %    \end{macrocode}
-% ... mais peut être forcé par l'argument optionnel de ×\newglssymbol×
+% ... mais peut être forcé par l'argument optionnel de "\newglssymbol"
 %    \begin{macrocode}
 }{%
   \newglossaryentry{#2}{%
@@ -5437,7 +5431,7 @@ This work consists of the file  yathesis.dtx
 }%
 }%
 %    \end{macrocode}
-% On définit un nouveau type de style de glossaire, ×yadsymbolstyle×.
+% On définit un nouveau type de style de glossaire, "yadsymbolstyle".
 % \begin{macro}{\yadsymbolstyle}
 %    \begin{macrocode}
 \newglossarystyle{yadsymbolstyle}{%
@@ -5466,8 +5460,8 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % \end{macro}
 %
-% La commande ×\printsymbols× est (re)définie de sorte que lui soit par défaut
-% appliqué le style ×yadsymbolstyle×.
+% La commande "\printsymbols" est (re)définie de sorte que lui soit par défaut
+% appliqué le style "yadsymbolstyle".
 % \begin{macro}{\printsymbols}
 %    \begin{macrocode}
 \ifundef{\printsymbols}{%
@@ -5579,7 +5573,7 @@ This work consists of the file  yathesis.dtx
 % \section{Avertissements}
 % \label{cha-yadr}
 %
-% Si la commande ×\tableofcontents× n'a pas été utilisée, une erreur est émise.
+% Si la commande "\tableofcontents" n'a pas été utilisée, une erreur est émise.
 %    \begin{macrocode}
 \AtEndDocument{%
   \ifbool{YAD@tableofcontents@used}{%
@@ -6201,7 +6195,6 @@ $clean_ext = 'synctex.gz synctex.gz(busy) run.xml tex.bak bbl bcf fdb_latexmk ru
 %%% Local Variables:
 %%% mode: latex
 %%% eval: (doctex-mode)
-%%% TeX-engine: xetex
 %%% TeX-master: t
 %%% ispell-local-dictionary: "francais"
 %%% End:
