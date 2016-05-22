@@ -1894,7 +1894,7 @@
   \shorttableofcontents{\cmdKV@YAD@name}{3}%
   \YAD@ClassWarningNoLine{%
     La valeur (`\cmdKV@YAD@depth') passee a la cle `depth'\MessageBreak%
-    en argument de la commande \protect\tableofcontents\space n'est
+    en argument de la commande \string\tableofcontents\space n'est
     pas\MessageBreak%
     un des niveaux de sectionnement connus (`part', `chapter',\MessageBreak%
     `section', `subsection', `subsubsection', `paragraph',\MessageBreak%
