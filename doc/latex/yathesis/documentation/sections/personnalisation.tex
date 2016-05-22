@@ -683,23 +683,23 @@ standard, il est possible de les redéfinir.
 \label{sec-expr-defin-par}
 
 Les expressions \meta{en français} et \meta{en anglais} définies par la \yatcl
-sont listées dans le \vref{tab-expressions-cles} et y sont identifiées par un
+sont listées\footnote{Et classées par ordre alphabétique des expressions \meta{en
+    français}.} dans le \vref{tab-expressions-cles} et y sont identifiées par un
 \meta{label} permettant de les redéfinir (voire de les définir, cf.
-{\NoAutoSpacing\vref{ex:doctor}}) au moyen de la commande \refCom{expression} suivante.
+{\NoAutoSpacing\vref{ex:doctor}}) au moyen de la commande \refCom{expression}
+suivante.
 %
 \begin{docCommand}{expression}{\marg{label}\marg{en français}\marg{en anglais}}
   Cette commande permet de (re)définir les valeurs \meta{en français} et
   \meta{en anglais} de l'expression identifiée par \meta{label}.
 \end{docCommand}
-
-\begin{table}
-  \centering
-  \input{tableaux/expressions}
-  \caption{Expressions de la \yatcl et labels correspondants (classés par ordre
-    alphabétique des valeurs en français)}
-  \label{tab-expressions-cles}
-\end{table}
-
+%
+{%
+  % \footnotesize%
+  \small%
+  \LTXtable{\textwidth}{tableaux/expressions}%
+}
+%
 \begin{dbexample}{Modification d'expression définie par la classe}{}
   Pour remplacer l'expression en français \enquote{Unit\'e de recherche} (dont le label est
   |universitydepartment|) par \enquote{Laboratoire}, il suffit de

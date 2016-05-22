@@ -2,6 +2,7 @@
 % pdfnup --nup 2x1 --landscape yathesis.pdf --trim '1.9cm 3.5cm 1.9cm 1.9cm' --suffix 2x1
 %
 \documentclass[english,french]{report}
+\usepackage{ltxtable}%
 \usepackage{denisbdoc}
 \usepackage[a4paper]{geometry}%
 \usepackage[lining]{libertine}
@@ -13,11 +14,30 @@
 \lstMakeShortInline[style=dbtex]|
 % \tcbset{listing options={escapechar=+}}
 %
+\newcommand{\expression}[3]{%^^A
+  \ifthenelse{\isempty{#2}}{%^^A
+    \meta{vide}%^^A
+  }{%
+    #2%^^A
+  }%
+  &
+  \ifthenelse{\isempty{#3}}{%^^A
+    \meta{vide}%^^A
+  }{%
+    #3%^^A
+  }%
+  &
+  #1%^^A
+  \\%^^A
+  % \midrule%
+}
+%
 \loadglsentries{glossaries/glossary}
 \loadglsentries{glossaries/acronyms}
 \addbibresource{yathesis.bib}
 %
 \InputIfFileExists{includeall-includeonly}{}{}
+%
 %
 \AfterEndPreamble{%
   \RecordChanges%
