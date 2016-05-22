@@ -1,0 +1,9 @@
+for i in specimen canevas
+do
+    for j in en-arborescence a-plat; do
+        zip -9r $i-$j.zip $i/$j/  -x@exclude.lst
+        echo "# Contenu de $i-$j.zip :"
+        echo "############################################################"
+        zipinfo -1 $i-$j.zip
+    done
+done
