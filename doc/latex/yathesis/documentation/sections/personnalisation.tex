@@ -214,7 +214,7 @@ différentes versions du document : \enquote{intermédiaire} (par défaut),
             \begin{itemize}
             \item estampillées du label qui les identifie;
             \item des hyperliens vers le fichier de configuration de la thèse
-              (cf.  {\NoAutoSpacing\vref{rq:configurationfile}}) où il est possible de les
+              (cf.  \vref{rq-configurationfile}) où il est possible de les
               (re)définir (cf. \vref{sec-expressions-cles}).
             \end{itemize}
           \end{enumerate}
@@ -231,7 +231,7 @@ différentes versions du document : \enquote{intermédiaire} (par défaut),
   Cette commande définit la date de la soumission du mémoire (qui ne figure
   qu'en version \enquote{\docValue*{submitted*}}). Ses arguments sont soumis aux
   mêmes contraintes que ceux de la commande \refCom{date}
-  (cf. {\NoAutoSpacing\vref{wa:format-date}}).
+  (cf. \vref{wa-format-date}).
 \end{docCommand}
 
 Les versions \enquote{à soumettre} et \enquote{finale} d'un mémoire de thèse ne
@@ -498,8 +498,8 @@ la personnalisation de ces packages.
     manuellement}{packages-a-ne-pas-charger}
   Les packages qui sont automatiquement chargés par la \yatcl{} ne doivent pas
   être chargés manuellement (au moyen de la commande
-  \docAuxCommand{usepackage}), sous peine de provoquer des clashs d'options
-  (tel que signalé à la {\NoAutoSpacing\vref{faq:option-clash}}).
+  \docAuxCommand{usepackage}), sous peine de provoquer des clashs d'options (tel
+  que signalé à la \vref{faq-option-clash}).
 \end{dbwarning}
 
 De ce fait, la personnalisation des packages automatiquement chargés par le
@@ -541,7 +541,7 @@ peuvent être passées à leurs options).
   Contrairement à l'option \refKey{space} qui ne prend effet qu'à la partie
   principale du document et se termine avec elle, l'option \refKey{setspace}
   a un effet (semi-)global et prend effet dès le début du document
-  (cf. {\NoAutoSpacing\vref{wa:space-setspace}}).
+  (cf. \vref{wa-space-setspace}).
 \end{docKey}
 \begin{docKey}{xcolor}{=\marg{option(s)}}{pas valeur par défaut,
     initialement vide}
@@ -683,11 +683,10 @@ standard, il est possible de les redéfinir.
 \label{sec-expr-defin-par}
 
 Les expressions \meta{en français} et \meta{en anglais} définies par la \yatcl
-sont listées\footnote{Et classées par ordre alphabétique des expressions \meta{en
-    français}.} dans le \vref{tab-expressions-cles} et y sont identifiées par un
-\meta{label} permettant de les redéfinir (voire de les définir, cf.
-{\NoAutoSpacing\vref{ex:doctor}}) au moyen de la commande \refCom{expression}
-suivante.
+sont listées\footnote{Et classées par ordre alphabétique des expressions
+  \meta{en français}.} dans le \vref{tab-expressions-cles} et y sont identifiées
+par un \meta{label} permettant de les redéfinir (voire de les définir, cf.
+\vref{ex-doctor}) au moyen de la commande \refCom{expression} suivante.
 %
 \begin{docCommand}{expression}{\marg{label}\marg{en français}\marg{en anglais}}
   Cette commande permet de (re)définir les valeurs \meta{en français} et
