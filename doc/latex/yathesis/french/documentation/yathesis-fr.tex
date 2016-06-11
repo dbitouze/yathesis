@@ -1,0 +1,127 @@
+% Pour imprimer la présente documentation 2 pages sur 1 :
+% pdfnup --nup 2x1 --landscape yathesis.pdf --trim '1.9cm 3.5cm 1.9cm 1.9cm' --suffix 2x1
+%
+\documentclass[english,french]{report}
+\usepackage{ltxtable}%
+\let\oldmaketitle\maketitle
+\usepackage{doc}
+\let\maketitle\oldmaketitle
+\usepackage{denisbdoc}
+\usepackage[a4paper]{geometry}%
+\usepackage[lining]{libertine}
+\renewcommand{\ttdefault}{lmtt}
+\indexsetup{level=\section*,toclevel=section,noclearpage}
+\makeindex[columns=2]
+\tcbset{index format=off}
+%
+\lstMakeShortInline[style=dbtex]|
+% \tcbset{listing options={escapechar=+}}
+%
+\newcommand{\expression}[3]{%^^A
+  \ifthenelse{\isempty{#2}}{%^^A
+    \meta{vide}%^^A
+  }{%
+    #2%^^A
+  }%
+  &
+  \ifthenelse{\isempty{#3}}{%^^A
+    \meta{vide}%^^A
+  }{%
+    #3%^^A
+  }%
+  &
+  #1%^^A
+  \\%^^A
+  % \midrule%
+}
+%
+\loadglsentries{glossaries/glossary}
+\loadglsentries{glossaries/acronyms}
+\addbibresource{yathesis-fr.bib}
+%
+\InputIfFileExists{includeall-includeonly}{}{}
+%
+%
+\AfterEndPreamble{%
+  \RecordChanges%
+  \GlossaryPrologue{%
+    \chapter{Historique des changements}\label{cha-history}
+    L'auteur a eu le souci constant d'assurer la compatibilité ascendante de la
+    \yatcl{}. Cependant, pour répondre à des demandes de fonctionnalités jugées
+    légitimes, quelques rares changements (signalés \alert{en rouge}
+    ci-dessous) cassent cette compatibilté en ce sens que certains anciens
+    documents peuvent éventuellement :
+    \begin{itemize}
+    \item soit ne plus compiler sans quelques ajustements. Dans ce cas, les
+      remèdes sont indiqués en note de bas de page du changement concerné ;
+    \item soit voir leur mise en page modifiée, en général légèrement. Dans ce
+      cas, les pages concernées sont indiquées.
+    \end{itemize}
+  }%
+  \changes{v0.99m}{2016/05/22}{Documentation révisée}%
+  \changes{v0.99m}{2016/05/22}{Documentation compilable au moyen de pdflatex}%
+  \changes{v0.99l}{2014/10/23}{Documentation révisée}%
+  \changes{v0.99k}{2014/10/01}{Documentation révisée}%
+  \changes{v0.99k}{2014/10/01}{Corrections de bugs}%
+  \changes{v0.99j}{2014/07/18}{Documentation révisée}%
+  \changes{v0.99j}{2014/07/18}{Corrections de bugs}%
+  \changes{v0.99i}{2014/07/17}{Documentation révisée}%
+  \changes{v0.99i}{2014/07/17}{Corrections de bugs}%
+  \changes{v0.99h}{2014/07/14}{Documentation révisée}%
+  \changes{v0.99h}{2014/07/14}{Corrections de bugs}%
+  \changes{v0.99g}{2014/07/13}{Documentation révisée}%
+  \changes{v0.99g}{2014/07/13}{Corrections de bugs}%
+  \changes{v0.99c}{2014/06/06}{Corrections de bugs}%
+  \changes{v0.99c}{2014/06/06}{Documentation révisée}%
+  \changes{v0.99b}{2014/06/02}{Corrections de bugs}%
+  \changes{v0.99a}{2014/06/02}{Corrections de bugs}%
+  \changes{v0.99}{2014/05/18}{Corrections de bugs}%
+}%
+\begin{document}
+% ^^A\settocdepth{subparagraph}
+\input{sections/fixed-footnotes}
+\include{sections/titre}
+\include{sections/abstract}
+\tableofcontents
+\setsecnumdepth{none}%
+\include{sections/introduction}
+\setsecnumdepth{subsection}
+\include{sections/proprietes-document}
+\include{sections/pages-titre}
+\include{sections/pages-liminaires}
+\include{sections/pages-corps}
+\include{sections/pages-annexes}
+\include{sections/pages-finales}
+\include{sections/personnalisation}
+\appendix
+\include{sections/installation}
+\include{sections/specimens-canevas}
+\include{sections/recommandations}
+\include{sections/faq}
+\include{sections/fichiers-charges}
+\include{sections/packages-charges}
+\include{sections/incompatibilites-connues}
+\include{sections/aspects}
+\include{sections/notations}
+\include{sections/add-ons}
+\include{sections/usage-avance}
+\include{sections/developpements}
+\PrintChanges%
+\printbibliography[heading=bibintoc]
+\printglossaries\label{glossaire}
+\begingroup
+\setlength{\parskip}{0pt plus .1pt}
+\listoffigures
+\listoftables
+\endgroup
+\tcblistof[\chapter*]{dbwarninglist}{Table des avertissements\addcontentsline{toc}{chapter}{Table des avertissements}}%
+\tcblistof[\chapter*]{dbremarklist}{Table des remarques\addcontentsline{toc}{chapter}{Table des remarques}}%
+\tcblistof[\chapter*]{dbexamplelist}{Table des exemples\addcontentsline{toc}{chapter}{Table des exemples}}%
+\tcblistof[\chapter*]{dbfaqlist}{Table des questions\addcontentsline{toc}{chapter}{Table des questions}}%
+\printindex
+\end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

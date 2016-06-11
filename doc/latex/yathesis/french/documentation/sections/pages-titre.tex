@@ -1,0 +1,162 @@
+\chapter{Pages de titre}\label{cha-pages-de-titre}
+
+Ce chapitre documente la commande \refCom{maketitle} permettant de
+\emph{produire}, à partir des données définies \vref{sec-proprietes-de-titre},
+les pages de titre de la thèse.
+
+\section{Production}
+
+\begin{docCommand}[doc description=\mandatory]{maketitle}{\oarg{options}}
+  Cette commande \emph{produit} :
+  \begin{enumerate}
+  \item
+    \begin{enumerate}
+    \item une page de 1\iere{} de couverture\footnote{Sauf contre-ordre,
+        cf. clé \refKey{nofrontcover}.} ;
+    \item une page de titre.
+    \end{enumerate}
+    Ces deux pages sont composées dans la langue principale et
+    sont identiques\footnote{À ceci près que le numéro d'ordre de la thèse ne figure
+      que sur la page de 1\iere{} de couverture.} ;
+  \item \emph{automatiquement}\footnote{Sans qu'il soit nécessaire de faire
+      figurer une 2\ieme{} occurrence de la commande \refCom{maketitle}.} une
+    seconde page de titre \emph{si} \aside{et seulement si} l'une au moins des
+    commandes \refCom{title}, \refCom{subtitle}, \refCom{academicfield} ou
+    \refCom{speciality} est employée avec son argument optionnel
+    (cf. \vref{rq-titre-supp}). Cette page est composée dans la langue
+    secondaire.
+  \end{enumerate}
+\end{docCommand}
+
+La commande \refCom{maketitle} admet un argument optionnel permettant de
+personnaliser les pages de titre au moyen des clés \refKey{nofrontcover} et
+\refKey{frametitle}.%^^A
+%^^A
+\changes{v0.99g}{2014/07/13}{Personnalisation des pages de titre (\emph{via}
+  \protect\refKey{frametitle} et \protect\refKey{nofrontcover}) possible en
+  option de \protect\docAuxCommand{maketitle}}%^^A
+
+\begin{docKey}{nofrontcover}{=\docValue{true}\textbar\docValue{false}}{par défaut
+    \docValue{true}, initialement \docValue{false}}
+  Cette clé permet de désactiver la production de la page de 1\iere{} de
+  couverture.
+\end{docKey}
+
+{%
+  \tcbset{before lower=\vspace*{\baselineskip}\par}
+\begin{docKey}{frametitle}{=\docValue{fbox}\textbar\docValue{shadowbox}\textbar\docValue{ovalbox}\textbar\docValue{none}\textbar\marg{autre}}{pas de valeur par défaut, initialement \docValue{fbox}}
+  \changes{v0.99c}{2014/06/06}{Nouvelle clé \protect\refKey{frametitle}
+    permettant de personnaliser (p. ex. supprimer) le cadre autour du
+    titre}%^^A
+  %^^A
+  Cette clé permet de personnaliser le cadre figurant par défaut autour du
+  titre de la thèse sur les pages de titre :
+  \begin{itemize}
+  \item sa valeur \docValue{fbox} produit un cadre rectangulaire ;
+  \item sa valeur \docValue{shadowbox} produit un cadre ombré ;
+  \item sa valeur \docValue{ovalbox} produit un cadre dont les sommets sont
+    arrondis ;
+  \item sa valeur \docValue{none} permet de supprimer ce cadre. L'affichage des
+    mentions \enquote{Titre de la thèse} et \foreignquote{english}{Thesis
+      Title} est alors désactivé ;
+  \item toute \meta{autre} valeur lui étant passée doit être :
+    \begin{enumerate}
+    \item une liste de clés/valeurs propres à l'environnement
+      \docAuxEnvironment{tcolorbox} du \Package{tcolorbox} (cf. la
+      documentation de ce package) ;
+    \item passée entre paire d'accolades :
+\begin{preamblecode}
+\yadsetup{frametitle={"\meta{autre}"}}
+\end{preamblecode}
+    \end{enumerate}
+  \end{itemize}
+\end{docKey}
+}
+
+\begin{dbexample}{Cadre personnalisé autour du titre de la thèse}{}
+  Pour que le cadre entourant le titre de la thèse soit ombré, il suffit de
+  saisir :
+\begin{preamblecode}
+\maketitle[frametitle=shadowbox]
+\end{preamblecode}
+\end{dbexample}
+
+\begin{dbexample}{Cadre \enquote{fantaisie} autour du titre de la thèse}{}
+  Cet exemple, certainement déconseillé, montre comment exploiter les
+  fonctionnalités du \Package{tcolorbox} pour obtenir un cadre
+  \enquote{fantaisie} autour du titre de la thèse.%
+  \NoAutoSpacing%
+\begin{preamblecode}
+\maketitle[frametitle={colback=red!50!white,beamer}]
+\end{preamblecode}
+\end{dbexample}
+
+\section{Exemple complet de pages de titre}
+\label{sec-exemple-complet}
+
+Avec les données caractéristiques suivantes, la commande
+\refCom{maketitle} produit :
+\begin{enumerate}
+\item en langue principale (ici le français),
+  \begin{enumerate}
+  \item \changes*{v0.99f}{2014/07/11}{Directeurs de thèse désormais dans un
+      tableau indépendant de celui des membres du jury sur les pages de
+      titre}%^^A
+    % ^^A
+    une page de 1\iere{} de couverture illustrée \vref{fig-maketitle-fr} ;
+  \item une page de titre ;
+  \end{enumerate}
+\item en langue secondaire (ici l'anglais), une page de titre illustrée
+  \vref{fig-maketitle-en}.
+\end{enumerate}
+%
+\begin{dbexample}{Préparation et production des pages de titre}{}
+%
+  \NoAutoSpacing%
+  \lstset{morecomment=[is]{\%}{\^^M}}%
+  \preamblesample[configuration/characteristics]{%
+    deletekeywords={[2]title},%
+    rangeendsuffix={\^^M},%
+    linerange={%
+      author-42]
+    }%
+  }{title=Préparation du titre (par exemple dans le \File{\characteristicsfile})}
+  %
+  \lstset{deletecomment=[is]{\%}{\^^M}}%
+  %
+  \bodysample{rangesuffix=\^^M,linerange={maketitle}}{title=Production
+    du titre}
+\end{dbexample}
+
+\begin{landscape}
+  \begin{figure}[htb]
+    \centering
+    \begin{subfigure}[b]{.45\linewidth}
+      \centering%
+      \fbox{\includegraphics[page=1,width=\linewidth-2\fboxsep-2\fboxrule]{../exemples/specimen/en-arborescence/these}}
+      % ^^A\screenshot[1]{fr-title}
+      \caption{Page de première de couverture en français}
+      \label{fig-maketitle-fr}
+    \end{subfigure}%
+    \hspace{\stretch{1}}%
+    \begin{subfigure}[b]{.45\linewidth}
+      \centering%
+      \fbox{\includegraphics[page=5,width=\linewidth-2\fboxsep-2\fboxrule]{../exemples/specimen/en-arborescence/these}}
+      % ^^A\screenshot[1]{en-title}
+      \caption{Page de titre en anglais}
+      \label{fig-maketitle-en}
+    \end{subfigure}%
+    \caption{Pages de première de couverture et de titre}
+    \label{fig-maketitle}
+  \end{figure}
+\end{landscape}
+%
+\iffalse
+%%% Local Variables:
+%%% mode: latex
+%%% eval: (latex-mode)
+%%% ispell-local-dictionary: "fr_FR"
+%%% TeX-engine: xetex
+%%% TeX-master: "../yathesis.dtx"
+%%% End:
+\fi

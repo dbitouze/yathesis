@@ -1,0 +1,317 @@
+\chapter{Questions fréquemment posées}\label{cha-faq}
+
+Ce chapitre est une \gls{faq} \aside{autrement dit une liste des questions
+  fréquemment posées} sur la \yatcl{}.
+
+\section{Communication}
+\label{sec-communication}
+
+\begin{dbfaq}{Comment communiquer avec l'auteur de la \yatcl{} ?}{bogues}
+  La \yatcl{} est vraiment formidable, mais je souhaite :
+  \begin{enumerate}
+  \item signaler un dysfonctionnement (un bogue) ;
+  \item demander une nouvelle fonctionnalité ;
+  \item communiquer avec l'auteur de la classe.
+  \end{enumerate}
+  Comment faire ?
+  %
+  \tcblower
+  %
+  \begin{enumerate}
+  \item Pour rapporter un dysfonctionnement :
+    \begin{enumerate}
+    \item s'assurer qu'il n'est pas déjà répertorié :
+      \begin{enumerate}
+      \item en lisant la suite du présent chapitre ;
+      \item en lisant le \vref{cha-incomp-conn} ;
+      \item en consultant la liste des \enquote{issues} à l'adresse
+        \url{https://github.com/dbitouze/yathesis/issues/} ;
+      \end{enumerate}
+    \item s'il n'est pas déjà répertorié, créer une \enquote{issue} à l'adresse
+      \url{https://github.com/dbitouze/yathesis/issues/new}\footnote{Un
+        \gls{ecm} est vivement souhaité.}.
+    \end{enumerate}
+  \item Pour demander une fonctionnalité :
+    \begin{enumerate}
+    \item s'assurer qu'elle n'est pas déjà répertoriée en
+      consultant la liste des \enquote{issues} à l'adresse
+      \url{https://github.com/dbitouze/yathesis/issues/} ;
+    \item si la fonctionnalité n'a pas déjà été demandée, créer une
+      \enquote{issue} à l'adresse
+      \url{https://github.com/dbitouze/yathesis/issues/new}.
+    \end{enumerate}
+  \item Pour communiquer avec l'auteur de la classe, il est possible d'utiliser
+    l'adresse indiquée en page de titre de la présente documentation.
+  \end{enumerate}
+\end{dbfaq}
+
+\section{Avertissements}
+\label{sec-avertissements}
+
+\begin{dbfaq}{Puis-je ignorer un avertissement signalant une version trop
+    ancienne d'un package ?}{}
+  Je suis confronté à un avertissement de la forme \enquote{You have requested,
+    on input line \meta{numéro}, version `\meta{date plus récente}' of package
+    \meta{nom d'un package}, but only version `\meta{date moins récente} ...'
+    is available.}. Est-ce grave, docteur ?
+  %
+  \tcblower
+  %
+  Ça peut être grave. Cf. \vref{rq-packages-anciens} pour plus de précisions.
+\end{dbfaq}
+
+\section{Erreurs}
+\label{sec-erreurs}
+
+\begin{dbfaq}{Comment éviter l'erreur \enquote{Option clash for package
+      \meta{package}} ?}{option-clash}
+  Je suis confronté à l'erreur \enquote{Option clash for package
+    \meta{package}} (notamment avec \meta{package}|=|\package{babel}). Comment
+  l'éviter ?
+  %
+  \tcblower
+  %
+  Cette erreur est probablement due au fait que le \meta{package} a été
+  manuellement chargé au moyen de la commande
+  |\usepackage[...]{|\meta{package}|}|, alors que la \yatcl{} le charge déjà
+  automatiquement (cf. l'\vref{sec-packages-charges-par} pour la liste des
+  packages automatiquement chargés). Supprimer cette commande devrait résoudre
+  le problème (cf. également l'\vref{wa-packages-a-ne-pas-charger}).
+\end{dbfaq}
+
+\begin{dbfaq}{Comment éviter l'erreur \enquote{Command
+      \protect\docAuxCommand*{nobreakspace} unavailable in encoding T1} ?}{}
+  Lorsque je compile ma thèse avec \hologo{XeLaTeX} ou \hologo{LuaLaTeX}, je
+  suis confronté à l'erreur \enquote{Command
+    \docAuxCommand*{nobreakspace} unavailable in encoding T1}. Comment
+  l'éviter ?
+  %
+  \tcblower
+  %
+  (Cette question ne concerne pas directement la \yatcl{}.) Il suffit d'insérer,
+  en préambule du fichier (maître) de la thèse, la
+  ligne :
+\begin{preamblecode}[title=Par exemple dans le \File{\configurationfile}]
+\DeclareTextCommand{\nobreakspace}{T1}{\leavevmode\nobreak\ }
+\end{preamblecode}
+\end{dbfaq}
+
+% ^^A \begin{dbfaq}{Comment éviter l'erreur \enquote{No room for a new%
+%   ^^A \protect\docAuxCommand*{write}} ?}{}%
+%   ^^A Je suis confronté à l'erreur \enquote{no room for a new%
+%   ^^A \docAuxCommand{write}}. Comment l'éviter ?%
+%   ^^A%
+%   ^^A \tcblower%
+%   ^^A%
+%   ^^A Il devrait suffire de charger le \Package{morewrites} (plutôt parmi%
+%   ^^A les premiers packages).%
+%   ^^A \end{dbfaq}
+
+\section{Mise en page}
+\label{sec-mise-en-page}
+
+\subsection{Pages de titre}
+\label{sec-pages-de-titre}
+
+\begin{dbfaq}{Comment modifier l'apparence de la page de titre ?}{}
+  L'apparence par défaut de la page de titre ne me convient pas et je voudrais
+  la modifier. Comment faire ?
+  %
+  \tcblower
+  %
+  Il est prévu de permettre de modifier certains aspects de la mise en page de
+  la page de titre, et même de fournir une documentation permettant d'obtenir
+  une apparence complètement personnalisée, mais ce n'est pas encore
+  implémenté.  En attendant que ça le soit, il faut composer cette page soit
+  même, en y resaisissant manuellement toutes les caractéristiques nécessaires
+  définies au \vref{cha-caract-du-docum}.
+\end{dbfaq}
+
+\subsection{Table des matières}
+\label{sec-table-des-matieres-faq}
+
+\begin{dbfaq}{Pourquoi les glossaire, listes d'acronymes et de symboles
+    apparaissent en double dans la table des matières et dans les signets ?}{}
+  Les glossaire, listes d'acronymes et de symboles apparaissent en double dans
+  la table des matières et dans les signets. Comment éviter cela ?%
+  \tcblower
+  %
+  La \yatcl{} fait d'elle-même figurer les glossaire, listes d'acronymes et de
+  symboles à la fois dans la table des matières et dans les signets. Pour
+  régler le problème, il devrait donc suffire de \emph{ne pas} explicitement
+  demander que ce soit le cas, en \emph{ne} recourant \emph{ni} à l'option
+  \docAuxKey*{toc}, \emph{ni} à la commande \docAuxCommand*{glstoctrue} du
+  \Package{glossaries}.
+\end{dbfaq}
+
+\begin{dbfaq}{Comment faire en sorte que, dans la table des matières, seuls
+    les numéros de page soient des liens hypertextes ?}{}
+  J'ai chargé le \Package{hyperref} et, par défaut, les entrées de la table des
+  matières sont toutes entières des liens hypertextes, ce qui est trop
+  envahissant. Comment faire en sorte que seuls les numéros de page soient des
+  liens hypertextes ?
+  %
+  \tcblower
+  %
+  (Cette question ne concerne pas directement la \yatcl{}.) Il suffit de passer
+  l'option |linktoc=false| au \Package{hyperref}.
+\end{dbfaq}
+
+\begin{dbfaq}{Comment supprimer la bibliographie des sommaire, table des
+    matières et signets ?}{}
+  Par défaut, la bibliographie figure dans les sommaire, table des matières et
+  signets du document. Comment éviter cela ?
+  %
+  \tcblower
+  %
+  (Cette question ne concerne pas directement la \yatcl{}.) Il suffit de passer
+  à la commande \docAuxCommand{printbibliography} l'option
+  |heading=|\meta{entête}, où \meta{entête} vaut par exemple
+  \docValue*{bibliography} (cf. la documentation du \Package{biblatex} pour plus
+  de détails).
+\end{dbfaq}
+
+\begin{dbfaq}{Comment affecter des profondeurs différentes aux signets et à la
+    table des matières ?}{}
+  Grâce au chargement du \Package{hyperref}, mon fichier \acrshort{pdf} dispose
+  de signets mais, par défaut, ceux-ci ont même niveau de profondeur que la
+  table des matières. Comment leur affecter une profondeur différente ?
+  %
+  \tcblower
+  %
+  (Cette question ne concerne pas directement la \yatcl{}.) L'option
+  \docAuxKey{depth} du \Package*{bookmark} permet d'affecter aux signets un
+  autre niveau que celui par défaut.
+\begin{preamblecode}[title=Par exemple dans le \File{\configurationfile}]
+\bookmarksetup{depth="\meta{autre niveau}"}
+\end{preamblecode}
+où \meta{autre niveau} est l'une des valeurs possibles de la clé
+\refKey{depth}.
+\end{dbfaq}
+
+\begin{dbfaq}{Dans la table des matières, des numéros de pages débordent dans
+    la marge de droite}{}
+  Dans la table des matières, certains numéros de pages (en chiffres romains
+  notamment) débordent dans la marge de droite. Comment l'éviter ?
+  %
+  \tcblower
+  %
+  Il suffit d'insérer, en préambule du fichier (maître) de la thèse, les
+  lignes :
+\begin{preamblecode}[title=Par exemple dans le \File{\configurationfile}]
+\makeatletter
+\renewcommand*\@pnumwidth{"\meta{distance}"}
+\makeatother
+\end{preamblecode}
+  où \meta{distance}, à exprimer par exemple en points (par exemple |27pt|),
+  est à déterminer par \enquote{essais/erreurs} de sorte que \meta{distance}
+  soit :
+  \begin{enumerate}
+  \item suffisamment grande, pour empêcher les débordements de numéros de
+    pages ;
+  \item aussi petite que possible, pour éviter les lignes de pointillés trop
+    courtes.
+  \end{enumerate}
+\end{dbfaq}
+
+\subsection{Divers}
+\label{sec-divers}
+
+\begin{dbfaq}{Pourquoi mes signes de ponctuation haute ne sont pas précédés des
+    espaces adéquates ?}{}
+  Certains éléments que j'ai saisis en préambule contiennent des signes de
+  ponctuation haute ({\NoAutoSpacing?;:!}) mais, dans le \pdf{} produit, ces
+  derniers ne sont pas précédés des espaces adéquates. Comment régler ce
+  problème ?
+  %
+  \tcblower
+  %
+  (Cette question ne concerne pas directement la \yatcl{}.) Le problème est dû
+  aux caractères actifs du module \package{frenchb} du \Package{babel}. Si ces
+  éléments concernent :
+  \begin{enumerate}
+  \item les caractéristiques du document (cf. \vref{cha-caract-du-docum}), il
+    suffit de les saisir\footnote{Cf. \vref{sec-lieu-de-saisie}.} :
+    \begin{itemize}
+    \item soit dans le \emph{corps} du fichier (maître) de la
+      thèse\footnote{Mais cf. alors \vref{wa-avant-maketitle}.} (et donc
+      \emph{pas} dans son \emph{préambule}) ;
+    \item soit dans le \File{\characteristicsfile} prévu à cet effet ;
+    \item soit entre |\shorthandon{;:!?}| et |\shorthandoff{;:!?}| si on tient
+      absolument à ce qu'ils soient saisis en préambule.
+    \end{itemize}
+  \item les termes du glossaire, des acronymes ou des symboles, il suffit de
+    définir les entrées correspondantes ou d'utiliser la ou les commandes
+    \docAuxCommand{loadglsentries} :
+    \begin{itemize}
+    \item soit dans le \File{\configurationfile}
+      (cf. \vref{rq-configurationfile}) ;
+    \item soit entre |\shorthandon{;:!?}| et |\shorthandoff{;:!?}|. Cette
+      solution peut être préférée à la précédente pour ne pas perdre les
+      fonctionnalités de complétion pour les labels des termes de glossaire
+      fournies par certains éditeurs de texte orientés \LaTeX{}.
+    \end{itemize}
+  \end{enumerate}
+\end{dbfaq}
+
+\begin{dbfaq}{Pourquoi \protect\docAuxCommand*{setcounter} n'a-t-elle pas
+    d'effet sur \protect\docAuxKey*{secnumdepth} ?}{}
+  J'essaie de modifier la profondeur de numérotation de mon document en
+  spécifiant la valeur du compteur \docAuxKey*{secnumdepth} au moyen de la
+  commande :
+\begin{preamblecode}
+\setcounter{secnumdepth}{"\meta{nombre}"}
+\end{preamblecode}
+  mais cela n'a aucun effet. Pourquoi ?
+  %
+  \tcblower
+  %
+  La profondeur de numérotation d'un document composé avec la \yatcl{} est
+  à spécifier au moyen de l'option de classe
+  \refKey{secnumdepth}. Cf. \vref{sec-profondeur-de-la} pour plus de
+  précisions.
+\end{dbfaq}
+
+\section{Validation}
+\label{sec-validation}
+
+\begin{dbfaq}{Le \acrshort{pdf} de mon mémoire n'est pas valide au yeux du
+    \acrshort{cines}. Comment y remédier ?}{}
+  Conformément aux dispositions propres au dépôt sur support électronique
+  \autocite{guidoct-abes}, j'ai testé sur le site \url{http://facile.cines.fr/}
+  la validité du fichier \acrshort{pdf} de mon mémoire de thèse créé avec la
+  \yatcl{}, et il s'avère que celui-ci n'est pas valide. Comment y remédier ?
+  %
+  \tcblower
+  %
+  (Cette question ne concerne pas directement la \yatcl{}.) Le problème vient de
+  ce que le site \url{http://facile.cines.fr/} reconnaît mal les méta-données
+  des fichiers \acrshort{pdf} produits par \LaTeX{}, \hologo{XeLaTeX} ou
+  \hologo{LuaLaTeX}. Il devrait suffire d'installer le logiciel libre
+  \program{PDFtk}\footnote{Ce logiciel devrait être disponible :
+    \begin{itemize}
+    \item sous Linux : sous forme de paquet de la distribution utilisée ;
+    \item sous Mac OS X : comme indiqué
+      \href{http://stackoverflow.com/q/20804441}{ici} par exemple ;
+    \item sous Windows : \href{https://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/}{ici}.
+    \end{itemize}
+  }%
+  puis de lancer dans un terminal la commande suivante :
+\begin{lstlisting}[language=bash]
+pdftk these.pdf output these-valide.pdf
+\end{lstlisting}
+où \file{these.pdf} est le fichier \acrshort{pdf} original du mémoire. Le
+fichier généré, \file{these-valide.pdf}, est à la fois valide et identique dans
+la forme à l'original.
+\end{dbfaq}
+
+%
+\iffalse
+%%% Local Variables:
+%%% mode: latex
+%%% eval: (latex-mode)
+%%% ispell-local-dictionary: "fr_FR"
+%%% TeX-engine: xetex
+%%% TeX-master: "../yathesis.dtx"
+%%% End:
+\fi

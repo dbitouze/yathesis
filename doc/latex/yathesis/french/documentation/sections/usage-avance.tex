@@ -1,0 +1,163 @@
+\chapter{Usage avancé}\label{cha-usage-avance}
+
+\section{(Dés)Activation des erreurs ciblées propres aux éléments
+  \enquote{obligatoires}}\label{sec-desact-des-erre}
+
+On a vu \vref{sec-comm-oblig} que la \yatcl{} considère comme
+\enquote{obligatoires} certains éléments (commandes et environnements) et que,
+parmi eux, certains ne le sont que modérément. La liste complète de ces
+derniers figure à la 1\iere{} colonne du \vref{tab-no-warnings}.
+\begin{table}[ht]
+  \centering
+  \caption[Éléments modérément \enquote{obligatoires} et désactivation des
+  erreurs associées]{Éléments modérément \enquote{obligatoires} et options de
+    désactivation des erreurs ciblées associées}
+  \label{tab-no-warnings}
+  \input{tableaux/no-warnings}
+\end{table}
+
+Cependant, au cours de la rédaction, certains éléments \enquote{obligatoires}
+de la thèse ne sont pas encore connus de l'utilisateur, par exemple la date de
+soutenance (commande \refCom{date}).
+% ^^A
+De ce fait, le signalement des éléments \enquote{obligatoires} manquants est :
+\begin{description}
+\item[désactivé] par défaut\footnote{C'est-à-dire en version intermédiaire du
+    document (cf. valeur initiale \docValue{inprogress} de la clé
+    \refKey{version}). Le signalement est également désactivé en versions
+    intermédiaire alternative et brouillon (cf. valeurs \docValue{inprogress*}
+    et \docValue{draft} de la clé \refKey{version}).} ;
+\item[activé] (seulement) en versions \enquote{à
+    soumettre}\footnote{Cf. valeurs \docValue{submitted} et
+    \docValue{submitted*} de la clé \refKey{version}.} et
+  \emph{finale}\footnote{Cf. valeur \docValue{final} de la clé
+    \refKey{version}.} du document, par le biais d'une erreur ciblée, émise
+  à chaque compilation.
+\end{description}
+
+Or, l'utilisateur \emph{avancé} peut vouloir passer outre le caractère
+\enquote{obligatoire} de tel ou tel élément\footnote{Par exemple, il peut juger
+  inutile de faire figurer des mots clés dans sa thèse et donc vouloir passer
+  outre la commande \enquote{obligatoire} \protect\refCom{keywords}.},
+y compris en versions à soumettre ou finale du document, et pour éviter que
+chaque compilation ne soit alors perturbée par les erreurs ciblées
+correspondantes, la \yatcl{} propose de désactiver ces erreurs de façon :
+\begin{description}
+\item[soit globale] au moyen de la clé \refKey{noerror} suivante.
+  \begin{docKey}{noerror}{=\docValue{true}\textbar\docValue{false}}{par défaut
+      \docValue{true}, initialement \docValue{true}}
+    Cette option est en sous-main initialement égale à \docValue{true}, et
+    devient automatiquement égale à \docValue{false} si la clé \refKey{version}
+    a pour valeur \docValue{submitted}, \docValue{submitted*} ou
+    \docValue{final}. L'employer la rend égale à \docValue{true} et désactive
+    donc, dans tous les cas, toutes les erreurs propres à la \yatcl{}.
+  \end{docKey}
+\item[soit individuelle] au moyen des clés listées au \vref{tab-no-warnings} et
+  dont le rôle est précisé ci-après.
+  \begin{docKey}{noauthor}{=\docValue{true}\textbar\docValue{false}}{par défaut
+      \docValue{true}, initialement \docValue{false}}
+    Cette option désactive l'erreur émise si la commande \refCom{author} est
+    omise (ou à arguments obligatoires vides).
+  \end{docKey}
+  \begin{docKey}{notitle}{=\docValue{true}\textbar\docValue{false}}{par défaut
+      \docValue{true}, initialement \docValue{false}}
+    Cette option désactive l'erreur émise si la commande \refCom{title} est
+    omise (ou à argument obligatoire vide).
+  \end{docKey}
+  \begin{docKey}{noacademicfield}{=\docValue{true}\textbar\docValue{false}}{par
+      défaut \docValue{true}, initialement \docValue{false}}
+    Cette option désactive l'erreur émise si la commande \refCom{academicfield}
+    est omise (ou à argument obligatoire vide).
+  \end{docKey}
+  \begin{docKey}{nodate}{=\docValue{true}\textbar\docValue{false}}{par défaut
+      \docValue{true}, initialement \docValue{false}}
+    Cette option désactive l'erreur émise si la commande \refCom{date} est
+    omise (ou à arguments obligatoires vides ou incorrects)\footnote{La
+      commande \refCom{date} n'est en fait pas \enquote{obligatoire} en
+      versions \enquote{à soumettre} (valeurs \docValue{submitted} et
+      \docValue{submitted*} de la clé \refKey{version}).}.
+  \end{docKey}
+  \begin{docKey}{noinstitute}{=\docValue{true}\textbar\docValue{false}}{par
+      défaut \docValue{true}, initialement \docValue{false}}
+    Cette option désactive l'erreur émise si la commande \refCom{institute} est
+    omise (ou à argument obligatoire vide).
+  \end{docKey}
+  \begin{docKey}{nodoctoralschool}{=\docValue{true}\textbar\docValue{false}}{par
+      défaut \docValue{true}, initialement \docValue{false}}
+    Cette option désactive l'erreur émise si la commande
+    \refCom{doctoralschool} est omise (ou à argument obligatoire vide).
+  \end{docKey}
+  \begin{docKey}{nolaboratory}{=\docValue{true}\textbar\docValue{false}}{par
+      défaut \docValue{true}, initialement \docValue{false}}
+    Cette option désactive l'erreur émise si la commande \refCom{laboratory}
+    est omise (ou à 1\ier{} argument obligatoire vide).
+  \end{docKey}
+  \begin{docKey}{nolaboratoryadress}{=\docValue{true}\textbar\docValue{false}}{par
+      défaut \docValue{true}, initialement \docValue{false}}
+    Cette option désactive l'erreur émise si la commande \refCom{laboratory}
+    est omise (ou à 2\ieme{} argument obligatoire vide).
+  \end{docKey}
+  \begin{docKey}{nosupervisor}{=\docValue{true}\textbar\docValue{false}}{par
+      défaut \docValue{true}, initialement \docValue{false}}
+    Cette option désactive l'erreur émise si la commande \refCom{supervisor}
+    est omise (ou à argument obligatoire vide).
+  \end{docKey}
+  \begin{docKey}{nomaketitle}{=\docValue{true}\textbar\docValue{false}}{par
+      défaut \docValue{true}, initialement \docValue{false}}
+    Cette option désactive l'erreur émise si la commande \refCom{maketitle} est
+    omise.
+  \end{docKey}
+  \begin{docKey}{nokeywords}{=\docValue{true}\textbar\docValue{false}}{par
+      défaut \docValue{true}, initialement \docValue{false}}
+    Cette option désactive l'erreur émise si la commande \refCom{keywords} est
+    omise (ou à arguments obligatoires vides).
+  \end{docKey}
+  \begin{docKey}{noabstract}{=\docValue{true}\textbar\docValue{false}}{par
+      défaut \docValue{true}, initialement \docValue{false}}
+    Cette option désactive l'erreur émise si l'environnement \refEnv{abstract}
+    est omis (ou à contenu vide).
+  \end{docKey}
+  \begin{docKey}{nomakeabstract}{=\docValue{true}\textbar\docValue{false}}{par
+      défaut \docValue{true}, initialement \docValue{false}}
+    Cette option désactive l'erreur émise si la commande \refCom{makeabstract}
+    est omise.
+  \end{docKey}
+  \begin{docKey}{notableofcontents}{=\docValue{true}\textbar\docValue{false}}{par
+      défaut \docValue{true}, initialement \docValue{false}}
+    Cette option désactive l'erreur émise si la commande
+    \refCom{tableofcontents} est omise.
+  \end{docKey}
+  \begin{docKey}{noprintbibliography}{=\docValue{true}\textbar\docValue{false}}{par
+      défaut \docValue{true}, initialement \docValue{false}}
+    Cette option désactive l'erreur émise si la commande
+    \refCom{printbibliography} est omise.
+  \end{docKey}
+\end{description}
+
+\begin{dbwarning}{Éléments \enquote{obligatoires} : modérément obligatoires
+    mais fortement conseillés}{}
+  En versions à soumettre et finale du document, il est conseillé d'employer
+  tous les éléments \enquote{obligatoires} et, sinon, d'utiliser à bon escient
+  les clés de désactivation ci-dessus, sans quoi :
+  \begin{itemize}
+  \item des textes génériques peuvent figurer dans le document en remplacement
+    de certains éléments manquants ;
+  \item le bon fonctionnement de la \yatcl{} peut être sérieusement altéré.
+  \end{itemize}
+  Donc, pour ces versions, on ne passera outre les éléments
+  \enquote{obligatoires} de la \yatcl{} que dans le cadre d'un usage avancé, si
+  l'on est sûr de ce que l'on fait et qu'on pourra en gérer \emph{seul} les
+  conséquences.  On évitera notamment de recourir de façon trop légère à la clé
+  \refKey{noerror}.
+\end{dbwarning}
+
+%
+\iffalse
+%%% Local Variables:
+%%% mode: latex
+%%% eval: (latex-mode)
+%%% ispell-local-dictionary: "fr_FR"
+%%% TeX-engine: xetex
+%%% TeX-master: "../yathesis.dtx"
+%%% End:
+\fi
