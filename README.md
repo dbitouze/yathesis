@@ -19,24 +19,24 @@ will extract the class whereas:
 
      pdflatex yathesis.dtx
 
-will extract it and also typeset the documentation.
+will extract it and also typeset the documentation of the code.
 
-Typesetting the documentation requires:
+Typesetting the documentation of the class requires:
 
 - a number of packages in addition to those needed to use the `yathesis`
    classes.  To compile the documentation without error, you will need, among
    others, my personal (dirty) package `denisbdoc` for documenting the classes
    I've written.
 - a complete `pdflatex` run of `these.tex` to be found in the
-   `.../yathesis/doc/latex/yathesis/exemples/specimen/a-plat` directory, with
-   `yathesis-demo` package load at first place. If `latexmk` is available, it is
-   easier to run:
+  `.../yathesis/doc/latex/yathesis/french/exemples/specimen/a-plat` directory,
+  with `yathesis-demo` package load at first place. If `latexmk` is available,
+  it is easier to run:
 
         latexmk -f -pdf -jobname=these -pdflatex= \
         "pdflatex %O '\RequirePackage{yathesis-demo}\input{%S}'" these.tex
 
 - to run `pdflatex` on `yathesis.tex` to be found in the
-   `.../yathesis/doc/latex/yathesis/documentation` directory. If `latexmk` is
-   available, it is easier to run:
+   `.../yathesis/doc/latex/yathesis/documentation/french` directory. If
+   `latexmk` is available, it is easier to run:
 
-        latexmk yathesis.dtx
+        latexmk yathesis.tex

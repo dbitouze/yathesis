@@ -42,27 +42,27 @@ will extract the class whereas:
 
      pdflatex yathesis.dtx
 
-will extract it and also typeset the documentation.
+will extract it and also typeset the documentation of the code.
 
-Typesetting the documentation requires:
+Typesetting the documentation of the class requires:
 
 - a number of packages in addition to those needed to use the `yathesis`
    classes.  To compile the documentation without error, you will need, among
    others, my personal (dirty) package `denisbdoc` for documenting the classes
    I've written.
 - a complete `pdflatex` run of `these.tex` to be found in the
-   `.../yathesis/doc/latex/yathesis/exemples/specimen/a-plat` directory, with
-   `yathesis-demo` package load at first place. If `latexmk` is available, it is
-   easier to run:
+  `.../yathesis/doc/latex/yathesis/french/exemples/specimen/a-plat` directory,
+  with `yathesis-demo` package load at first place. If `latexmk` is available,
+  it is easier to run:
 
         latexmk -f -pdf -jobname=these -pdflatex= \
         "pdflatex %O '\RequirePackage{yathesis-demo}\input{%S}'" these.tex
 
 - to run `pdflatex` on `yathesis.tex` to be found in the
-   `.../yathesis/doc/latex/yathesis/documentation` directory. If `latexmk` is
-   available, it is easier to run:
+   `.../yathesis/doc/latex/yathesis/documentation/french` directory. If
+   `latexmk` is available, it is easier to run:
 
-        latexmk yathesis.dtx
+        latexmk yathesis.tex
 %</readme>
 %<*internal>
 \fi
@@ -148,39 +148,39 @@ This work consists of the file  yathesis.dtx
   \file{\YAD@classname.ins}{\from{\jobname.dtx}{install}}
   \file{\YAD@classname.drv}{\from{\jobname.dtx}{driver}}%
 }%
-\usedir{doc/latex/\YAD@classname/\YAD@documentation}
+\usedir{doc/latex/\YAD@classname/french/\YAD@documentation}
 \generate{
   \nopreamble\nopostamble
   % \file{latexmkrc}{\from{\jobname.dtx}{class-latexmkrc}}
   \file{translations.tex}{\from{\jobname.dtx}{translations}}
 }%
-\usedir{doc/latex/\YAD@classname/\YAD@flattemplate}
+\usedir{doc/latex/\YAD@classname/french/\YAD@flattemplate}
 \generate{
   \nopreamble\nopostamble
   \file{latexmkrc}{\from{\jobname.dtx}{samples-templates-latexmkrc}}
   \file{these.tex}{\from{\YAD@sampletemplates.dtx}{flat-template}}
 }%
-\usedir{doc/latex/\YAD@classname/\YAD@flatsample}
+\usedir{doc/latex/\YAD@classname/french/\YAD@flatsample}
 \generate{
   \nopreamble\nopostamble
   \file{latexmkrc}{\from{\jobname.dtx}{samples-templates-latexmkrc}}
   \file{these.tex}{\from{\YAD@sampletemplates.dtx}{flat-sample}}
   \file{bibliographie.bib}{\from{\YAD@sampletemplates.dtx}{bibliography-sample}}
 }%
-\usedir{doc/latex/\YAD@classname/\YAD@treesample}
+\usedir{doc/latex/\YAD@classname/french/\YAD@treesample}
 \generate{
   \nopreamble\nopostamble
   \file{latexmkrc}{\from{\jobname.dtx}{samples-templates-latexmkrc}}
   \file{these.tex}{\from{\YAD@sampletemplates.dtx}{these-sample}}
 }%
-\usedir{doc/latex/\YAD@classname/\YAD@treesample/configuration}
+\usedir{doc/latex/\YAD@classname/french/\YAD@treesample/configuration}
 \generate{
   \nopreamble\nopostamble
   \file{characteristics.tex}{\from{\YAD@sampletemplates.dtx}{characteristics-sample}}
   \file{thesis.cfg}{\from{\YAD@sampletemplates.dtx}{cfg-sample}}
   \file{macros.tex}{\from{\YAD@sampletemplates.dtx}{macros-sample}}
 }%
-\usedir{doc/latex/\YAD@classname/\YAD@treesample/corps}
+\usedir{doc/latex/\YAD@classname/french/\YAD@treesample/corps}
 \generate{
   \nopreamble\nopostamble
   \file{conclusion.tex}{\from{\YAD@sampletemplates.dtx}{conclusion-sample}}
@@ -192,7 +192,7 @@ This work consists of the file  yathesis.dtx
   \file{developpementII.tex}{\from{\YAD@sampletemplates.dtx}{developpementII-sample}}
   \file{introduction.tex}{\from{\YAD@sampletemplates.dtx}{introduction-sample}}
 }%
-\usedir{doc/latex/\YAD@classname/\YAD@treesample/liminaires}
+\usedir{doc/latex/\YAD@classname/french/\YAD@treesample/liminaires}
 \generate{
   \nopreamble\nopostamble
   \file{dedicaces.tex}{\from{\YAD@sampletemplates.dtx}{dedications-sample}}
@@ -202,19 +202,19 @@ This work consists of the file  yathesis.dtx
   \file{remerciements.tex}{\from{\YAD@sampletemplates.dtx}{acknowledgments-sample}}
   \file{resumes.tex}{\from{\YAD@sampletemplates.dtx}{abstract-sample}}
 }%
-\usedir{doc/latex/\YAD@classname/\YAD@treesample/annexes}
+\usedir{doc/latex/\YAD@classname/french/\YAD@treesample/annexes}
 \generate{
   \nopreamble\nopostamble
   \file{juridique.tex}{\from{\YAD@sampletemplates.dtx}{juridique-sample}}
   \file{listings.tex}{\from{\YAD@sampletemplates.dtx}{listings-sample}}
 }%
-\usedir{doc/latex/\YAD@classname/\YAD@treesample/annexes/programmes}
+\usedir{doc/latex/\YAD@classname/french/\YAD@treesample/annexes/programmes}
 \generate{
   \nopreamble\nopostamble
   \file{factorielle.c}{\from{\YAD@sampletemplates.dtx}{factorielle-sample}}
   \file{heure.c}{\from{\YAD@sampletemplates.dtx}{heure-sample}}
 }%
-\usedir{doc/latex/\YAD@classname/\YAD@treesample/auxiliaires}
+\usedir{doc/latex/\YAD@classname/french/\YAD@treesample/auxiliaires}
 \generate{
   \nopreamble\nopostamble
   \file{acronymes.tex}{\from{\YAD@sampletemplates.dtx}{acronyms-sample}}
@@ -222,37 +222,37 @@ This work consists of the file  yathesis.dtx
   \file{symboles.tex}{\from{\YAD@sampletemplates.dtx}{symbols-sample}}
   \file{bibliographie.bib}{\from{\YAD@sampletemplates.dtx}{bibliography-sample}}
 }%
-\usedir{doc/latex/\YAD@classname/\YAD@treetemplate}
+\usedir{doc/latex/\YAD@classname/french/\YAD@treetemplate}
 \generate{
   \nopreamble\nopostamble
   \file{latexmkrc}{\from{\jobname.dtx}{samples-templates-latexmkrc}}
   \file{these.tex}{\from{\YAD@sampletemplates.dtx}{these-master}}
 }%
-\usedir{doc/latex/\YAD@classname/\YAD@treetemplate/configuration}
+\usedir{doc/latex/\YAD@classname/french/\YAD@treetemplate/configuration}
 \generate{
   \nopreamble\nopostamble
   \file{characteristics.tex}{\from{\YAD@sampletemplates.dtx}{characteristics-master}}
   \file{thesis.cfg}{\from{\YAD@sampletemplates.dtx}{cfg-master}}
   \file{macros.tex}{\from{\YAD@sampletemplates.dtx}{macros-master}}
 }%
-\usedir{doc/latex/\YAD@classname/\YAD@treetemplate/auxiliaires}
+\usedir{doc/latex/\YAD@classname/french/\YAD@treetemplate/auxiliaires}
 \generate{
   \nopreamble\nopostamble
   \file{bibliographie.bib}{\from{\YAD@sampletemplates.dtx}{bibliography-master}}
 }%
-\usedir{doc/latex/\YAD@classname/\YAD@treetemplate/annexes}
+\usedir{doc/latex/\YAD@classname/french/\YAD@treetemplate/annexes}
 \generate{
   \nopreamble\nopostamble
   \file{annexeI.tex}{\from{\YAD@sampletemplates.dtx}{annexe-masterI}}
   \file{annexeII.tex}{\from{\YAD@sampletemplates.dtx}{annexe-masterII}}
 }%
-\usedir{doc/latex/\YAD@classname/\YAD@treetemplate/corps}
+\usedir{doc/latex/\YAD@classname/french/\YAD@treetemplate/corps}
 \generate{
   \nopreamble\nopostamble
   \file{conclusion.tex}{\from{\YAD@sampletemplates.dtx}{conclusion-master}}
   \file{introduction.tex}{\from{\YAD@sampletemplates.dtx}{introduction-master}}
 }%
-\usedir{doc/latex/\YAD@classname/\YAD@treetemplate/liminaires}
+\usedir{doc/latex/\YAD@classname/french/\YAD@treetemplate/liminaires}
 \generate{
   \nopreamble\nopostamble
   \file{dedicaces.tex}{\from{\YAD@sampletemplates.dtx}{dedications-master}}
