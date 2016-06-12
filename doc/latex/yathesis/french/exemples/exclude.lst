@@ -43,6 +43,7 @@
 *.sty
 *.fdb_latexmk
 *docstrip.cfg
+*latexmkrc.tex
 *myctan
 *.atfi
 *.bcf
@@ -60,3 +61,6 @@
 *nwejm.cfg
 *.cls
 *makefile
+*exclude.lst
+*create-zip
+*.zip
