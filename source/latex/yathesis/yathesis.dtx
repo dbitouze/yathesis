@@ -949,15 +949,11 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \RequirePackage{setspace}[2011/12/19]%
 %    \end{macrocode}
-% Pour pouvoir afficher un sommaire c-à-d une table des matières réduite
-%    \begin{macrocode}
-\RequirePackage{shorttoc}[2002/08/20]%
-%    \end{macrocode}
-% Pour régler finement la profondeur de la table des matières et de la
-% numérotation
-%    \begin{macrocode}
-\RequirePackage{tocvsec2}[2014/03/10]%
-%    \end{macrocode}
+% % Pour régler finement la profondeur de la table des matières et de la
+% % numérotation
+% %    \begin{macrocode}
+% \RequirePackage{tocvsec2}[2014/03/10]%
+% %    \end{macrocode}
 % Pour faire figurer les table des matières, bibliographie et index
 % dans la table des matières
 %    \begin{macrocode}
@@ -1016,6 +1012,11 @@ This work consists of the file  yathesis.dtx
 % Pour gérer les langues.
 %    \begin{macrocode}
 \RequirePackage{babel}[2014/03/24]
+%    \end{macrocode}
+% Pour pouvoir afficher un sommaire c-à-d une table des matières réduite
+%    \begin{macrocode}
+% \RequirePackage{shorttoc}[2002/08/20]%
+\RequirePackage{etoc}[2015/08/29]%
 %    \end{macrocode}
 % Pour tester la langue en cours
 %    \begin{macrocode}
@@ -2879,150 +2880,134 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\YAD@starttoc}
-%   On définit la commande "\YAD@starttoctoc", analogue à
-%   "\starttoc" fournie par \file{latex.ltx}, ne concernant que la
-%   table des matières ("toc"), qui génère mais n'importe pas le
-%   \File{.toc}.
-%    \begin{macrocode}
-\newcommand{\YAD@starttoctoc}{%
-  \begingroup
-    \if@filesw
-      \expandafter\newwrite\csname tf@toc\endcsname
-      \immediate\openout \csname tf@toc\endcsname \jobname.toc\relax
-    \fi
-    \@nobreakfalse
-  \endgroup}
-%    \end{macrocode}
-% On fait générer le \File{.toc}, en s'assurant que cela se fera
-% après la commande "\shorttableofcontents" du \Package{shorttoc}
-% utilisée dans la redéfinition de la commande "\tableofcontents"
-% ci-après (obligation de ce package).
-%    \begin{macrocode}
-\AtEndDocument{\YAD@starttoctoc}
-%    \end{macrocode}
-% \end{macro}
-%
 % Redéfinition de la commande "\tableofcontents" de sorte qu'elle
 % admette un argument optionnel permettant d'afficher une table des
-% matières supplémentaire jusqu'à un niveau donné. Cette commande
-% s'appuie sur le \Package{shorttoc}, avec hack de sorte qu'elle
-% soit compatible avec (et exprimée en les même termes que) le
-% \Package{tocvsec2}. On lui applique le style de page propre à la
+% matières supplémentaire jusqu'à un niveau donné. Cette commande, qui
+% s'appuie sur le \Package{etoc}, est exprimée en les même termes que le
+% \Package{tocvsec2} (désormais non chargé). On lui applique le style de page propre à la
 % partie liminaire du document, notamment début de la prise en
 % compte des chapitres et sections (numérotés ou pas) dans la table
 % des matières.
 %
-% % Pour commencer, on doit faire en sorte que la commande
-% % "\shorttableofcontents" utilise la définition originale de la commande
-% % "\chapter" et pas celle qu'on a patchée dans le but de simplifier l'usage de
-% % sa version étoilée.
-% %    \begin{macrocode}
-% \xpatchcmd{\shorttableofcontents}{\chapter}{\YAD@ORI@chapter}{}{}
-% %    \end{macrocode}
-%
 % \begin{macro}{\tableofcontents}
 %    \begin{macrocode}
-\let\YAD@ORI@setcounter\setcounter%
-\let\YAD@ORI@tableofcontents\tableofcontents%
-\newif\if@YAD@knownsect%
-%    \end{macrocode}
-% On redéfinit la commande "\shorttableofcontents" du \Package{shorttoc} en
-% retirant "\@mkboth{\uppercase{#1}}{\uppercase{#1}}" qui provoque sinon une
-% erreur au niveau de la commande "\tableofcontents" si elle est employée avec
-% un argument optionnel.
-%    \begin{macrocode}
-\def\shorttableofcontents#1#2{\bgroup\c@tocdepth=#2\@restonecolfalse
-  \if@tightshtoc
-     \parsep\z@
-  \fi
-  \if@twocolumn\@restonecoltrue\onecolumn\fi
-  \chapter*{#1}%
-  \@startshorttoc{toc}\if@restonecol\twocolumn\fi\egroup}
-\renewcommand{\tableofcontents}{%
-  \booltrue{YAD@tableofcontents@used}%
-  \cleardoublepage%
-  \YAD@phantomsection%
-  \let\cmdKV@YAD@name\contentsname%
-  \@ifnextchar[{\tableofcontents@YAD@with@argument}{\tableofcontents@YAD@without@argument}%]
-}%
-\newcommand\tableofcontents@YAD@without@argument{%
-  \YAD@ORI@tableofcontents%
-}%
-\newcommand\tableofcontents@YAD@with@argument[1][]{%
-  \yadsetup{#1}%
-  \renewcommand{\setcounter}[2]{}%
-  %
-  \ifthenelse{\equal{\cmdKV@YAD@depth}{none}}{%
-    \shorttableofcontents{\cmdKV@YAD@name}{-10}%
-    \@YAD@knownsecttrue%
-  }{%
-  }%
-  \ifthenelse{\equal{\cmdKV@YAD@depth}{part}}{%
-    \shorttableofcontents{\cmdKV@YAD@name}{-1}%
-    \@YAD@knownsecttrue%
-  }{%
-  }%
-  \ifthenelse{\equal{\cmdKV@YAD@depth}{chapter}}{%
-    \shorttableofcontents{\cmdKV@YAD@name}{0}%
-    \@YAD@knownsecttrue%
-  }{%
-  }%
-  \ifthenelse{\equal{\cmdKV@YAD@depth}{section}}{%
-    \shorttableofcontents{\cmdKV@YAD@name}{1}%
-    \@YAD@knownsecttrue%
-  }{%
-  }%
-  \ifthenelse{\equal{\cmdKV@YAD@depth}{subsection}}{%
-    \shorttableofcontents{\cmdKV@YAD@name}{2}%
-    \@YAD@knownsecttrue%
-  }{%
-  }%
-  \ifthenelse{\equal{\cmdKV@YAD@depth}{subsubsection}}{%
-    \shorttableofcontents{\cmdKV@YAD@name}{3}%
-    \@YAD@knownsecttrue%
-  }{%
-  }%
-  \ifthenelse{\equal{\cmdKV@YAD@depth}{paragraph}}{%
-    \shorttableofcontents{\cmdKV@YAD@name}{4}%
-    \@YAD@knownsecttrue%
-  }{%
-  }%
-  \ifthenelse{\equal{\cmdKV@YAD@depth}{subparagraph}}{%
-    \shorttableofcontents{\cmdKV@YAD@name}{5}%
-    \@YAD@knownsecttrue%
-  }{%
-  }%
-  \ifthenelse{\equal{\cmdKV@YAD@depth}{all}}{%
-    \shorttableofcontents{\cmdKV@YAD@name}{100}%
-    \@YAD@knownsecttrue%
-  }{%
-  }%
-  \if@YAD@knownsect%
-  \else%
-  \shorttableofcontents{\cmdKV@YAD@name}{3}%
-  \YAD@ClassWarningNoLine{%
-    La valeur (`\cmdKV@YAD@depth') passee a la cle `depth'\MessageBreak%
-    en argument de la commande \string\tableofcontents\space n'est
-    pas\MessageBreak%
-    un des niveaux de sectionnement connus (`part', `chapter',\MessageBreak%
-    `section', `subsection', `subsubsection', `paragraph',\MessageBreak%
-    `subparagraph' et `all').\MessageBreak%
-    Le niveau `subsection' va etre utilise\MessageBreak%
-    a la place%
-  }%
-  \fi%
-  \let\setcounter\YAD@ORI@setcounter%
-  \resettocdepth*%
-}%
+        \AfterEndPreamble{%
+        \let\YAD@ORI@tableofcontents\tableofcontents%
+        \renewcommand{\tableofcontents}{%
+        \booltrue{YAD@tableofcontents@used}%
+        \cleardoublepage%
+        \YAD@phantomsection%
+        \let\cmdKV@YAD@name\contentsname%
+        \@ifnextchar[{\tableofcontents@YAD@with@argument}{\tableofcontents@YAD@without@argument}%]
+        }%
+        \newcommand\tableofcontents@YAD@without@argument{%
+        \YAD@ORI@tableofcontents%
+        }%
+        \newcommand\tableofcontents@YAD@with@argument[1][]{%
+        \yadsetup{#1}%
+        \@ifundefined {Etoc@\cmdKV@YAD@depth @@}
+        {%
+        \YAD@ClassWarningNoLine{%
+        La valeur (`\cmdKV@YAD@depth') passee a la cle `depth'\MessageBreak%
+        en argument de la commande \string\tableofcontents\space n'est pas\MessageBreak%
+        un des niveaux de sectionnement connus :\MessageBreak%
+        `part', `chapter', `section', `subsection',\MessageBreak%
+        `subsubsection', `paragraph', `subparagraph', `none' et `all'.\MessageBreak%
+        Le niveau `\YAD@tocdepth' va etre utilise à la place%
+        }%
+        \let\cmdKV@YAD@depth\YAD@tocdepth
+        }{%
+        }%
+        \bgroup
+        \renewcommand{\contentsname}{\cmdKV@YAD@name}
+        \etocsetnexttocdepth{\cmdKV@YAD@depth}%
+        % \etocsettocdepth.toc{\cmdKV@YAD@depth}
+        \YAD@ORI@tableofcontents%
+        \egroup
+        %
+        }%
+        }%
 %    \end{macrocode}
 % \end{macro}
+%
+% On crée la macro "\YAD@setsecnumdepth", analogue à "\@setseccntt@c" du \Package{tocvsec2}, qui fixe
+% la valeur du compteur "secnumdepth" selon l'argument donné sous la forme du
+% nom d'une commande de sectionnement
+%    \begin{macrocode}
+        \newcommand{\YAD@setsecnumdepth}[1]{%
+        \newif\if@YAD@knownsect%
+        \ifthenelse{\equal{#1}{none}}{%
+        \setcounter{secnumdepth}{-10}%
+        \@YAD@knownsecttrue%
+        }{%
+        }%
+        \ifthenelse{\equal{#1}{part}}{%
+        \setcounter{secnumdepth}{-1}%
+        \@YAD@knownsecttrue%
+        }{%
+        }%
+        \ifthenelse{\equal{#1}{chapter}}{%
+        \setcounter{secnumdepth}{0}%
+        \@YAD@knownsecttrue%
+        }{%
+        }%
+        \ifthenelse{\equal{#1}{section}}{%
+        \setcounter{secnumdepth}{1}%
+        \@YAD@knownsecttrue%
+        }{%
+        }%
+        \ifthenelse{\equal{#1}{subsection}}{%
+        \setcounter{secnumdepth}{2}%
+        \@YAD@knownsecttrue%
+        }{%
+        }%
+        \ifthenelse{\equal{#1}{subsubsection}}{%
+        \setcounter{secnumdepth}{3}%
+        \@YAD@knownsecttrue%
+        }{%
+        }%
+        \ifthenelse{\equal{#1}{paragraph}}{%
+        \setcounter{secnumdepth}{4}%
+        \@YAD@knownsecttrue%
+        }{%
+        }%
+        \ifthenelse{\equal{#1}{subparagraph}}{%
+        \setcounter{secnumdepth}{5}%
+        \@YAD@knownsecttrue%
+        }{%
+        }%
+        \ifthenelse{\equal{#1}{all}}{%
+        \setcounter{secnumdepth}{100}%
+        \@YAD@knownsecttrue%
+        }{%
+        }%
+        \if@YAD@knownsect%
+        \else%
+        \setcounter{secnumdepth}{3}%
+        \YAD@ClassWarningNoLine{%
+        La valeur (`\YAD@secnumdepth') passee a la cle `secnumdepth'\MessageBreak%
+        en argument de la commande \string\documentclass\space n'est
+        pas\MessageBreak%
+        un des niveaux de sectionnement connus (`part', `chapter',\MessageBreak%
+        `section', `subsection', `subsubsection', `paragraph',\MessageBreak%
+        `subparagraph', `none' et `all').\MessageBreak%
+        Le niveau `subsection' va etre utilise\MessageBreak%
+        a la place%
+        }%
+        \fi%
+        }
+%    \end{macrocode}
 %
 % Globalement dans le document, la table des matières et la
 % numérotation des paragraphes vont jusqu'aux sous-sections
 %    \begin{macrocode}
-\AtBeginDocument{\maxtocdepth{\YAD@tocdepth}}%
-\AtBeginDocument{\maxsecnumdepth{\YAD@secnumdepth}}%
+        \etocsettocdepth{\YAD@tocdepth}
+        \AtBeginDocument{%
+        % \yadsetup{#1}%
+        \YAD@setsecnumdepth{\YAD@secnumdepth}
+        }
+        % \renewcommand{\setcounter}[2]{}%
+        %
 %    \end{macrocode}
 %
 % Définition des styles de pages (basées sur le \Package{titleps})
@@ -3062,7 +3047,7 @@ This work consists of the file  yathesis.dtx
 % Par défaut, rien n'est numéroté au début du document.
 %    \begin{macrocode}
   \AtBeginDocument{%
-    \setsecnumdepth{none}%
+    \setcounter{secnumdepth}{-10}%
     \frontmatter%
   }%
 %    \end{macrocode}
@@ -3075,7 +3060,7 @@ This work consists of the file  yathesis.dtx
 % table des matières
 %    \begin{macrocode}
   % \settocdepth{none}%
-  \setsecnumdepth{none}%
+  \setcounter{secnumdepth}{-10}%
   \ifdraft{%
     \newgeometry{centering,nomarginpar,bottom=1cm,top=1cm,headheight=\YAD@max@logoheight,margin=0.5cm,tmargin=\YAD@max@logoheight+1cm}%
   }{%
@@ -3134,8 +3119,7 @@ This work consists of the file  yathesis.dtx
 % numéroté, les titres courants sont absents et la profondeur de la table des
 % matières est fixée à son niveau par défaut (sous-sections)
 %    \begin{macrocode}
-  \setsecnumdepth{none}%
-  \resettocdepth*%
+  \setcounter{secnumdepth}{-10}%
   \YAD@setfoot%
 }%
 %    \end{macrocode}
@@ -3163,8 +3147,7 @@ This work consists of the file  yathesis.dtx
 % numéroté et la profondeur de la table des matières est fixée à son
 % niveau par défaut (sous-sections)
 %    \begin{macrocode}
-  \setsecnumdepth{none}%
-  \resettocdepth*%
+  \setcounter{secnumdepth}{-10}%
   \YAD@setfoot%
 }%
 %    \end{macrocode}
@@ -3191,8 +3174,7 @@ This work consists of the file  yathesis.dtx
 % numéroté et la profondeur de la table des matières est fixée à son
 % niveau par défaut (sous-sections)
 %    \begin{macrocode}
-  \setsecnumdepth{none}%
-  \resettocdepth*%
+  \setcounter{secnumdepth}{-10}%
   \YAD@setfoot%
 }%
 %    \end{macrocode}
@@ -3227,8 +3209,7 @@ This work consists of the file  yathesis.dtx
 % Dans la partie principale, la profondeur de la table des matières
 % est fixée à son niveau par défaut (sous-sections).
 %    \begin{macrocode}
-  \resettocdepth*%
-  \setsecnumdepth{\YAD@secnumdepth}%
+  \YAD@setsecnumdepth{\YAD@secnumdepth}%
   \YAD@setfoot%
 }%
 %    \end{macrocode}
@@ -3299,7 +3280,7 @@ This work consists of the file  yathesis.dtx
 % son niveau par défaut (sous-sections)
 %    \begin{macrocode}
   \YAD@phantomsection%
-  \setsecnumdepth{\YAD@secnumdepth}%
+  \YAD@setsecnumdepth{\YAD@secnumdepth}%
   \YAD@bookmarksetup{startatroot}%
   \YAD@setfoot%
 }%
@@ -3320,7 +3301,7 @@ This work consists of the file  yathesis.dtx
 % Dans la partie biblio, aucun élément de structuration n'est
 % numéroté
 %    \begin{macrocode}
-  \setsecnumdepth{none}%
+  \setcounter{secnumdepth}{-10}%
 %    \end{macrocode}
 %    \begin{macrocode}
   \singlespacing%
@@ -3364,7 +3345,7 @@ This work consists of the file  yathesis.dtx
 % Dans la partie finale, rien n'est numéroté
 %    \begin{macrocode}
   \YAD@phantomsection%
-  \setsecnumdepth{none}%
+  \setcounter{secnumdepth}{-10}%
   \YAD@bookmarksetup{startatroot}%
   \YAD@setfoot%
 }%
@@ -3396,7 +3377,7 @@ This work consists of the file  yathesis.dtx
 % Dans la partie glossaire, aucun élément de structuration n'est
 % numéroté
 %    \begin{macrocode}
-  \setsecnumdepth{none}%
+  \setcounter{secnumdepth}{-10}%
   \YAD@setfoot%
 }%
 %    \end{macrocode}
@@ -3418,7 +3399,7 @@ This work consists of the file  yathesis.dtx
 % Dans la partie glossaire, aucun élément de structuration n'est
 % numéroté
 %    \begin{macrocode}
-  \setsecnumdepth{none}%
+  \setcounter{secnumdepth}{-10}%
   \YAD@setfoot%
 }%
 %    \end{macrocode}
@@ -3437,10 +3418,10 @@ This work consists of the file  yathesis.dtx
 % Dans la partie index, aucun élément de structuration n'est
 % numéroté
 %    \begin{macrocode}
-  \setsecnumdepth{none}%
+  \setcounter{secnumdepth}{-10}%
   \cleardoublepage%
   \YAD@phantomsection%
-  \setsecnumdepth{\YAD@secnumdepth}%
+  \YAD@setsecnumdepth{\YAD@secnumdepth}%
   \YAD@bookmarksetup{startatroot}%
   \YAD@setfoot%
 }%
@@ -3466,7 +3447,7 @@ This work consists of the file  yathesis.dtx
 % Dans la partie \textquote{4\ieme{} de couverture}, aucun élément
 % de structuration n'est numéroté
 %    \begin{macrocode}
-  \setsecnumdepth{none}%
+  \setcounter{secnumdepth}{-10}%
 }%
 %    \end{macrocode}
 %
@@ -4824,30 +4805,8 @@ This work consists of the file  yathesis.dtx
 % "\addcontentsline{toc}{...}{...}" ;
 % \item les titres courants soient corrects (par défaut, les titres courants
 %   des chapitres et sections non numérotés sont ceux des chapitre et section
-%   numérotés précédents).
+%   numérotés les précédant).
 % \end{itemize}
-% Pour ce faire, on recourt aux bascules "\setsecnumdepth{none}" and
-% "\resetsecnumdepth" du \Package{tocvsec2}.
-% % Mais, avant cela, on redéfinit la
-% % macro "\resetsecnumdepth" qui souffre de \enquote{spurious spaces} dans les
-% % versions antérieures à celles en date du 2014/03/10.
-% %    \begin{macrocode}
-% \@ifpackagelater{tocvsec2}{2014/03/10}{%
-% }{%
-%   \renewcommand\resetsecnumdepth{%
-%     \@ifstar{%
-%       \setcounter{secnumdepth}{\value{max@secnumdepth}}%
-%       \edef\stack@secnumdepth{\the\c@secnumdepth\relax}%
-%     }{%
-%       \ifx\stack@secnumdepth\@empty%
-%       \PackageWarning{tocvsec2}{There is no previous value for secnumdepth}%
-%       \else%
-%       \afterassignment\gobble@secnumdepth%
-%       \expandafter\c@secnumdepth\expandafter\numexpr\stack@secnumdepth\@nil%
-%       \fi%
-%     }%
-%   }%
-% }%
 \let\YAD@ORI@chapter\chapter%
 \AfterPreamble{% delay the redefinition when titlesec has done its own
   \renewcommand\chapter{%
@@ -4857,10 +4816,10 @@ This work consists of the file  yathesis.dtx
     }{%
       \YAD@bookmarksetup{startatroot}%
     }%
-    \@ifstar{\YAD@starred@chapter}{\YAD@unstarred@chapter}%
+        \@ifstar{\YAD@starred@chapter}{\YAD@unstarred@chapter}%
   }%
   \newcommand{\YAD@starred@chapter}{%
-    \setsecnumdepth{none}%
+    \setcounter{secnumdepth}{-10}%
     \YAD@ORI@chapter%
   }%
   \newcommand{\YAD@unstarred@chapter}{%
@@ -4870,24 +4829,11 @@ This work consists of the file  yathesis.dtx
 % ("\mainmatter"), sans quoi les (sous-)sections de la partie "\frontmatter"
 % sont numérotées, alors que rien ne doit l'être dans cette partie.
 %    \begin{macrocode}
-    \if@mainmatter%
-    \resetsecnumdepth*%
-    \fi%
-    \YAD@ORI@chapter%
+        \if@mainmatter%
+        \YAD@setsecnumdepth{\YAD@secnumdepth}
+        \fi%
+        \YAD@ORI@chapter%
   }%
-  % \newcommand{\YAD@arg@chapter}[2][]{%
-  %   \ifthenelse{\isempty{#1}}{%
-  %     \YAD@ORI@chapter{#2}%
-  %     \def\chaptertitle{#2}%
-  %   }{%
-  %     \YAD@ORI@chapter[#1]{#2}%
-  %     \def\chaptertitle{#1}%
-  %   }%
-  % }%
-  % \newcommand{\YAD@noarg@chapter}[1]{%
-  %   \YAD@ORI@chapter{#1}%
-  %   \def\chaptertitle{#1}%
-  % }%
 %    \end{macrocode}
 % On ne veut pas utiliser cette nouvelle définition de "\chapter*" pour
 % "\tableofcontents" et les listes similaires.
@@ -4920,7 +4866,7 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % Les parties sont par défaut numérotées.
 %    \begin{macrocode}
-\xpretocmd{\part}{\setsecnumdepth{\YAD@secnumdepth}}{}{}%
+\xpretocmd{\part}{\YAD@setsecnumdepth{\YAD@secnumdepth}}{}{}%
 %    \end{macrocode}
 %
 % % On crée une commande créant des chapitres. Celle-ci a un argument optionnel,
@@ -5057,7 +5003,7 @@ This work consists of the file  yathesis.dtx
 % %   à son niveau par défaut (par défaut sous-sections).
 % %    \begin{macrocode}
 % \newenvironment{introduction}[1][\YAD@trintroduction]{%
-%   \setsecnumdepth{\YAD@secnumdepth}%
+%   \YAD@setsecnumdepth{\YAD@secnumdepth}%
 %   \YAD@introduction@begin[#1]%
 %   \Collect@Body\YAD@introduction%
 % }{%
@@ -5078,7 +5024,7 @@ This work consists of the file  yathesis.dtx
 % %   avant qu'elle ne commence.
 % %    \begin{macrocode}
 % \newenvironment{introduction*}[1][\YAD@trintroduction]{%
-%   \setsecnumdepth{none}%
+%   \setcounter{secnumdepth}{-10}%
 %   \YAD@introduction@begin[#1]%
 %   \Collect@Body\YAD@introduction%
 % }{%
@@ -5093,7 +5039,7 @@ This work consists of the file  yathesis.dtx
 % %    \begin{macrocode}
 % \BeforeBeginEnvironment{introduction*}{\pagestyle{mainmatter}}
 % \AfterEndEnvironment{introduction*}{%
-%   \setsecnumdepth{\YAD@secnumdepth}%
+%   \YAD@setsecnumdepth{\YAD@secnumdepth}%
 % }%
 % %    \end{macrocode}
 % %
@@ -5163,7 +5109,7 @@ This work consists of the file  yathesis.dtx
 % %   Environnement de conclusion générale numérotée.
 % %    \begin{macrocode}
 % \newenvironment{conclusion}[1][\YAD@trconclusion]{%
-%   \setsecnumdepth{\YAD@secnumdepth}%
+%   \YAD@setsecnumdepth{\YAD@secnumdepth}%
 %   \YAD@conclusion@begin[#1]%
 %   \Collect@Body\YAD@conclusion%
 % }{%
@@ -5178,7 +5124,7 @@ This work consists of the file  yathesis.dtx
 % %    \begin{macrocode}
 % \BeforeBeginEnvironment{conclusion}{%
 %   \YAD@phantomsection%
-%   \setsecnumdepth{\YAD@secnumdepth}%
+%   \YAD@setsecnumdepth{\YAD@secnumdepth}%
 %   \YAD@bookmarksetup{startatroot}%
 % }%
 % \AfterEndEnvironment{conclusion}{\appendix}
@@ -5190,7 +5136,7 @@ This work consists of the file  yathesis.dtx
 % %   chargé avant qu'elle ne commence.
 % %    \begin{macrocode}
 % \newenvironment{conclusion*}[1][\YAD@trconclusion]{%
-%   \setsecnumdepth{none}%
+%   \setcounter{secnumdepth}{-10}%
 %   \YAD@conclusion@begin[#1]%
 %   \Collect@Body\YAD@conclusion%
 % }{%
@@ -5205,12 +5151,12 @@ This work consists of the file  yathesis.dtx
 % %    \begin{macrocode}
 % \BeforeBeginEnvironment{conclusion*}{%
 %   \YAD@phantomsection%
-%   \setsecnumdepth{\YAD@secnumdepth}%
+%   \YAD@setsecnumdepth{\YAD@secnumdepth}%
 %   \YAD@bookmarksetup{startatroot}%
 % }%
 % \AfterEndEnvironment{conclusion*}{%
 %   \appendix%
-%   \setsecnumdepth{\YAD@secnumdepth}%
+%   \YAD@setsecnumdepth{\YAD@secnumdepth}%
 % }%
 % %    \end{macrocode}
 % %
@@ -6149,8 +6095,8 @@ $clean_ext = 'synctex.gz synctex.gz(busy) run.xml tex.bak bbl bcf fdb_latexmk ru
 \endinput
 
 %%% Local Variables:
-%%% mode: latex
+%%% mode: tex
 %%% eval: (doctex-mode)
-%%% TeX-master: t
 %%% ispell-local-dictionary: "francais"
+%%% TeX-master: t
 %%% End:
