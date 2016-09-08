@@ -2746,7 +2746,7 @@ This work consists of the file  yathesis.dtx
       and bool {YAD@valid@year}%
     }{%
       \csdef{printdate}{%
-        \formatdate{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}%
+        \formatdate{#1}{#2}{#3}%
       }%
     }{%
       \csdef{printdate}{%
@@ -2767,7 +2767,7 @@ This work consists of the file  yathesis.dtx
       and bool {YAD@valid@year}%
     }{%
       \csdef{printsubmissiondate}{%
-        \formatdate{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}%
+        \formatdate{#1}{#2}{#3}%
       }%
     }{%
       \csdef{printsubmissiondate}{%
