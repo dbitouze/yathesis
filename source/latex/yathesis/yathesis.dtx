@@ -3648,24 +3648,27 @@ This work consists of the file  yathesis.dtx
   \noindent%
   \ifcsdef{printordernumber}{%
 %    \end{macrocode}
-% On n'affiche le numéro d'ordre de la thèse que sur la 1\iere{} page du
-% document : 1\iere{} de couverture s'il y a, page de titre en langue
-% principale sinon.
+% S'il est demandé, le numéro d'ordre de la thèse n'est affiché que sur la
+% 1\iere{} page du document : 1\iere{} de couverture s'il y a, page de titre en
+% langue principale sinon.
 %    \begin{macrocode}
+  \newcommand\YAD@printedordernumber{%
+    \itshape%
+    \sffamily%
+    \YAD@translation{ordernumber}%
+    \IfLanguageName{french}{%
+      \FBcolonspace%
+    }{%
+    }: \printordernumber%
+  }
+  \ifdraft{}{\vspace*{\stretch{1}}}%
   \ifboolexpr{%
     bool {YAD@cover@page}%
     or (bool {YAD@nofrontcover} and test {\IfLanguageName{\YAD@mainlanguage}})%
   }{%
-    \ifdraft{}{\vspace*{\stretch{1}}}%
     % \vspace*{\stretch{1}}%
     \raggedleft{%
-      \itshape%
-      \sffamily%
-      \YAD@translation{ordernumber}%
-      \IfLanguageName{french}{%
-        \FBcolonspace%
-      }{%
-      }: \printordernumber%
+      \YAD@printedordernumber%
     }%
   }{%
   }%
