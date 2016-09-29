@@ -447,6 +447,9 @@ This work consists of the file  yathesis.dtx
 \newbool{YAD@valid@month}
 \newbool{YAD@valid@year}
 \newbool{YAD@mainmatter@used}
+\newbool{YAD@localtocs}%
+\newbool{YAD@nextwithlocaltoc}%
+%
 \newlength{\cmdKV@YAD@logoheight}
 \newlength{\YAD@max@logoheight}
 \newlength{\YAD@default@logoheight}
@@ -630,6 +633,7 @@ This work consists of the file  yathesis.dtx
 \YAD@create@boolean{noprintbibliography}%
 \YAD@create@boolean{nofrontcover}%
 \YAD@create@boolean{hdr}%
+\YAD@create@boolean{localtocs@classoption}%
 %
 \yadsetup{noerror=true}%
 %
@@ -758,6 +762,21 @@ This work consists of the file  yathesis.dtx
   },%
   output/screen/.code={},%
   output/.initial=screen%
+}%
+%    \end{macrocode}
+%
+% On définit la clé de classe "localtocs" qui fait que les titres des chapitres
+% de la partie principale sont automatiquement suivis d'une table des matières
+% locale à ce chapitre, de profondeur pouvant être précisée mais par défaut
+% celle par défaut de la table des matières. 
+%    \begin{macrocode}
+\def\YAD@localtocsdepth{\YAD@tocdepth}%
+\yadsetup{%
+  localtocs/.code={%
+    \booltrue{YAD@localtocs@classoption}%
+    \def\YAD@localtocsdepth{#1}%
+  },%
+  localtocs/.default=\YAD@tocdepth%
 }%
 %    \end{macrocode}
 %
@@ -2880,53 +2899,65 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % \end{macro}
 %
-% Redéfinition de la commande "\tableofcontents" de sorte qu'elle
-% admette un argument optionnel permettant d'afficher une table des
-% matières supplémentaire jusqu'à un niveau donné. Cette commande, qui
-% s'appuie sur le \Package{etoc}, est exprimée en les même termes que le
-% \Package{tocvsec2} (désormais non chargé). On lui applique le style de page propre à la
-% partie liminaire du document, notamment début de la prise en
-% compte des chapitres et sections (numérotés ou pas) dans la table
-% des matières.
+% Redéfinition de la commande "\tableofcontents" de sorte qu'elle admette un
+% argument optionnel permettant d'afficher une table des matières supplémentaire
+% jusqu'à un niveau donné. Cette commande, qui s'appuie sur le \Package{etoc},
+% est exprimée en les même termes que le \Package{tocvsec2} (désormais non
+% chargé). On lui applique le style de page propre à la partie liminaire du
+% document, notamment début de la prise en compte des chapitres et sections
+% (numérotés ou pas) dans la table des matières. 
 %
 % \begin{macro}{\tableofcontents}
 %    \begin{macrocode}
         \AfterEndPreamble{%
-        \let\YAD@ORI@tableofcontents\tableofcontents%
-        \renewcommand{\tableofcontents}{%
-        \pagestyle{preliminary}%
-        \booltrue{YAD@tableofcontents@used}%
-        \cleardoublepage%
-        \YAD@phantomsection%
-        \let\cmdKV@YAD@name\contentsname%
-        \@ifnextchar[{\tableofcontents@YAD@with@argument}{\tableofcontents@YAD@without@argument}%]
-        }%
-        \newcommand\tableofcontents@YAD@without@argument{%
-        \YAD@ORI@tableofcontents%
-        }%
-        \newcommand\tableofcontents@YAD@with@argument[1][]{%
-        \yadsetup{#1}%
-        \@ifundefined {Etoc@\cmdKV@YAD@depth @@}
-        {%
-        \YAD@ClassWarningNoLine{%
-        La valeur (`\cmdKV@YAD@depth') passee a la cle `depth'\MessageBreak%
-        en argument de la commande \string\tableofcontents\space n'est pas\MessageBreak%
-        un des niveaux de sectionnement connus :\MessageBreak%
-        `part', `chapter', `section', `subsection',\MessageBreak%
-        `subsubsection', `paragraph', `subparagraph', `none' et `all'.\MessageBreak%
-        Le niveau `\YAD@tocdepth' va etre utilise à la place%
-        }%
-        \let\cmdKV@YAD@depth\YAD@tocdepth
-        }{%
-        }%
-        \bgroup
-        \renewcommand{\contentsname}{\cmdKV@YAD@name}
-        \etocsetnexttocdepth{\cmdKV@YAD@depth}%
-        % \etocsettocdepth.toc{\cmdKV@YAD@depth}
-        \YAD@ORI@tableofcontents%
-        \egroup
-        %
-        }%
+          \let\YAD@ORI@tableofcontents\tableofcontents%
+          \let\YAD@ORI@localtableofcontents\localtableofcontents%
+          \newcommand\tableofcontents@YAD@without@argument{%
+            \YAD@globalstyle
+            \YAD@computenumwidths\relax%
+            \etoctableofcontents%
+            \etocsetnexttocdepth{\YAD@tocdepth}
+            \let\cmdKV@YAD@depth\YAD@tocdepth
+            \let\cmdKV@YAD@name\contentsname%
+            \YAD@localstyle % pour les local TOCs qui suivent
+          }%
+          \newcommand\tableofcontents@YAD@with@argument[1][]{%
+            \yadsetup{#1}%
+            \@ifundefined {Etoc@\cmdKV@YAD@depth @@}
+            {%
+              \YAD@ClassWarningNoLine{%
+                La valeur (`\cmdKV@YAD@depth') passee a la cle `depth'\MessageBreak%
+                en argument de la commande \string\tableofcontents\space n'est pas\MessageBreak%
+                un des niveaux de sectionnement connus :\MessageBreak%
+                `part', `chapter', `section', `subsection',\MessageBreak%
+                `subsubsection', `paragraph', `subparagraph', `none' et `all'.\MessageBreak%
+                Le niveau `\YAD@tocdepth' va etre utilise a la place%
+              }%
+              \let\cmdKV@YAD@depth\YAD@tocdepth
+            }{%
+            }%
+            \YAD@globalstyle
+            \etocsetnexttocdepth{\cmdKV@YAD@depth}%
+            \YAD@computenumwidths\relax% note: a effet global
+            \etocsetnexttocdepth{\cmdKV@YAD@depth}% on doit le répéter, car c'est un truc à un coup seulement
+            \etoctableofcontents%
+            \etocsettocdepth{\YAD@tocdepth}
+            \let\cmdKV@YAD@depth\YAD@tocdepth
+            \let\cmdKV@YAD@name\contentsname%
+            \YAD@localstyle % pour les local TOCs qui suivent
+          }%
+          \renewcommand{\tableofcontents}{%
+            \pagestyle{preliminary}%
+            \booltrue{YAD@tableofcontents@used}%
+            \cleardoublepage%
+            \YAD@phantomsection%
+            % \renewcommand{\contentsname}{\cmdKV@YAD@name}
+            \@ifnextchar[{%
+              \tableofcontents@YAD@with@argument%
+            }{%
+              \tableofcontents@YAD@without@argument%
+            }%]
+          }%
         }%
 %    \end{macrocode}
 % \end{macro}
@@ -3045,11 +3076,13 @@ This work consists of the file  yathesis.dtx
 }%
 %    \end{macrocode}
 % \end{macro}
-% Par défaut, rien n'est numéroté au début du document.
+% Par défaut, au début du document rien n'est numéroté et les chapitres ne
+% débutent pas par des tables des matières locales. 
 %    \begin{macrocode}
   \AtBeginDocument{%
     \setcounter{secnumdepth}{-10}%
     \frontmatter%
+    \boolfalse{YAD@localtocs}%
   }%
 %    \end{macrocode}
 % Définition du style de page des titres
@@ -3215,10 +3248,16 @@ This work consists of the file  yathesis.dtx
 }%
 %    \end{macrocode}
 % Extension de la commande "\mainmatter" de sorte qu'elle applique le style de
-% page "mainmatter".
+% page "mainmatter" et que les chapitres qui s'y trouvent débutent
+% automatiquement par des tables des matières locales.
 %    \begin{macrocode}
 \xapptocmd{\mainmatter}{%
   \booltrue{YAD@mainmatter@used}%
+  \ifbool{YAD@localtocs@classoption}%
+  {%
+    \booltrue{YAD@localtocs}%
+  }{%
+  }
   \pagestyle{mainmatter}%
 }{}{}%
 %    \end{macrocode}
@@ -3352,11 +3391,13 @@ This work consists of the file  yathesis.dtx
 }%
 %    \end{macrocode}
 % Extension de la commande "\backmatter" de sorte qu'elle applique le style de
-% page "backmatter".
+% page "backmatter" et que les chapitres qui s'y trouvent ne débutent pas par
+% des tables des matières locales.
 % \begin{macro}{\backmatter}
 %    \begin{macrocode}
 \xapptocmd{\backmatter}{%
   \pagestyle{backmatter}%
+  \boolfalse{YAD@localtocs}%
 }{}{}%
 %    \end{macrocode}
 % \end{macro}
@@ -4797,6 +4838,283 @@ This work consists of the file  yathesis.dtx
 }%
 %    \end{macrocode}
 % \end{environment}
+%
+%
+%\section{Commandes et styles pour les tables des matières locales}
+%
+% Les commandes et styles suivants, ainsi que toute la machinerie permettant de
+% faire débuter les chapitres par leurs tables des matières locales s'appuient
+% sur le \pkg{etoc} de Jean-François Burnol (qui a aimablement fourni le code
+% suivant). 
+%    \begin{macrocode}
+% it will be easy to globally shift the TOC horizontally if needed
+\def\YAD@leftmargin {0pt}
+\def\YAD@rightmargin {2.55em}% like LaTeX’s \@tocrmarg
+%    \end{macrocode}
+% this is for dotted leaders
+%    \begin{macrocode}
+\newbox\YAD@leaderbox
+\def\YAD@leaderboxwidth {0.7777em}% about like what standard classes do
+%    \end{macrocode}
+% vertical spacing
+%    \begin{macrocode}
+\def\YAD@verysmallvskip {0pt plus .2pt}
+\def\YAD@globalmedvskip {1em plus 1pt}
+\def\YAD@localmedvskip {.25em plus .25pt}
+\def\YAD@bigvskip {2.25em plus 1pt}
+%    \end{macrocode}
+% the ‘‘numwidths’’ for typesetting the numbering of division units.
+% I don’t recall exactly how (and for which fonts) these figures were chosen.
+% They quickly prove too small if using Roman numerals (as do too the book
+% class defaults even though they are a bit larger).
+%    \begin{macrocode}
+\def\YAD@numwidthB {1.5em} % chapter
+\def\YAD@numwidthC {2.278em}% section, I think default is 2.3em
+\def\YAD@numwidthD {3.056em}% analog in standard class is 3.2em
+\def\YAD@numwidthE {3.833em}% analog in standard class is 4.1em
+\def\YAD@numwidthF {4.611em}% analog in standard class is 5em
+\def\YAD@numwidthG {5.389em}% analog in standard class is 6em
+%    \end{macrocode}
+%
+%    \begin{macrocode}
+\newcommand\YAD@setlinestyle [2]{% #1= unit, #2= numwidth as macro
+  \etocsetstyle{#1}
+  {\advance\leftskip#2\relax}
+  {\vskip \YAD@verysmallvskip\relax
+    \leavevmode
+    {\interlinepenalty\@M
+      \etocifnumbered
+      {\llap{\makebox[#2][l]{\etocnumber}}}{\advance\leftskip-#2\relax}%
+      \etocname
+      \nobreak\leaders \copy\YAD@leaderbox
+      \hfil\makebox[-\parfillskip][r]{\etocpage}%
+      \par }%
+  }
+  {}
+  {\advance\leftskip-#2\relax}%
+}
+%    \end{macrocode}
+%    \begin{macrocode}
+\newcommand\YAD@globalstyle {% encapsule le style pour les global TOCs
+  \etocsettocstyle {\if@twocolumn \@restonecoltrue \onecolumn \else
+    \@restonecolfalse \fi
+    \parindent\z@ \leftskip\z@skip \rightskip \z@skip
+    \setbox\YAD@leaderbox\hbox to \YAD@leaderboxwidth{\hss.\hss}%
+    \chapter *[\cmdKV@YAD@name]{%\noindent\kern\YAD@leftmargin\relax % uses "pt"...
+      % \contentsname%
+      % \@mkboth{\MakeUppercase\contentsname}{\MakeUppercase\contentsname}%
+      \cmdKV@YAD@name%
+    }%
+    \rightskip \YAD@rightmargin\relax
+    \parfillskip -\rightskip % or a smaller value if desired
+    \leftskip \YAD@leftmargin \relax } {\if@restonecol \twocolumn
+    \fi\cleardoublepage}%
+  % 
+  \etocsetstyle{part} {} {\addpenalty {-\@highpenalty}%
+    \addvspace \YAD@bigvskip \leavevmode {\large
+      \bfseries % use a group to limit font change
+      \interlinepenalty\@M \etocifnumbered{\etocnumber\hspace{1em}}{}%
+      \etocname \nobreak\hfil\makebox[-\parfillskip][r]{\etocpage}}\par
+    \nobreak } {} {}
+  % 
+  \etocsetstyle{chapter} {\advance\leftskip\YAD@numwidthB\relax} {\addpenalty
+    {-\@highpenalty }%
+    \vskip \YAD@globalmedvskip\relax \leavevmode {\interlinepenalty\@M \etocifnumbered
+      {\llap{\makebox[\YAD@numwidthB][l]{\bfseries\etocnumber}}}
+      {\advance\leftskip-\YAD@numwidthB\relax}%
+      \bfseries\etocname
+      \nobreak\hfil\makebox[-\parfillskip][r]{\etocpage}\par }%
+    \penalty \@highpenalty } {} {\advance\leftskip-\YAD@numwidthB\relax}
+  % 
+  \YAD@setlinestyle {section}{\YAD@numwidthC}%
+  \YAD@setlinestyle {subsection}{\YAD@numwidthD}%
+  \YAD@setlinestyle {subsubsection}{\YAD@numwidthE}%
+  \YAD@setlinestyle {paragraph}{\YAD@numwidthF}%
+  \YAD@setlinestyle {subparagraph}{\YAD@numwidthG}%
+}
+%    \end{macrocode}
+% style pour les local TOCs
+%    \begin{macrocode}
+\newcommand\YAD@localstyle {%
+  \etocsettocstyle {%
+    \if@twocolumn
+    \@restonecoltrue
+    \onecolumn
+    \else
+    \@restonecolfalse
+    \fi%
+    \setbox\YAD@leaderbox\hbox to \YAD@leaderboxwidth{\hss.\hss}%
+    \parindent\z@
+    \dimen@ 2.25em % soon to be \leftskip
+    \section *{\kern\dimen@ % \dimen@ works here by sheer luck
+      % \contentsname%
+      % \@mkboth{\MakeUppercase\contentsname}{\MakeUppercase\contentsname}%
+      \large\textbf{\translate{lbl-localtocname}}%
+    }%
+    \parskip \z@skip \vspace{-1.25\baselineskip}% somewhat ad hoc
+    \leftskip 2.25em \rightskip 4.5em \advance\rightskip-\YAD@rightmargin\relax
+    \leavevmode\leaders\hrule\@height\p@\hfill\kern\z@\par
+    \rightskip 4.5em
+    \parfillskip -\YAD@rightmargin\relax%
+  }{%
+    \nobreak\vskip-.5\baselineskip
+    \leavevmode\leaders\hrule\@height\p@\hfill\kern\z@\par
+    \bigskip \if@restonecol \twocolumn \fi
+  }
+  % % 
+  \etocsetstyle{section} {%
+    \advance\leftskip\YAD@numwidthC\relax%
+  } {%
+    \addpenalty
+    \@secpenalty \etociffirst{}{\addvspace{\YAD@localmedvskip}}%
+    \leavevmode {%
+      \interlinepenalty\@M \bfseries%
+      \etocifnumbered
+      {%
+        \llap{%
+          \makebox[\YAD@numwidthC][l]{\etocnumber}%
+        }%
+      }
+      {%
+        \advance\leftskip-\YAD@numwidthC%
+      }%
+      \etocname\nobreak\hfil\makebox[-\parfillskip][r]{\etocpage}\par%
+    }%
+    \penalty \@highpenalty%
+  }
+  {} {%
+    \advance\leftskip-\YAD@numwidthC\relax%
+  }
+  % % 
+  \YAD@setlinestyle {subsection}{\YAD@numwidthD}%
+  \YAD@setlinestyle {subsubsection}{\YAD@numwidthE}%
+  \YAD@setlinestyle {paragraph}{\YAD@numwidthF}%
+  \YAD@setlinestyle {subparagraph}{\YAD@numwidthG}%
+}
+%    \end{macrocode}
+%    \begin{macrocode}
+\newcommand*\YAD@computenumwidths@ [2] {% #1 pour `etoc' ou `local', #2=pour le
+                                % \kern 
+  \begingroup
+  \def\YAD@numwidthB {0pt}%
+  \def\YAD@numwidthC {0pt}%
+  \def\YAD@numwidthD {0pt}%
+  \def\YAD@numwidthE {0pt}%
+  \def\YAD@numwidthF {0pt}%
+  \def\YAD@numwidthG {0pt}%
+  \etocsetstyle{part}{}{}{}{}%
+  \etocsetstyle{chapter}{}
+  {\setbox0\hbox{\bfseries\etocthenumber\kern#2}}
+  {\ifdim\wd0>\YAD@numwidthB\edef\YAD@numwidthB{\the\wd0}\fi}{}%
+  \etocsetstyle{section}{}
+  {\setbox0\hbox{\bfseries\etocthenumber\kern#2}}
+  {\ifdim\wd0>\YAD@numwidthC\edef\YAD@numwidthC{\the\wd0}\fi}{}%
+  \etocsetstyle{subsection}{}
+  {\setbox0\hbox{\etocthenumber\kern#2}}
+  {\ifdim\wd0>\YAD@numwidthD\edef\YAD@numwidthD{\the\wd0}\fi}{}%
+  \etocsetstyle{subsubsection}{}
+  {\setbox0\hbox{\etocthenumber\kern#2}}
+  {\ifdim\wd0>\YAD@numwidthE\edef\YAD@numwidthE{\the\wd0}\fi}{}%
+  \etocsetstyle{paragraph}{}
+  {\setbox0\hbox{\etocthenumber\kern#2}}
+  {\ifdim\wd0>\YAD@numwidthF\edef\YAD@numwidthF{\the\wd0}\fi}{}%
+  \etocsetstyle{subparagraph}{}
+  {\setbox0\hbox{\etocthenumber\kern#2}}
+  {\ifdim\wd0>\YAD@numwidthG\edef\YAD@numwidthG{\the\wd0}\fi}{}%
+  % 
+  \etocsettocstyle{}
+  {\global\let\YAD@numwidthB\YAD@numwidthB
+    \global\let\YAD@numwidthC\YAD@numwidthC
+    \global\let\YAD@numwidthD\YAD@numwidthD
+    \global\let\YAD@numwidthE\YAD@numwidthE
+    \global\let\YAD@numwidthF\YAD@numwidthF
+    \global\let\YAD@numwidthG\YAD@numwidthG}%
+  \etocnopar
+  \csname YAD@ORI@#1tableofcontents\endcsname
+  \endgroup
+}%
+%    \end{macrocode}
+%    \begin{macrocode}
+\newcommand*\YAD@computenumwidths [1][0.5em]{%
+  \YAD@computenumwidths@ {}{#1}%
+}
+\newcommand*\YAD@computelocalnumwidths [1][0.5em]{%
+  \YAD@computenumwidths@ {local}{#1}%
+}
+%    \end{macrocode}
+%
+% \section{Machinerie pour les tables des matières locales}
+%
+% Les tables des matières locales ne sont pas imprimées si elles sont vides.
+%    \begin{macrocode}
+\etocchecksemptiness
+%    \end{macrocode}
+%
+% Ajout automatique de tables des matières locales.
+%    \begin{macrocode}
+\AfterEndPreamble{%
+  \@ifundefined {Etoc@\YAD@localtocsdepth @@}
+  {%
+    \YAD@ClassWarningNoLine{%
+      La valeur (`\YAD@localtocsdepth') passee a la cle `localtocs'\MessageBreak%
+      en option de classe n'est pas un des niveaux de\MessageBreak%
+      sectionnement connus :\MessageBreak%
+      `part', `chapter', `section', `subsection',\MessageBreak%
+      `subsubsection', `paragraph', `subparagraph'.\MessageBreak%
+      Le niveau `\YAD@tocdepth' va etre utilise a la place%
+    }%
+  }{%
+  }%
+}
+\newcommand{\YAD@default@localtoc}{%
+  \ifbool{YAD@localtocs}%
+  {%
+    \bgroup
+    \YAD@localstyle%
+    \YAD@computelocalnumwidths\relax%
+    \@ifundefined {Etoc@\YAD@localtocsdepth @@}
+    {%
+    }{%
+      \etocsetnexttocdepth{\YAD@localtocsdepth}%
+    }
+    \localtableofcontents%
+    \YAD@globalstyle
+    \egroup
+  }{%
+  }%
+}
+\newcommand{\YAD@localtoc}{\YAD@default@localtoc}
+\newcommand{\stoplocaltocs}{%
+  \boolfalse{YAD@localtocs}%
+}
+\newcommand{\startlocaltocs}{%
+  \booltrue{YAD@localtocs}%
+}
+\newcommand{\nextwithoutlocaltoc}{%
+  \renewcommand{\YAD@localtoc}{}%
+}
+\newcommand{\nextwithlocaltoc}{%
+  \renewcommand{\YAD@localtoc}{\YAD@default@localtoc}%
+  \booltrue{YAD@localtocs}%
+  \booltrue{YAD@nextwithlocaltoc}%
+}
+\apptocmd{\@makechapterhead}{%
+  \ifbool{YAD@localtocs}%
+  {%
+    \YAD@localtoc%
+    \renewcommand{\YAD@localtoc}{\YAD@default@localtoc}%
+    \ifbool{YAD@nextwithlocaltoc}%
+    {%
+      \boolfalse{YAD@localtocs}%
+      \boolfalse{YAD@nextwithlocaltoc}%
+      % \boolfalse{YAD@localtocs@classoption}%
+    }{%
+    }
+  }{%
+  }%
+}{}{}%
+%    \end{macrocode}
+% \end{environment}
 % On redéfinit la commande "\chapter" de sorte que, dans un chapitre non
 % numéroté ("\chapter*") :
 % \begin{itemize}
@@ -4839,10 +5157,18 @@ This work consists of the file  yathesis.dtx
 % On ne veut pas utiliser cette nouvelle définition de "\chapter*" pour
 % "\tableofcontents" et les listes similaires.
 %    \begin{macrocode}
-  % \xpatchcmd{\tableofcontents}{\chapter}{\YAD@ORI@chapter}{}{}%
-  % \xpatchcmd{\shorttableofcontents}{\chapter}{\YAD@ORI@chapter}{}{}%
-  % \xpatchcmd{\listoftables}{\chapter}{\YAD@ORI@chapter}{}{}%
-  % \xpatchcmd{\listoffigures}{\chapter}{\YAD@ORI@chapter}{}{}%
+\xpretocmd{\tableofcontents}{\renewcommand{\YAD@localtoc}{}}{}{}%
+\xapptocmd{\tableofcontents}{\renewcommand{\YAD@localtoc}{\YAD@default@localtoc}}{}{}%
+\xpretocmd{\listoftables}{\renewcommand{\YAD@localtoc}{}}{}{}%
+\xapptocmd{\listoftables}{\renewcommand{\YAD@localtoc}{\YAD@default@localtoc}}{}{}%
+\xpretocmd{\listoffigures}{\renewcommand{\YAD@localtoc}{}}{}{}%
+\xapptocmd{\listoffigures}{\renewcommand{\YAD@localtoc}{\YAD@default@localtoc}}{}{}%
+\xpretocmd{\printbibliography}{\renewcommand{\YAD@localtoc}{}}{}{}%
+\xapptocmd{\printbibliography}{\renewcommand{\YAD@localtoc}{\YAD@default@localtoc}}{}{}%
+\xpretocmd{\printglossary}{\renewcommand{\YAD@localtoc}{}}{}{}%
+\xapptocmd{\printglossary}{\renewcommand{\YAD@localtoc}{\YAD@default@localtoc}}{}{}%
+\xpretocmd{\printindex}{\renewcommand{\YAD@localtoc}{}}{}{}%
+\xapptocmd{\printindex}{\renewcommand{\YAD@localtoc}{\YAD@default@localtoc}}{}{}%
 %    \end{macrocode}
 % Si le \Package{floatrow} est chargé, on doit aussi ne pas utiliser cette
 % nouvelle définition de "\chapter*" pour les listes de flottants personnalisés
@@ -5623,6 +5949,7 @@ This work consists of the file  yathesis.dtx
 %<class>\expression{inprogressfoottext}{\translate{lbl-versiondate}}{\translate{lbl-versiondate}}%
 \expression{submittedfoottext}{Version soumise en date du}{Submitted work
   as of}%
+\expression{localtocname}{Sommaire du pr\'esent chapitre}{Outline of the current chapter}%
 %    \end{macrocode}
 %
 %    \begin{macrocode}
