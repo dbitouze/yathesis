@@ -2176,7 +2176,7 @@ This work consists of the file  yathesis.dtx
 % Commande où seront stockés les logos (avec écrasement à chaque
 % nouveau logo).
 %    \begin{macrocode}
-        \newcommand*\YAD@logo{}%
+\newcommand*\YAD@logo{}%
 %    \end{macrocode}
 %
 % On crée une commande créant des commandes.
@@ -5126,32 +5126,34 @@ This work consists of the file  yathesis.dtx
 %   des chapitres et sections non numérotés sont ceux des chapitre et section
 %   numérotés les précédant).
 % \end{itemize}
+%    \begin{macrocode}
 \let\YAD@ORI@chapter\chapter%
 \AfterPreamble{% delay the redefinition when titlesec has done its own
-  \renewcommand\chapter{%
+  \renewcommand\chapter
+  {%
     \cleardoublepage%
     \YAD@phantomsection%
     \ifbool{YAD@output@paper}{%
     }{%
       \YAD@bookmarksetup{startatroot}%
     }%
-        \@ifstar{\YAD@starred@chapter}{\YAD@unstarred@chapter}%
+    \@ifstar{\YAD@starred@chapter}{\YAD@unstarred@chapter}%
   }%
   \newcommand{\YAD@starred@chapter}{%
     \setcounter{secnumdepth}{-10}%
     \YAD@ORI@chapter%
   }%
-  \newcommand{\YAD@unstarred@chapter}{%
 %    \end{macrocode}
 % La numérotation des chapitres non étoilés au niveau initial
 % ("\resetsecnumdepth*") n'est activée qu'à partir de la partie principale
 % ("\mainmatter"), sans quoi les (sous-)sections de la partie "\frontmatter"
 % sont numérotées, alors que rien ne doit l'être dans cette partie.
 %    \begin{macrocode}
-        \if@mainmatter%
-        \YAD@setsecnumdepth{\YAD@secnumdepth}
-        \fi%
-        \YAD@ORI@chapter%
+  \newcommand{\YAD@unstarred@chapter}{%
+    \if@mainmatter%
+    \YAD@setsecnumdepth{\YAD@secnumdepth}
+    \fi%
+    \YAD@ORI@chapter%
   }%
 %    \end{macrocode}
 % On ne veut pas utiliser cette nouvelle définition de "\chapter*" pour
@@ -6426,5 +6428,6 @@ $clean_ext = 'synctex.gz synctex.gz(busy) run.xml tex.bak bbl bcf fdb_latexmk ru
 %%% mode: tex
 %%% eval: (doctex-mode)
 %%% ispell-local-dictionary: "francais"
+%%% TeX-command-default: "TeX"
 %%% TeX-master: t
 %%% End:
