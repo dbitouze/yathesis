@@ -142,7 +142,7 @@ différentes versions du document : \enquote{intermédiaire} (par défaut),
           intermédiaire en date du \meta{date du jour}} ou
         \foreignquote{english}{Work in progress as of \meta{date du jour}} est
         désactivé ;
-      \item \changes*{v0.99f}{2014/07/11}{En versions \enquote{à soumettre},
+      \item \changes*{v0.99f}{2014-07-11}{En versions \enquote{à soumettre},
           date de soutenance et composition du jury absentes des pages de titre
           (et non obligatoires)}% ^^A
         % ^^A
@@ -156,7 +156,7 @@ différentes versions du document : \enquote{intermédiaire} (par défaut),
           versions soumises aux rapporteurs où elle ne figure nulle part.}.
       \end{enumerate}
     \item[\docValue{submitted*}.] %
-      \changes{v0.99k}{2014/10/01}{Nouvelle commande
+      \changes{v0.99k}{2014-10-01}{Nouvelle commande
         \protect\refCom{submissiondate} permettant de stipuler une date de
         soumission du mémoire aux rapporteurs}% ^^A
       % ^^A
@@ -316,7 +316,7 @@ les pages de résumés et de 4\ieme{} de couverture
 de laboratoires parmi ceux définis au moyen de la commande
 \refCom{laboratory}.%^^A
 %^^A
-\changes{v0.99j}{2014/07/18}{Nouvelle clé \protect\refKey{numlaboratories}
+\changes{v0.99j}{2014-07-18}{Nouvelle clé \protect\refKey{numlaboratories}
   permettant de spécifier le nombre ($\geqslant 0$) de laboratoires devant
   figurer sur les pages de résumés et de 4\ieme{} de couverture}%^^A
 
@@ -344,7 +344,7 @@ package\footnote{Par souci de compatibilité ascendante, la clé désormais
   \tcbset{before lower=\vspace*{\baselineskip}\par}
   \begin{docKey}{fncychap}{=\docValue{Sonny}\textbar\docValue{Lenny}\textbar\docValue{Glenn}\textbar\docValue{Conny}\textbar\docValue{Rejne}\textbar\docValue{Bjarne}\textbar\docValue{PetersLenny}\textbar\docValue{Bjornstrup}\textbar\docValue{none}}{pas
       de valeur par défaut, initialement \docValue{PetersLenny}}
-    \changes{v0.99g}{2014/07/13}{Clé \protect\refAux{chap-style} remplacée par
+    \changes{v0.99g}{2014-07-13}{Clé \protect\refAux{chap-style} remplacée par
       (et alias de) la clé \protect\refKey{fncychap}}%^^A
     % ^^A
     Cette clé permet de spécifier un autre style du \Package{fncychap}.
@@ -468,7 +468,7 @@ les habilitations à diriger les recherches.
 
 \begin{docKey}{hdr}{=\docValue{true}\textbar\docValue{false}}{par défaut
     \docValue{true}, initialement \docValue{false}}
-  \changes{v0.99f}{2014/07/11}{Nouvelle clé \protect\refKey{hdr} permettant de
+  \changes{v0.99f}{2014-07-11}{Nouvelle clé \protect\refKey{hdr} permettant de
     d'utiliser la \yatcl{} pour une \gls{hdr}}%^^A
   % ^^A
   Cette clé spécifie que le document est une habilitation à diriger les
@@ -485,7 +485,7 @@ celles dont le label est suffixé par \enquote{\texttt{-hdr}} dans le
 \section{Options à passer aux packages chargés par la classe}
 \label{sec-options-passer-aux}
 
-\changes{v0.99g}{2014/07/13}{Des options peuvent être passées aux packages
+\changes{v0.99g}{2014-07-13}{Des options peuvent être passées aux packages
   chargés par \yat{}}%^^A
 %^^A
 Pour plusieurs de ses fonctionnalités, la \yatcl s'appuie sur des packages
@@ -555,7 +555,7 @@ peuvent être passées à leurs options).
 \end{docKey}
 \begin{docKey}{titleps}{=\marg{option(s)}}{pas valeur par défaut, initialement
     vide}
-  % ^^A \changes{v0.99j}{2014/07/18}{Clé \protect\refAux{titleps} remplacée par
+  % ^^A \changes{v0.99j}{2014-07-18}{Clé \protect\refAux{titleps} remplacée par
   % ^^A (et alias de) la clé \protect\refKey{titlesec}}% ^^A
   Cette option permet de passer une ou plusieurs \meta{option(s)} au
   \Package{titleps}.
@@ -576,7 +576,7 @@ peuvent être passées à leurs options).
   \Package{datetime}.
 \end{docKey}
 % ^^A
-\changes*{v0.99k}{2014/10/01}{%
+\changes*{v0.99k}{2014-10-01}{%
   Option de classe \protect\docAuxKey*{bookmark} supprimée%^^A
 }%^^A
 
@@ -734,7 +734,7 @@ français et en anglais fournies par les modules \package{frenchb} et
 \package{english} du \Package{babel}, à l'exception de l'expression française
 figurant en légende des tableaux flottants (\enquote{Table} est remplacée par
 \enquote{Tableau}).% ^^A
-\changes*{v0.99j}{2014/07/18}{Les légendes des tableaux flottants sont
+\changes*{v0.99j}{2014-07-18}{Les légendes des tableaux flottants sont
   introduites par l'expression \enquote{\textsc{Tableau}} et non plus plus
   \enquote{\textsc{Table}}}% ^^A
 
@@ -796,7 +796,7 @@ ou des chargé(e)s de recherche (\gls{hdr} ou pas) du \gls{cnrs}. La clé
 
 \begin{docKey}{corps}{=\meta{label}}{pas de
     valeur par défaut, initialement vide}
-  \changes{v0.99e}{2014/06/15}{Clé \protect\refAux{corporation} remplacée par
+  \changes{v0.99e}{2014-06-15}{Clé \protect\refAux{corporation} remplacée par
     (et alias de) la clé \protect\refKey{corps}}%^^A
   % ^^A
   L'option |corps=|\meta{label} permet de stipuler un \meta{corps en français}
@@ -839,7 +839,7 @@ La clé \refKey{role} suivante permet de spécifier de \emph{nouveaux} rôles
 
 \begin{docKey}{role}{=\meta{label}}{pas de valeur par défaut, initialement
     vide}
-  \changes{v0.99f}{2014/07/11}{Nouvelle clé \protect\refKey{role} permettant de
+  \changes{v0.99f}{2014-07-11}{Nouvelle clé \protect\refKey{role} permettant de
     spécifier ou définir de nouveaux rôles pour les personnes}%^^A
   % ^^A
   L'option |role=|\meta{label} permet de stipuler un \meta{rôle en français} et
@@ -854,13 +854,8 @@ La clé \refKey{role} suivante permet de spécifier de \emph{nouveaux} rôles
 Si on souhaite recourir à des packages qui ne sont pas appelés par la \yatcl{},
 on les chargera manuellement, par exemple en préambule du fichier (maître) de
 la thèse.
-%
-\iffalse
+
 %%% Local Variables:
 %%% mode: latex
-%%% eval: (latex-mode)
-%%% ispell-local-dictionary: "fr_FR"
-%%% TeX-engine: xetex
-%%% TeX-master: "../yathesis"
+%%% TeX-master: "../yathesis-fr"
 %%% End:
-\fi
