@@ -772,11 +772,42 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \def\YAD@localtocsdepth{\YAD@tocdepth}%
 \yadsetup{%
+  localtocs/.is family,%
   localtocs/.code={%
     \booltrue{YAD@localtocs@classoption}%
-    \def\YAD@localtocsdepth{#1}%
   },%
-  localtocs/.default=\YAD@tocdepth%
+  localtocs/depth/.code={%
+    \pgfkeysalso{localtocs}%
+    \ifboolexpr{%
+      test {\ifstrempty{#1}}
+      or %
+      test {\ifstrequal{#1}{part}}
+      or %
+      test {\ifstrequal{#1}{chapter}}
+    }{%
+      \def\YAD@localtocsdepth{\YAD@tocdepth}%
+    }{%
+      \def\YAD@localtocsdepth{#1}%
+    }%
+    \ifboolexpr{%
+      test {\@ifundefined {Etoc@\YAD@localtocsdepth @@}}
+      or %
+      test {\ifstrequal{#1}{part}}
+      or %
+      test {\ifstrequal{#1}{chapter}}
+    }{%
+      \YAD@ClassWarningNoLine{%
+        La valeur (`#1') passee a la cle\MessageBreak%
+         `localtocs/depth'\MessageBreak%
+        en option de classe n'est pas un des niveaux de\MessageBreak%
+        sectionnement acceptes :\MessageBreak%
+        `section', `subsection',`subsubsection',\MessageBreak%
+        `paragraph', `subparagraph'.\MessageBreak%
+        Le niveau `\YAD@tocdepth' va etre utilise a la place%
+      }%
+    }{%
+    }%
+  },%
 }%
 %    \end{macrocode}
 %
