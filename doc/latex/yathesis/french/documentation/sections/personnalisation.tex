@@ -306,6 +306,88 @@ Les documents composés avec la \yatcl{} peuvent avoir deux formats de sortie :
   leurs cibles ne figureront nulle part en sortie \enquote{papier}.
 \end{dbwarning}
 
+\subsection{Tables des matières locales}
+\label{sec-localtoc}
+
+%^^A
+\changes{v0.99o}{2016-09-29}{Nouvelle option de classe \refKey{localtocs}
+  permettant de faire automatiquement débuter les chapitres par leurs tables des
+  matières locales}%^^A
+
+\begin{docKey}[][doc new=2016-09-29]{localtocs}{}{pas de valeur par défaut, pas
+    de valeur initiale} 
+  Cette clé fait automatiquement débuter les chapitres de la partie
+  principale\footnote{C'est-à-dire de \refCom{mainmatter} jusqu'à
+    \refCom{backmatter}.} par leurs tables des matières locales.
+\end{docKey}
+
+Par défaut, les tables des matières locales générées grâce à la clé
+\refKey{localtocs} ont comme \enquote{niveau de profondeur} les
+sous-sections\footnote{Ce niveau est donc par défaut identique à celui des
+  \hyperref[sec-table-des-matieres]{tables des matières
+    \enquote{globales}}.}. Il est possible d'en spécifier un autre grâce à la
+clé \refKey{localtocs/depth}.
+
+{%
+  \tcbset{before lower=\vspace*{.5\baselineskip}\par}
+  \begin{docKey}[][doc
+    new=2016-09-29]{localtocs/depth}{=\docValue{section}\textbar\docValue{subsection}\textbar\docValue{subsubsection}\textbar\docValue{paragraph}\textbar\docValue{subparagraph}}{par
+      défaut \docValue{subsection}, pas de valeur initiale}
+    Cette clé :
+    \begin{enumerate}
+    \item actionne la clé \refKey{localtocs} ;
+    \item modifie le \enquote{niveau de profondeur} des tables des matières
+      locales, respectivement jusqu'aux : sections, sous-sections,
+      sous-sous-sections, paragraphes, sous-paragraphes\footnote{La clé
+        \refKey{localtocs/depth} ne peut pas prendre comme valeurs
+        \docValue{part} ou \docValue{chapter} puisque les tables des matières
+        \emph{locales aux chapitres} ne peuvent être de \enquote{niveau de
+          profondeur} \emph{supérieur ou égal} aux chapitres.}.
+    \end{enumerate}
+
+\end{docKey}
+}
+
+\begin{dbexample}{Tables des matières locales automatiques}{}
+  Pour que chaque chapitre de la partie principale du mémoire débute
+  automatiquement par sa table des matières locale, il suffit de passer l'option
+  suivante à la \yatcl{}.
+\begin{preamblecode}
+\documentclass[localtocs]{yathesis}
+\end{preamblecode}
+  
+  Dans l'exemple précédent, les tables des matières locales vont jusqu'aux
+  sous-sections. Pour qu'elles aillent par exemple jusqu'aux sous-sous-sections,
+  on recourra à :
+\begin{preamblecode}
+\documentclass[localtocs/depth=subsubsection]{yathesis}
+\end{preamblecode}
+\end{dbexample}
+
+La \yatcl{} fournit aussi des commandes permettant d'activer ou de désactiver
+semi-globalement ou localement l'insertion automatique de tables des matières
+locales et ce, indépendamment du recours à l'option \refKey{localtocs}.
+
+\begin{docCommand}[doc new=2016-09-29]{startlocaltocs}{}
+  Cette commande est une bascule \emph{activant} jusqu'à nouvel ordre
+  l'insertion automatique de tables des matières locales.
+\end{docCommand}
+
+\begin{docCommand}[doc new=2016-09-29]{stoplocaltocs}{}
+  Cette commande est une bascule \emph{désactivant} jusqu'à nouvel ordre
+  l'insertion automatique de tables des matières locales.
+\end{docCommand}
+
+\begin{docCommand}[doc new=2016-09-29]{nextwithlocaltoc}{}
+  Cette commande \emph{active}, pour le \emph{chapitre suivant seulement},
+  l'insertion automatique de tables des matières locales.
+\end{docCommand}
+
+\begin{docCommand}[doc new=2016-09-29]{nextwithoutlocaltoc}{}
+  Cette commande \emph{désactive}, pour le \emph{chapitre suivant seulement},
+  l'insertion automatique de tables des matières locales.
+\end{docCommand}
+
 \subsection{Nombre de laboratoires sur les pages de résumés et de 4\ieme{} de couverture}
 \label{sec-nombre-de-labor}
 
