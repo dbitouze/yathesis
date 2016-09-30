@@ -58,6 +58,8 @@
 \newbool{YAD@valid@month}
 \newbool{YAD@valid@year}
 \newbool{YAD@mainmatter@used}
+\newbool{YAD@localtocs}%
+\newbool{YAD@nextwithlocaltoc}%
 \newlength{\cmdKV@YAD@logoheight}
 \newlength{\YAD@max@logoheight}
 \newlength{\YAD@default@logoheight}
@@ -200,6 +202,7 @@
 \YAD@create@boolean{noprintbibliography}%
 \YAD@create@boolean{nofrontcover}%
 \YAD@create@boolean{hdr}%
+\YAD@create@boolean{localtocs@classoption}%
 \yadsetup{noerror=true}%
 \booltrue{YAD@cover@page}%
 \YAD@create@boolean{nologo}%
@@ -298,6 +301,45 @@
   output/screen/.code={},%
   output/.initial=screen%
 }%
+\def\YAD@localtocsdepth{\YAD@tocdepth}%
+\yadsetup{%
+  localtocs/.is family,%
+  localtocs/.code={%
+    \booltrue{YAD@localtocs@classoption}%
+  },%
+  localtocs/depth/.code={%
+    \pgfkeysalso{localtocs}%
+    \ifboolexpr{%
+      test {\ifstrempty{#1}}
+      or %
+      test {\ifstrequal{#1}{part}}
+      or %
+      test {\ifstrequal{#1}{chapter}}
+    }{%
+      \def\YAD@localtocsdepth{\YAD@tocdepth}%
+    }{%
+      \def\YAD@localtocsdepth{#1}%
+    }%
+    \ifboolexpr{%
+      test {\@ifundefined {Etoc@\YAD@localtocsdepth @@}}
+      or %
+      test {\ifstrequal{#1}{part}}
+      or %
+      test {\ifstrequal{#1}{chapter}}
+    }{%
+      \YAD@ClassWarningNoLine{%
+        La valeur (`#1') passee a la cle\MessageBreak%
+         `localtocs/depth'\MessageBreak%
+        en option de classe n'est pas un des niveaux de\MessageBreak%
+        sectionnement acceptes :\MessageBreak%
+        `section', `subsection',`subsubsection',\MessageBreak%
+        `paragraph', `subparagraph'.\MessageBreak%
+        Le niveau `\YAD@tocdepth' va etre utilise a la place%
+      }%
+    }{%
+    }%
+  },%
+}%
 \def\YAD@interligne{single}%
 \yadsetup{%
   space/.is choice,%
@@ -381,8 +423,6 @@
 \RequirePackage{tcolorbox}[2014/03/31]%
 \RequirePackage{marvosym}[2011/07/20]%
 \RequirePackage{setspace}[2011/12/19]%
-\RequirePackage{shorttoc}[2002/08/20]%
-\RequirePackage{tocvsec2}[2014/03/10]%
 \RequirePackage{tocbibind}[2010/10/13]%
 \ifthenelse{\equal{\YAD@fncychapstyle}{none}}{%
 }{%
@@ -404,6 +444,7 @@
   }%
 }%
 \RequirePackage{babel}[2014/03/24]
+\RequirePackage{etoc}[2015/08/29]%
 \RequirePackage{iflang}[2007/11/11]%
 \RequirePackage{datetime}[2013/09/10]%
 \AtEndPreamble{%
@@ -1151,11 +1192,12 @@
   \small%
   \DTLifdbempty{YAD@staffs}{}{%
     \ifthenelse{\DTLrowcount{YAD@supervisors}>1}{%
-      \begin{tabular}[t]{>{\itshape}lll}
-      }{%
-        \begin{tabular}[t]{>{\itshape}l@{ }ll}
-        }%
-        \DTLforeach*{YAD@supervisors}{%
+      \newcolumntype{u}{>{\itshape}lll}
+    }{%
+      \newcolumntype{u}{>{\itshape}l@{ }ll}
+    }%
+    \begin{tabular}[t]{u}
+      \DTLforeach*{YAD@supervisors}{%
           \YAD@committeemember@lastname=lastname,%
           \YAD@committeemember@fistname=firstname,%
           \YAD@committeemember@role=role%
@@ -1232,7 +1274,7 @@
   \end{tabular}
 }%
 \DeclareRobustCommand*\YAD@meta{\YAD@generic@argument}%
-        \newcommand*\YAD@logo{}%
+\newcommand*\YAD@logo{}%
 \newcommand*{\YAD@create@macro}[2][]{%
   \ifthenelse{\isempty{#1}}{%
     \csdef{#2}##1{%
@@ -1722,7 +1764,7 @@
       and bool {YAD@valid@year}%
     }{%
       \csdef{printdate}{%
-        \formatdate{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}%
+        \formatdate{#1}{#2}{#3}%
       }%
     }{%
       \csdef{printdate}{%
@@ -1738,7 +1780,7 @@
       and bool {YAD@valid@year}%
     }{%
       \csdef{printsubmissiondate}{%
-        \formatdate{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}%
+        \formatdate{#1}{#2}{#3}%
       }%
     }{%
       \csdef{printsubmissiondate}{%
@@ -1811,103 +1853,121 @@
   }%
 }%
 \xpretocmd{\pagestyle}{\cleardoublepage}{}{}%
-\newcommand{\YAD@starttoctoc}{%
-  \begingroup
-    \if@filesw
-      \expandafter\newwrite\csname tf@toc\endcsname
-      \immediate\openout \csname tf@toc\endcsname \jobname.toc\relax
-    \fi
-    \@nobreakfalse
-  \endgroup}
-\AtEndDocument{\YAD@starttoctoc}
-\let\YAD@ORI@setcounter\setcounter%
-\let\YAD@ORI@tableofcontents\tableofcontents%
-\newif\if@YAD@knownsect%
-\def\shorttableofcontents#1#2{\bgroup\c@tocdepth=#2\@restonecolfalse
-  \if@tightshtoc
-     \parsep\z@
-  \fi
-  \if@twocolumn\@restonecoltrue\onecolumn\fi
-  \chapter*{#1}%
-  \@startshorttoc{toc}\if@restonecol\twocolumn\fi\egroup}
-\renewcommand{\tableofcontents}{%
-  \booltrue{YAD@tableofcontents@used}%
-  \cleardoublepage%
-  \YAD@phantomsection%
-  \let\cmdKV@YAD@name\contentsname%
-  \@ifnextchar[{\tableofcontents@YAD@with@argument}{\tableofcontents@YAD@without@argument}%]
-}%
-\newcommand\tableofcontents@YAD@without@argument{%
-  \YAD@ORI@tableofcontents%
-}%
-\newcommand\tableofcontents@YAD@with@argument[1][]{%
-  \yadsetup{#1}%
-  \renewcommand{\setcounter}[2]{}%
-  %
-  \ifthenelse{\equal{\cmdKV@YAD@depth}{none}}{%
-    \shorttableofcontents{\cmdKV@YAD@name}{-10}%
-    \@YAD@knownsecttrue%
-  }{%
-  }%
-  \ifthenelse{\equal{\cmdKV@YAD@depth}{part}}{%
-    \shorttableofcontents{\cmdKV@YAD@name}{-1}%
-    \@YAD@knownsecttrue%
-  }{%
-  }%
-  \ifthenelse{\equal{\cmdKV@YAD@depth}{chapter}}{%
-    \shorttableofcontents{\cmdKV@YAD@name}{0}%
-    \@YAD@knownsecttrue%
-  }{%
-  }%
-  \ifthenelse{\equal{\cmdKV@YAD@depth}{section}}{%
-    \shorttableofcontents{\cmdKV@YAD@name}{1}%
-    \@YAD@knownsecttrue%
-  }{%
-  }%
-  \ifthenelse{\equal{\cmdKV@YAD@depth}{subsection}}{%
-    \shorttableofcontents{\cmdKV@YAD@name}{2}%
-    \@YAD@knownsecttrue%
-  }{%
-  }%
-  \ifthenelse{\equal{\cmdKV@YAD@depth}{subsubsection}}{%
-    \shorttableofcontents{\cmdKV@YAD@name}{3}%
-    \@YAD@knownsecttrue%
-  }{%
-  }%
-  \ifthenelse{\equal{\cmdKV@YAD@depth}{paragraph}}{%
-    \shorttableofcontents{\cmdKV@YAD@name}{4}%
-    \@YAD@knownsecttrue%
-  }{%
-  }%
-  \ifthenelse{\equal{\cmdKV@YAD@depth}{subparagraph}}{%
-    \shorttableofcontents{\cmdKV@YAD@name}{5}%
-    \@YAD@knownsecttrue%
-  }{%
-  }%
-  \ifthenelse{\equal{\cmdKV@YAD@depth}{all}}{%
-    \shorttableofcontents{\cmdKV@YAD@name}{100}%
-    \@YAD@knownsecttrue%
-  }{%
-  }%
-  \if@YAD@knownsect%
-  \else%
-  \shorttableofcontents{\cmdKV@YAD@name}{3}%
-  \YAD@ClassWarningNoLine{%
-    La valeur (`\cmdKV@YAD@depth') passee a la cle `depth'\MessageBreak%
-    en argument de la commande \string\tableofcontents\space n'est
-    pas\MessageBreak%
-    un des niveaux de sectionnement connus (`part', `chapter',\MessageBreak%
-    `section', `subsection', `subsubsection', `paragraph',\MessageBreak%
-    `subparagraph' et `all').\MessageBreak%
-    Le niveau `subsection' va etre utilise\MessageBreak%
-    a la place%
-  }%
-  \fi%
-  \let\setcounter\YAD@ORI@setcounter%
-  \resettocdepth*%
-}%
-\AtBeginDocument{\maxtocdepth{\YAD@tocdepth}}%
-\AtBeginDocument{\maxsecnumdepth{\YAD@secnumdepth}}%
+        \AfterEndPreamble{%
+          \let\YAD@ORI@tableofcontents\tableofcontents%
+          \let\YAD@ORI@localtableofcontents\localtableofcontents%
+          \renewcommand{\tableofcontents}{%
+            \pagestyle{preliminary}%
+            \booltrue{YAD@tableofcontents@used}%
+            \cleardoublepage%
+            \YAD@phantomsection%
+            % \renewcommand{\contentsname}{\cmdKV@YAD@name}
+            \@ifnextchar[{\tableofcontents@YAD@with@argument}{\tableofcontents@YAD@without@argument}%]
+          }%
+          \newcommand\tableofcontents@YAD@without@argument{%
+            \YAD@globalstyle
+            \YAD@computenumwidths\relax%
+            \etoctableofcontents%
+            \etocsetnexttocdepth{\YAD@tocdepth}
+            \let\cmdKV@YAD@depth\YAD@tocdepth
+            \let\cmdKV@YAD@name\contentsname%
+            \YAD@localstyle % pour les local TOCs qui suivent
+          }%
+          \newcommand\tableofcontents@YAD@with@argument[1][]{%
+            \yadsetup{#1}%
+            \@ifundefined {Etoc@\cmdKV@YAD@depth @@}
+            {%
+              \YAD@ClassWarningNoLine{%
+                La valeur (`\cmdKV@YAD@depth') passee a la cle `depth'\MessageBreak%
+                en argument de la commande \string\tableofcontents\space n'est pas\MessageBreak%
+                un des niveaux de sectionnement connus :\MessageBreak%
+                `part', `chapter', `section', `subsection',\MessageBreak%
+                `subsubsection', `paragraph', `subparagraph', `none' et `all'.\MessageBreak%
+                Le niveau `\YAD@tocdepth' va etre utilise a la place%
+              }%
+              \let\cmdKV@YAD@depth\YAD@tocdepth
+            }{%
+            }%
+            \YAD@globalstyle
+            \etocsetnexttocdepth{\cmdKV@YAD@depth}%
+            \YAD@computenumwidths\relax% note: a effet global
+            \etocsetnexttocdepth{\cmdKV@YAD@depth}% on doit le répéter, car c'est un truc à un coup seulement
+            \etoctableofcontents%
+            \etocsettocdepth{\YAD@tocdepth}
+            \let\cmdKV@YAD@depth\YAD@tocdepth
+            \let\cmdKV@YAD@name\contentsname%
+            \YAD@localstyle % pour les local TOCs qui suivent
+          }%
+        }%
+        \newcommand{\YAD@setsecnumdepth}[1]{%
+        \newif\if@YAD@knownsect%
+        \ifthenelse{\equal{#1}{none}}{%
+        \setcounter{secnumdepth}{-10}%
+        \@YAD@knownsecttrue%
+        }{%
+        }%
+        \ifthenelse{\equal{#1}{part}}{%
+        \setcounter{secnumdepth}{-1}%
+        \@YAD@knownsecttrue%
+        }{%
+        }%
+        \ifthenelse{\equal{#1}{chapter}}{%
+        \setcounter{secnumdepth}{0}%
+        \@YAD@knownsecttrue%
+        }{%
+        }%
+        \ifthenelse{\equal{#1}{section}}{%
+        \setcounter{secnumdepth}{1}%
+        \@YAD@knownsecttrue%
+        }{%
+        }%
+        \ifthenelse{\equal{#1}{subsection}}{%
+        \setcounter{secnumdepth}{2}%
+        \@YAD@knownsecttrue%
+        }{%
+        }%
+        \ifthenelse{\equal{#1}{subsubsection}}{%
+        \setcounter{secnumdepth}{3}%
+        \@YAD@knownsecttrue%
+        }{%
+        }%
+        \ifthenelse{\equal{#1}{paragraph}}{%
+        \setcounter{secnumdepth}{4}%
+        \@YAD@knownsecttrue%
+        }{%
+        }%
+        \ifthenelse{\equal{#1}{subparagraph}}{%
+        \setcounter{secnumdepth}{5}%
+        \@YAD@knownsecttrue%
+        }{%
+        }%
+        \ifthenelse{\equal{#1}{all}}{%
+        \setcounter{secnumdepth}{100}%
+        \@YAD@knownsecttrue%
+        }{%
+        }%
+        \if@YAD@knownsect%
+        \else%
+        \setcounter{secnumdepth}{3}%
+        \YAD@ClassWarningNoLine{%
+        La valeur (`\YAD@secnumdepth') passee a la cle `secnumdepth'\MessageBreak%
+        en argument de la commande \string\documentclass\space n'est
+        pas\MessageBreak%
+        un des niveaux de sectionnement connus (`part', `chapter',\MessageBreak%
+        `section', `subsection', `subsubsection', `paragraph',\MessageBreak%
+        `subparagraph', `none' et `all').\MessageBreak%
+        Le niveau `subsection' va etre utilise\MessageBreak%
+        a la place%
+        }%
+        \fi%
+        }
+        \etocsettocdepth{\YAD@tocdepth}
+        \AtBeginDocument{%
+        % \yadsetup{#1}%
+        \YAD@setsecnumdepth{\YAD@secnumdepth}
+        }
+        % \renewcommand{\setcounter}[2]{}%
+        %
 \newcommand*{\YAD@chapter@header}{%
   \ifthenelse{%
     \value{secnumdepth}>-1
@@ -1931,12 +1991,13 @@
   \sectiontitle%
 }%
   \AtBeginDocument{%
-    \setsecnumdepth{none}%
+    \setcounter{secnumdepth}{-10}%
     \frontmatter%
+    \boolfalse{YAD@localtocs}%
   }%
 \newpagestyle{titles}[]{%
   % \settocdepth{none}%
-  \setsecnumdepth{none}%
+  \setcounter{secnumdepth}{-10}%
   \ifdraft{%
     \newgeometry{centering,nomarginpar,bottom=1cm,top=1cm,headheight=\YAD@max@logoheight,margin=0.5cm,tmargin=\YAD@max@logoheight+1cm}%
   }{%
@@ -1985,8 +2046,7 @@
 }%
 \newpagestyle{prepreliminary}[]{%
   \restoregeometry%
-  \setsecnumdepth{none}%
-  \resettocdepth*%
+  \setcounter{secnumdepth}{-10}%
   \YAD@setfoot%
 }%
 \newpagestyle{preliminary}[]{%
@@ -2005,8 +2065,7 @@
   {}%
   {\thepage}%
   \headrule%
-  \setsecnumdepth{none}%
-  \resettocdepth*%
+  \setcounter{secnumdepth}{-10}%
   \YAD@setfoot%
 }%
 \newpagestyle{ordinary}[]{%
@@ -2025,8 +2084,7 @@
   {}%
   {\thepage}%
   \headrule%
-  \setsecnumdepth{none}%
-  \resettocdepth*%
+  \setcounter{secnumdepth}{-10}%
   \YAD@setfoot%
 }%
 \newpagestyle{mainmatter}[]{%
@@ -2054,12 +2112,16 @@
   {}%
   {\thepage}%
   \headrule%
-  \resettocdepth*%
-  \setsecnumdepth{\YAD@secnumdepth}%
+  \YAD@setsecnumdepth{\YAD@secnumdepth}%
   \YAD@setfoot%
 }%
 \xapptocmd{\mainmatter}{%
   \booltrue{YAD@mainmatter@used}%
+  \ifbool{YAD@localtocs@classoption}%
+  {%
+    \booltrue{YAD@localtocs}%
+  }{%
+  }
   \pagestyle{mainmatter}%
 }{}{}%
 \AtEndDocument{%
@@ -2111,7 +2173,7 @@
   {\thepage}%
   \headrule%
   \YAD@phantomsection%
-  \setsecnumdepth{\YAD@secnumdepth}%
+  \YAD@setsecnumdepth{\YAD@secnumdepth}%
   \YAD@bookmarksetup{startatroot}%
   \YAD@setfoot%
 }%
@@ -2119,7 +2181,7 @@
   \pagestyle{appendix}%
 }{}{}%
 \newpagestyle{biblio}[]{%
-  \setsecnumdepth{none}%
+  \setcounter{secnumdepth}{-10}%
   \singlespacing%
   \sethead[\thepage]%
   []%
@@ -2151,12 +2213,13 @@
   {\thepage}%
   \headrule%
   \YAD@phantomsection%
-  \setsecnumdepth{none}%
+  \setcounter{secnumdepth}{-10}%
   \YAD@bookmarksetup{startatroot}%
   \YAD@setfoot%
 }%
 \xapptocmd{\backmatter}{%
   \pagestyle{backmatter}%
+  \boolfalse{YAD@localtocs}%
 }{}{}%
 \newpagestyle{contents}[]{%
   \cleardoublepage%
@@ -2170,7 +2233,7 @@
   {}%
   {\thepage}%
   \headrule%
-  \setsecnumdepth{none}%
+  \setcounter{secnumdepth}{-10}%
   \YAD@setfoot%
 }%
 \newpagestyle{glossaire}[]{%
@@ -2185,7 +2248,7 @@
   {}%
   {\thepage}%
   \headrule%
-  \setsecnumdepth{none}%
+  \setcounter{secnumdepth}{-10}%
   \YAD@setfoot%
 }%
 \newpagestyle{index}[]{%
@@ -2197,10 +2260,10 @@
   {}%
   {\thepage}%
   \headrule%
-  \setsecnumdepth{none}%
+  \setcounter{secnumdepth}{-10}%
   \cleardoublepage%
   \YAD@phantomsection%
-  \setsecnumdepth{\YAD@secnumdepth}%
+  \YAD@setsecnumdepth{\YAD@secnumdepth}%
   \YAD@bookmarksetup{startatroot}%
   \YAD@setfoot%
 }%
@@ -2218,7 +2281,7 @@
   {}%
   {}%
   {}%
-  \setsecnumdepth{none}%
+  \setcounter{secnumdepth}{-10}%
 }%
 \newcommand*{\printlaboratory}[2][]{%
   \YAD@ifemptyorundef{#2}{%
@@ -2344,20 +2407,23 @@
   %\YAD@astuce@expressioncle%
   \noindent%
   \ifcsdef{printordernumber}{%
+  \newcommand\YAD@printedordernumber{%
+    \itshape%
+    \sffamily%
+    \YAD@translation{ordernumber}%
+    \IfLanguageName{french}{%
+      \FBcolonspace%
+    }{%
+    }: \printordernumber%
+  }
+  \ifdraft{}{\vspace*{\stretch{1}}}%
   \ifboolexpr{%
     bool {YAD@cover@page}%
     or (bool {YAD@nofrontcover} and test {\IfLanguageName{\YAD@mainlanguage}})%
   }{%
-    \ifdraft{}{\vspace*{\stretch{1}}}%
     % \vspace*{\stretch{1}}%
     \raggedleft{%
-      \itshape%
-      \sffamily%
-      \YAD@translation{ordernumber}%
-      \IfLanguageName{french}{%
-        \FBcolonspace%
-      }{%
-      }: \printordernumber%
+      \YAD@printedordernumber%
     }%
   }{%
   }%
@@ -3363,9 +3429,225 @@
 \AfterEndEnvironment{epigraphspage}{%
   \pagestyle{preliminary}%
 }%
+\def\YAD@leftmargin {0pt}
+\def\YAD@rightmargin {2.55em}% like LaTeX’s \@tocrmarg
+\newbox\YAD@leaderbox
+\def\YAD@leaderboxwidth {0.7777em}% about like what standard classes do
+\def\YAD@verysmallvskip {0pt plus .2pt}
+\def\YAD@globalmedvskip {1em plus 1pt}
+\def\YAD@localmedvskip {.25em plus .25pt}
+\def\YAD@bigvskip {2.25em plus 1pt}
+\def\YAD@numwidthB {1.5em} % chapter
+\def\YAD@numwidthC {2.278em}% section, I think default is 2.3em
+\def\YAD@numwidthD {3.056em}% analog in standard class is 3.2em
+\def\YAD@numwidthE {3.833em}% analog in standard class is 4.1em
+\def\YAD@numwidthF {4.611em}% analog in standard class is 5em
+\def\YAD@numwidthG {5.389em}% analog in standard class is 6em
+\newcommand\YAD@setlinestyle [2]{% #1= unit, #2= numwidth as macro
+  \etocsetstyle{#1}
+  {\advance\leftskip#2\relax}
+  {\vskip \YAD@verysmallvskip\relax
+    \leavevmode
+    {\interlinepenalty\@M
+      \etocifnumbered
+      {\llap{\makebox[#2][l]{\etocnumber}}}{\advance\leftskip-#2\relax}%
+      \etocname
+      \nobreak\leaders \copy\YAD@leaderbox
+      \hfil\makebox[-\parfillskip][r]{\etocpage}%
+      \par }%
+  }
+  {}
+  {\advance\leftskip-#2\relax}%
+}
+\newcommand\YAD@globalstyle {% encapsule le style pour les global TOCs
+  \etocsettocstyle {\if@twocolumn \@restonecoltrue \onecolumn \else
+    \@restonecolfalse \fi
+    \parindent\z@ \leftskip\z@skip \rightskip \z@skip
+    \setbox\YAD@leaderbox\hbox to \YAD@leaderboxwidth{\hss.\hss}%
+    \chapter *[\cmdKV@YAD@name]{\noindent\kern\YAD@leftmargin\relax % uses "pt"...
+      \cmdKV@YAD@name%
+    }%
+    \rightskip \YAD@rightmargin\relax
+    \parfillskip -\rightskip % or a smaller value if desired
+    \leftskip \YAD@leftmargin \relax } {\if@restonecol \twocolumn
+    \fi\cleardoublepage}%
+  %
+  \etocsetstyle{part} {} {\addpenalty {-\@highpenalty}%
+    \addvspace \YAD@bigvskip \leavevmode {\large
+      \bfseries % use a group to limit font change
+      \interlinepenalty\@M \etocifnumbered{\etocnumber\hspace{1em}}{}%
+      \etocname \nobreak\hfil\makebox[-\parfillskip][r]{\etocpage}}\par
+    \nobreak } {} {}
+  %
+  \etocsetstyle{chapter} {\advance\leftskip\YAD@numwidthB\relax} {\addpenalty
+    {-\@highpenalty }%
+    \vskip \YAD@globalmedvskip\relax \leavevmode {\interlinepenalty\@M \etocifnumbered
+      {\llap{\makebox[\YAD@numwidthB][l]{\bfseries\etocnumber}}}
+      {\advance\leftskip-\YAD@numwidthB\relax}%
+      \bfseries\etocname
+      \nobreak\hfil\makebox[-\parfillskip][r]{\etocpage}\par }%
+    \penalty \@highpenalty } {} {\advance\leftskip-\YAD@numwidthB\relax}
+  %
+  \YAD@setlinestyle {section}{\YAD@numwidthC}%
+  \YAD@setlinestyle {subsection}{\YAD@numwidthD}%
+  \YAD@setlinestyle {subsubsection}{\YAD@numwidthE}%
+  \YAD@setlinestyle {paragraph}{\YAD@numwidthF}%
+  \YAD@setlinestyle {subparagraph}{\YAD@numwidthG}%
+}
+\newcommand\YAD@localstyle {%
+  \etocsettocstyle {%
+    \if@twocolumn
+    \@restonecoltrue
+    \onecolumn
+    \else
+    \@restonecolfalse
+    \fi%
+    \setbox\YAD@leaderbox\hbox to \YAD@leaderboxwidth{\hss.\hss}%
+    \parindent\z@
+    \dimen@ 2.25em % soon to be \leftskip
+    \section *{\kern\dimen@ % \dimen@ works here by sheer luck
+      % \contentsname%
+      % \@mkboth{\MakeUppercase\contentsname}{\MakeUppercase\contentsname}%
+      \large\textbf{\translate{lbl-localtocname}}%
+    }%
+    \parskip \z@skip \vspace{-1.25\baselineskip}% somewhat ad hoc
+    \leftskip 2.25em \rightskip 4.5em \advance\rightskip-\YAD@rightmargin\relax
+    \leavevmode\leaders\hrule\@height\p@\hfill\kern\z@\par
+    \rightskip 4.5em
+    \parfillskip -\YAD@rightmargin\relax%
+  }{%
+    \nobreak\vskip-.5\baselineskip
+    \leavevmode\leaders\hrule\@height\p@\hfill\kern\z@\par
+    \bigskip \if@restonecol \twocolumn \fi
+  }
+  % %
+  \etocsetstyle{section} {%
+    \advance\leftskip\YAD@numwidthC\relax%
+  } {%
+    \addpenalty
+    \@secpenalty \etociffirst{}{\addvspace{\YAD@localmedvskip}}%
+    \leavevmode {%
+      \interlinepenalty\@M \bfseries%
+      \etocifnumbered
+      {%
+        \llap{%
+          \makebox[\YAD@numwidthC][l]{\etocnumber}%
+        }%
+      }
+      {%
+        \advance\leftskip-\YAD@numwidthC%
+      }%
+      \etocname\nobreak\hfil\makebox[-\parfillskip][r]{\etocpage}\par%
+    }%
+    \penalty \@highpenalty%
+  }
+  {} {%
+    \advance\leftskip-\YAD@numwidthC\relax%
+  }
+  % %
+  \YAD@setlinestyle {subsection}{\YAD@numwidthD}%
+  \YAD@setlinestyle {subsubsection}{\YAD@numwidthE}%
+  \YAD@setlinestyle {paragraph}{\YAD@numwidthF}%
+  \YAD@setlinestyle {subparagraph}{\YAD@numwidthG}%
+}
+\newcommand*\YAD@computenumwidths@ [2] {% #1 pour `etoc' ou `local', #2=pour le
+                                % \kern
+  \begingroup
+  \def\YAD@numwidthB {0pt}%
+  \def\YAD@numwidthC {0pt}%
+  \def\YAD@numwidthD {0pt}%
+  \def\YAD@numwidthE {0pt}%
+  \def\YAD@numwidthF {0pt}%
+  \def\YAD@numwidthG {0pt}%
+  \etocsetstyle{part}{}{}{}{}%
+  \etocsetstyle{chapter}{}
+  {\setbox0\hbox{\bfseries\etocthenumber\kern#2}}
+  {\ifdim\wd0>\YAD@numwidthB\edef\YAD@numwidthB{\the\wd0}\fi}{}%
+  \etocsetstyle{section}{}
+  {\setbox0\hbox{\bfseries\etocthenumber\kern#2}}
+  {\ifdim\wd0>\YAD@numwidthC\edef\YAD@numwidthC{\the\wd0}\fi}{}%
+  \etocsetstyle{subsection}{}
+  {\setbox0\hbox{\etocthenumber\kern#2}}
+  {\ifdim\wd0>\YAD@numwidthD\edef\YAD@numwidthD{\the\wd0}\fi}{}%
+  \etocsetstyle{subsubsection}{}
+  {\setbox0\hbox{\etocthenumber\kern#2}}
+  {\ifdim\wd0>\YAD@numwidthE\edef\YAD@numwidthE{\the\wd0}\fi}{}%
+  \etocsetstyle{paragraph}{}
+  {\setbox0\hbox{\etocthenumber\kern#2}}
+  {\ifdim\wd0>\YAD@numwidthF\edef\YAD@numwidthF{\the\wd0}\fi}{}%
+  \etocsetstyle{subparagraph}{}
+  {\setbox0\hbox{\etocthenumber\kern#2}}
+  {\ifdim\wd0>\YAD@numwidthG\edef\YAD@numwidthG{\the\wd0}\fi}{}%
+  %
+  \etocsettocstyle{}
+  {\global\let\YAD@numwidthB\YAD@numwidthB
+    \global\let\YAD@numwidthC\YAD@numwidthC
+    \global\let\YAD@numwidthD\YAD@numwidthD
+    \global\let\YAD@numwidthE\YAD@numwidthE
+    \global\let\YAD@numwidthF\YAD@numwidthF
+    \global\let\YAD@numwidthG\YAD@numwidthG}%
+  \etocnopar
+  \csname YAD@ORI@#1tableofcontents\endcsname
+  \endgroup
+}%
+\newcommand*\YAD@computenumwidths [1][0.5em]{%
+  \YAD@computenumwidths@ {}{#1}%
+}
+\newcommand*\YAD@computelocalnumwidths [1][0.5em]{%
+  \YAD@computenumwidths@ {local}{#1}%
+}
+\etocchecksemptiness
+\newcommand{\YAD@default@localtoc}{%
+  \ifbool{YAD@localtocs}%
+  {%
+    \bgroup
+    \YAD@localstyle%
+    \YAD@computelocalnumwidths\relax%
+    \@ifundefined {Etoc@\YAD@localtocsdepth @@}
+    {%
+    }{%
+      \etocsetnexttocdepth{\YAD@localtocsdepth}%
+    }
+    \localtableofcontents%
+    \YAD@globalstyle
+    \egroup
+  }{%
+  }%
+}
+\newcommand{\YAD@localtoc}{\YAD@default@localtoc}
+\newcommand{\stoplocaltocs}{%
+  \boolfalse{YAD@localtocs}%
+}
+\newcommand{\startlocaltocs}{%
+  \booltrue{YAD@localtocs}%
+}
+\newcommand{\nextwithoutlocaltoc}{%
+  \renewcommand{\YAD@localtoc}{}%
+}
+\newcommand{\nextwithlocaltoc}{%
+  \renewcommand{\YAD@localtoc}{\YAD@default@localtoc}%
+  \booltrue{YAD@localtocs}%
+  \booltrue{YAD@nextwithlocaltoc}%
+}
+\apptocmd{\@makechapterhead}{%
+  \ifbool{YAD@localtocs}%
+  {%
+    \YAD@localtoc%
+    \renewcommand{\YAD@localtoc}{\YAD@default@localtoc}%
+    \ifbool{YAD@nextwithlocaltoc}%
+    {%
+      \boolfalse{YAD@localtocs}%
+      \boolfalse{YAD@nextwithlocaltoc}%
+      % \boolfalse{YAD@localtocs@classoption}%
+    }{%
+    }
+  }{%
+  }%
+}{}{}%
 \let\YAD@ORI@chapter\chapter%
 \AfterPreamble{% delay the redefinition when titlesec has done its own
-  \renewcommand\chapter{%
+  \renewcommand\chapter
+  {%
     \cleardoublepage%
     \YAD@phantomsection%
     \ifbool{YAD@output@paper}{%
@@ -3375,32 +3657,27 @@
     \@ifstar{\YAD@starred@chapter}{\YAD@unstarred@chapter}%
   }%
   \newcommand{\YAD@starred@chapter}{%
-    \setsecnumdepth{none}%
+    \setcounter{secnumdepth}{-10}%
     \YAD@ORI@chapter%
   }%
   \newcommand{\YAD@unstarred@chapter}{%
     \if@mainmatter%
-    \resetsecnumdepth*%
+    \YAD@setsecnumdepth{\YAD@secnumdepth}
     \fi%
     \YAD@ORI@chapter%
   }%
-  % \newcommand{\YAD@arg@chapter}[2][]{%
-  %   \ifthenelse{\isempty{#1}}{%
-  %     \YAD@ORI@chapter{#2}%
-  %     \def\chaptertitle{#2}%
-  %   }{%
-  %     \YAD@ORI@chapter[#1]{#2}%
-  %     \def\chaptertitle{#1}%
-  %   }%
-  % }%
-  % \newcommand{\YAD@noarg@chapter}[1]{%
-  %   \YAD@ORI@chapter{#1}%
-  %   \def\chaptertitle{#1}%
-  % }%
-  % \xpatchcmd{\tableofcontents}{\chapter}{\YAD@ORI@chapter}{}{}%
-  % \xpatchcmd{\shorttableofcontents}{\chapter}{\YAD@ORI@chapter}{}{}%
-  % \xpatchcmd{\listoftables}{\chapter}{\YAD@ORI@chapter}{}{}%
-  % \xpatchcmd{\listoffigures}{\chapter}{\YAD@ORI@chapter}{}{}%
+\xpretocmd{\tableofcontents}{\renewcommand{\YAD@localtoc}{}}{}{}%
+\xapptocmd{\tableofcontents}{\renewcommand{\YAD@localtoc}{\YAD@default@localtoc}}{}{}%
+\xpretocmd{\listoftables}{\renewcommand{\YAD@localtoc}{}}{}{}%
+\xapptocmd{\listoftables}{\renewcommand{\YAD@localtoc}{\YAD@default@localtoc}}{}{}%
+\xpretocmd{\listoffigures}{\renewcommand{\YAD@localtoc}{}}{}{}%
+\xapptocmd{\listoffigures}{\renewcommand{\YAD@localtoc}{\YAD@default@localtoc}}{}{}%
+\xpretocmd{\printbibliography}{\renewcommand{\YAD@localtoc}{}}{}{}%
+\xapptocmd{\printbibliography}{\renewcommand{\YAD@localtoc}{\YAD@default@localtoc}}{}{}%
+\xpretocmd{\printglossary}{\renewcommand{\YAD@localtoc}{}}{}{}%
+\xapptocmd{\printglossary}{\renewcommand{\YAD@localtoc}{\YAD@default@localtoc}}{}{}%
+\xpretocmd{\printindex}{\renewcommand{\YAD@localtoc}{}}{}{}%
+\xapptocmd{\printindex}{\renewcommand{\YAD@localtoc}{\YAD@default@localtoc}}{}{}%
   \@ifpackageloaded{floatrow}{%
     \xpatchcmd{\float@listhead}{\chapter}{\YAD@ORI@chapter}{}{}%
   }{%
@@ -3413,7 +3690,7 @@
   }{%
   }%
 }%
-\xpretocmd{\part}{\setsecnumdepth{\YAD@secnumdepth}}{}{}%
+\xpretocmd{\part}{\YAD@setsecnumdepth{\YAD@secnumdepth}}{}{}%
 \disclaimer{%
   \IfLanguageName{french}{%
     \ifundef{\printinstitute}{%
@@ -3741,6 +4018,7 @@ du}{Work in progress as of}%
 \expression{inprogressfoottext}{\translate{lbl-versiondate}}{\translate{lbl-versiondate}}%
 \expression{submittedfoottext}{Version soumise en date du}{Submitted work
   as of}%
+\expression{localtocname}{Sommaire du pr\'esent chapitre}{Outline of the current chapter}%
 %% ----------------------------------------------------------------------------------
 %% This work may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either version 1.3
@@ -3752,7 +4030,7 @@ du}{Work in progress as of}%
 %% 
 %% This work has the LPPL maintenance status `maintained'.
 %% 
-%% The Current Maintainer of this work is Denis Bitouz'e.
+%% The Current Maintainer of this work is Denis Bitouzé.
 %% 
 %% This work consists of the file  yathesis.dtx
 %%           and the derived files yathesis.cls,
