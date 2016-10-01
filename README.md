@@ -33,7 +33,7 @@ Typesetting the documentation of the class requires:
   it is easier to run:
 
         latexmk -f -pdf -jobname=these -pdflatex= \
-        "pdflatex %O '\RequirePackage{yathesis-demo}\input{%S}'" these.tex
+        "pdflatex %O '\RequirePackage{etoolbox}\AtEndPreamble{\RequirePackage{yathesis-demo}}\input{%S}'" these.tex
 
 - to run `pdflatex` on `yathesis.tex` to be found in the
    `.../yathesis/doc/latex/yathesis/documentation/french` directory. If

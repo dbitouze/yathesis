@@ -17,21 +17,19 @@
 \RequirePackage{letltxmacro}
 \RequirePackage{xifthen}
 \RequirePackage[user,abspage]{zref}
-\AtEndPreamble{%
-  \xpretocmd{\tableofcontents@YAD@with@argument}{\cleardoublepage\zlabel{tableofcontents-withargument}}{}{}
-  \xpretocmd{\tableofcontents@YAD@without@argument}{\cleardoublepage\zlabel{tableofcontents-withoutargument}}{}{}
-}
-\AfterEndPreamble{%
-  \xpretocmd{\maketitle}{\zlabel{fr-title}}{}{}%
-  \xpretocmd{\makedisclaimer}{\cleardoublepage\zlabel{disclaimer}}{}{}
-  \xpretocmd{\makekeywords}{\cleardoublepage\zlabel{keywords}}{}{}
-  \xpretocmd{\makelaboratory}{\cleardoublepage\zlabel{laboratory}}{}{}
-  \xpretocmd{\makededications}{\cleardoublepage\zlabel{dedications}}{}{}
-  \xpretocmd{\makefrontepigraphs}{\cleardoublepage\zlabel{frontepigraphs}}{}{}
-  \xpretocmd{\acknowledgements}{\cleardoublepage\zlabel{acknowledgements}}{}{}
-  \xpretocmd{\caution}{\cleardoublepage\zlabel{caution}}{}{}
-  \xpretocmd{\makeabstract}{\cleardoublepage\zlabel{abstract}}{}{}
-  \xpretocmd{\foreword}{\cleardoublepage\zlabel{foreword}}{}{}
+\AfterEndPreamble{
+  \pretocmd{\tableofcontents@YAD@without@argument}{\cleardoublepage\zlabel{tableofcontents-withoutargument}}{}{}
+  \pretocmd{\tableofcontents@YAD@with@argument}{\cleardoublepage\zlabel{tableofcontents-withargument}}{}{}
+  \pretocmd{\maketitle}{\zlabel{fr-title}}{}{}%
+  \pretocmd{\makedisclaimer}{\cleardoublepage\zlabel{disclaimer}}{}{}
+  \pretocmd{\makekeywords}{\cleardoublepage\zlabel{keywords}}{}{}
+  \pretocmd{\makelaboratory}{\cleardoublepage\zlabel{laboratory}}{}{}
+  \pretocmd{\makededications}{\cleardoublepage\zlabel{dedications}}{}{}
+  \pretocmd{\makefrontepigraphs}{\cleardoublepage\zlabel{frontepigraphs}}{}{}
+  \pretocmd{\acknowledgements}{\cleardoublepage\zlabel{acknowledgements}}{}{}
+  \pretocmd{\caution}{\cleardoublepage\zlabel{caution}}{}{}
+  \pretocmd{\makeabstract}{\cleardoublepage\zlabel{abstract}}{}{}
+  \pretocmd{\foreword}{\cleardoublepage\zlabel{foreword}}{}{}
   \let\YAD@demo@chapter@ORI\chapter%
   \RenewDocumentCommand\chapter{som}{%
     \IfBooleanTF{#1}
@@ -88,7 +86,7 @@
 %% 
 %% This work has the LPPL maintenance status `maintained'.
 %% 
-%% The Current Maintainer of this work is Denis Bitouz'e.
+%% The Current Maintainer of this work is Denis Bitouzé.
 %% 
 %% This work consists of the file  yathesis.dtx
 %%           and the derived files yathesis.cls,

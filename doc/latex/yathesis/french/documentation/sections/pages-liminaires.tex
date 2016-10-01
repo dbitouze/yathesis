@@ -1,4 +1,4 @@
-\chapter{Pages liminaires}\label{cha-liminaires}
+\chapter{Partie liminaire}\label{cha-liminaires}
 
 Cette section détaille les commandes permettant de préparer et produire les
 \glspl{liminaire}, à savoir :
@@ -38,7 +38,7 @@ Cette section détaille les commandes permettant de préparer et produire les
 \section{Clause de non-responsabilité}
 \label{sec-clause-de-non}
 
-\changes{v0.99d}{2014/06/08}{Élision \enquote{automatique} des articles définis
+\changes{v0.99d}{2014-06-08}{Élision \enquote{automatique} des articles définis
   précédant \meta{institut} et \meta{co-institut} dans la clause de
   non-responsabilité}%^^A
 %^^A
@@ -338,7 +338,8 @@ page.
 \end{dbexample}
 
 \begin{figure}[htbp]
-  \centering \screenshot{abstract}%
+  \centering
+  \screenshot{abstract}%
   \caption{Page de résumés succincts en français et en anglais}
   \label{fig-resumes-succincts}
 \end{figure}
@@ -361,39 +362,6 @@ page.
   résumé(s) ci-dessus, un résumé \emph{en français} de la thèse. Celui-ci doit
   être \emph{substantiel}, d'une dizaine de pages environ.
 \end{dbwarning}
-
-% ^^A \section[Résumé substantiel en français]{Résumé substantiel en français (éventuel)}
-% ^^A
-% ^^A Un mémoire composé principalement en langue étrangère \aside{notamment dans le
-% ^^A   cadre d'une cotutelle internationale} requiert, en sus de la page de
-% ^^A résumé(s) ci-dessus, un résumé \emph{en français} de la thèse
-% ^^A \emph{substantiel}\footnote{Une dizaine de pages suffisent.}.
-% ^^A
-% ^^A \begin{docCommand}{frenchabstract}{\oarg{intitulé alternatif}}
-% ^^A   Cette commande débute le résumé substantiel en français de la
-% ^^A   thèse. Elle crée un chapitre\nochapter{} ordinaire non numéroté, par défaut
-% ^^A   intitulé \enquote{Résumé en français}\noillustration. Si on souhaite un
-% ^^A   \meta{intitulé alternatif}, on recourra à son argument
-% ^^A   optionnel\redefexprcle.
-% ^^A \end{docCommand}
-% ^^A
-% ^^A \begin{dbexample}{Résumé substantiel en français}{}
-% ^^A \begin{bodycode}
-% ^^A \frenchabstract
-% ^^A "\meta{résumé substantiel de la thèse en français}"
-% ^^A \end{bodycode}
-% ^^A \end{dbexample}
-% ^^A
-% ^^A \begin{dbremark}{Absence/Présence fautive du résumé substantiel en
-% ^^A     français}{}
-% ^^A   La \yatcl émet un avertissement dans les cas où le mémoire est :
-% ^^A   \begin{enumerate}
-% ^^A   \item principalement composé en \emph{langue étrangère} et
-% ^^A     \refCom{frenchabstract} \emph{n'}est \emph{pas} employée ;
-% ^^A   \item principalement composé en \emph{français} et \refCom{frenchabstract}
-% ^^A     \emph{est} employée.
-% ^^A   \end{enumerate}
-% ^^A \end{dbremark}
 
 \section{Liste d'acronymes, liste de symboles,
   glossaire}\label{sec-sigl-gloss-nomencl}
@@ -489,26 +457,26 @@ la \yatcl. Cependant, celle-ci fournit des fonctionnalités propres au
 \end{dbexample}
 
 % \afterpage{%
-  \begin{landscape}
-    \begin{figure}[p]
+\begin{landscape}
+  \begin{figure}[p]
+    \centering
+    \begin{subfigure}[b]{.45\linewidth}
       \centering
-      \begin{subfigure}[b]{.45\linewidth}
-        \centering
-        \screenshot[1]{printacronyms}
-        \caption{Acronymes}
-        \label{fig-printacronyms}
-      \end{subfigure}%
-      \hspace{\stretch{1}}%
-      \begin{subfigure}[b]{.45\linewidth}
-        \centering
-        \screenshot[1]{printsymbols}
-        \caption{Symboles}
-        \label{fig-printsymbols}
-      \end{subfigure}%
-      \caption{Listes des acronymes et des symboles}
-      \label{fig-printacronyms-printsymbols}
-    \end{figure}
-  \end{landscape}
+      \screenshot[1]{printacronyms}
+      \caption{Acronymes}
+      \label{fig-printacronyms}
+    \end{subfigure}%
+    \hspace{\stretch{1}}%
+    \begin{subfigure}[b]{.45\linewidth}
+      \centering
+      \screenshot[1]{printsymbols}
+      \caption{Symboles}
+      \label{fig-printsymbols}
+    \end{subfigure}%
+    \caption{Listes des acronymes et des symboles}
+    \label{fig-printacronyms-printsymbols}
+  \end{figure}
+\end{landscape}
 % }
 
 % ^^A Si on souhaite faire figurer :
@@ -532,17 +500,23 @@ des acronymes\footnote{Les commandes \docAuxCommand{printglossary} et
   des termes du glossaire et des acronymes, sont illustrées
   \vref{fig-printglossary,fig-printacronyms}.} et des symboles sont \emph{a
   priori} arbitraires. Il est cependant parfois conseillé de placer :
-  \begin{itemize}
-  \item si elles sont \emph{communes}, \emph{la} liste résultante en partie finale ;
-  \item si elles sont \emph{distinctes} :
-    \begin{enumerate}
-    \item les listes des acronymes et des symboles avant qu'ils soient utilisés
-      pour la première fois donc, \emph{a priori}, avant le ou les résumés ;
-    \item la liste des termes du glossaire en partie finale.
-    \end{enumerate}
-  \end{itemize}
+\begin{itemize}
+\item si elles sont \emph{communes}, \emph{la} liste résultante en partie finale ;
+\item si elles sont \emph{distinctes} :
+  \begin{enumerate}
+  \item les listes des acronymes et des symboles avant qu'ils soient utilisés
+    pour la première fois donc, \emph{a priori}, avant le ou les résumés ;
+  \item la liste des termes du glossaire en partie finale.
+  \end{enumerate}
+\end{itemize}
 
-  \section{Sommaire et/ou table des matières}\label{sec-table-des-matieres}
+\section{Sommaire et/ou table des matières}\label{sec-table-des-matieres}
+
+
+La \yatcl{} redéfinit la commande \refCom{tableofcontents} habituelle de
+création des tables des matières \enquote{globales}\footnote{Par opposition aux
+  tables des matières locales, cf. \vref{sec-localtoc}.} pour permettre de
+facilement en spécifier la profondeur et en modifier le nom.
 
 \begin{docCommand}[doc description=\mandatory]{tableofcontents}{\oarg{options}}
   Cette commande produit une table des matières dont le \enquote{niveau de
@@ -550,7 +524,6 @@ des acronymes\footnote{Les commandes \docAuxCommand{printglossary} et
   commandes de structuration qui y figurent sont (seulement) ceux des parties
   (éventuelles), des chapitres, des sections et des sous-sections.
 \end{docCommand}
-
 
 L'argument optionnel de la commande \refCom{tableofcontents} permet de stipuler
 des \meta{options} sous la forme d'une liste \meta{clé}|=|\meta{valeur} dont
@@ -576,8 +549,8 @@ les clés disponibles sont les deux suivantes.
 \end{docKey}
 
 \begin{dbremark}{Tables des matières multiples}{}
-  Si la table des matières est longue, elle peut être placée en fin de document
-  mais elle est alors à remplacer, en \glspl{liminaire}, par un sommaire
+  Si la table des matières est longue, il est conseillé de la placer en fin de
+  document mais de faire alors figurer, en \glspl{liminaire}, un sommaire
   c'est-à-dire par une table des matières allégée.
 
   À cet effet, la \yatcl{} permet de faire figurer, dans un même document,
@@ -607,13 +580,15 @@ les clés disponibles sont les deux suivantes.
     \begin{figure}[p]
       \centering
       \begin{subfigure}[b]{.45\linewidth}
-        \centering \screenshot[1]{tableofcontents-withargument}
+        \centering%
+        \screenshot[1]{tableofcontents-withargument}
         \caption{Sommaire allant jusqu'aux chapitres}
         \label{fig-tableofcontentsto}
       \end{subfigure}%
       \hspace{\stretch{1}}%
       \begin{subfigure}[b]{.45\linewidth}
-        \centering \screenshot[1]{tableofcontents-withoutargument}
+        \centering%
+        \screenshot[1]{tableofcontents-withoutargument}
         \caption{Table des matières allant jusqu'aux sous-sections}
         \label{fig-tableofcontents}
       \end{subfigure}%
@@ -634,14 +609,3 @@ informatiques au moyen de la commande |\lstlistoflistings| du
 \Package*{listings}.
 %
 Nous n'illustrons pas ces commandes, classiques.
-
-%
-\iffalse
-%%% Local Variables:
-%%% mode: latex
-%%% eval: (latex-mode)
-%%% ispell-local-dictionary: "fr_FR"
-%%% TeX-engine: xetex
-%%% TeX-master: "../yathesis.dtx"
-%%% End:
-\fi
