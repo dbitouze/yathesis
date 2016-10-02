@@ -6,7 +6,8 @@ les pages de titre de la thèse.
 
 \section{Production}
 
-\begin{docCommand}[doc description=\mandatory]{maketitle}{\oarg{options}}
+\begin{docCommand}[doc description=\mandatory]{maketitle}{\oarg{options}}%
+  \index[concepts]{titre!production}%
   Cette commande \emph{produit} :
   \begin{enumerate}
   \item
@@ -37,7 +38,8 @@ personnaliser les pages de titre au moyen des clés \refKey{nofrontcover} et
   option de \protect\docAuxCommand{maketitle}}%^^A
 
 \begin{docKey}{nofrontcover}{=\docValue{true}\textbar\docValue{false}}{par défaut
-    \docValue{true}, initialement \docValue{false}}
+    \docValue{true}, initialement \docValue{false}}%
+  \index[concepts]{titre!page de couverture!suppression}%
   Cette clé permet de désactiver la production de la page de 1\iere{} de
   couverture.
 \end{docKey}
@@ -47,8 +49,9 @@ personnaliser les pages de titre au moyen des clés \refKey{nofrontcover} et
 \begin{docKey}{frametitle}{=\docValue{fbox}\textbar\docValue{shadowbox}\textbar\docValue{ovalbox}\textbar\docValue{none}\textbar\marg{autre}}{pas de valeur par défaut, initialement \docValue{fbox}}
   \changes{v0.99c}{2014-06-06}{Nouvelle clé \protect\refKey{frametitle}
     permettant de personnaliser (p. ex. supprimer) le cadre autour du
-    titre}%^^A
-  %^^A
+    titre}%
+  \index[concepts]{titre!cadre entourant}%
+  %
   Cette clé permet de personnaliser le cadre figurant par défaut autour du
   titre de la thèse sur les pages de titre :
   \begin{itemize}
@@ -130,6 +133,7 @@ Avec les données caractéristiques suivantes, la commande
 
 \begin{landscape}
   \begin{figure}[htb]
+    \index[concepts]{titre!exemples}%
     \centering
     \begin{subfigure}[b]{.45\linewidth}
       \centering%

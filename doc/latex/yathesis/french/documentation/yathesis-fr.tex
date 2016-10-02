@@ -8,7 +8,8 @@
 \usepackage[a4paper]{geometry}%
 \usepackage[lining]{libertine}
 \renewcommand{\ttdefault}{lmtt}
-\indexsetup{level=\section*,toclevel=section,noclearpage}
+%
+\makeindex[name=concepts,title=Index des concepts,columns=3]
 \makeindex[columns=2]
 \tcbset{index format=off}
 %
@@ -119,6 +120,12 @@
 \tcblistof[\chapter*]{dbexamplelist}{Table des exemples\addcontentsline{toc}{chapter}{Table des exemples}}%
 \tcblistof[\chapter*]{dbfaqlist}{Table des questions\addcontentsline{toc}{chapter}{Table des questions}}%
 \printindex
+%
+% Some hack against point 1 of this issue: \url{https://github.com/ho-tex/oberdiek/issues/12}
+\cleardoublepage
+\phantomsection
+%
+\printindex[concepts]
 \end{document}
 
 %%% Local Variables:
