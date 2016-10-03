@@ -55,7 +55,7 @@ Typesetting the documentation of the class requires:
   with `yathesis-demo` package load at first place. If `latexmk` is available,
   it is easier to run:
 
-        latexmk -f -pdf -jobname=these -pdflatex= "pdflatex %O '\RequirePackage{etoolbox}\AtEndPreamble{\RequirePackage{yathesis-demo}}\input{%S}'" these.tex
+        latexmk -f -pdf -jobname=these -pdflatex="pdflatex %O '\RequirePackage{etoolbox}\AtEndPreamble{\RequirePackage{yathesis-demo}}\input{%S}'" these.tex
 
 - to run `pdflatex` on `yathesis.tex` to be found in the
    `.../yathesis/doc/latex/yathesis/documentation/french` directory. If
@@ -973,10 +973,6 @@ This work consists of the file  yathesis.dtx
 % expressions clés du canevas de thèse (notamment dans les pages de titre)
 %    \begin{macrocode}
 \RequirePackage{translator}[2010/06/12]%
-%    \end{macrocode}
-% Pour fixer quelques bugs (en général sans conséquence) de \hologo{LaTeX2e}
-%    \begin{macrocode}
-\RequirePackage{fixltx2e}[2006/09/13]%
 %    \end{macrocode}
 % Pour tester le moteur employé
 %    \begin{macrocode}
