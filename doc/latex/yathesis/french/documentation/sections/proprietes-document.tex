@@ -1,5 +1,6 @@
-\chapter{Caractéristiques du document}
-\label{cha-caract-du-docum}
+\chapter{Caractéristiques de la thèse}
+\label{cha-caract-du-docum}%
+\index{caractéristiques de la thèse}%
 
 Ce chapitre liste les commandes et options permettant de spécifier les données
 caractéristiques du document. La plupart d'entre elles sont ensuite affichées
@@ -17,8 +18,9 @@ en divers emplacements du document :
 Certaines de ces caractéristiques figurent également comme métadonnées du fichier
 \pdf{} produit.
 
-\section{Où spécifier les caractéristiques du document ?}
-\label{sec-lieu-de-saisie}
+\section{Où spécifier les caractéristiques de la thèse ?}
+\label{sec-lieu-de-saisie}%
+\index{caractéristiques de la thèse!lieu de spécification}%
 
 Les commandes permettant de définir les caractéristiques du document peuvent être
 saisies, au choix :
@@ -69,7 +71,9 @@ titre\footnote{En outre, les titres et éventuels sous-titres figureront sur les
   \vref{sec-quatr-de-couv}).}.
 %
 \begin{docCommand}[doc description=\mandatory]{author}{\oarg{adresse
-      courriel}\marg{prénom}\marg{nom}}
+      courriel}\marg{prénom}\marg{nom}}%
+  \index{caractéristiques de la thèse!auteur}%
+  \index{auteur}%
   Cette commande définit l'auteur de la thèse. Ses \meta{prénom} et
   \meta{nom} :
   \begin{itemize}
@@ -84,39 +88,55 @@ titre\footnote{En outre, les titres et éventuels sous-titres figureront sur les
     \begin{enumerate}
     \item les éventuels accents figurent dans les \meta{prénom} et
       \meta{nom};
-    \item le \meta{nom} \emph{ne} soit \emph{pas} saisi en capitales
-      (sauf pour la ou les majuscules) car il sera automatiquement
-      composé en petites capitales.
+    \item \index{caractéristiques de la thèse!auteur!capitales}%
+      \index{capitales}%
+      \index{majuscules}%
+      % \index{auteur de la thèse!majuscules|see{auteur de la thèse!capitales}}%
+      le \meta{nom} \emph{ne} soit \emph{pas} saisi en capitales (sauf pour la
+      ou les majuscules) car il sera automatiquement composé en petites
+      capitales.
     \end{enumerate}
   \end{dbwarning}
 \end{docCommand}
 %
 \begin{docCommand}[doc description=\mandatory]{title}{\oarg{titre dans la langue
-      secondaire}\marg{titre}}
+      secondaire}\marg{titre}}%
+  \index{caractéristiques de la thèse!titre}%
+  \index{titre}%
   Cette commande définit le \meta{titre} de la thèse. Celui-ci apparaît alors
   aussi comme métadonnée \enquote{Titre} du fichier \pdf{} de la thèse.
 \end{docCommand}
 %
 \begin{docCommand}{subtitle}{\oarg{sous-titre dans la langue
-      secondaire}\marg{sous-titre}}
-  Cette commande définit l'éventuel \meta{sous-titre} de la thèse.
+      secondaire}\marg{sous-titre}}%
+  \index{caractéristiques de la thèse!sous-titre}%
+  \index{sous-titre}%
+  % \index{titre de la thèse!sous-titre|see{sous-titre de la thèse}}%
+  Cette commande définit l'éventuel \meta{sous-titre} de
+  la thèse.
 \end{docCommand}
 %
 \begin{docCommand}[doc description=\mandatory]{academicfield}{\oarg{discipline dans la langue
-      secondaire}\marg{discipline}}
+      secondaire}\marg{discipline}}%
+  \index{caractéristiques de la thèse!discipline}%
+  \index{discipline}%
   Cette commande définit la \meta{discipline} \aside{ou champ disciplinaire}
   de la thèse. Celui-ci apparaît alors aussi comme métadonnée \enquote{Sujet} du
   fichier \pdf{} de la thèse, sauf si la commande \refCom{subject} est utilisée.
 \end{docCommand}
 %
 \begin{docCommand}{speciality}{\oarg{spécialité dans la langue
-      secondaire}\marg{spécialité}}
+      secondaire}\marg{spécialité}}%
+  \index{caractéristiques de la thèse!spécialité}%
+  \index{spécialité}%
   Cette commande définit la \meta{spécialité} (du champ
   disciplinaire) de la thèse.
 \end{docCommand}
 %
 \begin{dbremark}{Titre, sous-titre, champ disciplinaire et spécialité dans la
-    langue secondaire}{titre-supp}
+    langue secondaire}{titre-supp}%
+  \index{caractéristiques de la thèse!en langue secondaire}%
+  \index{langue secondaire}%
   \emph{Via} leur argument obligatoire, les commandes \refCom{title},
   \refCom{subtitle}, \refCom{academicfield} et \refCom{speciality} définissent
   les titre, sous-titre, champ disciplinaire et spécialité, \emph{dans la
