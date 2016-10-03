@@ -3,8 +3,8 @@
 \index{caractéristiques de la thèse}%
 
 Ce chapitre liste les commandes et options permettant de spécifier les données
-caractéristiques du document. La plupart d'entre elles sont ensuite affichées
-en divers emplacements du document :
+caractéristiques de la thèse. La plupart d'entre elles sont ensuite affichées
+en divers emplacements du mémoire :
 \begin{itemize}
 \item sur les pages de 1\iere{} de couverture et de titre(s), produites par la
   commande \refCom{maketitle} ;
@@ -22,7 +22,7 @@ Certaines de ces caractéristiques figurent également comme métadonnées du fi
 \label{sec-lieu-de-saisie}%
 \index{caractéristiques de la thèse!lieu de spécification}%
 
-Les commandes permettant de définir les caractéristiques du document peuvent être
+Les commandes permettant de définir les caractéristiques de la thèse peuvent être
 saisies, au choix :
 \begin{description}
 \item[dans le fichier (maître) de la thèse :]\
@@ -31,7 +31,7 @@ saisies, au choix :
   \item soit dans son corps ;
     \begin{dbwarning}{Caractéristiques de la thèse à saisir \emph{avant}
         \protect\refCom*{maketitle}}{avant-maketitle}
-    Si les caractéristiques du document sont saisies dans le corps du fichier
+    Si les caractéristiques de la thèse sont saisies dans le corps du fichier
     (maître) de la thèse, elles doivent nécessairement l'être \emph{avant} la
     commande \refCom{maketitle}.
   \end{dbwarning}
@@ -168,7 +168,7 @@ titre\footnote{En outre, les titres et éventuels sous-titres figureront sur les
 \begin{docCommand}{subject}{\oarg{sujet dans la langue
       secondaire}\marg{sujet de la thèse}}
   Cette commande définit le \meta{sujet de la thèse}.  Celui-ci ne figure nulle
-  part dans le document papier : il n'apparaît que comme métadonnée
+  part dans la version papier du mémoire : il n'apparaît que comme métadonnée
   \enquote{Sujet} du fichier \pdf{} de la thèse. Si cette commande n'est pas
   employée, c'est le champ disciplinaire (commande \refCom{academicfield}) qui
   apparaît comme métadonnée \enquote{Sujet}.
@@ -696,7 +696,7 @@ de 1\iere{} de couverture.
     d'ordre} : ce dernier est alors remplacé par une espace horizontale vide
   permettant de l'inscrire à la main \emph{a posteriori}. Vide ou pas, le
   \meta{numéro d'ordre} figure sur \aside{et seulement sur} la 1\iere{} page
-  du document\footnote{Première de couverture s'il y a, page de titre en langue
+  du mémoire\footnote{Première de couverture s'il y a, page de titre en langue
     principale sinon.}, précédé de l'expression \enquote{Num\'ero d'ordre :} ou
   \foreignquote{english}{Order Number:}\selonlangue.
 \end{docCommand}
@@ -726,13 +726,8 @@ Les mots clés de la thèse sont stipulés au moyen de la commande
     \end{itemize}
   \end{itemize}
 \end{docCommand}
-%
-\iffalse
+
 %%% Local Variables:
 %%% mode: latex
-%%% eval: (latex-mode)
-%%% ispell-local-dictionary: "fr_FR"
-%%% TeX-engine: xetex
-%%% TeX-master: "../yathesis.dtx"
+%%% TeX-master: "../yathesis-fr"
 %%% End:
-\fi
