@@ -3,14 +3,14 @@
 \section{Packages chargés par la classe}\label{sec-packages-charges-par}
 
 On a vu \vref{sec-options-passer-aux} que, pour plusieurs de ses
-fonctionnalités, la \yatcl s'appuie sur des packages qu'elle charge
+fonctionnalités, la \yatCl s'appuie sur des packages qu'elle charge
 automatiquement. Ceux-ci sont répertoriés, selon leur ordre de chargement, dans
 la liste suivante qui indique leur fonction et le cas échéant :
 \begin{itemize}
 \item la ou les options avec lesquelles ils sont chargés ;
-\item les options de la \yatcl{} ou leurs commandes propres permettant de les
+\item les options de la \yatCl{} ou leurs commandes propres permettant de les
   personnaliser ;
-\item ceux qui, dans le cadre d'un usage standard de la \yatcl{}, peuvent être
+\item ceux qui, dans le cadre d'un usage standard de la \yatCl{}, peuvent être
   utiles à l'utilisateur final : leur nom est alors un hyperlien vers la page
   qui leur est dédiée sur le \acrshort{ctan}.
 \end{itemize}
@@ -36,7 +36,7 @@ la liste suivante qui indique leur fonction et le cas échéant :
   \end{description}
 \item[\package{graphicx} :] inclusion d'images, notamment des logos ;
   \begin{description}
-  \item[personnalisation :] option \refKey{graphicx} de la \yatcl ;
+  \item[personnalisation :] option \refKey{graphicx} de la \yatCl ;
   \end{description}
 \item[\package*{environ} :] stockage du contenu d'un environnement dans une
   macro ;
@@ -44,7 +44,7 @@ la liste suivante qui indique leur fonction et le cas échéant :
   \LaTeX{} ;
   \begin{description}
   \item[option par défaut :] \docAuxKey{export} ;
-  \item[personnalisation :] option \refKey{adjustbox} de la \yatcl ;
+  \item[personnalisation :] option \refKey{adjustbox} de la \yatCl ;
   \end{description}
 \item[\package{array} :] mise en forme automatique de colonnes de tableaux
   (notamment) ;
@@ -65,7 +65,7 @@ la liste suivante qui indique leur fonction et le cas échéant :
 \item[\package{marvosym} :] accès à des symboles spéciaux ;
 \item[\package{setspace} :] gestion de l'espace interligne ;
   \begin{description}
-  \item[personnalisation :] option \refKey{setspace} de la \yatcl ;
+  \item[personnalisation :] option \refKey{setspace} de la \yatCl ;
   \end{description}
 \item[\package*{shorttoc} :] création de sommaire ;
 \item[\package*{tocvsec2} :] gestion des profondeurs de numérotation des
@@ -77,7 +77,7 @@ la liste suivante qui indique leur fonction et le cas échéant :
 \item[\package{fncychap} :] têtes de chapitres améliorées ;
   \begin{description}
   \item[option par défaut :] \docAuxKey{PetersLenny} ;
-  \item[personnalisation :] option \refKey{fncychap} de la \yatcl ;
+  \item[personnalisation :] option \refKey{fncychap} de la \yatCl ;
   \end{description}
 \item[\package{titleps} :] %^^A
   % ^^A \changes{v0.99j}{2014-07-18}{Package \package{titleps} remplacé par le
@@ -85,7 +85,7 @@ la liste suivante qui indique leur fonction et le cas échéant :
   gestion des styles de pages ;
   \begin{description}
     % ^^A \item[option par défaut :] \docAuxKey{pagestyles} ;
-  \item[personnalisation :] option \refKey{titleps} de la \yatcl ;
+  \item[personnalisation :] option \refKey{titleps} de la \yatCl ;
   \end{description}
   % ^^A \begin{dbwarning}{Package \package{titlesec} : à utiliser avec
   %   ^^A discernement}{}
@@ -96,33 +96,33 @@ la liste suivante qui indique leur fonction et le cas échéant :
   %     ^^A (cf. \vref{sec-chapitres-numerotes}) et
   %     ^^A de l'option \refKey{fncychap} ;
   %     ^^A \item l'emploi de certaines de ses commandes peut éventuellement
-  %     ^^A conduire à des incompatibilités avec la \yatcl{} ;
+  %     ^^A conduire à des incompatibilités avec la \yatCl{} ;
   %     ^^A \end{itemize}
   %   ^^A\end{dbwarning}
 \item[\package{xcolor} :] gestion des couleurs ;
   \begin{description}
-  \item[personnalisation :] option \refKey{xcolor} de la \yatcl ;
+  \item[personnalisation :] option \refKey{xcolor} de la \yatCl ;
   \end{description}
 \item[\package*{datatool} :] gestion de bases de données (membres du jury,
   etc.) ;
   \begin{description}
-  \item[personnalisation :] option \refKey{datatool} de la \yatcl ;
+  \item[personnalisation :] option \refKey{datatool} de la \yatCl ;
   \end{description}
 \item[\package*{ifdraft} :] test conditionnel du mode brouillon ;
 \item[\package{draftwatermark} :] texte en filigrane\footnote{Chargé seulement
     si l'une ou l'autre des valeurs \docValue{draft} ou \docValue{inprogress*}
     est passée à la clé \refKey{version}.} ;
   \begin{description}
-  \item[personnalisation :] option \refKey{draftwatermark} de la \yatcl ;
+  \item[personnalisation :] option \refKey{draftwatermark} de la \yatCl ;
   \end{description}
 \item[\package{babel} :] gestion des langues ;
   \begin{description}
-  \item[personnalisation :] option \refKey{babel} de la \yatcl ;
+  \item[personnalisation :] option \refKey{babel} de la \yatCl ;
   \end{description}
 \item[\package*{iflang} :] test de la langue en cours ;
 \item[\package{datetime} :] gestion des dates ;
   \begin{description}
-  \item[personnalisation :] option \refKey{datetime} de la \yatcl ;
+  \item[personnalisation :] option \refKey{datetime} de la \yatCl ;
   \end{description}
 \item[\package*{hypcap} :] liens hypertextes pointant au début des
   flottants%\ifscreenoutput ;
@@ -141,18 +141,18 @@ la liste suivante qui indique leur fonction et le cas échéant :
     recommandé}{packages-anciens}
   Si on ne dispose pas de versions suffisamment récentes des packages
   automatiquement chargés, des avertissements sont émis car le bon
-  fonctionnement de la \yatcl{} peut alors être sérieusement altéré, voire être
+  fonctionnement de la \yatCl{} peut alors être sérieusement altéré, voire être
   bloqué par une erreur de compilation \aside*{éventuellement absconse}. Il
   est très fortement recommandé de mettre sa distribution \TeX{} à jour et, si
   le problème persiste dans le cas de la distribution \enquote{MiK\TeX{}},
   d'installer plutôt la distribution \enquote{\TeX~Live} dont les versions (à
   jour) à partir de la \enquote{2014} fournissent des packages suffisamment
-  récents pour la \yatcl.
+  récents pour la \yatCl.
 \end{dbremark}
 
 \section{Packages non  chargés par la classe}\label{sec-packages-non-charges}
 
-La liste suivante répertorie des packages non chargés par la \yatcl{} mais
+La liste suivante répertorie des packages non chargés par la \yatCl{} mais
 pouvant se révéler très utiles, notamment aux doctorants.  Elle est loin d'être
 exhaustive et ne mentionne notamment pas les packages nécessaires :
 \begin{itemize}
@@ -168,7 +168,7 @@ etc. \aside*{presque indispensables si on utilise \hologo{LaTeX} ou
 \vref{cha-specimen-canevas}.
 
 En outre, lorsqu'ils sont chargés manuellement par l'utilisateur, certains des
-packages suivants se voient fixés par la \yatcl{} des options ou réglages dont
+packages suivants se voient fixés par la \yatCl{} des options ou réglages dont
 les plus notables sont précisés.
 
 \begin{description}
@@ -212,7 +212,7 @@ les plus notables sont précisés.
 \item[\package{hyperref} :] \changes*{v0.99h}{2014-07-14}{Packages
     \package{hyperref}, \package{varioref}, \package{index} et
     \package{idxlayout}, plus automatiquement chargés par la
-    \yatcl{}\protect\footnote{Les utilisateurs qui ont l'usage de ces packages
+    \yatCl{}\protect\footnote{Les utilisateurs qui ont l'usage de ces packages
       doivent donc désormais les charger manuellement (au moyen de la commande
       \protect\docAuxCommand{usepackage}).}.}%^^A
 %^^A

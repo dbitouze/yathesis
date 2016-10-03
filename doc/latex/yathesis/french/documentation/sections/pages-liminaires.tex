@@ -28,7 +28,7 @@ Cette section détaille les commandes permettant de préparer et produire les
 \begin{dbremark}{Commande \protect\docAuxCommand*{frontmatter} non nécessaire}{nofrontmatter}
   La commande \docAuxCommand{frontmatter} usuelle de la \Class{book}, employée
   habituellement pour entamer la partie liminaire du document, n'est pas
-  nécessaire car la \yatcl{} la charge déjà en sous-main. On verra plus loin
+  nécessaire car la \yatCl{} la charge déjà en sous-main. On verra plus loin
   que, au contraire, la commande analogue \refCom{mainmatter} doit être
   explicitement employée pour entamer la partie principale du document (il en
   est de même des commandes \refCom{appendix} et \refCom{backmatter} pour les
@@ -42,7 +42,7 @@ Cette section détaille les commandes permettant de préparer et produire les
   précédant \meta{institut} et \meta{co-institut} dans la clause de
   non-responsabilité}%^^A
 %^^A
-La \yatcl{} permet de faire figurer une clause de non-responsabilité, telle
+La \yatCl{} permet de faire figurer une clause de non-responsabilité, telle
 qu'exigée par certains instituts. Celle-ci apparaît sur une page dédiée et
 a pour contenu par défaut une phrase semblable à\selonlangue{} :
   \begin{itemize}
@@ -241,7 +241,7 @@ par défaut si elle ne convient pas, on pourra recourir à la commande
 \end{figure}
 
 \begin{dbremark}{Épigraphes ailleurs dans le document}{}
-  Pour gérer les épigraphes liminaires, la \yatcl{} exploite le
+  Pour gérer les épigraphes liminaires, la \yatCl{} exploite le
   \Package*{epigraph} \aside*{qui est automatiquement chargé}. Il est bien sûr
   possible de recourir aux commandes de ce package pour faire figurer, ailleurs
   dans le mémoire, d'autres épigraphes.
@@ -372,7 +372,7 @@ page.
 \end{dbremark*}
 
 Tout système de gestion de glossaire peut théoriquement être mis en œuvre avec
-la \yatcl. Cependant, celle-ci fournit des fonctionnalités propres au
+la \yatCl. Cependant, celle-ci fournit des fonctionnalités propres au
 \Package{glossaries}\footnote{Dans ses versions à partir de la \texttt{4.0} en
   date du \formatdate{14}{11}{2013}. Dans cette section, le fonctionnement de
   ce package est supposé connu du lecteur (sinon, cf. par exemple
@@ -386,7 +386,7 @@ la \yatcl. Cependant, celle-ci fournit des fonctionnalités propres au
 \end{itemize}
 
 \begin{dbwarning}{Package \package{glossaries} non chargé par défaut}{}
-  Le \Package{glossaries} \emph{n'étant pas} chargé par la \yatcl, on veillera
+  Le \Package{glossaries} \emph{n'étant pas} chargé par la \yatCl, on veillera
   à le charger manuellement si on souhaite l'utiliser.
 \end{dbwarning}
 
@@ -513,7 +513,7 @@ des acronymes\footnote{Les commandes \docAuxCommand{printglossary} et
 \section{Sommaire et/ou table des matières}\label{sec-table-des-matieres}
 
 
-La \yatcl{} redéfinit la commande \refCom{tableofcontents} habituelle de
+La \yatCl{} redéfinit la commande \refCom{tableofcontents} habituelle de
 création des tables des matières \enquote{globales}\footnote{Par opposition aux
   tables des matières locales, cf. \vref{sec-localtoc}.} pour permettre de
 facilement en spécifier la profondeur et en modifier le nom.
@@ -553,7 +553,7 @@ les clés disponibles sont les deux suivantes.
   document mais de faire alors figurer, en \glspl{liminaire}, un sommaire
   c'est-à-dire par une table des matières allégée.
 
-  À cet effet, la \yatcl{} permet de faire figurer, dans un même document,
+  À cet effet, la \yatCl{} permet de faire figurer, dans un même document,
   plusieurs tables des matières au moyen d'occurrences multiples de la commande
   \refCom{tableofcontents}, chacune d'elles étant sujette aux options
   précédentes.

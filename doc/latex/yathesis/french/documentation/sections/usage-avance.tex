@@ -3,7 +3,7 @@
 \section{(Dés)Activation des erreurs ciblées propres aux éléments
   \enquote{obligatoires}}\label{sec-desact-des-erre}
 
-On a vu \vref{sec-comm-oblig} que la \yatcl{} considère comme
+On a vu \vref{sec-comm-oblig} que la \yatCl{} considère comme
 \enquote{obligatoires} certains éléments (commandes et environnements) et que,
 parmi eux, certains ne le sont que modérément. La liste complète de ces
 derniers figure à la 1\iere{} colonne du \vref{tab-no-warnings}.
@@ -41,7 +41,7 @@ Or, l'utilisateur \emph{avancé} peut vouloir passer outre le caractère
   outre la commande \enquote{obligatoire} \protect\refCom{keywords}.},
 y compris en versions à soumettre ou finale du document, et pour éviter que
 chaque compilation ne soit alors perturbée par les erreurs ciblées
-correspondantes, la \yatcl{} propose de désactiver ces erreurs de façon :
+correspondantes, la \yatCl{} propose de désactiver ces erreurs de façon :
 \begin{description}
 \item[soit globale] au moyen de la clé \refKey{noerror} suivante.
   \begin{docKey}{noerror}{=\docValue{true}\textbar\docValue{false}}{par défaut
@@ -50,7 +50,7 @@ correspondantes, la \yatcl{} propose de désactiver ces erreurs de façon :
     devient automatiquement égale à \docValue{false} si la clé \refKey{version}
     a pour valeur \docValue{submitted}, \docValue{submitted*} ou
     \docValue{final}. L'employer la rend égale à \docValue{true} et désactive
-    donc, dans tous les cas, toutes les erreurs propres à la \yatcl{}.
+    donc, dans tous les cas, toutes les erreurs propres à la \yatCl{}.
   \end{docKey}
 \item[soit individuelle] au moyen des clés listées au \vref{tab-no-warnings} et
   dont le rôle est précisé ci-après.
@@ -142,10 +142,10 @@ correspondantes, la \yatcl{} propose de désactiver ces erreurs de façon :
   \begin{itemize}
   \item des textes génériques peuvent figurer dans le document en remplacement
     de certains éléments manquants ;
-  \item le bon fonctionnement de la \yatcl{} peut être sérieusement altéré.
+  \item le bon fonctionnement de la \yatCl{} peut être sérieusement altéré.
   \end{itemize}
   Donc, pour ces versions, on ne passera outre les éléments
-  \enquote{obligatoires} de la \yatcl{} que dans le cadre d'un usage avancé, si
+  \enquote{obligatoires} de la \yatCl{} que dans le cadre d'un usage avancé, si
   l'on est sûr de ce que l'on fait et qu'on pourra en gérer \emph{seul} les
   conséquences.  On évitera notamment de recourir de façon trop légère à la clé
   \refKey{noerror}.

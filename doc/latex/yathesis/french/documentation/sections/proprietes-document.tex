@@ -45,7 +45,7 @@ saisies, au choix :
   \vref{sec-canevas-arborescence}.
   \begin{dbwarning}{Fichier de caractéristiques à ne pas importer manuellement}{}
     Le \File{\characteristicsfile} est \emph{automatiquement} importé par la
-    \yatcl{} et il doit donc \emph{ne pas} être explicitement importé : on
+    \yatCl{} et il doit donc \emph{ne pas} être explicitement importé : on
     \emph{ne} recourra donc \emph{pas} à la commande
     |\input{|\file{\characteristicsfile}|}| (ou autre commande d'importation
     similaire à \docAuxCommand{input}).
@@ -532,7 +532,7 @@ d'apporter sur les membres du jury des \meta{précisions}\footnote{Pour les
 \label{sec-corps}
 
 Les clés suivantes\syntaxeoptions{} permettent de spécifier les corps (de
-métier) des membres du jury parmi celles prédéfinies par la \yatcl{}.
+métier) des membres du jury parmi celles prédéfinies par la \yatCl{}.
 
 \begin{docKey}{professor}{=\docValue{true}\textbar\docValue{false}}{par défaut
     \docValue{true}, initialement \docValue{false}}
@@ -654,7 +654,7 @@ veillera à ne pas multiplier celles-ci.
 Par défaut, les directeurs de thèse et membres du jury sont supposés être des
 hommes\footnote{Je promets d'envisager mon adhésion au \acrshort{mlf} pour une
   supposition aussi sexiste !}, si bien qu'un certain nombre de mots clés de la
-\yatcl{} sont de genre masculin (\enquote{directeur}, \enquote{chargé de
+\yatCl{} sont de genre masculin (\enquote{directeur}, \enquote{chargé de
   recherche}, etc.). Il est possible de spécifier qu'un directeur de thèse ou
 un membre du jury est un homme ou une femme au moyen des clés \refKey{male} et
 \refKey{female} suivantes.
@@ -672,7 +672,7 @@ un membre du jury est un homme ou une femme au moyen des clés \refKey{male} et
 L'option |female|\footnote{Ou, de façons équivalentes,
   \protect\lstinline+male=false+ ou \protect\lstinline+female=true+.} n'a pour
 effet que d'accorder en genre féminin un certain nombre de mots clés de la
-\yatcl{} (\enquote{directrice} au lieu \enquote{directeur}, \enquote{chargée de
+\yatCl{} (\enquote{directrice} au lieu \enquote{directeur}, \enquote{chargée de
   recherche} au lieu \enquote{chargé de recherche}, etc.).
 
 \begin{dbexample}{Directrice de thèse}{}

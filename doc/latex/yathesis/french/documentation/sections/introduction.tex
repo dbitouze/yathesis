@@ -1,6 +1,6 @@
 \chapter{Introduction}
 
-\section{Objet de la \yatcl}
+\section{Objet de la \yatCl}
 \label{sec-objet-de-la}
 
 \LaTeX{} est un système particulièrement performant de préparation et de
@@ -40,12 +40,12 @@ de plusieurs outils récents et puissants disponibles sous \LaTeX{}, notamment :
 \end{itemize}
 % ^^A, mais peut éventuellement être adaptée à d'autres pays.
 
-La \yatcl{}, basée sur la \Class{book}, se veut à la fois simple d'emploi et,
+La \yatCl{}, basée sur la \Class{book}, se veut à la fois simple d'emploi et,
 dans une certaine mesure, (aisément) personnalisable.
 
 % ^^AMais sur ce dernier point, ce que fait observer
 % ^^A\citefirstlastauthor{thesul} au sujet de sa \Class{thesul}, s'applique
-% ^^Aégalement à la \yatcl{} : ^^A %
+% ^^Aégalement à la \yatCl{} : ^^A %
 % ^^A\blockcquote{thesul}{%
 % ^^ALa \Class{thesul} fait partie des classes de la gamme
 % ^^A\enquote{prêt-à-porter}.  Elle satisfait un certain nombre de besoins, mais
@@ -62,14 +62,14 @@ dans une certaine mesure, (aisément) personnalisable.
 \label{sec-comment-lire-cette}
 
 La présente documentation est divisée en deux parties : une principale dédiée
-à l'usage courant de la \yatcl{} et une annexe concernant les aspects moins
+à l'usage courant de la \yatCl{} et une annexe concernant les aspects moins
 courants, pouvant n'être consultés qu'occasionnellement.
 
 \subsection{Partie principale}
 \label{sec-partie-principale}
 
 La partie principale de la documentation commence par présenter les commandes et
-environnements fournis par la \yatcl{} et ce, dans l'ordre dans lequel on
+environnements fournis par la \yatCl{} et ce, dans l'ordre dans lequel on
 rencontre les objets correspondants dans un mémoire de thèse :
 \begin{enumerate}
 \item en page(s) de titre (cf. \vref{cha-caract-du-docum,cha-pages-de-titre}) ;
@@ -78,7 +78,7 @@ rencontre les objets correspondants dans un mémoire de thèse :
 \item en pages annexes (cf. \vref{cha-annexes}) ;
 \item en pages finales (cf. \vref{cha-pages-finales}).
 \end{enumerate}
-Elle indique enfin comment personnaliser la \yatcl{}
+Elle indique enfin comment personnaliser la \yatCl{}
 (cf. \vref{cha-configuration}).
 % ^^A, par exemple pour redéfinir les expressions automatiquement insérées dans
 % ^^Ales documents.
@@ -86,10 +86,10 @@ Elle indique enfin comment personnaliser la \yatcl{}
 \subsection{Partie annexe}
 \label{sec-partie-annexe}
 
-L'installation de la \yatcl{} est décrite à l'\vref{cha-installation}.
+L'installation de la \yatCl{} est décrite à l'\vref{cha-installation}.
 
 L'\vref{cha-specimen-canevas} est dédiée à deux spécimens et deux canevas de
-thèse produits par la \yatcl{}. On pourra :
+thèse produits par la \yatCl{}. On pourra :
 \begin{itemize}
 \item visualiser leurs \acrshortpl{pdf} pour se faire une idée du genre de
   mémoire qu'on peut obtenir ;
@@ -99,22 +99,22 @@ thèse produits par la \yatcl{}. On pourra :
 
 L'\vref{cha-recomm-et-astuc} fournit quelques recommandations, trucs et astuces.
 
-Les questions fréquemment posées au sujet de la \yatcl{} sont répertoriées
+Les questions fréquemment posées au sujet de la \yatCl{} sont répertoriées
 à l'\vref{cha-faq}.
 
-L'\vref{cha-fichiers-importes-par} documente deux fichiers que la \yatcl{}
+L'\vref{cha-fichiers-importes-par} documente deux fichiers que la \yatCl{}
 importe automatiquement.
 
-L'\vref{cha-packages-charges} répertorie les packages chargés par la \yatcl{} et
+L'\vref{cha-packages-charges} répertorie les packages chargés par la \yatCl{} et
 qu'il est du coup préférable de \emph{ne pas} charger manuellement. Elle donne
 également une liste non exhaustive de packages qu'elle ne charge pas mais
 pouvant se révéler très utiles, notamment aux doctorants.
 
-L'\vref{cha-incomp-conn} liste les incompatibilités connues de la \yatcl{}.
+L'\vref{cha-incomp-conn} liste les incompatibilités connues de la \yatCl{}.
 
 Si nécessaire, on pourra consulter l'\vref{cha-pagination} pour avoir une vue
 d'ensemble de la \gls{pagination}, des \glspl{titrecourant} et de la
-numérotation des chapitres par défaut avec la \yatcl{}.
+numérotation des chapitres par défaut avec la \yatCl{}.
 
 Les notations, syntaxe, terminologie et codes couleurs de la présente
 documentation se veulent intuitifs mais, en cas de doute, on se reportera
@@ -122,15 +122,18 @@ documentation se veulent intuitifs mais, en cas de doute, on se reportera
 définis dans le glossaire \vpageref{glossaire}.
 
 L'\vref{cha-add-ons} signale quelques \emph{add-ons} destinés à faciliter
-l'usage de la \yatcl{} avec différents éditeurs de texte.
+l'usage de la \yatCl{} avec différents éditeurs de texte.
 
 L'\vref{cha-usage-avance}, à ne pas mettre entre toutes les mains, indique
-comment s'affranchir d'erreurs propres à la \yatcl{}. \emph{Elle n'est
-  à consulter que si l'on est sûr de ce que l'on fait et qu'on pourra en gérer
-  \emph{seul} les conséquences.}
+comment s'affranchir d'erreurs propres à la \yatCl{}. Elle n'est
+à consulter que :
+\begin{enumerate}
+\item \emph{si l'on est sûr de ce que l'on fait} !
+\item \emph{si on pourra en gérer \emph{seul} les conséquences} !
+\end{enumerate}
 
 L'\vref{cha-devel-futurs} est une \emph{TODO list} des fonctionnalités que
-l'auteur de \yat{} doit encore mettre en œuvre, que ce soit pour la classe
+l'auteur de \yatcl{} doit encore mettre en œuvre, que ce soit pour la classe
 elle-même ou pour sa documentation.
 
 Enfin, l'historique des changements de la classe se trouve \vref{cha-history}.
@@ -141,17 +144,21 @@ ascendante, y figurent en rouge.
 \label{sec-ressources-internet}
 
 Cette classe est fournie par les distributions \TeX~Live et MiK\TeX{}. Elle est
-également disponible aux adresses :
-\begin{itemize}
-\item \url{http://www.ctan.org/pkg/\jobname} pour sa version stable ;
-\item \url{https://github.com/dbitouze/\jobname} pour sa version de
-  développement.
-\end{itemize}
+également disponible, pour ses versions :
+\begin{description}[labelwidth=\widthof{\bfseries de développement à :},align=right]
+\item[stable à :] \url{http://www.ctan.org/pkg/yathesis}
+\item[de développement à :] \url{https://github.com/dbitouze/yathesis}
+\end{description}
+% \begin{itemize}
+% \item \url{http://www.ctan.org/pkg/yathesis} pour sa version stable ;
+% \item \url{https://github.com/dbitouze/yathesis} pour sa version de
+%   développement.
+% \end{itemize}
 
 \section{Remerciements}
 \label{sec-remerciements}
 
-L'auteur de la \yatcl{} remercie tous les doctorants que, depuis plusieurs
+L'auteur de la \yatCl{} remercie tous les doctorants que, depuis plusieurs
 années, il a formés à \LaTeX{} : les questions qu'ils ont soulevées et les
 demandes de fonctionnalités qu'ils ont formulées sont à l'origine du présent
 travail.
@@ -164,9 +171,14 @@ Talbot pour \package*{datatool} et \package*{glossaries}, Thomas F. Sturm
 pour \package*{tcolorbox} et Jean-François pour \package*{etoc}.
 
 L'auteur adresse des remerciements chaleureux à ceux qui ont accepté de
-bêta-tester la \yatcl{}, notamment Cécile Barbet, Coralie Escande, Mathieu
+bêta-tester la \yatCl{}, notamment Cécile Barbet, Coralie Escande, Mathieu
 Leroy-Lerêtre, Mathieu Bardoux, Yvon Henel et Jérôme Champavère.
 
 Enfin, l'auteur sait gré de leur patience tous ceux à qui il avait promis une
 version stable ou, plus simplement une fonctionnalité, de la présente
 classe... pour la semaine dernière !
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../yathesis-fr"
+%%% End:

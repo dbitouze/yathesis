@@ -1,13 +1,13 @@
 \chapter{Questions fréquemment posées}\label{cha-faq}
 
 Ce chapitre est une \gls{faq} \aside{autrement dit une liste des questions
-  fréquemment posées} sur la \yatcl{}.
+  fréquemment posées} sur la \yatCl{}.
 
 \section{Communication}
 \label{sec-communication}
 
-\begin{dbfaq}{Comment communiquer avec l'auteur de la \yatcl{} ?}{bogues}
-  La \yatcl{} est vraiment formidable, mais je souhaite :
+\begin{dbfaq}{Comment communiquer avec l'auteur de la \yatCl{} ?}{bogues}
+  La \yatCl{} est vraiment formidable, mais je souhaite :
   \begin{enumerate}
   \item signaler un dysfonctionnement (un bogue) ;
   \item demander une nouvelle fonctionnalité ;
@@ -73,7 +73,7 @@ Ce chapitre est une \gls{faq} \aside{autrement dit une liste des questions
   %
   Cette erreur est probablement due au fait que le \meta{package} a été
   manuellement chargé au moyen de la commande
-  |\usepackage[...]{|\meta{package}|}|, alors que la \yatcl{} le charge déjà
+  |\usepackage[...]{|\meta{package}|}|, alors que la \yatCl{} le charge déjà
   automatiquement (cf. l'\vref{sec-packages-charges-par} pour la liste des
   packages automatiquement chargés). Supprimer cette commande devrait résoudre
   le problème (cf. également l'\vref{wa-packages-a-ne-pas-charger}).
@@ -88,7 +88,7 @@ Ce chapitre est une \gls{faq} \aside{autrement dit une liste des questions
   %
   \tcblower
   %
-  (Cette question ne concerne pas directement la \yatcl{}.) Il suffit d'insérer,
+  (Cette question ne concerne pas directement la \yatCl{}.) Il suffit d'insérer,
   en préambule du fichier (maître) de la thèse, la
   ligne :
 \begin{preamblecode}[title=Par exemple dans le \File{\configurationfile}]
@@ -136,7 +136,7 @@ Ce chapitre est une \gls{faq} \aside{autrement dit une liste des questions
   la table des matières et dans les signets. Comment éviter cela ?%
   \tcblower
   %
-  La \yatcl{} fait d'elle-même figurer les glossaire, listes d'acronymes et de
+  La \yatCl{} fait d'elle-même figurer les glossaire, listes d'acronymes et de
   symboles à la fois dans la table des matières et dans les signets. Pour
   régler le problème, il devrait donc suffire de \emph{ne pas} explicitement
   demander que ce soit le cas, en \emph{ne} recourant \emph{ni} à l'option
@@ -153,7 +153,7 @@ Ce chapitre est une \gls{faq} \aside{autrement dit une liste des questions
   %
   \tcblower
   %
-  (Cette question ne concerne pas directement la \yatcl{}.) Il suffit de passer
+  (Cette question ne concerne pas directement la \yatCl{}.) Il suffit de passer
   l'option |linktoc=false| au \Package{hyperref}.
 \end{dbfaq}
 
@@ -164,7 +164,7 @@ Ce chapitre est une \gls{faq} \aside{autrement dit une liste des questions
   %
   \tcblower
   %
-  (Cette question ne concerne pas directement la \yatcl{}.) Il suffit de passer
+  (Cette question ne concerne pas directement la \yatCl{}.) Il suffit de passer
   à la commande \docAuxCommand{printbibliography} l'option
   |heading=|\meta{entête}, où \meta{entête} vaut par exemple
   \docValue*{bibliography} (cf. la documentation du \Package{biblatex} pour plus
@@ -179,7 +179,7 @@ Ce chapitre est une \gls{faq} \aside{autrement dit une liste des questions
   %
   \tcblower
   %
-  (Cette question ne concerne pas directement la \yatcl{}.) L'option
+  (Cette question ne concerne pas directement la \yatCl{}.) L'option
   \docAuxKey{depth} du \Package*{bookmark} permet d'affecter aux signets un
   autre niveau que celui par défaut.
 \begin{preamblecode}[title=Par exemple dans le \File{\configurationfile}]
@@ -226,7 +226,7 @@ où \meta{autre niveau} est l'une des valeurs possibles de la clé
   %
   \tcblower
   %
-  (Cette question ne concerne pas directement la \yatcl{}.) Le problème est dû
+  (Cette question ne concerne pas directement la \yatCl{}.) Le problème est dû
   aux caractères actifs du module \package{frenchb} du \Package{babel}. Si ces
   éléments concernent :
   \begin{enumerate}
@@ -266,7 +266,7 @@ où \meta{autre niveau} est l'une des valeurs possibles de la clé
   %
   \tcblower
   %
-  La profondeur de numérotation d'un document composé avec la \yatcl{} est
+  La profondeur de numérotation d'un document composé avec la \yatCl{} est
   à spécifier au moyen de l'option de classe
   \refKey{secnumdepth}. Cf. \vref{sec-profondeur-de-la} pour plus de
   précisions.
@@ -280,11 +280,11 @@ où \meta{autre niveau} est l'une des valeurs possibles de la clé
   Conformément aux dispositions propres au dépôt sur support électronique
   \autocite{guidoct-abes}, j'ai testé sur le site \url{http://facile.cines.fr/}
   la validité du fichier \acrshort{pdf} de mon mémoire de thèse créé avec la
-  \yatcl{}, et il s'avère que celui-ci n'est pas valide. Comment y remédier ?
+  \yatCl{}, et il s'avère que celui-ci n'est pas valide. Comment y remédier ?
   %
   \tcblower
   %
-  (Cette question ne concerne pas directement la \yatcl{}.) Le problème vient de
+  (Cette question ne concerne pas directement la \yatCl{}.) Le problème vient de
   ce que le site \url{http://facile.cines.fr/} reconnaît mal les méta-données
   des fichiers \acrshort{pdf} produits par \LaTeX{}, \hologo{XeLaTeX} ou
   \hologo{LuaLaTeX}. Il devrait suffire d'installer le logiciel libre
