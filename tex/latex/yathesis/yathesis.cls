@@ -203,6 +203,7 @@
 \YAD@create@boolean{nofrontcover}%
 \YAD@create@boolean{hdr}%
 \YAD@create@boolean{localtocs@classoption}%
+\YAD@create@boolean{localbibs}%
 \yadsetup{noerror=true}%
 \booltrue{YAD@cover@page}%
 \YAD@create@boolean{nologo}%
@@ -340,6 +341,43 @@
     }%
   },%
 }%
+\newcommand\YAD@localbibs@common@code[1]{%
+  \booltrue{YAD@localbibs}%
+  \AtEndPreamble{%
+    \@ifpackageloaded{biblatex}{%
+    }{%
+      \@ifpackageloaded{csquotes}{%
+      }{%
+        \RequirePackage{csquotes}%
+      }%
+      \YAD@ClassWarningNoLine{%
+        L'ajout automatique des bibliographies locales en fin\MessageBreak%
+        de chapitres fourni par l'option de classe\MessageBreak%
+        `localbibs' repose sur le package `biblatex'\MessageBreak%
+        que vous n'avez pas charge.\MessageBreak%
+        La classe `yathesis' va le faire pour vous mais\MessageBreak%
+        le recours a ce package pour la bibliographie sera\MessageBreak%
+        alors necessaire et exclura tout autre outil\MessageBreak%
+        de production de la bibliographie\MessageBreak%
+        (`BibTeX', `natbib', etc.)%
+      }%
+      \RequirePackage{biblatex}%
+    }%
+    \ExecuteBibliographyOptions{%
+      refsegment=chapter,%
+      defernumbers=#1%
+    }%
+    \AfterEndPreamble{\newrefsegment}%
+  }%
+}
+\yadsetup{%
+  localbibs*/.code={%
+    \YAD@localbibs@common@code{true}%
+  },%
+  localbibs/.code={%
+    \YAD@localbibs@common@code{false}%
+  }%
+}
 \def\YAD@interligne{single}%
 \yadsetup{%
   space/.is choice,%
@@ -417,7 +455,6 @@
 \RequirePackage{xstring}[2013/10/13]%
 \RequirePackage{textcase}[2004/10/07]%
 \RequirePackage{translator}[2010/06/12]%
-\RequirePackage{fixltx2e}[2006/09/13]%
 \RequirePackage{iftex}[2013/04/04]%
 \RequirePackage{epigraph}[2009/09/02]%
 \RequirePackage{tcolorbox}[2014/03/31]%
@@ -3648,6 +3685,13 @@
 \AfterPreamble{% delay the redefinition when titlesec has done its own
   \renewcommand\chapter
   {%
+    \ifbool{YAD@localbibs}{%
+      \let\YAD@ORI@blx@warn@bibempty\blx@warn@bibempty%
+      \def\blx@warn@bibempty{}%
+      \YAD@printbibliography@ORI[segment=\therefsegment,heading=YAD@localbibs@heading]%
+      \let\blx@warn@bibempty\YAD@ORI@blx@warn@bibempty%
+   }{%
+    }
     \cleardoublepage%
     \YAD@phantomsection%
     \ifbool{YAD@output@paper}{%
@@ -3745,7 +3789,12 @@
 \AtEndPreamble{%
   \@ifpackageloaded{biblatex}{%
     \defbibheading{bibintoc}[\bibname]{\chapter*{#1}}%
-    \defbibheading{subbibintoc}[\bibname]{\section{#1}}%
+    % \defbibheading{subbibintoc}[\bibname]{\section*{#1}}%
+    \defbibheading{YAD@localbibs@heading}[\translate{lbl-localbibliography}]{%
+      % \YAD@setsecnumdepth{none}%
+      \section*{#1}%
+      % \YAD@setsecnumdepth{\YAD@secnumdepth}%
+    }%
     \@ifpackageloaded{csquotes}{%
       \SetCiteCommand{\autocite}%
     }{%
@@ -4019,6 +4068,7 @@ du}{Work in progress as of}%
 \expression{submittedfoottext}{Version soumise en date du}{Submitted work
   as of}%
 \expression{localtocname}{Sommaire du pr\'esent chapitre}{Outline of the current chapter}%
+\expression{localbibliography}{Bibliographie du chapitre}{Bibliography of the current chapter}%
 %% ----------------------------------------------------------------------------------
 %% This work may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either version 1.3

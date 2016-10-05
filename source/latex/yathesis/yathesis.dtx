@@ -633,6 +633,7 @@ This work consists of the file  yathesis.dtx
 \YAD@create@boolean{nofrontcover}%
 \YAD@create@boolean{hdr}%
 \YAD@create@boolean{localtocs@classoption}%
+\YAD@create@boolean{localbibs}%
 %
 \yadsetup{noerror=true}%
 %
@@ -810,6 +811,49 @@ This work consists of the file  yathesis.dtx
 }%
 %    \end{macrocode}
 %
+% On définit la clé de classe "localbibs" qui fait que les chapitres
+% contenant des références bibliographiques sont automatiquement terminées par
+% leurs bibliographies locales. 
+%    \begin{macrocode}
+\newcommand\YAD@localbibs@common@code[1]{%
+  \booltrue{YAD@localbibs}%
+  \AtEndPreamble{%
+    \@ifpackageloaded{biblatex}{%
+    }{%
+      \@ifpackageloaded{csquotes}{%
+      }{%
+        \RequirePackage{csquotes}%
+      }%
+      \YAD@ClassWarningNoLine{%
+        L'ajout automatique des bibliographies locales en fin\MessageBreak%
+        de chapitres fourni par l'option de classe\MessageBreak%
+        `localbibs' repose sur le package `biblatex'\MessageBreak%
+        que vous n'avez pas charge.\MessageBreak%
+        La classe `yathesis' va le faire pour vous mais\MessageBreak%
+        le recours a ce package pour la bibliographie sera\MessageBreak%
+        alors necessaire et exclura tout autre outil\MessageBreak%
+        de production de la bibliographie\MessageBreak%
+        (`BibTeX', `natbib', etc.)%
+      }%
+      \RequirePackage{biblatex}%
+    }%
+    \ExecuteBibliographyOptions{%
+      refsegment=chapter,%
+      defernumbers=#1%
+    }%
+    \AfterEndPreamble{\newrefsegment}%
+  }%
+}
+\yadsetup{%
+  localbibs*/.code={%
+    \YAD@localbibs@common@code{true}%
+  },%
+  localbibs/.code={%
+    \YAD@localbibs@common@code{false}%
+  }%
+}
+%    \end{macrocode}
+%
 %    \begin{macrocode}
 % \def\YAD@interligne{single}%
 % \define@choicekey*{yathesis.cls}{space}{single,onehalf,double}[single]%
@@ -973,10 +1017,6 @@ This work consists of the file  yathesis.dtx
 % expressions clés du canevas de thèse (notamment dans les pages de titre)
 %    \begin{macrocode}
 \RequirePackage{translator}[2010/06/12]%
-%    \end{macrocode}
-% Pour fixer quelques bugs (en général sans conséquence) de \hologo{LaTeX2e}
-%    \begin{macrocode}
-\RequirePackage{fixltx2e}[2006/09/13]%
 %    \end{macrocode}
 % Pour tester le moteur employé
 %    \begin{macrocode}
@@ -5145,6 +5185,13 @@ This work consists of the file  yathesis.dtx
 \AfterPreamble{% delay the redefinition when titlesec has done its own
   \renewcommand\chapter
   {%
+    \ifbool{YAD@localbibs}{%
+      \let\YAD@ORI@blx@warn@bibempty\blx@warn@bibempty%
+      \def\blx@warn@bibempty{}%
+      \YAD@printbibliography@ORI[segment=\therefsegment,heading=YAD@localbibs@heading]% 
+      \let\blx@warn@bibempty\YAD@ORI@blx@warn@bibempty%
+   }{%
+    }
     \cleardoublepage%
     \YAD@phantomsection%
     \ifbool{YAD@output@paper}{%
@@ -5567,7 +5614,12 @@ This work consists of the file  yathesis.dtx
 \AtEndPreamble{%
   \@ifpackageloaded{biblatex}{%
     \defbibheading{bibintoc}[\bibname]{\chapter*{#1}}%
-    \defbibheading{subbibintoc}[\bibname]{\section{#1}}%
+    % \defbibheading{subbibintoc}[\bibname]{\section*{#1}}%
+    \defbibheading{YAD@localbibs@heading}[\translate{lbl-localbibliography}]{%
+      % \YAD@setsecnumdepth{none}%
+      \section*{#1}%
+      % \YAD@setsecnumdepth{\YAD@secnumdepth}%
+    }%
 %    \end{macrocode}
 %
 % Références bibliographiques des citations formelles (cf. \Package{biblatex}):
@@ -5966,6 +6018,7 @@ This work consists of the file  yathesis.dtx
 \expression{submittedfoottext}{Version soumise en date du}{Submitted work
   as of}%
 \expression{localtocname}{Sommaire du pr\'esent chapitre}{Outline of the current chapter}%
+\expression{localbibliography}{Bibliographie du chapitre}{Bibliography of the current chapter}%
 %    \end{macrocode}
 %
 %    \begin{macrocode}
