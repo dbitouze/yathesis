@@ -32,11 +32,10 @@ Typesetting the documentation of the class requires:
   with `yathesis-demo` package load at first place. If `latexmk` is available,
   it is easier to run:
 
-        latexmk -f -pdf -jobname=these -pdflatex= \
-        "pdflatex %O '\RequirePackage{etoolbox}\AtEndPreamble{\RequirePackage{yathesis-demo}}\input{%S}'" these.tex
+        latexmk -f -pdf -jobname=these -pdflatex="pdflatex %O '\RequirePackage{etoolbox}\AtEndPreamble{\RequirePackage{yathesis-demo}}\input{%S}'" these.tex
 
 - to run `pdflatex` on `yathesis.tex` to be found in the
    `.../yathesis/doc/latex/yathesis/documentation/french` directory. If
    `latexmk` is available, it is easier to run:
 
-        latexmk yathesis.tex
+        latexmk yathesis-fr.tex
