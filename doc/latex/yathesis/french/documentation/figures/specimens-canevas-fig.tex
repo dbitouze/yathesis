@@ -18,7 +18,7 @@
         one child at (0.8,-0.725) and two children at (0.8,-0.75) and (0.8,-1.5)
     },
     edge from parent path={
-        ($(\tikzparentnode\tikzparentanchor)+(2ex,0pt)$) |- (\tikzchildnode\tikzchildanchor)%^^A|
+        ($(\tikzparentnode\tikzparentanchor)+(2ex,0pt)$) |- (\tikzchildnode\tikzchildanchor)%|
     },
     anchor=west,
     growth parent anchor=west,
@@ -97,7 +97,7 @@
     \node[fit=(a1)(a2)(a3)(a4)(a5)(a6)(b1)(b2)(b3)(b4)(b5)(b6)(t1)(t2),
     inner sep=0,line
     width=0] (glob) {};
-    %^^A
+    %
     \node [
       fill=a-plat,
       draw=a-plat,
@@ -119,7 +119,7 @@
       color=a-plat,
       thick
     ] (a-plat_zone_label) to [out=-60,in=0] (a-plat_zone);
-    %^^A
+    %
     \node[
       fill=en-arborescence,
       draw=en-arborescence,

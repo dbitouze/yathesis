@@ -45,11 +45,11 @@
 \item Remplacer \refCom{coinstitute}, et peut-être aussi \refCom{company}, par des
   occurrences multiples de \refCom{institute}, distinguables par l'ordre de saisie
   et/ou par des  options.
-%^^A \item Faire des pseudo-chapitres de la partie liminaire (\refCom{acknowledgements},
-%^^A   \refCom{caution}, \refCom{frenchabstract}, \refCom{foreword}, \refCom{preface}) des objets analogues
-%^^A   à \refEnv{abstract} (c-à-d des environnements pour les préparer et des commandes
-%^^A   \docAuxCommand*{make...} pour les produire).
-%^^A \item Finir d'implémenter et documenter \docAuxKey*{affiliationsecondary}
+% \item Faire des pseudo-chapitres de la partie liminaire (\refCom{acknowledgements},
+%   \refCom{caution}, \refCom{frenchabstract}, \refCom{foreword}, \refCom{preface}) des objets analogues
+%   à \refEnv{abstract} (c-à-d des environnements pour les préparer et des commandes
+%   \docAuxCommand*{make...} pour les produire).
+% \item Finir d'implémenter et documenter \docAuxKey*{affiliationsecondary}
 % et assimilés.
 \item Fournir une option pour les polices.
 \item Faire figurer la discipline sur la 4\ieme{} de couverture.
@@ -109,12 +109,12 @@
   expliquer l'usage de \program{latexmk} dans les \enquote{trucs et astuces}.
 % \item Utiliser le \Package{tcolorbox} pour s'affranchir des raccourcis
 %   %
-%   \lstDeleteShortInline×%^^A
+%   \lstDeleteShortInline×%
 %   %
 %   \lstinline|×|
-%   %^^A
-%   \lstMakeShortInline[style=dbtex]×%^^A
-%   %^^A
+%   %
+%   \lstMakeShortInline[style=dbtex]×%
+%   %
 %   et ×÷× ainsi pouvoir compiler la documentation avec \program{pdflatex} et non
 %   plus \program{xelatex} (il faudra alors renoncer au \Package*{fontawesome}
 %   qui fournit l'icône en forme de canevas).
@@ -127,7 +127,7 @@
 \begin{lstlisting}
 pdflatex -jobname=these_a_imprimer "\PassOptionsToClass{output=paper}{yathesis}\input{these}"
 \end{lstlisting}
-  \lstset{escapechar="}%^^A
+  \lstset{escapechar="}%
 Évoquer éventuellement les \enquote{makefile}.
 \end{enumerate}
 

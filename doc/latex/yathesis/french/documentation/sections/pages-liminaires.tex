@@ -40,8 +40,8 @@ Cette section détaille les commandes permettant de préparer et produire les
 
 \changes{v0.99d}{2014-06-08}{Élision \enquote{automatique} des articles définis
   précédant \meta{institut} et \meta{co-institut} dans la clause de
-  non-responsabilité}%^^A
-%^^A
+  non-responsabilité}%
+%
 La \yatCl{} permet de faire figurer une clause de non-responsabilité, telle
 qu'exigée par certains instituts. Celle-ci apparaît sur une page dédiée et
 a pour contenu par défaut une phrase semblable à\selonlangue{} :
@@ -318,12 +318,12 @@ page.
 
 \begin{dbexample}{Préparation et production de la page dédiée aux résumés}{}
   Les codes suivants produisent la page illustrée \vref{fig-resumes-succincts}.
-%^^A \preamblesample{%
-%^^A   includerangemarker=false,%
-%^^A   rangebeginprefix={»).\^^M},%
-%^^A   rangeendsuffix={\^^M\%\ Page},%
-%^^A   linerange={\\begin\{abstract-\\end\{abstract\}}%
-%^^A }{title=Préparation des résumés}
+% \preamblesample{%
+%   includerangemarker=false,%
+%   rangebeginprefix={»).\^^M},%
+%   rangeendsuffix={\^^M\%\ Page},%
+%   linerange={\\begin\{abstract-\\end\{abstract\}}%
+% }{title=Préparation des résumés}
 \begin{bodycode}
 \begin{abstract}
   \lipsum[1-2]

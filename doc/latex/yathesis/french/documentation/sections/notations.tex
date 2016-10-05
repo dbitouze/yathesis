@@ -152,14 +152,14 @@ environnements peuvent être modulés au moyen d'options, ou listes d'options
 (séparées par des virgules). Ces options se présentent sous la forme
 \meta{clé}|=|\meta{valeur} et la \meta{valeur} passée à une \meta{clé} peut
 être :
-%^^A \begin{description}
-%^^A \item[ne prennent pas de valeur.] Une telle option, par exemple nommée
-%^^A   \refKey{option}, est alors documentée selon la syntaxe suivante:
-%^^A     \begin{docKey*}{option}{}{\meta{valeurs par défaut et initiale}}
-%^^A       \meta{Description de \refKey{option}}
-%^^A     \end{docKey*}
-%^^A \item[prennent des valeurs.] Une telle option se présente alors sous la forme
-%^^A   \meta{clé}|=|\meta{valeur}. Les valeurs passées à une clé peuvent être :
+% \begin{description}
+% \item[ne prennent pas de valeur.] Une telle option, par exemple nommée
+%   \refKey{option}, est alors documentée selon la syntaxe suivante:
+%     \begin{docKey*}{option}{}{\meta{valeurs par défaut et initiale}}
+%       \meta{Description de \refKey{option}}
+%     \end{docKey*}
+% \item[prennent des valeurs.] Une telle option se présente alors sous la forme
+%   \meta{clé}|=|\meta{valeur}. Les valeurs passées à une clé peuvent être :
 \begin{description}
 \item[libre.] Si une telle \meta{clé} est (pour l'exemple) nommée
   \refKey{freekey}, elle est alors documentée selon la syntaxe suivante :
@@ -175,7 +175,7 @@ environnements peuvent être modulés au moyen d'options, ou listes d'options
     \meta{Description de \refKey{choicekey} et de ses valeurs possibles}
   \end{docKey*}
 \end{description}
-%^^A \end{description}
+% \end{description}
 
 Les \meta{valeurs par défaut et initiale} d'une clé sont souvent précisées
 (entre parenthèses en fin de ligne). Elles indiquent ce que la clé vaut :
@@ -184,7 +184,7 @@ Les \meta{valeurs par défaut et initiale} d'une clé sont souvent précisées
   \emph{seule} c'est-à-dire sans qu'une valeur explicite lui soit passée ;
 \item[initialement] c'est-à-dire lorsque la clé \emph{n'est pas} employée.
 \end{description}
-%^^A
+%
 Ainsi certaines clés, appelées booléennes parce qu'elles ne peuvent prendre que
 deux valeurs (\docValue*{true} et \docValue*{false}), portent la précision par
 exemple \enquote{par défaut \lstinline+true+, initialement \lstinline+false+}

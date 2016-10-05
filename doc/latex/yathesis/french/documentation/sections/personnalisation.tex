@@ -309,10 +309,10 @@ Les documents composés avec la \yatCl{} peuvent avoir deux formats de sortie :
 \subsection{Tables des matières locales}
 \label{sec-localtoc}
 
-%^^A
+%
 \changes{v0.99o}{2016-09-29}{Nouvelle option de classe \refKey{localtocs}
   permettant de faire automatiquement débuter les chapitres par leurs tables des
-  matières locales}%^^A
+  matières locales}%
 
 \begin{docKey}[][doc new=2016-09-29]{localtocs}{}{pas de valeur par défaut, pas
     de valeur initiale} 
@@ -396,11 +396,11 @@ les pages de résumés et de 4\ieme{} de couverture
 (cf. \vref{sec-abstract,sec-quatr-de-couv}). Mais la clé
 \refKey{numlaboratories} suivante permet de faire figurer un nombre arbitraire
 de laboratoires parmi ceux définis au moyen de la commande
-\refCom{laboratory}.%^^A
-%^^A
+\refCom{laboratory}.%
+%
 \changes{v0.99j}{2014-07-18}{Nouvelle clé \protect\refKey{numlaboratories}
   permettant de spécifier le nombre ($\geqslant 0$) de laboratoires devant
-  figurer sur les pages de résumés et de 4\ieme{} de couverture}%^^A
+  figurer sur les pages de résumés et de 4\ieme{} de couverture}%
 
 \begin{docKey}{numlaboratories}{=\meta{nombre}}{pas de valeur par
     défaut, initialement \docValue*{1}}
@@ -420,14 +420,14 @@ Pour gérer les têtes de chapitres, la \yatCl{} s'appuie sur le
 clé \refKey{fncychap} suivante permet de spécifier un autre style de ce
 package\footnote{Par souci de compatibilité ascendante, la clé désormais
   obsolète \docAuxKey{chap-style} est un alias de la clé
-  \refKey{fncychap}.}.%^^A
+  \refKey{fncychap}.}.%
 %
 {%
   \tcbset{before lower=\vspace*{\baselineskip}\par}
   \begin{docKey}{fncychap}{=\docValue{Sonny}\textbar\docValue{Lenny}\textbar\docValue{Glenn}\textbar\docValue{Conny}\textbar\docValue{Rejne}\textbar\docValue{Bjarne}\textbar\docValue{PetersLenny}\textbar\docValue{Bjornstrup}\textbar\docValue{none}}{pas
       de valeur par défaut, initialement \docValue{PetersLenny}}
     \changes{v0.99g}{2014-07-13}{Clé \protect\refAux{chap-style} remplacée par
-      (et alias de) la clé \protect\refKey{fncychap}}%^^A
+      (et alias de) la clé \protect\refKey{fncychap}}%
     %
     Cette clé permet de spécifier un autre style du \Package{fncychap}.
 
@@ -551,7 +551,7 @@ les habilitations à diriger les recherches.
 \begin{docKey}{hdr}{=\docValue{true}\textbar\docValue{false}}{par défaut
     \docValue{true}, initialement \docValue{false}}
   \changes{v0.99f}{2014-07-11}{Nouvelle clé \protect\refKey{hdr} permettant de
-    d'utiliser la \yatCl{} pour une \gls{hdr}}%^^A
+    d'utiliser la \yatCl{} pour une \gls{hdr}}%
   %
   Cette clé spécifie que le document est une habilitation à diriger les
   recherches.
@@ -568,8 +568,8 @@ celles dont le label est suffixé par \enquote{\texttt{-hdr}} dans le
 \label{sec-options-passer-aux}
 
 \changes{v0.99g}{2014-07-13}{Des options peuvent être passées aux packages
-  chargés par \yat{}}%^^A
-%^^A
+  chargés par \yat{}}%
+%
 Pour plusieurs de ses fonctionnalités, la \yatCl s'appuie sur des packages
 qu'elle charge automatiquement (listés
 \vref{sec-packages-charges-par}). Aussi son comportement par défaut et sa
@@ -659,8 +659,8 @@ peuvent être passées à leurs options).
 \end{docKey}
 %
 \changes*{v0.99k}{2014-10-01}{%
-  Option de classe \protect\docAuxKey*{bookmark} supprimée%^^A
-}%^^A
+  Option de classe \protect\docAuxKey*{bookmark} supprimée%
+}%
 
 \begin{dbexample}{Passage d'options à un package  automatiquement chargés par \yat}{}
   L'exemple suivant montre comment passer au \Package{xcolor} les options
@@ -879,7 +879,7 @@ ou des chargé(e)s de recherche (\gls{hdr} ou pas) du \gls{cnrs}. La clé
 \begin{docKey}{corps}{=\meta{label}}{pas de
     valeur par défaut, initialement vide}
   \changes{v0.99e}{2014-06-15}{Clé \protect\refAux{corporation} remplacée par
-    (et alias de) la clé \protect\refKey{corps}}%^^A
+    (et alias de) la clé \protect\refKey{corps}}%
   %
   L'option |corps=|\meta{label} permet de stipuler un \meta{corps en français}
   et un \meta{corps en anglais} où \meta{label} identifie une expression listée
@@ -922,7 +922,7 @@ La clé \refKey{role} suivante permet de spécifier de \emph{nouveaux} rôles
 \begin{docKey}{role}{=\meta{label}}{pas de valeur par défaut, initialement
     vide}
   \changes{v0.99f}{2014-07-11}{Nouvelle clé \protect\refKey{role} permettant de
-    spécifier ou définir de nouveaux rôles pour les personnes}%^^A
+    spécifier ou définir de nouveaux rôles pour les personnes}%
   %
   L'option |role=|\meta{label} permet de stipuler un \meta{rôle en français} et
   un \meta{rôle en anglais} où \meta{label} identifie une expression listée au
