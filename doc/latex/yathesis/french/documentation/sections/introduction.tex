@@ -8,7 +8,7 @@ production de toutes sortes de documents : rapports de stage, mémoires de
 \emph{master} et de thèses, polycopiés de cours, rapports d'activité, etc.
 
 Les outils standards ou généralistes de \LaTeX{} tels que les classes
-\class{book} ou \class*{memoir} n'étant pas calibrés pour répondre aux exigences
+\class{book} ou \class{memoir} n'étant pas calibrés pour répondre aux exigences
 particulières des mémoires de thèse, de nombreuses classes spécifiques ont été
 créées\footnote{Cf. \url{http://ctan.org/topic/dissertation}.}  et sont livrées
 avec toute distribution \TeX{} moderne. Toutefois, la plupart d'entre elles ne
@@ -17,10 +17,10 @@ université donnée.
 
 Parmi les exceptions notables figurent :
 \begin{itemize}
-\item la \Class*{droit-fr}, destinée aux thèses en droit préparées en France ;
-\item la \Class*{ulthese}, destinée aux thèses francophones préparées
+\item la \Class{droit-fr}, destinée aux thèses en droit préparées en France ;
+\item la \Class{ulthese}, destinée aux thèses francophones préparées
   à l'Université Laval (Canada) ;
-\item la \Class*[http://www.loria.fr/~roegel/TeX/TUL.html]{thesul}, destinée
+\item la \Class[http://www.loria.fr/~roegel/TeX/TUL.html]{thesul}, destinée
   initialement aux thèses en informatique préparées à l'Université de Lorraine,
   mais aisément adaptable à tout autre champ disciplinaire et institut en
   France. Cette classe n'est toutefois pas fournie par les distributions \TeX{}
@@ -34,29 +34,27 @@ instituts. Elle implémente notamment l'essentiel des recommandations émanant d
 l'utilisateur.  Elle a en outre été conçue pour (facultativement) tirer profit
 de plusieurs outils récents et puissants disponibles sous \LaTeX{}, notamment :
 \begin{itemize}
-\item la bibliographie avec le \Package*{biblatex} ;
+\item la bibliographie avec le \Package{biblatex} ;
 \item les glossaire, liste d'acronymes et liste de symboles avec le
-  \Package*{glossaries}.
+  \Package{glossaries}.
 \end{itemize}
-% ^^A, mais peut éventuellement être adaptée à d'autres pays.
+%, mais peut éventuellement être adaptée à d'autres pays.
 
 La \yatCl{}, basée sur la \Class{book}, se veut à la fois simple d'emploi et,
 dans une certaine mesure, (aisément) personnalisable.
 
-% ^^AMais sur ce dernier point, ce que fait observer
-% ^^A\citefirstlastauthor{thesul} au sujet de sa \Class{thesul}, s'applique
-% ^^Aégalement à la \yatCl{} : ^^A %
-% ^^A\blockcquote{thesul}{%
-% ^^ALa \Class{thesul} fait partie des classes de la gamme
-% ^^A\enquote{prêt-à-porter}.  Elle satisfait un certain nombre de besoins, mais
-% ^^Apas tous les besoins. C'est une classe faite pour ceux qui veulent
-% ^^Autiliser un outil au prix d'un nombre très restreint (voire nul) de
-% ^^Amodifications. Celui ou celle qui souhaiterait une classe très
-% ^^Aparticulière, différant en de nombreux points de ce qu'offre la
-% ^^A\Class{thesul}, pourrait bien sûr redéfinir les parties concernées de la
-% ^^Aclasse mais gagnerait bien plus à se construire sa propre classe. Le
-% ^^A\enquote{prêt-à-porter} ne vaudra jamais le \enquote{sur mesure}.%
-% ^^A }
+% Mais sur ce dernier point, ce que fait observer \citefirstlastauthor{thesul}
+% au sujet de sa \Class{thesul}, s'applique également à la \yatCl{} : %
+% \blockcquote{thesul}{%
+% La \Class{thesul} fait partie des classes de la gamme \enquote{prêt-à-porter}.
+% Elle satisfait un certain nombre de besoins, mais pas tous les besoins. C'est
+% une classe faite pour ceux qui veulent utiliser un outil au prix d'un nombre
+% très restreint (voire nul) de modifications. Celui ou celle qui souhaiterait
+% une classe très particulière, différant en de nombreux points de ce qu'offre
+% la \Class{thesul}, pourrait bien sûr redéfinir les parties concernées de la
+% classe mais gagnerait bien plus à se construire sa propre classe. Le
+% \enquote{prêt-à-porter} ne vaudra jamais le \enquote{sur mesure}.%
+% }
 
 \section{Comment lire la présente documentation ?}
 \label{sec-comment-lire-cette}
@@ -80,8 +78,8 @@ rencontre les objets correspondants dans un mémoire de thèse :
 \end{enumerate}
 Elle indique enfin comment personnaliser la \yatCl{}
 (cf. \vref{cha-configuration}).
-% ^^A, par exemple pour redéfinir les expressions automatiquement insérées dans
-% ^^Ales documents.
+% , par exemple pour redéfinir les expressions automatiquement insérées dans les
+% documents.
 
 \subsection{Partie annexe}
 \label{sec-partie-annexe}
@@ -167,8 +165,8 @@ Il remercie en outre tous les auteurs de packages à qui il a soumis \aside{à u
   rythme parfois effréné} des questions, demandes de fonctionnalités et rapports
 de bogues. Ils ont eu la gentillesse de répondre rapidement, clairement et
 savamment, en acceptant souvent les suggestions formulées. Parmi eux, Nicola
-Talbot pour \package*{datatool} et \package*{glossaries}, Thomas F. Sturm
-pour \package*{tcolorbox} et Jean-François pour \package*{etoc}.
+Talbot pour \package{datatool} et \package{glossaries}, Thomas F. Sturm
+pour \package{tcolorbox} et Jean-François pour \package{etoc}.
 
 L'auteur adresse des remerciements chaleureux à ceux qui ont accepté de
 bêta-tester la \yatCl{}, notamment Cécile Barbet, Coralie Escande, Mathieu

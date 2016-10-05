@@ -263,12 +263,12 @@ des remerciements, un résumé substantiel en français
   du mémoire, ces chapitres seront automatiquement \emph{non} numérotés.
 \end{dbwarning}
 
-% ^^A\begin{dbremark}{\protect\Glspl{titrecourant} des chapitres des
-%   ^^A\protect\glspl{liminaire}}{titrecourant}%
-%   ^^ALes chapitres \enquote{ordinaires} sont pourvus de \glspl{titrecourant}
-%   ^^Asi (et seulement si) ils figurent après la page dédiée aux résumés
-%   ^^A(cf. \vref{sec-abstract}).
-% ^^A\end{dbremark}
+%\begin{dbremark}{\protect\Glspl{titrecourant} des chapitres des
+%  \protect\glspl{liminaire}}{titrecourant}%
+%  Les chapitres \enquote{ordinaires} sont pourvus de \glspl{titrecourant}
+%  si (et seulement si) ils figurent après la page dédiée aux résumés
+%  (cf. \vref{sec-abstract}).
+%\end{dbremark}
 
 \section{Résumés succincts en français et en anglais}\label{sec-abstract}
 
@@ -390,22 +390,22 @@ la \yatCl. Cependant, celle-ci fournit des fonctionnalités propres au
   à le charger manuellement si on souhaite l'utiliser.
 \end{dbwarning}
 
-% ^^A \begin{enumerate}
-% ^^A \item les commandes de ce package produisant les liste des termes du ou des
-% ^^A   glossaires sont légèrement modifiées (un style de pages propre leur étant
-% ^^A   appliqué) :
-% ^^A   \begin{itemize}
-% ^^A   \item \docAuxCommand{printglossary} et \docAuxCommand{printglossaries} qui
-% ^^A     produisent la liste des termes du ou des glossaires\termesdefinisutilises{}
-% ^^A     (cf. \vref{fig-printglossary}) ;
-% ^^A   \item \docAuxCommand{printacronyms}\footnote{L'usage de la commande
-% ^^A       \docAuxCommand{printacronyms} nécessite que l'option \docAuxKey{acronyms}
-% ^^A       soit passée au \Package{glossaries}.} qui produit la liste des
-% ^^A     acronymes\termesdefinisutilises{} (cf. \vref{fig-printacronyms}) ;
-% ^^A   \end{itemize}
-% ^^A \item les commande et style propres \refCom{newglssymbol}, et
-% ^^A   \docValue{yadsymbolstyle}, précisés ci-dessous, sont définis.
-% ^^A \end{enumerate}
+% \begin{enumerate}
+% \item les commandes de ce package produisant les liste des termes du ou des
+%   glossaires sont légèrement modifiées (un style de pages propre leur étant
+%   appliqué) :
+%   \begin{itemize}
+%   \item \docAuxCommand{printglossary} et \docAuxCommand{printglossaries} qui
+%     produisent la liste des termes du ou des glossaires\termesdefinisutilises{}
+%     (cf. \vref{fig-printglossary}) ;
+%   \item \docAuxCommand{printacronyms}\footnote{L'usage de la commande
+%       \docAuxCommand{printacronyms} nécessite que l'option \docAuxKey{acronyms}
+%       soit passée au \Package{glossaries}.} qui produit la liste des
+%     acronymes\termesdefinisutilises{} (cf. \vref{fig-printacronyms}) ;
+%   \end{itemize}
+% \item les commande et style propres \refCom{newglssymbol}, et
+%   \docValue{yadsymbolstyle}, précisés ci-dessous, sont définis.
+% \end{enumerate}
 
 \begin{docCommand}{newglssymbol}{\oarg{classement}\marg{label}\marg{symbole}\marg{nom}\marg{description}}
   Cette commande définit un symbole au moyen :
@@ -479,20 +479,20 @@ la \yatCl. Cependant, celle-ci fournit des fonctionnalités propres au
 \end{landscape}
 % }
 
-% ^^A Si on souhaite faire figurer :
-% ^^A \begin{enumerate}
-% ^^A \item une liste \emph{commune} des acronymes et des termes du glossaire, on
-% ^^A   chargera \package{glossaries} \emph{sans} l'option |acronym| et on recourra à
-% ^^A   la commande \docAuxCommand{printglossary} ;
-% ^^A \item deux listes \emph{distinctes}, on chargera \package{glossaries}
-% ^^A   \emph{avec} l'option |acronym|. et on recourra à la commande
-% ^^A   \begin{enumerate}
-% ^^A   \item \refCom{printacronyms} pour celle des acronymes (cf.
-% ^^A     \vref{fig-acronymes}) ;
-% ^^A   \item\label{item:1} \docAuxCommand{printglossary} pour celle des termes du
-% ^^A     glossaire (cf. \vref{fig-printglossary}).
-% ^^A   \end{enumerate}
-% ^^A \end{enumerate}
+% Si on souhaite faire figurer :
+% \begin{enumerate}
+% \item une liste \emph{commune} des acronymes et des termes du glossaire, on
+%   chargera \package{glossaries} \emph{sans} l'option |acronym| et on recourra à
+%   la commande \docAuxCommand{printglossary} ;
+% \item deux listes \emph{distinctes}, on chargera \package{glossaries}
+%   \emph{avec} l'option |acronym|. et on recourra à la commande
+%   \begin{enumerate}
+%   \item \refCom{printacronyms} pour celle des acronymes (cf.
+%     \vref{fig-acronymes}) ;
+%   \item\label{item:1} \docAuxCommand{printglossary} pour celle des termes du
+%     glossaire (cf. \vref{fig-printglossary}).
+%   \end{enumerate}
+% \end{enumerate}
 
 Dans un mémoire de thèse, les emplacements des listes des termes du glossaire,
 des acronymes\footnote{Les commandes \docAuxCommand{printglossary} et

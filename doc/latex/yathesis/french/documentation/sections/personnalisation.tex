@@ -17,10 +17,10 @@ usuelle :
 \begin{preamblecode}
 \documentclass["\meta{options}"]{yathesis}
 \end{preamblecode}
-% ^^A Tester et documenter la commande |\yasetup|.
+% Tester et documenter la commande |\yasetup|.
 
-% ^^A La \yatCl accepte, en sus des options qui lui sont propres, celles de la
-% ^^A \Class{book} sur laquelle est elle basée.
+% La \yatCl accepte, en sus des options qui lui sont propres, celles de la
+% \Class{book} sur laquelle est elle basée.
 
 \subsection{Options de la classe \textsf{book}}\label{sec-options-usuelles-de}
 
@@ -44,10 +44,10 @@ notamment :
   ci-dessus : cela risquerait de produire des résultats non souhaités.
 \end{dbwarning}
 
-% ^^A \subsection{Options de la \yatCl}\label{sec-options-yatCl}
+% \subsection{Options de la \yatCl}\label{sec-options-yatCl}
 %
-% ^^A Les \meta{options} discutées dans cette section, propres à la \yatCl{},
-% ^^A permettent de contrôler les grandes lignes du document.
+% Les \meta{options} discutées dans cette section, propres à la \yatCl{},
+% permettent de contrôler les grandes lignes du document.
 
 \subsection{Langues (principale, secondaire,
   supplémentaires)}\label{sec-langues}
@@ -144,8 +144,8 @@ différentes versions du document : \enquote{intermédiaire} (par défaut),
         désactivé ;
       \item \changes*{v0.99f}{2014-07-11}{En versions \enquote{à soumettre},
           date de soutenance et composition du jury absentes des pages de titre
-          (et non obligatoires)}% ^^A
-        % ^^A
+          (et non obligatoires)}%
+        %
         sur les pages de titre, la composition du jury est masquée et la date de
         soutenance est supprimée\footnote{En versions soumises aux rapporteurs,
           le doctorant ne peut préjuger ni d'un jury ni d'une date de
@@ -158,8 +158,8 @@ différentes versions du document : \enquote{intermédiaire} (par défaut),
     \item[\docValue{submitted*}.] %
       \changes{v0.99k}{2014-10-01}{Nouvelle commande
         \protect\refCom{submissiondate} permettant de stipuler une date de
-        soumission du mémoire aux rapporteurs}% ^^A
-      % ^^A
+        soumission du mémoire aux rapporteurs}%
+      %
       Cette valeur produit le même effet que la valeur \docValue{submitted} sauf
       que le caractère \enquote{à soumettre} de la version est renforcé par
       l'affichage, sur (presque) tous les pieds de pages et en petites
@@ -428,7 +428,7 @@ package\footnote{Par souci de compatibilité ascendante, la clé désormais
       de valeur par défaut, initialement \docValue{PetersLenny}}
     \changes{v0.99g}{2014-07-13}{Clé \protect\refAux{chap-style} remplacée par
       (et alias de) la clé \protect\refKey{fncychap}}%^^A
-    % ^^A
+    %
     Cette clé permet de spécifier un autre style du \Package{fncychap}.
 
     Le \enquote{style} supplémentaire \docValue{none} permet de désactiver le
@@ -503,17 +503,17 @@ redéfinies, globalement ou localement.
   Si les valeurs des clés \refKey{sepcorpaffilfrench} ou
   \refKey{sepcorpaffilenglish} doivent \emph{débuter} ou \emph{finir} par un
   espace, celui-ci doit être saisi au moyen de
-  % ^^A
+  %
   \lstinline[showspaces]+\ +
-  % ^^A
-  % ^^A ou de
-  % ^^A
-  % ^^A \lstinline[deletekeywords={[2]space}]+\space+,
-  % ^^A
+  %
+  % ou de
+  %
+  % \lstinline[deletekeywords={[2]space}]+\space+,
+  %
   et non pas seulement de
-  % ^^A
+  %
   \lstinline[showspaces]+ +.
-  % ^^A
+  %
 \end{dbwarning}
 
 \begin{dbexample}{Redéfinition (globale) de l'expression séparant corps et
@@ -552,7 +552,7 @@ les habilitations à diriger les recherches.
     \docValue{true}, initialement \docValue{false}}
   \changes{v0.99f}{2014-07-11}{Nouvelle clé \protect\refKey{hdr} permettant de
     d'utiliser la \yatCl{} pour une \gls{hdr}}%^^A
-  % ^^A
+  %
   Cette clé spécifie que le document est une habilitation à diriger les
   recherches.
 \end{docKey}
@@ -637,8 +637,8 @@ peuvent être passées à leurs options).
 \end{docKey}
 \begin{docKey}{titleps}{=\marg{option(s)}}{pas valeur par défaut, initialement
     vide}
-  % ^^A \changes{v0.99j}{2014-07-18}{Clé \protect\refAux{titleps} remplacée par
-  % ^^A (et alias de) la clé \protect\refKey{titlesec}}% ^^A
+  % \changes{v0.99j}{2014-07-18}{Clé \protect\refAux{titleps} remplacée par
+  % (et alias de) la clé \protect\refKey{titlesec}}%
   Cette option permet de passer une ou plusieurs \meta{option(s)} au
   \Package{titleps}.
 \end{docKey}
@@ -657,7 +657,7 @@ peuvent être passées à leurs options).
   Cette option permet de passer une ou plusieurs \meta{option(s)} au
   \Package{datetime}.
 \end{docKey}
-% ^^A
+%
 \changes*{v0.99k}{2014-10-01}{%
   Option de classe \protect\docAuxKey*{bookmark} supprimée%^^A
 }%^^A
@@ -815,10 +815,10 @@ telles que traduites par la \yatCl{}. Il s'agit en fait des traductions en
 français et en anglais fournies par les modules \package{frenchb} et
 \package{english} du \Package{babel}, à l'exception de l'expression française
 figurant en légende des tableaux flottants (\enquote{Table} est remplacée par
-\enquote{Tableau}).% ^^A
+\enquote{Tableau}).%
 \changes*{v0.99j}{2014-07-18}{Les légendes des tableaux flottants sont
   introduites par l'expression \enquote{\textsc{Tableau}} et non plus plus
-  \enquote{\textsc{Table}}}% ^^A
+  \enquote{\textsc{Table}}}%
 
 Si on souhaite redéfinir ces expressions, il suffit de recourir aux commandes
 |\addto|, |\captionsfrench| et |\captionsenglish| du \Package{babel} au moyen
@@ -880,7 +880,7 @@ ou des chargé(e)s de recherche (\gls{hdr} ou pas) du \gls{cnrs}. La clé
     valeur par défaut, initialement vide}
   \changes{v0.99e}{2014-06-15}{Clé \protect\refAux{corporation} remplacée par
     (et alias de) la clé \protect\refKey{corps}}%^^A
-  % ^^A
+  %
   L'option |corps=|\meta{label} permet de stipuler un \meta{corps en français}
   et un \meta{corps en anglais} où \meta{label} identifie une expression listée
   au \vref{tab-expressions-cles} ou à définir au moyen de la commande
@@ -916,14 +916,14 @@ pages de titre, sont attachés :
 La clé \refKey{role} suivante permet de spécifier de \emph{nouveaux} rôles
 à \emph{définir} au moyen de la commande \refCom{expression}.
 
-% ^^A Il est même possible de \emph{définir} de \emph{nouveaux} rôles au moyen
-% ^^A de la commande \refCom{expression}.
+% Il est même possible de \emph{définir} de \emph{nouveaux} rôles au moyen
+% de la commande \refCom{expression}.
 
 \begin{docKey}{role}{=\meta{label}}{pas de valeur par défaut, initialement
     vide}
   \changes{v0.99f}{2014-07-11}{Nouvelle clé \protect\refKey{role} permettant de
     spécifier ou définir de nouveaux rôles pour les personnes}%^^A
-  % ^^A
+  %
   L'option |role=|\meta{label} permet de stipuler un \meta{rôle en français} et
   un \meta{rôle en anglais} où \meta{label} identifie une expression listée au
   \vref{tab-expressions-cles} ou à définir au moyen de la commande
