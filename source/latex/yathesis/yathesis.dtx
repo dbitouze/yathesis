@@ -833,7 +833,7 @@ This work consists of the file  yathesis.dtx
         le recours a ce package pour la bibliographie sera\MessageBreak%
         alors necessaire et exclura tout autre outil\MessageBreak%
         de production de la bibliographie\MessageBreak%
-        (`BibTeX', `natbib', etc.)%
+        (notamment `BibTeX')%
       }%
       \RequirePackage{biblatex}%
     }%
@@ -1104,8 +1104,7 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % Pour pouvoir afficher un sommaire c-à-d une table des matières réduite
 %    \begin{macrocode}
-% \RequirePackage{shorttoc}[2002/08/20]%
-\RequirePackage{etoc}[2015/08/29]%
+\RequirePackage{etoc}[2016/09/29]%
 %    \end{macrocode}
 % Pour tester la langue en cours
 %    \begin{macrocode}
@@ -5615,7 +5614,7 @@ This work consists of the file  yathesis.dtx
   \@ifpackageloaded{biblatex}{%
     \defbibheading{bibintoc}[\bibname]{\chapter*{#1}}%
     % \defbibheading{subbibintoc}[\bibname]{\section*{#1}}%
-    \defbibheading{YAD@localbibs@heading}[\translate{lbl-localbibliography}]{%
+    \defbibheading{YAD@localbibs@heading}[\translate{lbl-localbibname}]{%
       % \YAD@setsecnumdepth{none}%
       \section*{#1}%
       % \YAD@setsecnumdepth{\YAD@secnumdepth}%
@@ -6018,7 +6017,7 @@ This work consists of the file  yathesis.dtx
 \expression{submittedfoottext}{Version soumise en date du}{Submitted work
   as of}%
 \expression{localtocname}{Sommaire du pr\'esent chapitre}{Outline of the current chapter}%
-\expression{localbibliography}{Bibliographie du chapitre}{Bibliography of the current chapter}%
+\expression{localbibname}{Bibliographie du chapitre}{Bibliography of the current chapter}%
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -6034,7 +6033,7 @@ This work consists of the file  yathesis.dtx
 %
 %    \begin{macrocode}
 # mode: yathesis.cls
-# denisbitouze, 16.05.2014
+# denisbitouze, 05.10.2016
 #
 #include:class-book
 #include:latex-document
@@ -6090,6 +6089,10 @@ sepcorpaffilfrench=
 sepcorpaffilenglish=
 version=#inprogress,inprogress*,submitted,submitted*,final,draft
 output=#screen,paper,paper*
+localtocs
+localtocs/depth=#section,subsection,subsubsection,paragraph,subparagraph
+localbibs
+localbibs*
 10pt
 11pt
 12pt
