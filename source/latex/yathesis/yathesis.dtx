@@ -2609,6 +2609,7 @@ This work consists of the file  yathesis.dtx
 %
 %    \begin{macrocode}
 \YAD@create@macro[entite]{pres}
+\YAD@create@macro[entite]{comue}
 \YAD@create@macro[entite]{institute}
 \YAD@create@macro[entite]{coinstitute}
 \YAD@create@macro[entite]{company}
@@ -3172,6 +3173,11 @@ This work consists of the file  yathesis.dtx
   {%
     \ifdef{\printpreslogo}{%
       \printpreslogo%
+      \booltrue{YAD@logo@before}%
+    }{%
+    }%
+    \ifdef{\printcomuelogo}{%
+      \printcomuelogo%
       \booltrue{YAD@logo@before}%
     }{%
     }%
@@ -5889,6 +5895,7 @@ This work consists of the file  yathesis.dtx
 %
 %    \begin{macrocode}
 \expression{meta-logopres}{logo PRES}{logo PRES}
+\expression{meta-logocomue}{logo ComUE}{logo ComUE}
 \expression{meta-logoinstitute}{logo de l'institut}{logo de l'institut}
 \expression{meta-institute}{institut principal}{institut principal}
 \expression{meta-coinstitute}{institut de cotutelle}{institut de cotutelle}
@@ -6150,6 +6157,7 @@ datetime
 #
 # Institute and entities
 \pres{%<nom du PRES%>}#n
+\comue{%<nom de la ComUE%>}#n
 \institute{%<nom de l'institut%>}#n
 \coinstitute{%<nom de l'institut de cotutelle%>}#n
 \company{%<nom de l'entreprise%>}#n
@@ -6157,6 +6165,7 @@ datetime
 \laboratory{%<nom du laboratoire%>}{adresse du laboratoire%>}#n
 #
 \pres[%<précision(s)%>]{%<nom du PRES%>}#n
+\comue[%<précision(s)%>]{%<nom de la ComUE%>}#n
 \institute[%<précision(s)%>]{%<nom de l'institut%>}#n
 \coinstitute[%<précision(s)%>]{%<nom de l'institut de cotutelle%>}#n
 \company[%<précision(s)%>]{%<nom de l'entreprise%>}#n
@@ -6164,6 +6173,11 @@ datetime
 \laboratory[%<précision(s)%>]{%<nom du laboratoire%>}{%<adresse du laboratoire%>}#n
 #
 #keyvals:\pres
+logo=
+logoheight=
+url=
+#endkeyvals
+#keyvals:\comue
 logo=
 logoheight=
 url=
