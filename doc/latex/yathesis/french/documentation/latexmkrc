@@ -18,7 +18,7 @@ $makeindex = 'texindy -L french -M denisbdoc.xdy';
 
 add_cus_dep('idx', 'ind', 0, 'texindy');
 sub texindy{
-    system("texindy -L french \"$_[0].idx\"");
+    system("texindy -L french -M denisbdoc.xdy \"$_[0].idx\"");
 }
 
 @generated_exts = qw(aux idx ind lo* out toc acn acr alg bbl bcf fls gl* ist
