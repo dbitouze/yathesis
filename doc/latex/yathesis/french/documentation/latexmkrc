@@ -25,6 +25,6 @@ sub texindy{
 run.xml sbl* sl* sym* xdy unq synctex.gz mw *~
 
 $clean_ext = 'synctex.gz synctex.gz(busy) run.xml tex.bak bbl bcf fdb_latexmk run tdo listing'
-db* listing tcbtemp ins drv
+db* listing tcbtemp ins drv atfi
 );
 $quote_filenames = 0;
