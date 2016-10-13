@@ -10,9 +10,6 @@ add_cus_dep('slo', 'sls', 0, 'makeglossaries');
 sub makeglossaries{
     system( "makeglossaries \"$_[0]\"" );
 }
-sub makeindex{
-  system( "makeindex -s gglo.ist -o \"$_[0].gls\" \"$_[0].glo\"" );
-}
 
 $makeindex = 'texindy -L french -M denisbdoc.xdy';
 
@@ -21,10 +18,9 @@ sub texindy{
     system("texindy -L french -M denisbdoc.xdy \"$_[0].idx\"");
 }
 
-@generated_exts = qw(aux idx ind lo* out toc acn acr alg bbl bcf fls gl* ist
-run.xml sbl* sl* sym* xdy unq synctex.gz mw *~
+push @generated_exts, 'acn', 'acr', 'alg', 'bcf', 'fls', 'gl*', 'sbl*', 'sl*', 'sym*' ;
 
-$clean_ext = 'synctex.gz synctex.gz(busy) run.xml tex.bak bbl bcf fdb_latexmk run tdo listing'
-db* listing tcbtemp ins drv atfi
-);
+$clean_ext .= 'synctex.gz* run.xml tex.bak ind idx out bbl bcf fdb_latexmk run
+tdo listing *~ lo* unq mw tcbtemp ins drv atfi db*' ;
+
 $quote_filenames = 0;
