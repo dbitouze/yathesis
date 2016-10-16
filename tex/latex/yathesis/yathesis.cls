@@ -359,7 +359,7 @@
         le recours a ce package pour la bibliographie sera\MessageBreak%
         alors necessaire et exclura tout autre outil\MessageBreak%
         de production de la bibliographie\MessageBreak%
-        (`BibTeX', `natbib', etc.)%
+        (notamment `BibTeX')%
       }%
       \RequirePackage{biblatex}%
     }%
@@ -481,7 +481,7 @@
   }%
 }%
 \RequirePackage{babel}[2014/03/24]
-\RequirePackage{etoc}[2015/08/29]%
+\RequirePackage{etoc}[2016/09/29]%
 \RequirePackage{iflang}[2007/11/11]%
 \RequirePackage{datetime}[2013/09/10]%
 \AtEndPreamble{%
@@ -1593,6 +1593,7 @@
   }%
 }%
 \YAD@create@macro[entite]{pres}
+\YAD@create@macro[entite]{comue}
 \YAD@create@macro[entite]{institute}
 \YAD@create@macro[entite]{coinstitute}
 \YAD@create@macro[entite]{company}
@@ -2046,6 +2047,11 @@
   {%
     \ifdef{\printpreslogo}{%
       \printpreslogo%
+      \booltrue{YAD@logo@before}%
+    }{%
+    }%
+    \ifdef{\printcomuelogo}{%
+      \printcomuelogo%
       \booltrue{YAD@logo@before}%
     }{%
     }%
@@ -3790,7 +3796,7 @@
   \@ifpackageloaded{biblatex}{%
     \defbibheading{bibintoc}[\bibname]{\chapter*{#1}}%
     % \defbibheading{subbibintoc}[\bibname]{\section*{#1}}%
-    \defbibheading{YAD@localbibs@heading}[\translate{lbl-localbibliography}]{%
+    \defbibheading{YAD@localbibs@heading}[\translate{lbl-localbibname}]{%
       % \YAD@setsecnumdepth{none}%
       \section*{#1}%
       % \YAD@setsecnumdepth{\YAD@secnumdepth}%
@@ -3956,6 +3962,7 @@
   }%
 }%
 \expression{meta-logopres}{logo PRES}{logo PRES}
+\expression{meta-logocomue}{logo ComUE}{logo ComUE}
 \expression{meta-logoinstitute}{logo de l'institut}{logo de l'institut}
 \expression{meta-institute}{institut principal}{institut principal}
 \expression{meta-coinstitute}{institut de cotutelle}{institut de cotutelle}
@@ -4068,7 +4075,7 @@ du}{Work in progress as of}%
 \expression{submittedfoottext}{Version soumise en date du}{Submitted work
   as of}%
 \expression{localtocname}{Sommaire du pr\'esent chapitre}{Outline of the current chapter}%
-\expression{localbibliography}{Bibliographie du chapitre}{Bibliography of the current chapter}%
+\expression{localbibname}{Bibliographie du chapitre}{Bibliography of the current chapter}%
 %% ----------------------------------------------------------------------------------
 %% This work may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either version 1.3
