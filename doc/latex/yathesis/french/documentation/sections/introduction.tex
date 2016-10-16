@@ -1,6 +1,6 @@
 \chapter{Introduction}
 
-\section{Objet de la \yatCl}
+\section{Objet de la présente classe}
 \label{sec-objet-de-la}
 
 \LaTeX{} est un système particulièrement performant de préparation et de
@@ -8,26 +8,26 @@ production de toutes sortes de documents : rapports de stage, mémoires de
 \emph{master} et de thèses, polycopiés de cours, rapports d'activité, etc.
 
 Les outils standards ou généralistes de \LaTeX{} tels que les classes
-\class{book} ou \class{memoir} n'étant pas calibrés pour répondre aux exigences
+\class*{book} ou \class{memoir} n'étant pas calibrés pour répondre aux exigences
 particulières des mémoires de thèse, de nombreuses classes spécifiques ont été
 créées\footnote{Cf. \url{http://ctan.org/topic/dissertation}.}  et sont livrées
 avec toute distribution \TeX{} moderne. Toutefois, la plupart d'entre elles ne
 sont pas destinées aux thèses préparées en France et sont souvent propres à une
 université donnée.
 
-Parmi les exceptions notables figurent :
+Parmi les exceptions notables figurent les classes :
 \begin{itemize}
-\item la \Class{droit-fr}, destinée aux thèses en droit préparées en France ;
-\item la \Class{ulthese}, destinée aux thèses francophones préparées
+\item \class{droit-fr}, destinée aux thèses en droit préparées en France ;
+\item \class{ulthese}, destinée aux thèses francophones préparées
   à l'Université Laval (Canada) ;
-\item la \Class[http://www.loria.fr/~roegel/TeX/TUL.html]{thesul}, destinée
+\item \class[http://www.loria.fr/~roegel/TeX/TUL.html]{thesul}, destinée
   initialement aux thèses en informatique préparées à l'Université de Lorraine,
   mais aisément adaptable à tout autre champ disciplinaire et institut en
   France. Cette classe n'est toutefois pas fournie par les distributions \TeX{}
   et nécessite d'être installée manuellement.
 \end{itemize}
 
-La présente classe, \yat, a pour objet de faciliter la composition de mémoires
+La présente classe, \yatcl, a pour objet de faciliter la composition de mémoires
 de thèses préparées en France, quels que soient les champs disciplinaires et
 instituts. Elle implémente notamment l'essentiel des recommandations émanant du
 \citeauthor{guidoct} \autocite{guidoct} et ce, de façon transparente pour
@@ -140,8 +140,9 @@ ascendante, y figurent en rouge.
 
 \section{Ressources Internet}
 \label{sec-ressources-internet}
+\index{distribution \TeX}%
 
-Cette classe est fournie par les distributions \TeX~Live et MiK\TeX{}. Elle est
+Cette classe est fournie par les distributions \texlive et \miktex. Elle est
 également disponible, pour ses versions :
 \begin{description}[labelwidth=\widthof{\bfseries de développement à :},align=right]
 \item[stable à :] \url{http://www.ctan.org/pkg/yathesis}

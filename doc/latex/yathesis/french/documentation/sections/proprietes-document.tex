@@ -1,18 +1,27 @@
 \chapter{Caractéristiques de la thèse}
 \label{cha-caract-du-docum}%
-\index{caractéristiques de la thèse}%
+\indexdef{caractéristiques de la thèse}%
 
 Ce chapitre liste les commandes et options permettant de spécifier les données
 caractéristiques de la thèse. La plupart d'entre elles sont ensuite affichées
 en divers emplacements du mémoire :
 \begin{itemize}
-\item sur les pages de 1\iere{} de couverture et de titre(s), produites par la
+\item%
+  \index{titre}%
+  \index{couverture}%
+  \index{première de couverture}%
+  sur les pages de 1\iere{} de couverture et de titre(s), produites par la
   commande \refCom{maketitle} ;
-\item sur l'éventuelle page dédiée au(x) laboratoire(s) où la thèse a été préparée,
+\item\index{laboratoire}%
+  sur l'éventuelle page dédiée au(x) laboratoire(s) où la thèse a été préparée,
   produite par la commande \refCom{makelaboratory} ;
-\item sur l'éventuelle page dédiée aux mots clés, produite par la commande \refCom{makekeywords} ;
-\item sur la page dédiée aux résumés, produite par la commande \refCom{makeabstract} ;
-\item sur l'éventuelle 4\ieme{} de couverture, produite par la commande
+\item\index{mot clé}%
+  sur l'éventuelle page dédiée aux mots clés, produite par la commande
+  \refCom{makekeywords} ;
+\item\index{résumé}%
+  sur la page dédiée aux résumés, produite par la commande \refCom{makeabstract} ;
+\item\index{quatrième de couverture}%
+  sur l'éventuelle 4\ieme{} de couverture, produite par la commande
   \refCom{makebackcover}.
 \end{itemize}
 Certaines de ces caractéristiques figurent également comme métadonnées du fichier
@@ -37,6 +46,8 @@ saisies, au choix :
   \end{dbwarning}
   \end{enumerate}
 \item[dans un fichier dédié]
+  \index{fichier!des caractéristiques de la thèse}%
+  \index{dossier!de configuration}%
   % \item\label{characteristicsfile} dans un fichier dédié,
   à nommer \file{\characteristicsfile} et à placer dans un sous-dossier à nommer
   \folder{\configurationdirectory}. Ces fichier et sous-dossier \aside{tous
@@ -72,26 +83,37 @@ titre\footnote{En outre, les titres et éventuels sous-titres figureront sur les
 %
 \begin{docCommand}[doc description=\mandatory]{author}{\oarg{adresse
       courriel}\marg{prénom}\marg{nom}}%
-  \index{caractéristiques de la thèse!auteur}%
-  \index{auteur}%
+  \index{caractéristiques de la thèse!liste!auteur}%
+  \indexdef{auteur}%
+  \index{auteur!courriel}%
+  \index{courriel}%
+  \indexdef{courriel!auteur}%
+  \index{mail|see{courriel}}%
+  \index{email|see{courriel}}%
   Cette commande définit l'auteur de la thèse. Ses \meta{prénom} et
   \meta{nom} :
   \begin{itemize}
   \item figureront sur la ou les pages de titre ;
-  \item seront un lien hypertexte vers l'\meta{adresse courriel} si celle-ci
-    est renseignée en argument optionnel ;
+  \item%
+    \index{lien hypertexte!courriel}%
+    seront un lien hypertexte vers l'\meta{adresse courriel} si celle-ci est
+    renseignée en argument optionnel ;
   \item apparaîtront aussi comme métadonnée \enquote{Auteur} du
     fichier \pdf{} de la thèse.
   \end{itemize}
   \begin{dbwarning}{Format des prénom et nom de l'auteur}{}
+    \index{auteur!format}%
+    \index{nom!format}%
+    \index{prénom!format}%
+    \index{format!nom}%
+    \index{format!prénom}%
     On veillera à ce que :
     \begin{enumerate}
     \item les éventuels accents figurent dans les \meta{prénom} et
       \meta{nom};
-    \item \index{caractéristiques de la thèse!auteur!capitales}%
+    \item \index{caractéristiques de la thèse!liste!auteur}%
       \index{capitales}%
-      \index{majuscules}%
-      % \index{auteur de la thèse!majuscules|see{auteur de la thèse!capitales}}%
+      \index{majuscules|see{capitales}}%
       le \meta{nom} \emph{ne} soit \emph{pas} saisi en capitales (sauf pour la
       ou les majuscules) car il sera automatiquement composé en petites
       capitales.
@@ -101,25 +123,25 @@ titre\footnote{En outre, les titres et éventuels sous-titres figureront sur les
 %
 \begin{docCommand}[doc description=\mandatory]{title}{\oarg{titre dans la langue
       secondaire}\marg{titre}}%
-  \index{caractéristiques de la thèse!titre}%
-  \index{titre}%
+  \index{caractéristiques de la thèse!liste!titre}%
+  \indexdef{titre}%
   Cette commande définit le \meta{titre} de la thèse. Celui-ci apparaît alors
   aussi comme métadonnée \enquote{Titre} du fichier \pdf{} de la thèse.
 \end{docCommand}
 %
 \begin{docCommand}{subtitle}{\oarg{sous-titre dans la langue
       secondaire}\marg{sous-titre}}%
-  \index{caractéristiques de la thèse!sous-titre}%
-  \index{sous-titre}%
-  % \index{titre de la thèse!sous-titre|see{sous-titre de la thèse}}%
+  \index{caractéristiques de la thèse!liste!sous-titre}%
+  \indexdef{sous-titre}%
+  \index{titre!sous-titre}%
   Cette commande définit l'éventuel \meta{sous-titre} de
   la thèse.
 \end{docCommand}
 %
 \begin{docCommand}[doc description=\mandatory]{academicfield}{\oarg{discipline dans la langue
       secondaire}\marg{discipline}}%
-  \index{caractéristiques de la thèse!discipline}%
-  \index{discipline}%
+  \index{caractéristiques de la thèse!liste!discipline}%
+  \indexdef{discipline}%
   Cette commande définit la \meta{discipline} \aside{ou champ disciplinaire}
   de la thèse. Celui-ci apparaît alors aussi comme métadonnée \enquote{Sujet} du
   fichier \pdf{} de la thèse, sauf si la commande \refCom{subject} est utilisée.
@@ -127,16 +149,15 @@ titre\footnote{En outre, les titres et éventuels sous-titres figureront sur les
 %
 \begin{docCommand}{speciality}{\oarg{spécialité dans la langue
       secondaire}\marg{spécialité}}%
-  \index{caractéristiques de la thèse!spécialité}%
-  \index{spécialité}%
+  \index{caractéristiques de la thèse!liste!spécialité}%
+  \indexdef{spécialité}%
   Cette commande définit la \meta{spécialité} (du champ
   disciplinaire) de la thèse.
 \end{docCommand}
 %
 \begin{dbremark}{Titre, sous-titre, champ disciplinaire et spécialité dans la
     langue secondaire}{titre-supp}%
-  \index{caractéristiques de la thèse!en langue secondaire}%
-  \index{langue secondaire}%
+  \index{caractéristiques de la thèse!liste!langue}%
   \emph{Via} leur argument obligatoire, les commandes \refCom{title},
   \refCom{subtitle}, \refCom{academicfield} et \refCom{speciality} définissent
   les titre, sous-titre, champ disciplinaire et spécialité, \emph{dans la
@@ -153,20 +174,36 @@ titre\footnote{En outre, les titres et éventuels sous-titres figureront sur les
 \end{dbremark}
 %
 \begin{docCommand}[doc description=\mandatory]{date}{\marg{jour}\marg{mois}\marg{année}}
+  \index{caractéristiques de la thèse!liste!date de soutenance}%
+  \index{date!de soutenance}%
   Cette commande définit la date de la soutenance.
-  \begin{dbwarning}{Format des jour, mois et année de la date de
-      soutenance}{format-date}
-    Les \meta{jour}, \meta{mois} et \meta{année} doivent être des nombres
-    (entiers), \meta{jour} et \meta{mois} étant compris respectivement :
-    \begin{itemize}
-    \item entre |1| et |31| ;
-    \item entre |1| et |12|.
-    \end{itemize}
-  \end{dbwarning}
 \end{docCommand}
+%
+\begin{docCommand}{submissiondate}{\marg{jour}\marg{mois}\marg{année}}
+  \index{caractéristiques de la thèse!liste!date de soumission}%
+  \index{date!de soumission}%
+  Cette commande définit la date de la soumission du mémoire (qui ne figure
+  qu'en version \enquote{à soumettre}, cf. option \docValue{submitted*}
+  \vref{sec-versions}). Ses arguments sont soumis aux mêmes contraintes que ceux
+  de la commande \refCom{date} (cf. \vref{wa-format-date}).
+\end{docCommand}
+%
+\begin{dbwarning}{Format des jour, mois et année des dates de
+    soutenance et de soumission}{format-date}
+  \index{date!format}%
+  \index{format!date}%
+  Les \meta{jour}, \meta{mois} et \meta{année} doivent être des nombres
+  (entiers), \meta{jour} et \meta{mois} étant compris respectivement :
+  \begin{itemize}
+  \item entre |1| et |31| ;
+  \item entre |1| et |12|.
+  \end{itemize}
+\end{dbwarning}
 %
 \begin{docCommand}{subject}{\oarg{sujet dans la langue
       secondaire}\marg{sujet de la thèse}}
+   \index{caractéristiques de la thèse!liste!sujet}%
+   \indexdef{sujet}%
   Cette commande définit le \meta{sujet de la thèse}.  Celui-ci ne figure nulle
   part dans la version papier du mémoire : il n'apparaît que comme métadonnée
   \enquote{Sujet} du fichier \pdf{} de la thèse. Si cette commande n'est pas
@@ -175,10 +212,11 @@ titre\footnote{En outre, les titres et éventuels sous-titres figureront sur les
 \end{docCommand}
 
 \begin{dbexample}{Auteur, (sous-)titre, spécialité, sujet, date}{}
+   \indexex{caractéristiques de la thèse}%
   Les données principales d'une thèse peuvent être les suivantes.
   % \tcbset{listing options={deletekeywords={[2]title}}}
   \NoAutoSpacing%
-\begin{bodycode}[title=Par exemple dans le \File{\characteristicsfile},listing options={deletekeywords={[2]title}}]
+\begin{preamblecode}[title=Par exemple dans le \File{\characteristicsfile},listing options={deletekeywords={author,title,subtitle,date},deletekeywords={[2]title},deletekeywords={[5]academicfield,speciality}}]
 \author[aa@zygo.fr]{Alphonse}{Allais}
 \title[Laugh's Chaos]{Le chaos du rire}
 \subtitle[Chaos' laugh]{Le rire du chaos}
@@ -186,7 +224,7 @@ titre\footnote{En outre, les titres et éventuels sous-titres figureront sur les
 \speciality[Dynamical systems]{Systèmes dynamiques}
 \date{1}{1}{2015}
 \subject{Rire chaotique}
-\end{bodycode}
+\end{preamblecode}
 \end{dbexample}
 
 \subsection{Instituts et entités}\label{sec-entites}
@@ -201,6 +239,8 @@ de titre\footnote{Le ou les laboratoires apparaissent en outre sur les pages
 %
 \begin{docCommand}{comue}{\oarg{précision(s)}\marg{nom de la
       \acrshort*{comue}}}
+   \index{caractéristiques de la thèse!liste!\acrshort{comue}}%
+   \indexdef{\acrshort{comue}}%
   Cette commande définit la \gls{comue}. Celle-ci ne figure que par
   l'intermédiaire de ses logo et \acrshort{url} spécifiés au moyen des clés
   \refKey{logo} et \refKey{url}.
@@ -208,28 +248,47 @@ de titre\footnote{Le ou les laboratoires apparaissent en outre sur les pages
 %
 \begin{docCommand}[doc description=\mandatory]{institute}{\oarg{précision(s)}\marg{nom de
       l'institut}}
-  Cette commande définit l'institut (ou l'université), principal
+  \index{caractéristiques de la thèse!liste!institut principal}%
+  \indexdef{institut}%
+  \indexdef{institut!principal}%
+  \indexsee{université}{institut}%
+  \indexsee{école}{institut}%
+  Cette commande définit l'institut (ou l'université, l'école, etc.), principal
   en cas de cotutelle.
 \end{docCommand}
 %
 \begin{docCommand}{coinstitute}{\oarg{précision(s)}\marg{nom de
       l'institut}}
+  \index{caractéristiques de la thèse!liste!institut de cotutelle}%
+  \index{institut!de cotutelle}%
+  \indexdef{cotutelle!institut}%
   Cette commande définit l'institut de cotutelle. Celle-ci ne
   devrait être employée qu'en cas de thèse cotutelle de nature
   \emph{internationale}.
 \end{docCommand}
 %
 \begin{docCommand}{company}{\oarg{précision(s)}\marg{nom de l'entreprise}}
+  \index{caractéristiques de la thèse!liste!entreprise}%
+  \indexdef{entreprise}%
+  \indexsee{thèse industrielle}{entreprise}%
+  \indexsee{\acrshort{cifre}}{entreprise}%
   Cette commande définit l'entreprise ayant (co)financé la thèse.
-  Celle-ci ne devrait être employée qu'en cas de thèse industrielle.
+  Celle-ci ne devrait être employée qu'en cas de thèse industrielle (par
+  exemple dans le cadre d'un dispositif \acrshort{cifre}).
 \end{docCommand}
 %
 \begin{docCommand}[doc description=\mandatory]{doctoralschool}{\oarg{précision(s)}\marg{nom de l'école
       doctorale}}
+  \index{caractéristiques de la thèse!liste!école doctorale}%
+  \indexdef{école doctorale}%
   Cette commande définit l'école doctorale.
 \end{docCommand}
 %
 \begin{docCommand}[doc description=\mandatory]{laboratory}{\oarg{précision(s)}\marg{nom}\marg{adresse}}
+  \index{caractéristiques de la thèse!liste!laboratoire}%
+  \indexdef{laboratoire}%
+  \index{laboratoire!nom}%
+  \index{laboratoire!adresse}%
   Cette commande définit le nom et l'adresse du laboratoire.
 \end{docCommand}
 %
@@ -239,10 +298,11 @@ de titre\footnote{Le ou les laboratoires apparaissent en outre sur les pages
 \end{dbremark}
 %
 \begin{dbexample}{Instituts et entités}{}
+  \indexex{laboratoire}%
   Si la thèse a été préparée au \gls{lmpa} de l'\gls{ulco}, on
   pourra recourir à :
   \NoAutoSpacing%
-\begin{bodycode}
+\begin{preamblecode}[listing options={deletekeywords={[5]institute,doctoralschool}}]
 \comue{Université Lille Nord de France}
 \institute{ULCO}
 \doctoralschool{ED Régionale SPI 72}
@@ -251,11 +311,13 @@ de titre\footnote{Le ou les laboratoires apparaissent en outre sur les pages
   50, rue Ferdinand Buisson            \\
   CS 80699                             \\
   62228 Calais Cedex                   \\
-  France}
-\end{bodycode}
+  France%
+}
+\end{preamblecode}
 \end{dbexample}
 %
 \begin{dbremark}{Laboratoires multiples}{}
+  \index{laboratoire!multiple}%
   Si la thèse a été préparée dans plusieurs laboratoires, il est possible de
   tous les spécifier en utilisant la commande \refCom{laboratory} autant de
   fois que nécessaire. Par convention, le laboratoire stipulé à la première
@@ -277,6 +339,7 @@ de titre\footnote{Le ou les laboratoires apparaissent en outre sur les pages
 \end{dbremark}
 
 \subsubsection{Précisions}
+\index{caractéristiques de la thèse!précision}%
 
 Toutes les commandes précédentes admettent un argument optionnel permettant
 d'apporter sur les instituts ou entités des \meta{précisions} --- sous la forme
@@ -288,6 +351,9 @@ Les clés suivantes\syntaxeoptions{} sont valables pour tout institut ou entité
 
 \begin{docKey}{logo}{=\meta{fichier image}}{pas de valeur
     par défaut, initialement vide}
+  \indexdef{logo}%
+  \index{laboratoire!logo}%
+  \index{institut!logo}%
   Cette option définit le logo d'un institut, spécifié sous la forme de (du
   chemin menant à) son \meta{fichier image}.
   \begin{dbexample}{Logo d'institut}{logoinst}
@@ -295,9 +361,9 @@ Les clés suivantes\syntaxeoptions{} sont valables pour tout institut ou entité
     logo de cette université sous la forme d'un fichier nommé
     \texttt{ulco.pdf}, situé dans le sous-dossier \folder{images}. On
     saisira alors :
-\begin{bodycode}
+\begin{preamblecode}[listing options={deletekeywords={[5]institute}}]
 \institute[logo=images/ulco]{ULCO}
-\end{bodycode}
+\end{preamblecode}
 \end{dbexample}
 Tous les logos apparaissent automatiquement en haut de la ou des
 pages de titre, sauf :
@@ -311,14 +377,16 @@ pages de titre, sauf :
 %
 \begin{docKey}{logoheight}{=\meta{dimension}}{pas de valeur par
     défaut, initialement \docValue*{1.5cm}}
+  \indexdef{logo!taille}%
+  \indexdef{taille!logo}%
   Par défaut, tous les logos ont une même hauteur de \SI{1.5}{\cm}
   mais la clé \refKey{logoheight} permet de spécifier une hauteur
   différente.
   \begin{dbexample}{Hauteur du logo d'institut}{}
     La commande de l'\vref{ex-logoinst} aurait ainsi pu contenir :
-\begin{bodycode}
+\begin{preamblecode}[listing options={deletekeywords={[5]institute}}]
 \institute[logoheight=1cm,logo=images/ulco]{ULCO}
-\end{bodycode}
+\end{preamblecode}
 \end{dbexample}
 \end{docKey}
 %
@@ -328,18 +396,24 @@ pages de titre, sauf :
 %
 \begin{docKey}{url}{=\meta{\acrshort*{url} de l'institut}}{pas de valeur par
     défaut, initialement vide}
+  \indexdef{\acrshort{url}}%
+  \index{laboratoire!\acrshort{url}}%
+  \index{institut!\acrshort{url}}%
+  \index{lien hypertexte}%
   Cette option définit l'\acrshort{url} d'un institut. Les noms et éventuels
   logos des instituts sont alors des liens hypertextes pointant vers cette
   \acrshort{url}.
   \begin{dbexample}{\acrshort*{url} d'institut}{}
     Si la thèse a été préparée à l'\gls{ulco}, on pourra recourir à :%
     \NoAutoSpacing%
-\begin{bodycode}
+\begin{preamblecode}[listing options={deletekeywords={url},deletekeywords={[5]institute}}]
 \institute[url=http://www.univ-littoral.fr/]{ULCO}
-\end{bodycode}
+\end{preamblecode}
 \end{dbexample}
 \begin{dbwarning}{Caractère \protect\lstinline+\#+ à protéger dans les
     \acrshortpl*{url} d'instituts et entités}{}
+  \index{\acrshort{url}!format}%
+  \index{format!\acrshort{url}}%
   Au cas (peu probable) où le caractère |#| doive figurer dans ces
   \acrshortpl{url}, il doit être \enquote{protégé} au moyen d'une
   contre-oblique le précédant : |\#|.
@@ -347,6 +421,7 @@ pages de titre, sauf :
 \end{docKey}
 
 \paragraph{Pour le laboratoire seulement}
+  \index{caractéristiques de la thèse!liste!laboratoire}%
 
 Les options supplémentaires suivantes \emph{ne} sont prévues
 \emph{que} pour l'entité \enquote{laboratoire} qui, contrairement
@@ -354,16 +429,23 @@ aux autres, peut disposer d'une page dédiée\pagededieelabo.
 %
 \begin{docKey}{telephone}{=\meta{numéro}}{pas de valeur par défaut,
     initialement vide}
+  \indexdef{téléphone}%
+  \index{laboratoire!téléphone}%
   Cette option définit le numéro de téléphone du laboratoire.
 \end{docKey}
 %
 \begin{docKey}{fax}{=\meta{numéro}}{pas de valeur par défaut,
     initialement vide}
+  \indexdef{fax}%
+  \index{laboratoire!fax}%
   Cette option définit le numéro de fax du laboratoire.
 \end{docKey}
 %
 \begin{docKey}{email}{=\meta{adresse courriel}}{pas de valeur par
     défaut, initialement vide}
+  \index{courriel}%
+  \indexdef{courriel!laboratoire}%
+  \index{laboratoire!courriel}%
   Cette option définit l'adresse courriel du laboratoire.
 \end{docKey}
 %
@@ -371,6 +453,8 @@ aux autres, peut disposer d'une page dédiée\pagededieelabo.
     \docValue{true}, initialement \docValue{false}}
   \changes{v0.99i}{2014-07-17}{Nouvelle option \protect\refKey{nonamelink}
     agissant sur les hyperliens des laboratoires}%
+  \index{lien hypertexte!suppression}%
+  \indexsee{hyperlien}{lien hypertexte}%
 %
   Cette option a pour effet que, si l'\acrshort{url} du laboratoire a été
   définie au moyen de l'option \refKey{url}, le nom de celui-ci n'est pas un
@@ -380,9 +464,10 @@ aux autres, peut disposer d'une page dédiée\pagededieelabo.
 \end{docKey}
 %
 \begin{dbexample}{Laboratoire}{}
+  \indexex{laboratoire}%
   Si la thèse a été préparée au \gls{lmpa}, on peut recourir à :
   \NoAutoSpacing%
-\begin{bodycode}
+\begin{preamblecode}[listing options={deletekeywords={url}}]
 \laboratory[
 telephone=(33) 03 21 46 55 86,
 fax=(33) 03 21 46 55 75,
@@ -393,8 +478,9 @@ url=http://www-lmpa.univ-littoral.fr/
   50, rue Ferdinand Buisson            \\
   CS 80699                             \\
   62228 Calais Cedex                   \\
-  France}
-\end{bodycode}
+  France%
+}
+\end{preamblecode}
 \end{dbexample}
 %
 \begin{dbremark}{Téléphone, fax et courriel : pour le
@@ -405,6 +491,8 @@ url=http://www-lmpa.univ-littoral.fr/
 \end{dbremark}
 %
 \begin{dbremark}{Instituts sous forme d'acronymes}{acronymes}
+  \index{acronyme}%
+  \indexsee{sigle}{acronyme}%
   Si l'institut ou l'entité doit figurer sous la forme d'un acronyme, on aura
   intérêt à ne pas les saisir tels quel comme on l'a fait jusqu'ici
   (|\institute{ULCO}| ou |\laboratory{LMPA}|) mais à recourir aux
@@ -425,56 +513,94 @@ automatiquement sur la ou les pages de titre\footnote{En versions \enquote{à
 \subsubsection{Définition}\label{sec-definition-directeurs-jury}
 
 \paragraph{Directeurs}\label{sec-definition-directeurs}
+\index{rôle!prédéfini}%
 
+Parmi la ou les personnes assurant l'encadrement de la thèse,
+celles ayant les rôles :
+\begin{itemize}
+\item de directeur  ;
+\item de co-directeur ;
+\item de co-encadrant ;
+\end{itemize}
+sont distinguées au moyen des commandes respectives \refCom{supervisor},
+\refCom{cosupervisor} et \refCom{comonitor}, en versions éventuellement étoilées
+pour désigner celles qui ne sont pas membres du jury.%
+%
 \changes{v0.99f}{2014-07-11}{Nouvelles commandes \protect\refCom{supervisor*},
   \protect\refCom{cosupervisor*} et \protect\refCom{comonitor*} permettant de
   spécifier des directeurs de thèses non membres du jury}%
 %
-Parmi les directeurs de thèse, on distingue ceux qui sont membres du jury de
-ceux qui ne le sont pas. Les premiers sont définis au moyen des commandes
-\refCom{supervisor}, \refCom{cosupervisor} et \refCom{comonitor} ci-dessous,
-les seconds au moyen des variantes étoilées de ces commandes.
-
 \begin{docCommand}[doc
   description=\mandatory]{supervisor}{\oarg{précision(s)}\marg{prénom}\marg{nom}}
+  \index{caractéristiques de la thèse!liste!directeur de thèse}%
+  \indexdef{directeur de thèse}%
+  \index{membre du jury!directeur de thèse}%
   Cette commande définit un directeur de la thèse (également membre du jury).
 \end{docCommand}
 
 \begin{docCommand}[doc description=\mandatory]{supervisor*}{\oarg{précision(s)}\marg{prénom}\marg{nom}}
+  \index{caractéristiques de la thèse!liste!directeur de thèse}%
+  \indexdef{directeur de thèse}%
   Cette commande définit un directeur de la thèse (non membre du jury).
 \end{docCommand}
 
 \begin{docCommand}{cosupervisor}{\oarg{précision(s)}\marg{prénom}\marg{nom}}
+  \index{caractéristiques de la thèse!liste!co-directeur de thèse}%
+  \indexdef{co-directeur de thèse}%
+  \index{membre du jury!co-directeur de thèse}%
   Cette commande définit un éventuel co-directeur de la thèse (également membre du jury).
 \end{docCommand}
 
 \begin{docCommand}{cosupervisor*}{\oarg{précision(s)}\marg{prénom}\marg{nom}}
+  \index{caractéristiques de la thèse!liste!co-directeur de thèse}%
+  \indexdef{co-directeur de thèse}%
   Cette commande définit un éventuel co-directeur de la thèse (non membre du jury).
 \end{docCommand}
 
 \begin{docCommand}{comonitor}{\oarg{précision(s)}\marg{prénom}\marg{nom}}
+  \index{caractéristiques de la thèse!liste!co-encadrant de thèse}%
+  \indexdef{co-encadrant de thèse}%
+  \index{membre du jury!co-encadrant de thèse}%
   Cette commande définit un éventuel co-encadrant de la thèse (également membre du jury).
 \end{docCommand}
 
 \begin{docCommand}{comonitor*}{\oarg{précision(s)}\marg{prénom}\marg{nom}}
+  \index{caractéristiques de la thèse!liste!co-encadrant de thèse}%
+  \indexdef{co-encadrant de thèse}%
   Cette commande définit un éventuel co-encadrant de la thèse (non membre du jury).
 \end{docCommand}
 
 \paragraph{Membres du jury}\label{sec-definition-jury}
+\index{membre du jury}%
+\indexsee{jury}{membre du jury}%
 
 \begin{docCommand}{referee}{\oarg{précision(s)}\marg{prénom}\marg{nom}}
+  \index{caractéristiques de la thèse!liste!rapporteur}%
+  \indexdef{rapporteur de la thèse}%
+  \index{membre du jury!rapporteur}%
   Cette commande définit un rapporteur de la thèse.
 \end{docCommand}
 
 \begin{docCommand}{committeepresident}{\oarg{précision(s)}\marg{prénom}\marg{nom}}
-  Cette commande définit le président du jury de la thèse.
+  \index{caractéristiques de la thèse!liste!président du jury}%
+  \indexdef{président du jury}%
+  \index{membre du jury!président}%
+  \index{rôle!prédéfini}%
+  Cette commande définit le président du jury de la thèse (dont le rôle figure
+  sur la ou les pages de titre).
 \end{docCommand}
 
 \begin{docCommand}{examiner}{\oarg{précision(s)}\marg{prénom}\marg{nom}}
+  \index{caractéristiques de la thèse!liste!examinateur}%
+  \indexdef{examinateur}%
+  \index{membre du jury!examinateur}%
   Cette commande définit un examinateur ordinaire de la thèse.
 \end{docCommand}
 
 \begin{docCommand}{guest}{\oarg{précision(s)}\marg{prénom}\marg{nom}}
+  \index{caractéristiques de la thèse!liste!invité}%
+  \indexdef{invité}%
+  \index{membre du jury!invité}%
   Cette commande définit une éventuelle personne invitée au jury de la thèse.
 \end{docCommand}
 %
@@ -494,7 +620,8 @@ les seconds au moyen des variantes étoilées de ces commandes.
 \end{dbwarning}
 
 \begin{dbexample}{Jury}{}
-\begin{bodycode}
+  \indexex{membre du jury}%
+\begin{preamblecode}[listing options={deletekeywords={[5]supervisor,cosupervisor,committeepresident}}]
 \supervisor{Michel}{de Montaigne}
 \cosupervisor{Étienne}{de la Boétie}
 %
@@ -507,10 +634,16 @@ les seconds au moyen des variantes étoilées de ces commandes.
 \examiner{Paul}{Verlaine}
 %
 \guest{George}{Sand}
-\end{bodycode}
+\end{preamblecode}
 \end{dbexample}
 
-\begin{dbwarning}{Format des prénoms et noms des membres du jury}{}
+\begin{dbwarning}{Format des prénoms et noms des directeurs de thèse et membres du jury}{}
+  \index{directeur de thèse!format}%
+  \index{membre du jury!format}%
+  \index{nom!format}%
+  \index{prénom!format}%
+  \index{format!nom}%
+  \index{format!prénom}%
   Comme pour les prénom et nom de l'auteur de la thèse, on veillera à ce que :
   \begin{enumerate}
   \item les éventuels accents figurent dans les \meta{prénom} et \meta{nom};
@@ -523,55 +656,84 @@ les seconds au moyen des variantes étoilées de ces commandes.
 \subsubsection{Précisions}\label{sec-options-staff}
 
 Toutes les commandes précédentes admettent un argument optionnel permettant
-d'apporter sur les membres du jury des \meta{précisions}\footnote{Pour les
+d'apporter sur les directeurs de thèse et membres du jury\footnote{Pour les
   directeurs de thèse \emph{non} membres du jury, ces \meta{précisions} sont
-  inutiles car elles ne figureront nulle part.} --- sous la forme d'une liste
-\meta{clé}|=|\meta{valeur}.
+  inutiles car elles ne figureront nulle part.}
+des \meta{précisions} :
+\begin{enumerate}
+\item corporation ;
+\item affiliation ;
+\item homme/femme.
+\end{enumerate}
+% --- sous la forme d'une liste \meta{clé}|=|\meta{valeur}.
 
-\paragraph{Corps de métier}
-\label{sec-corps}
+\paragraph{Corporation}
+\label{sec-corps}%
+\indexsee{corps de métier}{corporation}%
+\index{caractéristiques de la thèse!liste!corporation}%
+\indexsee{fonction}{corporation}%
+\indexsee{grade}{corporation}%
+\index{corporation}%
+\index{corporation!prédéfinie}%
+\index{directeur de thèse!corporation}%
+\index{membre du jury!corporation}%
 
-Les clés suivantes\syntaxeoptions{} permettent de spécifier les corps (de
-métier) des membres du jury parmi celles prédéfinies par la \yatCl{}.
+Les clés suivantes\syntaxeoptions{} permettent de spécifier les corporations (ou
+corps de métier) des membres du jury parmi celles prédéfinies par la \yatCl{}.
 
 \begin{docKey}{professor}{=\docValue{true}\textbar\docValue{false}}{par défaut
     \docValue{true}, initialement \docValue{false}}
-  Cette clé permet de spécifier qu'une personne appartient au corps des
+  \index{corporation!prédéfinie!professeur}%
+  \indexsee{professeur}{corporation}%
+  Cette clé permet de spécifier qu'une personne appartient à la corporation des
   professeurs d'université.
 \end{docKey}
 %
 \begin{docKey}{seniorresearcher}{=\docValue{true}\textbar\docValue{false}}{par
     défaut \docValue{true}, initialement \docValue{false}}
-  Cette clé permet de spécifier qu'une personne appartient au corps des
+  \index{corporation!prédéfinie!directeur de recherche}%
+  \indexsee{directeur de recherche}{corporation}%
+  Cette clé permet de spécifier qu'une personne appartient à la corporation des
   directeurs de recherche du \gls{cnrs}.
 \end{docKey}
 %
 \begin{docKey}{mcf}{=\docValue{true}\textbar\docValue{false}}{par défaut
     \docValue{true}, initialement \docValue{false}}
-  Cette clé permet de spécifier qu'une personne appartient au corps des
+  \index{corporation!prédéfinie!\acrshort{mcf} (non) \acrshort{hdrpeople}}%
+  \indexsee{\acrshort{mcf} (non) \acrshort{hdrpeople}}{corporation}%
+  Cette clé permet de spécifier qu'une personne appartient à la corporation des
   \glspl{mcf}.
 \end{docKey}
 %
 \begin{docKey}{mcf*}{=\docValue{true}\textbar\docValue{false}}{par défaut
     \docValue{true}, initialement \docValue{false}}
-  Cette clé permet de spécifier qu'une personne appartient au corps des
-  \glspl{mcf} \gls{hdr}.
+  \index{corporation!prédéfinie!\acrshort{mcf} (non) \acrshort{hdrpeople}}%
+  \indexsee{\acrshort{mcf} (non) \acrshort{hdrpeople}}{corporation}%
+  \indexsee{\acrshort{hdrpeople}}{corporation}%
+  Cette clé permet de spécifier qu'une personne appartient à la corporation des
+  \glspl{mcf} \acrshort{hdrpeople}.
 \end{docKey}
 %
 \begin{docKey}{juniorresearcher}{=\docValue{true}\textbar\docValue{false}}{par
     défaut \docValue{true}, initialement \docValue{false}}
-  Cette clé permet de spécifier qu'une personne appartient au corps des
+  \index{corporation!prédéfinie!chargé de recherche (non) \acrshort{hdrpeople}}%
+  \indexsee{chargé de recherche (non) \acrshort{hdrpeople}}{corporation}%
+  Cette clé permet de spécifier qu'une personne appartient à la corporation des
   \glspl{cr} du \gls{cnrs}.
 \end{docKey}
 %
 \begin{docKey}{juniorresearcher*}{=\docValue{true}\textbar\docValue{false}}{par
     défaut \docValue{true}, initialement \docValue{false}}
-  Cette clé permet de spécifier qu'une personne appartient au corps des
-  \glspl{cr} \gls{hdr} du \gls{cnrs}.
+  \index{corporation!prédéfinie!chargé de recherche (non) \acrshort{hdrpeople}}%
+  \indexsee{chargé de recherche (non) \acrshort{hdrpeople}}{corporation}%
+  \indexsee{\acrshort{hdrpeople}}{corporation}%
+  Cette clé permet de spécifier qu'une personne appartient à la corporation des
+  \glspl{cr} \acrshort{hdrpeople} du \gls{cnrs}.
 \end{docKey}
 %
-\begin{dbexample}{Corps (prédéfinis)}{}
-\begin{bodycode}
+\begin{dbexample}{Corporation (prédéfinies)}{}
+  \indexex{corporation!prédéfinie}%
+\begin{preamblecode}[listing options={deletekeywords={[5]supervisor,cosupervisor,committeepresident}}]
 \supervisor[professor]{Michel}{de Montaigne}
 \cosupervisor[juniorresearcher*]{Étienne}{de la Boétie}
 %
@@ -582,12 +744,13 @@ métier) des membres du jury parmi celles prédéfinies par la \yatCl{}.
 \examiner[mcf*]{Charles}{Baudelaire}
 \examiner[professor]{Émile}{Zola}
 \examiner{Paul}{Verlaine}
-\end{bodycode}
+\end{preamblecode}
 \end{dbexample}
 %
-\begin{dbremark}{Corps non prédéfinis}{}
-  Il est possible de spécifier d'autres corps que ceux prédéfinis ci-dessus. La
-  \vref{sec-nouveaux-corps} explique comment procéder.
+\begin{dbremark}{Corporation non prédéfinies}{}
+  \index{corporation!non prédéfinie}%
+  Il est possible de spécifier d'autres corporations que celles prédéfinies
+  ci-dessus. La \vref{sec-nouveaux-corps} explique comment procéder.
 \end{dbremark}
 %
 % \begin{docKey}{distinction}{=\meta{distinction}}{pas de valeur par
@@ -603,26 +766,31 @@ métier) des membres du jury parmi celles prédéfinies par la \yatCl{}.
 % \end{docKey}
 %
 % \begin{dbexample}{Distinctions}{}
-%   \begin{bodycode}[title=Préparation du titre (p. ex. dans le \File{\characteristicsfile})]
+%   \begin{preamblecode}[title=Préparation du titre (p. ex. dans le \File{\characteristicsfile})]
 % \cosupervisor[distinction=prix Nobel,award=Nobel Price]{Étienne}{de la Boétie}
 % \referee[distinction=médaille Fields,award=Fields Medal]{René}{Descartes}
-% \end{bodycode}
+% \end{preamblecode}
 % \end{dbexample}
 
 \paragraph{Affiliation}
-\label{sec-inst-de-prov}
+\label{sec-inst-de-prov}%
+\index{affiliation}%
+\index{caractéristiques de la thèse!liste!affiliation}%
 
 \begin{docKey}{affiliation}{=\meta{institut}}{pas de valeur par défaut,
     initialement vide}
+  \indexdef{affiliation}%
+  \index{directeur de thèse!affiliation}%
+  \index{membre du jury!affiliation}%
   Cette clé définit l'\meta{institut}%
   \footnote{La \vref{rq-acronymes} s'applique également ici : plutôt que
     spécifié tel quel, l'acronyme d'un \meta{institut} peut être géré par le
     \Package{glossaries}.}  auquel est affilié un membre du jury.
 \end{docKey}
 \begin{dbexample}{Institut d'affiliation}{}
-\begin{bodycode}
+\begin{preamblecode}[listing options={deletekeywords={[5]supervisor}}]
 \supervisor[affiliation=ULCO]{Michel}{de Montaigne}
-\end{bodycode}
+\end{preamblecode}
 \end{dbexample}
 %
 \begin{dbwarning}{Virgule(s) dans les valeurs des clés}{virgule}
@@ -633,11 +801,12 @@ métier) des membres du jury parmi celles prédéfinies par la \yatCl{}.
 \end{dbwarning}
 %
 \begin{dbexample}{Multiples instituts d'affiliation}{}
+  \index{affiliation!multiple}%
   Si en plus d'être affilié à l'\gls{ulco}, René Descartes était membre du
   \gls{cnrs}, on pourait procéder comme suit :
-\begin{bodycode}
+\begin{preamblecode}
 \referee[affiliation={ULCO, CNRS}]{René}{Descartes}
-\end{bodycode}
+\end{preamblecode}
 On notera la paire d'accolades, nécessaire conformément
 à l'\vref{wa-virgule}. De façon générale, il n'est pas indispensable de faire
 figurer tant de précisions et, ne serait-ce que pour des raisons de place, on
@@ -645,7 +814,9 @@ veillera à ne pas multiplier celles-ci.
 \end{dbexample}
 
 \paragraph{Homme/femme}
-\label{sec-hommefemme}
+\label{sec-hommefemme}%
+\index{caractéristiques de la thèse!liste!homme}%
+\index{caractéristiques de la thèse!liste!femme}%
 
 \changes{v0.99f}{2014-07-11}{Nouvelles clés \protect\refKey{male} et
   \protect\refKey{female} permettant de spécifier si une personne est un homme
@@ -661,11 +832,13 @@ un membre du jury est un homme ou une femme au moyen des clés \refKey{male} et
 
 \begin{docKey}{male}{=\docValue{true}\textbar\docValue{false}}{par défaut
     \docValue{true}, initialement \docValue{true}}
+  \index{homme}%
   Cette clé permet de spécifier qu'une personne est ou pas de sexe masculin.
 \end{docKey}
 
 \begin{docKey}{female}{=\docValue{true}\textbar\docValue{false}}{par défaut
     \docValue{true}, initialement \docValue{false}}
+  \index{femme}%
   Cette clé permet de spécifier qu'une personne est ou pas de sexe féminin.
 \end{docKey}
 
@@ -676,10 +849,11 @@ effet que d'accorder en genre féminin un certain nombre de mots clés de la
   recherche} au lieu \enquote{chargé de recherche}, etc.).
 
 \begin{dbexample}{Directrice de thèse}{}
+  \indexex{femme}%
   S'il est demandé que le rôle de Sophie \textsc{Germain}, directrice de thèse,
   soit accordé en genre (\enquote{directrice} et non \enquote{directeur}), il
   suffit de saisir :
-\begin{preamblecode}[title=Par exemple dans le \File{\characteristicsfile}]
+\begin{preamblecode}[listing options={deletekeywords={[5]supervisor}}]
 \supervisor[female]{Sophie}{Germain}
 \end{preamblecode}
 \end{dbexample}
@@ -691,14 +865,16 @@ Certains instituts exigent que le numéro d'ordre de la thèse figure sur la pag
 de 1\iere{} de couverture.
 
 \begin{docCommand}{ordernumber}{\oarg{numéro d'ordre}}
+  \index{caractéristiques de la thèse!liste!numéro d'ordre}%
+  \indexdef{numéro d'ordre}%
   Cette commande définit le \meta{numéro d'ordre} de la thèse et s'utilise sans
   son argument optionnel si on ne connaît pas \aside{encore} le \meta{numéro
     d'ordre} : ce dernier est alors remplacé par une espace horizontale vide
   permettant de l'inscrire à la main \emph{a posteriori}. Vide ou pas, le
-  \meta{numéro d'ordre} figure sur \aside{et seulement sur} la 1\iere{} page
-  du mémoire\footnote{Première de couverture s'il y a, page de titre en langue
-    principale sinon.}, précédé de l'expression \enquote{Num\'ero d'ordre :} ou
-  \foreignquote{english}{Order Number:}\selonlangue.
+  \meta{numéro d'ordre} figure sur \aside{et seulement sur} la 1\iere{} page du
+  mémoire\footnote{Première de couverture s'il y a, page de titre en langue
+    principale sinon.}, précédé de l'expression
+  \translateexpression{ordernumber}.
 \end{docCommand}
 
 \section{Caractéristiques de mots clés}
@@ -709,13 +885,14 @@ Les mots clés de la thèse sont stipulés au moyen de la commande
 %
 \begin{docCommand}[doc description=\mandatory]{keywords}{\marg{mots clés}\marg{mots clés dans la langue
       secondaire}}
+  \index{caractéristiques de la thèse!liste!mot clé}%
+  \indexdef{mot clé}%
   Cette commande définit les \meta{mots clés} de la thèse dans
   les langues principale et secondaire. Ceux-ci :
   \begin{itemize}
   \item apparaissent comme métadonnée \enquote{Mots-clés} du fichier \pdf{} ;
   \item figurent, dans les deux langues principale et secondaire, précédés des
-    expressions \enquote{Mots clés :} et
-    \foreignquote{english}{Keywords:}\selonlangue :
+    expressions \translateexpression{keywords} :
     \begin{itemize}
     \item sur la page qui leur est dédiée (si la commande \refCom{makekeywords}
       est employée) ;

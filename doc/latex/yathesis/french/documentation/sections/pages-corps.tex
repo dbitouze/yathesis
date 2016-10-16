@@ -1,12 +1,17 @@
 \chapter{Partie principale}\label{cha-corps}
+\index{partie!principale}%
 
 La partie principale de la thèse, qu'on appelle aussi son \enquote{corps},
 comprend :
 \begin{enumerate}
-\item l'introduction (\enquote{générale}) ;
-\item les chapitres \enquote{ordinaires} ;
-\item la conclusion (\enquote{générale}) ;
-\item la bibliographie.
+\item\index{introduction}%
+ l'introduction (\enquote{générale}) ;
+\item\index{chapitre!ordinaire}%
+  les chapitres \enquote{ordinaires} ;
+\item\index{conclusion}%
+  la conclusion (\enquote{générale}) ;
+\item\index{bibliographie!globale}%
+  la bibliographie.
 \end{enumerate}
 Les introduction et conclusion peuvent éventuellement être
 \enquote{générales} par exemple si la thèse comporte plusieurs
@@ -14,6 +19,8 @@ parties, chacune introduite par une introduction et conclue par
 une conclusion \enquote{ordinaires}.
 
 \begin{dbremark}{Scission du mémoire en fichiers maître et esclaves}{}
+  \index{fichier!maître}%
+  \index{fichier!esclave}%
   Il est vivement recommandé de scinder le mémoire de thèse,
   notamment son corps, en fichiers maître et esclaves (ces derniers
   correspondants chacun à un chapitre). La procédure
@@ -27,7 +34,8 @@ une conclusion \enquote{ordinaires}.
 \end{docCommand}
 
 \section{Chapitres non numérotés}
-\label{sec-chap-non-numer}
+\label{sec-chap-non-numer}%
+\index{chapitre!non numéroté}%
 
 Si certains chapitres du corps de la thèse \aside{notamment d'introduction de
   conclusion \enquote{générales}} doivent être \emph{non} numérotés, on recourra de
@@ -52,6 +60,7 @@ d'en simplifier l'usage.
 % \end{enumerate}
 
 \begin{dbremark}{Variante étoilée de la commande \protect\docAuxCommand*{chapter} modifiée}{}
+  \indexdef{chapitre!non numéroté}%
   La \yatCl{} modifie la commande \docAuxCommand{chapter*} de sorte que :
   \begin{enumerate}
   \item automatiquement, le titre du chapitre figure :
@@ -67,6 +76,7 @@ d'en simplifier l'usage.
 \end{dbremark}
 
 \begin{dbexample}{Introduction}{}
+  \indexex{chapitre!non numéroté}%
   Le code suivant produit la \vref{fig-introduction} illustrant une
   introduction (générale) non numérotée. On constate que, bien que seule la
   commande \docAuxCommand{chapter} figure sous sa forme étoilée, aucun élément
@@ -74,11 +84,7 @@ d'en simplifier l'usage.
   %
   \bodysample[corps/introduction]{%
     deletekeywords={[1]introduction},%
-    deletekeywords={[3]section},%
-    deletekeywords={[3]subsection},%
-    deletekeywords={[3]subsubsection},%
-    deletekeywords={[3]paragraph},%
-    deletekeywords={[3]subparagraph}%
+    deletekeywords={[3]section,subsection,subsubsection,paragraph,subparagraph}%
   }{}
 \end{dbexample}
 
@@ -90,7 +96,8 @@ d'en simplifier l'usage.
 \end{figure}
 
 \section{Chapitres numérotés}
-\label{sec-chapitres-numerotes}
+\label{sec-chapitres-numerotes}%
+\indexdef{chapitre!numéroté}%
 
 Les chapitres numérotés du corps de la thèse sont introduits par la commande
 usuelle \docAuxCommand{chapter} (cf. \vref{fig-chapitre}).
@@ -109,7 +116,8 @@ usuelle \docAuxCommand{chapter} (cf. \vref{fig-chapitre}).
   comment ceci peut être modifié.
 \end{dbremark}
 
-\section{Références bibliographiques}
+\section{Références bibliographiques}\label{sec-refer-bibl}
+\indexdef{bibliographie!globale}%
 
 Les références bibliographiques font partie intégrante du corps de la thèse.
 
@@ -129,6 +137,7 @@ remplaçant fortement conseillé de \hologo{BibTeX}\footnote{Dans cette section,
 \end{docCommand}
 
 \begin{figure}[htbp]
+  \indexex{bibliographie!globale}%
   \centering
   \screenshot{printbibliography}
   \caption[Bibliographie]{Bibliographie (ici composée avec le style
@@ -138,16 +147,12 @@ remplaçant fortement conseillé de \hologo{BibTeX}\footnote{Dans cette section,
 
 \begin{dbwarning}{Package \package{biblatex} non chargé par défaut}{}
   Le \Package{biblatex} \emph{n'étant pas} chargé par la \yatCl, on veillera
-  à le charger manuellement si on souhaite l'utiliser.
+  à le charger manuellement si on souhaite l'utiliser, notamment si on souhaite
+  bénéficier de l'ajout automatique de bibliographies locales en fin de
+  chapitres (cf. \vref{sec-localbibs}).
 \end{dbwarning}
 
-%
-\iffalse
 %%% Local Variables:
 %%% mode: latex
-%%% eval: (latex-mode)
-%%% ispell-local-dictionary: "fr_FR"
-%%% TeX-engine: xetex
-%%% TeX-master: "../yathesis.dtx"
+%%% TeX-master: "../yathesis-fr"
 %%% End:
-\fi

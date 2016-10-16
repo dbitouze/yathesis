@@ -7,6 +7,10 @@ Ce chapitre est une \gls{faq} \aside{autrement dit une liste des questions
 \label{sec-communication}
 
 \begin{dbfaq}{Comment communiquer avec l'auteur de la \yatCl{} ?}{bogues}
+  \index{bogue}%
+  \index{bogue!rapport}%
+  \indexsee{bug}{bogue}%
+  \index{fonctionnalité!demande}%
   La \yatCl{} est vraiment formidable, mais je souhaite :
   \begin{enumerate}
   \item signaler un dysfonctionnement (un bogue) ;
@@ -50,6 +54,9 @@ Ce chapitre est une \gls{faq} \aside{autrement dit une liste des questions
 
 \begin{dbfaq}{Puis-je ignorer un avertissement signalant une version trop
     ancienne d'un package ?}{}
+  \index{avertissement de compilation}%
+  \index{compilation!avertissement}%
+  \index{package!ancien}%
   Je suis confronté à un avertissement de la forme \enquote{You have requested,
     on input line \meta{numéro}, version `\meta{date plus récente}' of package
     \meta{nom d'un package}, but only version `\meta{date moins récente} ...'
@@ -61,7 +68,9 @@ Ce chapitre est une \gls{faq} \aside{autrement dit une liste des questions
 \end{dbfaq}
 
 \section{Erreurs}
-\label{sec-erreurs}
+\label{sec-erreurs}%
+\index{erreur de compilation}%
+\index{compilation!erreur}%
 
 \begin{dbfaq}{Comment éviter l'erreur \enquote{Option clash for package
       \meta{package}} ?}{option-clash}
@@ -112,6 +121,8 @@ Ce chapitre est une \gls{faq} \aside{autrement dit une liste des questions
 
 \subsection{Pages de titre}
 \label{sec-pages-de-titre}
+\index{titre!mise en page}%
+\index{titre!apparence}%
 
 \begin{dbfaq}{Comment modifier l'apparence de la page de titre ?}{}
   L'apparence par défaut de la page de titre ne me convient pas et je voudrais
@@ -129,6 +140,7 @@ Ce chapitre est une \gls{faq} \aside{autrement dit une liste des questions
 
 \subsection{Table des matières}
 \label{sec-table-des-matieres-faq}
+\index{table des matières!entrée en double}%
 
 \begin{dbfaq}{Pourquoi les glossaire, listes d'acronymes et de symboles
     apparaissent en double dans la table des matières et dans les signets ?}{}
@@ -146,6 +158,7 @@ Ce chapitre est une \gls{faq} \aside{autrement dit une liste des questions
 
 \begin{dbfaq}{Comment faire en sorte que, dans la table des matières, seuls
     les numéros de page soient des liens hypertextes ?}{}
+  \index{table des matières!hyperlien}%
   J'ai chargé le \Package{hyperref} et, par défaut, les entrées de la table des
   matières sont toutes entières des liens hypertextes, ce qui est trop
   envahissant. Comment faire en sorte que seuls les numéros de page soient des
@@ -159,6 +172,7 @@ Ce chapitre est une \gls{faq} \aside{autrement dit une liste des questions
 
 \begin{dbfaq}{Comment supprimer la bibliographie des sommaire, table des
     matières et signets ?}{}
+  \index{table des matières!bibliographie}%
   Par défaut, la bibliographie figure dans les sommaire, table des matières et
   signets du document. Comment éviter cela ?
   %
@@ -173,6 +187,7 @@ Ce chapitre est une \gls{faq} \aside{autrement dit une liste des questions
 
 \begin{dbfaq}{Comment affecter des profondeurs différentes aux signets et à la
     table des matières ?}{}
+  \index{table des matières!profondeur!signet}%
   Grâce au chargement du \Package{hyperref}, mon fichier \acrshort{pdf} dispose
   de signets mais, par défaut, ceux-ci ont même niveau de profondeur que la
   table des matières. Comment leur affecter une profondeur différente ?
@@ -191,6 +206,7 @@ où \meta{autre niveau} est l'une des valeurs possibles de la clé
 
 \begin{dbfaq}{Dans la table des matières, des numéros de pages débordent dans
     la marge de droite}{}
+  \index{table des matières!débordement dans la marge}%
   Dans la table des matières, certains numéros de pages (en chiffres romains
   notamment) débordent dans la marge de droite. Comment l'éviter ?
   %
@@ -219,6 +235,7 @@ où \meta{autre niveau} est l'une des valeurs possibles de la clé
 
 \begin{dbfaq}{Pourquoi mes signes de ponctuation haute ne sont pas précédés des
     espaces adéquates ?}{}
+  \index{espace!avant \enquote{?;:"!}}%
   Certains éléments que j'ai saisis en préambule contiennent des signes de
   ponctuation haute ({\NoAutoSpacing?;:!}) mais, dans le \pdf{} produit, ces
   derniers ne sont pas précédés des espaces adéquates. Comment régler ce
@@ -256,6 +273,8 @@ où \meta{autre niveau} est l'une des valeurs possibles de la clé
 
 \begin{dbfaq}{Pourquoi \protect\docAuxCommand*{setcounter} n'a-t-elle pas
     d'effet sur \protect\docAuxKey*{secnumdepth} ?}{}
+  \index{profondeur!numérotation des paragraphes}%
+  \index{numérotation des paragraphes!profondeur}%
   J'essaie de modifier la profondeur de numérotation de mon document en
   spécifiant la valeur du compteur \docAuxKey*{secnumdepth} au moyen de la
   commande :
@@ -277,6 +296,8 @@ où \meta{autre niveau} est l'une des valeurs possibles de la clé
 
 \begin{dbfaq}{Le \acrshort{pdf} de mon mémoire n'est pas valide au yeux du
     \acrshort{cines}. Comment y remédier ?}{}
+  \index{\acrshort{pdf}!valide}
+  \index{validité!\acrshort{pdf}}
   Conformément aux dispositions propres au dépôt sur support électronique
   \autocite{guidoct-abes}, j'ai testé sur le site \url{http://facile.cines.fr/}
   la validité du fichier \acrshort{pdf} de mon mémoire de thèse créé avec la
@@ -286,32 +307,36 @@ où \meta{autre niveau} est l'une des valeurs possibles de la clé
   %
   (Cette question ne concerne pas directement la \yatCl{}.) Le problème vient de
   ce que le site \url{http://facile.cines.fr/} reconnaît mal les méta-données
-  des fichiers \acrshort{pdf} produits par \LaTeX{}, \hologo{XeLaTeX} ou
-  \hologo{LuaLaTeX}. Il devrait suffire d'installer le logiciel libre
-  \program{PDFtk}\footnote{Ce logiciel devrait être disponible :
-    \begin{itemize}
-    \item sous Linux : sous forme de paquet de la distribution utilisée ;
-    \item sous Mac OS X : comme indiqué
-      \href{http://stackoverflow.com/q/20804441}{ici} par exemple ;
-    \item sous Windows : \href{https://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/}{ici}.
-    \end{itemize}
-  }%
-  puis de lancer dans un terminal la commande suivante :
-\begin{lstlisting}[language=bash]
-pdftk these.pdf output these-valide.pdf
-\end{lstlisting}
-où \file{these.pdf} est le fichier \acrshort{pdf} original du mémoire. Le
-fichier généré, \file{these-valide.pdf}, est à la fois valide et identique dans
-la forme à l'original.
+  des fichiers \acrshort{pdf} produits par \hologo{pdfLaTeX}, \hologo{XeLaTeX} ou
+  \hologo{LuaLaTeX}.
+
+  Pour pallier cela, il devrait suffire\footnote{Plus de précisions à l'adresse
+    \url{https://facile.cines.fr/\#latex}.} d'insérer :
+\begin{preamblecode}
+\pdfobjcompresslevel 0
+\end{preamblecode}
+  en introduction du fichier (maître) \format{.tex}, avant la déclaration
+  \docAuxCommand{documentclass}.
+  % Il devrait suffire d'installer le logiciel libre
+%   \program{PDFtk}\footnote{Ce logiciel devrait être disponible :
+%     \begin{itemize}
+%     \item sous \linux{} : sous forme de paquet de la distribution utilisée ;
+%     \item sous \macos{} : comme indiqué
+%       \href{http://stackoverflow.com/q/20804441}{ici} par exemple ;
+%     \item sous \windows{} :
+%       \href{https://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/}{ici}.
+%     \end{itemize}
+%   }%
+%   puis de lancer dans un terminal la commande suivante :
+% \begin{lstlisting}[language=bash]
+% pdftk these.pdf output these-valide.pdf
+% \end{lstlisting}
+% où \file{these.pdf} est le fichier \acrshort{pdf} original du mémoire. Le
+% fichier généré, \file{these-valide.pdf}, est à la fois valide et identique dans
+% la forme à l'original.
 \end{dbfaq}
 
-%
-\iffalse
 %%% Local Variables:
 %%% mode: latex
-%%% eval: (latex-mode)
-%%% ispell-local-dictionary: "fr_FR"
-%%% TeX-engine: xetex
-%%% TeX-master: "../yathesis.dtx"
+%%% TeX-master: "../yathesis-fr"
 %%% End:
-\fi

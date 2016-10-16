@@ -4,10 +4,14 @@
 Pour faciliter son utilisation, la \yatCl{} importe automatiquement deux
 fichiers :
 \begin{enumerate}
-\item un fichier nommé \file{\characteristicsfile} dédié aux données
+\item%
+  \index{fichier!des caractéristiques de la thèse}%
+  un fichier nommé \file{\characteristicsfile} dédié aux données
   caractéristiques du document amenées à figurer en divers emplacements ou comme
   métadonnées du fichier \pdf{} produit (cf. \vref{sec-lieu-de-saisie}) ;
-\item un fichier nommé \file{\configurationfile} dédié à la configuration du
+\item%
+  \index{fichier!de configuration de \yatcl}%
+  un fichier nommé \file{\configurationfile} dédié à la configuration du
   document, où stocker notamment les réglages :
   \begin{itemize}
   \item de la \yatCl (cf. \vref{cha-configuration}) ;
@@ -25,13 +29,17 @@ fichiers :
   \item qu'ils existent\footnote{Ces fichiers et sous-répertoire sont donc
       à créer au besoin mais le canevas de thèse \enquote{en arborescence} livré avec
       la classe, décrit \vref{sec-canevas-arborescence}, les fournit d'emblée.} ;
-  \item qu'ils soient situés dans le répertoire \emph{ad hoc}, à savoir un
-    sous-répertoire nommé \folder{\configurationdirectory} du répertoire où
-    se trouve le fichier (maître) du document.
+  \item%
+    \index{dossier!de configuration}%
+    qu'ils soient situés dans le répertoire \emph{ad hoc}, à savoir un
+    sous-répertoire nommé \folder{\configurationdirectory} du répertoire où se
+    trouve le fichier (maître) du document.
   \end{enumerate}
 \end{dbwarning}
 %
 \begin{dbwarning}{Fichiers de données et de configuration à ne pas importer manuellement}{}
+  \index{fichier!des caractéristiques de la thèse}%
+  \index{fichier!de configuration de \yatcl}%
   Si ces fichiers
   % \file{\characteristicsfile} et \file{\configurationfile}
   vérifient les conditions de l'avertissement précédent, la \yatCl{} les

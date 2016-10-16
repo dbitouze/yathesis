@@ -3,26 +3,21 @@
 \section{Pour la prochaine version}
 \label{sec-pour-la-prochaine}
 
-\subsection{Classe}
-
+% \subsection{Classe}
+%
 % \begin{enumerate}
-  % \item S'assurer que les termes anglais choisis pour les noms de
-  % commandes sont judicieux.
-  % \item Mettre le bon \docAuxCommand*{CheckSum}.
+%   \item S'assurer que les termes anglais choisis pour les noms de
+%   commandes sont judicieux.
+%   \item Mettre le bon \docAuxCommand*{CheckSum}.
 % \end{enumerate}
 
 \subsection{Documentation de la classe}
 \label{sec-documentation-de-la}
 
 \begin{enumerate}
-\item À corriger :
-  \begin{enumerate}
-  \item si la documentation est imprimée, les commandes et environnements sont
-    peu lisibles dans les boîtes de warnings ;
-  \item la fonte en forme de canevas passe mal dans Acrobat
-    Reader. Cf. \url{http://tex.stackexchange.com/q/134121/18401}.
-  \end{enumerate}
 \item Documenter les spécimens et canevas.
+\item Si la documentation est imprimée, les commandes et environnements sont peu
+  lisibles dans les boîtes de warnings.
   % \item Revoir les instructions d'installation de la classe et de
   % production de sa documentation.
 \item Prévoir une version imprimable.
@@ -64,7 +59,7 @@
   \docAuxCommand*{author}, \docAuxCommand*{title}, ...,
   \docAuxCommand*{supervisor}, \docAuxCommand*{examiner}, etc. de la \yatCl{},
   d'obtenir une page de couverture adaptée à telle ou telle université (ou
-  \gls{pres}), rien qu'en ajoutant une option de classe telle que
+  \gls{comue}), rien qu'en ajoutant une option de classe telle que
   \docAuxKey*{style}|=|\docValue*{lille-1}. Pour ce faire, documenter la
   production des pages de titres et les macros publiques
   (\docAuxCommand*{print...}) qui permettent de faire apparaître les éléments
@@ -86,9 +81,8 @@
 \item Faire en sorte que, optionnellement, il soit possible de centrer
   verticalement le titre (en fait la boîte le contenant) dans les pages de
   titre.
-\item Tester l'intégration du \Package{minitoc}.
-\item Rendre personnalisable les différents \enquote{output} en proposant
-  diverses options.
+% \item Rendre personnalisables les différents \enquote{output} en proposant
+%   diverses options.
 \end{enumerate}
 
 \subsection{Documentation de la classe}
@@ -118,7 +112,6 @@
 %   et ×÷× ainsi pouvoir compiler la documentation avec \program{pdflatex} et non
 %   plus \program{xelatex} (il faudra alors renoncer au \Package*{fontawesome}
 %   qui fournit l'icône en forme de canevas).
-\item Prévoir un index des concepts en plus de celui des commandes.
 \item Prévoir un \File{.el} (pour \program{Emacs+AUCTeX}) et voir le format
   pour \program{TeXworks}.
 \item Indiquer comment obtenir un nom de fichier \acrshort{pdf} différent de
@@ -131,13 +124,7 @@ pdflatex -jobname=these_a_imprimer "\PassOptionsToClass{output=paper}{yathesis}\
 Évoquer éventuellement les \enquote{makefile}.
 \end{enumerate}
 
-%
-\iffalse
 %%% Local Variables:
 %%% mode: latex
-%%% eval: (latex-mode)
-%%% ispell-local-dictionary: "fr_FR"
-%%% TeX-engine: xetex
-%%% TeX-master: "../yathesis.dtx"
+%%% TeX-master: "../yathesis-fr"
 %%% End:
-\fi

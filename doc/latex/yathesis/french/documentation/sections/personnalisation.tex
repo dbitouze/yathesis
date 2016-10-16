@@ -11,6 +11,7 @@ Cette section passe en revue les outils de personnalisation propres ou pas à la
 \end{enumerate}
 
 \section{Options de classe}\label{options-classe}
+\index{option!de \yatcl|(}
 
 Les \meta{options} de classe de la \yatCl sont à passer selon la syntaxe
 usuelle :
@@ -23,18 +24,29 @@ usuelle :
 % \Class{book} sur laquelle est elle basée.
 
 \subsection{Options de la classe \textsf{book}}\label{sec-options-usuelles-de}
+\index{option!de la \Class{book}}
 
-Parmi les \meta{options} de la \yatCl figurent celles de la \Class{book},
+Parmi les \meta{options} de \yatcl figurent celles de la \Class{book},
 notamment :
 \begin{itemize}
-\item \docAuxKey{10pt} (défaut), \docAuxKey{11pt}, \docAuxKey{12pt}, pour fixer
+\item\index{taille des caractères}%
+  \docAuxKey{10pt} (défaut), \docAuxKey{11pt}, \docAuxKey{12pt}, pour fixer
   la taille de base des caractères ;
 \item éventuellement :
   \begin{itemize}
-  \item \docAuxKey{leqno} pour afficher les numéros d'équations à gauche ;
-  \item \docAuxKey{fleqn} pour que les équations hors texte soient toutes
+  \item\index{équation!numéro à gauche}%
+    \docAuxKey{leqno} pour afficher les numéros d'équations à gauche ;
+  \item\index{équation!alignement à gauche}%
+    \docAuxKey{fleqn} pour que les équations hors texte soient toutes
     alignées à gauche avec un même retrait d'alinéa ;
-  \item \docAuxKey{oneside} pour une pagination en recto seulement.
+  \item%
+    \index{pagination}%
+    \indexsee{recto}{pagination}%
+    \indexsee{verso}{pagination}%
+    \docAuxKey{oneside} pour une pagination en recto seulement\footnote{Les
+      chapitres commencent alors indifféremment sur une une page paire ou
+      impaire\index{page!paire/impaire} (c'est-à-dire sur une page de gauche ou
+      de droite\index{page!gauche/droite}).}.
   \end{itemize}
 \end{itemize}
 \begin{dbwarning}{Options usuelles de la \Class{book} : à utiliser avec
@@ -49,8 +61,13 @@ notamment :
 % Les \meta{options} discutées dans cette section, propres à la \yatCl{},
 % permettent de contrôler les grandes lignes du document.
 
-\subsection{Langues (principale, secondaire,
-  supplémentaires)}\label{sec-langues}
+\subsection{Langues (principale, secondaire, supplémentaires)}
+\label{sec-langues}%
+\index{langue}%
+\index{langue!principale}%
+\index{langue!secondaire}%
+\indexsee{français}{langue}%
+\indexsee{anglais}{langue}%
 
 Par défaut, un mémoire créé avec la \yatCl est composé :
 \begin{itemize}
@@ -62,10 +79,11 @@ Par défaut, un mémoire créé avec la \yatCl est composé :
 %
 \begin{docKey}{mainlanguage}{=\docValue{french}\textbar\docValue{english}}{pas
     de valeur par défaut, initialement \docValue{french}}
-  Pour que la langue principale \aside{et activée par défaut} du mémoire soit
-  l'anglais, il suffit de le stipuler au moyen de l'option
-  |mainlanguage=english|. Le français devient alors automatiquement la langue
-  secondaire de la thèse.
+  \indexdef{langue!principale}%
+  \indexdef{langue!secondaire}%
+  Pour que la langue principale \aside{et activée par défaut} soit l'anglais, il
+  suffit de le stipuler au moyen de l'option |mainlanguage=english|. Le français
+  devient alors automatiquement la langue secondaire.
 \end{docKey}
 
 \begin{dbwarning}{Langues principales et secondaires prises en charge}{}
@@ -75,6 +93,7 @@ Par défaut, un mémoire créé avec la \yatCl est composé :
 \end{dbwarning}
 
 \begin{dbremark}{Langues supplémentaires}{languessupplementaires}
+  \index{langue!supplémentaire}%
   Il est cependant possible de faire usage de langues \emph{supplémentaires},
   autres que le français et l'anglais, en les stipulant en option de
   \docAuxCommand{documentclass}\footnote{Ces langues doivent être l'une de
@@ -84,6 +103,7 @@ Par défaut, un mémoire créé avec la \yatCl est composé :
 
 \begin{dbexample}{Langue supplémentaire pour thèse
     multilingue principalement en français}{}
+  \indexex{langue!supplémentaire}%
   Pour composer un mémoire ayant pour langue principale le français et
   supplémentaire l'espagnol \aside{cas par exemple d'une thèse en linguistique
     espagnole}, il suffit de passer l'option suivante à la \yatCl{}.
@@ -94,6 +114,9 @@ Par défaut, un mémoire créé avec la \yatCl est composé :
 
 \begin{dbexample}{Langue supplémentaire pour thèse
     multilingue principalement en anglais}{}
+  \indexex{langue!principale}%
+  \indexex{langue!secondaire}%
+  \indexex{langue!supplémentaire}%
   Pour composer un mémoire ayant pour langue principale l'anglais (donc
   secondaire le français) et supplémentaire l'espagnol \aside{cas par exemple
     d'une thèse en linguistique espagnole}, il suffit de passer les options
@@ -104,6 +127,7 @@ Par défaut, un mémoire créé avec la \yatCl est composé :
 \end{dbexample}
 
 \subsection{Versions du mémoire}\label{sec-versions}
+\index{version du mémoire}%
 
 Au moyen de la clé \refKey{version}, la \yatCl{} permet de facilement produire
 différentes versions du document : \enquote{intermédiaire} (par défaut),
@@ -112,34 +136,38 @@ différentes versions du document : \enquote{intermédiaire} (par défaut),
 {\tcbset{before lower=\vspace*{\baselineskip}\par}
   \begin{docKey}{version}{=\docValue{inprogress}\textbar\docValue{inprogress*}\textbar\docValue{submitted}\textbar\docValue{submitted*}\textbar\docValue{final}\textbar\docValue{draft}}{pas
       de valeur par défaut, initialement \docValue{inprogress}}
+    \indexdef{version du mémoire}%
     Cette clé permet de spécifier la version du document à produire, au moyen
     des valeurs suivantes.
     \begin{description}
-    \item[\docValue{inprogress}.] Cette valeur produit une version
+    \item[\docValue{inprogress}.]%
+      \indexdef{version du mémoire!intermédiaire}%
+      Cette valeur produit une version
       \enquote{intermédiaire} du document\footnote{Une telle version est
         éventuellement destinée à être diffusée à des relecteurs.}. Ses
       caractéristiques sont les suivantes.
       \begin{enumerate}
       \item\label{item:inprogress:1} Pour indiquer clairement qu'il s'agit d'une
-        version \enquote{intermédiaire}, (presque) tous les pieds de page
-        contiennent en petites capitales la mention \enquote{Version
-          intermédiaire en date du \meta{date du jour}} ou
-        \foreignquote{english}{Work in progress as of \meta{date du
-            jour}}\selonlangue{}.
+        version \enquote{intermédiaire}, (presque) tous les pieds de
+        page\index{pied de page} contiennent en petites capitales la mention
+        \translateexpression{inprogressfoottext}.
       \item\label{item:inprogress:2} Aucun élément \enquote{obligatoire}
         (cf. \vref{sec-comm-oblig}) manquant n'est signalé.
       \end{enumerate}
-    \item[\docValue{inprogress*}.] Cette valeur produit le même effet que la
-      valeur \docValue{inprogress} sauf que le caractère non définitif de la
-      version est renforcé par la mention \enquote{travail en cours} ou
-      \foreignquote{english}{work in progress}\selonlangue{}, figurant en
-      filigrane et en capitales sur toutes les pages.
-    \item[\docValue{submitted}.] Cette valeur produit une version du document
+    \item[\docValue{inprogress*}.]%
+      \indexdef{version du mémoire!intermédiaire}%
+      Cette valeur produit le même effet que la valeur \docValue{inprogress}
+      sauf que le caractère non définitif de la version est renforcé par la
+      mention \translateexpression{inprogress}, figurant en
+      filigrane\index{filigrane} et en capitales sur toutes les pages.
+    \item[\docValue{submitted}.]%
+      \indexdef{version du mémoire!soumise aux rapporteurs}%
+      Cette valeur produit une version du document
       destinée à être \enquote{soumise} aux rapporteurs. \emph{Contrairement à}
       la version par défaut :
       \begin{enumerate}
-      \item l'affichage en pied de page de la mention \enquote{Version
-          intermédiaire en date du \meta{date du jour}} ou
+      \item l'affichage en pied de page\index{pied de page} de la mention
+        \enquote{Version intermédiaire en date du \meta{date du jour}} ou
         \foreignquote{english}{Work in progress as of \meta{date du jour}} est
         désactivé ;
       \item \changes*{v0.99f}{2014-07-11}{En versions \enquote{à soumettre},
@@ -156,29 +184,33 @@ différentes versions du document : \enquote{intermédiaire} (par défaut),
           versions soumises aux rapporteurs où elle ne figure nulle part.}.
       \end{enumerate}
     \item[\docValue{submitted*}.] %
+      \indexdef{version du mémoire!soumise aux rapporteurs}%
       \changes{v0.99k}{2014-10-01}{Nouvelle commande
         \protect\refCom{submissiondate} permettant de stipuler une date de
         soumission du mémoire aux rapporteurs}%
       %
       Cette valeur produit le même effet que la valeur \docValue{submitted} sauf
       que le caractère \enquote{à soumettre} de la version est renforcé par
-      l'affichage, sur (presque) tous les pieds de pages et en petites
-      capitales, de la mention \enquote{Version soumise en date du \meta{date}}
-      ou \foreignquote{english}{Submitted work as of
-        \meta{date}}\selonlangue{}. Ici, la \meta{date} est par défaut celle du
-      jour, mais il est possible d'en spécifier une autre au moyen de la
-      commande \refCom{submissiondate}.
-    \item[\docValue{final}.] Cette valeur produit une version \enquote{finale}
+      l'affichage, sur (presque) tous les pieds de pages\index{pied de page} et
+      en petites capitales, de la mention \enquote{Version soumise en date du
+        \meta{date}} ou \translateexpression{submittedfoottext}. Ici, la
+      \meta{date} est par défaut celle du jour, mais il est possible d'en
+      spécifier une autre au moyen de la commande \refCom{submissiondate}.
+    \item[\docValue{final}.]
+      \indexdef{version du mémoire!finale}%
+      Cette valeur produit une version \enquote{finale}
       du document. \emph{Contrairement à} la version par défaut :
       \begin{enumerate}
-      \item l'affichage en pied de page de la mention \enquote{Version
-          intermédiaire en date du \meta{date du jour}} ou
+      \item l'affichage en pied de page\index{pied de page} de la mention
+        \enquote{Version intermédiaire en date du \meta{date du jour}} ou
         \foreignquote{english}{Work in progress as of \meta{date du jour}} est
         désactivé ;
       \item si un élément \enquote{obligatoire} (cf. \vref{sec-comm-oblig})
         manque, une erreur de compilation signale l'omission.
       \end{enumerate}
-    \item[\docValue{draft}.] Cette valeur produit une version
+    \item[\docValue{draft}.]
+      \indexdef{version du mémoire!brouillon}%
+      Cette valeur produit une version
       \enquote{brouillon} du document\footnote{Une telle version est \emph{a
           priori} à usage exclusif de l'utilisateur et n'est en particulier pas
         destinée à être diffusée.}. Ses caractéristiques sont les suivantes :
@@ -195,9 +227,9 @@ différentes versions du document : \enquote{intermédiaire} (par défaut),
         \item Les différentes zones de la page, notamment celle allouée au
           texte, sont matérialisées et les dépassements de marges sont signalés
           par une barre verticale noire dans la marge.
-        \item La mention \enquote{brouillon} ou
-          \foreignquote{english}{draft}\selonlangue{} figure en filigrane (et en
-          capitales) sur toutes les pages du document.
+        \item La mention \translateexpression{draft} figure en
+          filigrane\index{filigrane} (et en capitales) sur toutes les pages du
+          document.
         \item Sur certaines pages, notamment celles de titre :
           \begin{enumerate}
           \item les données caractéristiques de la thèse\footnote{Auteur,
@@ -227,13 +259,6 @@ différentes versions du document : \enquote{intermédiaire} (par défaut),
   \end{docKey}
 }
 
-\begin{docCommand}{submissiondate}{\marg{jour}\marg{mois}\marg{année}}
-  Cette commande définit la date de la soumission du mémoire (qui ne figure
-  qu'en version \enquote{\docValue*{submitted*}}). Ses arguments sont soumis aux
-  mêmes contraintes que ceux de la commande \refCom{date}
-  (cf. \vref{wa-format-date}).
-\end{docCommand}
-
 Les versions \enquote{à soumettre} et \enquote{finale} d'un mémoire de thèse ne
 sont à produire qu'exceptionnellement, en toute fin de rédaction. De ce fait :
 \begin{dbwarning}{Par défaut, documents en version intermédiaire}{}
@@ -244,6 +269,7 @@ sont à produire qu'exceptionnellement, en toute fin de rédaction. De ce fait :
 
 \subsection{Formats de sortie}
 \label{sec-formats-de-sortie}
+\index{format du mémoire}%
 
 Les documents composés avec la \yatCl{} peuvent avoir deux formats de sortie :
 \enquote{écran} (par défaut) et \enquote{papier}, stipulés au moyen de la clé
@@ -251,27 +277,34 @@ Les documents composés avec la \yatCl{} peuvent avoir deux formats de sortie :
 
 \begin{docKey}{output}{=\docValue{screen}\textbar\docValue{paper}\textbar\docValue{paper*}}{pas
     de valeur par défaut, initialement \docValue{screen}}
+  \indexdef{format du mémoire}%
   Cette clé permet de spécifier le format de sortie du document, au moyen des
   valeurs suivantes.
   \begin{description}
-  \item[\docValue{screen}.] Avec cette valeur, le document a un format de
-    sortie destiné à être visualisé à l'écran. Ce format ne présente pas de
-    spécificités particulières.
-  \item[\docValue{paper}.] Avec cette valeur, le document a un format de sortie
+  \item[\docValue{screen}.]%
+    \indexdef{format du mémoire!écran}%
+    Avec cette valeur, le document a un format de sortie destiné à être
+    visualisé à l'écran. Ce format ne présente pas de spécificités
+    particulières.
+  \item[\docValue{paper}.]%
+    \indexdef{format du mémoire!papier}%
+    Avec cette valeur, le document a un format de sortie
     destiné à être imprimé sur papier. Les différences par rapport au format
     \enquote{écran} sont les suivantes :
     \begin{enumerate}
-    \item si le \Package{hyperref} est chargé par l'utilisateur,
+    \item%
+      \index{lien hypertexte}%
+      si le \Package{hyperref} est chargé par l'utilisateur,
       \begin{enumerate}
-      \item\label{item-paper-1} sa commande
-        |\href{|\meta{\acrshort*{url}}|}{|\meta{texte}|}| est automatiquement
-        remplacée par :
+      \item\label{item-paper-1}%
+        sa commande |\href{|\meta{\acrshort*{url}}|}{|\meta{texte}|}| est
+        automatiquement remplacée par :
+        \lstset{deletekeywords={url},deletekeywords={[2]url}}%
         \begin{itemize}
-        \item
-          \meta{texte}\lstinline[deletekeywords={[2]url}]+\footnote{\url{+\meta{\acrshort*{url}}|}}|
+        \item \meta{texte}\lstinline+\footnote{\url{+\meta{\normalfont\ttfamily\acrshort*{url}}|}}|
           si elle figure dans le texte ordinaire ;
         \item \meta{texte}
-          \lstinline[deletekeywords={[2]url}]+(\url{+\meta{\acrshort*{url}}|})|
+          \lstinline[deletekeywords={[2]url}]+(\url{+\meta{\normalfont\ttfamily\acrshort*{url}}|})|
           si elle figure en note de bas de page ;
         \end{itemize}
       \item les liens hypertextes sont systématiquement matérialisés comme le
@@ -283,31 +316,36 @@ Les documents composés avec la \yatCl{} peuvent avoir deux formats de sortie :
         besoin de modifier ce choix pour que, en sortie \enquote{papier}, cette
         coloration soit désactivée ;
       \end{enumerate}
-      \item\label{item-paper-2} les barres de navigation affichées par certains
-        styles de glossaires\footnote{Telles qu'on peut en voir
-          \vref{fig-printacronyms,fig-printglossary}.} \emph{sont} masquées.
+    \item%
+      \label{item-paper-2}%
+      les barres de navigation affichées par certains styles de
+      glossaires\footnote{Telles qu'on peut en voir
+        \vref{fig-printacronyms,fig-printglossary}.} \emph{sont} masquées.
     \end{enumerate}
-  \item[\docValue{paper*}.] Cette valeur produit le même effet que la valeur
-    \docValue{paper} sauf que son \vref{item-paper-2} est inversé : les barres
-    de navigation \emph{ne} sont \emph{pas} masquées.
+  \item[\docValue{paper*}.]%
+    \indexdef{format du mémoire!papier}%
+    Cette valeur produit le même effet que la valeur \docValue{paper} sauf que
+    son \vref{item-paper-2} est inversé : les barres de navigation \emph{ne}
+    sont \emph{pas} masquées.
   \end{description}
 \end{docKey}
 
-\begin{dbwarning}{Mises en page éventuellement différentes en sortie
+\begin{dbwarning}{Mises en page éventuellement différentes en formats
     \enquote{écran} et \enquote{papier}}{}
-  Du fait des \cref{item-paper-1,item-paper-2} précédents, les mises en page
-  des sorties \enquote{écran} et \enquote{papier} peuvent être différentes, et
-  il pourra être opportun de les comparer, par exemple à l'aide d'un logiciel
+  Du fait des \cref{item-paper-1,item-paper-2} précédents, les mises en page des
+  formats \enquote{écran} et \enquote{papier} peuvent être différentes, et il
+  pourra être opportun de les comparer, par exemple à l'aide d'un logiciel
   comparateur de fichiers \acrshort{pdf}. Si on souhaite que les sorties
   \enquote{écran} et \enquote{papier} soient absolument identiques, il suffit
   d'imprimer la première ; mais il faut avoir conscience du fait que, dans ce
   cas, si le mémoire contient des références vers des \acrshort{url} (par
-  exemple fournies par |\href{|\meta{\acrshort*{url}}|}{|\meta{texte}|}|),
-  leurs cibles ne figureront nulle part en sortie \enquote{papier}.
+  exemple fournies par |\href{|\meta{\acrshort*{url}}|}{|\meta{texte}|}|), leurs
+  cibles ne figureront nulle part en sortie \enquote{papier}.
 \end{dbwarning}
 
-\subsection{Tables des matières locales}
-\label{sec-localtoc}
+\subsection{Tables des matières locales automatiques}
+\label{sec-localtoc}%
+\index{table des matières!locale}%
 
 %
 \changes{v0.99o}{2016-09-29}{Nouvelle option de classe \refKey{localtocs}
@@ -316,6 +354,7 @@ Les documents composés avec la \yatCl{} peuvent avoir deux formats de sortie :
 
 \begin{docKey}[][doc new=2016-09-29]{localtocs}{}{pas de valeur par défaut, pas
     de valeur initiale} 
+  \indexdef{table des matières!locale}%
   Cette clé fait automatiquement débuter les chapitres de la partie
   principale\footnote{C'est-à-dire de \refCom{mainmatter} jusqu'à
     \refCom{backmatter}.} par leurs tables des matières locales.
@@ -333,6 +372,8 @@ clé \refKey{localtocs/depth}.
   \begin{docKey}[][doc
     new=2016-09-29]{localtocs/depth}{=\docValue{section}\textbar\docValue{subsection}\textbar\docValue{subsubsection}\textbar\docValue{paragraph}\textbar\docValue{subparagraph}}{par
       défaut \docValue{subsection}, pas de valeur initiale}
+    \index{table des matières!locale!profondeur}%
+    \index{profondeur!table des matières!locale}%
     Cette clé :
     \begin{enumerate}
     \item actionne la clé \refKey{localtocs} ;
@@ -349,6 +390,7 @@ clé \refKey{localtocs/depth}.
 }
 
 \begin{dbexample}{Tables des matières locales automatiques}{}
+  \indexex{table des matières!locale}%
   Pour que chaque chapitre de la partie principale du mémoire débute
   automatiquement par sa table des matières locale, il suffit de passer l'option
   suivante à la \yatCl{}.
@@ -369,34 +411,85 @@ semi-globalement ou localement l'insertion automatique de tables des matières
 locales et ce, indépendamment du recours à l'option \refKey{localtocs}.
 
 \begin{docCommand}[doc new=2016-09-29]{startlocaltocs}{}
+  \index{table des matières!locale}%
   Cette commande est une bascule \emph{activant} jusqu'à nouvel ordre
   l'insertion automatique de tables des matières locales.
 \end{docCommand}
 
 \begin{docCommand}[doc new=2016-09-29]{stoplocaltocs}{}
+  \index{table des matières!locale}%
   Cette commande est une bascule \emph{désactivant} jusqu'à nouvel ordre
   l'insertion automatique de tables des matières locales.
 \end{docCommand}
 
 \begin{docCommand}[doc new=2016-09-29]{nextwithlocaltoc}{}
+  \index{table des matières!locale}%
   Cette commande \emph{active}, pour le \emph{chapitre suivant seulement},
   l'insertion automatique de tables des matières locales.
 \end{docCommand}
 
 \begin{docCommand}[doc new=2016-09-29]{nextwithoutlocaltoc}{}
+  \index{table des matières!locale}%
   Cette commande \emph{désactive}, pour le \emph{chapitre suivant seulement},
   l'insertion automatique de tables des matières locales.
 \end{docCommand}
 
+\subsection{Bibliographies locales automatiques}
+\label{sec-localbibs}%
+\index{bibliographie!locale}%
+
+%
+\changes{v0.99o}{2016-09-29}{Nouvelle option de classe \refKey{localbibs}
+  permettant de faire automatiquement finir les chapitres par leurs
+  bibliographies locales}%
+
+\begin{docKey}[][doc new=2016-09-29]{localbibs}{}{pas de valeur par défaut, pas
+    de valeur initiale} 
+  \indexdef{bibliographie!locale}%
+  Cette clé fait automatiquement finir les chapitres (contenant au moins une
+  référence bibliographique) par leurs bibliographies locales.
+\end{docKey}
+
+\begin{docKey}[][doc new=2016-09-29]{localbibs*}{}{pas de valeur par défaut, pas
+    de valeur initiale} 
+  \indexdef{bibliographie!locale}%
+  Cette clé a le même effet que \refKey{localbibs} sauf que l'option
+  \docAuxKey{defernumbers} du \Package*{biblatex} est alors
+  activée\footnote{Cf. la documentation de \package*{biblatex} pour plus de
+    détails sur cette option et éventuellement une discussion sur ses avantages
+    et inconvénients à \url{http://tex.stackexchange.com/q/332431/18401}.}.
+\end{docKey}
+
+\begin{dbwarning}{\Package*{biblatex} nécessaire pour les bibliographies
+    locales}{}
+  L'ajout automatique des bibliographies locales en fin de chapitres fourni
+  repose sur le \Package{biblatex} (cf. \vref{sec-refer-bibl}). Le recours à ce
+  package pour la bibliographie de la thèse est alors nécessaire et exclusif de
+  tout autre outil de production de la bibliographie (notamment
+  \hologo{BibTeX}).%
+\end{dbwarning}
+
+\begin{dbexample}{Bibliographies locales automatiques}{}
+  \indexex{bibliographie!locale}%
+  Pour que chaque chapitre finisse automatiquement par sa bibliographie locale,
+  il suffit de passer l'option suivante à la \yatCl{}.
+\begin{preamblecode}
+\documentclass[localbibs]{yathesis}
+\end{preamblecode}
+\end{dbexample}
+
+Les bibliographies locales sont introduites par une section intitulée
+\translateexpression{localbibname}.
+
 \subsection{Nombre de laboratoires sur les pages de résumés et de 4\ieme{} de couverture}
 \label{sec-nombre-de-labor}
+\index{résumé}%
+\index{quatrième de couverture}%
 
-Par défaut, seul le laboratoire principal (avec son adresse) est affiché sur
-les pages de résumés et de 4\ieme{} de couverture
-(cf. \vref{sec-abstract,sec-quatr-de-couv}). Mais la clé
+Par défaut, seul le laboratoire principal (avec son adresse) est affiché sur les
+pages de résumés et de 4\ieme{} de couverture (cf. \vref{sec-abstract,sec-quatr-de-couv}). Mais la clé
 \refKey{numlaboratories} suivante permet de faire figurer un nombre arbitraire
-de laboratoires parmi ceux définis au moyen de la commande
-\refCom{laboratory}.%
+de laboratoires parmi ceux définis au moyen de la commande \refCom{laboratory}.%
 %
 \changes{v0.99j}{2014-07-18}{Nouvelle clé \protect\refKey{numlaboratories}
   permettant de spécifier le nombre ($\geqslant 0$) de laboratoires devant
@@ -404,6 +497,7 @@ de laboratoires parmi ceux définis au moyen de la commande
 
 \begin{docKey}{numlaboratories}{=\meta{nombre}}{pas de valeur par
     défaut, initialement \docValue*{1}}
+  \index{laboratoire!multiple!nombre}%
   Cette clé permet de spécifier le \meta{nombre} (entier positif ou nul) de
   laboratoires dont les noms et adresses doivent figurer sur la page de résumés
   et de 4\ieme{} de couverture. Ces laboratoires sont pris dans l'ordre de
@@ -426,6 +520,8 @@ package\footnote{Par souci de compatibilité ascendante, la clé désormais
   \tcbset{before lower=\vspace*{\baselineskip}\par}
   \begin{docKey}{fncychap}{=\docValue{Sonny}\textbar\docValue{Lenny}\textbar\docValue{Glenn}\textbar\docValue{Conny}\textbar\docValue{Rejne}\textbar\docValue{Bjarne}\textbar\docValue{PetersLenny}\textbar\docValue{Bjornstrup}\textbar\docValue{none}}{pas
       de valeur par défaut, initialement \docValue{PetersLenny}}
+    \index{chapitre!style de tête}%
+    \index{style!de tête de chapitre}%
     \changes{v0.99g}{2014-07-13}{Clé \protect\refAux{chap-style} remplacée par
       (et alias de) la clé \protect\refKey{fncychap}}%
     %
@@ -437,12 +533,13 @@ package\footnote{Par souci de compatibilité ascendante, la clé désormais
   \end{docKey}
 }
 
-\subsection{Expressions séparant les corps et affiliations des membres du jury}
-\label{sec-expr-separ-les}
+\subsection{Expressions séparant corporations et affiliations des membres du jury}
+\label{sec-expr-separ-les}%
+\index{expression!séparant corporation et affiliation}%
 
 Sur les pages de titre, chaque membre du jury peut être précisé notamment par :
 \begin{itemize}
-\item son corps, cf. \refKey{professor}, \refKey{mcf}, \refKey{mcf*},
+\item sa corporation, cf. \refKey{professor}, \refKey{mcf}, \refKey{mcf*},
   \refKey{seniorresearcher}, \refKey{juniorresearcher} et
   \refKey{juniorresearcher*} ;
 \item son affiliation, cf. \refKey{affiliation}.
@@ -463,6 +560,7 @@ elles sont par défaut séparées :
 \end{description}
 
 \begin{dbwarning}{Élision automatique non robuste}{elision-separateurs}
+  \index{expression!élision}%
   L'élision automatique des expressions contextuelles en français n'est pas
   robuste : elle peut en effet ne pas donner le résultat escompté si la valeur
   de la clé \refKey{affiliation}, définissant l'affiliation, a pour initiale :
@@ -478,11 +576,12 @@ suivantes, les expressions séparatrices en français et en anglais peuvent êtr
 redéfinies, globalement ou localement.
 
 \begin{docKey}{sepcorpaffilfrench}{=\meta{expression}}{pas de valeur par défaut,
-    initialement \lstinline[showspaces]+\ à l'+ ou
+    initialement \lstinline[showspaces]+\ +\texttt{à}\lstinline[showspaces]+\ +\texttt{l'} ou
     \lstinline[showspaces]+\ au\ +}
-  Cette option permet de redéfinir l'\meta{expression} employée en français
-  pour séparer les corps et affiliations des membres du jury. Elle peut
-  être employée :
+  \indexdef{expression!séparant corporation et affiliation}%
+  Cette option permet de redéfinir l'\meta{expression} employée en français pour
+  séparer les corporations et affiliations des membres du jury. Elle peut être
+  employée :
   \begin{description}
   \item[globalement:] elle est alors à spécifier en option de la classe de
     document ;
@@ -494,8 +593,9 @@ redéfinies, globalement ou localement.
 
 \begin{docKey}{sepcorpaffilenglish}{=\meta{expression}}{pas valeur par
     défaut, initialement \lstinline[showspaces]+\ at\ +}
+  \indexdef{expression!séparant corporation et affiliation}%
   Cette option, analogue à \refKey{sepcorpaffilfrench}, permet de redéfinir
-  l'\meta{expression} employée en anglais pour séparer les corps et
+  l'\meta{expression} employée en anglais pour séparer les corporations et
   affiliations des membres du jury.
 \end{docKey}
 
@@ -516,10 +616,11 @@ redéfinies, globalement ou localement.
   %
 \end{dbwarning}
 
-\begin{dbexample}{Redéfinition (globale) de l'expression séparant corps et
-    affiliations}{}
+\begin{dbexample}{Redéfinition (globale) de l'expression séparant corporations
+    et affiliations}{}
+  \indexex{expression!séparant corporation et affiliation}%
   L'exemple suivant montre comment remplacer l'expression (par défaut) séparant
-  corps et affiliations par une virgule, et ce :
+  corporations et affiliations par une virgule, et ce :
   \begin{itemize}
   \item globalement pour tous les membres du jury;
   \item en anglais.
@@ -529,9 +630,10 @@ redéfinies, globalement ou localement.
 \end{preamblecode}
 \end{dbexample}
 
-\begin{dbexample}{Redéfinition (locale) de l'expression séparant corps et
+\begin{dbexample}{Redéfinition (locale) de l'expression séparant corporation et
     affiliation}{}
-  L'exemple suivant montre comment remplacer l'expression séparant corps et
+  \indexex{expression!séparant corporation et affiliation}%
+  L'exemple suivant montre comment remplacer l'expression séparant corporation et
   affiliation par \enquote{\textvisiblespace{}à la\textvisiblespace{}}, et ce :
   \begin{itemize}
   \item localement (pour un membre du jury particulier);
@@ -543,13 +645,15 @@ redéfinies, globalement ou localement.
 \end{dbexample}
 
 \subsection{Habilitations à diriger les recherches}
-\label{sec-hdr}
-%
+\label{sec-hdr}%
+\index{\acrlong{hdr}}%
+
 Grâce à sa clé \refKey{hdr}, la \yatCl{} peut être utilisée pour
 les habilitations à diriger les recherches.
 
 \begin{docKey}{hdr}{=\docValue{true}\textbar\docValue{false}}{par défaut
     \docValue{true}, initialement \docValue{false}}
+  \indexdef{\acrlong{hdr}}%
   \changes{v0.99f}{2014-07-11}{Nouvelle clé \protect\refKey{hdr} permettant de
     d'utiliser la \yatCl{} pour une \gls{hdr}}%
   %
@@ -564,24 +668,24 @@ d'expressions clés de la \yatCl{}, en remplaçant par exemple \enquote{Thèse
 celles dont le label est suffixé par \enquote{\texttt{-hdr}} dans le
 \vref{tab-expressions-cles}.
 
-\section{Options à passer aux packages chargés par la classe}
-\label{sec-options-passer-aux}
+\section{Options à passer aux packages chargés par la \yatCl{}}
+\label{sec-options-passer-aux}%
+\index{option!de package chargé par \yatcl}%
 
 \changes{v0.99g}{2014-07-13}{Des options peuvent être passées aux packages
   chargés par \yat{}}%
 %
 Pour plusieurs de ses fonctionnalités, la \yatCl s'appuie sur des packages
-qu'elle charge automatiquement (listés
-\vref{sec-packages-charges-par}). Aussi son comportement par défaut et sa
-personnalisation sont-ils également gouvernés par le comportement par défaut et
-la personnalisation de ces packages.
+(listés \vref{sec-packages-charges-par}) qu'elle charge automatiquement. Aussi
+son comportement par défaut et sa personnalisation sont-ils également gouvernés
+par le comportement par défaut et la personnalisation de ces packages.
 
 \begin{dbwarning}{Packages automatiquement chargés à ne pas charger
     manuellement}{packages-a-ne-pas-charger}
   Les packages qui sont automatiquement chargés par la \yatCl{} ne doivent pas
   être chargés manuellement (au moyen de la commande
-  \docAuxCommand{usepackage}), sous peine de provoquer des clashs d'options (tel
-  que signalé à la \vref{faq-option-clash}).
+  \docAuxCommand{usepackage}), sous peine de provoquer des conflits d'options
+  (tel que signalé à la \vref{faq-option-clash}).
 \end{dbwarning}
 
 De ce fait, la personnalisation des packages automatiquement chargés par le
@@ -600,23 +704,27 @@ ceux :
     de configuration propre ; il en est ainsi du \Package{bookmark} qui dispose
     de la commande \protect\docAuxCommand*{bookmarksetup}.}).
 \end{itemize}
-Ces options, qui ont pour nom le nom du package concerné, sont les suivantes (à
-charge pour l'utilisateur de consulter la documentation des packages concernés
+Ces options, qui ont même nom que celui du package concerné, sont les suivantes
+(charge à l'utilisateur de consulter la documentation des packages concernés
 pour savoir s'ils peuvent lui être utiles et, le cas échéant, quelles valeurs
 peuvent être passées à leurs options).
 
 \begin{docKey}{graphicx}{=\marg{option(s)}}{pas valeur par défaut,
     initialement vide}
+  \index{option!de package chargé par \yatcl!\package*{graphicx}}%
   Cette option permet de passer une ou plusieurs \meta{option(s)} au
   \Package{graphicx}.
 \end{docKey}
 \begin{docKey}{adjustbox}{=\marg{option(s)}}{pas valeur par défaut,
     initialement \docValue*{export}}
+  \index{option!de package chargé par \yatcl!\package*{adjustbox}}%
+  % \index{package!\package*{adjustbox}!option}%
   Cette option permet de passer une ou plusieurs \meta{option(s)} au
   \Package{adjustbox}.
 \end{docKey}
 \begin{docKey}{setspace}{=\marg{option(s)}}{pas valeur par défaut,
     initialement vide}
+  \index{option!de package chargé par \yatcl!\package*{setspace}}%
   Cette option permet de passer une ou plusieurs \meta{option(s)} au
   \Package{setspace}.
 
@@ -627,16 +735,19 @@ peuvent être passées à leurs options).
 \end{docKey}
 \begin{docKey}{xcolor}{=\marg{option(s)}}{pas valeur par défaut,
     initialement vide}
+  \index{option!de package chargé par \yatcl!\package*{xcolor}}%
   Cette option permet de passer une ou plusieurs \meta{option(s)} au
   \Package{xcolor}.
 \end{docKey}
 \begin{docKey}{datatool}{=\marg{option(s)}}{pas valeur par défaut,
     initialement vide}
+  \index{option!de package chargé par \yatcl!\package*{datatool}}%
   Cette option permet de passer une ou plusieurs \meta{option(s)} au
   \Package{datatool}.
 \end{docKey}
 \begin{docKey}{titleps}{=\marg{option(s)}}{pas valeur par défaut, initialement
     vide}
+  \index{option!de package chargé par \yatcl!\package*{titleps}}%
   % \changes{v0.99j}{2014-07-18}{Clé \protect\refAux{titleps} remplacée par
   % (et alias de) la clé \protect\refKey{titlesec}}%
   Cette option permet de passer une ou plusieurs \meta{option(s)} au
@@ -644,16 +755,19 @@ peuvent être passées à leurs options).
 \end{docKey}
 \begin{docKey}{draftwatermark}{=\marg{option(s)}}{pas valeur par défaut,
     initialement vide}
+  \index{option!de package chargé par \yatcl!\package*{draftwatermark}}%
   Cette option permet de passer une ou plusieurs \meta{option(s)} au
   \Package{draftwatermark}.
 \end{docKey}
 \begin{docKey}{babel}{=\marg{option(s)}}{pas valeur par défaut,
     initialement vide}
+  \index{option!de package chargé par \yatcl!\package*{babel}}%
   Cette option permet de passer une ou plusieurs \meta{option(s)} au
   \Package{babel}.
 \end{docKey}
 \begin{docKey}{datetime}{=\marg{option(s)}}{pas valeur par défaut,
     initialement \docValue*{nodayofweek}}
+  \index{option!de package chargé par \yatcl!\package*{datetime}}%
   Cette option permet de passer une ou plusieurs \meta{option(s)} au
   \Package{datetime}.
 \end{docKey}
@@ -687,6 +801,8 @@ passées indifféremment :
 \end{docCommand}
 
 \subsection{Profondeur de la numérotation}\label{sec-profondeur-de-la}
+\index{profondeur!numérotation des paragraphes}%
+\index{numérotation!des paragraphes!profondeur}%
 
 Par défaut, la numérotation des paragraphes a pour \enquote{niveau de
   profondeur} les sous-sections. Autrement dit, seuls les titres des parties
@@ -698,6 +814,8 @@ profondeur.
   \tcbset{before lower=\vspace*{\baselineskip}\par}
   \begin{docKey}{secnumdepth}{=\docValue{part}\textbar\docValue{chapter}\textbar\docValue{section}\textbar\docValue{subsection}\textbar\docValue{subsubsection}\textbar\docValue{paragraph}\textbar\docValue{subparagraph}}{pas
       de valeur par défaut, initialement \docValue{subsection}}
+    \indexdef{profondeur!numérotation des paragraphes}%
+    \indexdef{numérotation des paragraphes!profondeur}%
     Cette clé permet de modifier le \enquote{niveau de profondeur} de la
     numérotation des paragraphes jusqu'aux, respectivement : parties,
     chapitres, sections, sous-sections, sous-sous-sections, paragraphes,
@@ -706,6 +824,7 @@ profondeur.
 }
 
 \subsection{Espace interligne}\label{sec-interligne}
+\index{espace!interligne}%
 
 L'interligne du document est par défaut \enquote{simple} mais, au moyen de
 l'option \refKey{space} suivante, il est possible de spécifier un interligne
@@ -713,6 +832,7 @@ l'option \refKey{space} suivante, il est possible de spécifier un interligne
 
 \begin{docKey}{space}{=\docValue{single}\textbar\docValue{onehalf}\textbar\docValue{double}}{pas de valeur par défaut,
     initialement \docValue{single}}
+  \indexdef{espace!interligne}%
   Cette clé permet de spécifier un interligne \docValue{single} (simple),
   \docValue{onehalf} (un et demi) ou \docValue{double} (double).
 \end{docKey}
@@ -729,19 +849,23 @@ Si on souhaite changer d'interligne ailleurs dans le mémoire, on recourra aux
 commandes du \Package*{setspace} \aside*{chargé par la \yatCl}.
 
 \section{Commandes et options de commandes de la \yatCl}
+\index{commandes de personnalisation!lieu de spécification}%
+\index{option!de \yatcl!lieu de spécification}%
 
-\begin{dbremark}{Lieu des commandes de personnalisations}{configurationfile}
+\begin{dbremark}{Lieu des commandes de personnalisation}{configurationfile}
   Les commandes de personnalisation listées dans cette section (et donc propres
   à \yatCl{}) ou fournies par les packages chargés manuellement peuvent être
   saisies :
   \begin{itemize}
   \item soit directement dans le (préambule du) fichier (maître) de la thèse ;
-  \item soit dans un fichier (prévu à cet effet) à nommer
-    \file{\configurationfile} et à placer dans un sous-dossier (prévu à cet
-    effet) à nommer \folder{\configurationdirectory}\footnote{Ces fichier et
-      sous-dossier sont à créer au besoin mais le canevas de thèse \enquote{en
-        arborescence} livré avec la \yatCl, décrit \vref{sec-canevas-arborescence}, les
-      fournit.}.
+  \item%
+    \index{fichier!de configuration de \yatcl}%
+    \index{dossier!de configuration}%
+    soit dans un fichier (prévu à cet effet) à nommer \file{\configurationfile}
+    et à placer dans un sous-dossier (prévu à cet effet) à nommer
+    \folder{\configurationdirectory}\footnote{Ces fichier et sous-dossier sont
+      à créer au besoin mais le canevas de thèse \enquote{en arborescence} livré
+      avec la \yatCl, décrit \vref{sec-canevas-arborescence}, les fournit.}.
   \end{itemize}
 \end{dbremark}
 
@@ -749,12 +873,13 @@ commandes du \Package*{setspace} \aside*{chargé par la \yatCl}.
   Le \File{\configurationfile} est \emph{automatiquement} importé par la
   \yatCl{} et il doit donc \emph{ne pas} être explicitement importé : on
   \emph{ne} recourra donc \emph{pas} à la commande
-  |\input{|\file{\characteristicsfile}|}| (ou autre commande d'importation
+  |\input{|\file{\configurationfile}|}| (ou autre commande d'importation
   similaire à \docAuxCommand{input}).
 \end{dbwarning}
 
 \subsection{(Re)Définition des expressions de la
-  thèse}\label{sec-expressions-cles}
+  thèse}\label{sec-expressions-cles}%
+\index{expression!(re)définition}%
 
 Un mémoire de thèse composé avec la \yatCl est émaillé d'expressions insérées
 de façon automatique sur certaines pages (titre, mots clés, laboratoire,
@@ -762,7 +887,8 @@ résumés, etc.). Que ces expressions soient définies par la \yatCl ou bien
 standard, il est possible de les redéfinir.
 
 \subsubsection{Expressions définies par la classe}
-\label{sec-expr-defin-par}
+\label{sec-expr-defin-par}%
+\index{expression!redéfinition}%
 
 Les expressions \meta{en français} et \meta{en anglais} définies par la \yatCl
 sont listées\footnote{Et classées par ordre alphabétique des expressions
@@ -771,17 +897,37 @@ par un \meta{label} permettant de les redéfinir (voire de les définir, cf.
 \vref{ex-doctor}) au moyen de la commande \refCom{expression} suivante.
 %
 \begin{docCommand}{expression}{\marg{label}\marg{en français}\marg{en anglais}}
-  Cette commande permet de (re)définir les valeurs \meta{en français} et
+  \indexdef{expression!redéfinition}%
+  Cette commande permet de redéfinir les valeurs \meta{en français} et
   \meta{en anglais} de l'expression identifiée par \meta{label}.
 \end{docCommand}
 %
-{%
-  % \footnotesize%
-  \small%
-  \LTXtable{\textwidth}{tableaux/expressions}%
+\bgroup
+\renewcommand{\expression}[3]{%
+  \ifthenelse{\isempty{#2}}{%
+    \meta{vide}%
+  }{%
+    #2%
+  }%
+  &
+  \ifthenelse{\isempty{#3}}{%
+    \meta{vide}%
+  }{%
+    #3%
+  }%
+  &
+  #1%
+  \\%
+  % \midrule%
 }
 %
+% \footnotesize%
+\small%
+\LTXtable{\textwidth}{tableaux/expressions}%
+\egroup
+%
 \begin{dbexample}{Modification d'expression définie par la classe}{}
+  \indexex{expression!redéfinition}%
   Pour remplacer l'expression en français \enquote{Unit\'e de recherche} (dont le label est
   |universitydepartment|) par \enquote{Laboratoire}, il suffit de
   saisir :
@@ -792,6 +938,7 @@ par un \meta{label} permettant de les redéfinir (voire de les définir, cf.
 \end{dbexample}
 %
 \begin{dbexample}{Suppression d'expression définie par la classe}{}
+  \indexex{expression!redéfinition}%
   Si on souhaite supprimer des pages de titre les mentions \enquote{Titre de la
     thèse} et \foreignquote{english}{Thesis Title} (expressions dont le label
   est |thesistitle|), il suffit de saisir :
@@ -802,13 +949,15 @@ par un \meta{label} permettant de les redéfinir (voire de les définir, cf.
 
 \begin{dbremark}{Modification d'expressions facilitée par la version
     \enquote{brouillon}}{}
-  On a vu \vref{sec-versions} que l'option |version=draft| permet de facilement
+  On a vu \vref{sec-versions} que l'option
+  \lstinline[deletekeywords={version}]|version=draft| permet de facilement
   retrouver les labels des expressions et atteindre le \File{\configurationfile}
   pour y modifier celles-ci.
 \end{dbremark}
 
 \subsubsection{Expressions standard}
-\label{sec-expressions-standard}
+\label{sec-expressions-standard}%
+\index{expression!redéfinition}%
 
 Le \vref{tab-expressions-standard} liste les expressions \LaTeX{} standard
 telles que traduites par la \yatCl{}. Il s'agit en fait des traductions en
@@ -834,28 +983,38 @@ de la syntaxe suivante.
   \label{tab-expressions-standard}
   \input{tableaux/expressions-standard}
 \end{table}
+%
 \begin{dbexample}{Redéfinition d'expressions du \Package{babel}}{}
-\begin{preamblecode}[title=Par exemple dans le \File{\configurationfile}]
+  \indexex{expression!redéfinition}%
+  \indexex{nom!résumé}%
+\begin{preamblecode}[title=Redéfinition des expressions pour les résumés]
 \addto\captionsfrench{\def\abstractname{Aperçu de notre travail}}
 \addto\captionsenglish{\def\abstractname{Overview of our work}}
 \end{preamblecode}
 \end{dbexample}
 
 En cas d'usage des packages \package{glossaries} et \package{biblatex}, la
-syntaxe précédente est inopérante avec les commandes |\glossaryname| et
-|\bibname| (ainsi que |\refname|). Dans ce cas, pour donner un \meta{titre
-  alternatif} :
+syntaxe précédente est inopérante avec les commandes
+\docAuxCommand{glossaryname} et \docAuxCommand{bibname} (ainsi que
+\docAuxCommand{refname}). Dans ce cas, pour donner un \meta{titre} (ou
+\meta{nom}) \meta{alternatif} :
 \begin{itemize}
-\item aux glossaire, liste d'acronymes et liste de symboles, on recourra
+\item%
+  \index{nom!glossaire}%
+  \index{nom!liste d'acronymes}%
+  \index{nom!liste de symboles}%
+  aux glossaire(s), liste d'acronymes et liste de symboles, on recourra
   à l'une ou l'autre des instructions suivantes :
-\begin{bodycode}
+\begin{bodycode}[listing options={deletekeywords={title}}]
 \printglossary[title="\meta{titre alternatif}"]
 \printglossaries[title="\meta{titre alternatif}"]
 \printacronyms[title="\meta{titre alternatif}"]
 \printsymbols[title="\meta{titre alternatif}"]
 \end{bodycode}
-\item à la bibliographie, on recourra à :
-\begin{bodycode}
+\item%
+  \index{nom!bibliographie}%
+  à la bibliographie, on recourra à :
+\begin{bodycode}[listing options={deletekeywords={title}}]
 \printbibliography[title="\meta{titre alternatif}"]
 \end{bodycode}
 \end{itemize}
@@ -866,28 +1025,39 @@ pourra être donné à la liste des listings, au moyen de:
 \renewcommand\lstlistingname{"\meta{titre alternatif}"}
 \end{preamblecode}
 
-\subsection{Nouveaux corps}\label{sec-nouveaux-corps}
+\subsection{Nouvelles corporations}\label{sec-nouveaux-corps}
+\index{corporation!non prédéfinie}%
+\index{expression!définition!corporation}%
 
 On a vu \vref{sec-jury} que des options des commandes définissant les
 directeurs de thèse et membres du jury permettent de spécifier si ceux-ci
-appartiennent aux corps \emph{prédéfinis} des professeurs ou des maîtres de
-conférences (\gls{hdr} ou pas) des universités et des directeurs de recherche
-ou des chargé(e)s de recherche (\gls{hdr} ou pas) du \gls{cnrs}. La clé
-\refKey{corps} suivante permet de spécifier de \emph{nouveaux} corps
-à \emph{définir} au moyen de la commande \refCom{expression}.
+appartiennent aux corporations \emph{prédéfinies} :
+\begin{itemize}
+\item des professeurs ou des maîtres de conférences (\glspl{hdrpeople} ou pas) des
+  universités ;
+\item des directeurs de recherche ou des chargé(e)s de recherche (\glspl{hdrpeople} ou
+  pas) du \gls{cnrs}.
+\end{itemize}
+La clé \refKey{corps} suivante permet de spécifier de \emph{nouvelles}
+corporations (ou nouveaux corps) à \emph{définir} au moyen de la commande
+\refCom{expression}.
 
-\begin{docKey}{corps}{=\meta{label}}{pas de
-    valeur par défaut, initialement vide}
+\begin{docKey}{corps}{=\meta{label}}{pas de valeur par défaut, initialement
+    vide}
+  \indexdef{expression!définition!corporation}%
   \changes{v0.99e}{2014-06-15}{Clé \protect\refAux{corporation} remplacée par
     (et alias de) la clé \protect\refKey{corps}}%
   %
-  L'option |corps=|\meta{label} permet de stipuler un \meta{corps en français}
-  et un \meta{corps en anglais} où \meta{label} identifie une expression listée
-  au \vref{tab-expressions-cles} ou à définir au moyen de la commande
-  \refCom{expression}.
+  L'option |corps=|\meta{label} permet de stipuler une \meta{corporation en
+    français} et une \meta{corporation en anglais} où \meta{label} identifie une
+  expression listée au \vref{tab-expressions-cles} ou à définir au moyen de la
+  commande \refCom{expression}.
 \end{docKey}
 
-\begin{dbexample}{Nouveau corps}{doctor}
+\begin{dbexample}{Nouvelle corporation}{doctor}
+  \indexex{expression!définition}%
+  \indexex{expression!non prédéfinie}%
+  \indexex{corporation!non prédéfinie}%
   Si on souhaite spécifier que certains membres du jury sont docteurs, il
   suffit de définir \aside{une seule fois} l'expression suivante de label (par
   exemple) |doctor| :
@@ -903,6 +1073,8 @@ ou des chargé(e)s de recherche (\gls{hdr} ou pas) du \gls{cnrs}. La clé
 \end{dbexample}
 
 \subsection{Nouveaux rôles}\label{sec-nouveaux-roles}
+\index{rôle!non prédéfini}%
+\index{expression!définition!rôle}%
 
 On a pu noter \vref{sec-jury} que des rôles, figurant automatiquement sur les
 pages de titre, sont attachés :
@@ -921,6 +1093,7 @@ La clé \refKey{role} suivante permet de spécifier de \emph{nouveaux} rôles
 
 \begin{docKey}{role}{=\meta{label}}{pas de valeur par défaut, initialement
     vide}
+  \indexdef{expression!définition!rôle}%
   \changes{v0.99f}{2014-07-11}{Nouvelle clé \protect\refKey{role} permettant de
     spécifier ou définir de nouveaux rôles pour les personnes}%
   %
@@ -929,7 +1102,7 @@ La clé \refKey{role} suivante permet de spécifier de \emph{nouveaux} rôles
   \vref{tab-expressions-cles} ou à définir au moyen de la commande
   \refCom{expression}.
 \end{docKey}
-
+\index{option!de \yatcl|)}
 
 \section{Packages chargés manuellement}
 \label{sec-options-de-classes}

@@ -13,11 +13,30 @@
   explicité \vref{sec-options}.}
 %
 \DeclareFixedFootnote{\versiontl}{L'année \enquote{\tlversion} est
-  éventuellement à remplacer par celle de la version de la \TeX{}~Live
+  éventuellement à remplacer par celle de la version de la \texlive
   effectivement utilisée.}
 %
-\DeclareFixedFootnote{\selonlangue}{Selon que la langue principale de la
-  thèse est le français ou l'anglais.}
+% Fixed footnote « Selon la langue »
+\newcommand{\selonlanguebase}{%
+  Selon que la langue principale, ou la langue en cours, de la thèse est le
+  français ou l'anglais.%
+}%
+\DeclareFixedFootnote{\selonlangueshort}{%
+  \selonlanguebase%
+}%
+\DeclareFixedFootnote{\selonlangue}{%
+  \selonlanguebase (cf. \vref{sec-expressions-cles} pour plus de précisions).%
+}%
+% \newcommand{\selonlangue}{%
+%   \@ifstar{\@tempswatrue\csuse{YAD@starnostar@selonlangue}}{\@tempswafalse\csuse{YAD@starnostar@selonlangue}}%
+% }%
+% \newcommand{\YAD@starnostar@selonlangue}[1]{%
+%   \if@tempswa%
+%   \selonlangueshort%
+%   \else%
+%   \selonlanguelong%
+%   \fi%
+% }%
 %
 \DeclareFixedFootnote{\nofrontmatter}{Au contraire, la commande analogue
   \protect\docAuxCommand{frontmatter} pour les \protect\glspl{liminaire} ne
@@ -28,8 +47,7 @@
   \emph{employés dans le texte}.}
 %
 \DeclareFixedFootnote{\redefexprcle}{Une autre manière de modifier cet intitulé
-  est de recourir à la commande \protect\refCom{expression} pour redéfinir
-  l'expression qui lui est attachée (cf. \vref{sec-expressions-standard}).}
+  est détaillé \vref{sec-expressions-standard}.}
 %
 \DeclareFixedFootnote{\hauteurpage}{Dans la limite de la hauteur de page.}
 %
@@ -70,13 +88,8 @@
 %
 \DeclareFixedFootnote{\noframe}{Sans le cadre.}
 %
-%
-\iffalse
+
 %%% Local Variables:
 %%% mode: latex
-%%% eval: (latex-mode)
-%%% ispell-local-dictionary: "fr_FR"
-%%% TeX-engine: xetex
-%%% TeX-master: "../yathesis"
+%%% TeX-master: "../yathesis-fr"
 %%% End:
-\fi

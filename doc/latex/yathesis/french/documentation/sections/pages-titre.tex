@@ -1,3 +1,8 @@
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../test"
+%%% End:
 \chapter{Pages de titre}\label{cha-pages-de-titre}
 
 Ce chapitre documente la commande \refCom{maketitle} permettant de
@@ -12,13 +17,15 @@ les pages de titre de la thèse.
   \begin{enumerate}
   \item
     \begin{enumerate}
-    \item une page de 1\iere{} de couverture\footnote{Sauf contre-ordre,
-        cf. clé \refKey{nofrontcover}.} ;
+    \item une page de 1\iere{} de couverture%
+      \index{couverture}%
+      \index{première de couverture}%
+      \footnote{Sauf contre-ordre, cf. clé \refKey{nofrontcover}.} ;
     \item une page de titre.
     \end{enumerate}
     Ces deux pages sont composées dans la langue principale et
     sont identiques\footnote{À ceci près que le numéro d'ordre de la thèse ne figure
-      que sur la page de 1\iere{} de couverture.} ;
+      que sur la page de 1\iere{} de couverture\index{couverture}.} ;
   \item \emph{automatiquement}\footnote{Sans qu'il soit nécessaire de faire
       figurer une 2\ieme{} occurrence de la commande \refCom{maketitle}.} une
     seconde page de titre \emph{si} \aside{et seulement si} l'une au moins des
@@ -39,9 +46,12 @@ personnaliser les pages de titre au moyen des clés \refKey{nofrontcover} et
 
 \begin{docKey}{nofrontcover}{=\docValue{true}\textbar\docValue{false}}{par défaut
     \docValue{true}, initialement \docValue{false}}%
-  \index{titre!page de couverture!suppression}%
-  Cette clé permet de désactiver la production de la page de 1\iere{} de
-  couverture.
+  \index{couverture}%
+  \index{première de couverture!suppression}%
+  \index{titre!première de couverture}%
+  \index{titre!première de couverture!suppression}%
+  \index{suppression!première de couverture}%
+  Cette clé permet de désactiver la production de la 1\iere{} de couverture.
 \end{docKey}
 
 {%
@@ -51,6 +61,9 @@ personnaliser les pages de titre au moyen des clés \refKey{nofrontcover} et
     permettant de personnaliser (p. ex. supprimer) le cadre autour du
     titre}%
   \index{titre!cadre entourant}%
+  \index{cadre!entourant le titre!supression}%
+  \index{cadre!entourant le titre!forme}%
+  \index{suppression!cadre entourant le titre}%
   %
   Cette clé permet de personnaliser le cadre figurant par défaut autour du
   titre de la thèse sur les pages de titre :
@@ -60,8 +73,7 @@ personnaliser les pages de titre au moyen des clés \refKey{nofrontcover} et
   \item sa valeur \docValue{ovalbox} produit un cadre dont les sommets sont
     arrondis ;
   \item sa valeur \docValue{none} permet de supprimer ce cadre. L'affichage des
-    mentions \enquote{Titre de la thèse} et \foreignquote{english}{Thesis
-      Title} est alors désactivé ;
+    mentions \translateexpression{thesistitle} est alors désactivé ;
   \item toute \meta{autre} valeur lui étant passée doit être :
     \begin{enumerate}
     \item une liste de clés/valeurs propres à l'environnement
@@ -85,6 +97,7 @@ personnaliser les pages de titre au moyen des clés \refKey{nofrontcover} et
 \end{dbexample}
 
 \begin{dbexample}{Cadre \enquote{fantaisie} autour du titre de la thèse}{}
+  \index{cadre!entourant le titre!fantaisie}%
   Cet exemple, certainement déconseillé, montre comment exploiter les
   fonctionnalités du \Package{tcolorbox} pour obtenir un cadre
   \enquote{fantaisie} autour du titre de la thèse.%
@@ -106,19 +119,44 @@ Avec les données caractéristiques suivantes, la commande
       tableau indépendant de celui des membres du jury sur les pages de
       titre}%
     %
-    une page de 1\iere{} de couverture illustrée \vref{fig-maketitle-fr} ;
+    une page de 1\iere{} de couverture\index{première de couverture} illustrée
+    \vref{fig-maketitle-fr} ;
   \item une page de titre ;
   \end{enumerate}
 \item en langue secondaire (ici l'anglais), une page de titre illustrée
   \vref{fig-maketitle-en}.
 \end{enumerate}
 %
+\begin{dbremark}{Expressions clés émaillant les pages de titres}{}
+  Cet exemple montre que les pages de titres (et, plus généralement, le mémoire
+  de thèse) sont émaillées d'expressions, par exemple :
+  \begin{itemize}
+  \item \translateexpression*{doctoralschool} ;
+  \item \translateexpression*{committeemembers} ;
+  \end{itemize}
+  que la \yatCl{} insère de façon automatique. La \vref{sec-expressions-cles}
+  explique comment, au besoin, redéfinir ces expressions.
+\end{dbremark}
+%
 \begin{dbexample}{Préparation et production des pages de titre}{}
 %
   \NoAutoSpacing%
   \lstset{morecomment=[is]{\%}{\^^M}}%
   \preamblesample[configuration/characteristics]{%
+    deletekeywords={author,title,subtitle,date,url},%
     deletekeywords={[2]title},%
+    deletekeywords={[5]%
+      academicfield,%
+      speciality,%
+      institute,%
+      coinstitute,%
+      doctoralschool,%
+      supervisor,%
+      cosupervisor,%
+      comonitor,%
+      committeepresident,%
+      ordernumber%
+    },%
     rangeendsuffix={\^^M},%
     linerange={%
       author-42]
@@ -133,13 +171,14 @@ Avec les données caractéristiques suivantes, la commande
 
 \begin{landscape}
   \begin{figure}[htb]
-    \index{titre!exemples}%
+    \indexex{titre}%
+    \indexex{Première de couverture}%
     \centering
     \begin{subfigure}[b]{.45\linewidth}
       \centering%
       \fbox{\includegraphics[page=1,width=\linewidth-2\fboxsep-2\fboxrule]{../exemples/specimen/en-arborescence/these}}
       %\screenshot[1]{fr-title}
-      \caption{Page de première de couverture en français}
+      \caption{Page de 1\iere{} de couverture en français}
       \label{fig-maketitle-fr}
     \end{subfigure}%
     \hspace{\stretch{1}}%
@@ -150,7 +189,7 @@ Avec les données caractéristiques suivantes, la commande
       \caption{Page de titre en anglais}
       \label{fig-maketitle-en}
     \end{subfigure}%
-    \caption{Pages de première de couverture et de titre}
+    \caption{Pages de 1\iere{} de couverture et de titre}
     \label{fig-maketitle}
   \end{figure}
 \end{landscape}

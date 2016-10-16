@@ -2,6 +2,7 @@
 \label{cha-recomm-et-astuc}
 
 \section{Images}
+\index{image}
 
 L'insertion d'images se fait au moyen des commandes du classique
 \Package{graphicx} (automatiquement chargé par la \yatCl{}). On notera qu'il
@@ -31,6 +32,7 @@ est conseillé, selon qu'il s'agit d'images dont :
 \end{description}
 
 \section{Acronymes}\label{acronymes}
+\index{acronyme}
 
 On a vu \vref{rq-acronymes} que si un institut (par exemple) doit figurer
 sous la forme d'un acronyme, on aura intérêt à ne pas le saisir tel
@@ -47,8 +49,8 @@ procédure.
 \begin{preamblecode}
 \newacronym{ulco}{ULCO}{université du Littoral Côte d'Opale}
 \end{preamblecode}
-on peut recourir, non pas à |\institute{ULCO}|, mais à :
-\begin{preamblecode}
+on peut recourir, non pas à \lstinline[deletekeywords={[5]institute}]|\institute{ULCO}|, mais à :
+\begin{preamblecode}[listing options={deletekeywords={[5]institute}}]
 \institute{\acrshort*{ulco}}
 \end{preamblecode}
 \end{dbexample}
@@ -59,7 +61,7 @@ on peut recourir, non pas à |\institute{ULCO}|, mais à :
   les instituts (commandes \refCom{institute} et \refCom{coinstitute}) ou les
   affiliations des membres du jury (clé \refKey{affiliation}), les élisions
   automatiques de la clause de non-responsabilité ou des expressions
-  contextuelles séparant corps et affiliations ne donneront pas toujours le
+  contextuelles séparant corporations et affiliations ne donneront pas toujours le
   résultat escompté (en français notamment). On pourra alors le cas échéant
   faire usage :
   \begin{itemize}
@@ -71,6 +73,8 @@ on peut recourir, non pas à |\institute{ULCO}|, mais à :
 
 \section{Scission du mémoire en fichiers maître et esclaves}
 \label{sec-repart-du-memo}
+\index{fichier!maître}
+\index{fichier!esclave}
 
 La scission du mémoire de thèse en différents fichiers maître et esclaves,
 hautement recommandée, suppose de :
@@ -111,6 +115,7 @@ sous-répertoire, nommé \folder{corps}, situé au même niveau que le fichier
 maître\footnote{C'est-à-dire à la racine du répertoire contenant le fichier
   maître.}.
 \begin{dbexample}{Structure d'une thèse en une seule partie}{sans-parties}
+  \indexex{fichier!esclave}
 \begin{bodycode}
 \include{corps/"\meta{introduction}"}
 \include{corps/"\meta{premier chapitre}"}
@@ -122,7 +127,8 @@ maître\footnote{C'est-à-dire à la racine du répertoire contenant le fichier
 %
 \begin{dbexample}{Structure d'une thèse en deux parties}{avec-parties}
   \lstset{keywordstyle=[3]\color{texcs}}%
-\begin{bodycode}
+  \indexex{fichier!esclave}
+\begin{bodycode}[listing options={deletekeywords={part},deletekeywords={[3]part}}]
 \include{corps/"\meta{introduction générale}"}
 %
 \part{"\meta{titre de la partie 1}"}
@@ -148,19 +154,14 @@ suit ce type d'organisation.
 
 \section{Automatisation des compilations avec \program{latexmk}}
 \label{sec-autom-des-comp}
+\index{compilation!automatisée}
 
 Le programme \program{latexmk} qui permet d'automatiser le processus de
 compilation complète de la thèse.
 
 [TODO]
 
-%
-\iffalse
 %%% Local Variables:
 %%% mode: latex
-%%% eval: (latex-mode)
-%%% ispell-local-dictionary: "fr_FR"
-%%% TeX-engine: xetex
-%%% TeX-master: "../yathesis.dtx"
+%%% TeX-master: "../yathesis-fr"
 %%% End:
-\fi

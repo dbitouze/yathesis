@@ -1,4 +1,7 @@
 \chapter{Partie liminaire}\label{cha-liminaires}
+\index{liminaire}%
+\indexsee{préliminaire}{liminaire}%
+\index{partie!liminaire}%
 
 Cette section détaille les commandes permettant de préparer et produire les
 \glspl{liminaire}, à savoir :
@@ -36,7 +39,8 @@ Cette section détaille les commandes permettant de préparer et produire les
 \end{dbremark}
 
 \section{Clause de non-responsabilité}
-\label{sec-clause-de-non}
+\label{sec-clause-de-non}%
+\index{clause de non-responsabilité}%
 
 \changes{v0.99d}{2014-06-08}{Élision \enquote{automatique} des articles définis
   précédant \meta{institut} et \meta{co-institut} dans la clause de
@@ -72,6 +76,7 @@ La page dédiée à la clause de non-responsabilité est produite par la command
 
 \begin{dbexample}{Production de la page dédiée à la clause de
     non-responsabilité}{}
+  \indexex{clause de non-responsabilité}%
   \NoAutoSpacing%
 %
 \bodysample{rangesuffix=\^^M,linerange={makedisclaimer}}{}%
@@ -103,6 +108,7 @@ par défaut si elle ne convient pas, on pourra recourir à la commande
 \refCom{disclaimer}.
 
 \begin{docCommand}{disclaimer}{\marg{clause}}
+  \index{clause de non-responsabilité!modification}%
   Cette commande, à placer avant \refCom{makedisclaimer}, permet de redéfinir
   le contenu par défaut de la \meta{clause} de non-responsabilité.
 \end{docCommand}
@@ -110,26 +116,34 @@ par défaut si elle ne convient pas, on pourra recourir à la commande
 \section{Mots clés}\label{sec-mots-cles}
 
 \begin{docCommand}{makekeywords}{}
+  \indexdef{mot clé}%
   Cette commande produit une page où figurent, seuls et centrés
   verticalement, les mots clés de la thèse stipulés au moyen de la commande
   \refCom{keywords}.
 \end{docCommand}
 %
 \begin{docCommand}{makekeywords*}{}
+  \indexdef{mot clé}%
   Cette commande a le même effet que la commande
   \refCom{makekeywords} sauf que les mots clés sont alignés sur le haut de la
   page et non centrés verticalement.
 \end{docCommand}
 
 \begin{dbexample}{Préparation et production de la page dédiée aux mots clés}{}
+  \indexex{mot clé}%
   Les codes suivants produisent la page illustrée \vref{fig-makekeywords}.
-  \preamblesample[configuration/characteristics]{linerange={keywords-laugh}}{title=Préparation}
+  \preamblesample[configuration/characteristics]{%
+    linerange={keywords-laugh},%
+    deletekeywords={[1]{keywords}},
+    deletekeywords={[5]{keywords}}%
+  }{title=Préparation}
 %
   \bodysample{rangesuffix=\^^M,linerange={makekeywords}}{title=Production}
 \end{dbexample}
 
 \begin{figure}[htbp]
-  \centering \screenshot{keywords}%
+  \centering
+  \screenshot{keywords}%
   \caption{Page dédiée aux mots clés}
   \label{fig-makekeywords}
 \end{figure}
@@ -138,6 +152,7 @@ par défaut si elle ne convient pas, on pourra recourir à la commande
 \label{sec-laboratoires}
 
 \begin{docCommand}{makelaboratory}{}
+  \indexdef{laboratoire}%
   Cette commande produit une page où figure, seul(s) et centré(s)
   verticalement, le ou les laboratoires où a été préparée la thèse, stipulés au
   moyen de la commande \refCom{laboratory} et éventuellement précisés au moyen
@@ -146,21 +161,27 @@ par défaut si elle ne convient pas, on pourra recourir à la commande
 \end{docCommand}
 %
 \begin{docCommand}{makelaboratory*}{}
+  \index{laboratoire}%
   Cette commande a le même effet que la commande \refCom{makelaboratory} sauf
   que le ou les laboratoires sont alignés sur le haut de la page et non centrés
   verticalement.
 \end{docCommand}
 
 \begin{dbexample}{Préparation et production de la page dédiée au(x) laboratoire(s)}{}
+  \indexex{laboratoire}%
   Les codes suivants produisent la page illustrée \vref{fig-makelaboratory}.
   \NoAutoSpacing%
-  \preamblesample[configuration/characteristics]{linerange={laboratory-Liouville}}{title=Préparation}
+  \preamblesample[configuration/characteristics]{%
+    deletekeywords={url},%
+    linerange={laboratory-Liouville}%
+  }{title=Préparation}
 %
   \bodysample{rangesuffix=\^^M,linerange={makelaboratory}}{title=Production}
 \end{dbexample}
 
 \begin{figure}[htbp]
-  \centering \screenshot{laboratory}
+  \centering
+  \screenshot{laboratory}
   \caption{Page dédiée au(x) laboratoire(s)}
   \label{fig-makelaboratory}
 \end{figure}
@@ -168,23 +189,27 @@ par défaut si elle ne convient pas, on pourra recourir à la commande
 \section{Dédicaces}
 
 \begin{docCommand}{dedication}{\marg{dédicace}}
+  \indexdef{dédicace}%
   Cette commande, à employer autant de fois que
   souhaité\hauteurpage{}, permet de préparer une dédicace.
 \end{docCommand}
 
 \begin{docCommand}{makededications}{}
+  \index{dédicace}%
   Cette commande produit une page où figurent, seules, alignées à droite et
   centrées verticalement, la ou les dédicaces stipulées au moyen de la commande
   \refCom{dedication}.
 \end{docCommand}
 %
 \begin{docCommand}{makededications*}{}
+  \index{dédicace}%
   Cette commande a le même effet que la commande \refCom{makededications} sauf
   que la ou les dédicaces sont alignées sur le haut de la page et non centrées
   verticalement.
 \end{docCommand}
 
 \begin{dbexample}{Préparation et production de la page dédiée aux dédicaces}{}
+  \indexex{dédicace}%
   \NoAutoSpacing%
   \preamblesample[liminaires/dedicaces]{linerange={dedication-{co-aimé\ !}}}{title=Préparation}
 %
@@ -193,7 +218,8 @@ par défaut si elle ne convient pas, on pourra recourir à la commande
 \end{dbexample}
 
 \begin{figure}[htbp]
-  \centering \screenshot{dedications}%
+  \centering
+  \screenshot{dedications}%
   \caption{Page de dédicaces}
   \label{fig-dedicationspage}
 \end{figure}
@@ -201,9 +227,10 @@ par défaut si elle ne convient pas, on pourra recourir à la commande
 \section{Épigraphes liminaires}
 
 \begin{docCommand}{frontepigraph}{\oarg{langue}\marg{épigraphe}\marg{auteur}}
-  Cette commande, à employer autant de fois que
-  souhaité\hauteurpage{}, permet de préparer une épigraphe destinée à
-  apparaître sur une \gls{liminaire} dédiée.
+  \indexdef{épigraphe}%
+  Cette commande, à employer autant de fois que souhaité\hauteurpage{}, permet
+  de préparer une épigraphe destinée à apparaître sur une \gls{liminaire}
+  dédiée.
 
   Si l'épigraphe est exprimée dans une \meta{langue} \aside{connue du
     \Package{babel}} autre que la langue principale du document, on peut le
@@ -214,12 +241,14 @@ par défaut si elle ne convient pas, on pourra recourir à la commande
 \end{docCommand}
 
 \begin{docCommand}{makefrontepigraphs}{}
+  \index{épigraphe}%
   Cette commande produit une page où figurent, seules, alignées à droite et
   centrées verticalement, la ou les épigraphes stipulées au moyen de la
   commande \refCom{frontepigraph}.
 \end{docCommand}
 %
 \begin{docCommand}{makefrontepigraphs*}{}
+  \index{épigraphe}%
   Cette commande a le même effet que la commande \refCom{makefrontepigraphs}
   sauf que la ou les épigraphes sont alignées sur le haut de la page et non
   centrées verticalement.
@@ -227,6 +256,7 @@ par défaut si elle ne convient pas, on pourra recourir à la commande
 
 \begin{dbexample}{Préparation et production de la page dédiée aux épigraphes
     liminaires}{}
+  \indexex{épigraphe}%
   \NoAutoSpacing%
   Les codes suivants produisent la page illustrée \vref{fig-epigraphspage}.
   \preamblesample[liminaires/epigraphes]{linerange={frontepigraph-Einstein}}{title=Préparation}
@@ -235,7 +265,8 @@ par défaut si elle ne convient pas, on pourra recourir à la commande
 \end{dbexample}
 
 \begin{figure}[htbp]
-  \centering \screenshot{frontepigraphs}
+  \centering
+  \screenshot{frontepigraphs}
   \caption{Page d'épigraphes liminaires}
   \label{fig-epigraphspage}
 \end{figure}
@@ -249,6 +280,11 @@ par défaut si elle ne convient pas, on pourra recourir à la commande
 
 \section{Avertissement, remerciements, résumé substantiel, préface,
   avant-propos, etc.}
+\index{avertissement}%
+\index{remerciements}%
+\index{résumé}%
+\index{préface}%
+\index{avant-propos}%
 
 Les \glspl{liminaire} d'un mémoire de thèse peuvent contenir un avertissement,
 des remerciements, un résumé substantiel en français
@@ -257,6 +293,7 @@ des remerciements, un résumé substantiel en français
 
 \begin{dbwarning}{Chapitres \enquote{ordinaires} des \glspl{liminaire}
     automatiquement \emph{non} numérotés}{}
+  \index{chapitre!non numéroté}%
   Les chapitres \enquote{ordinaires} des \glspl{liminaire} doivent être
   introduits au moyen de la commande usuelle \docAuxCommand{chapter}, sous sa
   forme \emph{non} étoilée : puisqu'ils seront situés dans la partie liminaire
@@ -276,7 +313,10 @@ Une page contenant de courts résumés en français et en anglais est requise.
 L'environnement \refEnv{abstract} suivant permet de préparer une telle
 page.
 %
-\begin{docEnvironment}[doclang/environment content=résumé,doc description=\mandatory]{abstract}{\oarg{intitulé alternatif}}
+\begin{docEnvironment}[doclang/environment content=résumé,doc description=\mandatory]{abstract}{\oarg{titre alternatif}}
+  \indexdef{résumé}%
+  \index{résumé!en français}%
+  \index{résumé!en anglais}%
   Cet environnement, destiné à recevoir le ou les résumés de la thèse, est
   conçu pour être employé une ou deux fois :
   \begin{enumerate}
@@ -292,12 +332,15 @@ page.
   \item sur la 4\ieme{} de couverture si la commande \refCom{makebackcover} est
     employée.
   \end{itemize}
-  Ils sont respectivement intitulés \enquote{Résumé} ou
-  \foreignquote{english}{Abstract}\selonlangue{} mais l'argument optionnel
-  permet de spécifier un \meta{intitulé alternatif}\redefexprcle.
+  Ils \index{nom!résumé}%
+  sont respectivement intitulés \enquote{\abstractname} ou
+  \enquote{\selectlanguage{english}\abstractname}\selonlangueshort{} mais
+  l'argument optionnel permet de spécifier un \meta{titre} (ou \meta{nom}
+    \meta{alternatif}\redefexprcle.
 \end{docEnvironment}
 
 \begin{docCommand}[doc description=\mandatory]{makeabstract}{}
+  \index{résumé}%
   Cette commande produit une page dédiée aux résumés en y faisant
   apparaître automatiquement :
   \begin{enumerate}
@@ -317,6 +360,7 @@ page.
 \end{docCommand}
 
 \begin{dbexample}{Préparation et production de la page dédiée aux résumés}{}
+  \indexex{résumé}%
   Les codes suivants produisent la page illustrée \vref{fig-resumes-succincts}.
 % \preamblesample{%
 %   includerangemarker=false,%
@@ -365,6 +409,9 @@ page.
 
 \section{Liste d'acronymes, liste de symboles,
   glossaire}\label{sec-sigl-gloss-nomencl}
+\index{acronyme!liste d'---s}%
+\index{symbole!liste de ---s}%
+\index{glossaire}%
 
 \begin{dbremark*}{Section à passer en 1\iere{} lecture}
   Cette section est à passer en 1\iere{} lecture si on ne compte faire figurer
@@ -408,6 +455,7 @@ la \yatCl. Cependant, celle-ci fournit des fonctionnalités propres au
 % \end{enumerate}
 
 \begin{docCommand}{newglssymbol}{\oarg{classement}\marg{label}\marg{symbole}\marg{nom}\marg{description}}
+  \indexdef{symbole}%
   Cette commande définit un symbole au moyen :
   \begin{itemize}
   \item de son \meta{label}\footnote{Ce \meta{label}, qui identifie le symbole de
@@ -434,6 +482,7 @@ la \yatCl. Cependant, celle-ci fournit des fonctionnalités propres au
 \end{dbwarning}
 
 \begin{docCommand}{printsymbols}{\oarg{options}}
+  \index{symbole!liste de ---s}%
   Cette commande, fournie par le \Package{glossaries}, produit la liste des
   symboles saisies (par exemple) au moyen de la \refCom{newglssymbol}. Mais
   elle a été légèrement redéfinie, sa clé \refKey{style} ayant pour valeur par
@@ -448,6 +497,7 @@ la \yatCl. Cependant, celle-ci fournit des fonctionnalités propres au
 \end{docCommand}
 
 \begin{dbexample}{Définitions et liste des symboles}{}
+  \indexex{symbole}%
   Le code suivant définit certains symboles.
   \preamblesample[auxiliaires/symboles.tex]{}{}%
   Le code suivant produit la liste de ces symboles \aside*{composée avec le
@@ -512,13 +562,14 @@ des acronymes\footnote{Les commandes \docAuxCommand{printglossary} et
 
 \section{Sommaire et/ou table des matières}\label{sec-table-des-matieres}
 
-
 La \yatCl{} redéfinit la commande \refCom{tableofcontents} habituelle de
 création des tables des matières \enquote{globales}\footnote{Par opposition aux
-  tables des matières locales, cf. \vref{sec-localtoc}.} pour permettre de
-facilement en spécifier la profondeur et en modifier le nom.
+  tables des matières locales\index{table des matières!locale},
+  cf. \vref{sec-localtoc}.} pour permettre de facilement en spécifier la
+profondeur et en modifier le nom.
 
 \begin{docCommand}[doc description=\mandatory]{tableofcontents}{\oarg{options}}
+  \indexdef{table des matières}%
   Cette commande produit une table des matières dont le \enquote{niveau de
     profondeur} par défaut est celui des sous-sections : les intitulés des
   commandes de structuration qui y figurent sont (seulement) ceux des parties
@@ -534,6 +585,8 @@ les clés disponibles sont les deux suivantes.
     %
   \begin{docKey}{depth}{=\docValue{part}\textbar\docValue{chapter}\textbar\docValue{section}\textbar\docValue{subsection}\textbar\docValue{subsubsection}\textbar\docValue{paragraph}\textbar\docValue{subparagraph}}{pas
       de valeur par défaut, initialement \docValue{subsection}}
+    \index{table des matières!globale!profondeur}%
+    \index{profondeur!table des matières!globale}%
     Cette clé permet de modifier le \enquote{niveau de profondeur} de la table
     des matières, respectivement jusqu'aux : parties, chapitres, sections,
     sous-sections, sous-sous-sections, paragraphes, sous-paragraphes.
@@ -542,13 +595,17 @@ les clés disponibles sont les deux suivantes.
 %
 \begin{docKey}{name}{=\meta{nom alternatif}}{pas de valeur par défaut,
     initialement \docAuxCommand{contentsname}}
+  \index{table des matières!globale!nom}%
+  \index{table des matières!globale!titre}%
+  \index{nom!table des matières}%
   Par défaut, le nom de la table des matières est \docAuxCommand{contentsname},
-  c'est-à-dire \enquote{Table des matières} ou
-  \foreignquote{english}{Contents}\selonlangue{}. Cette clé permet de spécifier
-  un \meta{nom alternatif}.
+  c'est-à-dire \enquote{\contentsname} ou
+  \enquote{\selectlanguage{english}\contentsname}\selonlangueshort{}. Cette clé
+  permet de spécifier un \meta{nom alternatif}\redefexprcle.
 \end{docKey}
 
 \begin{dbremark}{Tables des matières multiples}{}
+  \index{table des matières!globale!multiple}%
   Si la table des matières est longue, il est conseillé de la placer en fin de
   document mais de faire alors figurer, en \glspl{liminaire}, un sommaire
   c'est-à-dire par une table des matières allégée.
@@ -560,6 +617,7 @@ les clés disponibles sont les deux suivantes.
 \end{dbremark}
 
 \begin{dbexample}{Sommaire et table des matières}{sommaire-table-des-matieres}
+  \indexex{table des matières}%
   Pour faire figurer, dans un même document :
   \begin{enumerate}
   \item un sommaire :
@@ -570,9 +628,18 @@ les clés disponibles sont les deux suivantes.
   \item la table des matières ;
   \end{enumerate}
   on insérera respectivement :
-  \bodysample{rangeendsuffix=\],linerange={tableofcontents-Sommaire}}{} et :
-  \bodysample{rangesuffix=\^^M,linerange={tableofcontents}}{} La
-  \vref{fig-tableofcontentsto-tableofcontents} illustre ce code.
+  %
+  \bodysample{%
+    rangeendsuffix=\],%
+    deletekeywords={chapter},%
+    linerange={tableofcontents-Sommaire},
+  }{}
+  %
+  et :
+  %
+  \bodysample{rangesuffix=\^^M,linerange={tableofcontents}}{}
+  %
+  La \vref{fig-tableofcontentsto-tableofcontents} illustre ce code.
 \end{dbexample}
 
 \afterpage{%
@@ -600,6 +667,13 @@ les clés disponibles sont les deux suivantes.
 }
 
 \section{Tables et listes et usuelles}
+\index{figure!table des ---s}%
+\index{table des figures}%
+\index{liste des tableaux}%
+\indexsee{table des tableaux}{liste des tableaux}%
+\index{tableau!liste des ---x}%
+\index{table des listings}%
+\index{listing informatique!table des ---s}%
 
 Les commandes usuelles |\listoftables| et |\listoffigures| produisent les
 listes respectivement des tableaux et des figures.
@@ -609,3 +683,8 @@ informatiques au moyen de la commande |\lstlistoflistings| du
 \Package*{listings}.
 %
 Nous n'illustrons pas ces commandes, classiques.
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../yathesis-fr"
+%%% End:

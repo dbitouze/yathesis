@@ -1,16 +1,20 @@
 \chapter{Canevas et spécimens de thèse}\label{cha-specimen-canevas}%
+\index{canevas}%
+\index{spécimen}%
 
 Un canevas et un spécimen de mémoires de thèse créés avec la \yatCl sont
-fournis, chacun en deux versions selon la façon dont le source \file{.tex} est
-organisé :
+fournis, chacun en deux versions illustrant chacune une façon d'organiser le
+source \file{.tex} du mémoire :
 \begin{description}
-\item[une \enquote{à plat} :] le source est tout entier dans un unique fichier,
+\item[\enquote{à plat} :] le source est tout entier dans un unique fichier,
   situé dans le même dossier que les fichiers annexes (bibliographie et
   images) ;
-\item[une \enquote{en arborescence} :] le source est scindé en fichiers maître
-  et esclaves\footnote{Comme cela est en général recommandé,
-    cf. \vref{sec-repart-du-memo}.}, situés (ainsi que l'ensemble des fichiers
-  annexes) dans différents (sous-)dossiers.
+\item[\enquote{en arborescence} :]%
+  \index{fichier!maître}%
+  \index{fichier!esclave}%
+  le source est scindé en fichiers maître et esclaves\footnote{Comme cela est en
+    général recommandé, cf. \vref{sec-repart-du-memo}.}, situés (ainsi que
+  l'ensemble des fichiers annexes) dans différents (sous-)dossiers.
 \end{description}
 Les deux canevas et deux spécimens ainsi proposés ont pour but :
 \begin{itemize}
@@ -26,11 +30,10 @@ documentation\footnote{Disponible à l'adresse
 spécimens par le biais d'une archive \gls{zip}, normalement accessible par
 simple clic sur le lien suivant :
 \textattachfile{../exemples/canevas-specimen.zip}{\file{canevas-specimen.zip}}\footnote{En
-  tous cas avec les afficheurs \pdf:{} \program{Evince} sous Linux et
+  tous cas avec les afficheurs \pdf:{} \program{Evince} sous \linux et
   \href{http://www.sumatrapdfreader.org/free-pdf-reader-fr.html}{\program{SumatraPDF}}
-  sous Windows.}. L'extraction
-de cette archive fournit un dossier nommé \folder{exemples} dont l'arborescence
-est la suivante :
+  sous \windows.}. L'extraction de cette archive fournit un dossier nommé
+\folder{exemples} dont l'arborescence est la suivante :
 
 \setlength{\DTbaselineskip}{15pt}
 \begin{tcolorbox}
@@ -79,14 +82,14 @@ est la suivante :
 \changes{v0.99a}{2014-06-02}{Spécimens et canevas enrichis}%
 \begin{comment}
   \begin{itemize}
-  \item pour la distribution \TeX{} Live\versiontl, sur les systèmes :
+  \item pour la distribution \texlive\versiontl, sur les systèmes :
     \begin{itemize}
-    \item Linux et Mac OS X :
+    \item \linux et \macos{} :
       \href{./.}{\folder{\unixtldirectory\tldistdirectory\jobdocdirectory/}} ;
-    \item Windows :
+    \item \windows{} :
       \href{./.}{\folder{\wintldirectory\tldistdirectory\jobdocdirectory/}} ;
     \end{itemize}
-  \item pour la distribution MiK\TeX{} : \folder{\miktexdistdirectory}.
+  \item pour la distribution \miktex : \folder{\miktexdistdirectory}.
   \end{itemize}
 \end{comment}
 
@@ -124,6 +127,7 @@ les données ont été vidées : pour les exploiter, il suffit donc de remplir l
 
 \subsection{Canevas \enquote{à plat}}
 \label{sec-canevas-a-plat}
+\index{canevas!à plat}%
 
 Le dossier (\folder{canevas/a-plat}) de ce canevas ne contient que trois fichiers :
 \begin{enumerate}
@@ -136,6 +140,9 @@ Le dossier (\folder{canevas/a-plat}) de ce canevas ne contient que trois fichier
 
 \subsection{Canevas \enquote{en arborescence}}
 \label{sec-canevas-arborescence}
+\index{canevas!en arborescence}%
+\index{fichier!maître}%
+\index{fichier!esclave}%
 
 Le dossier (\folder{canevas/en-arborescence}) de ce canevas contient les fichiers :
 \begin{enumerate}
@@ -154,6 +161,7 @@ mettent en évidence l'ensemble des possibilités offertes par la \yatCl{}.
 
 \subsection{Spécimen \enquote{à plat}}
 \label{sec-specimen-a-plat}
+\index{spécimen!à plat}%
 
 Le dossier (\folder{specimen/a-plat}) de ce spécimen contient les fichiers :
 \begin{enumerate}
@@ -170,6 +178,9 @@ Le dossier (\folder{specimen/a-plat}) de ce spécimen contient les fichiers :
 
 \subsection{Spécimen \enquote{en arborescence}}
 \label{sec-specimen-arborescence}
+\index{spécimen!en arborescence}%
+\index{fichier!maître}%
+\index{fichier!esclave}%
 
 Le dossier (\folder{specimen/en-arborescence}) de ce spécimen contient les
 fichiers :
@@ -180,12 +191,7 @@ fichiers :
 
 [TODO]
 
-%
-\iffalse
 %%% Local Variables:
 %%% mode: latex
-%%% eval: (latex-mode)
-%%% ispell-local-dictionary: "fr_FR"
 %%% TeX-master: "../yathesis-fr"
 %%% End:
-\fi

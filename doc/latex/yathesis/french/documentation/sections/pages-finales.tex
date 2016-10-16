@@ -1,4 +1,5 @@
 \chapter{Partie finale}\label{cha-pages-finales}
+\index{partie!finale}%
 
 Ce chapitre indique comment produire les pages finales de la thèse,
 à savoir :
@@ -7,10 +8,11 @@ Ce chapitre indique comment produire les pages finales de la thèse,
   termes du glossaire ;
 \item l'éventuel index;
 \item la table des matières, en cas de sommaire en \glspl{liminaire};
-\item la quatrième de couverture (le dos de la thèse).
+\item la 4\ieme{} de couverture (le dos de la thèse).
 \end{enumerate}
 
 \begin{docCommand}{backmatter}{}
+  \indexdef{partie!finale}%
   Les éventuelles pages finales de la thèse doivent être manuellement
   introduites au moyen de la commande usuelle
   \docAuxCommand{backmatter}\footnote{Cette commande n'est pas obligatoire en
@@ -19,12 +21,14 @@ Ce chapitre indique comment produire les pages finales de la thèse,
 \end{docCommand}
 
 \section{Glossaire}
+\index{glossaire}%
 
 Les commandes de production du glossaire (\docAuxCommand{printglossary}) ou
 des glossaires (\docAuxCommand{printglossaries}) sont détaillées et illustrées
 \vref{sec-sigl-gloss-nomencl,fig-printglossary}.
 
 \begin{figure}[htbp]
+  \indexex{glossaire}%
   \centering
   \screenshot{printglossary}
   \caption{Glossaire}
@@ -32,6 +36,7 @@ des glossaires (\docAuxCommand{printglossaries}) sont détaillées et illustrée
 \end{figure}
 
 \section{Index}
+\index{index}%
 
 \begin{dbremark*}{Section à passer en 1\iere{} lecture}
   Cette section est à passer en 1\iere{} lecture si on ne compte pas faire
@@ -53,6 +58,7 @@ La \vref{fig-printindex} illustre une page d'index créé au moyen du
 \Package{imakeidx}.
 
 \begin{figure}[htbp]
+  \indexex{index}%
   \centering
   \screenshot{printindex}
   \caption{Index}
@@ -60,14 +66,17 @@ La \vref{fig-printindex} illustre une page d'index créé au moyen du
 \end{figure}
 
 \section{Table des matières}
+\index{table des matières!globale}%
 
 Si la table des matières est longue, elle peut être placée en
 annexe. Nous renvoyons ici à la \vref{sec-table-des-matieres} et à
 la \vref{fig-tableofcontents} qui traite déjà cette question.
 
 \section{Quatrième de couverture}\label{sec-quatr-de-couv}
+\index{couverture}%
+\index{quatrième de couverture}%
 
-La quatrième de couverture s'obtient au moyen de la commande
+La 4\ieme{} de couverture s'obtient au moyen de la commande
 \refCom{makebackcover} suivante.
 
 \begin{docCommand}{makebackcover}{}
@@ -84,19 +93,14 @@ La quatrième de couverture s'obtient au moyen de la commande
 \end{docCommand}
 
 \begin{figure}[htbp]
+  \indexex{quatrième de couverture}%
   \centering
   \screenshot{makebackcover}
-  \caption{Quatrième de couverture}
+  \caption{Page de 4\ieme{} de couverture}
   \label{fig-makebackcover}
 \end{figure}
 
-%
-\iffalse
 %%% Local Variables:
 %%% mode: latex
-%%% eval: (latex-mode)
-%%% ispell-local-dictionary: "fr_FR"
-%%% TeX-engine: xetex
-%%% TeX-master: "../yathesis.dtx"
+%%% TeX-master: "../yathesis-fr"
 %%% End:
-\fi
