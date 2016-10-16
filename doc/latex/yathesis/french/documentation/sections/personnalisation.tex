@@ -348,11 +348,11 @@ Les documents composés avec la \yatCl{} peuvent avoir deux formats de sortie :
 \index{table des matières!locale}%
 
 %
-\changes{v0.99o}{2016-09-29}{Nouvelle option de classe \refKey{localtocs}
+\changes{v0.99o}{2016-10-16}{Nouvelle option de classe \refKey{localtocs}
   permettant de faire automatiquement débuter les chapitres par leurs tables des
   matières locales}%
 
-\begin{docKey}[][doc new=2016-09-29]{localtocs}{}{pas de valeur par défaut, pas
+\begin{docKey}[][doc new=2016-10-16]{localtocs}{}{pas de valeur par défaut, pas
     de valeur initiale} 
   \indexdef{table des matières!locale}%
   Cette clé fait automatiquement débuter les chapitres de la partie
@@ -370,7 +370,7 @@ clé \refKey{localtocs/depth}.
 {%
   \tcbset{before lower=\vspace*{.5\baselineskip}\par}
   \begin{docKey}[][doc
-    new=2016-09-29]{localtocs/depth}{=\docValue{section}\textbar\docValue{subsection}\textbar\docValue{subsubsection}\textbar\docValue{paragraph}\textbar\docValue{subparagraph}}{par
+    new=2016-10-16]{localtocs/depth}{=\docValue{section}\textbar\docValue{subsection}\textbar\docValue{subsubsection}\textbar\docValue{paragraph}\textbar\docValue{subparagraph}}{par
       défaut \docValue{subsection}, pas de valeur initiale}
     \index{table des matières!locale!profondeur}%
     \index{profondeur!table des matières!locale}%
@@ -410,25 +410,25 @@ La \yatCl{} fournit aussi des commandes permettant d'activer ou de désactiver
 semi-globalement ou localement l'insertion automatique de tables des matières
 locales et ce, indépendamment du recours à l'option \refKey{localtocs}.
 
-\begin{docCommand}[doc new=2016-09-29]{startlocaltocs}{}
+\begin{docCommand}[doc new=2016-10-16]{startlocaltocs}{}
   \index{table des matières!locale}%
   Cette commande est une bascule \emph{activant} jusqu'à nouvel ordre
   l'insertion automatique de tables des matières locales.
 \end{docCommand}
 
-\begin{docCommand}[doc new=2016-09-29]{stoplocaltocs}{}
+\begin{docCommand}[doc new=2016-10-16]{stoplocaltocs}{}
   \index{table des matières!locale}%
   Cette commande est une bascule \emph{désactivant} jusqu'à nouvel ordre
   l'insertion automatique de tables des matières locales.
 \end{docCommand}
 
-\begin{docCommand}[doc new=2016-09-29]{nextwithlocaltoc}{}
+\begin{docCommand}[doc new=2016-10-16]{nextwithlocaltoc}{}
   \index{table des matières!locale}%
   Cette commande \emph{active}, pour le \emph{chapitre suivant seulement},
   l'insertion automatique de tables des matières locales.
 \end{docCommand}
 
-\begin{docCommand}[doc new=2016-09-29]{nextwithoutlocaltoc}{}
+\begin{docCommand}[doc new=2016-10-16]{nextwithoutlocaltoc}{}
   \index{table des matières!locale}%
   Cette commande \emph{désactive}, pour le \emph{chapitre suivant seulement},
   l'insertion automatique de tables des matières locales.
@@ -439,18 +439,18 @@ locales et ce, indépendamment du recours à l'option \refKey{localtocs}.
 \index{bibliographie!locale}%
 
 %
-\changes{v0.99o}{2016-09-29}{Nouvelle option de classe \refKey{localbibs}
+\changes{v0.99o}{2016-10-16}{Nouvelle option de classe \refKey{localbibs}
   permettant de faire automatiquement finir les chapitres par leurs
   bibliographies locales}%
 
-\begin{docKey}[][doc new=2016-09-29]{localbibs}{}{pas de valeur par défaut, pas
+\begin{docKey}[][doc new=2016-10-16]{localbibs}{}{pas de valeur par défaut, pas
     de valeur initiale} 
   \indexdef{bibliographie!locale}%
   Cette clé fait automatiquement finir les chapitres (contenant au moins une
   référence bibliographique) par leurs bibliographies locales.
 \end{docKey}
 
-\begin{docKey}[][doc new=2016-09-29]{localbibs*}{}{pas de valeur par défaut, pas
+\begin{docKey}[][doc new=2016-10-16]{localbibs*}{}{pas de valeur par défaut, pas
     de valeur initiale} 
   \indexdef{bibliographie!locale}%
   Cette clé a le même effet que \refKey{localbibs} sauf que l'option
