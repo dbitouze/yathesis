@@ -3,7 +3,7 @@ $pdf_mode = 1;
 $bibtex_use = 1;
 $bibtex = 'biber %O %B';
 
-add_cus_dep('glo', 'gls', 0, 'makeglossaries');
+# add_cus_dep('glo', 'gls', 0, 'makeindex');
 add_cus_dep('glo2', 'gls2', 0, 'makeglossaries');
 add_cus_dep('acn', 'acr', 0, 'makeglossaries');
 add_cus_dep('slo', 'sls', 0, 'makeglossaries');
@@ -11,7 +11,12 @@ sub makeglossaries{
     system( "makeglossaries \"$_[0]\"" );
 }
 
-$makeindex = 'texindy -L french -M denisbdoc.xdy';
+add_cus_dep('glo', 'gls', 0, 'makeglo2gls');
+sub makeglo2gls {
+    system("makeindex -s gglo.ist -o '$_[0]'.gls '$_[0]'.glo");
+}
+
+# $makeindex = 'texindy -L french -M denisbdoc.xdy';
 
 add_cus_dep('idx', 'ind', 0, 'texindy');
 sub texindy{
