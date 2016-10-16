@@ -3,7 +3,7 @@ $pdf_mode = 1;
 $bibtex_use = 1;
 $bibtex = 'biber %O %B';
 
-add_cus_dep('glo', 'gls', 0, 'makeindex');
+add_cus_dep('glo', 'gls', 0, 'makeglossaries');
 add_cus_dep('glo2', 'gls2', 0, 'makeglossaries');
 add_cus_dep('acn', 'acr', 0, 'makeglossaries');
 add_cus_dep('slo', 'sls', 0, 'makeglossaries');
