@@ -12,8 +12,8 @@
 \input{sections/fixed-footnotes}
 %
 \tcbset{index command name=commands}
-\makeindex[name=commands,columns=2,title=Index des commandes,options=-M denisbdoc.xdy -L french,intoc]
-\makeindex[title=Index des concepts,columns=3,options=-M denisbdoc.xdy -L french,intoc]
+\makeindex[title=Index des commandes,columnseprule,options=-M denisbdoc.xdy -L french,intoc,name=commands]
+\makeindex[title=Index des concepts,columnseprule,options=-M denisbdoc.xdy -L french,intoc]
 %
 \lstMakeShortInline[style=dbtex]|
 % \tcbset{listing options={escapechar=+}}
