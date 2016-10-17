@@ -12,8 +12,8 @@
 \input{sections/fixed-footnotes}
 %
 \tcbset{index command name=commands}
-\makeindex[name=commands,columns=2,title=Index des commandes,options=-M denisbdoc.xdy -L french]
-\makeindex[title=Index des concepts,columns=3,options=-M denisbdoc.xdy -L french]
+\makeindex[name=commands,columns=2,title=Index des commandes,options=-M denisbdoc.xdy -L french,intoc]
+\makeindex[title=Index des concepts,columns=3,options=-M denisbdoc.xdy -L french,intoc]
 %
 \lstMakeShortInline[style=dbtex]|
 % \tcbset{listing options={escapechar=+}}
@@ -138,12 +138,33 @@
   \cleardoublepage
   \phantomsection
   %
+  \indexprologue{%
+    Dans cet index, les types :
+    \begin{itemize}
+    \item commandes ;
+    \item environnements ;
+    \item clés ;
+    \item valeurs de clés ;
+    \end{itemize}
+    des entrées sont indiqués par des couleurs (selon la convention précisée
+    \vref{sec-comm-envir-cles}).%
+  }%
   \printindex[commands]
   %
   % Some hack against point 1 of this issue: \url{https://github.com/ho-tex/oberdiek/issues/12}
   \cleardoublepage
   \phantomsection
   %
+  \indexprologue{%
+    \changes{v0.99o}{2016-10-16}{Index des concepts}%
+    Dans cet index, un numéro de page :
+    \begin{description}
+    \item[en gras] indique une page contenant une information importante sur
+      l'entrée correspondante, par exemple sa définition ;
+    \item[en italique] indique une page contenant un exemple qui illustre
+      l'entrée correspondante.
+    \end{description}
+  }%
   \printindex
 }
 %
