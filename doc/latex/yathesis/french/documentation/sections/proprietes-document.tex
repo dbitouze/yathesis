@@ -701,21 +701,30 @@ corps de métier) des membres du jury parmi celles prédéfinies par la \yatCl{}
   directeurs de recherche du \gls{cnrs}.
 \end{docKey}
 %
-\begin{docKey}{mcf}{=\docValue{true}\textbar\docValue{false}}{par défaut
+\begin{docKey}[][doc updated=2016-10-16]{associateprofessor}{=\docValue{true}\textbar\docValue{false}}{par défaut
     \docValue{true}, initialement \docValue{false}}
   \index{corporation!prédéfinie!\acrshort{mcf} (non) \acrshort{hdrpeople}}%
   \indexsee{\acrshort{mcf} (non) \acrshort{hdrpeople}}{corporation}%
+  \changes{v0.99o}{2016-10-16}{Clés \protect\refAux{mcf} et
+    \protect\refAux{mcf*} remplacées par (et alias de) les clés
+    \protect\refKey{associateprofessor} et
+    \protect\refKey{associateprofessor*}}%
+  \changes*{v0.99o}{2016-10-16}{\acrshort{mcf} désormais traduit en anglais par
+    \enquote{\foreignlanguage{english}{\translate{associateprofessor}}}}%
   Cette clé permet de spécifier qu'une personne appartient à la corporation des
-  \glspl{mcf}.
+  \glspl{mcf}\footnote{Par souci de compatibilité ascendante, la clé désormais
+    obsolète \refAux{mcf} est un alias de la clé \refKey{associateprofessor}.}.
 \end{docKey}
 %
-\begin{docKey}{mcf*}{=\docValue{true}\textbar\docValue{false}}{par défaut
+\begin{docKey}[][doc updated=2016-10-16]{associateprofessor*}{=\docValue{true}\textbar\docValue{false}}{par défaut
     \docValue{true}, initialement \docValue{false}}
   \index{corporation!prédéfinie!\acrshort{mcf} (non) \acrshort{hdrpeople}}%
   \indexsee{\acrshort{mcf} (non) \acrshort{hdrpeople}}{corporation}%
   \indexsee{\acrshort{hdrpeople} (habilité)}{corporation}%
   Cette clé permet de spécifier qu'une personne appartient à la corporation des
-  \glspl{mcf} \acrshort{hdrpeople}.
+  \glspl{mcf} \acrshort{hdrpeople}\footnote{Par souci de compatibilité
+    ascendante, la clé désormais obsolète \refAux{mcf*} est un alias de la clé
+    \refKey{associateprofessor*}.}.
 \end{docKey}
 %
 \begin{docKey}{juniorresearcher}{=\docValue{true}\textbar\docValue{false}}{par
@@ -745,7 +754,7 @@ corps de métier) des membres du jury parmi celles prédéfinies par la \yatCl{}
 \referee[seniorresearcher]{Denis}{Diderot}
 %
 \committeepresident[professor]{Victor}{Hugo}
-\examiner[mcf*]{Charles}{Baudelaire}
+\examiner[associateprofessor*]{Charles}{Baudelaire}
 \examiner[professor]{Émile}{Zola}
 \examiner{Paul}{Verlaine}
 \end{preamblecode}
