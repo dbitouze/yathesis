@@ -210,6 +210,8 @@
 \YAD@create@boolean{professor}%
 \YAD@create@boolean{mcf}%
 \YAD@create@boolean{mcf*}%
+\YAD@create@boolean{associateprofessor}%
+\YAD@create@boolean{associateprofessor*}%
 \YAD@create@boolean{juniorresearcher}%
 \YAD@create@boolean{juniorresearcher*}%
 \YAD@create@boolean{seniorresearcher}%
@@ -220,6 +222,8 @@
   professor=false,%
   mcf=false,%
   mcf*=false,%
+  associateprofessor=false,%
+  associateprofessor*=false,%
   juniorresearcher=false,%
   juniorresearcher*=false,%
   seniorresearcher=false,%
@@ -795,6 +799,8 @@
     professor=false,%
     mcf=false,%
     mcf*=false,%
+    associateprofessor=false,%
+    associateprofessor*=false,%
     juniorresearcher=false,%
     juniorresearcher*=false,%
     seniorresearcher=false,%
@@ -832,12 +838,20 @@
     }%
   }{%
   }%
-  \ifboolexpr{ bool {YAD@mcf} }{%
-    \yadsetup{corps=mcf,#1}%
+  \ifboolexpr{
+    bool {YAD@mcf}
+    or
+    bool {YAD@associateprofessor}
+  }{%
+    \yadsetup{corps=associateprofessor,#1}%
   }{%
   }%
-  \ifboolexpr{ bool {YAD@mcf*} }{%
-    \yadsetup{corps=mcf*,#1}%
+  \ifboolexpr{
+    bool {YAD@mcf*}
+    or
+    bool {YAD@associateprofessor*}
+  }{%
+    \yadsetup{corps=associateprofessor*,#1}%
   }{%
   }%
   \ifboolexpr{ bool {YAD@juniorresearcher} }{%
@@ -4045,8 +4059,8 @@
 \expression{examiners-pl}{Examinateurs}{Examiners}%
 \expression{guests}{Invit\'e}{Guest}%
 \expression{guests-pl}{Invit\'es}{Guests}%
-\expression{mcf}{\textsc{mcf}}{Lecturer}%
-\expression{mcf*}{\textsc{mcf} \textsc{hdr}}{\textsc{hdr} Lecturer}%
+\expression{associateprofessor}{\textsc{mcf}}{Associate Professor}%
+\expression{associateprofessor*}{\textsc{mcf} \textsc{hdr}}{\textsc{hdr} Associate Professor}%
 \expression{keywords}{Mots cl\'es}{Keywords}%
 \expression{ordernumber}{Num\'ero d'ordre}{Order Number}%
 \expression{committeepresident}{pr\'esident du jury}{Committee President}%

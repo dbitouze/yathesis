@@ -67,20 +67,21 @@ url=http://www-lmpa.univ-littoral.fr/
 % 2 arguments obligatoires, successivement les prénom et nom de chaque
 % personne. Si besoin est, on peut apporter certaines précisions en argument
 % optionnel, essentiellement au moyen des clés suivantes :
-% - « professor », « seniorresearcher », « mcf », « mcf* »,
-%   « juniorresearcher », « juniorresearcher* » (qui peuvent ne pas prendre de
-%   valeur) pour stipuler le corps auquel appartient la personne ;
+% - « professor », « seniorresearcher », « associateprofessor »,
+%   « associateprofessor* », « juniorresearcher », « juniorresearcher* » (qui
+%   peuvent ne pas prendre de valeur) pour stipuler le corps auquel appartient
+%   la personne ;
 % - « affiliation » pour stipuler l'institut auquel est affiliée la personne ;
 % - « female » pour stipuler que la personne est une femme pour que certains
 %   mots clés soient accordés en genre.
 %
 \supervisor[professor,affiliation=ULCO]{Michel}{de Montaigne}
-\cosupervisor[mcf*,affiliation=ULCO]{Charles}{Baudelaire}
-\comonitor[mcf,affiliation=ULCO]{Étienne}{de la Boétie}
+\cosupervisor[associateprofessor*,affiliation=ULCO]{Charles}{Baudelaire}
+\comonitor[associateprofessor,affiliation=ULCO]{Étienne}{de la Boétie}
 \referee[professor,affiliation=IHP]{René}{Descartes}
 \referee[seniorresearcher,affiliation=CNRS]{Denis}{Diderot}
 \committeepresident[professor,affiliation=ENS Lyon]{Victor}{Hugo}
-\examiner[mcf,affiliation=Université de Paris~13]{Sophie}{Germain}
+\examiner[associateprofessor,affiliation=Université de Paris~13]{Sophie}{Germain}
 \examiner[juniorresearcher,affiliation=INRIA]{Joseph}{Fourier}
 \examiner[juniorresearcher*,affiliation=CNRS]{Paul}{Verlaine}
 \guest{George}{Sand}

@@ -192,6 +192,8 @@ professor
 seniorresearcher
 mcf
 mcf*
+associateprofessor
+associateprofessor*
 juniorresearcher
 juniorresearcher*
 #endkeyvals
@@ -201,6 +203,8 @@ professor
 seniorresearcher
 mcf
 mcf*
+associateprofessor
+associateprofessor*
 juniorresearcher
 juniorresearcher*
 #endkeyvals
@@ -210,6 +214,8 @@ professor
 seniorresearcher
 mcf
 mcf*
+associateprofessor
+associateprofessor*
 juniorresearcher
 juniorresearcher*
 #endkeyvals
@@ -219,6 +225,8 @@ professor
 seniorresearcher
 mcf
 mcf*
+associateprofessor
+associateprofessor*
 juniorresearcher
 juniorresearcher*
 #endkeyvals
@@ -228,6 +236,8 @@ professor
 seniorresearcher
 mcf
 mcf*
+associateprofessor
+associateprofessor*
 juniorresearcher
 juniorresearcher*
 #endkeyvals
@@ -237,6 +247,8 @@ professor
 seniorresearcher
 mcf
 mcf*
+associateprofessor
+associateprofessor*
 juniorresearcher
 juniorresearcher*
 #endkeyvals
@@ -246,6 +258,8 @@ professor
 seniorresearcher
 mcf
 mcf*
+associateprofessor
+associateprofessor*
 juniorresearcher
 juniorresearcher*
 #endkeyvals
