@@ -457,13 +457,18 @@ locales et ce, indépendamment du recours à l'option \refKey{localtocs}.
     et inconvénients à \url{http://tex.stackexchange.com/q/332431/18401}.}.
 \end{docKey}
 
-\begin{dbwarning}{\Package*{biblatex} nécessaire pour les bibliographies
+\begin{dbwarning}{Package \package*{biblatex} nécessaire pour les bibliographies
     locales}{}
-  L'ajout automatique des bibliographies locales en fin de chapitres fourni
-  repose sur le \Package{biblatex} (cf. \vref{sec-refer-bibl}). Le recours à ce
-  package pour la bibliographie de la thèse est alors nécessaire et exclusif de
-  tout autre outil de production de la bibliographie (notamment
-  \hologo{BibTeX}).%
+  Cette fonctionnalité d'ajout automatique des bibliographies locales en fin de
+  chapitres repose sur le \Package{biblatex} (cf. \vref{sec-refer-bibl}):
+  \begin{itemize}
+  \item donc nécessite, pour la bibliographie de la thèse, le recours à ce
+    package \alert{à l'exclusion de tout autre outil de production de
+      bibliographie} (notamment \hologo{BibTeX}) ;
+  \item notamment sur sa notion de segments de bibliographies et plus
+    particulièrement sur l'option |refsegment=chapter| qui devra être prise
+    compte si d'autres segments sont souhaités.
+  \end{itemize}
 \end{dbwarning}
 
 \begin{dbexample}{Bibliographies locales automatiques}{}

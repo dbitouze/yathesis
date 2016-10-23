@@ -1,15 +1,10 @@
-
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "../test"
-%%% End:
 \chapter{Pages de titre}\label{cha-pages-de-titre}
 
 Ce chapitre documente la commande \refCom{maketitle} permettant de
 \emph{produire}, à partir des données définies \vref{sec-proprietes-de-titre},
 les pages de titre de la thèse.
 
-\section{Production}
+\section{Production des pages de titre}
 
 \begin{docCommand}[doc description=\mandatory]{maketitle}{\oarg{options}}%
   \index{titre!production}%
@@ -40,9 +35,9 @@ La commande \refCom{maketitle} admet un argument optionnel permettant de
 personnaliser les pages de titre au moyen des clés \refKey{nofrontcover} et
 \refKey{frametitle}.%
 %
-\changes{v0.99g}{2014-07-13}{Personnalisation des pages de titre (\emph{via}
-  \protect\refKey{frametitle} et \protect\refKey{nofrontcover}) possible en
-  option de \protect\docAuxCommand{maketitle}}%
+\changes{v0.99g}{2014-07-13}{Personnalisation des pages de titre possible en
+  option de \protect\docAuxCommand{maketitle} (\emph{via}
+  \protect\refKey{frametitle} et \protect\refKey{nofrontcover})}%
 
 \begin{docKey}{nofrontcover}{=\docValue{true}\textbar\docValue{false}}{par défaut
     \docValue{true}, initialement \docValue{false}}%
@@ -176,7 +171,7 @@ Avec les données caractéristiques suivantes, la commande
     \centering
     \begin{subfigure}[b]{.45\linewidth}
       \centering%
-      \fbox{\includegraphics[page=1,width=\linewidth-2\fboxsep-2\fboxrule]{../exemples/specimen/en-arborescence/these}}
+      \fbox{\includegraphics[page=1,width=\linewidth-2\fboxsep-2\fboxrule]{../exemples/specimen/a-plat/these}}
       %\screenshot[1]{fr-title}
       \caption{Page de 1\iere{} de couverture en français}
       \label{fig-maketitle-fr}
@@ -184,7 +179,7 @@ Avec les données caractéristiques suivantes, la commande
     \hspace{\stretch{1}}%
     \begin{subfigure}[b]{.45\linewidth}
       \centering%
-      \fbox{\includegraphics[page=5,width=\linewidth-2\fboxsep-2\fboxrule]{../exemples/specimen/en-arborescence/these}}
+      \fbox{\includegraphics[page=5,width=\linewidth-2\fboxsep-2\fboxrule]{../exemples/specimen/a-plat/these}}
       %\screenshot[1]{en-title}
       \caption{Page de titre en anglais}
       \label{fig-maketitle-en}

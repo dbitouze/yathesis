@@ -242,7 +242,7 @@ de titre\footnote{Le ou les laboratoires apparaissent en outre sur les pages
 \subsubsection{Définition}
 %
 \begin{docCommand}{comue}{\oarg{précision(s)}\marg{nom de la
-      \acrshort*{comue}}}
+      COMUE}}
    \index{caractéristiques de la thèse!liste!\acrshort{comue}}%
    \indexdef{\acrshort{comue}}%
   Cette commande définit la \gls{comue}. Celle-ci ne figure que par
@@ -499,9 +499,9 @@ url=http://www-lmpa.univ-littoral.fr/
   \indexsee{sigle}{acronyme}%
   Si l'institut ou l'entité doit figurer sous la forme d'un acronyme, on aura
   intérêt à ne pas les saisir tels quel comme on l'a fait jusqu'ici
-  (|\institute{ULCO}| ou |\laboratory{LMPA}|) mais à recourir aux
-  fonctionnalités du \Package{glossaries}. L'\vref{acronymes} donne un aperçu
-  de la procédure.
+  (\lstinline[deletekeywords={[5]institute}]|\institute{ULCO}| ou
+  |\laboratory{LMPA}|) mais à recourir aux fonctionnalités du
+  \Package{glossaries}. L'\vref{acronymes} donne un aperçu de la procédure.
 \end{dbremark}
 
 \subsection{Directeur(s) de thèse et membres du jury}\label{sec-jury}
@@ -706,7 +706,7 @@ corps de métier) des membres du jury parmi celles prédéfinies par la \yatCl{}
   \index{corporation!prédéfinie!\acrshort{mcf} (non) \acrshort{hdrpeople}}%
   \indexsee{\acrshort{mcf} (non) \acrshort{hdrpeople}}{corporation}%
   \changes{v0.99o}{2016-10-16}{Clés \protect\refAux{mcf} et
-    \protect\refAux{mcf*} remplacées par (et alias de) les clés
+    \protect\refAux{mcf*} remplacées par les (et alias des) clés
     \protect\refKey{associateprofessor} et
     \protect\refKey{associateprofessor*}}%
   \changes*{v0.99o}{2016-10-16}{\acrshort{mcf} désormais traduit en anglais par
