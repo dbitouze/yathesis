@@ -12,7 +12,7 @@
 %% See http://www.latex-project.org/lppl.txt
 %% -----------------------------------------------------------------------
 \def\fileversion{v0.99o}
-\def\filedate{2016/10/16}
+\def\filedate{2016/10/24}
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesClass{yathesis}[\filedate\space\fileversion\space Yet another class for writing thesis (DB)]
 \RequirePackage{pgfopts}[2011/06/02]%
@@ -458,7 +458,6 @@
 \RequirePackage{array}[2008/09/09]%
 \RequirePackage{xstring}[2013/10/13]%
 \RequirePackage{textcase}[2004/10/07]%
-\RequirePackage{translator}[2010/06/12]%
 \RequirePackage{iftex}[2013/04/04]%
 \RequirePackage{epigraph}[2009/09/02]%
 \RequirePackage{tcolorbox}[2014/03/31]%
@@ -487,6 +486,7 @@
 \RequirePackage{babel}[2014/03/24]
 \RequirePackage{etoc}[2016/09/29]%
 \RequirePackage{iflang}[2007/11/11]%
+\RequirePackage{translator}[2010/06/12]%
 \RequirePackage{datetime}[2013/09/10]%
 \AtEndPreamble{%
   \@ifpackageloaded{hyperref}{%
