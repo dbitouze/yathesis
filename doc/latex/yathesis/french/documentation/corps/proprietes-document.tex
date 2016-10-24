@@ -242,7 +242,7 @@ de titre\footnote{Le ou les laboratoires apparaissent en outre sur les pages
 \subsubsection{Définition}
 %
 \begin{docCommand}{comue}{\oarg{précision(s)}\marg{nom de la
-      COMUE}}
+      {\normalfont\ttfamily\acrshort*{comue}}}}
    \index{caractéristiques de la thèse!liste!\acrshort{comue}}%
    \indexdef{\acrshort{comue}}%
   Cette commande définit la \gls{comue}. Celle-ci ne figure que par
@@ -398,7 +398,7 @@ pages de titre, sauf :
 % L'option |nologo| (qui ne prend pas de valeur) pour que le logo d'un
 % institut ne figure pas, même s'il a été précisé.
 %
-\begin{docKey}{url}{=\meta{\acrshort*{url} de l'institut}}{pas de valeur par
+\begin{docKey}{url}{=\meta{{\normalfont\ttfamily\acrshort*{url}} de l'institut}}{pas de valeur par
     défaut, initialement vide}
   \indexdef{\acrshort{url}}%
   \index{laboratoire!\acrshort{url}}%
@@ -414,6 +414,7 @@ pages de titre, sauf :
 \institute[url=http://www.univ-littoral.fr/]{ULCO}
 \end{preamblecode}
 \end{dbexample}
+%
 \begin{dbwarning}{Caractère \protect\lstinline+\#+ à protéger dans les
     \acrshortpl*{url} d'instituts et entités}{}
   \index{\acrshort{url}!format}%

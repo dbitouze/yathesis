@@ -294,7 +294,7 @@ Les documents composés avec la \yatCl{} peuvent avoir deux formats de sortie :
       si le \Package{hyperref} est chargé par l'utilisateur,
       \begin{enumerate}
       \item\label{item-paper-1}%
-        sa commande |\href{|\meta{\acrshort*{url}}|}{|\meta{texte}|}| est
+        sa commande |\href{|\meta{\normalfont\ttfamily\acrshort*{url}}|}{|\meta{texte}|}| est
         automatiquement remplacée par :
         \lstset{deletekeywords={url},deletekeywords={[2]url}}%
         \begin{itemize}
@@ -336,7 +336,8 @@ Les documents composés avec la \yatCl{} peuvent avoir deux formats de sortie :
   \enquote{écran} et \enquote{papier} soient absolument identiques, il suffit
   d'imprimer la première ; mais il faut avoir conscience du fait que, dans ce
   cas, si le mémoire contient des références vers des \acrshort{url} (par
-  exemple fournies par |\href{|\meta{\acrshort*{url}}|}{|\meta{texte}|}|), leurs
+  exemple fournies par
+  |\href{|\meta{\normalfont\ttfamily\acrshort*{url}}|}{|\meta{texte}|}|), leurs
   cibles ne figureront nulle part en sortie \enquote{papier}.
 \end{dbwarning}
 
