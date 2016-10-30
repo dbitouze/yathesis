@@ -57,11 +57,17 @@ Typesetting the documentation of the class requires:
 
       latexmk -g -pdf -jobname=these -pdflatex="pdflatex %O '\RequirePackage{etoolbox}\AtEndPreamble{\RequirePackage{yathesis-demo}}\input{%S}'" these.tex
 
-- to run `pdflatex` on `yathesis.tex` to be found in the
-  `.../yathesis/doc/latex/yathesis/documentation/french` directory. If `latexmk`
-  is available, it is easier to run:
+- to compile `yathesis.tex` to be found in the
+  `.../yathesis/doc/latex/yathesis/documentation/french` directory as follows:
 
-      latexmk yathesis-fr.tex
+      pdflatex yathesis-fr.tex
+      biber yathesis-fr.tex
+      makeglossaries yathesis-fr
+      texindy -L french -M denisbdoc-chng.xdy yathesis-fr-changes.idx
+      texindy -M denisbdoc.xdy -L french commands.idx
+      texindy -M denisbdoc.xdy -L french yathesis-fr.idx
+      pdflatex yathesis-fr.tex
+      pdflatex yathesis-fr.tex
 %</readme>
 %<*internal>
 \fi
@@ -74,7 +80,7 @@ Typesetting the documentation of the class requires:
 \input docstrip.tex
 \Msg{********************************************************}
 \Msg{* Installation}
-\Msg{* Class: yathesis 2016-10-24 v0.99o}
+\Msg{* Class: yathesis 2016-10-30 v0.99o}
 \Msg{* that helps to write thesis following French rules (DB)}
 \Msg{********************************************************}
 \keepsilent
@@ -278,7 +284,7 @@ This work consists of the file  yathesis.dtx
 % \iffalse
 %<*class>
 \def\fileversion{v0.99o}
-\def\filedate{2016/10/24}
+\def\filedate{2016/10/30}
 %</class>
 %<*driver>
 \ProvidesFile{yathesis.dtx}
@@ -3581,7 +3587,6 @@ This work consists of the file  yathesis.dtx
 %
 % \begin{macro}{\printlaboratory}
 %    \begin{macrocode}
-% \newcommand*{\printlaboratory}{\@ifstar{\@tempswatrue\YAD@laboratory@name@temp}{\@tempswafalse\YAD@laboratory@name@temp}}%
 \newcommand*{\printlaboratory}[2][]{%
   \YAD@ifemptyorundef{#2}{%
     \YAD@reach@file{\YAD@generic@argument@translate{laboratory}}%
@@ -5628,7 +5633,7 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 %
 % Réglage nécessaire sans quoi le titre courant \textquote{BIBLIOGRAPHIE}
-% apparaît en trop en entête et en pied de page
+% apparaît en trop en entête et en pied de page (see \url{http://tex.stackexchange.com/q/89884/18401}).
 %    \begin{macrocode}
 \AtEndPreamble{%
   \@ifpackageloaded{biblatex}{%
@@ -5962,6 +5967,7 @@ This work consists of the file  yathesis.dtx
 \expression{phone}{\Telefon}{\Telefon}%
 \expression{fax}{\Fax}{\Fax}%
 \expression{caution}{Avertissement}{Caution}%
+\expression{localbibname}{Bibliographie du pr\'esent chapitre}{Bibliography of the current chapter}%
 \expression{draft}{brouillon}{draft}%
 \expression{prepared-at}{Cette th\`ese a \'et\'e pr\'epar\'ee au}{This
   thesis has been prepared at}%
@@ -6019,6 +6025,7 @@ This work consists of the file  yathesis.dtx
 \expression{referees}{Rapporteur}{Referee}%
 \expression{referees-pl}{Rapporteurs}{Referees}%
 \expression{website}{Site}{Web Site}%
+\expression{localtocname}{Sommaire du pr\'esent chapitre}{Outline of the current chapter}%
 \expression{defendedon}{Soutenue le}{Defended on}%
 \expression{speciality}{Sp\'ecialit\'e}{Speciality}%
 \expression{supervisedby}{Th\`ese dirig\'ee par}{Thesis supervised by}%
@@ -6039,8 +6046,6 @@ This work consists of the file  yathesis.dtx
 %<class>\expression{inprogressfoottext}{\translate{lbl-versiondate}}{\translate{lbl-versiondate}}%
 \expression{submittedfoottext}{Version soumise en date du}{Submitted work
   as of}%
-\expression{localtocname}{Sommaire du pr\'esent chapitre}{Outline of the current chapter}%
-\expression{localbibname}{Bibliographie du chapitre}{Bibliography of the current chapter}%
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -6056,7 +6061,7 @@ This work consists of the file  yathesis.dtx
 %
 %    \begin{macrocode}
 # mode: yathesis.cls
-# denisbitouze, 24.10.2016
+# denisbitouze, 30.10.2016
 #
 #include:class-book
 #include:latex-document
