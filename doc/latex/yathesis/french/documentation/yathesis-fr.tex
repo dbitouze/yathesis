@@ -1,16 +1,15 @@
 % Pour imprimer la présente documentation 2 pages sur 1 :
 % pdfnup --nup 2x1 --landscape yathesis.pdf --trim '1.9cm 3.5cm 1.9cm 1.9cm' --suffix 2x1
 %
-% \documentclass[localtocs]{yathesis}
 \documentclass[version=final,noerror,localtocs]{yathesis}
 \usepackage{ltxtable}%
 \usepackage[yad]{denisbdoc}
 \usepackage{dirtree}
 \usepackage[lining]{libertine}
 %
-\changes{v0.99o}{2016-10-24}{Suppression d'un warning inutile du \Package{iflang}}%
-\changes{v0.99o}{2016-10-24}{Documentation révisée}%
-\changes{v0.99o}{2016-10-24}{Correction de bugs}%
+\changes{v0.99o}{2016-10-30}{Suppression d'un warning inutile du \Package{iflang}}%
+\changes{v0.99o}{2016-10-30}{Documentation révisée}%
+\changes{v0.99o}{2016-10-30}{Correction de bugs}%
 \changes{v0.99n}{2016-06-11}{Documentation révisée}%
 \changes{v0.99m}{2016-05-22}{Documentation révisée}%
 \changes{v0.99m}{2016-05-22}{Documentation compilable au moyen de \hologo{pdfLaTeX}}%
@@ -87,6 +86,8 @@
 %
 \cleardoublepage
 \phantomsection
+\MarkbothHack
+\pagestyle{indexpagestyle}
 \indexprologue{%
   Dans cet index, les couleurs spécifient la nature :
   \begin{itemize}
@@ -97,12 +98,16 @@
   \end{itemize}
   des entrées (selon la convention précisée \vref{sec-comm-envir-cles}).%
 }%
+\renewcommand{\indexname}{Index des commandes}
 \printindex[commands]
+\UndoMarkbothHack
 %
 \cleardoublepage
 \phantomsection
+\MarkbothHack
+\pagestyle{indexpagestyle}
 \indexprologue{%
-  \changes{v0.99o}{2016-10-24}{Index des concepts}%
+  \changes{v0.99o}{2016-10-30}{Index des concepts}%
   Dans cet index, un numéro de page :
   \begin{description}
   \item[en gras] indique une page contenant une information importante sur
@@ -111,7 +116,9 @@
     l'entrée correspondante.
   \end{description}
 }%
+\renewcommand{\indexname}{Index des concepts}
 \printindex
+\UndoMarkbothHack
 %
 \end{document}
 

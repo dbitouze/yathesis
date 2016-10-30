@@ -1,14 +1,14 @@
 \chapter{Personnalisation}\label{cha-configuration}
 
-Cette section passe en revue les outils de personnalisation propres ou pas à la
-\yatCl{} :
-\begin{enumerate}
-\item options de classe ;
-\item options de préambule ;
-\item commandes (et options de commandes) de la \yatCl;
-\item packages chargés par la \yatCl ;
-\item packages chargés manuellement.
-\end{enumerate}
+% Cette section passe en revue les outils de personnalisation propres ou pas à la
+% \yatCl{} :
+% \begin{enumerate}
+% \item options de classe ;
+% \item options de préambule ;
+% \item commandes (et options de commandes) de la \yatCl;
+% \item packages chargés par la \yatCl ;
+% \item packages chargés manuellement.
+% \end{enumerate}
 
 \section{Options de classe}\label{options-classe}
 \index{option!de \yatcl|(}
@@ -43,10 +43,10 @@ notamment :
     \index{pagination}%
     \indexsee{recto}{pagination}%
     \indexsee{verso}{pagination}%
-    \docAuxKey{oneside} pour une pagination en recto seulement\footnote{Les
-      chapitres commencent alors indifféremment sur une une page paire ou
-      impaire\index{page!paire/impaire} (c'est-à-dire sur une page de gauche ou
-      de droite\index{page!gauche/droite}).}.
+    \docAuxKey{oneside} pour une \gls{pagination} en recto
+    seulement\footnote{Les chapitres commencent alors indifféremment sur une une
+      page paire ou impaire\index{page!paire/impaire} (c'est-à-dire sur une page
+      de gauche ou de droite\index{page!gauche/droite}).}.
   \end{itemize}
 \end{itemize}
 \begin{dbwarning}{Options usuelles de la \Class{book} : à utiliser avec
@@ -125,6 +125,200 @@ Par défaut, un mémoire créé avec la \yatCl est composé :
 \documentclass[mainlanguage=english,spanish]{yathesis}
 \end{preamblecode}
 \end{dbexample}
+
+\subsection{Profondeur de la numérotation}\label{sec-profondeur-de-la}
+\index{profondeur!numérotation des paragraphes}%
+\index{numérotation!des paragraphes!profondeur}%
+
+Par défaut, la numérotation des paragraphes a pour \enquote{niveau de
+  profondeur} les sous-sections. Autrement dit, seuls les titres des parties
+(éventuelles), chapitres, sections et sous-sections sont numérotés.  L'option
+\refKey{secnumdepth} suivante permet de spécifier un autre niveau de
+profondeur.
+%
+{%
+  \tcbset{before lower=\vspace*{\baselineskip}\par}
+  \begin{docKey}{secnumdepth}{=\docValue{part}\textbar\docValue{chapter}\textbar\docValue{section}\textbar\docValue{subsection}\textbar\docValue{subsubsection}\textbar\docValue{paragraph}\textbar\docValue{subparagraph}}{pas
+      de valeur par défaut, initialement \docValue{subsection}}
+    \indexdef{profondeur!numérotation des paragraphes}%
+    \indexdef{numérotation des paragraphes!profondeur}%
+    Cette clé permet de modifier le \enquote{niveau de profondeur} de la
+    numérotation des paragraphes jusqu'aux, respectivement : parties,
+    chapitres, sections, sous-sections, sous-sous-sections, paragraphes,
+    sous-paragraphes.
+  \end{docKey}
+}
+
+\subsection{Espace interligne}\label{sec-interligne}
+\index{espace!interligne}%
+
+L'interligne du document est par défaut \enquote{simple} mais, au moyen de
+l'option \refKey{space} suivante, il est possible de spécifier un interligne
+\enquote{un et demi} ou \enquote{double}.
+
+\begin{docKey}{space}{=\docValue{single}\textbar\docValue{onehalf}\textbar\docValue{double}}{pas de valeur par défaut,
+    initialement \docValue{single}}
+  \indexdef{espace!interligne}%
+  Cette clé permet de spécifier un interligne \docValue{single} (simple),
+  \docValue{onehalf} (un et demi) ou \docValue{double} (double).
+\end{docKey}
+
+\begin{dbwarning}{Option d'interligne : seulement dans la partie
+    principale}{space-setspace}
+  Contrairement à l'option \refKey{setspace} qui a un effet (semi-)global et
+  prend effet dès le début du document, l'option \refKey{space} ne prend effet
+  qu'à la partie principale du document (cf. \vref{cha-corps}) et se termine
+  avec elle, avant la partie annexe (cf. \vref{cha-annexes}).
+\end{dbwarning}
+
+Si on souhaite changer d'interligne ailleurs dans le mémoire, on recourra aux
+commandes du \Package*{setspace} \aside*{chargé par la \yatCl}.
+
+\subsection{Tables des matières locales automatiques}
+\label{sec-localtoc}%
+\index{table des matières!locale}%
+
+%
+\changes{v0.99o}{2016-10-30}{Nouvelle option de classe \protect\refKey{localtocs}
+  permettant de faire automatiquement débuter les chapitres par leurs tables des
+  matières locales}%
+
+\begin{docKey}[][doc new=2016-10-30]{localtocs}{}{pas de valeur par défaut, pas
+    de valeur initiale} 
+  \indexdef{table des matières!locale}%
+  Cette clé fait automatiquement débuter les chapitres de la partie
+  principale\footnote{C'est-à-dire de \refCom{mainmatter} jusqu'à
+    \refCom{backmatter}.} par leurs tables des matières locales.
+\end{docKey}
+
+Par défaut, les tables des matières locales générées grâce à la clé
+\refKey{localtocs} ont comme \enquote{niveau de profondeur} les
+sous-sections\footnote{Ce niveau est donc par défaut identique à celui des
+  \hyperref[sec-table-des-matieres]{tables des matières
+    \enquote{globales}}.}. Il est possible d'en spécifier un autre grâce à la
+clé \refKey{localtocs/depth}.
+
+{%
+  \tcbset{before lower=\vspace*{.5\baselineskip}\par}
+  \begin{docKey}[][doc
+    new=2016-10-30]{localtocs/depth}{=\docValue{section}\textbar\docValue{subsection}\textbar\docValue{subsubsection}\textbar\docValue{paragraph}\textbar\docValue{subparagraph}}{par
+      défaut \docValue{subsection}, pas de valeur initiale}
+    \index{table des matières!locale!profondeur}%
+    \index{profondeur!table des matières!locale}%
+    Cette clé :
+    \begin{enumerate}
+    \item actionne la clé \refKey{localtocs} ;
+    \item modifie le \enquote{niveau de profondeur} des tables des matières
+      locales, respectivement jusqu'aux : sections, sous-sections,
+      sous-sous-sections, paragraphes, sous-paragraphes\footnote{La clé
+        \refKey{localtocs/depth} ne peut pas prendre comme valeurs
+        \docValue{part} ou \docValue{chapter} puisque les tables des matières
+        \emph{locales aux chapitres} ne peuvent être de \enquote{niveau de
+          profondeur} \emph{supérieur ou égal} aux chapitres.}.
+    \end{enumerate}
+
+\end{docKey}
+}
+
+\begin{dbexample}{Tables des matières locales automatiques}{}
+  \indexex{table des matières!locale}%
+  Pour que chaque chapitre de la partie principale du mémoire débute
+  automatiquement par sa table des matières locale, il suffit de passer l'option
+  suivante à la \yatCl{}.
+\begin{preamblecode}
+\documentclass[localtocs]{yathesis}
+\end{preamblecode}
+  
+  Dans l'exemple précédent, les tables des matières locales vont jusqu'aux
+  sous-sections. Pour qu'elles aillent par exemple jusqu'aux sous-sous-sections,
+  on recourra à :
+\begin{preamblecode}
+\documentclass[localtocs/depth=subsubsection]{yathesis}
+\end{preamblecode}
+\end{dbexample}
+
+La \yatCl{} fournit aussi des commandes permettant d'activer ou de désactiver
+semi-globalement ou localement l'insertion automatique de tables des matières
+locales et ce, indépendamment du recours à l'option \refKey{localtocs}.
+
+\begin{docCommand}[doc new=2016-10-30]{startlocaltocs}{}
+  \index{table des matières!locale}%
+  Cette commande est une bascule \emph{activant} jusqu'à nouvel ordre
+  l'insertion automatique de tables des matières locales.
+\end{docCommand}
+
+\begin{docCommand}[doc new=2016-10-30]{stoplocaltocs}{}
+  \index{table des matières!locale}%
+  Cette commande est une bascule \emph{désactivant} jusqu'à nouvel ordre
+  l'insertion automatique de tables des matières locales.
+\end{docCommand}
+
+\begin{docCommand}[doc new=2016-10-30]{nextwithlocaltoc}{}
+  \index{table des matières!locale}%
+  Cette commande \emph{active}, pour le \emph{chapitre suivant seulement},
+  l'insertion automatique de tables des matières locales.
+\end{docCommand}
+
+\begin{docCommand}[doc new=2016-10-30]{nextwithoutlocaltoc}{}
+  \index{table des matières!locale}%
+  Cette commande \emph{désactive}, pour le \emph{chapitre suivant seulement},
+  l'insertion automatique de tables des matières locales.
+\end{docCommand}
+
+Les tables des matières locales sont introduites par une section (non numérotée)
+intitulée \translateexpression{localtocname}.
+
+\subsection{Bibliographies locales automatiques}
+\label{sec-localbibs}%
+\index{bibliographie!locale}%
+
+%
+\changes{v0.99o}{2016-10-30}{Nouvelle option de classe
+  \protect\refKey{localbibs} permettant de faire automatiquement finir les
+  chapitres par leurs bibliographies locales}%
+
+\begin{docKey}[][doc new=2016-10-30]{localbibs}{}{pas de valeur par défaut, pas
+    de valeur initiale} 
+  \indexdef{bibliographie!locale}%
+  Cette clé fait automatiquement finir les chapitres (contenant au moins une
+  référence bibliographique) par leurs bibliographies locales.
+\end{docKey}
+
+\begin{docKey}[][doc new=2016-10-30]{localbibs*}{}{pas de valeur par défaut, pas
+    de valeur initiale} 
+  \indexdef{bibliographie!locale}%
+  Cette clé a le même effet que \refKey{localbibs} sauf que l'option
+  \docAuxKey{defernumbers} du \Package*{biblatex} est alors
+  activée\footnote{Cf. la documentation de \package*{biblatex} pour plus de
+    détails sur cette option et éventuellement une discussion sur ses avantages
+    et inconvénients à \url{http://tex.stackexchange.com/q/332431/18401}.}.
+\end{docKey}
+
+\begin{dbwarning}{Package \package*{biblatex} nécessaire pour les bibliographies
+    locales}{}
+  Cette fonctionnalité d'ajout automatique des bibliographies locales en fin de
+  chapitres repose sur le \Package{biblatex} (cf. \vref{sec-refer-bibl}):
+  \begin{itemize}
+  \item donc nécessite, pour la bibliographie de la thèse, le recours à ce
+    package \alert{à l'exclusion de tout autre outil de production de
+      bibliographie} (notamment \hologo{BibTeX}) ;
+  \item notamment sur sa notion de segments de bibliographies et plus
+    particulièrement sur l'option |refsegment=chapter| qui devra être prise
+    compte si d'autres segments sont souhaités.
+  \end{itemize}
+\end{dbwarning}
+
+\begin{dbexample}{Bibliographies locales automatiques}{}
+  \indexex{bibliographie!locale}%
+  Pour que chaque chapitre finisse automatiquement par sa bibliographie locale,
+  il suffit de passer l'option suivante à la \yatCl{}.
+\begin{preamblecode}
+\documentclass[localbibs]{yathesis}
+\end{preamblecode}
+\end{dbexample}
+
+Les bibliographies locales sont introduites par une section (non numérotée)
+intitulée \translateexpression{localbibname}.
 
 \subsection{Versions du mémoire}\label{sec-versions}
 \index{version du mémoire}%
@@ -341,175 +535,6 @@ Les documents composés avec la \yatCl{} peuvent avoir deux formats de sortie :
   cibles ne figureront nulle part en sortie \enquote{papier}.
 \end{dbwarning}
 
-\subsection{Tables des matières locales automatiques}
-\label{sec-localtoc}%
-\index{table des matières!locale}%
-
-%
-\changes{v0.99o}{2016-10-24}{Nouvelle option de classe \protect\refKey{localtocs}
-  permettant de faire automatiquement débuter les chapitres par leurs tables des
-  matières locales}%
-
-\begin{docKey}[][doc new=2016-10-24]{localtocs}{}{pas de valeur par défaut, pas
-    de valeur initiale} 
-  \indexdef{table des matières!locale}%
-  Cette clé fait automatiquement débuter les chapitres de la partie
-  principale\footnote{C'est-à-dire de \refCom{mainmatter} jusqu'à
-    \refCom{backmatter}.} par leurs tables des matières locales.
-\end{docKey}
-
-Par défaut, les tables des matières locales générées grâce à la clé
-\refKey{localtocs} ont comme \enquote{niveau de profondeur} les
-sous-sections\footnote{Ce niveau est donc par défaut identique à celui des
-  \hyperref[sec-table-des-matieres]{tables des matières
-    \enquote{globales}}.}. Il est possible d'en spécifier un autre grâce à la
-clé \refKey{localtocs/depth}.
-
-{%
-  \tcbset{before lower=\vspace*{.5\baselineskip}\par}
-  \begin{docKey}[][doc
-    new=2016-10-24]{localtocs/depth}{=\docValue{section}\textbar\docValue{subsection}\textbar\docValue{subsubsection}\textbar\docValue{paragraph}\textbar\docValue{subparagraph}}{par
-      défaut \docValue{subsection}, pas de valeur initiale}
-    \index{table des matières!locale!profondeur}%
-    \index{profondeur!table des matières!locale}%
-    Cette clé :
-    \begin{enumerate}
-    \item actionne la clé \refKey{localtocs} ;
-    \item modifie le \enquote{niveau de profondeur} des tables des matières
-      locales, respectivement jusqu'aux : sections, sous-sections,
-      sous-sous-sections, paragraphes, sous-paragraphes\footnote{La clé
-        \refKey{localtocs/depth} ne peut pas prendre comme valeurs
-        \docValue{part} ou \docValue{chapter} puisque les tables des matières
-        \emph{locales aux chapitres} ne peuvent être de \enquote{niveau de
-          profondeur} \emph{supérieur ou égal} aux chapitres.}.
-    \end{enumerate}
-
-\end{docKey}
-}
-
-\begin{dbexample}{Tables des matières locales automatiques}{}
-  \indexex{table des matières!locale}%
-  Pour que chaque chapitre de la partie principale du mémoire débute
-  automatiquement par sa table des matières locale, il suffit de passer l'option
-  suivante à la \yatCl{}.
-\begin{preamblecode}
-\documentclass[localtocs]{yathesis}
-\end{preamblecode}
-  
-  Dans l'exemple précédent, les tables des matières locales vont jusqu'aux
-  sous-sections. Pour qu'elles aillent par exemple jusqu'aux sous-sous-sections,
-  on recourra à :
-\begin{preamblecode}
-\documentclass[localtocs/depth=subsubsection]{yathesis}
-\end{preamblecode}
-\end{dbexample}
-
-La \yatCl{} fournit aussi des commandes permettant d'activer ou de désactiver
-semi-globalement ou localement l'insertion automatique de tables des matières
-locales et ce, indépendamment du recours à l'option \refKey{localtocs}.
-
-\begin{docCommand}[doc new=2016-10-24]{startlocaltocs}{}
-  \index{table des matières!locale}%
-  Cette commande est une bascule \emph{activant} jusqu'à nouvel ordre
-  l'insertion automatique de tables des matières locales.
-\end{docCommand}
-
-\begin{docCommand}[doc new=2016-10-24]{stoplocaltocs}{}
-  \index{table des matières!locale}%
-  Cette commande est une bascule \emph{désactivant} jusqu'à nouvel ordre
-  l'insertion automatique de tables des matières locales.
-\end{docCommand}
-
-\begin{docCommand}[doc new=2016-10-24]{nextwithlocaltoc}{}
-  \index{table des matières!locale}%
-  Cette commande \emph{active}, pour le \emph{chapitre suivant seulement},
-  l'insertion automatique de tables des matières locales.
-\end{docCommand}
-
-\begin{docCommand}[doc new=2016-10-24]{nextwithoutlocaltoc}{}
-  \index{table des matières!locale}%
-  Cette commande \emph{désactive}, pour le \emph{chapitre suivant seulement},
-  l'insertion automatique de tables des matières locales.
-\end{docCommand}
-
-\subsection{Bibliographies locales automatiques}
-\label{sec-localbibs}%
-\index{bibliographie!locale}%
-
-%
-\changes{v0.99o}{2016-10-24}{Nouvelle option de classe
-  \protect\refKey{localbibs} permettant de faire automatiquement finir les
-  chapitres par leurs bibliographies locales}%
-
-\begin{docKey}[][doc new=2016-10-24]{localbibs}{}{pas de valeur par défaut, pas
-    de valeur initiale} 
-  \indexdef{bibliographie!locale}%
-  Cette clé fait automatiquement finir les chapitres (contenant au moins une
-  référence bibliographique) par leurs bibliographies locales.
-\end{docKey}
-
-\begin{docKey}[][doc new=2016-10-24]{localbibs*}{}{pas de valeur par défaut, pas
-    de valeur initiale} 
-  \indexdef{bibliographie!locale}%
-  Cette clé a le même effet que \refKey{localbibs} sauf que l'option
-  \docAuxKey{defernumbers} du \Package*{biblatex} est alors
-  activée\footnote{Cf. la documentation de \package*{biblatex} pour plus de
-    détails sur cette option et éventuellement une discussion sur ses avantages
-    et inconvénients à \url{http://tex.stackexchange.com/q/332431/18401}.}.
-\end{docKey}
-
-\begin{dbwarning}{Package \package*{biblatex} nécessaire pour les bibliographies
-    locales}{}
-  Cette fonctionnalité d'ajout automatique des bibliographies locales en fin de
-  chapitres repose sur le \Package{biblatex} (cf. \vref{sec-refer-bibl}):
-  \begin{itemize}
-  \item donc nécessite, pour la bibliographie de la thèse, le recours à ce
-    package \alert{à l'exclusion de tout autre outil de production de
-      bibliographie} (notamment \hologo{BibTeX}) ;
-  \item notamment sur sa notion de segments de bibliographies et plus
-    particulièrement sur l'option |refsegment=chapter| qui devra être prise
-    compte si d'autres segments sont souhaités.
-  \end{itemize}
-\end{dbwarning}
-
-\begin{dbexample}{Bibliographies locales automatiques}{}
-  \indexex{bibliographie!locale}%
-  Pour que chaque chapitre finisse automatiquement par sa bibliographie locale,
-  il suffit de passer l'option suivante à la \yatCl{}.
-\begin{preamblecode}
-\documentclass[localbibs]{yathesis}
-\end{preamblecode}
-\end{dbexample}
-
-Les bibliographies locales sont introduites par une section intitulée
-\translateexpression{localbibname}.
-
-\subsection{Nombre de laboratoires sur les pages de résumés et de 4\ieme{} de couverture}
-\label{sec-nombre-de-labor}
-\index{résumé}%
-\index{quatrième de couverture}%
-
-Par défaut, seul le laboratoire principal (avec son adresse) est affiché sur les
-pages de résumés et de 4\ieme{} de couverture (cf. \vref{sec-abstract,sec-quatr-de-couv}). Mais la clé
-\refKey{numlaboratories} suivante permet de faire figurer un nombre arbitraire
-de laboratoires parmi ceux définis au moyen de la commande \refCom{laboratory}.%
-%
-\changes{v0.99j}{2014-07-18}{Nouvelle clé \protect\refKey{numlaboratories}
-  permettant de spécifier le nombre ($\geqslant 0$) de laboratoires devant
-  figurer sur les pages de résumés et de 4\ieme{} de couverture}%
-
-\begin{docKey}{numlaboratories}{=\meta{nombre}}{pas de valeur par
-    défaut, initialement \docValue*{1}}
-  \index{laboratoire!multiple!nombre}%
-  Cette clé permet de spécifier le \meta{nombre} (entier positif ou nul) de
-  laboratoires dont les noms et adresses doivent figurer sur la page de résumés
-  et de 4\ieme{} de couverture. Ces laboratoires sont pris dans l'ordre de
-  leurs définitions au moyen de la commande \refCom{laboratory}.
-\end{docKey}
-
-Pour gagner de la place sur les pages concernées, la composition des noms et
-adresses des laboratoires est un peu condensée si \meta{nombre} dépasse $1$.
-
 \subsection{Style des têtes de chapitres}\label{sec-style-des-tetes}
 
 Pour gérer les têtes de chapitres, la \yatCl{} s'appuie sur le
@@ -535,6 +560,31 @@ package\footnote{Par souci de compatibilité ascendante, la clé désormais
     usuelles de la \Class{book}.
   \end{docKey}
 }
+
+\subsection{Habilitations à diriger les recherches}
+\label{sec-hdr}%
+% \index{hdr (habilitation)@\acrshort{hdr} (habilitation)}%
+
+Grâce à sa clé \refKey{hdr}, la \yatCl{} peut être utilisée pour les
+habilitations à diriger les recherches.
+
+\begin{docKey}{hdr}{=\docValue{true}\textbar\docValue{false}}{par défaut
+    \docValue{true}, initialement \docValue{false}}
+  % \indexdef{hdr (habilitation)@\acrshort{hdr} (habilitation)}%
+  \changes{v0.99f}{2014-07-11}{Nouvelle clé \protect\refKey{hdr} permettant de
+    d'utiliser la \yatCl{} pour une habilitation à diriger les recherches}%
+  %
+  Cette clé spécifie que le mémoire est pour une habilitation à diriger les
+  recherches.
+\end{docKey}
+
+Le seul effet de la clé \refKey{hdr} est d'adapter un certain nombre
+d'expressions clés de la \yatCl{}, en remplaçant par exemple
+\enquote{\foreignlanguage{french}{\translate{thesisdefendedby}}} par
+\enquote{\foreignlanguage{french}{\translate{thesisdefendedby-hdr}}}. Les
+expressions propres aux habilitations à diriger les recherches sont celles dont
+les labels sont suffixés par \enquote{\texttt{-hdr}} dans le
+\vref{tab-expressions-cles}.
 
 \subsection{Expressions séparant corporations et affiliations des membres du jury}
 \label{sec-expr-separ-les}%
@@ -647,29 +697,31 @@ redéfinies, globalement ou localement.
 \end{bodycode}
 \end{dbexample}
 
-\subsection{Habilitations à diriger les recherches}
-\label{sec-hdr}%
-\index{\acrshort{hdr} (habilitation)}%
+\subsection{Nombre de laboratoires sur les pages de résumés et de 4\ieme{} de couverture}
+\label{sec-nombre-de-labor}
+\index{résumé}%
+\index{quatrième de couverture}%
 
-Grâce à sa clé \refKey{hdr}, la \yatCl{} peut être utilisée pour
-les habilitations à diriger les recherches.
+Par défaut, seul le laboratoire principal (avec son adresse) est affiché sur les
+pages de résumés et de 4\ieme{} de couverture (cf. \vref{sec-abstract,sec-quatr-de-couv}). Mais la clé
+\refKey{numlaboratories} suivante permet de faire figurer un nombre arbitraire
+de laboratoires parmi ceux définis au moyen de la commande \refCom{laboratory}.%
+%
+\changes{v0.99j}{2014-07-18}{Nouvelle clé \protect\refKey{numlaboratories}
+  permettant de spécifier le nombre ($\geqslant 0$) de laboratoires devant
+  figurer sur les pages de résumés et de 4\ieme{} de couverture}%
 
-\begin{docKey}{hdr}{=\docValue{true}\textbar\docValue{false}}{par défaut
-    \docValue{true}, initialement \docValue{false}}
-  \indexdef{\acrshort{hdr} (habilitation)}%
-  \changes{v0.99f}{2014-07-11}{Nouvelle clé \protect\refKey{hdr} permettant de
-    d'utiliser la \yatCl{} pour une \gls{hdr}}%
-  %
-  Cette clé spécifie que le document est une habilitation à diriger les
-  recherches.
+\begin{docKey}{numlaboratories}{=\meta{nombre}}{pas de valeur par
+    défaut, initialement \docValue*{1}}
+  \index{laboratoire!multiple!nombre}%
+  Cette clé permet de spécifier le \meta{nombre} (entier positif ou nul) de
+  laboratoires dont les noms et adresses doivent figurer sur la page de résumés
+  et de 4\ieme{} de couverture. Ces laboratoires sont pris dans l'ordre de
+  leurs définitions au moyen de la commande \refCom{laboratory}.
 \end{docKey}
 
-Le seul effet de la clé \refKey{hdr} est d'adapter un certain nombre
-d'expressions clés de la \yatCl{}, en remplaçant par exemple \enquote{Thèse
-  présentée par} par \enquote{Habilitation à diriger les recherches présentée
-  par}. Les expressions propres aux habilitations à diriger les recherches sont
-celles dont le label est suffixé par \enquote{\texttt{-hdr}} dans le
-\vref{tab-expressions-cles}.
+Pour gagner de la place sur les pages concernées, la composition des noms et
+adresses des laboratoires est un peu condensée si \meta{nombre} dépasse $1$.
 
 \section{Options à passer aux packages chargés par la \yatCl}
 \label{sec-options-passer-aux}%
@@ -714,20 +766,19 @@ peuvent être passées à leurs options).
 
 \begin{docKey}{graphicx}{=\marg{option(s)}}{pas valeur par défaut,
     initialement vide}
-  \index{option!de package chargé par \yatcl!\package*{graphicx}}%
+  \index{option!de package chargé par \yatcl!graphicx@\package*{graphicx}}%
   Cette option permet de passer une ou plusieurs \meta{option(s)} au
   \Package{graphicx}.
 \end{docKey}
 \begin{docKey}{adjustbox}{=\marg{option(s)}}{pas valeur par défaut,
     initialement \docValue*{export}}
-  \index{option!de package chargé par \yatcl!\package*{adjustbox}}%
-  % \index{package!\package*{adjustbox}!option}%
+  \index{option!de package chargé par \yatcl!adjustbox@\package*{adjustbox}}%
   Cette option permet de passer une ou plusieurs \meta{option(s)} au
   \Package{adjustbox}.
 \end{docKey}
 \begin{docKey}{setspace}{=\marg{option(s)}}{pas valeur par défaut,
     initialement vide}
-  \index{option!de package chargé par \yatcl!\package*{setspace}}%
+  \index{option!de package chargé par \yatcl!setspace@\package*{setspace}}%
   Cette option permet de passer une ou plusieurs \meta{option(s)} au
   \Package{setspace}.
 
@@ -738,19 +789,19 @@ peuvent être passées à leurs options).
 \end{docKey}
 \begin{docKey}{xcolor}{=\marg{option(s)}}{pas valeur par défaut,
     initialement vide}
-  \index{option!de package chargé par \yatcl!\package*{xcolor}}%
+  \index{option!de package chargé par \yatcl!xcolor@\package*{xcolor}}%
   Cette option permet de passer une ou plusieurs \meta{option(s)} au
   \Package{xcolor}.
 \end{docKey}
 \begin{docKey}{datatool}{=\marg{option(s)}}{pas valeur par défaut,
     initialement vide}
-  \index{option!de package chargé par \yatcl!\package*{datatool}}%
+  \index{option!de package chargé par \yatcl!datatool@\package*{datatool}}%
   Cette option permet de passer une ou plusieurs \meta{option(s)} au
   \Package{datatool}.
 \end{docKey}
 \begin{docKey}{titleps}{=\marg{option(s)}}{pas valeur par défaut, initialement
     vide}
-  \index{option!de package chargé par \yatcl!\package*{titleps}}%
+  \index{option!de package chargé par \yatcl!titleps@\package*{titleps}}%
   % \changes{v0.99j}{2014-07-18}{Clé \protect\refAux{titleps} remplacée par
   % (et alias de) la clé \protect\refKey{titlesec}}%
   Cette option permet de passer une ou plusieurs \meta{option(s)} au
@@ -758,19 +809,20 @@ peuvent être passées à leurs options).
 \end{docKey}
 \begin{docKey}{draftwatermark}{=\marg{option(s)}}{pas valeur par défaut,
     initialement vide}
-  \index{option!de package chargé par \yatcl!\package*{draftwatermark}}%
+  \index{option!de package chargé par
+    \yatcl!draftwatermark@\package*{draftwatermark}}%
   Cette option permet de passer une ou plusieurs \meta{option(s)} au
   \Package{draftwatermark}.
 \end{docKey}
 \begin{docKey}{babel}{=\marg{option(s)}}{pas valeur par défaut,
     initialement vide}
-  \index{option!de package chargé par \yatcl!\package*{babel}}%
+  \index{option!de package chargé par \yatcl!babel@\package*{babel}}%
   Cette option permet de passer une ou plusieurs \meta{option(s)} au
   \Package{babel}.
 \end{docKey}
 \begin{docKey}{datetime}{=\marg{option(s)}}{pas valeur par défaut,
     initialement \docValue*{nodayofweek}}
-  \index{option!de package chargé par \yatcl!\package*{datetime}}%
+  \index{option!de package chargé par \yatcl!datetime@\package*{datetime}}%
   Cette option permet de passer une ou plusieurs \meta{option(s)} au
   \Package{datetime}.
 \end{docKey}
@@ -787,69 +839,69 @@ peuvent être passées à leurs options).
 \end{preamblecode}
 \end{dbexample}
 
-\section{Options de préambule}
-\label{sec-options-de-preambule}
-
-Pour des raisons techniques, les options de la \yatCl listées à la
-\vref{options-classe}, ne peuvent être passées qu'en argument optionnel de
-\docAuxCommand{documentclass}. Les options de la présente section peuvent être
-passées indifféremment :
-\begin{itemize}
-\item en argument optionnel de \docAuxCommand{documentclass} ;
-\item en préambule, en argument de la commande \refCom{yadsetup}.
-\end{itemize}
-
-\begin{docCommand}{yadsetup}{\marg{options}}
-  Cette commande permet de spécifier certaines \meta{options} de la \yatCl.
-\end{docCommand}
-
-\subsection{Profondeur de la numérotation}\label{sec-profondeur-de-la}
-\index{profondeur!numérotation des paragraphes}%
-\index{numérotation!des paragraphes!profondeur}%
-
-Par défaut, la numérotation des paragraphes a pour \enquote{niveau de
-  profondeur} les sous-sections. Autrement dit, seuls les titres des parties
-(éventuelles), chapitres, sections et sous-sections sont numérotés.  L'option
-\refKey{secnumdepth} suivante permet de spécifier un autre niveau de
-profondeur.
+% \section{Options de préambule}
+% \label{sec-options-de-preambule}
 %
-{%
-  \tcbset{before lower=\vspace*{\baselineskip}\par}
-  \begin{docKey}{secnumdepth}{=\docValue{part}\textbar\docValue{chapter}\textbar\docValue{section}\textbar\docValue{subsection}\textbar\docValue{subsubsection}\textbar\docValue{paragraph}\textbar\docValue{subparagraph}}{pas
-      de valeur par défaut, initialement \docValue{subsection}}
-    \indexdef{profondeur!numérotation des paragraphes}%
-    \indexdef{numérotation des paragraphes!profondeur}%
-    Cette clé permet de modifier le \enquote{niveau de profondeur} de la
-    numérotation des paragraphes jusqu'aux, respectivement : parties,
-    chapitres, sections, sous-sections, sous-sous-sections, paragraphes,
-    sous-paragraphes.
-  \end{docKey}
-}
-
-\subsection{Espace interligne}\label{sec-interligne}
-\index{espace!interligne}%
-
-L'interligne du document est par défaut \enquote{simple} mais, au moyen de
-l'option \refKey{space} suivante, il est possible de spécifier un interligne
-\enquote{un et demi} ou \enquote{double}.
-
-\begin{docKey}{space}{=\docValue{single}\textbar\docValue{onehalf}\textbar\docValue{double}}{pas de valeur par défaut,
-    initialement \docValue{single}}
-  \indexdef{espace!interligne}%
-  Cette clé permet de spécifier un interligne \docValue{single} (simple),
-  \docValue{onehalf} (un et demi) ou \docValue{double} (double).
-\end{docKey}
-
-\begin{dbwarning}{Option d'interligne : seulement dans la partie
-    principale}{space-setspace}
-  Contrairement à l'option \refKey{setspace} qui a un effet (semi-)global et
-  prend effet dès le début du document, l'option \refKey{space} ne prend effet
-  qu'à la partie principale du document (cf. \vref{cha-corps}) et se termine
-  avec elle, avant la partie annexe (cf. \vref{cha-annexes}).
-\end{dbwarning}
-
-Si on souhaite changer d'interligne ailleurs dans le mémoire, on recourra aux
-commandes du \Package*{setspace} \aside*{chargé par la \yatCl}.
+% Pour des raisons techniques, les options de la \yatCl listées à la
+% \vref{options-classe}, ne peuvent être passées qu'en argument optionnel de
+% \docAuxCommand{documentclass}. Les options de la présente section peuvent être
+% passées indifféremment :
+% \begin{itemize}
+% \item en argument optionnel de \docAuxCommand{documentclass} ;
+% \item en préambule, en argument de la commande \refCom{yadsetup}.
+% \end{itemize}
+%
+% \begin{docCommand}{yadsetup}{\marg{options}}
+%   Cette commande permet de spécifier certaines \meta{options} de la \yatCl.
+% \end{docCommand}
+%
+% \subsection{Profondeur de la numérotation}\label{sec-profondeur-de-la}
+% \index{profondeur!numérotation des paragraphes}%
+% \index{numérotation!des paragraphes!profondeur}%
+%
+% Par défaut, la numérotation des paragraphes a pour \enquote{niveau de
+%   profondeur} les sous-sections. Autrement dit, seuls les titres des parties
+% (éventuelles), chapitres, sections et sous-sections sont numérotés.  L'option
+% \refKey{secnumdepth} suivante permet de spécifier un autre niveau de
+% profondeur.
+% %
+% {%
+%   \tcbset{before lower=\vspace*{\baselineskip}\par}
+%   \begin{docKey}{secnumdepth}{=\docValue{part}\textbar\docValue{chapter}\textbar\docValue{section}\textbar\docValue{subsection}\textbar\docValue{subsubsection}\textbar\docValue{paragraph}\textbar\docValue{subparagraph}}{pas
+%       de valeur par défaut, initialement \docValue{subsection}}
+%     \indexdef{profondeur!numérotation des paragraphes}%
+%     \indexdef{numérotation des paragraphes!profondeur}%
+%     Cette clé permet de modifier le \enquote{niveau de profondeur} de la
+%     numérotation des paragraphes jusqu'aux, respectivement : parties,
+%     chapitres, sections, sous-sections, sous-sous-sections, paragraphes,
+%     sous-paragraphes.
+%   \end{docKey}
+% }
+%
+% \subsection{Espace interligne}\label{sec-interligne}
+% \index{espace!interligne}%
+%
+% L'interligne du document est par défaut \enquote{simple} mais, au moyen de
+% l'option \refKey{space} suivante, il est possible de spécifier un interligne
+% \enquote{un et demi} ou \enquote{double}.
+%
+% \begin{docKey}{space}{=\docValue{single}\textbar\docValue{onehalf}\textbar\docValue{double}}{pas de valeur par défaut,
+%     initialement \docValue{single}}
+%   \indexdef{espace!interligne}%
+%   Cette clé permet de spécifier un interligne \docValue{single} (simple),
+%   \docValue{onehalf} (un et demi) ou \docValue{double} (double).
+% \end{docKey}
+%
+% \begin{dbwarning}{Option d'interligne : seulement dans la partie
+%     principale}{space-setspace}
+%   Contrairement à l'option \refKey{setspace} qui a un effet (semi-)global et
+%   prend effet dès le début du document, l'option \refKey{space} ne prend effet
+%   qu'à la partie principale du document (cf. \vref{cha-corps}) et se termine
+%   avec elle, avant la partie annexe (cf. \vref{cha-annexes}).
+% \end{dbwarning}
+%
+% Si on souhaite changer d'interligne ailleurs dans le mémoire, on recourra aux
+% commandes du \Package*{setspace} \aside*{chargé par la \yatCl}.
 
 \section{Commandes et options de commandes de la \yatCl}
 \index{commandes de personnalisation!lieu de spécification}%

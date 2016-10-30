@@ -12,7 +12,7 @@
 %% See http://www.latex-project.org/lppl.txt
 %% -----------------------------------------------------------------------
 \def\fileversion{v0.99o}
-\def\filedate{2016/10/24}
+\def\filedate{2016/10/30}
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesClass{yathesis}[\filedate\space\fileversion\space Yet another class for writing thesis (DB)]
 \RequirePackage{pgfopts}[2011/06/02]%
@@ -4018,6 +4018,7 @@
 \expression{phone}{\Telefon}{\Telefon}%
 \expression{fax}{\Fax}{\Fax}%
 \expression{caution}{Avertissement}{Caution}%
+\expression{localbibname}{Bibliographie du pr\'esent chapitre}{Bibliography of the current chapter}%
 \expression{draft}{brouillon}{draft}%
 \expression{prepared-at}{Cette th\`ese a \'et\'e pr\'epar\'ee au}{This
   thesis has been prepared at}%
@@ -4070,6 +4071,7 @@
 \expression{referees}{Rapporteur}{Referee}%
 \expression{referees-pl}{Rapporteurs}{Referees}%
 \expression{website}{Site}{Web Site}%
+\expression{localtocname}{Sommaire du pr\'esent chapitre}{Outline of the current chapter}%
 \expression{defendedon}{Soutenue le}{Defended on}%
 \expression{speciality}{Sp\'ecialit\'e}{Speciality}%
 \expression{supervisedby}{Th\`ese dirig\'ee par}{Thesis supervised by}%
@@ -4088,8 +4090,6 @@ du}{Work in progress as of}%
 \expression{inprogressfoottext}{\translate{lbl-versiondate}}{\translate{lbl-versiondate}}%
 \expression{submittedfoottext}{Version soumise en date du}{Submitted work
   as of}%
-\expression{localtocname}{Sommaire du pr\'esent chapitre}{Outline of the current chapter}%
-\expression{localbibname}{Bibliographie du chapitre}{Bibliography of the current chapter}%
 %% ----------------------------------------------------------------------------------
 %% This work may be distributed and/or modified under the
 %% conditions of the LaTeX Project Public License, either version 1.3

@@ -3,8 +3,7 @@
 \indexsee{préliminaire}{liminaire}%
 \index{partie!liminaire}%
 
-Cette section détaille les commandes permettant de préparer et produire les
-\glspl{liminaire}, à savoir :
+La \gls{liminaire} de la thèse comprend :
 \begin{enumerate}
 \item la page (éventuelle) de clause de non-responsabilité ;
 \item la page (éventuelle) des mots clés de la thèse ;
@@ -14,7 +13,7 @@ Cette section détaille les commandes permettant de préparer et produire les
 \item la page de résumés dans les langues principale et secondaire ;
 \item les (éventuels) avertissement, remerciements, résumé substantiel en
   français, avant-propos, etc.
-\item les listes (éventuelles), commune ou distinctes :
+\item la ou les listes (éventuelles), commune ou distinctes :
   \begin{itemize}
   \item des sigles et acronymes\footnote{Par commodité, nous ne parlerons plus
       dans la suite que d'acronymes mais ce qui les concernera s'appliquera de
@@ -230,8 +229,8 @@ par défaut si elle ne convient pas, on pourra recourir à la commande
 \begin{docCommand}{frontepigraph}{\oarg{langue}\marg{épigraphe}\marg{auteur}}
   \indexdef{épigraphe}%
   Cette commande, à employer autant de fois que souhaité\hauteurpage{}, permet
-  de préparer une épigraphe destinée à apparaître sur une \gls{liminaire}
-  dédiée.
+  de préparer une épigraphe destinée à apparaître sur une page dédiée de la
+  \gls{liminaire}.
 
   Si l'épigraphe est exprimée dans une \meta{langue} \aside{connue du
     \Package{babel}} autre que la langue principale du document, on peut le
@@ -285,22 +284,22 @@ par défaut si elle ne convient pas, on pourra recourir à la commande
 \index{résumé}%
 \index{avant-propos}%
 
-Les \glspl{liminaire} d'un mémoire de thèse peuvent contenir un avertissement,
-des remerciements, un résumé substantiel en français
-(cf. \vref{wa-frenchabstract}), un avant-propos, etc.
-à considérer et à composer comme des chapitres \enquote{ordinaires}.
+La \gls{liminaire} d'un mémoire de thèse peut contenir un avertissement, des
+remerciements, un résumé substantiel en français (cf. \vref{wa-frenchabstract}),
+un avant-propos, etc.  à considérer et à composer comme des chapitres
+\enquote{ordinaires}.
 
-\begin{dbwarning}{Chapitres \enquote{ordinaires} des \glspl{liminaire}
+\begin{dbwarning}{Chapitres \enquote{ordinaires} de la \gls{liminaire}
     automatiquement \emph{non} numérotés}{}
   \index{chapitre!non numéroté}%
-  Les chapitres \enquote{ordinaires} des \glspl{liminaire} doivent être
+  Les chapitres \enquote{ordinaires} de la \gls{liminaire} doivent être
   introduits au moyen de la commande usuelle \docAuxCommand{chapter}, sous sa
   forme \emph{non} étoilée : puisqu'ils seront situés dans la partie liminaire
   du mémoire, ces chapitres seront automatiquement \emph{non} numérotés.
 \end{dbwarning}
 
-%\begin{dbremark}{\protect\Glspl{titrecourant} des chapitres des
-%  \protect\glspl{liminaire}}{titrecourant}%
+%\begin{dbremark}{\protect\Glspl{titrecourant} des chapitres de la
+%  \protect\gls{liminaire}}{titrecourant}%
 %  Les chapitres \enquote{ordinaires} sont pourvus de \glspl{titrecourant}
 %  si (et seulement si) ils figurent après la page dédiée aux résumés
 %  (cf. \vref{sec-abstract}).
@@ -606,7 +605,7 @@ les clés disponibles sont les deux suivantes.
 \begin{dbremark}{Tables des matières multiples}{}
   \index{table des matières!globale!multiple}%
   Si la table des matières est longue, il est conseillé de la placer en fin de
-  document mais de faire alors figurer, en \glspl{liminaire}, un sommaire
+  document mais de faire alors figurer, en \gls{liminaire}, un sommaire
   c'est-à-dire par une table des matières allégée.
 
   À cet effet, la \yatCl{} permet de faire figurer, dans un même document,

@@ -88,8 +88,8 @@ titre\footnote{En outre, les titres et éventuels sous-titres figureront sur les
   \index{auteur!courriel}%
   \index{courriel}%
   \indexdef{courriel!auteur}%
-  \index{mail|see{courriel}}%
-  \index{email|see{courriel}}%
+  \indexsee{mail}{courriel}%
+  \indexsee{email}{courriel}%
   Cette commande définit l'auteur de la thèse. Ses \meta{prénom} et
   \meta{nom} :
   \begin{itemize}
@@ -113,7 +113,7 @@ titre\footnote{En outre, les titres et éventuels sous-titres figureront sur les
       \meta{nom};
     \item \index{caractéristiques de la thèse!liste!auteur}%
       \index{capitales}%
-      \index{majuscules|see{capitales}}%
+      \indexsee{majuscules}{capitales}%
       le \meta{nom} \emph{ne} soit \emph{pas} saisi en capitales (sauf pour la
       ou les majuscules) car il sera automatiquement composé en petites
       capitales.
@@ -243,8 +243,8 @@ de titre\footnote{Le ou les laboratoires apparaissent en outre sur les pages
 %
 \begin{docCommand}{comue}{\oarg{précision(s)}\marg{nom de la
       {\normalfont\ttfamily\acrshort*{comue}}}}
-   \index{caractéristiques de la thèse!liste!\acrshort{comue}}%
-   \indexdef{\acrshort{comue}}%
+   \index{caractéristiques de la thèse!liste!comue@\acrshort{comue}}%
+   \indexdef{comue@\acrshort{comue}}%
   Cette commande définit la \gls{comue}. Celle-ci ne figure que par
   l'intermédiaire de ses logo et \acrshort{url} spécifiés au moyen des clés
   \refKey{logo} et \refKey{url}.
@@ -275,7 +275,7 @@ de titre\footnote{Le ou les laboratoires apparaissent en outre sur les pages
   \index{caractéristiques de la thèse!liste!entreprise}%
   \indexdef{entreprise}%
   \indexsee{thèse industrielle}{entreprise}%
-  \indexsee{\acrshort{cifre}}{entreprise}%
+  \indexsee{cifre@\acrshort{cifre}}{entreprise}%
   Cette commande définit l'entreprise ayant (co)financé la thèse.
   Celle-ci ne devrait être employée qu'en cas de thèse industrielle (par
   exemple dans le cadre d'un dispositif \acrshort{cifre}).
@@ -400,9 +400,9 @@ pages de titre, sauf :
 %
 \begin{docKey}{url}{=\meta{{\normalfont\ttfamily\acrshort*{url}} de l'institut}}{pas de valeur par
     défaut, initialement vide}
-  \indexdef{\acrshort{url}}%
-  \index{laboratoire!\acrshort{url}}%
-  \index{institut!\acrshort{url}}%
+  \indexdef{url@\acrshort{url}}%
+  \index{laboratoire!url@\acrshort{url}}%
+  \index{institut!url@\acrshort{url}}%
   \index{lien hypertexte}%
   Cette option définit l'\acrshort{url} d'un institut. Les noms et éventuels
   logos des instituts sont alors des liens hypertextes pointant vers cette
@@ -417,8 +417,8 @@ pages de titre, sauf :
 %
 \begin{dbwarning}{Caractère \protect\lstinline+\#+ à protéger dans les
     \acrshortpl*{url} d'instituts et entités}{}
-  \index{\acrshort{url}!format}%
-  \index{format!\acrshort{url}}%
+  \index{url@\acrshort{url}!format}%
+  \index{format!url@\acrshort{url}}%
   Au cas (peu probable) où le caractère |#| doive figurer dans ces
   \acrshortpl{url}, il doit être \enquote{protégé} au moyen d'une
   contre-oblique le précédant : |\#|.
@@ -702,26 +702,26 @@ corps de métier) des membres du jury parmi celles prédéfinies par la \yatCl{}
   directeurs de recherche du \gls{cnrs}.
 \end{docKey}
 %
-\begin{docKey}[][doc updated=2016-10-24]{associateprofessor}{=\docValue{true}\textbar\docValue{false}}{par défaut
+\begin{docKey}[][doc updated=2016-10-30]{associateprofessor}{=\docValue{true}\textbar\docValue{false}}{par défaut
     \docValue{true}, initialement \docValue{false}}
-  \index{corporation!prédéfinie!\acrshort{mcf} (non) \acrshort{hdrpeople}}%
-  \indexsee{\acrshort{mcf} (non) \acrshort{hdrpeople}}{corporation}%
-  \changes{v0.99o}{2016-10-24}{Clés \protect\refAux{mcf} et
+  \index{corporation!prédéfinie!mcf (non) hdr@\acrshort{mcf} (non) \acrshort{hdrpeople}}%
+  \indexsee{mcf (non) hdr@\acrshort{mcf} (non) \acrshort{hdrpeople}}{corporation}%
+  \changes{v0.99o}{2016-10-30}{Clés \protect\refAux{mcf} et
     \protect\refAux{mcf*} remplacées par les (et alias des) clés
     \protect\refKey{associateprofessor} et
     \protect\refKey{associateprofessor*}}%
-  \changes*{v0.99o}{2016-10-24}{\acrshort{mcf} désormais traduit en anglais par
+  \changes*{v0.99o}{2016-10-30}{\acrshort{mcf} désormais traduit en anglais par
     \enquote{\foreignlanguage{english}{\translate{associateprofessor}}}}%
   Cette clé permet de spécifier qu'une personne appartient à la corporation des
   \glspl{mcf}\footnote{Par souci de compatibilité ascendante, la clé désormais
     obsolète \refAux{mcf} est un alias de la clé \refKey{associateprofessor}.}.
 \end{docKey}
 %
-\begin{docKey}[][doc updated=2016-10-24]{associateprofessor*}{=\docValue{true}\textbar\docValue{false}}{par défaut
+\begin{docKey}[][doc updated=2016-10-30]{associateprofessor*}{=\docValue{true}\textbar\docValue{false}}{par défaut
     \docValue{true}, initialement \docValue{false}}
-  \index{corporation!prédéfinie!\acrshort{mcf} (non) \acrshort{hdrpeople}}%
-  \indexsee{\acrshort{mcf} (non) \acrshort{hdrpeople}}{corporation}%
-  \indexsee{\acrshort{hdrpeople} (habilité)}{corporation}%
+  \index{corporation!prédéfinie!mcf (non) hdr@\acrshort{mcf} (non) \acrshort{hdrpeople}}%
+  \indexsee{mcf (non) hdr@\acrshort{mcf} (non) \acrshort{hdrpeople}}{corporation}%
+  \indexsee{hdr (habilité)@\acrshort{hdrpeople} (habilité)}{corporation}%
   Cette clé permet de spécifier qu'une personne appartient à la corporation des
   \glspl{mcf} \acrshort{hdrpeople}\footnote{Par souci de compatibilité
     ascendante, la clé désormais obsolète \refAux{mcf*} est un alias de la clé
@@ -740,7 +740,7 @@ corps de métier) des membres du jury parmi celles prédéfinies par la \yatCl{}
     défaut \docValue{true}, initialement \docValue{false}}
   \index{corporation!prédéfinie!chargé de recherche (non) \acrshort{hdrpeople}}%
   \indexsee{chargé de recherche (non) \acrshort{hdrpeople}}{corporation}%
-  \indexsee{\acrshort{hdrpeople} (habilité)}{corporation}%
+  \indexsee{hdr (habilité)@\acrshort{hdrpeople} (habilité)}{corporation}%
   Cette clé permet de spécifier qu'une personne appartient à la corporation des
   \glspl{cr} \acrshort{hdrpeople} du \gls{cnrs}.
 \end{docKey}

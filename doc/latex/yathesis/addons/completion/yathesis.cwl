@@ -1,5 +1,5 @@
 # mode: yathesis.cls
-# denisbitouze, 24.10.2016
+# denisbitouze, 30.10.2016
 #
 #include:class-book
 #include:latex-document

@@ -27,21 +27,7 @@ Parmi les exceptions notables figurent les classes :
   et nécessite d'être installée manuellement.
 \end{itemize}
 
-La présente classe, \yatcl, a pour objet de faciliter la composition de mémoires
-de thèses préparées en France, quels que soient les champs disciplinaires et
-instituts. Elle implémente notamment l'essentiel des recommandations émanant du
-\citeauthor{guidoct} \autocite{guidoct} et ce, de façon transparente pour
-l'utilisateur.  Elle a en outre été conçue pour (facultativement) tirer profit
-de plusieurs outils récents et puissants disponibles sous \LaTeX{}, notamment :
-\begin{itemize}
-\item la bibliographie avec le \Package{biblatex} ;
-\item les glossaire, liste d'acronymes et liste de symboles avec le
-  \Package{glossaries}.
-\end{itemize}
-%, mais peut éventuellement être adaptée à d'autres pays.
-
-La \yatCl{}, basée sur la \Class{book}, se veut à la fois simple d'emploi et,
-dans une certaine mesure, (aisément) personnalisable.
+\frenchabstract{}
 
 % Mais sur ce dernier point, ce que fait observer \citefirstlastauthor{thesul}
 % au sujet de sa \Class{thesul}, s'applique également à la \yatCl{} : %
@@ -71,10 +57,10 @@ environnements fournis par la \yatCl{} et ce, dans l'ordre dans lequel on
 rencontre les objets correspondants dans un mémoire de thèse :
 \begin{enumerate}
 \item en page(s) de titre (cf. \vref{cha-caract-du-docum,cha-pages-de-titre}) ;
-\item en \glspl{liminaire} (cf. \vref{cha-liminaires}) ;
-\item dans le corps de la thèse (cf. \vref{cha-corps}) ;
-\item en pages annexes (cf. \vref{cha-annexes}) ;
-\item en pages finales (cf. \vref{cha-pages-finales}).
+\item en \gls{liminaire} (cf. \vref{cha-liminaires}) ;
+\item en partie principale (corps) de la thèse (cf. \vref{cha-corps}) ;
+\item en annexes (cf. \vref{cha-annexes}) ;
+\item en partie finale (cf. \vref{cha-pages-finales}).
 \end{enumerate}
 Elle indique enfin comment personnaliser la \yatCl{}
 (cf. \vref{cha-configuration}).
@@ -142,17 +128,30 @@ ascendante, y figurent en rouge.
 \label{sec-ressources-internet}
 \index{distribution \TeX}%
 
-Cette classe est fournie par les distributions \texlive et \miktex. Elle est
-également disponible, pour ses versions :
-\begin{description}[labelwidth=\widthof{\bfseries de développement à :},align=right]
-\item[stable à :] \url{http://www.ctan.org/pkg/yathesis}
-\item[de développement à :] \url{https://github.com/dbitouze/yathesis}
-\end{description}
-% \begin{itemize}
-% \item \url{http://www.ctan.org/pkg/yathesis} pour sa version stable ;
-% \item \url{https://github.com/dbitouze/yathesis} pour sa version de
-%   développement.
-% \end{itemize}
+La \yatCl{} est fournie par les distributions \texlive et \miktex et est également disponible en versions :
+\begin{itemize}
+\item stable sur le \href{http://www.ctan.org/pkg/yathesis}{\acrshort*{ctan}} ;
+\item de développement sur \href{https://github.com/dbitouze/yathesis}{GitHub}.
+\end{itemize}
+
+Elle est aussi \emph{directement utilisable} au moyen d'éditeurs (et compilateurs)
+\LaTeX{} en ligne%
+\index{éditeur de texte!en ligne}%
+\index{compilation!en ligne}%
+\index{en ligne!éditeur de texte}%
+\index{en ligne!compilation}
+%
+tels que :
+\begin{itemize}
+\item \href{https://fr.sharelatex.com/}{ShareLaTeX} par le biais d'un
+  \href{https://fr.sharelatex.com/templates/thesis/yathesis-template}{canevas}
+  et
+  \href{https://fr.sharelatex.com/templates/thesis/yathesis-specimen}{spécimen}\detailsspecimencanevas ;
+\item \href{https://www.overleaf.com/}{Overleaf} par le biais d'un
+  \href{https://www.overleaf.com/latex/templates/template-of-a-thesis-written-with-yathesis-class/nhtmtthnqwtd}{canevas}
+  et
+  \href{https://www.overleaf.com/latex/examples/sample-of-a-thesis-written-with-yathesis-class/nbcfvfqgnjfq}{spécimen}\detailsspecimencanevas.
+\end{itemize}
 
 \section{Remerciements}
 \label{sec-remerciements}

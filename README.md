@@ -34,8 +34,14 @@ Typesetting the documentation of the class requires:
 
       latexmk -g -pdf -jobname=these -pdflatex="pdflatex %O '\RequirePackage{etoolbox}\AtEndPreamble{\RequirePackage{yathesis-demo}}\input{%S}'" these.tex
 
-- to run `pdflatex` on `yathesis.tex` to be found in the
-  `.../yathesis/doc/latex/yathesis/documentation/french` directory. If `latexmk`
-  is available, it is easier to run:
+- to compile `yathesis.tex` to be found in the
+  `.../yathesis/doc/latex/yathesis/documentation/french` directory as follows:
 
-      latexmk yathesis-fr.tex
+      pdflatex yathesis-fr.tex
+      biber yathesis-fr.tex
+      makeglossaries yathesis-fr
+      texindy -L french -M denisbdoc-chng.xdy yathesis-fr-changes.idx
+      texindy -M denisbdoc.xdy -L french commands.idx
+      texindy -M denisbdoc.xdy -L french yathesis-fr.idx
+      pdflatex yathesis-fr.tex
+      pdflatex yathesis-fr.tex
