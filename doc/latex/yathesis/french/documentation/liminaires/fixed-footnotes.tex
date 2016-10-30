@@ -25,13 +25,13 @@
 % Fixed footnote « Selon la langue »
 \newcommand{\selonlanguebase}{%
   Selon que la langue principale, ou la langue en cours, de la thèse est le
-  français ou l'anglais.%
+  français ou l'anglais%
 }%
 \DeclareFixedFootnote{\selonlangueshort}{%
-  \selonlanguebase%
+  \selonlanguebase.%
 }%
 \DeclareFixedFootnote{\selonlangue}{%
-  \selonlanguebase (cf. \vref{sec-expressions-cles} pour plus de précisions).%
+  \selonlanguebase{} (cf. \vref{sec-expressions-cles} pour plus de précisions).%
 }%
 % \newcommand{\selonlangue}{%
 % \@ifstar{\@tempswatrue\csuse{YAD@starnostar@selonlangue}}{\@tempswafalse\csuse{YAD@starnostar@selonlangue}}%
@@ -45,8 +45,8 @@
 % }%
 %
 \DeclareFixedFootnote{\nofrontmatter}{%
-  Au contraire, la commande analogue \protect\docAuxCommand{frontmatter} pour
-  les \protect\glspl{liminaire} ne doit pas être utilisée car elle l'est déjà en
+  Au contraire, la commande analogue \protect\docAuxCommand{frontmatter} pour la
+  \protect\gls{liminaire} ne doit pas être utilisée car elle l'est déjà en
   sous-main par la \yatCl{}.%
 }
 %
@@ -108,6 +108,14 @@
 %
 \DeclareFixedFootnote{\noframe}{%
   Sans le cadre.%
+}
+%
+\DeclareFixedFootnote{\detailsspecimencanevas}{%
+  Détaillés à l'\vref{cha-specimen-canevas}.
+}
+%
+\DeclareFixedFootnote{\enarborescence}{%
+  Versions \enquote{en arborescence} seulement.
 }
 %
 
