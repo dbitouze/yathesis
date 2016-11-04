@@ -7,29 +7,34 @@
 \usepackage{dirtree}
 \usepackage[lining]{libertine}
 %
-\changes{v0.99o}{2016-10-30}{Suppression d'un warning inutile du \Package{iflang}}%
-\changes{v0.99o}{2016-10-30}{Documentation révisée}%
-\changes{v0.99o}{2016-10-30}{Correction de bugs}%
-\changes{v0.99n}{2016-06-11}{Documentation révisée}%
-\changes{v0.99m}{2016-05-22}{Documentation révisée}%
-\changes{v0.99m}{2016-05-22}{Documentation compilable au moyen de \hologo{pdfLaTeX}}%
-\changes{v0.99l}{2014-10-23}{Documentation révisée}%
-\changes{v0.99k}{2014-10-01}{Documentation révisée}%
-\changes{v0.99k}{2014-10-01}{Corrections de bugs}%
-\changes{v0.99j}{2014-07-18}{Documentation révisée}%
-\changes{v0.99j}{2014-07-18}{Corrections de bugs}%
-\changes{v0.99i}{2014-07-17}{Documentation révisée}%
-\changes{v0.99i}{2014-07-17}{Corrections de bugs}%
-\changes{v0.99h}{2014-07-14}{Documentation révisée}%
-\changes{v0.99h}{2014-07-14}{Corrections de bugs}%
-\changes{v0.99g}{2014-07-13}{Documentation révisée}%
-\changes{v0.99g}{2014-07-13}{Corrections de bugs}%
-\changes{v0.99c}{2014-06-06}{Corrections de bugs}%
-\changes{v0.99c}{2014-06-06}{Documentation révisée}%
-\changes{v0.99b}{2014-06-02}{Corrections de bugs}%
-\changes{v0.99a}{2014-06-02}{Corrections de bugs}%
-\changes{v0.99}{2014-05-18}{Corrections de bugs}%
+\makeindex[title=Index des concepts,extout=pdx,extin=pnd,columnseprule]
 %
+\AtEndPreamble{%
+  \changes{v0.99o}{2016-10-30}{Suppression d'un warning inutile du
+    \Package{iflang}}%
+  \changes{v0.99o}{2016-10-30}{Documentation révisée}%
+  \changes{v0.99o}{2016-10-30}{Correction de bugs}%
+  \changes{v0.99n}{2016-06-11}{Documentation révisée}%
+  \changes{v0.99m}{2016-05-22}{Documentation révisée}%
+  \changes{v0.99m}{2016-05-22}{Documentation compilable au moyen de
+    \hologo{pdfLaTeX}}%
+  \changes{v0.99l}{2014-10-23}{Documentation révisée}%
+  \changes{v0.99k}{2014-10-01}{Documentation révisée}%
+  \changes{v0.99k}{2014-10-01}{Corrections de bugs}%
+  \changes{v0.99j}{2014-07-18}{Documentation révisée}%
+  \changes{v0.99j}{2014-07-18}{Corrections de bugs}%
+  \changes{v0.99i}{2014-07-17}{Documentation révisée}%
+  \changes{v0.99i}{2014-07-17}{Corrections de bugs}%
+  \changes{v0.99h}{2014-07-14}{Documentation révisée}%
+  \changes{v0.99h}{2014-07-14}{Corrections de bugs}%
+  \changes{v0.99g}{2014-07-13}{Documentation révisée}%
+  \changes{v0.99g}{2014-07-13}{Corrections de bugs}%
+  \changes{v0.99c}{2014-06-06}{Corrections de bugs}%
+  \changes{v0.99c}{2014-06-06}{Documentation révisée}%
+  \changes{v0.99b}{2014-06-02}{Corrections de bugs}%
+  \changes{v0.99a}{2014-06-02}{Corrections de bugs}%
+  \changes{v0.99}{2014-05-18}{Corrections de bugs}%
+}%
 \begin{document}
 \include{liminaires/titre}
 \restoregeometry
@@ -99,7 +104,7 @@
   des entrées (selon la convention précisée \vref{sec-comm-envir-cles}).%
 }%
 \renewcommand{\indexname}{Index des commandes}
-\printindex[commands]
+\printindex[\jobname-commands]
 \UndoMarkbothHack
 %
 \cleardoublepage

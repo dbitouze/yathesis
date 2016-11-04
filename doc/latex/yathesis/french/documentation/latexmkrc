@@ -3,8 +3,6 @@ $pdf_mode = 1;
 $bibtex_use = 1;
 $bibtex = 'biber %O %B';
 
-# # add_cus_dep('glo', 'gls', 0, 'makeindex');
-# add_cus_dep('glo2', 'gls2', 0, 'makeglossaries');
 add_cus_dep('glo', 'gls', 0, 'makeglossaries');
 add_cus_dep('acn', 'acr', 0, 'makeglossaries');
 add_cus_dep('slo', 'sls', 0, 'makeglossaries');
@@ -12,31 +10,30 @@ sub makeglossaries{
     system( "makeglossaries \"$_[0]\"" );
 }
 
-# add_cus_dep('glo', 'gls', 0, 'makeglo2gls');
-# sub makeglo2gls {
-#     system("makeindex -s gglo.ist -o '$_[0]'.gls '$_[0]'.glo");
-# }
-
-# $makeindex = 'texindy -L french -M denisbdoc.xdy';
-
-add_cus_dep('commands.idx', 'ind', 0, 'texindy');
-sub texindy{
-    system("texindy -L french -M denisbdoc.xdy commands.idx");
+add_cus_dep('odx', 'ond', 0, 'texindycommands');
+sub texindycommands{
+    system("texindy -L french -M denisbdoc.xdy -o \"$_[0].ond\" \"$_[0].odx\" ");
 }
 
-add_cus_dep('yathesis-fr.idx', 'ind', 0, 'texindybis');
-sub texindybis{
-    system("texindy -L french -M denisbdoc.xdy yathesis-fr.idx");
+add_cus_dep('gdx', 'gnd', 0, 'texindychanges');
+sub texindychanges{
+    system("texindy -L french -M denisbdoc-chng.xdy -o \"$_[0].gnd\" \"$_[0].gdx\" ");
 }
 
-add_cus_dep('__denisbdoc_changes.idx', 'ind', 0, 'texindyter');
-sub texindyter{
-    system("texindy -L french -M denisbdoc-chng.xdy \"$_[0].idx\"");
+add_cus_dep('pdx', 'pnd', 0, 'texindyconcepts');
+sub texindyconcepts{
+    system("texindy -L french -M denisbdoc.xdy -o \"$_[0].pnd\" \"$_[0].pdx\" ");
 }
+
+# system("texindy -L french -M denisbdoc.xdy -o \"$_[0].ond\" \"$_[0].odx\" ");
+# system("texindy -L french -M denisbdoc.xdy yathesis-fr.odx");
+# system("texindy -L french -M denisbdoc.xdy yathesis-fr.pdx");
+# system("texindy -L french -M denisbdoc-chng.xdy yathesis-fr.gdx");
 
 push @generated_exts, 'acn', 'acr', 'alg', 'bcf', 'fls', 'gl*', 'sbl*', 'sl*', 'sym*' ;
 
-$clean_ext .= 'synctex.gz* run.xml tex.bak ind idx out bbl bcf fdb_latexmk run
-tdo listing *~ lo* unq mw tcbtemp ins drv atfi db*' ;
+$clean_ext .= ' synctex.gz* run.xml tex.bak ind idx out bbl bcf fdb_latexmk run
+    tdo listing *~ lo* unq mw tcbtemp ins drv atfi db* idx pdx
+    gdx odx ' ;
 
 $quote_filenames = 0;
