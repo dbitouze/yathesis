@@ -24,59 +24,50 @@ Les deux canevas et deux spécimens ainsi proposés ont pour but :
 \item d'illustrer les fonctionnalités de la classe.
 \end{itemize}
 
-La version électronique (\pdf{}) de la présente
-documentation\footnote{Disponible à l'adresse
-  \url{http://ctan.org/pkg/yathesis}, si besoin est.} intègre ces canevas et
-spécimens par le biais d'une archive \gls{zip}, normalement accessible par
-simple clic sur le lien suivant :
-\textattachfile{../exemples/canevas-specimen.zip}{\file{canevas-specimen.zip}}\footnote{En
-  tous cas avec les afficheurs \pdf:{} \program{Evince} sous \linux et
-  \href{http://www.sumatrapdfreader.org/free-pdf-reader-fr.html}{\program{SumatraPDF}}
-  sous \windows.}. L'extraction de cette archive fournit un dossier nommé
-\folder{exemples} dont l'arborescence est la suivante :
-
-\setlength{\DTbaselineskip}{15pt}
-\begin{tcolorbox}
-  \dirtree{%
-  .1 \folder{exemples}/.
-  .2 \folder{canevas}/.
-  .3 \folder{a-plat}/.
-  .3 \folder{en-arborescence}/.
-  .2 \folder{specimen}/.
-  .3 \folder{a-plat}/.
-  .3 \folder{en-arborescence}/.
-}%
-\end{tcolorbox}
-
-\changes{v0.99n}{2016-06-11}{Réorganisation des spécimens et canevas}%
-\changes{v0.99m}{2016-05-22}{Réorganisation et changement de noms des spécimens
-  et canevas}%
-\changes{v0.99m}{2016-05-22}{Spécimens et canevas intégrés au \acrshort{pdf} de
-  la documentation sous la forme d'archives \gls{zip}}%
-\changes{v0.99l}{2014-10-23}{Réorganisation et changement de noms des spécimens
-  et canevas}%
-\changes{v0.99c}{2014-06-06}{Spécimens et canevas fournis sous forme d'archives
-  \file{.zip}}%
-\changes{v0.99b}{2014-06-02}{Réorganisation des spécimens et canevas}%
-\changes{v0.99a}{2014-06-02}{Spécimens et canevas enrichis}%
-\begin{comment}
-  \begin{itemize}
-  \item pour la distribution \texlive\versiontl, sur les systèmes :
-    \begin{itemize}
-    \item \linux et \macos{} :
-      \href{./.}{\folder{\unixtldirectory\tldistdirectory\jobdocdirectory/}} ;
-    \item \windows{} :
-      \href{./.}{\folder{\wintldirectory\tldistdirectory\jobdocdirectory/}} ;
-    \end{itemize}
-  \item pour la distribution \miktex : \folder{\miktexdistdirectory}.
-  \end{itemize}
-\end{comment}
-
-\begin{dbwarning}{Archive à extraire avant toute chose !}{}
-  Pour pouvoir consulter et surtout tester sans problème les canevas et
-  spécimens de l'archive \file{canevas-specimen.zip}, celle-ci \emph{doit} être
-  extraite avant toute chose !
-\end{dbwarning}
+\IfFileExists{../exemples/canevas-specimen.zip}{%
+  La version électronique (\pdf{}) de la présente
+  documentation\footnote{Disponible à l'adresse
+    \url{http://ctan.org/pkg/yathesis}, si besoin est.} intègre ces canevas et
+  spécimens par le biais d'une archive \gls{zip}, normalement accessible par
+  simple clic sur le lien suivant :
+  \textattachfile{../exemples/canevas-specimen.zip}{\file{canevas-specimen.zip}}\footnote{En
+    tous cas avec les afficheurs \pdf:{} \program{Evince} sous \linux et
+    \href{http://www.sumatrapdfreader.org/free-pdf-reader-fr.html}{\program{SumatraPDF}}
+    sous \windows.}. L'extraction de cette archive fournit un dossier nommé
+  \folder{exemples} dont l'arborescence est la suivante :
+  %
+  \setlength{\DTbaselineskip}{15pt}
+  \begin{tcolorbox}
+    \dirtree{%
+      .1 \folder{exemples}/.
+      .2 \folder{canevas}/.
+      .3 \folder{a-plat}/.
+      .3 \folder{en-arborescence}/.
+      .2 \folder{specimen}/.
+      .3 \folder{a-plat}/.
+      .3 \folder{en-arborescence}/.
+    }%
+  \end{tcolorbox}
+  %
+  \changes{v0.99n}{2016-06-11}{Réorganisation des spécimens et canevas}%
+  \changes{v0.99m}{2016-05-22}{Réorganisation et changement de noms des
+    spécimens et canevas}%
+  \changes{v0.99m}{2016-05-22}{Spécimens et canevas intégrés au \acrshort{pdf}
+    de la documentation sous la forme d'archives \gls{zip}}%
+  \changes{v0.99l}{2014-10-23}{Réorganisation et changement de noms des
+    spécimens et canevas}%
+  \changes{v0.99c}{2014-06-06}{Spécimens et canevas fournis sous forme
+    d'archives \file{.zip}}%
+  \changes{v0.99b}{2014-06-02}{Réorganisation des spécimens et canevas}%
+  \changes{v0.99a}{2014-06-02}{Spécimens et canevas enrichis}%
+  %
+  \begin{dbwarning}{Archive à extraire avant toute chose !}{}
+    Pour pouvoir consulter et surtout tester sans problème les canevas et
+    spécimens de l'archive \file{canevas-specimen.zip}, celle-ci \emph{doit}
+    être extraite avant toute chose !
+  \end{dbwarning}
+}{%
+}
 
 Il est également possible de tester directement au moyen des éditeurs (et
 compilateurs) \LaTeX{} en ligne%
