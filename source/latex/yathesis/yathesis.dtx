@@ -55,19 +55,12 @@ Typesetting the documentation of the class requires:
   with `yathesis-demo` package load at first place. If `latexmk` is available,
   it is easier to run:
 
-      latexmk -g -pdf -jobname=these -pdflatex="pdflatex %O '\RequirePackage{etoolbox}\AtEndPreamble{\RequirePackage{yathesis-demo}}\input{%S}'" these.tex
+      latexmk -g -norc -r ./latexmkrc  -jobname=these -pdflatex="pdflatex %O '\RequirePackage{etoolbox}\AtEndPreamble{\RequirePackage{yathesis-demo}}\input{%S}'" these.tex
 
 - to compile `yathesis.tex` to be found in the
   `.../yathesis/doc/latex/yathesis/documentation/french` directory as follows:
 
-      pdflatex yathesis-fr.tex
-      biber yathesis-fr.tex
-      makeglossaries yathesis-fr
-      texindy -L french -M denisbdoc-chng.xdy yathesis-fr-changes.idx
-      texindy -M denisbdoc.xdy -L french commands.idx
-      texindy -M denisbdoc.xdy -L french yathesis-fr.idx
-      pdflatex yathesis-fr.tex
-      pdflatex yathesis-fr.tex
+      latexmk -norc -r ./latexmkrc yathesis-fr
 %</readme>
 %<*internal>
 \fi

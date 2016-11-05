@@ -1,0 +1,40 @@
+\chapter{Compilation de la présente documentation}\label{cha-comp-de-la-pres}
+
+\index{compilation!du présent document}%
+
+Pour compiler soi-même le présent document, il est :
+\begin{enumerate}
+\item nécessaire de :
+  \begin{enumerate}
+  \item copier le \Folder{.../yathesis/doc/latex/yathesis/french} dans un
+    dossier personnel accessible en écriture ;
+  \item se rendre dans le \Folder{french/exemples/specimen/a-plat} et compiler
+    le \File{these.tex} au moyen de la commande suivante\uneseuleligne :
+  %
+\begin{listingshell}[before=\smallskip]
+latexmk -g -norc -r ./latexmkrc -jobname=these \
+-pdflatex="pdflatex %O '\RequirePackage{etoolbox} \
+\AtEndPreamble{\RequirePackage{yathesis-demo}} \input{%S}'" these
+\end{listingshell}
+%
+\item accéder au \File{canevas-specimen.zip} attaché à la version électronique
+  originale de la présente documentation\footnote{Disponible à l'adresse
+    \url{http://ctan.org/pkg/yathesis}, si besoin est.} et le placer dans le
+  \Folder{../exemples} ;
+\end{enumerate}
+\item suffisant d'ensuite :
+  \begin{enumerate}
+  \item se rendre dans le dossier \Folder{french/documentation} ;
+  \item lancer la commande :
+%
+\begin{listingshell}[before=\medskip]
+latexmk -norc -r ./latexmkrc yathesis-fr
+\end{listingshell}
+%
+  \end{enumerate}
+\end{enumerate}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../yathesis-fr"
+%%% End:
