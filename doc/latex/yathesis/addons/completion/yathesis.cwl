@@ -111,6 +111,7 @@ datetime
 \speciality{%<spécialité%>}#n
 \subject{%<sujet%>}#n
 \date{%<jour%>}{%<mois%>}{%<année%>}#n
+\submissiondate{%<jour%>}{%<mois%>}{%<année%>}#n
 #
 # Institute and entities
 \pres{%<nom du PRES%>}#n
@@ -267,9 +268,8 @@ juniorresearcher*
 # Misc
 \ordernumber[%<numéro d'ordre%>]#n
 \ordernumber#n*
-\submissiondate{%<jour%>}{%<mois%>}{%<année%>}#n
 #
-# Preliminary pages
+# Preliminary part
 #
 \disclaimer{%<clause%>}#n
 \makedisclaimer#n
@@ -344,13 +344,20 @@ depth=#part,chapter,section,subsection,subsubsection,paragraph,subparagraph
 name=
 #endkeyvals
 #
-# Main pages
+# Main part
 #
-# Appendix pages
+# Appendix part
 #
-# Back matter pages
+# Back matter part
 #
 \makebackcover
+#
+# All parts
+#
+\startlocaltocs
+\stoplocaltocs
+\nextwithlocaltoc
+\nextwithoutlocaltoc
 #
 # Customization
 #
