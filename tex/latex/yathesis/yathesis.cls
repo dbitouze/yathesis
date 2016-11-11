@@ -2222,6 +2222,7 @@
         \MakeUppercase\appendixname{} \thechapter.\
       }{%
       }
+      \chaptertitle%
     }{%
       \YAD@section@header%
     }%
