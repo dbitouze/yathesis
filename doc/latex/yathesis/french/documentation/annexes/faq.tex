@@ -243,15 +243,16 @@ où \meta{autre niveau} est l'une des valeurs possibles de la clé
   \index{table des matières!titre différent du titre courant}%
   \index{titre courant!différent du titre en table des matières}%
   %
-  Les titres des chapitres sont reproduits en \glsplural{titrecourant} et,
-  lorsque les titres de certains chapitres sont si longs qu'il débordent de
-  l'entête, je peux recourir à l'argument optionnel de la commande
-  \docAuxCommand{chapter} pour que ceux-ci soient y remplacés par des versions
-  alternatives \enquote{courtes}.
+  Les titres des chapitres sont reproduits en \glsplural{titrecourant} et, si
+  certains d'entre eux sont longs au point de déborder de l'entête, je peux
+  recourir à l'argument optionnel de la commande \docAuxCommand{chapter} pour
+  qu'ils y soient remplacés par des versions alternatives \enquote{courtes}.
 
-  Mais alors les titres \enquote{normaux} de ces chapitres sont remplacés par
-  leurs versions alternatives \enquote{courtes} \emph{également} en table(s) des
-  matières, et cela me pose problème dans les cas suivants.
+  Mais ce remplacement a alors lieu \emph{aussi} en table(s) des matières, et
+  cela me pose problème dans les cas suivants.
+  % Mais alors les titres \enquote{normaux} de ces chapitres sont remplacés par
+  % leurs versions alternatives \enquote{courtes} \emph{également} en table(s) des
+  % matières, et cela me pose problème dans les cas suivants.
   \begin{description}
   \item[Cas 1.] Je souhaite que, en table(s) des matières, figurent
     systématiquement les titres \enquote{normaux}, et pas leurs éventuelles
