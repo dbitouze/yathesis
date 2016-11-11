@@ -235,6 +235,53 @@ où \meta{autre niveau} est l'une des valeurs possibles de la clé
   \end{enumerate}
 \end{dbfaq}
 
+\subsection[Titres courants]{\texorpdfstring{\Glsentryplural{titrecourant}}{Titres courants}}
+\label{sec-titres-courants}
+
+\begin{dbfaq}{Est-il possible d'obtenir des \glsplural{titrecourant} distincts
+    des titres figurant en table(s) des matières ?}{}
+  \index{table des matières!titre différent du titre courant}%
+  \index{titre courant!différent du titre en table des matières}%
+  %
+  Les titres des chapitres sont reproduits en \glsplural{titrecourant} et,
+  lorsque les titres de certains chapitres sont si longs qu'il débordent de
+  l'entête, je peux recourir à l'argument optionnel de la commande
+  \docAuxCommand{chapter} pour que ceux-ci soient y remplacés par des versions
+  alternatives \enquote{courtes}.
+
+  Mais alors les titres \enquote{normaux} de ces chapitres sont remplacés par
+  leurs versions alternatives \enquote{courtes} \emph{également} en table(s) des
+  matières, et cela me pose problème dans les cas suivants.
+  \begin{description}
+  \item[Cas 1.] Je souhaite que, en table(s) des matières, figurent
+    systématiquement les titres \enquote{normaux}, et pas leurs éventuelles
+    versions alternatives \enquote{courtes}.
+  \item[Cas 2.] Je souhaite que les versions alternatives \enquote{courtes} des
+    titres des chapitres puissent être différentes en table(s) des matières et
+    en \glsplural{titrecourant}.
+  \end{description}
+  Est-il donc possible d'obtenir des \glsplural{titrecourant} distincts des
+  titres figurant en table(s) des matières ?%
+  \tcblower
+  %
+  (Cette question ne concerne pas directement la \yatCl{}.) Il suffit de
+  recourir à la commande \docAuxCommand{chaptermark}, comme suit.
+  \begin{description}
+  \item[Cas 1.]\
+\begin{bodycode}[listing options={deletekeywords={chapter},deletekeywords={[3]chapter}}]
+\chapter{"\meta{titre}"}
+\chaptermark{"\meta{titre alternatif en titre courant}"}
+\end{bodycode}
+  \item[Cas 2.]\
+\begin{bodycode}[listing options={deletekeywords={chapter},deletekeywords={[3]chapter}}]
+\chapter["\meta{titre alternatif en table(s) des matières}"]{"\meta{titre}"}
+\chaptermark{"\meta{titre alternatif en titre courant}"}
+\end{bodycode}
+  \end{description}
+  La commande analogue \docAuxCommand{sectionmark} peut être utilisée si le
+  problème se pose pour les sections.
+\end{dbfaq}
+
 \subsection{Divers}
 \label{sec-divers}
 
