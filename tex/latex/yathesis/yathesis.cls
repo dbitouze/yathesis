@@ -23,6 +23,8 @@
 }%
 \RequirePackage{filehook}[2011/10/12]%
 \RequirePackage{hopatch}[2012/05/28]%
+\RequirePackage{letltxmacro}[2010/09/02]%
+\RequirePackage{twoopt}[1999/04/12]%
 \RequirePackage{xifthen}[2009/04/17]%
 \newbool{YAD@cosupervisor@or@comonitor}
 \newbool{YAD@inprogress@work@star}
@@ -60,6 +62,7 @@
 \newbool{YAD@mainmatter@used}
 \newbool{YAD@localtocs}%
 \newbool{YAD@nextwithlocaltoc}%
+\newbool{YAD@starred@chapter}%
 \newlength{\cmdKV@YAD@logoheight}
 \newlength{\YAD@max@logoheight}
 \newlength{\YAD@default@logoheight}
@@ -468,7 +471,7 @@
 }{%
   \RequirePackage{fncychap}[2007/07/30]%
 }%
-\RequirePackage{titleps}[2011/12/15]%
+\RequirePackage[nopatches]{titleps}[2011/12/15]%
 \RequirePackage{nonumonpart}[2011/04/15]%
 \RequirePackage{xcolor}[2007/01/21]%
 \RequirePackage{datatool}[2014/03/08]%
@@ -3702,10 +3705,10 @@
   }{%
   }%
 }{}{}%
-\let\YAD@ORI@chapter\chapter%
+\LetLtxMacro{\YAD@ORI@chapter}{\chapter}%
 \AfterPreamble{% delay the redefinition when titlesec has done its own
-  \renewcommand\chapter
-  {%
+  \renewcommand\chapter{%
+    \boolfalse{YAD@starred@chapter}%
     \ifbool{YAD@localbibs}{%
       \let\YAD@ORI@blx@warn@bibempty\blx@warn@bibempty%
       \def\blx@warn@bibempty{}%
@@ -3721,15 +3724,33 @@
     }%
     \@ifstar{\YAD@starred@chapter}{\YAD@unstarred@chapter}%
   }%
-  \newcommand{\YAD@starred@chapter}{%
-    \setcounter{secnumdepth}{-10}%
-    \YAD@ORI@chapter%
+  \newcommandtwoopt{\YAD@tmp@chapter}[3][][]{%
+    \ifthenelse{\isempty{#1}}{%
+      \ifthenelse{\isempty{#2}}{%
+        \YAD@ORI@chapter{#3}%
+      }{%
+        \YAD@ORI@chapter{#3}%
+        \chaptermark{#2}%
+      }%
+    }{%
+      \ifthenelse{\isempty{#2}}{%
+        \YAD@ORI@chapter[#1]{#3}%
+      }{%
+        \YAD@ORI@chapter[#1]{#3}%
+        \chaptermark{#2}%
+      }%
+    }%
   }%
-  \newcommand{\YAD@unstarred@chapter}{%
+  \newcommandtwoopt{\YAD@starred@chapter}[3][][]{%
+    \booltrue{YAD@starred@chapter}%
+    \YAD@setsecnumdepth{none}%
+    \YAD@tmp@chapter[#1][#2]{#3}%
+  }%
+  \newcommandtwoopt{\YAD@unstarred@chapter}[3][][]{%
     \if@mainmatter%
     \YAD@setsecnumdepth{\YAD@secnumdepth}
     \fi%
-    \YAD@ORI@chapter%
+    \YAD@tmp@chapter[#1][#2]{#3}%
   }%
 \xpretocmd{\tableofcontents}{\renewcommand{\YAD@localtoc}{}}{}{}%
 \xapptocmd{\tableofcontents}{\renewcommand{\YAD@localtoc}{\YAD@default@localtoc}}{}{}%
@@ -3743,6 +3764,46 @@
 \xapptocmd{\printglossary}{\renewcommand{\YAD@localtoc}{\YAD@default@localtoc}}{}{}%
 \xpretocmd{\printindex}{\renewcommand{\YAD@localtoc}{}}{}{}%
 \xapptocmd{\printindex}{\renewcommand{\YAD@localtoc}{\YAD@default@localtoc}}{}{}%
+\LetLtxMacro{\YAD@ORI@section}{\section}
+\renewcommand\section{%
+  \if@mainmatter%
+  \ifbool{YAD@starred@chapter}{%
+  }{%
+    \YAD@setsecnumdepth{\YAD@secnumdepth}%
+  }%
+  \fi%
+  \@ifstar{\YAD@starred@section}{\YAD@unstarred@section}%
+}
+\newcommandtwoopt*{\YAD@tmp@section}[3][][]{%
+  \ifthenelse{\isempty{#1}}{%
+    \ifthenelse{\isempty{#2}}{%
+      \YAD@ORI@section{#3}%
+    }{%
+      \let\YAD@ORI@sectionmark\sectionmark%
+      \renewcommand\sectionmark[1]{}%
+      \YAD@ORI@section{#3}%
+      \YAD@ORI@sectionmark{#2}%
+      \let\sectionmark\YAD@ORI@sectionmark%
+    }%
+  }{%
+    \ifthenelse{\isempty{#2}}{%
+      \YAD@ORI@section[#1]{#3}%
+    }{%
+      \let\YAD@ORI@sectionmark\sectionmark%
+      \renewcommand\sectionmark[1]{}%
+      \YAD@ORI@section[#1]{#3}%
+      \YAD@ORI@sectionmark{#2}%
+      \let\sectionmark\YAD@ORI@sectionmark%
+    }%
+  }%
+}%
+\newcommandtwoopt{\YAD@starred@section}[3][][]{%
+  \YAD@setsecnumdepth{none}%
+  \YAD@tmp@section[#1][#2]{#3}%
+}%
+\newcommandtwoopt{\YAD@unstarred@section}[3][][]{%
+  \YAD@tmp@section[#1][#2]{#3}%
+}%
   \@ifpackageloaded{floatrow}{%
     \xpatchcmd{\float@listhead}{\chapter}{\YAD@ORI@chapter}{}{}%
   }{%
