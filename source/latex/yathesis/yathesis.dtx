@@ -455,6 +455,7 @@ This work consists of the file  yathesis.dtx
 \newbool{YAD@mainmatter@used}
 \newbool{YAD@localtocs}%
 \newbool{YAD@nextwithlocaltoc}%
+\newbool{YAD@starred@chapter}%
 %
 \newlength{\cmdKV@YAD@logoheight}
 \newlength{\YAD@max@logoheight}
@@ -5213,6 +5214,7 @@ This work consists of the file  yathesis.dtx
 \LetLtxMacro{\YAD@ORI@chapter}{\chapter}%
 \AfterPreamble{% delay the redefinition when titlesec has done its own
   \renewcommand\chapter{%
+    \boolfalse{YAD@starred@chapter}%
     \ifbool{YAD@localbibs}{%
       \let\YAD@ORI@blx@warn@bibempty\blx@warn@bibempty%
       \def\blx@warn@bibempty{}%
@@ -5246,6 +5248,7 @@ This work consists of the file  yathesis.dtx
     }%
   }%
   \newcommandtwoopt{\YAD@starred@chapter}[3][][]{%
+    \booltrue{YAD@starred@chapter}%
     \YAD@setsecnumdepth{none}%
     \YAD@tmp@chapter[#1][#2]{#3}%
   }%
@@ -5285,7 +5288,16 @@ This work consists of the file  yathesis.dtx
 % \end{itemize}
 %    \begin{macrocode}
 \LetLtxMacro{\YAD@ORI@section}{\section}
-\renewcommandtwoopt*{\section}[3][][]{%
+\renewcommand\section{%
+  \if@mainmatter%
+  \ifbool{YAD@starred@chapter}{%
+  }{%
+    \YAD@setsecnumdepth{\YAD@secnumdepth}%
+  }%
+  \fi%
+  \@ifstar{\YAD@starred@section}{\YAD@unstarred@section}%
+}
+\newcommandtwoopt*{\YAD@tmp@section}[3][][]{%
   \ifthenelse{\isempty{#1}}{%
     \ifthenelse{\isempty{#2}}{%
       \YAD@ORI@section{#3}%
@@ -5307,6 +5319,13 @@ This work consists of the file  yathesis.dtx
       \let\sectionmark\YAD@ORI@sectionmark%
     }%
   }%
+}%
+\newcommandtwoopt{\YAD@starred@section}[3][][]{%
+  \YAD@setsecnumdepth{none}%
+  \YAD@tmp@section[#1][#2]{#3}%
+}%
+\newcommandtwoopt{\YAD@unstarred@section}[3][][]{%
+  \YAD@tmp@section[#1][#2]{#3}%
 }%
 %    \end{macrocode}
 % Si le \Package{floatrow} est chargé, on doit aussi ne pas utiliser cette
