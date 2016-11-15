@@ -5030,6 +5030,7 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % style pour les local TOCs
 %    \begin{macrocode}
+\let\YAD@addcontentsline\addcontentsline
 \newcommand\YAD@localstyle {%
   \etocsettocstyle {%
     \if@twocolumn
@@ -5041,11 +5042,20 @@ This work consists of the file  yathesis.dtx
     \setbox\YAD@leaderbox\hbox to \YAD@leaderboxwidth{\hss.\hss}%
     \parindent\z@
     \dimen@ 2.25em % soon to be \leftskip
+%    \end{macrocode}
+% We don't want the "section" containing the localtoc to be itself in (global
+% or local) TOCs. For this, it is enough to \enquote{relax} "\addcontentsline".
+%    \begin{macrocode}
+    \renewcommand\addcontentsline[3]{}%
     \section *{\kern\dimen@ % \dimen@ works here by sheer luck
       % \contentsname%
       % \@mkboth{\MakeUppercase\contentsname}{\MakeUppercase\contentsname}%
       \large\textbf{\translate{lbl-localtocname}}%
     }%
+%    \end{macrocode}
+% We restore the original behavior of "\addcontentsline".
+%    \begin{macrocode}
+    \let\addcontentsline\YAD@addcontentsline
     \parskip \z@skip \vspace{-1.25\baselineskip}% somewhat ad hoc
     \leftskip 2.25em \rightskip 4.5em \advance\rightskip-\YAD@rightmargin\relax
     \leavevmode\leaders\hrule\@height\p@\hfill\kern\z@\par
@@ -5220,7 +5230,7 @@ This work consists of the file  yathesis.dtx
     \ifbool{YAD@localbibs}{%
       \let\YAD@ORI@blx@warn@bibempty\blx@warn@bibempty%
       \def\blx@warn@bibempty{}%
-      \YAD@printbibliography@ORI[segment=\therefsegment,heading=YAD@localbibs@heading]% 
+      \YAD@printbibliography@ORI[segment=\therefsegment,heading=YAD@localbibs@heading]%
       \let\blx@warn@bibempty\YAD@ORI@blx@warn@bibempty%
    }{%
     }
@@ -5711,11 +5721,10 @@ This work consists of the file  yathesis.dtx
 \AtEndPreamble{%
   \@ifpackageloaded{biblatex}{%
     \defbibheading{bibintoc}[\bibname]{\chapter*{#1}}%
-    % \defbibheading{subbibintoc}[\bibname]{\section*{#1}}%
     \defbibheading{YAD@localbibs@heading}[\translate{lbl-localbibname}]{%
-      % \YAD@setsecnumdepth{none}%
+      \renewcommand\addcontentsline[3]{}%
       \section*{#1}%
-      % \YAD@setsecnumdepth{\YAD@secnumdepth}%
+      \let\addcontentsline\YAD@addcontentsline
     }%
 %    \end{macrocode}
 %
