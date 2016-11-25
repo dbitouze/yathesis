@@ -3555,6 +3555,7 @@
   \YAD@setlinestyle {paragraph}{\YAD@numwidthF}%
   \YAD@setlinestyle {subparagraph}{\YAD@numwidthG}%
 }
+\let\YAD@addcontentsline\addcontentsline
 \newcommand\YAD@localstyle {%
   \etocsettocstyle {%
     \if@twocolumn
@@ -3566,11 +3567,13 @@
     \setbox\YAD@leaderbox\hbox to \YAD@leaderboxwidth{\hss.\hss}%
     \parindent\z@
     \dimen@ 2.25em % soon to be \leftskip
+    \renewcommand\addcontentsline[3]{}%
     \section *{\kern\dimen@ % \dimen@ works here by sheer luck
       % \contentsname%
       % \@mkboth{\MakeUppercase\contentsname}{\MakeUppercase\contentsname}%
       \large\textbf{\translate{lbl-localtocname}}%
     }%
+    \let\addcontentsline\YAD@addcontentsline
     \parskip \z@skip \vspace{-1.25\baselineskip}% somewhat ad hoc
     \leftskip 2.25em \rightskip 4.5em \advance\rightskip-\YAD@rightmargin\relax
     \leavevmode\leaders\hrule\@height\p@\hfill\kern\z@\par
@@ -3871,11 +3874,10 @@
 \AtEndPreamble{%
   \@ifpackageloaded{biblatex}{%
     \defbibheading{bibintoc}[\bibname]{\chapter*{#1}}%
-    % \defbibheading{subbibintoc}[\bibname]{\section*{#1}}%
     \defbibheading{YAD@localbibs@heading}[\translate{lbl-localbibname}]{%
-      % \YAD@setsecnumdepth{none}%
+      \renewcommand\addcontentsline[3]{}%
       \section*{#1}%
-      % \YAD@setsecnumdepth{\YAD@secnumdepth}%
+      \let\addcontentsline\YAD@addcontentsline
     }%
     \@ifpackageloaded{csquotes}{%
       \SetCiteCommand{\autocite}%
