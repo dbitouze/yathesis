@@ -1,3 +1,4 @@
+\mainmatter
 \chapter{Partie principale}\label{cha-corps}
 \index{partie!principale}%
 
@@ -33,7 +34,84 @@ une conclusion \enquote{ordinaires}.
   \Class{book}\nofrontmatter.
 \end{docCommand}
 
-\section{Chapitres non numérotés}
+\section{Chapitres et sections}
+
+La \yatCl{} modifie les commandes usuelles \docAuxCommand{chapter} et
+\docAuxCommand{section} de création des chapitres et sections en ce qui concerne
+les trois aspects suivants :
+\begin{enumerate}
+\item le nombre de leurs arguments optionnels qui passe de un à deux (permettant
+  de spécifier \emph{deux} titres alternatifs aux chapitres et sections) ;
+\item le comportement de leurs variantes étoilées (pour les chapitres et
+  sections \emph{non} numérotés) ;
+\item les têtes de chapitres numérotés ;
+\end{enumerate}
+examinés aux \vref{sec-chap-non-numer,sec-intit-altern,sec-chapitres-numerotes}.
+
+\subsection{Titres alternatifs}
+\label{sec-intit-altern}
+\index{table des matières!entrée différente du titre courant}%
+\index{titre courant!différent de l'entrée en table des matières}%
+
+Par défaut, les commandes \docAuxCommand{chapter} et \docAuxCommand{section}
+admettent, en plus de leur argument obligatoire permettant de stipuler le
+\meta{titre} du chapitre ou de la section, un argument optionnel (\emph{unique})
+permettant de remplacer le \meta{titre} par un \meta{titre alternatif}
+(\emph{identique}) :
+\begin{itemize}
+\item en \gls{tdm} ;
+\item en \gls{titrecourant} ;
+\item en signet.
+\end{itemize}
+
+Avec la \yatCl{}, ces commandes admettent un second argument optionnel
+permettant de stipuler des \meta{titres alternatifs} (\emph{différents}) :
+\begin{itemize}
+\item en \gls{tdm}\signet{} ;
+\item en \gls{titrecourant}.
+\end{itemize}
+La nouvelle syntaxe, indiquée ci-dessous, est commune aux commandes
+\refCom{chapter} et \refCom{section}.
+
+\begin{docCommand}{chapter}{\oarg{titre alt.~1}\oarg{titre alt.~2}\marg{titre}}
+  \indexdef{chapitre}%
+  Cette commande crée un chapitre dont il est possible de différencier les :
+  \begin{itemize}
+  \item titre ;
+  \item entrée en \gls{tdm}\signet{} ;
+  \item \gls{titrecourant}.
+  \end{itemize}
+  Son usage précis est synthétisé au \vref{tab-commande-chapter-section}.
+\end{docCommand}
+%
+\begin{docCommand}{section}{\oarg{titre alt.~1}\oarg{titre alt.~2}\marg{titre}}
+  \indexdef{section}%
+  Cette commande crée une section dont il est possible de différencier les :
+  \begin{itemize}
+  \item titre ;
+  \item entrée en \gls{tdm}\signet{} ;
+  \item \gls{titrecourant}.
+  \end{itemize}
+  Son usage précis est synthétisé au \vref{tab-commande-chapter-section}.
+\end{docCommand}
+%
+\begin{dbremark}{Titres alternatifs aussi pour les chapitres et sections non
+    numérotés}{}
+  Ces deux arguments optionnels, permettant différencier titre, entrée en
+  \gls{tdm} et \gls{titrecourant}, sont également disponibles avec les versions
+  étoilées des commandes \docAuxCommand{chapter} et \docAuxCommand{section} pour
+  les chapitres et sections non numérotés.
+\end{dbremark}
+%
+\begin{table}[hb]
+  \centering
+  \caption{Usage des (deux arguments optionnels des) commandes
+    \protect\refCom{chapter} et \protect\refCom{section}}
+  \label{tab-commande-chapter-section}
+  \input{tableaux/commande-chapter-section}
+\end{table}
+
+\subsection{Chapitres non numérotés}
 \label{sec-chap-non-numer}%
 \index{chapitre!non numéroté}%
 
@@ -65,8 +143,8 @@ d'en simplifier l'usage.
   \begin{enumerate}
   \item automatiquement, le titre du chapitre figure :
     \begin{enumerate}
-    \item dans la table des matières ;
-    \item dans les \glspl{titrecourant} ;
+    \item en table(s) des matières ;
+    \item en \glspl{titrecourant} ;
     \end{enumerate}
   \item les (sous-(sous-))sections du chapitre peuvent et même \emph{doivent}
     être créées avec les versions \emph{non} étoilées des commandes
@@ -95,12 +173,14 @@ d'en simplifier l'usage.
   \label{fig-introduction}
 \end{figure}
 
-\section{Chapitres numérotés}
+\subsection{Têtes des chapitres numérotés}
 \label{sec-chapitres-numerotes}%
 \indexdef{chapitre!numéroté}%
 
-Les chapitres numérotés du corps de la thèse sont introduits par la commande
-usuelle \docAuxCommand{chapter} (cf. \vref{fig-chapitre}).
+Les chapitres numérotés de la thèse, introduits par la version non étoilée de la
+commande \docAuxCommand{chapter}, voient leurs têtes composées par défaut avec
+le style |PetersLenny| du \Package{fncychap} (cf. \vref{fig-chapitre}). La
+\vref{sec-style-des-tetes} explique comment ceci peut être modifié.
 
 \begin{figure}[ht]
   \centering
@@ -109,12 +189,6 @@ usuelle \docAuxCommand{chapter} (cf. \vref{fig-chapitre}).
     \enquote{ordinaire}}
   \label{fig-chapitre}
 \end{figure}
-
-\begin{dbremark}{Style des têtes de chapitres numérotés personnalisable}{}
-  Les têtes de chapitres numérotés sont par défaut composées avec le style
-  |PetersLenny| du \Package*{fncychap}. La \vref{sec-style-des-tetes} explique
-  comment ceci peut être modifié.
-\end{dbremark}
 
 \section{Références bibliographiques}\label{sec-refer-bibl}
 \indexdef{bibliographie!globale}%
