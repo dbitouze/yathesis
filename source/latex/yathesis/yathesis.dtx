@@ -456,6 +456,11 @@ This work consists of the file  yathesis.dtx
 \newbool{YAD@localtocs}%
 \newbool{YAD@nextwithlocaltoc}%
 \newbool{YAD@starred@chapter}%
+\newbool{YAD@starred@section}%
+\newbool{YAD@starred@subsection}%
+\newbool{YAD@starred@subsubsection}%
+\newbool{YAD@starred@paragraph}%
+\newbool{YAD@starred@subparagraph}%
 %
 \newlength{\cmdKV@YAD@logoheight}
 \newlength{\YAD@max@logoheight}
@@ -5301,6 +5306,7 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \LetLtxMacro{\YAD@ORI@section}{\section}
 \renewcommand\section{%
+  \boolfalse{YAD@starred@section}%
   \if@mainmatter%
   \ifbool{YAD@starred@chapter}{%
   }{%
@@ -5333,11 +5339,125 @@ This work consists of the file  yathesis.dtx
   }%
 }%
 \newcommandtwoopt{\YAD@starred@section}[3][][]{%
+  \booltrue{YAD@starred@section}%
   \YAD@setsecnumdepth{none}%
   \YAD@tmp@section[#1][#2]{#3}%
 }%
 \newcommandtwoopt{\YAD@unstarred@section}[3][][]{%
   \YAD@tmp@section[#1][#2]{#3}%
+}%
+%    \end{macrocode}
+% On redéfinit la commande "\subsection" de sorte que sa version étoilée dispose
+% des mêmes facilités que les versions étoilées des commandes "\chapter" et
+% "\section".
+% \end{itemize}
+%    \begin{macrocode}
+\LetLtxMacro{\YAD@ORI@subsection}{\subsection}
+\renewcommand\subsection{%
+  \boolfalse{YAD@starred@subsection}%
+  \if@mainmatter%
+  \ifbool{YAD@starred@section}{%
+  }{%
+    \YAD@setsecnumdepth{\YAD@secnumdepth}%
+  }%
+  \fi%
+  \@ifstar{\YAD@starred@subsection}{\YAD@unstarred@subsection}%
+}
+\newcommand*{\YAD@tmp@subsection}[2][]{%
+  \ifthenelse{\isempty{#1}}{%
+    \YAD@ORI@subsection{#2}%
+  }{%
+    \YAD@ORI@subsection[#1]{#2}%
+  }%
+}%
+\newcommand{\YAD@starred@subsection}[2][]{%
+  \booltrue{YAD@starred@subsection}%
+  \YAD@setsecnumdepth{none}%
+  \YAD@tmp@subsection[#1]{#2}%
+}%
+\newcommand{\YAD@unstarred@subsection}[2][]{%
+  \YAD@tmp@subsection[#1]{#2}%
+}%
+%
+\LetLtxMacro{\YAD@ORI@subsubsection}{\subsubsection}
+\renewcommand\subsubsection{%
+  \boolfalse{YAD@starred@subsubsection}%
+  \if@mainmatter%
+  \ifbool{YAD@starred@section}{%
+  }{%
+    \YAD@setsecnumdepth{\YAD@secnumdepth}%
+  }%
+  \fi%
+  \@ifstar{\YAD@starred@subsubsection}{\YAD@unstarred@subsubsection}%
+}
+\newcommand*{\YAD@tmp@subsubsection}[2][]{%
+  \ifthenelse{\isempty{#1}}{%
+    \YAD@ORI@subsubsection{#2}%
+  }{%
+    \YAD@ORI@subsubsection[#1]{#2}%
+  }%
+}%
+\newcommand{\YAD@starred@subsubsection}[2][]{%
+  \booltrue{YAD@starred@subsubsection}%
+  \YAD@setsecnumdepth{none}%
+  \YAD@tmp@subsubsection[#1]{#2}%
+}%
+\newcommand{\YAD@unstarred@subsubsection}[2][]{%
+  \YAD@tmp@subsubsection[#1]{#2}%
+}%
+%
+\LetLtxMacro{\YAD@ORI@paragraph}{\paragraph}
+\renewcommand\paragraph{%
+  \boolfalse{YAD@starred@paragraph}%
+  \if@mainmatter%
+  \ifbool{YAD@starred@section}{%
+  }{%
+    \YAD@setsecnumdepth{\YAD@secnumdepth}%
+  }%
+  \fi%
+  \@ifstar{\YAD@starred@paragraph}{\YAD@unstarred@paragraph}%
+}
+\newcommand*{\YAD@tmp@paragraph}[2][]{%
+  \ifthenelse{\isempty{#1}}{%
+    \YAD@ORI@paragraph{#2}%
+  }{%
+    \YAD@ORI@paragraph[#1]{#2}%
+  }%
+}%
+\newcommand{\YAD@starred@paragraph}[2][]{%
+  \booltrue{YAD@starred@paragraph}%
+  \YAD@setsecnumdepth{none}%
+  \YAD@tmp@paragraph[#1]{#2}%
+}%
+\newcommand{\YAD@unstarred@paragraph}[2][]{%
+  \YAD@tmp@paragraph[#1]{#2}%
+}%
+%
+\LetLtxMacro{\YAD@ORI@subparagraph}{\subparagraph}
+\renewcommand\subparagraph{%
+  \boolfalse{YAD@starred@subparagraph}%
+  \if@mainmatter%
+  \ifbool{YAD@starred@section}{%
+  }{%
+    \YAD@setsecnumdepth{\YAD@secnumdepth}%
+  }%
+  \fi%
+  \@ifstar{\YAD@starred@subparagraph}{\YAD@unstarred@subparagraph}%
+}
+\newcommand*{\YAD@tmp@subparagraph}[2][]{%
+  \ifthenelse{\isempty{#1}}{%
+    \YAD@ORI@subparagraph{#2}%
+  }{%
+    \YAD@ORI@subparagraph[#1]{#2}%
+  }%
+}%
+\newcommand{\YAD@starred@subparagraph}[2][]{%
+  \booltrue{YAD@starred@subparagraph}%
+  \YAD@setsecnumdepth{none}%
+  \YAD@tmp@subparagraph[#1]{#2}%
+}%
+\newcommand{\YAD@unstarred@subparagraph}[2][]{%
+  \YAD@tmp@subparagraph[#1]{#2}%
 }%
 %    \end{macrocode}
 % Si le \Package{floatrow} est chargé, on doit aussi ne pas utiliser cette
