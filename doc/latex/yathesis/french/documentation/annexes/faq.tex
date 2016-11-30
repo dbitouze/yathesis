@@ -13,8 +13,8 @@ Ce chapitre est une \gls{faq} \aside{autrement dit une liste des questions
   \index{fonctionnalité!demande}%
   La \yatCl{} est vraiment formidable, mais je souhaite :
   \begin{enumerate}
-  \item signaler un dysfonctionnement (un bogue) ;
-  \item demander une nouvelle fonctionnalité ;
+  \item signaler un dysfonctionnement (un bogue) ou suggérer une amélioration
+    (par exemple en demandant une nouvelle fonctionnalité) ;
   \item communiquer avec l'auteur de la classe.
   \end{enumerate}
   Comment faire ?
@@ -22,28 +22,32 @@ Ce chapitre est une \gls{faq} \aside{autrement dit une liste des questions
   \tcblower
   %
   \begin{enumerate}
-  \item Pour rapporter un dysfonctionnement :
+  \item Pour un dysfonctionnement ou une amélioration :
     \begin{enumerate}
-    \item s'assurer qu'il n'est pas déjà répertorié :
+    \item avant de le signaler ou de la suggérer, s'assurer qu'ils n'ont pas
+      déjà été répertoriés :
       \begin{enumerate}
+      \item en consultant la liste de ceux qui le sont déjà\issues ;
       \item en lisant la suite du présent chapitre ;
       \item en lisant le \vref{cha-incomp-conn} ;
-      \item en consultant la liste des \enquote{issues} à l'adresse
-        \url{https://github.com/dbitouze/yathesis/issues/} ;
+        % des dysfonctionnements déjà répertoriés à l'adresse
+        % \url{https://github.com/dbitouze/yathesis/issues?q=is%3Aopen+is%3Aissue+label%3Abug} ;
       \end{enumerate}
-    \item s'il n'est pas déjà répertorié, créer une \enquote{issue} à l'adresse
-      \url{https://github.com/dbitouze/yathesis/issues/new}\footnote{Un
-        \gls{ecm} est vivement souhaité.}.
+    \item s'ils n'ont pas déjà été répertoriés, signaler ce dysfonctionnement
+      (un \gls{ecm} est alors vivement souhaité) ou suggérer cette
+      amélioration\newissues{}.
     \end{enumerate}
-  \item Pour demander une fonctionnalité :
-    \begin{enumerate}
-    \item s'assurer qu'elle n'est pas déjà répertoriée en
-      consultant la liste des \enquote{issues} à l'adresse
-      \url{https://github.com/dbitouze/yathesis/issues/} ;
-    \item si la fonctionnalité n'a pas déjà été demandée, créer une
-      \enquote{issue} à l'adresse
-      \url{https://github.com/dbitouze/yathesis/issues/new}.
-    \end{enumerate}
+  % \item Pour une nouvelle fonctionnalité (ou suggestion d'amélioration) :
+  %   \begin{enumerate}
+  %   \item avant de la demander, s'assurer qu'elle n'a pas déjà été répertoriée :
+  %     \begin{enumerate}
+  %     \item en consultant la liste de celles qui le sont déjà\issues ;
+  %       % \url{https://github.com/dbitouze/yathesis/issues?q=is%3Aopen+is%3Aissue+label%3Aenhancement} ;
+  %     \item en lisant la suite du présent chapitre ;
+  %     \end{enumerate}
+  %   \item si elle n'a pas déjà été répertoriée, demander cette fonctionnalité
+  %     (ou suggérer une amélioration)\newissues.
+  %   \end{enumerate}
   \item Pour communiquer avec l'auteur de la classe, il est possible d'utiliser
     l'adresse indiquée à la page \url{https://github.com/dbitouze/yathesis/}.
   \end{enumerate}
@@ -121,8 +125,8 @@ Ce chapitre est une \gls{faq} \aside{autrement dit une liste des questions
 
 \subsection{Pages de titre}
 \label{sec-pages-de-titre}
-\index{titre!mise en page}%
-\index{titre!apparence}%
+\index{page de titre!mise en page}%
+\index{page de titre!apparence}%
 
 \begin{dbfaq}{Comment modifier l'apparence de la page de titre ?}{}
   L'apparence par défaut de la page de titre ne me convient pas et je voudrais
@@ -238,49 +242,54 @@ où \meta{autre niveau} est l'une des valeurs possibles de la clé
 \subsection[Titres courants]{\texorpdfstring{\Glsentryplural{titrecourant}}{Titres courants}}
 \label{sec-titres-courants}
 
+\glsreset{tdm}
 \begin{dbfaq}{Est-il possible d'obtenir des \glsplural{titrecourant} distincts
     des titres figurant en table(s) des matières ?}{}
   \index{table des matières!titre différent du titre courant}%
   \index{titre courant!différent du titre en table des matières}%
   %
-  Les titres des chapitres sont reproduits en \glsplural{titrecourant} et, si
-  certains d'entre eux sont longs au point de déborder de l'entête, je peux
-  recourir à l'argument optionnel de la commande \docAuxCommand{chapter} pour
-  qu'ils y soient remplacés par des versions alternatives \enquote{courtes}.
+  Les titres des chapitres et des sections sont reproduits en
+  \glsplural{titrecourant} et, si certains d'entre eux sont longs au point de
+  déborder de l'entête, je peux recourir à l'argument optionnel des commandes
+  \docAuxCommand{chapter} et \docAuxCommand{section} pour qu'ils y soient
+  remplacés par des titres alternatifs \enquote{courts}.
 
-  Mais ce remplacement a alors lieu \emph{aussi} en table(s) des matières, et
-  cela me pose problème dans les cas suivants.
+  Mais ce remplacement a alors lieu \emph{aussi} en \gls{tdm}, et cela me pose
+  problème dans les cas suivants.
   % Mais alors les titres \enquote{normaux} de ces chapitres sont remplacés par
   % leurs versions alternatives \enquote{courtes} \emph{également} en table(s) des
   % matières, et cela me pose problème dans les cas suivants.
   \begin{description}
-  \item[Cas 1.] Je souhaite que, en table(s) des matières, figurent
-    systématiquement les titres \enquote{normaux}, et pas leurs éventuelles
-    versions alternatives \enquote{courtes}.
-  \item[Cas 2.] Je souhaite que les versions alternatives \enquote{courtes} des
-    titres des chapitres puissent être différentes en table(s) des matières et
-    en \glsplural{titrecourant}.
+  \item[Cas 1.] Je souhaite que, en \gls{tdm}, figurent systématiquement les
+    titres \enquote{normaux}, et pas d'éventuels titres alternatifs
+    \enquote{courts}.
+  \item[Cas 2.] Je souhaite que les titres alternatifs \enquote{courts} des
+    titres des chapitres puissent être différentes en \gls{tdm} et en
+    \glsplural{titrecourant}.
   \end{description}
   Est-il donc possible d'obtenir des \glsplural{titrecourant} distincts des
-  titres figurant en table(s) des matières ?%
+  titres figurant en \gls{tdm} ?%
   \tcblower
   %
-  (Cette question ne concerne pas directement la \yatCl{}.) Il suffit de
-  recourir à la commande \docAuxCommand{chaptermark}, comme suit.
-  \begin{description}
-  \item[Cas 1.]\
-\begin{bodycode}[listing options={deletekeywords={chapter},deletekeywords={[3]chapter}}]
-\chapter{"\meta{titre}"}
-\chaptermark{"\meta{titre alternatif en titre courant}"}
-\end{bodycode}
-  \item[Cas 2.]\
-\begin{bodycode}[listing options={deletekeywords={chapter},deletekeywords={[3]chapter}}]
-\chapter["\meta{titre alternatif en table(s) des matières}"]{"\meta{titre}"}
-\chaptermark{"\meta{titre alternatif en titre courant}"}
-\end{bodycode}
-  \end{description}
-  La commande analogue \docAuxCommand{sectionmark} peut être utilisée si le
-  problème se pose pour les sections.
+  Il suffit de recourir à l'argument optionnel supplémentaire des commandes
+  \refCom{chapter} et \refCom{section} fourni par la \yatCl{}
+  (cf. \vref{sec-intit-altern}).
+%   (Cette question ne concerne pas directement la \yatCl{}.) Il suffit de
+%   recourir à la commande \docAuxCommand{chaptermark}, comme suit.
+%   \begin{description}
+%   \item[Cas 1.]\
+% \begin{bodycode}[listing options={deletekeywords={chapter},deletekeywords={[3]chapter}}]
+% \chapter{"\meta{titre}"}
+% \chaptermark{"\meta{titre alternatif en titre courant}"}
+% \end{bodycode}
+%   \item[Cas 2.]\
+% \begin{bodycode}[listing options={deletekeywords={chapter},deletekeywords={[3]chapter}}]
+% \chapter["\meta{titre alternatif en table(s) des matières}"]{"\meta{titre}"}
+% \chaptermark{"\meta{titre alternatif en titre courant}"}
+% \end{bodycode}
+%   \end{description}
+%   La commande analogue \docAuxCommand{sectionmark} peut être utilisée si le
+%   problème se pose pour les sections.
 \end{dbfaq}
 
 \subsection{Divers}

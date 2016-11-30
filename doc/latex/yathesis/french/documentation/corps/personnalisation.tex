@@ -127,10 +127,10 @@ Par défaut, un mémoire créé avec la \yatCl est composé :
 \end{dbexample}
 
 \subsection{Profondeur de la numérotation}\label{sec-profondeur-de-la}
-\index{profondeur!numérotation des paragraphes}%
-\index{numérotation!des paragraphes!profondeur}%
+\index{profondeur!numérotation des unités}%
+\index{numérotation!des unités!profondeur}%
 
-Par défaut, la numérotation des paragraphes a pour \enquote{niveau de
+Par défaut, la numérotation des unités a pour \enquote{niveau de
   profondeur} les sous-sections. Autrement dit, seuls les titres des parties
 (éventuelles), chapitres, sections et sous-sections sont numérotés.  L'option
 \refKey{secnumdepth} suivante permet de spécifier un autre niveau de
@@ -140,10 +140,10 @@ profondeur.
   \tcbset{before lower=\vspace*{\baselineskip}\par}
   \begin{docKey}{secnumdepth}{=\docValue{part}\textbar\docValue{chapter}\textbar\docValue{section}\textbar\docValue{subsection}\textbar\docValue{subsubsection}\textbar\docValue{paragraph}\textbar\docValue{subparagraph}}{pas
       de valeur par défaut, initialement \docValue{subsection}}
-    \indexdef{profondeur!numérotation des paragraphes}%
-    \indexdef{numérotation des paragraphes!profondeur}%
+    \indexdef{profondeur!numérotation des unités}%
+    \indexdef{numérotation!des unités!profondeur}%
     Cette clé permet de modifier le \enquote{niveau de profondeur} de la
-    numérotation des paragraphes jusqu'aux, respectivement : parties,
+    numérotation des unités jusqu'aux, respectivement : parties,
     chapitres, sections, sous-sections, sous-sous-sections, paragraphes,
     sous-paragraphes.
   \end{docKey}
@@ -184,7 +184,7 @@ commandes du \Package*{setspace} \aside*{chargé par la \yatCl}.
   matières locales}%
 
 \begin{docKey}[][doc new=2016-10-30]{localtocs}{}{pas de valeur par défaut, pas
-    de valeur initiale} 
+    de valeur initiale}
   \indexdef{table des matières!locale}%
   Cette clé fait automatiquement débuter les chapitres de la partie
   principale\footnote{C'est-à-dire de \refCom{mainmatter} jusqu'à
@@ -228,7 +228,7 @@ clé \refKey{localtocs/depth}.
 \begin{preamblecode}
 \documentclass[localtocs]{yathesis}
 \end{preamblecode}
-  
+
   Dans l'exemple précédent, les tables des matières locales vont jusqu'aux
   sous-sections. Pour qu'elles aillent par exemple jusqu'aux sous-sous-sections,
   on recourra à :
@@ -278,14 +278,14 @@ intitulée \translateexpression{localtocname}.
   chapitres par leurs bibliographies locales}%
 
 \begin{docKey}[][doc new=2016-10-30]{localbibs}{}{pas de valeur par défaut, pas
-    de valeur initiale} 
+    de valeur initiale}
   \indexdef{bibliographie!locale}%
   Cette clé fait automatiquement finir les chapitres (contenant au moins une
   référence bibliographique) par leurs bibliographies locales.
 \end{docKey}
 
 \begin{docKey}[][doc new=2016-10-30]{localbibs*}{}{pas de valeur par défaut, pas
-    de valeur initiale} 
+    de valeur initiale}
   \indexdef{bibliographie!locale}%
   Cette clé a le même effet que \refKey{localbibs} sauf que l'option
   \docAuxKey{defernumbers} du \Package*{biblatex} est alors
@@ -727,7 +727,7 @@ adresses des laboratoires est un peu condensée si \meta{nombre} dépasse $1$.
 \label{sec-options-passer-aux}%
 \index{option!de package chargé par \yatcl}%
 
-\changes{v0.99g}{2014-07-13}{Des options peuvent être passées aux packages
+\changes{v0.99g}{2014-07-13}{Possibilité de passer des options aux packages
   chargés par \yat{}}%
 %
 Pour plusieurs de ses fonctionnalités, la \yatCl s'appuie sur des packages
@@ -856,10 +856,10 @@ peuvent être passées à leurs options).
 % \end{docCommand}
 %
 % \subsection{Profondeur de la numérotation}\label{sec-profondeur-de-la}
-% \index{profondeur!numérotation des paragraphes}%
-% \index{numérotation!des paragraphes!profondeur}%
+% \index{profondeur!numérotation des unités}%
+% \index{numérotation!des unités!profondeur}%
 %
-% Par défaut, la numérotation des paragraphes a pour \enquote{niveau de
+% Par défaut, la numérotation des unités a pour \enquote{niveau de
 %   profondeur} les sous-sections. Autrement dit, seuls les titres des parties
 % (éventuelles), chapitres, sections et sous-sections sont numérotés.  L'option
 % \refKey{secnumdepth} suivante permet de spécifier un autre niveau de
@@ -869,10 +869,10 @@ peuvent être passées à leurs options).
 %   \tcbset{before lower=\vspace*{\baselineskip}\par}
 %   \begin{docKey}{secnumdepth}{=\docValue{part}\textbar\docValue{chapter}\textbar\docValue{section}\textbar\docValue{subsection}\textbar\docValue{subsubsection}\textbar\docValue{paragraph}\textbar\docValue{subparagraph}}{pas
 %       de valeur par défaut, initialement \docValue{subsection}}
-%     \indexdef{profondeur!numérotation des paragraphes}%
-%     \indexdef{numérotation des paragraphes!profondeur}%
+%     \indexdef{profondeur!numérotation des unités}%
+%     \indexdef{numérotation des unités!profondeur}%
 %     Cette clé permet de modifier le \enquote{niveau de profondeur} de la
-%     numérotation des paragraphes jusqu'aux, respectivement : parties,
+%     numérotation des unités jusqu'aux, respectivement : parties,
 %     chapitres, sections, sous-sections, sous-sous-sections, paragraphes,
 %     sous-paragraphes.
 %   \end{docKey}

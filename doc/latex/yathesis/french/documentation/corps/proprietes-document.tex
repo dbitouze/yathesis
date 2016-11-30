@@ -7,7 +7,7 @@ caractéristiques de la thèse. La plupart d'entre elles sont ensuite affichées
 en divers emplacements du mémoire :
 \begin{itemize}
 \item%
-  \index{titre}%
+  \index{titre!de la thèse}%
   \index{couverture}%
   \index{première de couverture}%
   sur les pages de 1\iere{} de couverture et de titre(s), produites par la
@@ -124,7 +124,7 @@ titre\footnote{En outre, les titres et éventuels sous-titres figureront sur les
 \begin{docCommand}[doc description=\mandatory]{title}{\oarg{titre dans la langue
       secondaire}\marg{titre}}%
   \index{caractéristiques de la thèse!liste!titre}%
-  \indexdef{titre}%
+  \indexdef{titre!de la thèse}%
   Cette commande définit le \meta{titre} de la thèse. Celui-ci apparaît alors
   aussi comme métadonnée \enquote{Titre} du fichier \pdf{} de la thèse.
 \end{docCommand}
@@ -132,10 +132,9 @@ titre\footnote{En outre, les titres et éventuels sous-titres figureront sur les
 \begin{docCommand}{subtitle}{\oarg{sous-titre dans la langue
       secondaire}\marg{sous-titre}}%
   \index{caractéristiques de la thèse!liste!sous-titre}%
-  \indexdef{sous-titre}%
-  \index{titre!sous-titre}%
-  Cette commande définit l'éventuel \meta{sous-titre} de
-  la thèse.
+  \indexdef{sous-titre de la thèse}%
+  \index{titre!de la thèse!sous-titre}%
+  Cette commande définit l'éventuel \meta{sous-titre} de la thèse.
 \end{docCommand}
 %
 \begin{docCommand}[doc description=\mandatory]{academicfield}{\oarg{discipline dans la langue
@@ -704,14 +703,19 @@ corps de métier) des membres du jury parmi celles prédéfinies par la \yatCl{}
 %
 \begin{docKey}[][doc updated=2016-10-30]{associateprofessor}{=\docValue{true}\textbar\docValue{false}}{par défaut
     \docValue{true}, initialement \docValue{false}}
-  \index{corporation!prédéfinie!mcf (non) hdr@\acrshort{mcf} (non) \acrshort{hdrpeople}}%
-  \indexsee{mcf (non) hdr@\acrshort{mcf} (non) \acrshort{hdrpeople}}{corporation}%
+  \index{corporation!prédéfinie!mcf (non) hdr@\acrshort{mcf} (non)
+    \acrshort{hdrpeople}}%
+  \indexsee{mcf (non) hdr@\acrshort{mcf} (non)
+    \acrshort{hdrpeople}}{corporation}%
   \changes{v0.99o}{2016-10-30}{Clés \protect\refAux{mcf} et
     \protect\refAux{mcf*} remplacées par les (et alias des) clés
     \protect\refKey{associateprofessor} et
     \protect\refKey{associateprofessor*}}%
   \changes*{v0.99o}{2016-10-30}{\acrshort{mcf} désormais traduit en anglais par
-    \enquote{\foreignlanguage{english}{\translate{associateprofessor}}}}%
+    \enquote{\foreignlanguage{english}{\translate{associateprofessor}}} (et non
+    plus par
+    \enquote{Lecturer})\protect\footnote{Cf. \vref{sec-expressions-cles} au cas
+      où l'ancienne expression soit préférée.}}%
   Cette clé permet de spécifier qu'une personne appartient à la corporation des
   \glspl{mcf}\footnote{Par souci de compatibilité ascendante, la clé désormais
     obsolète \refAux{mcf} est un alias de la clé \refKey{associateprofessor}.}.

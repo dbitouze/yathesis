@@ -45,9 +45,10 @@
 % }%
 %
 \DeclareFixedFootnote{\nofrontmatter}{%
-  Au contraire, la commande analogue \protect\docAuxCommand{frontmatter} pour la
-  \protect\gls{liminaire} ne doit pas être utilisée car elle l'est déjà en
-  sous-main par la \yatCl{}.%
+  Avec la \Class{book} standard, la commande analogue
+  \protect\docAuxCommand{frontmatter} doit également être utilisée pour
+  introduire la \protect\gls{liminaire}. Mais celle-ci doit au contraire ne pas
+  être employée avec la \yatCl{} (qui l'actionne déjà en sous-main).%
 }
 %
 \DeclareFixedFootnote{\termesdefinisutilises}{%
@@ -124,7 +125,21 @@
 }
 %
 \DeclareFixedFootnote{\signet}{%
-  Le titre alternatif figurant en signet est alors identique à celui en \gls{tdm}.%
+  % Le titre alternatif figurant en signet est alors identique à celui en
+  % \gls{tdm}.%
+  Et en signet.%
+}
+%
+\DeclareFixedFootnote{\titresnormalalternatif}{%
+  \enquote{Normal} ou alternatif, cf. \vref{sec-intit-altern}.%
+}
+%
+\DeclareFixedFootnote{\issues}{%
+  À l'adresse \url{https://github.com/dbitouze/yathesis/issues/}.%
+}
+%
+\DeclareFixedFootnote{\newissues}{%
+  À l'adresse \url{https://github.com/dbitouze/yathesis/issues/new/}.%
 }
 
 %%% Local Variables:
