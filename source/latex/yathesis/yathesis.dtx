@@ -455,12 +455,12 @@ This work consists of the file  yathesis.dtx
 \newbool{YAD@mainmatter@used}
 \newbool{YAD@localtocs}%
 \newbool{YAD@nextwithlocaltoc}%
-\newbool{YAD@starred@chapter}%
-\newbool{YAD@starred@section}%
-\newbool{YAD@starred@subsection}%
-\newbool{YAD@starred@subsubsection}%
-\newbool{YAD@starred@paragraph}%
-\newbool{YAD@starred@subparagraph}%
+\newbool{YAD@nonnumbered@chapter}%
+\newbool{YAD@nonnumbered@section}%
+\newbool{YAD@nonnumbered@subsection}%
+\newbool{YAD@nonnumbered@subsubsection}%
+\newbool{YAD@nonnumbered@paragraph}%
+\newbool{YAD@nonnumbered@subparagraph}%
 %
 \newlength{\cmdKV@YAD@logoheight}
 \newlength{\YAD@max@logoheight}
@@ -5231,7 +5231,13 @@ This work consists of the file  yathesis.dtx
 \LetLtxMacro{\YAD@ORI@chapter}{\chapter}%
 \AfterPreamble{% delay the redefinition when titlesec has done its own
   \renewcommand\chapter{%
-    \boolfalse{YAD@starred@chapter}%
+    \boolfalse{YAD@nonnumbered@chapter}%
+    \boolfalse{YAD@nonnumbered@section}%
+    \boolfalse{YAD@nonnumbered@subsection}%
+    \boolfalse{YAD@nonnumbered@subsubsection}%
+    \boolfalse{YAD@nonnumbered@paragraph}%
+    \boolfalse{YAD@nonnumbered@subparagraph}%
+    %
     \ifbool{YAD@localbibs}{%
       \let\YAD@ORI@blx@warn@bibempty\blx@warn@bibempty%
       \def\blx@warn@bibempty{}%
@@ -5265,7 +5271,12 @@ This work consists of the file  yathesis.dtx
     }%
   }%
   \newcommandtwoopt{\YAD@starred@chapter}[3][][]{%
-    \booltrue{YAD@starred@chapter}%
+    \booltrue{YAD@nonnumbered@chapter}%
+    \booltrue{YAD@nonnumbered@section}%
+    \booltrue{YAD@nonnumbered@subsection}%
+    \booltrue{YAD@nonnumbered@subsubsection}%
+    \booltrue{YAD@nonnumbered@paragraph}%
+    \booltrue{YAD@nonnumbered@subparagraph}%
     \YAD@setsecnumdepth{none}%
     \YAD@tmp@chapter[#1][#2]{#3}%
   }%
@@ -5306,9 +5317,13 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \LetLtxMacro{\YAD@ORI@section}{\section}
 \renewcommand\section{%
-  \boolfalse{YAD@starred@section}%
+  % \boolfalse{YAD@nonnumbered@section}%
+  % \boolfalse{YAD@nonnumbered@subsection}%
+  % \boolfalse{YAD@nonnumbered@subsubsection}%
+  % \boolfalse{YAD@nonnumbered@paragraph}%
+  % \boolfalse{YAD@nonnumbered@subparagraph}%
   \if@mainmatter%
-  \ifbool{YAD@starred@chapter}{%
+  \ifbool{YAD@nonnumbered@chapter}{%
   }{%
     \YAD@setsecnumdepth{\YAD@secnumdepth}%
   }%
@@ -5339,7 +5354,11 @@ This work consists of the file  yathesis.dtx
   }%
 }%
 \newcommandtwoopt{\YAD@starred@section}[3][][]{%
-  \booltrue{YAD@starred@section}%
+  \booltrue{YAD@nonnumbered@section}%
+  \booltrue{YAD@nonnumbered@subsection}%
+  \booltrue{YAD@nonnumbered@subsubsection}%
+  \booltrue{YAD@nonnumbered@paragraph}%
+  \booltrue{YAD@nonnumbered@subparagraph}%
   \YAD@setsecnumdepth{none}%
   \YAD@tmp@section[#1][#2]{#3}%
 }%
@@ -5354,9 +5373,12 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \LetLtxMacro{\YAD@ORI@subsection}{\subsection}
 \renewcommand\subsection{%
-  \boolfalse{YAD@starred@subsection}%
+  % \boolfalse{YAD@nonnumbered@subsection}%
+  % \boolfalse{YAD@nonnumbered@subsubsection}%
+  % \boolfalse{YAD@nonnumbered@paragraph}%
+  % \boolfalse{YAD@nonnumbered@subparagraph}%
   \if@mainmatter%
-  \ifbool{YAD@starred@section}{%
+  \ifbool{YAD@nonnumbered@section}{%
   }{%
     \YAD@setsecnumdepth{\YAD@secnumdepth}%
   }%
@@ -5371,7 +5393,10 @@ This work consists of the file  yathesis.dtx
   }%
 }%
 \newcommand{\YAD@starred@subsection}[2][]{%
-  \booltrue{YAD@starred@subsection}%
+  \booltrue{YAD@nonnumbered@subsection}%
+  \booltrue{YAD@nonnumbered@subsubsection}%
+  \booltrue{YAD@nonnumbered@paragraph}%
+  \booltrue{YAD@nonnumbered@subparagraph}%
   \YAD@setsecnumdepth{none}%
   \YAD@tmp@subsection[#1]{#2}%
 }%
@@ -5381,9 +5406,11 @@ This work consists of the file  yathesis.dtx
 %
 \LetLtxMacro{\YAD@ORI@subsubsection}{\subsubsection}
 \renewcommand\subsubsection{%
-  \boolfalse{YAD@starred@subsubsection}%
+  % \boolfalse{YAD@nonnumbered@subsubsection}%
+  % \boolfalse{YAD@nonnumbered@paragraph}%
+  % \boolfalse{YAD@nonnumbered@subparagraph}%
   \if@mainmatter%
-  \ifbool{YAD@starred@section}{%
+  \ifbool{YAD@nonnumbered@subsection}{%
   }{%
     \YAD@setsecnumdepth{\YAD@secnumdepth}%
   }%
@@ -5398,7 +5425,9 @@ This work consists of the file  yathesis.dtx
   }%
 }%
 \newcommand{\YAD@starred@subsubsection}[2][]{%
-  \booltrue{YAD@starred@subsubsection}%
+  \booltrue{YAD@nonnumbered@subsubsection}%
+  \booltrue{YAD@nonnumbered@paragraph}%
+  \booltrue{YAD@nonnumbered@subparagraph}%
   \YAD@setsecnumdepth{none}%
   \YAD@tmp@subsubsection[#1]{#2}%
 }%
@@ -5408,9 +5437,10 @@ This work consists of the file  yathesis.dtx
 %
 \LetLtxMacro{\YAD@ORI@paragraph}{\paragraph}
 \renewcommand\paragraph{%
-  \boolfalse{YAD@starred@paragraph}%
+  % \boolfalse{YAD@nonnumbered@paragraph}%
+  % \boolfalse{YAD@nonnumbered@subparagraph}%
   \if@mainmatter%
-  \ifbool{YAD@starred@section}{%
+  \ifbool{YAD@nonnumbered@subsubsection}{%
   }{%
     \YAD@setsecnumdepth{\YAD@secnumdepth}%
   }%
@@ -5425,7 +5455,8 @@ This work consists of the file  yathesis.dtx
   }%
 }%
 \newcommand{\YAD@starred@paragraph}[2][]{%
-  \booltrue{YAD@starred@paragraph}%
+  \booltrue{YAD@nonnumbered@paragraph}%
+  \booltrue{YAD@nonnumbered@subparagraph}%
   \YAD@setsecnumdepth{none}%
   \YAD@tmp@paragraph[#1]{#2}%
 }%
@@ -5435,9 +5466,9 @@ This work consists of the file  yathesis.dtx
 %
 \LetLtxMacro{\YAD@ORI@subparagraph}{\subparagraph}
 \renewcommand\subparagraph{%
-  \boolfalse{YAD@starred@subparagraph}%
+  % \boolfalse{YAD@nonnumbered@subparagraph}%
   \if@mainmatter%
-  \ifbool{YAD@starred@section}{%
+  \ifbool{YAD@nonnumbered@paragraph}{%
   }{%
     \YAD@setsecnumdepth{\YAD@secnumdepth}%
   }%
@@ -5452,7 +5483,7 @@ This work consists of the file  yathesis.dtx
   }%
 }%
 \newcommand{\YAD@starred@subparagraph}[2][]{%
-  \booltrue{YAD@starred@subparagraph}%
+  \booltrue{YAD@nonnumbered@subparagraph}%
   \YAD@setsecnumdepth{none}%
   \YAD@tmp@subparagraph[#1]{#2}%
 }%
