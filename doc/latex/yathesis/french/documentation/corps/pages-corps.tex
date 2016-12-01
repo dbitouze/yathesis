@@ -54,36 +54,38 @@ etc.)  en ce qui concerne les trois aspects suivants (examinés aux
 \label{sec-intit-altern}
 \index{table des matières!entrée différente du titre courant}%
 \index{titre courant!différent de l'entrée en table des matières}%
-\index{titre alternatif}
+\index{titre!d'unité!alternatif}
+\index{titre!d'unité!normal}
 
 \changes{v0.99p}{2016-12-01}{Commandes \protect\refCom{chapter} et
   \protect\refCom{section} pourvue d'un argument optionnel supplémentaire
-  permettant de stipuler un titre \meta{alternatif} en entête différent de celui
+  permettant de stipuler un titre alternatif en entête différent de celui
   en \gls{tdm}}%
 
-Avec la \yatCl{}, les entêtes de la plupart des pages contiennent
-le \meta{titre} du chapitre et le \meta{titre} de l'éventuelle section en cours
+Avec la \yatCl{}, les entêtes de la plupart des pages contiennent le titre du
+chapitre et le titre de l'éventuelle section en cours
 (cf. \vref{cha-pagination}).
-
-Ce \meta{titre} est par défaut celui stipulé en argument obligatoire des
-commandes \docAuxCommand{chapter} et \docAuxCommand{section} et figure alors
-également dans le fil du texte et en \gls{tdm}\signet{}.
+%
+Ce titre est par défaut celui stipulé en argument obligatoire des commandes
+respectivement \docAuxCommand{chapter} et \docAuxCommand{section}, et figure
+alors également dans le fil du texte et en \gls{tdm}\signet{}.
 
 % Les commandes \docAuxCommand{chapter} et \docAuxCommand{section} admettent un
 % argument obligatoire permettant de stipuler le \meta{titre} du chapitre et de la
 % section dans le fil du texte, \meta{titre} qui par défaut figure également en
 % \gls{tdm}\signet{} et en entête.
 %
-Habituellement, il est possible de faire figurer en \gls{tdm}\signet{} et en
-entête \emph{un} titre \meta{alternatif} : il suffit pour cela de recourir
+Les classes standard offrent la possibilité de faire figurer en
+\gls{tdm}\signet{} et en entête \emph{un} titre alternatif, différent de celui
+stipulé en argument obligatoire : il suffit pour cela de recourir
 à l'\emph{unique} argument optionnel des commandes \docAuxCommand{chapter} et
-\docAuxCommand{section}. Mais ce titre \meta{alternatif} est alors
-nécessairement \emph{identique} en \gls{tdm}\signet{} et en entête.
+\docAuxCommand{section}. Mais ce titre alternatif est alors nécessairement
+\emph{identique} en \gls{tdm}\signet{} et en entête.
 
 La \yatCl{} fournit une fonctionnalité supplémentaire : grâce aux \emph{deux}
-arguments optionnels des commandes \docAuxCommand{chapter} et
-\docAuxCommand{section} qu'elle implémente, le titre \meta{alternatif} en entête
-peut être différencié de celui en \gls{tdm}\signet{}.
+arguments optionnels dont elle dote les commandes \docAuxCommand{chapter} et
+\docAuxCommand{section}, le titre alternatif en entête peut être différencié de
+celui en \gls{tdm}\signet{}.
 
 La nouvelle syntaxe indiquée ci-dessous, commune aux commandes \refCom{chapter}
 et \refCom{section},
@@ -121,13 +123,15 @@ est précisée et synthétisée au \vref{tab-commande-chapter-section}.
   \input{tableaux/commande-chapter-section}
 \end{table}
 %
-\begin{dbremark}{Titres différenciés alternatifs aussi pour les chapitres et
-    sections non numérotés}{}
+\begin{dbremark}{Titres alternatifs différenciables aussi pour
+    \protect\docAuxCommand*{chapter*} et \protect\docAuxCommand*{section*}%  les chapitres et
+    % sections non numérotés
+  }{}
   Les commandes \docAuxCommand{chapter*} et \docAuxCommand{section*}, permettant
   de créer des chapitres et sections non numérotés, partagent la syntaxe des
   commandes \docAuxCommand{chapter} et \docAuxCommand{section} synthétisée au
   \vref{tab-commande-chapter-section} : elles admettent donc elles aussi deux
-  arguments optionnels permettant de différencier les titres \meta{alternatifs}
+  arguments optionnels permettant de différencier les titres alternatifs
   en \gls{tdm}\signet{} et en entête.
 \end{dbremark}
 %
@@ -152,7 +156,7 @@ stipuler une version spécifique aux entêtes.
 Si certaines unités du corps de la thèse \aside{par exemple des chapitres
   d'introduction et de conclusion \enquote{générales}} doivent être \emph{non}
 numérotées, on recourra de façon usuelle à la version étoilée des commandes
-correspondantes. Celles-ci ont toutefois été quelque peu modifiées afin d'en
+correspondantes. Ces dernières ont toutefois été quelque peu modifiées afin d'en
 simplifier l'usage.
 
 %  : habituellement, si un chapitre non numéroté est créé
@@ -176,28 +180,29 @@ simplifier l'usage.
   (\docAuxCommand{chapter*}, \docAuxCommand{section*},
   \docAuxCommand{subsection*}, etc.) de sorte que :
   \begin{enumerate}
-  \item automatiquement, le \meta{titre} (ou l'un de ses titres
-    \meta{alternatifs}) correspondant figure :
+  \item automatiquement, le titre (alternatif le cas échéant) correspondant
+    figure :
     \begin{enumerate}
-    \item en \gls{tdm} ;
-    \item en entêtes (pour les chapitres et sections non numérotés
-      seulement) ;
+    \item en \gls{tdm} (selon la profondeur choisie : cf. \refKey{depth} et
+      \refKey{localtocs/depth}) ;
+    \item en entête (pour les chapitres et sections seulement) ;
     \end{enumerate}
-  \item les sous-unités qu'elles contiennent peuvent (et même \emph{doivent})
-    être créées avec les versions \emph{non} étoilées des commandes
-    correspondantes : elles seront néanmoins \emph{non} numérotées.
+  \item si les unités correspondantes contiennent des sous-unités, ces dernières
+    puissent (et même \emph{doivent}) être créées avec les versions \emph{non}
+    étoilées des commandes correspondantes : elles seront néanmoins \emph{non}
+    numérotées (comme l'unité les contenant).
 
-    Ainsi, si un chapitre est non numéroté, les sections, sous-sections et
-    sous-sous-sections qu'il contient doivent elles aussi ne pas être
+    Ainsi, si un chapitre est non numéroté, les sections, sous-sections,
+    sous-sous-sections, etc. qu'il contient doivent aussi être non
     numérotées. Et, avec la \yatCl{}, elles seront cependant introduites par les
     commandes \emph{non} étoilées correspondantes : \docAuxCommand{section},
-    \docAuxCommand{subsection} et \docAuxCommand{subsubsection}.
+    \docAuxCommand{subsection}, \docAuxCommand{subsubsection}, etc.
   \end{enumerate}
 \end{dbremark}
 
 \begin{dbexample}{Introduction}{}
   \indexex{chapitre!non numéroté}%
-  \indexex{unité!non numérotée}%
+  \indexex{unité!du mémoire!non numérotée}%
   Le code suivant produit la \vref{fig-introduction} illustrant une
   introduction (générale) non numérotée. On constate que, bien que seule la
   commande \docAuxCommand{chapter} figure sous sa forme étoilée, aucun élément
