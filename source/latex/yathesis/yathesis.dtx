@@ -1419,7 +1419,7 @@ This work consists of the file  yathesis.dtx
        \YAD@href{\YAD@configuration@directory/#1}{#2}%
     }{%
       \YAD@href{\jobname.tex}{#2}%
-    }
+    }%
   }{%
     #2%
   }%
@@ -1515,7 +1515,7 @@ This work consists of the file  yathesis.dtx
           \YAD@reach@file[\YAD@configuration@file]{%
             \translate{lbl-#1}%
           }%
-        \end{tabular}
+        \end{tabular}%
       }%
     }{%
     \translate{lbl-#1}%
@@ -1564,7 +1564,7 @@ This work consists of the file  yathesis.dtx
           \end{enumerate}
           Pour plus de d\'etails, consulter la documentation de la
           classe \textsl{yathesis}.%
-        \end{minipage}
+        \end{minipage}%
       }%
     \end{center}
   }{%
@@ -2060,7 +2060,7 @@ This work consists of the file  yathesis.dtx
 \newcommand{\YAD@display@staff}[1]{%
   \DTLforeach*{#1}{%
     \YAD@committeemember@lastname=lastname,%
-    \YAD@committeemember@fistname=firstname,%
+    \YAD@committeemember@firstname=firstname,%
     \YAD@committeemember@role=role,%
     \YAD@committeemember@corps=corps,%
     \YAD@committeemember@sepcorpaffil=%
@@ -2102,10 +2102,10 @@ This work consists of the file  yathesis.dtx
     % Prénom
     \YAD@reach@file{%
       %
-      \ifthenelse{\DTLiseq{\YAD@committeemember@fistname}{}}{%
+      \ifthenelse{\DTLiseq{\YAD@committeemember@firstname}{}}{%
         \YAD@generic@argument@translate{firstname}%
       }{%
-        \YAD@committeemember@fistname%
+        \YAD@committeemember@firstname%
       }%
 %    \end{macrocode}
 % L'accolade suivante ne doit pas être suivie d'un "%" sans quoi il
@@ -2180,14 +2180,14 @@ This work consists of the file  yathesis.dtx
   \small%
   \DTLifdbempty{YAD@staffs}{}{%
     \ifthenelse{\DTLrowcount{YAD@supervisors}>1}{%
-      \newcolumntype{u}{>{\itshape}lll}
+      \newcolumntype{u}{>{\itshape}lll}%
     }{%
-      \newcolumntype{u}{>{\itshape}l@{ }ll}
+      \newcolumntype{u}{>{\itshape}l@{ }ll}%
     }%
     \begin{tabular}[t]{u}
       \DTLforeach*{YAD@supervisors}{%
           \YAD@committeemember@lastname=lastname,%
-          \YAD@committeemember@fistname=firstname,%
+          \YAD@committeemember@firstname=firstname,%
           \YAD@committeemember@role=role%
         }{%
           % Nature des membres du jury
@@ -2205,10 +2205,10 @@ This work consists of the file  yathesis.dtx
           % Prénom
           \YAD@reach@file{%
             %
-            \ifthenelse{\DTLiseq{\YAD@committeemember@fistname}{}}{%
+            \ifthenelse{\DTLiseq{\YAD@committeemember@firstname}{}}{%
               \YAD@generic@argument@translate{firstname}%
             }{%
-              \YAD@committeemember@fistname%
+              \YAD@committeemember@firstname%
             }%
           }
           % Nom
@@ -2244,7 +2244,7 @@ This work consists of the file  yathesis.dtx
             \\
           }%
         }%
-      \end{tabular}
+      \end{tabular}%
     }{%
     }%
   }%
@@ -2260,7 +2260,7 @@ This work consists of the file  yathesis.dtx
       %
       \YAD@display@staff{\YAD@the@staff}%
     }%
-  \end{tabular}
+  \end{tabular}%
 }%
 %    \end{macrocode}
 %
@@ -2741,7 +2741,7 @@ This work consists of the file  yathesis.dtx
         % \YAD@firstname@author{} \bsc{\YAD@lastname@author}%
         % }{%
         \ifthenelse{\isempty{#1}}{%
-          \YAD@firstname@author{} \bsc{\YAD@lastname@author}
+          \YAD@firstname@author{} \bsc{\YAD@lastname@author}%
         }{%
           \YAD@href{mailto:\YAD@email@author}{\YAD@firstname@author{} \bsc{\YAD@lastname@author}}%
         }%
@@ -3022,8 +3022,8 @@ This work consists of the file  yathesis.dtx
             \YAD@globalstyle
             \YAD@computenumwidths\relax%
             \etoctableofcontents%
-            \etocsetnexttocdepth{\YAD@tocdepth}
-            \let\cmdKV@YAD@depth\YAD@tocdepth
+            \etocsetnexttocdepth{\YAD@tocdepth}%
+            \let\cmdKV@YAD@depth\YAD@tocdepth%
             \let\cmdKV@YAD@name\contentsname%
             \YAD@localstyle % pour les local TOCs qui suivent
           }%
@@ -3047,8 +3047,8 @@ This work consists of the file  yathesis.dtx
             \YAD@computenumwidths\relax% note: a effet global
             \etocsetnexttocdepth{\cmdKV@YAD@depth}% on doit le répéter, car c'est un truc à un coup seulement
             \etoctableofcontents%
-            \etocsettocdepth{\YAD@tocdepth}
-            \let\cmdKV@YAD@depth\YAD@tocdepth
+            \etocsettocdepth{\YAD@tocdepth}%
+            \let\cmdKV@YAD@depth\YAD@tocdepth%
             \let\cmdKV@YAD@name\contentsname%
             \YAD@localstyle % pour les local TOCs qui suivent
           }%
@@ -3127,10 +3127,10 @@ This work consists of the file  yathesis.dtx
 % Globalement dans le document, la table des matières et la
 % numérotation des paragraphes vont jusqu'aux sous-sections
 %    \begin{macrocode}
-        \etocsettocdepth{\YAD@tocdepth}
+        \etocsettocdepth{\YAD@tocdepth}%
         \AtBeginDocument{%
         % \yadsetup{#1}%
-        \YAD@setsecnumdepth{\YAD@secnumdepth}
+        \YAD@setsecnumdepth{\YAD@secnumdepth}%
         }
         % \renewcommand{\setcounter}[2]{}%
         %
@@ -3734,9 +3734,9 @@ This work consists of the file  yathesis.dtx
     \end{minipage}%
     \ifthenelse{\equal{\cmdKV@YAD@frametitle}{none}}{%
     }{%
-    \end{tcolorbox}
+    \end{tcolorbox}%
   }%
-  \end{lrbox}
+  \end{lrbox}%
   \settototalheight{\YAD@titleboxheight}{\YAD@titlebox}%
   \setlength{\YAD@otherboxheight}{0.3\paperheight-\YAD@titleboxheight}%
 %    \end{macrocode}
@@ -3967,7 +3967,7 @@ This work consists of the file  yathesis.dtx
     }%
     \ifdraft{}{\vspace*{\stretch{.1}}}%
     % \vspace*{\stretch{.1}}%
-  \end{minipage}
+  \end{minipage}%
   \ifthenelse{\equal{\cmdKV@YAD@frametitle}{none}}{%
   }{%
     % \ifdraft{}{\vspace*{\stretch{2}}}%
@@ -4302,7 +4302,7 @@ This work consists of the file  yathesis.dtx
       \YAD@reach@file{\YAD@generic@argument@translate{laboratory}}%
       \\[.1cm]
       \YAD@reach@file{\YAD@generic@argument@translate{laboratoryaddress}}%
-    \end{minipage}
+    \end{minipage}%
   }{%
   }%
   \DTLforeach*{laboratories}{%
@@ -4388,7 +4388,7 @@ This work consists of the file  yathesis.dtx
           }%
         }%
       \end{tabular}%
-    \end{minipage}
+    \end{minipage}%
     \ifthenelse{\DTLiseq{\YAD@laboratory@logo}{}}{%
     }{%
       \hspace{\stretch{1}}%
@@ -4624,7 +4624,7 @@ This work consists of the file  yathesis.dtx
           \\%
         }{%
           \newline%
-        }
+        }%
         \printlaboratoryaddress{\YAD@laboratory@address}%
         \ifthenelse{\value{DTLrowi}=\cmdKV@YAD@numlaboratories}{\dtlbreak}{}%
       }%
@@ -4851,7 +4851,7 @@ This work consists of the file  yathesis.dtx
     \setlength\epigraphrule{0pt}%
     \begin{epigraphs}
       \qitem{\YAD@generic@argument@translate{epigraphs}}{}%
-    \end{epigraphs}
+    \end{epigraphs}%
     \YAD@ClassError{%
       \protect\makefrontepigraphs\space utilisee/\protect\frontepigraph\space
       non utilisee%
@@ -5205,7 +5205,7 @@ This work consists of the file  yathesis.dtx
       \boolfalse{YAD@nextwithlocaltoc}%
       % \boolfalse{YAD@localtocs@classoption}%
     }{%
-    }
+    }%
   }{%
   }%
 }{}{}%
