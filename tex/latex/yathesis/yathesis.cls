@@ -11,8 +11,8 @@
 %% Released under the LaTeX Project Public License v1.3c or later
 %% See http://www.latex-project.org/lppl.txt
 %% -----------------------------------------------------------------------
-\def\fileversion{v0.99o}
-\def\filedate{2016/10/30}
+\def\fileversion{v0.99p}
+\def\filedate{2016/12/01}
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesClass{yathesis}[\filedate\space\fileversion\space Yet another class for writing thesis (DB)]
 \RequirePackage{pgfopts}[2011/06/02]%
@@ -62,7 +62,12 @@
 \newbool{YAD@mainmatter@used}
 \newbool{YAD@localtocs}%
 \newbool{YAD@nextwithlocaltoc}%
-\newbool{YAD@starred@chapter}%
+\newbool{YAD@nonnumbered@chapter}%
+\newbool{YAD@nonnumbered@section}%
+\newbool{YAD@nonnumbered@subsection}%
+\newbool{YAD@nonnumbered@subsubsection}%
+\newbool{YAD@nonnumbered@paragraph}%
+\newbool{YAD@nonnumbered@subparagraph}%
 \newlength{\cmdKV@YAD@logoheight}
 \newlength{\YAD@max@logoheight}
 \newlength{\YAD@default@logoheight}
@@ -642,7 +647,7 @@
        \YAD@href{\YAD@configuration@directory/#1}{#2}%
     }{%
       \YAD@href{\jobname.tex}{#2}%
-    }
+    }%
   }{%
     #2%
   }%
@@ -698,7 +703,7 @@
           \YAD@reach@file[\YAD@configuration@file]{%
             \translate{lbl-#1}%
           }%
-        \end{tabular}
+        \end{tabular}%
       }%
     }{%
     \translate{lbl-#1}%
@@ -742,7 +747,7 @@
           \end{enumerate}
           Pour plus de d\'etails, consulter la documentation de la
           classe \textsl{yathesis}.%
-        \end{minipage}
+        \end{minipage}%
       }%
     \end{center}
   }{%
@@ -1135,7 +1140,7 @@
 \newcommand{\YAD@display@staff}[1]{%
   \DTLforeach*{#1}{%
     \YAD@committeemember@lastname=lastname,%
-    \YAD@committeemember@fistname=firstname,%
+    \YAD@committeemember@firstname=firstname,%
     \YAD@committeemember@role=role,%
     \YAD@committeemember@corps=corps,%
     \YAD@committeemember@sepcorpaffil=%
@@ -1177,10 +1182,10 @@
     % Prénom
     \YAD@reach@file{%
       %
-      \ifthenelse{\DTLiseq{\YAD@committeemember@fistname}{}}{%
+      \ifthenelse{\DTLiseq{\YAD@committeemember@firstname}{}}{%
         \YAD@generic@argument@translate{firstname}%
       }{%
-        \YAD@committeemember@fistname%
+        \YAD@committeemember@firstname%
       }%
     }
     \YAD@reach@file{%
@@ -1246,14 +1251,14 @@
   \small%
   \DTLifdbempty{YAD@staffs}{}{%
     \ifthenelse{\DTLrowcount{YAD@supervisors}>1}{%
-      \newcolumntype{u}{>{\itshape}lll}
+      \newcolumntype{u}{>{\itshape}lll}%
     }{%
-      \newcolumntype{u}{>{\itshape}l@{ }ll}
+      \newcolumntype{u}{>{\itshape}l@{ }ll}%
     }%
     \begin{tabular}[t]{u}
       \DTLforeach*{YAD@supervisors}{%
           \YAD@committeemember@lastname=lastname,%
-          \YAD@committeemember@fistname=firstname,%
+          \YAD@committeemember@firstname=firstname,%
           \YAD@committeemember@role=role%
         }{%
           % Nature des membres du jury
@@ -1271,10 +1276,10 @@
           % Prénom
           \YAD@reach@file{%
             %
-            \ifthenelse{\DTLiseq{\YAD@committeemember@fistname}{}}{%
+            \ifthenelse{\DTLiseq{\YAD@committeemember@firstname}{}}{%
               \YAD@generic@argument@translate{firstname}%
             }{%
-              \YAD@committeemember@fistname%
+              \YAD@committeemember@firstname%
             }%
           }
           % Nom
@@ -1310,7 +1315,7 @@
             \\
           }%
         }%
-      \end{tabular}
+      \end{tabular}%
     }{%
     }%
   }%
@@ -1325,7 +1330,7 @@
       %
       \YAD@display@staff{\YAD@the@staff}%
     }%
-  \end{tabular}
+  \end{tabular}%
 }%
 \DeclareRobustCommand*\YAD@meta{\YAD@generic@argument}%
 \newcommand*\YAD@logo{}%
@@ -1705,7 +1710,7 @@
         % \YAD@firstname@author{} \bsc{\YAD@lastname@author}%
         % }{%
         \ifthenelse{\isempty{#1}}{%
-          \YAD@firstname@author{} \bsc{\YAD@lastname@author}
+          \YAD@firstname@author{} \bsc{\YAD@lastname@author}%
         }{%
           \YAD@href{mailto:\YAD@email@author}{\YAD@firstname@author{} \bsc{\YAD@lastname@author}}%
         }%
@@ -1923,8 +1928,8 @@
             \YAD@globalstyle
             \YAD@computenumwidths\relax%
             \etoctableofcontents%
-            \etocsetnexttocdepth{\YAD@tocdepth}
-            \let\cmdKV@YAD@depth\YAD@tocdepth
+            \etocsetnexttocdepth{\YAD@tocdepth}%
+            \let\cmdKV@YAD@depth\YAD@tocdepth%
             \let\cmdKV@YAD@name\contentsname%
             \YAD@localstyle % pour les local TOCs qui suivent
           }%
@@ -1948,8 +1953,8 @@
             \YAD@computenumwidths\relax% note: a effet global
             \etocsetnexttocdepth{\cmdKV@YAD@depth}% on doit le répéter, car c'est un truc à un coup seulement
             \etoctableofcontents%
-            \etocsettocdepth{\YAD@tocdepth}
-            \let\cmdKV@YAD@depth\YAD@tocdepth
+            \etocsettocdepth{\YAD@tocdepth}%
+            \let\cmdKV@YAD@depth\YAD@tocdepth%
             \let\cmdKV@YAD@name\contentsname%
             \YAD@localstyle % pour les local TOCs qui suivent
           }%
@@ -2016,10 +2021,10 @@
         }%
         \fi%
         }
-        \etocsettocdepth{\YAD@tocdepth}
+        \etocsettocdepth{\YAD@tocdepth}%
         \AtBeginDocument{%
         % \yadsetup{#1}%
-        \YAD@setsecnumdepth{\YAD@secnumdepth}
+        \YAD@setsecnumdepth{\YAD@secnumdepth}%
         }
         % \renewcommand{\setcounter}[2]{}%
         %
@@ -2460,9 +2465,9 @@
     \end{minipage}%
     \ifthenelse{\equal{\cmdKV@YAD@frametitle}{none}}{%
     }{%
-    \end{tcolorbox}
+    \end{tcolorbox}%
   }%
-  \end{lrbox}
+  \end{lrbox}%
   \settototalheight{\YAD@titleboxheight}{\YAD@titlebox}%
   \setlength{\YAD@otherboxheight}{0.3\paperheight-\YAD@titleboxheight}%
   %\YAD@astuce@expressioncle%
@@ -2682,7 +2687,7 @@
     }%
     \ifdraft{}{\vspace*{\stretch{.1}}}%
     % \vspace*{\stretch{.1}}%
-  \end{minipage}
+  \end{minipage}%
   \ifthenelse{\equal{\cmdKV@YAD@frametitle}{none}}{%
   }{%
     % \ifdraft{}{\vspace*{\stretch{2}}}%
@@ -2962,7 +2967,7 @@
       \YAD@reach@file{\YAD@generic@argument@translate{laboratory}}%
       \\[.1cm]
       \YAD@reach@file{\YAD@generic@argument@translate{laboratoryaddress}}%
-    \end{minipage}
+    \end{minipage}%
   }{%
   }%
   \DTLforeach*{laboratories}{%
@@ -3048,7 +3053,7 @@
           }%
         }%
       \end{tabular}%
-    \end{minipage}
+    \end{minipage}%
     \ifthenelse{\DTLiseq{\YAD@laboratory@logo}{}}{%
     }{%
       \hspace{\stretch{1}}%
@@ -3242,7 +3247,7 @@
           \\%
         }{%
           \newline%
-        }
+        }%
         \printlaboratoryaddress{\YAD@laboratory@address}%
         \ifthenelse{\value{DTLrowi}=\cmdKV@YAD@numlaboratories}{\dtlbreak}{}%
       }%
@@ -3422,7 +3427,7 @@
     \setlength\epigraphrule{0pt}%
     \begin{epigraphs}
       \qitem{\YAD@generic@argument@translate{epigraphs}}{}%
-    \end{epigraphs}
+    \end{epigraphs}%
     \YAD@ClassError{%
       \protect\makefrontepigraphs\space utilisee/\protect\frontepigraph\space
       non utilisee%
@@ -3704,14 +3709,20 @@
       \boolfalse{YAD@nextwithlocaltoc}%
       % \boolfalse{YAD@localtocs@classoption}%
     }{%
-    }
+    }%
   }{%
   }%
 }{}{}%
 \LetLtxMacro{\YAD@ORI@chapter}{\chapter}%
 \AfterPreamble{% delay the redefinition when titlesec has done its own
   \renewcommand\chapter{%
-    \boolfalse{YAD@starred@chapter}%
+    \boolfalse{YAD@nonnumbered@chapter}%
+    \boolfalse{YAD@nonnumbered@section}%
+    \boolfalse{YAD@nonnumbered@subsection}%
+    \boolfalse{YAD@nonnumbered@subsubsection}%
+    \boolfalse{YAD@nonnumbered@paragraph}%
+    \boolfalse{YAD@nonnumbered@subparagraph}%
+    %
     \ifbool{YAD@localbibs}{%
       \let\YAD@ORI@blx@warn@bibempty\blx@warn@bibempty%
       \def\blx@warn@bibempty{}%
@@ -3745,7 +3756,12 @@
     }%
   }%
   \newcommandtwoopt{\YAD@starred@chapter}[3][][]{%
-    \booltrue{YAD@starred@chapter}%
+    \booltrue{YAD@nonnumbered@chapter}%
+    \booltrue{YAD@nonnumbered@section}%
+    \booltrue{YAD@nonnumbered@subsection}%
+    \booltrue{YAD@nonnumbered@subsubsection}%
+    \booltrue{YAD@nonnumbered@paragraph}%
+    \booltrue{YAD@nonnumbered@subparagraph}%
     \YAD@setsecnumdepth{none}%
     \YAD@tmp@chapter[#1][#2]{#3}%
   }%
@@ -3769,8 +3785,13 @@
 \xapptocmd{\printindex}{\renewcommand{\YAD@localtoc}{\YAD@default@localtoc}}{}{}%
 \LetLtxMacro{\YAD@ORI@section}{\section}
 \renewcommand\section{%
+  % \boolfalse{YAD@nonnumbered@section}%
+  % \boolfalse{YAD@nonnumbered@subsection}%
+  % \boolfalse{YAD@nonnumbered@subsubsection}%
+  % \boolfalse{YAD@nonnumbered@paragraph}%
+  % \boolfalse{YAD@nonnumbered@subparagraph}%
   \if@mainmatter%
-  \ifbool{YAD@starred@chapter}{%
+  \ifbool{YAD@nonnumbered@chapter}{%
   }{%
     \YAD@setsecnumdepth{\YAD@secnumdepth}%
   }%
@@ -3801,11 +3822,132 @@
   }%
 }%
 \newcommandtwoopt{\YAD@starred@section}[3][][]{%
+  \booltrue{YAD@nonnumbered@section}%
+  \booltrue{YAD@nonnumbered@subsection}%
+  \booltrue{YAD@nonnumbered@subsubsection}%
+  \booltrue{YAD@nonnumbered@paragraph}%
+  \booltrue{YAD@nonnumbered@subparagraph}%
   \YAD@setsecnumdepth{none}%
   \YAD@tmp@section[#1][#2]{#3}%
 }%
 \newcommandtwoopt{\YAD@unstarred@section}[3][][]{%
   \YAD@tmp@section[#1][#2]{#3}%
+}%
+\LetLtxMacro{\YAD@ORI@subsection}{\subsection}
+\renewcommand\subsection{%
+  % \boolfalse{YAD@nonnumbered@subsection}%
+  % \boolfalse{YAD@nonnumbered@subsubsection}%
+  % \boolfalse{YAD@nonnumbered@paragraph}%
+  % \boolfalse{YAD@nonnumbered@subparagraph}%
+  \if@mainmatter%
+  \ifbool{YAD@nonnumbered@section}{%
+  }{%
+    \YAD@setsecnumdepth{\YAD@secnumdepth}%
+  }%
+  \fi%
+  \@ifstar{\YAD@starred@subsection}{\YAD@unstarred@subsection}%
+}
+\newcommand*{\YAD@tmp@subsection}[2][]{%
+  \ifthenelse{\isempty{#1}}{%
+    \YAD@ORI@subsection{#2}%
+  }{%
+    \YAD@ORI@subsection[#1]{#2}%
+  }%
+}%
+\newcommand{\YAD@starred@subsection}[2][]{%
+  \booltrue{YAD@nonnumbered@subsection}%
+  \booltrue{YAD@nonnumbered@subsubsection}%
+  \booltrue{YAD@nonnumbered@paragraph}%
+  \booltrue{YAD@nonnumbered@subparagraph}%
+  \YAD@setsecnumdepth{none}%
+  \YAD@tmp@subsection[#1]{#2}%
+}%
+\newcommand{\YAD@unstarred@subsection}[2][]{%
+  \YAD@tmp@subsection[#1]{#2}%
+}%
+\LetLtxMacro{\YAD@ORI@subsubsection}{\subsubsection}
+\renewcommand\subsubsection{%
+  % \boolfalse{YAD@nonnumbered@subsubsection}%
+  % \boolfalse{YAD@nonnumbered@paragraph}%
+  % \boolfalse{YAD@nonnumbered@subparagraph}%
+  \if@mainmatter%
+  \ifbool{YAD@nonnumbered@subsection}{%
+  }{%
+    \YAD@setsecnumdepth{\YAD@secnumdepth}%
+  }%
+  \fi%
+  \@ifstar{\YAD@starred@subsubsection}{\YAD@unstarred@subsubsection}%
+}
+\newcommand*{\YAD@tmp@subsubsection}[2][]{%
+  \ifthenelse{\isempty{#1}}{%
+    \YAD@ORI@subsubsection{#2}%
+  }{%
+    \YAD@ORI@subsubsection[#1]{#2}%
+  }%
+}%
+\newcommand{\YAD@starred@subsubsection}[2][]{%
+  \booltrue{YAD@nonnumbered@subsubsection}%
+  \booltrue{YAD@nonnumbered@paragraph}%
+  \booltrue{YAD@nonnumbered@subparagraph}%
+  \YAD@setsecnumdepth{none}%
+  \YAD@tmp@subsubsection[#1]{#2}%
+}%
+\newcommand{\YAD@unstarred@subsubsection}[2][]{%
+  \YAD@tmp@subsubsection[#1]{#2}%
+}%
+\LetLtxMacro{\YAD@ORI@paragraph}{\paragraph}
+\renewcommand\paragraph{%
+  % \boolfalse{YAD@nonnumbered@paragraph}%
+  % \boolfalse{YAD@nonnumbered@subparagraph}%
+  \if@mainmatter%
+  \ifbool{YAD@nonnumbered@subsubsection}{%
+  }{%
+    \YAD@setsecnumdepth{\YAD@secnumdepth}%
+  }%
+  \fi%
+  \@ifstar{\YAD@starred@paragraph}{\YAD@unstarred@paragraph}%
+}
+\newcommand*{\YAD@tmp@paragraph}[2][]{%
+  \ifthenelse{\isempty{#1}}{%
+    \YAD@ORI@paragraph{#2}%
+  }{%
+    \YAD@ORI@paragraph[#1]{#2}%
+  }%
+}%
+\newcommand{\YAD@starred@paragraph}[2][]{%
+  \booltrue{YAD@nonnumbered@paragraph}%
+  \booltrue{YAD@nonnumbered@subparagraph}%
+  \YAD@setsecnumdepth{none}%
+  \YAD@tmp@paragraph[#1]{#2}%
+}%
+\newcommand{\YAD@unstarred@paragraph}[2][]{%
+  \YAD@tmp@paragraph[#1]{#2}%
+}%
+\LetLtxMacro{\YAD@ORI@subparagraph}{\subparagraph}
+\renewcommand\subparagraph{%
+  % \boolfalse{YAD@nonnumbered@subparagraph}%
+  \if@mainmatter%
+  \ifbool{YAD@nonnumbered@paragraph}{%
+  }{%
+    \YAD@setsecnumdepth{\YAD@secnumdepth}%
+  }%
+  \fi%
+  \@ifstar{\YAD@starred@subparagraph}{\YAD@unstarred@subparagraph}%
+}
+\newcommand*{\YAD@tmp@subparagraph}[2][]{%
+  \ifthenelse{\isempty{#1}}{%
+    \YAD@ORI@subparagraph{#2}%
+  }{%
+    \YAD@ORI@subparagraph[#1]{#2}%
+  }%
+}%
+\newcommand{\YAD@starred@subparagraph}[2][]{%
+  \booltrue{YAD@nonnumbered@subparagraph}%
+  \YAD@setsecnumdepth{none}%
+  \YAD@tmp@subparagraph[#1]{#2}%
+}%
+\newcommand{\YAD@unstarred@subparagraph}[2][]{%
+  \YAD@tmp@subparagraph[#1]{#2}%
 }%
   \@ifpackageloaded{floatrow}{%
     \xpatchcmd{\float@listhead}{\chapter}{\YAD@ORI@chapter}{}{}%
