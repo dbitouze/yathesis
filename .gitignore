@@ -53,3 +53,5 @@ ls-R
 *.xdy
 *.el
 *~
+*_region_*
+*.directory
