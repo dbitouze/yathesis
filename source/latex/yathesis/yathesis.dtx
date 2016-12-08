@@ -128,7 +128,7 @@ This work consists of the file  yathesis.dtx
 \def\YAD@treesample{\YAD@examples/\YAD@sample/en-arborescence}
 %</install>
 %<*install>
-\usedir{/}
+\usedir{doc/latex/\YAD@classname/}
 \generate{
   \nopreamble\nopostamble
   \file{README.md}{\from{\jobname.dtx}{readme}}
@@ -137,6 +137,7 @@ This work consists of the file  yathesis.dtx
 \generate{%
   \file{\YAD@classname.cls}{\from{\jobname.dtx}{class}}
   \file{\YAD@classname-demo.sty}{\from{\jobname.dtx}{demopkg}}
+  \file{\YAD@classname-translations.tex}{\from{\jobname.dtx}{translations}}
 }%
 %</install>
 %<install>\endbatchfile
@@ -145,12 +146,6 @@ This work consists of the file  yathesis.dtx
 \generate{
   \file{\YAD@classname.ins}{\from{\jobname.dtx}{install}}
   \file{\YAD@classname.drv}{\from{\jobname.dtx}{driver}}%
-}%
-\usedir{doc/latex/\YAD@classname/french/\YAD@documentation}
-\generate{
-  \nopreamble\nopostamble
-  % \file{latexmkrc}{\from{\jobname.dtx}{class-latexmkrc}}
-  \file{translations.tex}{\from{\jobname.dtx}{translations}}
 }%
 \usedir{doc/latex/\YAD@classname/french/\YAD@flattemplate}
 \generate{
@@ -1360,6 +1355,14 @@ This work consists of the file  yathesis.dtx
 % \begin{macro}{\YAD@characteristics@file}
 %    \begin{macrocode}
 \newcommand*{\YAD@characteristics@file}{characteristics.tex}
+%    \end{macrocode}
+% \end{macro}
+%
+% On définit la macro privée où est stocké le nom du fichier contenant
+% les traductions de la classe.
+% \begin{macro}{\YAD@characteristics@file}
+%    \begin{macrocode}
+\newcommand*{\YAD@translations@file}{yathesis-translations.tex}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -6184,12 +6187,25 @@ This work consists of the file  yathesis.dtx
 \expression{meta-ordernumber}{num\'ero d'ordre}{order number}%
 %    \end{macrocode}
 %
+% The following translations are gathered in the
+% \file{yathesis-translations.tex} file that has to be input in the class.
+%    \begin{macrocode}
+\InputIfFileExists{\YAD@translations@file}{}{%
+  \ClassError{%
+    Fichier \`YAD@translations@file' non trouve%
+  }{%
+    Le fichier \`YAD@translations@file' n'a pas ete trouve.\MessageBreak%
+    Veuillez verifier votre installation de la classe `yathesis'.%
+  }%
+}
+%    \end{macrocode}
+%
 %    \begin{macrocode}
 %</class>
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-%<*class|translations>
+%<*translations>
 %    \end{macrocode}
 % Traduction des expressions clés de la thèse.
 %    \begin{macrocode}
@@ -6258,31 +6274,29 @@ This work consists of the file  yathesis.dtx
 \expression{referees}{Rapporteur}{Referee}%
 \expression{referees-pl}{Rapporteurs}{Referees}%
 \expression{website}{Site}{Web Site}%
-\expression{localtocname}{Sommaire du pr\'esent chapitre}{Outline of the current chapter}%
+\expression{localtocname}{Sommaire du pr\'esent chapitre}{Outline of the current
+  chapter}%
 \expression{defendedon}{Soutenue le}{Defended on}%
 \expression{speciality}{Sp\'ecialit\'e}{Speciality}%
 \expression{supervisedby}{Th\`ese dirig\'ee par}{Thesis supervised by}%
 \expression{supervisedby-hdr}{Directeurs}{Supervisors}%
-\expression{thesisdefendedby}{Th\`ese pr\'esent\'ee par}{Thesis defended
-  by}%
+\expression{thesisdefendedby}{Th\`ese pr\'esent\'ee par}{Thesis defended by}%
 \expression{thesisdefendedby-hdr}{Habilitation \`a diriger les recherches
   pr\'esent\'ee par}{Habilitation to conduct research defended by}%
 \expression{thesistitle}{Titre de la th\`ese}{Thesis Title}%
-\expression{thesistitle-hdr}{Titre de l'habilitation \`a diriger les recherches}{Habilitation to conduct research's Title}%
+\expression{thesistitle-hdr}{Titre de l'habilitation \`a diriger les
+  recherches}{Habilitation to conduct research's Title}%
 \expression{inprogress}{travail en cours}{work in progress}%
-\expression{universitydepartment}{Unit\'e de recherche}{University
-  Department}%
-%<!translations>\expression{versiondate}{Version interm\'ediaire en date
-%<!translations>du}{Work in progress as of}%
-%<translations>\expression{inprogressfoottext}{Version interm\'ediaire en
-%<translations>date du}{Work in progress as of}%
-%<class>\expression{inprogressfoottext}{\translate{lbl-versiondate}}{\translate{lbl-versiondate}}%
+\expression{universitydepartment}{Unit\'e de recherche}{University Department}%
+\expression{versiondate}{Version interm\'ediaire en date du}{Work in progress as
+  of}%
+\expression{inprogressfoottext}{\translate{lbl-versiondate}}{\translate{lbl-versiondate}}%
 \expression{submittedfoottext}{Version soumise en date du}{Submitted work
   as of}%
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-%</class|translations>
+%</translations>
 %    \end{macrocode}
 %
 % \chapter{Fichier de complétion}
