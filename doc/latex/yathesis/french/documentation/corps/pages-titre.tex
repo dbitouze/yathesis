@@ -136,8 +136,7 @@ Avec les données caractéristiques suivantes, la commande
 \begin{dbexample}{Préparation et production des pages de titre}{}
 %
   \NoAutoSpacing%
-  \lstset{morecomment=[is]{\%}{\^^M}}%
-  \preamblesample[configuration/characteristics]{%
+  \preamblesample{preparation-titre}{%
     deletekeywords={author,title,subtitle,date,url},%
     deletekeywords={[2]title},%
     deletekeywords={[5]%
@@ -152,16 +151,10 @@ Avec les données caractéristiques suivantes, la commande
       committeepresident,%
       ordernumber%
     },%
-    rangeendsuffix={\^^M},%
-    linerange={%
-      author-42]
-    }%
-  }{title=Préparation du titre (par exemple dans le \File{\characteristicsfile})}
+  }%
+  {title=Préparation du titre (par exemple dans le \File{\characteristicsfile})}
   %
-  \lstset{deletecomment=[is]{\%}{\^^M}}%
-  %
-  \bodysample{rangesuffix=\^^M,linerange={maketitle}}{title=Production
-    du titre}
+  \bodysample{production-titre}{}{title=Production du titre}
 \end{dbexample}
 
 \begin{landscape}

@@ -77,8 +77,8 @@ La page dédiée à la clause de non-responsabilité est produite par la command
     non-responsabilité}{}
   \indexex{clause de non-responsabilité}%
   \NoAutoSpacing%
-%
-\bodysample{rangesuffix=\^^M,linerange={makedisclaimer}}{}%
+  %
+  \bodysample{production-clause}{}{}%
   Le résultat de ce code est illustré \vref{fig-disclaimerpage}.
 \end{dbexample}
 
@@ -131,13 +131,12 @@ par défaut si elle ne convient pas, on pourra recourir à la commande
 \begin{dbexample}{Préparation et production de la page dédiée aux mots clés}{}
   \indexex{mot clé}%
   Les codes suivants produisent la page illustrée \vref{fig-makekeywords}.
-  \preamblesample[configuration/characteristics]{%
-    linerange={keywords-laugh},%
+  \preamblesample{preparation-mots-cles}{%
     deletekeywords={[1]{keywords}},
     deletekeywords={[5]{keywords}}%
   }{title=Préparation}
-%
-  \bodysample{rangesuffix=\^^M,linerange={makekeywords}}{title=Production}
+  %
+  \bodysample{production-mots-cles}{}{title=Production}
 \end{dbexample}
 
 \begin{figure}[htbp]
@@ -170,13 +169,12 @@ par défaut si elle ne convient pas, on pourra recourir à la commande
   \indexex{laboratoire}%
   Les codes suivants produisent la page illustrée \vref{fig-makelaboratory}.
   \NoAutoSpacing%
-  \preamblesample[configuration/characteristics]{%
+  \preamblesample{preparation-laboratoire}{%
     deletekeywords={url},%
     morekeywords={[2]url},%
-    linerange={laboratory-Liouville}%
   }{title=Préparation}
-%
-  \bodysample{rangesuffix=\^^M,linerange={makelaboratory}}{title=Production}
+  %
+  \bodysample{production-laboratoire}{}{title=Production}
 \end{dbexample}
 
 \begin{figure}[htbp]
@@ -211,9 +209,9 @@ par défaut si elle ne convient pas, on pourra recourir à la commande
 \begin{dbexample}{Préparation et production de la page dédiée aux dédicaces}{}
   \indexex{dédicace}%
   \NoAutoSpacing%
-  \preamblesample[liminaires/dedicaces]{linerange=dedication-ritent}{title=Préparation}
-%
-  \bodysample[liminaires/dedicaces]{rangesuffix=\^^M,linerange={makededications}}{title=Production}
+  \preamblesample{preparation-dedicaces}{}{title=Préparation}
+  %
+  \bodysample{production-dedicaces}{}{title=Production}
   Le résultat de ce code est illustré \vref{fig-dedicationspage}.
 \end{dbexample}
 
@@ -259,9 +257,9 @@ par défaut si elle ne convient pas, on pourra recourir à la commande
   \indexex{épigraphe}%
   \NoAutoSpacing%
   Les codes suivants produisent la page illustrée \vref{fig-epigraphspage}.
-  \preamblesample[liminaires/epigraphes]{linerange={frontepigraph-Einstein}}{title=Préparation}
+  \preamblesample{preparation-epigraphes}{}{title=Préparation}
   %
-  \bodysample[liminaires/epigraphes]{rangesuffix=\^^M,linerange={makefrontepigraphs}}{title=Production}
+  \bodysample{production-epigraphes}{}{title=Production}
 \end{dbexample}
 
 \begin{figure}[htbp]
@@ -360,23 +358,9 @@ page.
 \begin{dbexample}{Préparation et production de la page dédiée aux résumés}{}
   \indexex{résumé}%
   Les codes suivants produisent la page illustrée \vref{fig-resumes-succincts}.
-% \preamblesample{%
-%   includerangemarker=false,%
-%   rangebeginprefix={»).\^^M},%
-%   rangeendsuffix={\^^M\%\ Page},%
-%   linerange={\\begin\{abstract-\\end\{abstract\}}%
-% }{title=Préparation des résumés}
-\begin{bodycode}
-\begin{abstract}
-  \lipsum[1-2]
-\end{abstract}
-\begin{abstract}
-  \lipsum[3-4]
-\end{abstract}
-\end{bodycode}
+  \preamblesample{preparation-resumes}{}{title=Préparation des résumés}
+  \bodysample{production-resumes}{}{title=Production des résumés}
   %
-  \bodysample[liminaires/resumes]{rangesuffix=\^^M,linerange={makeabstract}}{title=Production
-    des résumés}
 \end{dbexample}
 
 \begin{figure}[htbp]
@@ -497,11 +481,11 @@ la \yatCl. Cependant, celle-ci fournit des fonctionnalités propres au
 \begin{dbexample}{Définitions et liste des symboles}{}
   \indexex{symbole}%
   Le code suivant définit certains symboles.
-  \preamblesample[auxiliaires/symboles.tex]{}{}%
+  \preamblesample{preparation-symboles}{}{title=Préparation}%
   Le code suivant produit la liste de ces symboles \aside*{composée avec le
     style \docValue{yadsymbolstyle}}.
-  \bodysample{rangesuffix=\^^M,linerange={printsymbols}}{} Le résultat de ce
-  code est illustré \vref{fig-printsymbols}.
+  \bodysample{production-symboles}{}{title=Production}%
+  Le résultat de ce code est illustré \vref{fig-printsymbols}.
 \end{dbexample}
 
 % \afterpage{%
@@ -628,14 +612,11 @@ les clés disponibles sont les deux suivantes.
   \end{enumerate}
   on insérera respectivement :
   %
-  \bodysample{%
-    rangeendsuffix=\],%
-    linerange={tableofcontents-Sommaire},
-  }{}
+  \bodysample{sommaire}{}{}
   %
   et :
   %
-  \bodysample{rangesuffix=\^^M,linerange={tableofcontents}}{}
+  \bodysample{table-des-matieres}{}{}
   %
   La \vref{fig-tableofcontentsto-tableofcontents} illustre ce code.
 \end{dbexample}
