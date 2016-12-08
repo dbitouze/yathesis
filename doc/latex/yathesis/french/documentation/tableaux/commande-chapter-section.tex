@@ -1,0 +1,26 @@
+\footnotesize%
+\lstset{%
+  deletekeywords={chapter},deletekeywords={[3]chapter},%
+  deletekeywords={section},deletekeywords={[3]section},%
+}
+\begin{tabular}{|l|c|c|c|}
+  \cline{2-4}
+  \multicolumn{1}{c|}{}
+                                                                                                                                                      &
+    fil
+    du texte                                                                                                                                          & \gls{tdm}
+                                                                                                                                                      & entête                                                                                                                                                           \\\hline
+  \lstinline+\chapter{+\meta{titre}\lstinline+}+                                                                                                      & \multicolumn{3}{c|}{}                                                                                                                                            \\
+  \lstinline+\section{+\meta{titre}\lstinline+}+                                                                                                      & \multicolumn{3}{c|}{\multirow{-2}*{\meta{titre}}}                                                                                                                \\\hline
+  \lstinline+\chapter[+\meta{alt. en {\normalfont\ttfamily\acrshort*{tdm}}}\lstinline+]{+\meta{titre}\lstinline+}+                                    &                                                   & \multicolumn{2}{c|}{}                                                                                        \\
+  \lstinline+\section[+\meta{alt. en {\normalfont\ttfamily\acrshort*{tdm}}}\lstinline+]{+\meta{titre}\lstinline+}+                                    & \multirow{-2}*{\meta{titre}}                      & \multicolumn{2}{c|}{\multirow{-2}*{\meta{alt. en {\normalfont\ttfamily\acrshort*{tdm}}}}}                    \\\hline
+  \lstinline+\chapter[][+\meta{alt. en entête}\lstinline+]{+\meta{titre}\lstinline+}+                                                                 & \multicolumn{2}{c|}{}                             &                                                                                                              \\
+  \lstinline+\section[][+\meta{alt. en entête}\lstinline+]{+\meta{titre}\lstinline+}+                                                                 & \multicolumn{2}{c|}{\multirow{-2}*{\meta{titre}}} & \multirow{-2}*{\meta{alt. en entête}}                                                                        \\\hline
+  \lstinline+\chapter[+\meta{alt. en {\normalfont\ttfamily\acrshort*{tdm}}}\lstinline+][+\meta{alt. en entête}\lstinline+]{+\meta{titre}\lstinline+}+ &                                                   &                                                                      &                                       \\
+  \lstinline+\section[+\meta{alt. en {\normalfont\ttfamily\acrshort*{tdm}}}\lstinline+][+\meta{alt. en entête}\lstinline+]{+\meta{titre}\lstinline+}+ & \multirow{-2}*{\meta{titre}}                      & \multirow{-2}*{\meta{alt. en {\normalfont\ttfamily\acrshort*{tdm}}}} & \multirow{-2}*{\meta{alt. en entête}} \\\hline
+\end{tabular}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: "../yathesis-fr"
+%%% End:
