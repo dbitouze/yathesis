@@ -69,10 +69,9 @@ Overleaf
 
 ## Questions and answers
 
-Users can find questions about `yathesis` e.g. on Q & A sites:
-
-- [in French](http://texnique.fr/osqa/tags/yathesis/),
-- [in English](http://tex.stackexchange.com/questions/tagged/yathesis).
+Users can find questions about `yathesis` e.g. on Q &
+A sites [in French](http://texnique.fr/osqa/tags/yathesis/)
+and [in English](http://tex.stackexchange.com/questions/tagged/yathesis).
 
 New questions are welcome there.
 
