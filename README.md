@@ -64,8 +64,7 @@ also be tested on:
     - https://fr.sharelatex.com/templates/thesis/yathesis-template
     - https://fr.sharelatex.com/templates/thesis/yathesis-specimen
 - Overleaf:
-    -
-      https://www.overleaf.com/latex/templates/template-of-a-thesis-written-with-yathesis-class/nhtmtthnqwtd
+    - https://www.overleaf.com/latex/templates/template-of-a-thesis-written-with-yathesis-class/nhtmtthnqwtd
     - https://www.overleaf.com/latex/examples/sample-of-a-thesis-written-with-yathesis-class/nbcfvfqgnjfq
 
 ## Questions and answers
