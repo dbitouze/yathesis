@@ -52,21 +52,20 @@ This work has the LPPL maintenance status "maintained".
 `yathesis` is provided with an extensive documentation (in French) in the
 `doc/latex/yathesis/french/documentation` directory in the distribution, also
 available
-at :
 [on CTAN](http://mirrors.ctan.org/macros/latex/contrib/yathesis/doc/yathesis-fr.pdf).
 
 ## Templates and samples
 
 `yathesis` comes with templates and samples in the
 `doc/latex/yathesis/french/exemples/` directory in the distribution. They can
-also be tested on:
-
-- ShareLaTeX:
-    - [template](https://fr.sharelatex.com/templates/thesis/yathesis-template)
-    - [specimen](https://fr.sharelatex.com/templates/thesis/yathesis-specimen)
-- Overleaf:
-    - [template](https://www.overleaf.com/latex/templates/template-of-a-thesis-written-with-yathesis-class/nhtmtthnqwtd)
-    - [specimen](https://www.overleaf.com/latex/examples/sample-of-a-thesis-written-with-yathesis-class/nbcfvfqgnjfq)
+also be tested on
+ShareLaTeX
+([template](https://fr.sharelatex.com/templates/thesis/yathesis-template)
+and [specimen](https://fr.sharelatex.com/templates/thesis/yathesis-specimen))
+and on
+Overleaf
+([template](https://www.overleaf.com/latex/templates/template-of-a-thesis-written-with-yathesis-class/nhtmtthnqwtd) and
+[specimen](https://www.overleaf.com/latex/examples/sample-of-a-thesis-written-with-yathesis-class/nbcfvfqgnjfq)).
 
 ## Questions and answers
 
