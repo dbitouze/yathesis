@@ -3,6 +3,33 @@
 Ce chapitre est une \gls{faq} \aside{autrement dit une liste des questions
   fréquemment posées} sur la \yatCl{}.
 
+\section{Problèmes d'utilisation}
+
+\begin{dbfaq}{Comment faire en cas de problème d'utilisation de la \yatCl{} ?}{probleme-utilisation}
+  \index{problème d'utilisation}%
+  La \yatCl{} est vraiment formidable, mais je rencontre un problème en
+  l'utilisant.  Comment faire ?
+  %
+  \tcblower
+  %
+  En cas de problème d'utilisation\footnote{À ne pas confondre avec un
+    bogue ou une fonctionnalité manquante, cf. \vref{faq-bogues}.} :
+  \begin{enumerate}
+  \item commencer par chercher s'il n'a pas déjà été signalé
+    (et surtout solutionné) en consultant par exemple la liste des questions
+    concernant la \yatCl{} sur les sites de questions \& réponses dédiés
+    à \LaTeX{} :
+      \begin{itemize}
+      \item \url{http://texnique.fr/osqa/tags/yathesis/}\footnote{Site francophone.} ;
+      \item
+        \url{http://tex.stackexchange.com/questions/tagged/yathesis}\footnote{Site anglophone.} ;
+      \end{itemize}
+    \item s'il semble inédit (ou n'est pas \aside{ou mal} solutionné), poser
+      soi-même une question sur un des lieux d'entraide dédiés à \LaTeX{}, par
+      exemple sur l'un des sites ci-dessus\ecm{}.
+    \end{enumerate}
+\end{dbfaq}
+
 \section{Communication}
 \label{sec-communication}
 
@@ -11,31 +38,32 @@ Ce chapitre est une \gls{faq} \aside{autrement dit une liste des questions
   \index{bogue!rapport}%
   \indexsee{bug}{bogue}%
   \index{fonctionnalité!demande}%
-  La \yatCl{} est vraiment formidable, mais je souhaite :
+  La \yatCl{} est vraiment formidable, mais :
   \begin{enumerate}
-  \item signaler un dysfonctionnement (un bogue) ou suggérer une amélioration
+  \item je souhaite signaler un dysfonctionnement (un bogue) ou suggérer une amélioration
     (par exemple en demandant une nouvelle fonctionnalité) ;
-  \item communiquer avec l'auteur de la classe.
+  \item je souhaite communiquer avec son auteur.
   \end{enumerate}
   Comment faire ?
   %
   \tcblower
   %
   \begin{enumerate}
-  \item Pour un dysfonctionnement ou une amélioration :
+  \item Pour un dysfonctionnement\footnote{À ne pas confondre avec un
+      \enquote{simple} problème d'utilisation, cf. \vref{faq-probleme-utilisation}.}
+    ou une amélioration :
     \begin{enumerate}
     \item avant de le signaler ou de la suggérer, s'assurer qu'ils n'ont pas
       déjà été répertoriés :
       \begin{enumerate}
       \item en consultant la liste de ceux qui le sont déjà\issues ;
       \item en lisant la suite du présent chapitre ;
-      \item en lisant le \vref{cha-incomp-conn} ;
+      \item en lisant l'\vref{cha-incomp-conn} ;
         % des dysfonctionnements déjà répertoriés à l'adresse
         % \url{https://github.com/dbitouze/yathesis/issues?q=is%3Aopen+is%3Aissue+label%3Abug} ;
       \end{enumerate}
-    \item s'ils n'ont pas déjà été répertoriés, signaler ce dysfonctionnement
-      (un \gls{ecm} est alors vivement souhaité) ou suggérer cette
-      amélioration\newissues{}.
+    \item s'ils n'ont pas déjà été répertoriés, signaler ce
+      dysfonctionnement\ecm{} ou suggérer cette amélioration\newissues{}.
     \end{enumerate}
   % \item Pour une nouvelle fonctionnalité (ou suggestion d'amélioration) :
   %   \begin{enumerate}
@@ -371,31 +399,14 @@ où \meta{autre niveau} est l'une des valeurs possibles de la clé
   ce que le site \url{http://facile.cines.fr/} reconnaît mal les méta-données
   des fichiers \acrshort{pdf} produits par \hologo{pdfLaTeX}, \hologo{XeLaTeX} ou
   \hologo{LuaLaTeX}.
-
+  %
   Pour pallier cela, il devrait suffire\footnote{Plus de précisions à l'adresse
-    \url{https://facile.cines.fr/\#latex}.} d'insérer :
+    \url{https://facile.cines.fr/\#latex}.} d'insérer en introduction du fichier
+  (maître) \file{.tex}, avant même la déclaration
+  \docAuxCommand{documentclass} :
 \begin{preamblecode}
 \pdfobjcompresslevel 0
 \end{preamblecode}
-  en introduction du fichier (maître) \format{.tex}, avant la déclaration
-  \docAuxCommand{documentclass}.
-  % Il devrait suffire d'installer le logiciel libre
-%   \program{PDFtk}\footnote{Ce logiciel devrait être disponible :
-%     \begin{itemize}
-%     \item sous \linux{} : sous forme de paquet de la distribution utilisée ;
-%     \item sous \macos{} : comme indiqué
-%       \href{http://stackoverflow.com/q/20804441}{ici} par exemple ;
-%     \item sous \windows{} :
-%       \href{https://www.pdflabs.com/tools/pdftk-the-pdf-toolkit/}{ici}.
-%     \end{itemize}
-%   }%
-%   puis de lancer dans un terminal la commande suivante :
-% \begin{lstlisting}[language=bash]
-% pdftk these.pdf output these-valide.pdf
-% \end{lstlisting}
-% où \file{these.pdf} est le fichier \acrshort{pdf} original du mémoire. Le
-% fichier généré, \file{these-valide.pdf}, est à la fois valide et identique dans
-% la forme à l'original.
 \end{dbfaq}
 
 %%% Local Variables:
