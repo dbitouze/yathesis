@@ -3249,7 +3249,6 @@ This work consists of the file  yathesis.dtx
 % géométrie restaurée mais toujours pas de titres courants
 %    \begin{macrocode}
 \newpagestyle{prepreliminary}[]{%
-  \restoregeometry%
 %    \end{macrocode}
 % Dans la partie pré-préliminaire, aucun élément de structuration n'est
 % numéroté, les titres courants sont absents et la profondeur de la table des
@@ -4028,6 +4027,7 @@ This work consists of the file  yathesis.dtx
 }{%
 }%
 \expandafter\selectlanguage\expandafter{\YAD@mainlanguage}%
+\restoregeometry%
 \pagestyle{preliminary}%
 }%
 %    \end{macrocode}
