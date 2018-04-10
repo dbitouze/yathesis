@@ -3145,14 +3145,13 @@ This work consists of the file  yathesis.dtx
 % Définition de titres courants
 %    \begin{macrocode}
 \newcommand*{\YAD@chapter@header}{%
-  \ifthenelse{%
-    \value{secnumdepth}>-1
-    \and
-    \value{chapter}>0
+  \ifboolexpr{
+    (test {\ifnumcomp{\value{secnumdepth}}{>}{-1}} or (not bool
+    {YAD@nonnumbered@chapter})) and test {\ifnumcomp{\value{chapter}}{>}{0}}
   }{%
     \MakeUppercase\chaptername{}\ \thechapter.%
   }{%
-  }
+  }%
   \chaptertitle%
 }%
 %    \end{macrocode}
@@ -3161,14 +3160,13 @@ This work consists of the file  yathesis.dtx
 % \begin{macro}{\YAD@section@header}
 %    \begin{macrocode}
 \newcommand*{\YAD@section@header}{%
-  \ifthenelse{%
-    \value{secnumdepth}>0
-    \and
-    \value{chapter}>0
+  \ifboolexpr{
+    (test {\ifnumcomp{\value{secnumdepth}}{>}{0}} or (not bool
+    {YAD@nonnumbered@section})) and test {\ifnumcomp{\value{chapter}}{>}{0}}
   }{%
     \thesection.%
   }{%
-  }
+  }%
   \sectiontitle%
 }%
 %    \end{macrocode}
@@ -5234,12 +5232,12 @@ This work consists of the file  yathesis.dtx
 \LetLtxMacro{\YAD@ORI@chapter}{\chapter}%
 \AfterPreamble{% delay the redefinition when titlesec has done its own
   \renewcommand\chapter{%
-    \boolfalse{YAD@nonnumbered@chapter}%
-    \boolfalse{YAD@nonnumbered@section}%
-    \boolfalse{YAD@nonnumbered@subsection}%
-    \boolfalse{YAD@nonnumbered@subsubsection}%
-    \boolfalse{YAD@nonnumbered@paragraph}%
-    \boolfalse{YAD@nonnumbered@subparagraph}%
+    % \boolfalse{YAD@nonnumbered@chapter}%
+    % \boolfalse{YAD@nonnumbered@section}%
+    % \boolfalse{YAD@nonnumbered@subsection}%
+    % \boolfalse{YAD@nonnumbered@subsubsection}%
+    % \boolfalse{YAD@nonnumbered@paragraph}%
+    % \boolfalse{YAD@nonnumbered@subparagraph}%
     %
     \ifbool{YAD@localbibs}{%
       \let\YAD@ORI@blx@warn@bibempty\blx@warn@bibempty%
@@ -5320,11 +5318,6 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \LetLtxMacro{\YAD@ORI@section}{\section}
 \renewcommand\section{%
-  % \boolfalse{YAD@nonnumbered@section}%
-  % \boolfalse{YAD@nonnumbered@subsection}%
-  % \boolfalse{YAD@nonnumbered@subsubsection}%
-  % \boolfalse{YAD@nonnumbered@paragraph}%
-  % \boolfalse{YAD@nonnumbered@subparagraph}%
   \if@mainmatter%
   \ifbool{YAD@nonnumbered@chapter}{%
   }{%
@@ -5376,10 +5369,6 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \LetLtxMacro{\YAD@ORI@subsection}{\subsection}
 \renewcommand\subsection{%
-  % \boolfalse{YAD@nonnumbered@subsection}%
-  % \boolfalse{YAD@nonnumbered@subsubsection}%
-  % \boolfalse{YAD@nonnumbered@paragraph}%
-  % \boolfalse{YAD@nonnumbered@subparagraph}%
   \if@mainmatter%
   \ifbool{YAD@nonnumbered@section}{%
   }{%
@@ -5409,9 +5398,6 @@ This work consists of the file  yathesis.dtx
 %
 \LetLtxMacro{\YAD@ORI@subsubsection}{\subsubsection}
 \renewcommand\subsubsection{%
-  % \boolfalse{YAD@nonnumbered@subsubsection}%
-  % \boolfalse{YAD@nonnumbered@paragraph}%
-  % \boolfalse{YAD@nonnumbered@subparagraph}%
   \if@mainmatter%
   \ifbool{YAD@nonnumbered@subsection}{%
   }{%
@@ -5440,8 +5426,6 @@ This work consists of the file  yathesis.dtx
 %
 \LetLtxMacro{\YAD@ORI@paragraph}{\paragraph}
 \renewcommand\paragraph{%
-  % \boolfalse{YAD@nonnumbered@paragraph}%
-  % \boolfalse{YAD@nonnumbered@subparagraph}%
   \if@mainmatter%
   \ifbool{YAD@nonnumbered@subsubsection}{%
   }{%
@@ -5469,7 +5453,6 @@ This work consists of the file  yathesis.dtx
 %
 \LetLtxMacro{\YAD@ORI@subparagraph}{\subparagraph}
 \renewcommand\subparagraph{%
-  % \boolfalse{YAD@nonnumbered@subparagraph}%
   \if@mainmatter%
   \ifbool{YAD@nonnumbered@paragraph}{%
   }{%
