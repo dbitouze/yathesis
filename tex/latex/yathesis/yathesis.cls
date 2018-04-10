@@ -7,7 +7,7 @@
 %% yathesis.dtx  (with options: `class')
 %% -----------------------------------------------------------------------
 %% yathesis --- Yet Another Thesis Class
-%% E-mail: denis.bitouze@lmpa.univ-littoral.fr
+%% E-mail: denis.bitouze@univ-littoral.fr
 %% Released under the LaTeX Project Public License v1.3c or later
 %% See http://www.latex-project.org/lppl.txt
 %% -----------------------------------------------------------------------
@@ -2030,25 +2030,23 @@
         % \renewcommand{\setcounter}[2]{}%
         %
 \newcommand*{\YAD@chapter@header}{%
-  \ifthenelse{%
-    \value{secnumdepth}>-1
-    \and
-    \value{chapter}>0
+  \ifboolexpr{
+    (test {\ifnumcomp{\value{secnumdepth}}{>}{-1}} or (not bool
+    {YAD@nonnumbered@chapter})) and test {\ifnumcomp{\value{chapter}}{>}{0}}
   }{%
     \MakeUppercase\chaptername{}\ \thechapter.%
   }{%
-  }
+  }%
   \chaptertitle%
 }%
 \newcommand*{\YAD@section@header}{%
-  \ifthenelse{%
-    \value{secnumdepth}>0
-    \and
-    \value{chapter}>0
+  \ifboolexpr{
+    (test {\ifnumcomp{\value{secnumdepth}}{>}{0}} or (not bool
+    {YAD@nonnumbered@section})) and test {\ifnumcomp{\value{chapter}}{>}{0}}
   }{%
     \thesection.%
   }{%
-  }
+  }%
   \sectiontitle%
 }%
   \AtBeginDocument{%
@@ -2111,7 +2109,6 @@
   \setfoot{}{}{}%
 }%
 \newpagestyle{prepreliminary}[]{%
-  \restoregeometry%
   \setcounter{secnumdepth}{-10}%
   \YAD@setfoot%
 }%
@@ -2735,6 +2732,7 @@
 }{%
 }%
 \expandafter\selectlanguage\expandafter{\YAD@mainlanguage}%
+\restoregeometry%
 \pagestyle{preliminary}%
 }%
 \AtEndDocument{%
@@ -3717,12 +3715,12 @@
 \LetLtxMacro{\YAD@ORI@chapter}{\chapter}%
 \AfterPreamble{% delay the redefinition when titlesec has done its own
   \renewcommand\chapter{%
-    \boolfalse{YAD@nonnumbered@chapter}%
-    \boolfalse{YAD@nonnumbered@section}%
-    \boolfalse{YAD@nonnumbered@subsection}%
-    \boolfalse{YAD@nonnumbered@subsubsection}%
-    \boolfalse{YAD@nonnumbered@paragraph}%
-    \boolfalse{YAD@nonnumbered@subparagraph}%
+    % \boolfalse{YAD@nonnumbered@chapter}%
+    % \boolfalse{YAD@nonnumbered@section}%
+    % \boolfalse{YAD@nonnumbered@subsection}%
+    % \boolfalse{YAD@nonnumbered@subsubsection}%
+    % \boolfalse{YAD@nonnumbered@paragraph}%
+    % \boolfalse{YAD@nonnumbered@subparagraph}%
     %
     \ifbool{YAD@localbibs}{%
       \let\YAD@ORI@blx@warn@bibempty\blx@warn@bibempty%
@@ -3786,11 +3784,6 @@
 \xapptocmd{\printindex}{\renewcommand{\YAD@localtoc}{\YAD@default@localtoc}}{}{}%
 \LetLtxMacro{\YAD@ORI@section}{\section}
 \renewcommand\section{%
-  % \boolfalse{YAD@nonnumbered@section}%
-  % \boolfalse{YAD@nonnumbered@subsection}%
-  % \boolfalse{YAD@nonnumbered@subsubsection}%
-  % \boolfalse{YAD@nonnumbered@paragraph}%
-  % \boolfalse{YAD@nonnumbered@subparagraph}%
   \if@mainmatter%
   \ifbool{YAD@nonnumbered@chapter}{%
   }{%
@@ -3836,10 +3829,6 @@
 }%
 \LetLtxMacro{\YAD@ORI@subsection}{\subsection}
 \renewcommand\subsection{%
-  % \boolfalse{YAD@nonnumbered@subsection}%
-  % \boolfalse{YAD@nonnumbered@subsubsection}%
-  % \boolfalse{YAD@nonnumbered@paragraph}%
-  % \boolfalse{YAD@nonnumbered@subparagraph}%
   \if@mainmatter%
   \ifbool{YAD@nonnumbered@section}{%
   }{%
@@ -3868,9 +3857,6 @@
 }%
 \LetLtxMacro{\YAD@ORI@subsubsection}{\subsubsection}
 \renewcommand\subsubsection{%
-  % \boolfalse{YAD@nonnumbered@subsubsection}%
-  % \boolfalse{YAD@nonnumbered@paragraph}%
-  % \boolfalse{YAD@nonnumbered@subparagraph}%
   \if@mainmatter%
   \ifbool{YAD@nonnumbered@subsection}{%
   }{%
@@ -3898,8 +3884,6 @@
 }%
 \LetLtxMacro{\YAD@ORI@paragraph}{\paragraph}
 \renewcommand\paragraph{%
-  % \boolfalse{YAD@nonnumbered@paragraph}%
-  % \boolfalse{YAD@nonnumbered@subparagraph}%
   \if@mainmatter%
   \ifbool{YAD@nonnumbered@subsubsection}{%
   }{%
@@ -3926,7 +3910,6 @@
 }%
 \LetLtxMacro{\YAD@ORI@subparagraph}{\subparagraph}
 \renewcommand\subparagraph{%
-  % \boolfalse{YAD@nonnumbered@subparagraph}%
   \if@mainmatter%
   \ifbool{YAD@nonnumbered@paragraph}{%
   }{%
@@ -4228,11 +4211,11 @@
 }
 %% ----------------------------------------------------------------------------------
 %% This work may be distributed and/or modified under the
-%% conditions of the LaTeX Project Public License, either version 1.3
+%% conditions of the LaTeX Project Public License, either version 1.3c
 %% of this license or (at your option) any later version.
 %% The latest version of this license is in
 %%   http://www.latex-project.org/lppl.txt
-%% and version 1.3 or later is part of all distributions of LaTeX
+%% and version 1.3c or later is part of all distributions of LaTeX
 %% version 2005/12/01 or later.
 %% 
 %% This work has the LPPL maintenance status `maintained'.

@@ -1,7 +1,7 @@
 -----------------------------------------------------------------------
 
 - `yathesis` --- Yet Another Thesis Class, version 0.99p
-- E-mail: `denis.bitouze@lmpa.univ-littoral.fr`
+- E-mail: `denis.bitouze@univ-littoral.fr`
 - Released under the LaTeX Project Public License v1.3c or later. See
   http://www.latex-project.org/lppl.txt
 
@@ -28,13 +28,13 @@ Typesetting the documentation of the class requires:
    others, my personal (dirty) package `denisbdoc` for documenting the classes
    I've written.
 - a complete `pdflatex` run of `these.tex` to be found in the
-  `.../yathesis/doc/latex/yathesis/french/exemples/specimen/a-plat` directory,
+  `.../doc/latex/yathesis/french/exemples/specimen/a-plat` directory,
   with `yathesis-demo` package load at first place. If `latexmk` is available,
   it is easier to run:
 
       latexmk -g -norc -r ./latexmkrc  -jobname=these -pdflatex="pdflatex %O '\RequirePackage{etoolbox}\AtEndPreamble{\RequirePackage{yathesis-demo}}\input{%S}'" these.tex
 
-- to compile `yathesis.tex` to be found in the
-  `.../yathesis/doc/latex/yathesis/documentation/french` directory as follows:
+- to compile `yathesis-fr.tex` to be found in the
+  `.../doc/latex/yathesis/french/documentation` directory as follows:
 
       latexmk -norc -r ./latexmkrc yathesis-fr
