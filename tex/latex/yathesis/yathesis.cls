@@ -11,8 +11,8 @@
 %% Released under the LaTeX Project Public License v1.3c or later
 %% See http://www.latex-project.org/lppl.txt
 %% -----------------------------------------------------------------------
-\def\fileversion{v0.99p}
-\def\filedate{2016/12/08}
+\def\fileversion{v0.99q}
+\def\filedate{2018/04/10}
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesClass{yathesis}[\filedate\space\fileversion\space Yet another class for writing thesis (DB)]
 \RequirePackage{pgfopts}[2011/06/02]%
