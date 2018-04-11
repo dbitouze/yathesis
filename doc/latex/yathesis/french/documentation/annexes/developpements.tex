@@ -81,6 +81,31 @@
 \item Faire en sorte que, optionnellement, il soit possible de centrer
   verticalement le titre (en fait la boîte le contenant) dans les pages de
   titre.
+\item Fournir une commande \docAuxCommand{newcorporation} dont la définition soit la
+  suivante.
+\begin{docCommand}{newcorporation}{\marg{corps}\marg{en français}\marg{en anglais}}
+  \indexdef{expression!redéfinition}%
+  Cette commande permet de redéfinir une nouvelle corporation \meta{en français}
+  et \meta{en anglais} pouvant être utilisée comme nouvelle option des
+  directeur(s) de thèse et membres du jury.
+\end{docCommand}
+
+Un exemple d'utilisation serait alors :
+\begin{dbexample}{Nouvelle corporation}{doctor}
+  \indexex{corporation!non prédéfinie}%
+  Si on souhaite spécifier que certains membres du jury sont docteurs, il suffit
+  de définir \aside{une seule fois} la corporation (par exemple) |doctor| :
+\begin{preamblecode}[title=Par exemple dans le \File{\configurationfile}]
+\newcorporation{doctor}{docteur}{Doctor}
+\end{preamblecode}
+  pour pouvoir ensuite l'utiliser \aside{autant de fois que souhaité}, par
+  exemple ainsi :
+\begin{bodycode}
+\examiner[doctor]{Joseph}{Fourier}
+\examiner[doctor]{Paul}{Verlaine}
+\end{bodycode}
+\end{dbexample}
+
 % \item Rendre personnalisables les différents \enquote{output} en proposant
 %   diverses options.
 \end{enumerate}

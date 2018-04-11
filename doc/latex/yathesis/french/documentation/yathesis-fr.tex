@@ -1,5 +1,15 @@
-% Pour imprimer la présente documentation 2 pages sur 1 :
-% pdfnup --nup 2x1 --landscape yathesis.pdf --trim '1.9cm 3.5cm 1.9cm 1.9cm' --suffix 2x1
+% Après compilation de la présente documentation, l'impression 2 pages sur 1
+% peut se faire au moyen de :
+% - complètement :
+%     pdfnup --nup 2x1 --landscape yathesis-fr.pdf --suffix 2x1
+% - partiellement (par exemple, pages 1 à 80 seulement) :
+%     pdfnup --nup 2x1 --landscape yathesis-fr.pdf '1-80' --suffix 2x1
+%
+% Pour une impression papier, on pourra avoir (préalablement à la compilation)
+% passé les options  :
+% - `oneside' à la classe `yathesis' pour économiser le papier
+% - `lscape' au package  `denisbdoc' pour éviter que les pages en paysage ne
+%   soient imprimées en portrait.
 %
 \documentclass[version=final,noerror,localtocs]{yathesis}
 \usepackage{ltxtable}%
@@ -10,6 +20,8 @@
 \makeindex[title=Index des concepts,extout=pdx,extin=pnd,columnseprule]
 %
 \AtEndPreamble{%
+  \changes{v0.99q}{2018-04-10}{Documentation révisée}%
+  \changes{v0.99q}{2018-04-10}{Correction de bugs}%
   \changes{v0.99p}{2016-12-08}{Documentation révisée}%
   \changes{v0.99o}{2016-10-30}{Suppression d'un warning inutile du
     \Package{iflang}}%
