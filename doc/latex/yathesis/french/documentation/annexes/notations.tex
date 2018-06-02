@@ -138,7 +138,7 @@ Ces cadres pourront en outre comporter d'éventuels titres :
 \begin{bodycode}[title=\meta{titre}]
 "\meta{code source}"
 \end{bodycode}
-\begin{preamblecode}
+\begin{preamblecode}[]
 "\meta{code source à insérer en préambule}"
 \end{preamblecode}
 \begin{preamblecode}[title=\meta{titre}]
@@ -220,20 +220,20 @@ et initialement \docValue*{false}, c'est-à-dire :
 \begin{enumerate}
 \item \docValue*{true} si l'utilisateur l'emploie en option de la \yatCl mais
   sans lui passer de valeur :
-\begin{preamblecode}
+\begin{preamblecode}[]
 \documentclass[nofrontcover,"\meta{autres options}"]{yathesis}
 \end{preamblecode}
 \item \docValue*{false} si l'utilisateur ne l'emploie pas en option de la \yatCl :
-\begin{preamblecode}
+\begin{preamblecode}[]
 \documentclass["\meta{toutes options sauf \refKey*{nofrontcover}}"]{yathesis}
 \end{preamblecode}
 \item la valeur \docValue*{true} ou \docValue*{false} que l'utilisateur lui
   passe le cas échéant en option de la \yatCl :
-\begin{preamblecode}
+\begin{preamblecode}[]
 \documentclass[nofrontcover=true,"\meta{autres options}"]{yathesis}
 \end{preamblecode}
 ou
-\begin{preamblecode}
+\begin{preamblecode}[]
 \documentclass[nofrontcover=false,"\meta{autres options}"]{yathesis}
 \end{preamblecode}
 \end{enumerate}
