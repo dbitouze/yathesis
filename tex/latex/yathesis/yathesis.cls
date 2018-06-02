@@ -12,7 +12,7 @@
 %% See http://www.latex-project.org/lppl.txt
 %% -----------------------------------------------------------------------
 \def\fileversion{v0.99q}
-\def\filedate{2018/04/10}
+\def\filedate{2018/05/04}
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesClass{yathesis}[\filedate\space\fileversion\space Yet another class for writing thesis (DB)]
 \RequirePackage{pgfopts}[2011/06/02]%
@@ -2034,7 +2034,7 @@
     (test {\ifnumcomp{\value{secnumdepth}}{>}{-1}} or (not bool
     {YAD@nonnumbered@chapter})) and test {\ifnumcomp{\value{chapter}}{>}{0}}
   }{%
-    \MakeUppercase\chaptername{}\ \thechapter.%
+    \MakeUppercase\chaptername{}\ \thechapter.
   }{%
   }%
   \chaptertitle%
@@ -2044,7 +2044,7 @@
     (test {\ifnumcomp{\value{secnumdepth}}{>}{0}} or (not bool
     {YAD@nonnumbered@section})) and test {\ifnumcomp{\value{chapter}}{>}{0}}
   }{%
-    \thesection.%
+    \thesection.
   }{%
   }%
   \sectiontitle%
