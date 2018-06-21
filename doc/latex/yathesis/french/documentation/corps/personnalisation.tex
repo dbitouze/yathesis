@@ -15,7 +15,7 @@
 
 Les \meta{options} de classe de la \yatCl sont à passer selon la syntaxe
 usuelle :
-\begin{preamblecode}[]
+\begin{preamblecode}
 \documentclass["\meta{options}"]{yathesis}
 \end{preamblecode}
 % Tester et documenter la commande |\yasetup|.
@@ -107,7 +107,7 @@ Par défaut, un mémoire créé avec la \yatCl est composé :
   Pour composer un mémoire ayant pour langue principale le français et
   supplémentaire l'espagnol \aside{cas par exemple d'une thèse en linguistique
     espagnole}, il suffit de passer l'option suivante à la \yatCl{}.
-\begin{preamblecode}[]
+\begin{preamblecode}
 \documentclass[spanish]{yathesis}
 \end{preamblecode}
 \end{dbexample}
@@ -121,7 +121,7 @@ Par défaut, un mémoire créé avec la \yatCl est composé :
   secondaire le français) et supplémentaire l'espagnol \aside{cas par exemple
     d'une thèse en linguistique espagnole}, il suffit de passer les options
   suivantes à la \yatCl{}.
-\begin{preamblecode}[]
+\begin{preamblecode}
 \documentclass[mainlanguage=english,spanish]{yathesis}
 \end{preamblecode}
 \end{dbexample}
@@ -225,14 +225,14 @@ clé \refKey{localtocs/depth}.
   Pour que chaque chapitre de la partie principale du mémoire débute
   automatiquement par sa table des matières locale, il suffit de passer l'option
   suivante à la \yatCl{}.
-\begin{preamblecode}[]
+\begin{preamblecode}
 \documentclass[localtocs]{yathesis}
 \end{preamblecode}
 
   Dans l'exemple précédent, les tables des matières locales vont jusqu'aux
   sous-sections. Pour qu'elles aillent par exemple jusqu'aux sous-sous-sections,
   on recourra à :
-\begin{preamblecode}[]
+\begin{preamblecode}
 \documentclass[localtocs/depth=subsubsection]{yathesis}
 \end{preamblecode}
 \end{dbexample}
@@ -312,7 +312,7 @@ intitulée \translateexpression{localtocname}.
   \indexex{bibliographie!locale}%
   Pour que chaque chapitre finisse automatiquement par sa bibliographie locale,
   il suffit de passer l'option suivante à la \yatCl{}.
-\begin{preamblecode}[]
+\begin{preamblecode}
 \documentclass[localbibs]{yathesis}
 \end{preamblecode}
 \end{dbexample}
@@ -545,7 +545,7 @@ package\footnote{Par souci de compatibilité ascendante, la clé désormais
   \refKey{fncychap}.}.%
 %
 {%
-  \tcbset{before lower=\vspace*{\baselineskip}\par}
+  \tcbset{before lower=\vspace*{.5\baselineskip}\par}
   \begin{docKey}{fncychap}{=\docValue{Sonny}\textbar\docValue{Lenny}\textbar\docValue{Glenn}\textbar\docValue{Conny}\textbar\docValue{Rejne}\textbar\docValue{Bjarne}\textbar\docValue{PetersLenny}\textbar\docValue{Bjornstrup}\textbar\docValue{none}}{pas
       de valeur par défaut, initialement \docValue{PetersLenny}}
     \index{chapitre!style de tête}%
@@ -1016,7 +1016,7 @@ par un \meta{label} permettant de les redéfinir (voire de les définir, cf.
 
 Le \vref{tab-expressions-standard} liste les expressions \LaTeX{} standard
 telles que traduites par la \yatCl{}. Il s'agit en fait des traductions en
-français et en anglais fournies par les modules \package*+{frenchb} et
+français et en anglais fournies par les modules \package*+{babel-french} et
 \package*+{english} du \Package{babel}, à l'exception de l'expression française
 figurant en légende des tableaux flottants (\enquote{Table} est remplacée par
 \enquote{Tableau}).%
@@ -1060,7 +1060,7 @@ syntaxe précédente est inopérante avec les commandes
   \index{nom!liste de symboles}%
   aux glossaire(s), liste d'acronymes et liste de symboles, on recourra
   à l'une ou l'autre des instructions suivantes :
-\begin{bodycode}[listing options={deletekeywords={title}}]
+\begin{bodycode}[listing options={morekeywords={[2]title}}]
 \printglossary[title="\meta{titre alternatif}"]
 \printglossaries[title="\meta{titre alternatif}"]
 \printacronyms[title="\meta{titre alternatif}"]
@@ -1069,7 +1069,7 @@ syntaxe précédente est inopérante avec les commandes
 \item%
   \index{nom!bibliographie}%
   à la bibliographie, on recourra à :
-\begin{bodycode}[listing options={deletekeywords={title}}]
+\begin{bodycode}[listing options={morekeywords={[2]title}}]
 \printbibliography[title="\meta{titre alternatif}"]
 \end{bodycode}
 \end{itemize}

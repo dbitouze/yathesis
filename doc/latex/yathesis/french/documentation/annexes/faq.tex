@@ -200,7 +200,7 @@ Ce chapitre est une \gls{faq} \aside{autrement dit une liste des questions
   \tcblower
   %
   (Cette question ne concerne pas directement la \yatCl{}.) Il suffit de passer
-  l'option |linktoc=false| au \Package{hyperref}.
+  l'option \lstinline|linktoc=false| au \Package{hyperref}.
 \end{dbfaq}
 
 \begin{dbfaq}{Comment supprimer la bibliographie des sommaire, table des
@@ -334,8 +334,8 @@ où \meta{autre niveau} est l'une des valeurs possibles de la clé
   \tcblower
   %
   (Cette question ne concerne pas directement la \yatCl{}.) Le problème est dû
-  aux caractères actifs du module \package*+{frenchb} du \Package{babel}. Si ces
-  éléments concernent :
+  aux caractères actifs du module \package*+{babel-french} du
+  \Package{babel}. Si ces éléments concernent :
   \begin{enumerate}
   \item les caractéristiques du document (cf. \vref{cha-caract-du-docum}), il
     suffit de les saisir\footnote{Cf. \vref{sec-lieu-de-saisie}.} :
@@ -368,7 +368,7 @@ où \meta{autre niveau} est l'une des valeurs possibles de la clé
   J'essaie de modifier la profondeur de numérotation de mon document en
   spécifiant la valeur du compteur \docAuxKey*{secnumdepth} au moyen de la
   commande :
-\begin{preamblecode}[]
+\begin{preamblecode}
 \setcounter{secnumdepth}{"\meta{nombre}"}
 \end{preamblecode}
   mais cela n'a aucun effet. Pourquoi ?
@@ -404,7 +404,7 @@ où \meta{autre niveau} est l'une des valeurs possibles de la clé
     \url{https://facile.cines.fr/\#latex}.} d'insérer en introduction du fichier
   (maître) \file{.tex}, avant même la déclaration
   \docAuxCommand{documentclass} :
-\begin{preamblecode}[]
+\begin{preamblecode}
 \pdfobjcompresslevel 0
 \end{preamblecode}
 \end{dbfaq}
