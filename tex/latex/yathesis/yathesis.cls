@@ -11,8 +11,8 @@
 %% Released under the LaTeX Project Public License v1.3c or later
 %% See http://www.latex-project.org/lppl.txt
 %% -----------------------------------------------------------------------
-\def\fileversion{v0.99q}
-\def\filedate{2018/05/04}
+\def\fileversion{v0.99r}
+\def\filedate{2018/06/02}
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesClass{yathesis}[\filedate\space\fileversion\space Yet another class for writing thesis (DB)]
 \RequirePackage{pgfopts}[2011/06/02]%
@@ -3765,6 +3765,12 @@
     \YAD@tmp@chapter[#1][#2]{#3}%
   }%
   \newcommandtwoopt{\YAD@unstarred@chapter}[3][][]{%
+    \boolfalse{YAD@nonnumbered@chapter}%
+    \boolfalse{YAD@nonnumbered@section}%
+    \boolfalse{YAD@nonnumbered@subsection}%
+    \boolfalse{YAD@nonnumbered@subsubsection}%
+    \boolfalse{YAD@nonnumbered@paragraph}%
+    \boolfalse{YAD@nonnumbered@subparagraph}%
     \if@mainmatter%
     \YAD@setsecnumdepth{\YAD@secnumdepth}
     \fi%
