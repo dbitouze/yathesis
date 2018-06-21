@@ -55,3 +55,14 @@ ls-R
 *~
 *_region_*
 *.directory
+*.gdx
+*.gnd
+*.odx
+*.ond
+*.pdx
+*.pnd
+*.atfi
+*.drv
+*.ins
+*.listing
+*latexmkrc.tex
