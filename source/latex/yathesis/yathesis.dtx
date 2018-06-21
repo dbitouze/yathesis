@@ -5288,6 +5288,12 @@ This work consists of the file  yathesis.dtx
 % sont numérotées, alors que rien ne doit l'être dans cette partie.
 %    \begin{macrocode}
   \newcommandtwoopt{\YAD@unstarred@chapter}[3][][]{%
+    \boolfalse{YAD@nonnumbered@chapter}%
+    \boolfalse{YAD@nonnumbered@section}%
+    \boolfalse{YAD@nonnumbered@subsection}%
+    \boolfalse{YAD@nonnumbered@subsubsection}%
+    \boolfalse{YAD@nonnumbered@paragraph}%
+    \boolfalse{YAD@nonnumbered@subparagraph}%
     \if@mainmatter%
     \YAD@setsecnumdepth{\YAD@secnumdepth}
     \fi%
