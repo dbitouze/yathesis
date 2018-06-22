@@ -5370,6 +5370,11 @@ This work consists of the file  yathesis.dtx
   \YAD@tmp@section[#1][#2]{#3}%
 }%
 \newcommandtwoopt{\YAD@unstarred@section}[3][][]{%
+  \boolfalse{YAD@nonnumbered@section}%
+  \boolfalse{YAD@nonnumbered@subsection}%
+  \boolfalse{YAD@nonnumbered@subsubsection}%
+  \boolfalse{YAD@nonnumbered@paragraph}%
+  \boolfalse{YAD@nonnumbered@subparagraph}%
   \YAD@tmp@section[#1][#2]{#3}%
 }%
 %    \end{macrocode}
@@ -5404,6 +5409,10 @@ This work consists of the file  yathesis.dtx
   \YAD@tmp@subsection[#1]{#2}%
 }%
 \newcommand{\YAD@unstarred@subsection}[2][]{%
+  \boolfalse{YAD@nonnumbered@subsection}%
+  \boolfalse{YAD@nonnumbered@subsubsection}%
+  \boolfalse{YAD@nonnumbered@paragraph}%
+  \boolfalse{YAD@nonnumbered@subparagraph}%
   \YAD@tmp@subsection[#1]{#2}%
 }%
 %
@@ -5432,6 +5441,9 @@ This work consists of the file  yathesis.dtx
   \YAD@tmp@subsubsection[#1]{#2}%
 }%
 \newcommand{\YAD@unstarred@subsubsection}[2][]{%
+  \boolfalse{YAD@nonnumbered@subsubsection}%
+  \boolfalse{YAD@nonnumbered@paragraph}%
+  \boolfalse{YAD@nonnumbered@subparagraph}%
   \YAD@tmp@subsubsection[#1]{#2}%
 }%
 %
@@ -5459,6 +5471,8 @@ This work consists of the file  yathesis.dtx
   \YAD@tmp@paragraph[#1]{#2}%
 }%
 \newcommand{\YAD@unstarred@paragraph}[2][]{%
+  \boolfalse{YAD@nonnumbered@paragraph}%
+  \boolfalse{YAD@nonnumbered@subparagraph}%
   \YAD@tmp@paragraph[#1]{#2}%
 }%
 %
@@ -5485,6 +5499,7 @@ This work consists of the file  yathesis.dtx
   \YAD@tmp@subparagraph[#1]{#2}%
 }%
 \newcommand{\YAD@unstarred@subparagraph}[2][]{%
+  \boolfalse{YAD@nonnumbered@subparagraph}%
   \YAD@tmp@subparagraph[#1]{#2}%
 }%
 %    \end{macrocode}
