@@ -5168,6 +5168,11 @@ This work consists of the file  yathesis.dtx
   {%
     \bgroup
     \YAD@localstyle%
+    \@ifundefined {Etoc@\YAD@localtocsdepth @@}
+    {%
+    }{%
+      \etocsetnexttocdepth{\YAD@localtocsdepth}%
+    }
     \YAD@computelocalnumwidths\relax%
     \@ifundefined {Etoc@\YAD@localtocsdepth @@}
     {%
