@@ -12,7 +12,7 @@
 %% See http://www.latex-project.org/lppl.txt
 %% -----------------------------------------------------------------------
 \def\fileversion{v0.99s}
-\def\filedate{2018/06/21}
+\def\filedate{2018/06/22}
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesClass{yathesis}[\filedate\space\fileversion\space Yet another class for writing thesis (DB)]
 \RequirePackage{pgfopts}[2011/06/02]%
@@ -3670,6 +3670,11 @@
   {%
     \bgroup
     \YAD@localstyle%
+    \@ifundefined {Etoc@\YAD@localtocsdepth @@}
+    {%
+    }{%
+      \etocsetnexttocdepth{\YAD@localtocsdepth}%
+    }
     \YAD@computelocalnumwidths\relax%
     \@ifundefined {Etoc@\YAD@localtocsdepth @@}
     {%
@@ -3831,6 +3836,11 @@
   \YAD@tmp@section[#1][#2]{#3}%
 }%
 \newcommandtwoopt{\YAD@unstarred@section}[3][][]{%
+  \boolfalse{YAD@nonnumbered@section}%
+  \boolfalse{YAD@nonnumbered@subsection}%
+  \boolfalse{YAD@nonnumbered@subsubsection}%
+  \boolfalse{YAD@nonnumbered@paragraph}%
+  \boolfalse{YAD@nonnumbered@subparagraph}%
   \YAD@tmp@section[#1][#2]{#3}%
 }%
 \LetLtxMacro{\YAD@ORI@subsection}{\subsection}
@@ -3859,6 +3869,10 @@
   \YAD@tmp@subsection[#1]{#2}%
 }%
 \newcommand{\YAD@unstarred@subsection}[2][]{%
+  \boolfalse{YAD@nonnumbered@subsection}%
+  \boolfalse{YAD@nonnumbered@subsubsection}%
+  \boolfalse{YAD@nonnumbered@paragraph}%
+  \boolfalse{YAD@nonnumbered@subparagraph}%
   \YAD@tmp@subsection[#1]{#2}%
 }%
 \LetLtxMacro{\YAD@ORI@subsubsection}{\subsubsection}
@@ -3886,6 +3900,9 @@
   \YAD@tmp@subsubsection[#1]{#2}%
 }%
 \newcommand{\YAD@unstarred@subsubsection}[2][]{%
+  \boolfalse{YAD@nonnumbered@subsubsection}%
+  \boolfalse{YAD@nonnumbered@paragraph}%
+  \boolfalse{YAD@nonnumbered@subparagraph}%
   \YAD@tmp@subsubsection[#1]{#2}%
 }%
 \LetLtxMacro{\YAD@ORI@paragraph}{\paragraph}
@@ -3912,6 +3929,8 @@
   \YAD@tmp@paragraph[#1]{#2}%
 }%
 \newcommand{\YAD@unstarred@paragraph}[2][]{%
+  \boolfalse{YAD@nonnumbered@paragraph}%
+  \boolfalse{YAD@nonnumbered@subparagraph}%
   \YAD@tmp@paragraph[#1]{#2}%
 }%
 \LetLtxMacro{\YAD@ORI@subparagraph}{\subparagraph}
@@ -3937,6 +3956,7 @@
   \YAD@tmp@subparagraph[#1]{#2}%
 }%
 \newcommand{\YAD@unstarred@subparagraph}[2][]{%
+  \boolfalse{YAD@nonnumbered@subparagraph}%
   \YAD@tmp@subparagraph[#1]{#2}%
 }%
   \@ifpackageloaded{floatrow}{%
