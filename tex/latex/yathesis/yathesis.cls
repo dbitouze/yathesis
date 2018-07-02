@@ -3720,13 +3720,6 @@
 \LetLtxMacro{\YAD@ORI@chapter}{\chapter}%
 \AfterPreamble{% delay the redefinition when titlesec has done its own
   \renewcommand\chapter{%
-    % \boolfalse{YAD@nonnumbered@chapter}%
-    % \boolfalse{YAD@nonnumbered@section}%
-    % \boolfalse{YAD@nonnumbered@subsection}%
-    % \boolfalse{YAD@nonnumbered@subsubsection}%
-    % \boolfalse{YAD@nonnumbered@paragraph}%
-    % \boolfalse{YAD@nonnumbered@subparagraph}%
-    %
     \ifbool{YAD@localbibs}{%
       \let\YAD@ORI@blx@warn@bibempty\blx@warn@bibempty%
       \def\blx@warn@bibempty{}%
@@ -3836,11 +3829,16 @@
   \YAD@tmp@section[#1][#2]{#3}%
 }%
 \newcommandtwoopt{\YAD@unstarred@section}[3][][]{%
-  \boolfalse{YAD@nonnumbered@section}%
-  \boolfalse{YAD@nonnumbered@subsection}%
-  \boolfalse{YAD@nonnumbered@subsubsection}%
-  \boolfalse{YAD@nonnumbered@paragraph}%
-  \boolfalse{YAD@nonnumbered@subparagraph}%
+  \if@mainmatter%
+  \ifbool{YAD@nonnumbered@chapter}{%
+  }{%
+    \boolfalse{YAD@nonnumbered@section}%
+    \boolfalse{YAD@nonnumbered@subsection}%
+    \boolfalse{YAD@nonnumbered@subsubsection}%
+    \boolfalse{YAD@nonnumbered@paragraph}%
+    \boolfalse{YAD@nonnumbered@subparagraph}%
+  }%
+  \fi%
   \YAD@tmp@section[#1][#2]{#3}%
 }%
 \LetLtxMacro{\YAD@ORI@subsection}{\subsection}
@@ -3869,10 +3867,15 @@
   \YAD@tmp@subsection[#1]{#2}%
 }%
 \newcommand{\YAD@unstarred@subsection}[2][]{%
-  \boolfalse{YAD@nonnumbered@subsection}%
-  \boolfalse{YAD@nonnumbered@subsubsection}%
-  \boolfalse{YAD@nonnumbered@paragraph}%
-  \boolfalse{YAD@nonnumbered@subparagraph}%
+  \if@mainmatter%
+  \ifbool{YAD@nonnumbered@section}{%
+  }{%
+    \boolfalse{YAD@nonnumbered@subsection}%
+    \boolfalse{YAD@nonnumbered@subsubsection}%
+    \boolfalse{YAD@nonnumbered@paragraph}%
+    \boolfalse{YAD@nonnumbered@subparagraph}%
+  }%
+  \fi%
   \YAD@tmp@subsection[#1]{#2}%
 }%
 \LetLtxMacro{\YAD@ORI@subsubsection}{\subsubsection}
@@ -3900,9 +3903,14 @@
   \YAD@tmp@subsubsection[#1]{#2}%
 }%
 \newcommand{\YAD@unstarred@subsubsection}[2][]{%
-  \boolfalse{YAD@nonnumbered@subsubsection}%
-  \boolfalse{YAD@nonnumbered@paragraph}%
-  \boolfalse{YAD@nonnumbered@subparagraph}%
+  \if@mainmatter%
+  \ifbool{YAD@nonnumbered@subsection}{%
+  }{%
+    \boolfalse{YAD@nonnumbered@subsubsection}%
+    \boolfalse{YAD@nonnumbered@paragraph}%
+    \boolfalse{YAD@nonnumbered@subparagraph}%
+  }%
+  \fi%
   \YAD@tmp@subsubsection[#1]{#2}%
 }%
 \LetLtxMacro{\YAD@ORI@paragraph}{\paragraph}
@@ -3929,8 +3937,13 @@
   \YAD@tmp@paragraph[#1]{#2}%
 }%
 \newcommand{\YAD@unstarred@paragraph}[2][]{%
-  \boolfalse{YAD@nonnumbered@paragraph}%
-  \boolfalse{YAD@nonnumbered@subparagraph}%
+  \if@mainmatter%
+  \ifbool{YAD@nonnumbered@subsubsection}{%
+  }{%
+    \boolfalse{YAD@nonnumbered@paragraph}%
+    \boolfalse{YAD@nonnumbered@subparagraph}%
+  }%
+  \fi%
   \YAD@tmp@paragraph[#1]{#2}%
 }%
 \LetLtxMacro{\YAD@ORI@subparagraph}{\subparagraph}
@@ -3956,7 +3969,12 @@
   \YAD@tmp@subparagraph[#1]{#2}%
 }%
 \newcommand{\YAD@unstarred@subparagraph}[2][]{%
-  \boolfalse{YAD@nonnumbered@subparagraph}%
+  \if@mainmatter%
+  \ifbool{YAD@nonnumbered@paragraph}{%
+  }{%
+    \boolfalse{YAD@nonnumbered@subparagraph}%
+  }%
+  \fi%
   \YAD@tmp@subparagraph[#1]{#2}%
 }%
   \@ifpackageloaded{floatrow}{%
