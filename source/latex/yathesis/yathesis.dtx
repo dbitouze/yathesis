@@ -3864,7 +3864,7 @@ This work consists of the file  yathesis.dtx
         }{%
           \textbf{\printauthor}%
         }%
-      \ifboolexpr{%
+        \ifboolexpr{%
           bool {YAD@submitted@work}%
           or bool {YAD@submitted@work@star}%
         }{%
@@ -4983,11 +4983,19 @@ This work consists of the file  yathesis.dtx
 \newcommand\YAD@setlinestyle [2]{% #1= unit, #2= numwidth as macro
   \etocsetstyle{#1}
   {\advance\leftskip#2\relax}
-  {\vskip \YAD@verysmallvskip\relax
-    \leavevmode
+  {%
+    \vskip
+    \YAD@verysmallvskip\relax
+    \leavevmode%
     {\interlinepenalty\@M
       \etocifnumbered
-      {\llap{\makebox[#2][l]{\etocnumber}}}{\advance\leftskip-#2\relax}%
+      {%
+        \llap{%
+          \makebox[#2][l]{%
+            \etocnumber%
+          }%
+        }%
+      }{\advance\leftskip-#2\relax}%
       \etocname
       \nobreak\leaders \copy\YAD@leaderbox
       \hfil\makebox[-\parfillskip][r]{\etocpage}%
@@ -4999,17 +5007,29 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 %    \begin{macrocode}
 \newcommand\YAD@globalstyle {% encapsule le style pour les global TOCs
-  \etocsettocstyle {\if@twocolumn \@restonecoltrue \onecolumn \else
-    \@restonecolfalse \fi
-    \parindent\z@ \leftskip\z@skip \rightskip \z@skip
+  \etocsettocstyle {%
+    \if@twocolumn
+    \@restonecoltrue
+    \onecolumn
+    \else
+    \@restonecolfalse
+    \fi
+    \parindent\z@
+    \leftskip\z@skip
+    \rightskip\z@skip
     \setbox\YAD@leaderbox\hbox to \YAD@leaderboxwidth{\hss.\hss}%
     \chapter *[\cmdKV@YAD@name]{\noindent\kern\YAD@leftmargin\relax % uses "pt"...
       \cmdKV@YAD@name%
     }%
     \rightskip \YAD@rightmargin\relax
     \parfillskip -\rightskip % or a smaller value if desired
-    \leftskip \YAD@leftmargin \relax } {\if@restonecol \twocolumn
-    \fi\cleardoublepage}%
+    \leftskip \YAD@leftmargin \relax%
+  }{%
+    \if@restonecol
+    \twocolumn
+    \fi
+    \cleardoublepage%
+  }%
   % 
   \etocsetstyle{part} {} {\addpenalty {-\@highpenalty}%
     \addvspace \YAD@bigvskip \leavevmode {\large
@@ -5020,7 +5040,9 @@ This work consists of the file  yathesis.dtx
   % 
   \etocsetstyle{chapter} {\advance\leftskip\YAD@numwidthB\relax} {\addpenalty
     {-\@highpenalty }%
-    \vskip \YAD@globalmedvskip\relax \leavevmode {\interlinepenalty\@M \etocifnumbered
+    \vskip \YAD@globalmedvskip\relax
+    \leavevmode%
+    {\interlinepenalty\@M \etocifnumbered
       {\llap{\makebox[\YAD@numwidthB][l]{\bfseries\etocnumber}}}
       {\advance\leftskip-\YAD@numwidthB\relax}%
       \bfseries\etocname
