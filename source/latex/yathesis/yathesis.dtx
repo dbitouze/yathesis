@@ -630,7 +630,7 @@ This work consists of the file  yathesis.dtx
 \YAD@create@boolean{noinstitute}%
 \YAD@create@boolean{nodoctoralschool}%
 \YAD@create@boolean{nolaboratory}%
-\YAD@create@boolean{nolaboratoryadress}%
+\YAD@create@boolean{nolaboratoryaddress}%
 \YAD@create@boolean{nosupervisor}%
 \YAD@create@boolean{nomaketitle}%
 \YAD@create@boolean{nokeywords}%
@@ -3634,9 +3634,9 @@ This work consists of the file  yathesis.dtx
 \newcommand*{\printlaboratoryaddress}[1]{%
   \ifundef{#1}{%
     \YAD@reach@file{\YAD@generic@argument@translate{laboratoryaddress}}%
-    \ifbool{YAD@nolaboratoryadress}{%
+    \ifbool{YAD@nolaboratoryaddress}{%
     }{%
-      \YAD@ClassError[nolaboratoryadress]{%
+      \YAD@ClassError[nolaboratoryaddress]{%
         Adresse du laboratoire non specifiee ou vide%
       }{%
         La commande \protect\laboratory\space n'a pas ete utilisee\MessageBreak%
@@ -4682,7 +4682,7 @@ This work consists of the file  yathesis.dtx
 % désactivent l'émission de ces erreurs.
 %    \begin{macrocode}
   \YAD@nolaboratorytrue%
-  \YAD@nolaboratoryadresstrue%
+  \YAD@nolaboratoryaddresstrue%
 }%
 %    \end{macrocode}
 % \end{macro}
@@ -6407,7 +6407,7 @@ nodate
 noinstitute
 nodoctoralschool
 nolaboratory
-nolaboratoryadress
+nolaboratoryaddress
 nosupervisor
 nomaketitle
 nokeywords
