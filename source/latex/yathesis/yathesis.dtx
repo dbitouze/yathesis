@@ -3795,13 +3795,13 @@ This work consists of the file  yathesis.dtx
         }{%
           \YAD@translation{institute} \textbf{\textsc{\Large\printinstitute}}%
         }%
-      }%
-      \ifundef{\printcoinstitute}{%
-      }{%
-        \ifdraft{}{\vspace*{\stretch{.5}}}%
-        % \vspace*{\stretch{.5}}%
-        \par%
-        \YAD@translation{coinstitute} \textbf{\textsc{\Large\printcoinstitute}}%
+        \ifundef{\printcoinstitute}{%
+        }{%
+          \ifdraft{}{\vspace*{\stretch{.5}}}%
+          % \vspace*{\stretch{.5}}%
+          \par%
+          \YAD@translation{coinstitute} \textbf{\textsc{\Large\printcoinstitute}}%
+        }%
       }%
       \ifundef{\printcompany}{%
       }{%
@@ -3917,32 +3917,35 @@ This work consists of the file  yathesis.dtx
       \fi%
       \ifdraft{}{\vspace*{\stretch{1}}}%
       % \vspace*{\stretch{1}}%
-      \par%
-      \large%
-      \YAD@translation{academicfield}
-      %
-      \YAD@ifemptyorundef{\printacademicfield}{%
-        \YAD@generic@argument@translate{academicfield}%
-        \ifbool{YAD@noacademicfield}{%
-        }{%
-          \YAD@ClassError[noacademicfield]{%
-            Champ disciplinaire de la these non specifie%
-          }{%
-            La commande \protect\academicfield\space n'a pas ete utilisee
-            (celle-ci est requise)\MessageBreak%
-            ou son argument obligatoire est vide (celui-ci doit etre renseigne).%
-          }%
-        }%
+      \ifbool{YAD@academicfield}{%
       }{%
-        \textbf{\printacademicfield}%
-      }%
-      \ifundef{\printspeciality}{%
-      }{%
-        \ifdraft{}{\vspace*{\stretch{.5}}}%
-        % \vspace*{\stretch{.5}}%
         \par%
         \large%
-        \YAD@translation{speciality} \textbf{\printspeciality}%
+        \YAD@translation{academicfield}
+        %
+        \YAD@ifemptyorundef{\printacademicfield}{%
+          \YAD@generic@argument@translate{academicfield}%
+          \ifbool{YAD@noacademicfield}{%
+          }{%
+            \YAD@ClassError[noacademicfield]{%
+              Champ disciplinaire de la these non specifie%
+            }{%
+              La commande \protect\academicfield\space n'a pas ete utilisee
+              (celle-ci est requise)\MessageBreak%
+              ou son argument obligatoire est vide (celui-ci doit etre renseigne).%
+            }%
+          }%
+        }{%
+          \textbf{\printacademicfield}%
+        }%
+        \ifundef{\printspeciality}{%
+        }{%
+          \ifdraft{}{\vspace*{\stretch{.5}}}%
+          % \vspace*{\stretch{.5}}%
+          \par%
+          \large%
+          \YAD@translation{speciality} \textbf{\printspeciality}%
+        }%
       }
     \end{center}
   % \end{minipage}%
