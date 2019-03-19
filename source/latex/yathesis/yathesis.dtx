@@ -1149,6 +1149,23 @@ This work consists of the file  yathesis.dtx
 %
 % \section{Début du code de la classe}
 %
+% Because of some changes in \Package{parskip}, we need to adjust the vertical
+% space before the first rule of the local TOCs, depending on this package is
+% loaded or not (cf. definition of ×\YAD@localstyle× below).
+%    \begin{macrocode}
+\newlength{\YAD@vspace@before@localtoc@rule}
+\setlength{\YAD@vspace@before@localtoc@rule}{-1.25\baselineskip}
+\AtEndPreamble{%
+  \@ifpackageloaded{parskip}{%
+    \@ifpackagelater{parskip}{2.0a}{%
+      \setlength{\YAD@vspace@before@localtoc@rule}{-.775\baselineskip}%
+    }{%
+    }%
+  }{%
+  }%
+}
+%    \end{macrocode}
+%
 % On définit les macros "\YAD@href", "\YAD@hypersetup", "\YAD@url",
 % "\YAD@nolinkurl" identiques aux macros "\href", "\hypersetup", "\url",
 % "\nolinkurl" du \Package{hyperref} mais sur lesquelles on a plus de
@@ -5097,7 +5114,15 @@ This work consists of the file  yathesis.dtx
 % We restore the original behavior of "\addcontentsline".
 %    \begin{macrocode}
     \let\addcontentsline\YAD@addcontentsline
-    \parskip \z@skip \vspace{-1.25\baselineskip}% somewhat ad hoc
+    \parskip \z@skip
+%    \end{macrocode}
+%
+% Because of some changes in \Package{parskip}, we need to adjust the vertical
+% space before the first rule of the local TOCs, depending on this package is
+% loaded or not (cf. definition of ×\YAD@vspace@before@localtoc@rule× above).
+%
+%    \begin{macrocode}
+    \vspace{\YAD@vspace@before@localtoc@rule}% somewhat ad hoc
     \leftskip 2.25em \rightskip 4.5em \advance\rightskip-\YAD@rightmargin\relax
     \leavevmode\leaders\hrule\@height\p@\hfill\kern\z@\par
     \rightskip 4.5em
