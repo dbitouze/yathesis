@@ -3778,10 +3778,10 @@ This work consists of the file  yathesis.dtx
     % \begin{minipage}[c][\YAD@otherboxheight][c]{\YAD@titleboxwidth}
     %   \ifdraft{}{\vspace*{\stretch{.25}}}%
     \begin{center}
-      \YAD@ifemptyorundef{\printinstitute}{%
-        \YAD@generic@argument@translate{institute}%
-        \ifbool{YAD@noinstitute}{%
-        }{%
+      \ifbool{YAD@noinstitute}{%
+      }{%
+        \YAD@ifemptyorundef{\printinstitute}{%
+          \YAD@generic@argument@translate{institute}%
           \YAD@ClassError[noinstitute]{%
             Institut de la these non specifie%
           }{%
@@ -3791,9 +3791,9 @@ This work consists of the file  yathesis.dtx
             vide\MessageBreak%
             (celui-ci doit etre renseigne).%
           }%
+        }{%
+          \YAD@translation{institute} \textbf{\textsc{\Large\printinstitute}}%
         }%
-      }{%
-        \YAD@translation{institute} \textbf{\textsc{\Large\printinstitute}}%
       }%
       \ifundef{\printcoinstitute}{%
       }{%
@@ -3809,14 +3809,14 @@ This work consists of the file  yathesis.dtx
         \par%
         \YAD@translation{company} \textbf{\textsc{\Large\printcompany}}%
       }%
-      \ifdraft{}{\vspace*{\stretch{1.5}}}%
-      % \vspace*{\stretch{1.5}}%
-      \par%
-      \YAD@translation{doctoralschool}
-      \YAD@ifemptyorundef{\printdoctoralschool}{%
-        \YAD@generic@argument@translate{doctoralschool}%
-        \ifbool{YAD@nodoctoralschool}{%
-        }{%
+      \ifbool{YAD@nodoctoralschool}{%
+      }{%
+        \ifdraft{}{\vspace*{\stretch{1.5}}}%
+        % \vspace*{\stretch{1.5}}%
+        \par%
+        \YAD@translation{doctoralschool}
+        \YAD@ifemptyorundef{\printdoctoralschool}{%
+          \YAD@generic@argument@translate{doctoralschool}%
           \YAD@ClassError[nodoctoralschool]{%
             Ecole doctorale de la these non specifiee%
           }{%
@@ -3826,18 +3826,21 @@ This work consists of the file  yathesis.dtx
             vide\MessageBreak%
             (celui-ci doit etre renseigne).%
           }%
+        }{%
+          \textbf{\printdoctoralschool}%
         }%
-      }{%
-        \textbf{\printdoctoralschool}%
       }%
-      \ifdraft{}{\vspace*{\stretch{.5}}}%
-      % \vspace*{\stretch{.5}}%
-      \par%
-      \YAD@translation{universitydepartment}
-      \ifdefstring{\YAD@main@laboratory@nonamelink}{true}{%
-        \textbf{\printlaboratory{\YAD@main@laboratory@name}}%
+      \ifbool{YAD@nolaboratory}{%
       }{%
-        \textbf{\printlaboratory[\YAD@main@laboratory@url]{\YAD@main@laboratory@name}}%
+        \ifdraft{}{\vspace*{\stretch{.5}}}%
+        % \vspace*{\stretch{.5}}%
+        \par%
+        \YAD@translation{universitydepartment}
+        \ifdefstring{\YAD@main@laboratory@nonamelink}{true}{%
+          \textbf{\printlaboratory{\YAD@main@laboratory@name}}%
+        }{%
+          \textbf{\printlaboratory[\YAD@main@laboratory@url]{\YAD@main@laboratory@name}}%
+        }%
       }%
       \ifdraft{}{\vspace*{\stretch{1.5}}}%
       % \vspace*{\stretch{1.5}}%
@@ -3877,32 +3880,38 @@ This work consists of the file  yathesis.dtx
           %   \textbf{\printdate}%
           % }%
         }{%
-          \ifdraft{}{\vspace*{\stretch{1}}}%
-          % \vspace*{\stretch{1}}%
-          \par%
-          \YAD@translation{defendedon}
-          \YAD@ifemptyorundef{\printdate}{%
-            \YAD@generic@argument@translate{date}%
+          \ifbool{YAD@nodate}{%
           }{%
-            \textbf{\printdate}%
+            \ifdraft{}{\vspace*{\stretch{1}}}%
+            % \vspace*{\stretch{1}}%
+            \par%
+            \YAD@translation{defendedon}
+            \YAD@ifemptyorundef{\printdate}{%
+              \YAD@generic@argument@translate{date}%
+            }{%
+              \textbf{\printdate}%
+            }%
           }%
         }%
       }%
       \ifYAD@hdr%
       \else%
-      \ifdraft{}{\vspace*{\stretch{1}}}%
-      % \vspace*{\stretch{1}}%
-      \par%
-      \YAD@translation{aim}%
-      \ifundef{\printinstitute}{%
-        \YAD@generic@argument@translate{institute}%
+      \ifbool{YAD@noaim}{%
       }{%
-        \printinstitute*%
-      }%
-      \ifundef{\printcoinstitute}{%
-      }{%
-        \YAD@translation{aimand}%
-        \printcoinstitute*%
+        \ifdraft{}{\vspace*{\stretch{1}}}%
+        % \vspace*{\stretch{1}}%
+        \par%
+        \YAD@translation{aim}%
+        \ifundef{\printinstitute}{%
+          \YAD@generic@argument@translate{institute}%
+        }{%
+          \printinstitute*%
+        }%
+        \ifundef{\printcoinstitute}{%
+        }{%
+          \YAD@translation{aimand}%
+          \printcoinstitute*%
+        }%
       }%
       \fi%
       \ifdraft{}{\vspace*{\stretch{1}}}%
