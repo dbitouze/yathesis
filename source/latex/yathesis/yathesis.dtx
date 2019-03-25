@@ -1,6 +1,6 @@
 % \iffalse meta-comment
 %
-% Copyright (C) 2012-2018 by Denis Bitouz'e <denis.bitouze@univ-littoral.fr>
+% Copyright (C) 2012-2019 by Denis Bitouz'e <denis.bitouze@univ-littoral.fr>
 % -------------------------------------------------------------------------------
 % This work may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License, either version 1.3c
@@ -2519,7 +2519,7 @@ This work consists of the file  yathesis.dtx
 %         \ifthenelse{\equal{#2}{doctoralschool}}{%
 %           \YAD@ClassWarningNoLine{%
 %             Le logo de l'ecole doctorale a ete fourni mais\MessageBreak%
-%             il n'apparaitra nulle part. Veuillez le supprimer%
+%             il n'apparaitra nulle part. Le mieux est de le supprimer%
 %           }%
 %         }{%
 %         }%
@@ -6236,6 +6236,7 @@ This work consists of the file  yathesis.dtx
 \expression{meta-institute}{institut principal}{institut principal}
 \expression{meta-coinstitute}{institut de cotutelle}{institut de cotutelle}
 \expression{meta-logocoinstitute}{logo de l'institut de cotutelle}{logo de l'institut de cotutelle}
+\expression{meta-logocompany}{logo de l'entreprise}{logo de l'entreprise}
 \expression{meta-doctoralschool}{\'ecole doctorale}{\'ecole doctorale}
 \expression{meta-laboratory}{nom du laboratoire}{nom du laboratoire}
 \expression{meta-logolaboratory}{logo du laboratoire}{logo du laboratoire}
@@ -6366,11 +6367,6 @@ This work consists of the file  yathesis.dtx
   pr\'esent\'ee par}{Habilitation to conduct research defended by}%
 \expression{thesistitle}{}{}%
 \expression{thesistitle-hdr}{}{}%
-%
-\changes{v0.99u}{2019-03-19}{Expressions clés \enquote{Titre de la thèse} et
-  \enquote{Titre de l’habilitation à diriger les recherches} (et équivalents en
-  anglais) désormais vides}%
-%
 \expression{inprogress}{travail en cours}{work in progress}%
 \expression{universitydepartment}{Unit\'e de recherche}{University Department}%
 \expression{versiondate}{Version interm\'ediaire en date du}{Work in progress as
@@ -6538,16 +6534,19 @@ url=
 logo=
 logoheight=
 url=
+nologo
 #endkeyvals
 #keyvals:\coinstitute
 logo=
 logoheight=
 url=
+nologo
 #endkeyvals
 #keyvals:\company
 logo=
 logoheight=
 url=
+nologo
 #endkeyvals
 #keyvals:\doctoralschool
 logo=
@@ -6662,6 +6661,12 @@ juniorresearcher*
 # Misc
 \ordernumber[%<numéro d'ordre%>]#n
 \ordernumber#n*
+#
+#keyvals:\maketitle
+nofrontcover
+noaim
+frametitle=#shadowbox,ovalbox,none,fbox
+#endkeyvals
 #
 # Preliminary part
 #
