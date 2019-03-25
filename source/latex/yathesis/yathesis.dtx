@@ -2509,7 +2509,7 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % Création de la commande affichant le logo de l'entité (sauf si "nologo" est demandé).
 %    \begin{macrocode}
-      \ifbool{YAD@nologo}{%
+\ifbool{YAD@nologo}{%
       }{%
         \csdef{print#2logo}{%
 % %    \end{macrocode}
@@ -2532,31 +2532,40 @@ This work consists of the file  yathesis.dtx
         }%
       }%
       \csdef{YAD@starnostar@print#2logo}{%
-        \yadsetup{url=,##1}%
-        \renewcommand*\YAD@logo{%
-          \ifthenelse{\equal{\cmdKV@YAD@logo}{}}{%
-            \YAD@reach@file{\YAD@generic@argument@translate{logo#2}}%
+        \yadsetup{url=,nologo=false,##1}%
+        \ifbool{YAD@nologo}{%
+        }{%
+          \ifbool{YAD@logo@before}{%
+            \hspace{\stretch{1}}%
           }{%
-            \YAD@reach@file{%
-              \includegraphics[height=\cmdKV@YAD@logoheight]{\cmdKV@YAD@logo}%
+          }%
+          \renewcommand*\YAD@logo{%
+            \ifthenelse{\equal{\cmdKV@YAD@logo}{}}{%
+              \YAD@reach@file{\YAD@generic@argument@translate{logo#2}}%
+            }{%
+              \YAD@reach@file{%
+                \includegraphics[height=\cmdKV@YAD@logoheight]{\cmdKV@YAD@logo}%
+              }%
             }%
           }%
-        }%
-        \if@tempswa%
-        \else%
-        % \ifbool{YAD@nolink}{%
-        %   \YAD@logo%
-        % }{%
+          \if@tempswa%
+          \else%
+          % \ifbool{YAD@nolink}{%
+          % \YAD@logo%
+          % }{%
           \ifthenelse{\equal{\cmdKV@YAD@url}{}}{%
             % \YAD@href{www.#2.fr}{
-              \YAD@logo%
+            \YAD@logo%
             % }%
           }{%
             \YAD@href{\cmdKV@YAD@url}{\YAD@logo}%
           }%
-        % }%
-        \fi%
-        \setlength\cmdKV@YAD@logoheight{\YAD@default@logoheight}%
+          % }%
+          \fi%
+          \setlength\cmdKV@YAD@logoheight{\YAD@default@logoheight}%
+          \boolfalse{YAD@nologo}
+          \booltrue{YAD@logo@before}%
+        }%
       }%
     }%
   }%
@@ -3219,37 +3228,21 @@ This work consists of the file  yathesis.dtx
   {%
     \ifdef{\printpreslogo}{%
       \printpreslogo%
-      \booltrue{YAD@logo@before}%
     }{%
     }%
     \ifdef{\printcomuelogo}{%
       \printcomuelogo%
-      \booltrue{YAD@logo@before}%
     }{%
     }%
     \ifdef{\printinstitutelogo}{%
-      \ifbool{YAD@logo@before}{%
-        \hspace{\stretch{1}}%
-      }{%
-      }%
       \printinstitutelogo%
-      \booltrue{YAD@logo@before}%
     }{%
     }%
     \ifdef{\printcoinstitutelogo}{%
-      \ifbool{YAD@logo@before}{%
-        \hspace{\stretch{1}}%
-      }{%
-      }%
       \printcoinstitutelogo%
-      \booltrue{YAD@logo@before}%
     }{%
     }%
     \ifdef{\printcompanylogo}{%
-      \ifbool{YAD@logo@before}{%
-        \hspace{\stretch{1}}%
-      }{%
-      }%
       \printcompanylogo%
     }{%
     }%
