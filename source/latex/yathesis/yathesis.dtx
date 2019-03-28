@@ -1688,7 +1688,7 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % On crée un style de réinitialisation des caractéristiques des personnes.
 %    \begin{macrocode}
-\yadsetup{reinitialize person/.style={%
+\yadsetup{reset person/.style={%
     corps=,%
     role=,%
     affiliation=,%
@@ -1881,7 +1881,7 @@ This work consists of the file  yathesis.dtx
 % \end{macrocode}
 % On réinitialise les caractéristiques pour la personne suivante.
 %    \begin{macrocode}
-  \yadsetup{reinitialize person}%
+  \yadsetup{reset person}%
 }%
 %    \end{macrocode}
 %
@@ -1921,7 +1921,7 @@ This work consists of the file  yathesis.dtx
 % \begin{macro}{\supervisor}
 %    \begin{macrocode}
 \newcommand{\supervisor}{%
-  \@ifstar{\@tempswatrue\YAD@supervisor}{\@tempswafalse\YAD@supervisor}%
+  \@ifstar{\@tempswafalse\YAD@supervisor}{\@tempswatrue\YAD@supervisor}%
 }
 \newcommand*{\YAD@supervisor}[3][]{%
   \booltrue{YAD@supervisor@specified}%
@@ -1931,13 +1931,12 @@ This work consists of the file  yathesis.dtx
     not bool {YAD@male}%
   }{%
     \YAD@error@firstlastnames@empty{de la directrice de these}{#2}{#3}{\supervisor}%
-    \YAD@staff[role=supervisorfem,#1]{#2}{#3}{YAD@supervisors}%
+    \YAD@staff[role=supervisor-female,#1]{#2}{#3}{YAD@supervisors}%
   }{%
     \YAD@error@firstlastnames@empty{du directeur de these}{#2}{#3}{\supervisor}%
     \YAD@staff[role=supervisor,#1]{#2}{#3}{YAD@supervisors}%
   }%
   \if@tempswa%
-  \else%
   \YAD@staff[role=supervisor,#1]{#2}{#3}{supervisors-in-committee}%
   \fi%
 }%
