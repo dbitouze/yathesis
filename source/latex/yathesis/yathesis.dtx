@@ -1601,7 +1601,7 @@ This work consists of the file  yathesis.dtx
 %   (éventuellement vides) de l'expresion respectivement en français et en
 %   anglais.
 %    \begin{macrocode}
-\newcommand{\expression}[3]{%
+\newcommand{\YAD@expression}[3]{%
   \AtBeginDocument{%
     \deftranslation[to=French]{lbl-#1}{#2}%
     \deftranslation[to=English]{lbl-#1}{#3}%
@@ -1609,6 +1609,29 @@ This work consists of the file  yathesis.dtx
     \deftranslation[to=English]{#1}{#3}%
   }%
 }%
+\newcommand{\YAD@expression@alias}[5]{%
+  \ifthenelse{\equal{#1}{#4}}{%
+    \YAD@expression{#5}{#2}{#3}%
+  }{%
+  }%
+}%
+\newcommand{\expression}[3]{%
+  \YAD@expression@alias{#1}{#2}{#3}{juniorresearcherfem*}{juniorresearcher-female*}%
+  \YAD@expression@alias{#1}{#2}{#3}{mcf}{associateprofessor}%
+  \YAD@expression@alias{#1}{#2}{#3}{mcf*}{associateprofessor*}%
+  \renewcommand*{\do}[1]{\YAD@expression@alias{#1}{#2}{#3}{##1fem}{##1-female}}
+  \docsvlist{%
+    juniorresearcher,%
+    supervisor,%
+    cosupervisor,%
+    comonitor,%
+    seniorresearcher,%
+    committeepresident,%
+    professor,%
+  }
+  %
+  \YAD@expression{#1}{#2}{#3}%
+}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -1784,7 +1807,7 @@ This work consists of the file  yathesis.dtx
       bool {YAD@female} or %
       not bool {YAD@male}%
     }{%
-      \yadsetup{corps=juniorresearcherfem*,#1}%
+      \yadsetup{corps=juniorresearcher-female*,#1}%
     }{%
       \yadsetup{corps=juniorresearcher*,#1}%
     }%
