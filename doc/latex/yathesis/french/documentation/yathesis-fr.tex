@@ -2,7 +2,7 @@
 % peut se faire au moyen de :
 % - complètement :
 %     pdfnup --nup 2x1 --landscape yathesis-fr.pdf --suffix 2x1
-% - partiellement (par exemple, pages 1 à 80 seulement) :
+% - partiellement (par exemple, pages 1 à 79 seulement) :
 %     pdfnup --nup 2x1 --landscape yathesis-fr.pdf '1-79' --suffix 2x1
 %
 % Pour une impression papier, on pourra avoir (préalablement à la compilation)
@@ -25,6 +25,9 @@
 \makeindex[title=Index des concepts,extout=pdx,extin=pnd,columnseprule]
 %
 \AtEndPreamble{%
+  \changes{v0.99u}{2019-03-28}{Documentation révisée}%
+  \changes{v0.99u}{2019-03-28}{Correction de bugs}%
+  \changes{v0.99t}{2018-07-09}{Correction de bug}%
   \changes{v0.99s}{2018-06-22}{Correction de bug}%
   \changes{v0.99s}{2018-06-21}{Correction de bug}%
   \changes{v0.99r}{2018-06-02}{Correction de bugs}%

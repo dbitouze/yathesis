@@ -32,12 +32,15 @@ les pages de titre de la thèse.
 \end{docCommand}
 
 La commande \refCom{maketitle} admet un argument optionnel permettant de
-personnaliser les pages de titre au moyen des clés \refKey{nofrontcover} et
-\refKey{frametitle}.%
+personnaliser les pages de titre au moyen des clés \refKey{nofrontcover},
+\refKey{noaim} et \refKey{frametitle}.%
 %
 \changes{v0.99g}{2014-07-13}{Personnalisation des pages de titre possible en
   option de \protect\docAuxCommand{maketitle} (\emph{via}
   \protect\refKey{frametitle} et \protect\refKey{nofrontcover})}%
+\changes{v0.99u}{2019-03-28}{Sur la ou les pages de titre en français, accord en
+  genre automatique des expressions clés introduisant les groupes de membres du
+  jury}%
 
 \begin{docKey}{nofrontcover}{=\docValue{true}\textbar\docValue{false}}{par défaut
     \docValue{true}, initialement \docValue{false}}%
@@ -47,6 +50,19 @@ personnaliser les pages de titre au moyen des clés \refKey{nofrontcover} et
   \index{page de titre!première de couverture!suppression}%
   \index{suppression!première de couverture}%
   Cette clé permet de désactiver la production de la 1\iere{} de couverture.
+\end{docKey}
+
+\begin{docKey}[][doc new=2019-03-28]{noaim}{=\docValue{true}\textbar\docValue{false}}{par défaut
+    \docValue{true}, initialement \docValue{false}}%
+  %
+  \index{titre!de la thèse!personnalisation}%
+  \changes{v0.99u}{2019-03-28}{Nouvelle option \protect\refKey{noaim} de
+    \protect\docAuxCommand{maketitle} permettant de (légèrement) personnaliser
+    les pages de titre}%
+  %
+  Cette clé permet de désactiver sur les pages de titre l'affichage
+  de\selonlangue{} \enquote{En vue de l’obtention du grade de docteur de ...} ou
+  \enquote{In order to become Doctor from ...}.%
 \end{docKey}
 
 {%

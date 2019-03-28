@@ -71,8 +71,8 @@ pages de 1\iere{} de couverture et de titre de la thèse\footnote{Sauf cas
   particulier, ces pages seront dans la suite appelées simplement
   \enquote{pages de titre}.}.
 
-\subsection{Auteur, (sous-)titre, spécialité, sujet,
-  date}\label{sec-caracteristiques}
+\subsection{Auteur, (sous-)titre, discipline, spécialité,
+  date, sujet}\label{sec-caracteristiques}
 
 Les commandes suivantes permettent de stipuler les auteur, titre et éventuel
 sous-titre, champ disciplinaire, spécialité, date et sujet de la thèse. Toutes
@@ -214,7 +214,7 @@ titre\footnote{En outre, les titres et éventuels sous-titres figureront sur les
   apparaît comme métadonnée \enquote{Sujet}.
 \end{docCommand}
 
-\begin{dbexample}{Auteur, (sous-)titre, spécialité, sujet, date}{}
+\begin{dbexample}{Auteur, (sous-)titre, discipline, spécialité, sujet, date}{}
    \indexex{caractéristiques de la thèse}%
   Les données principales d'une thèse peuvent être les suivantes.
   % \tcbset{listing options={deletekeywords={[2]title}}}
@@ -393,12 +393,26 @@ pages de titre, sauf :
 \end{dbexample}
 \end{docKey}
 %
-% \DescribeOption{nologo}
-% L'option |nologo| (qui ne prend pas de valeur) pour que le logo d'un
-% institut ne figure pas, même s'il a été précisé.
+\begin{docKey}[][doc new=2019-03-28]{nologo}{=\docValue{true}\textbar\docValue{false}}{par défaut
+    \docValue{true}, initialement \docValue{false}}%
+  %
+  \indexdef{logo!suppression}%
+  \changes{v0.99u}{2019-03-28}{Nouvelle option \protect\refKey{nologo} des
+    commandes d'instituts et entreprise permettant de (légèrement) personnaliser
+    les pages de titre}%
+  %
+  Si les commandes \refCom{comue}, \refCom{institute}, \refCom{coinstitute} et
+  \refCom{company} sont employées sans l'option \refKey{logo}, les zones des
+  pages de titre réservées aux logos correspondants contiennent les rappels
+  respectivement \enquote{\meta{logo ComUE}}, \enquote{\meta{logo de
+      l’institut}}, \enquote{\meta{logo de l’institut de cotutelle}} et
+  \enquote{\meta{logo de l’entreprise}}. Si l'option \refKey{logo} est absente
+  parce que l'affichage du logo correspondant n'est pas souhaité, l'option
+  \refKey{nologo} permet de supprimer ce rappel.
+\end{docKey}
 %
-\begin{docKey}{url}{=\meta{{\normalfont\ttfamily\acrshort*{url}} de l'institut}}{pas de valeur par
-    défaut, initialement vide}
+\begin{docKey}{url}{=\meta{{\normalfont\ttfamily\acrshort*{url}} de
+      l'institut}}{pas de valeur par défaut, initialement vide}
   \indexdef{url@\acrshort{url}}%
   \index{laboratoire!url@\acrshort{url}}%
   \index{institut!url@\acrshort{url}}%
@@ -409,7 +423,8 @@ pages de titre, sauf :
   \begin{dbexample}{\acrshort*{url} d'institut}{}
     Si la thèse a été préparée à l'\gls{ulco}, on pourra recourir à :%
     \NoAutoSpacing%
-\begin{preamblecode}[listing options={deletekeywords={url},morekeywords={[2]url},deletekeywords={[5]institute}}]
+\begin{preamblecode}[listing
+options={deletekeywords={url},morekeywords={[2]url},deletekeywords={[5]institute}}]
 \institute[url=http://www.univ-littoral.fr/]{ULCO}
 \end{preamblecode}
 \end{dbexample}
