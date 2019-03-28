@@ -71,7 +71,7 @@ nodate
 noinstitute
 nodoctoralschool
 nolaboratory
-nolaboratoryadress
+nolaboratoryaddress
 nosupervisor
 nomaketitle
 nokeywords
@@ -144,16 +144,19 @@ url=
 logo=
 logoheight=
 url=
+nologo
 #endkeyvals
 #keyvals:\coinstitute
 logo=
 logoheight=
 url=
+nologo
 #endkeyvals
 #keyvals:\company
 logo=
 logoheight=
 url=
+nologo
 #endkeyvals
 #keyvals:\doctoralschool
 logo=
@@ -268,6 +271,12 @@ juniorresearcher*
 # Misc
 \ordernumber[%<numéro d'ordre%>]#n
 \ordernumber#n*
+#
+#keyvals:\maketitle
+nofrontcover
+noaim
+frametitle=#shadowbox,ovalbox,none,fbox
+#endkeyvals
 #
 # Preliminary part
 #

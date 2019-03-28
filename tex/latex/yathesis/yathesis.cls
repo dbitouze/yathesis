@@ -11,8 +11,8 @@
 %% Released under the LaTeX Project Public License v1.3c or later
 %% See http://www.latex-project.org/lppl.txt
 %% -----------------------------------------------------------------------
-\def\fileversion{v0.99s}
-\def\filedate{2018/06/22}
+\def\fileversion{v0.99u}
+\def\filedate{2019/03/28}
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesClass{yathesis}[\filedate\space\fileversion\space Yet another class for writing thesis (DB)]
 \RequirePackage{pgfopts}[2011/06/02]%
@@ -196,11 +196,12 @@
 \YAD@create@boolean{noauthor}%
 \YAD@create@boolean{notitle}%
 \YAD@create@boolean{noacademicfield}%
+\YAD@create@boolean{noaim}%
 \YAD@create@boolean{nodate}%
 \YAD@create@boolean{noinstitute}%
 \YAD@create@boolean{nodoctoralschool}%
 \YAD@create@boolean{nolaboratory}%
-\YAD@create@boolean{nolaboratoryadress}%
+\YAD@create@boolean{nolaboratoryaddress}%
 \YAD@create@boolean{nosupervisor}%
 \YAD@create@boolean{nomaketitle}%
 \YAD@create@boolean{nokeywords}%
@@ -508,6 +509,17 @@
   }{%
   }%
 }%
+\newlength{\YAD@vspace@before@localtoc@rule}
+\setlength{\YAD@vspace@before@localtoc@rule}{-1.25\baselineskip}
+\AtEndPreamble{%
+  \@ifpackageloaded{parskip}{%
+    \@ifpackagelater{parskip}{2.0a}{%
+      \setlength{\YAD@vspace@before@localtoc@rule}{-.775\baselineskip}%
+    }{%
+    }%
+  }{%
+  }%
+}
 \AtEndPreamble{%
   \@ifpackageloaded{hyperref}{%
     \newcommand{\YAD@href}[3][]{\href[#1]{#2}{#3}}%
@@ -754,7 +766,7 @@
   }{%
   }%
 }%
-\newcommand{\expression}[3]{%
+\newcommand{\YAD@expression}[3]{%
   \AtBeginDocument{%
     \deftranslation[to=French]{lbl-#1}{#2}%
     \deftranslation[to=English]{lbl-#1}{#3}%
@@ -762,6 +774,29 @@
     \deftranslation[to=English]{#1}{#3}%
   }%
 }%
+\newcommand{\YAD@expression@alias}[5]{%
+  \ifthenelse{\equal{#1}{#4}}{%
+    \YAD@expression{#5}{#2}{#3}%
+  }{%
+  }%
+}%
+\newcommand{\expression}[3]{%
+  \YAD@expression@alias{#1}{#2}{#3}{juniorresearcherfem*}{juniorresearcher-female*}%
+  \YAD@expression@alias{#1}{#2}{#3}{mcf}{associateprofessor}%
+  \YAD@expression@alias{#1}{#2}{#3}{mcf*}{associateprofessor*}%
+  \renewcommand*{\do}[1]{\YAD@expression@alias{#1}{#2}{#3}{##1fem}{##1-female}}
+  \docsvlist{%
+    juniorresearcher,%
+    supervisor,%
+    cosupervisor,%
+    comonitor,%
+    seniorresearcher,%
+    committeepresident,%
+    professor,%
+  }
+  %
+  \YAD@expression{#1}{#2}{#3}%
+}
 \newcommand*{\YAD@generic@argument@translate}[1]{%
   \YAD@texorpdfstring{\YAD@generic@argument{\translate{meta-#1}}}{<#1>}%
 }%
@@ -798,7 +833,7 @@
 \yadsetup{sepcorpaffilenglish=\YAD@global@sepcorpaffil@english}%
 \yadsetup{name=\contentsname}%
 \yadsetup{depth=subsubsection}%
-\yadsetup{reinitialize person/.style={%
+\yadsetup{reset person/.style={%
     corps=,%
     role=,%
     affiliation=,%
@@ -831,17 +866,34 @@
 \DTLnewdb{YAD@supervisors}%
 \DTLnewdb{dedications}%
 \DTLnewdb{frontepigraphs}%
+\DTLforeach{YAD@staffs}{%
+  \YAD@the@staff=YAD@the@staff}{%
+  \YAD@create@boolean{only@female@\YAD@the@staff}%
+  \global\booltrue{YAD@only@female@\YAD@the@staff}%
+}%
 \newcommand*{\YAD@staff}[4][]{%
   \dtlexpandnewvalue%
   %
   \yadsetup{#1}%
-  %
+\DTLforeach{YAD@staffs}{%
+  \YAD@the@staff=YAD@the@staff}{%
+    \ifthenelse{\equal{#4}{\YAD@the@staff}}{%
+      \ifboolexpr{%
+        bool {YAD@female} or %
+        not bool {YAD@male}%
+      }{%
+      }{%
+        \global\boolfalse{YAD@only@female@#4}%
+      }%
+    }{%
+    }
+}%
   \ifbool{YAD@professor}{%
     \ifboolexpr{%
       bool {YAD@female} or %
       not bool {YAD@male}%
     }{%
-      \yadsetup{corps=professorfem,#1}%
+      \yadsetup{corps=professor-female,#1}%
     }{%
       \yadsetup{corps=professor,#1}%
     }%
@@ -868,7 +920,7 @@
       bool {YAD@female} or %
       not bool {YAD@male}%
     }{%
-      \yadsetup{corps=juniorresearcherfem,#1}%
+      \yadsetup{corps=juniorresearcher-female,#1}%
     }{%
       \yadsetup{corps=juniorresearcher,#1}%
     }%
@@ -879,7 +931,7 @@
       bool {YAD@female} or %
       not bool {YAD@male}%
     }{%
-      \yadsetup{corps=juniorresearcherfem*,#1}%
+      \yadsetup{corps=juniorresearcher-female*,#1}%
     }{%
       \yadsetup{corps=juniorresearcher*,#1}%
     }%
@@ -890,7 +942,7 @@
       bool {YAD@female} or %
       not bool {YAD@male}%
     }{%
-      \yadsetup{corps=seniorresearcherfem,#1}%
+      \yadsetup{corps=seniorresearcher-female,#1}%
     }{%
       \yadsetup{corps=seniorresearcher,#1}%
     }%
@@ -943,7 +995,7 @@
   }{%
     \DTLnewdbentry{#4}{affiliationsecondary}{\cmdKV@YAD@affiliationsecondary}%
   }%
-  \yadsetup{reinitialize person}%
+  \yadsetup{reset person}%
 }%
 \newcommand{\YAD@error@firstlastnames@empty}[4]{%
   \ifthenelse{\isempty{#2}}{%
@@ -969,7 +1021,7 @@
   \YAD@staff[#1]{#2}{#3}{supervisors-in-committee}%
 }%
 \newcommand{\supervisor}{%
-  \@ifstar{\@tempswatrue\YAD@supervisor}{\@tempswafalse\YAD@supervisor}%
+  \@ifstar{\@tempswafalse\YAD@supervisor}{\@tempswatrue\YAD@supervisor}%
 }
 \newcommand*{\YAD@supervisor}[3][]{%
   \booltrue{YAD@supervisor@specified}%
@@ -979,13 +1031,12 @@
     not bool {YAD@male}%
   }{%
     \YAD@error@firstlastnames@empty{de la directrice de these}{#2}{#3}{\supervisor}%
-    \YAD@staff[role=supervisorfem,#1]{#2}{#3}{YAD@supervisors}%
+    \YAD@staff[role=supervisor-female,#1]{#2}{#3}{YAD@supervisors}%
   }{%
     \YAD@error@firstlastnames@empty{du directeur de these}{#2}{#3}{\supervisor}%
     \YAD@staff[role=supervisor,#1]{#2}{#3}{YAD@supervisors}%
   }%
   \if@tempswa%
-  \else%
   \YAD@staff[role=supervisor,#1]{#2}{#3}{supervisors-in-committee}%
   \fi%
 }%
@@ -1001,7 +1052,7 @@
     not bool {YAD@male}%
   }{%
     \YAD@error@firstlastnames@empty{de la co-directrice de these}{#2}{#3}{\cosupervisor}%
-    \YAD@staff[role=cosupervisorfem,#1]{#2}{#3}{YAD@supervisors}%
+    \YAD@staff[role=cosupervisor-female,#1]{#2}{#3}{YAD@supervisors}%
   }{%
     \YAD@error@firstlastnames@empty{du co-directeur de these}{#2}{#3}{\cosupervisor}%
     \YAD@staff[role=cosupervisor,#1]{#2}{#3}{YAD@supervisors}%
@@ -1023,7 +1074,7 @@
     not bool {YAD@male}%
   }{%
     \YAD@error@firstlastnames@empty{de la co-encadrante de these}{#2}{#3}{\comonitor}%
-    \YAD@staff[role=comonitorfem,#1]{#2}{#3}{YAD@supervisors}%
+    \YAD@staff[role=comonitor-female,#1]{#2}{#3}{YAD@supervisors}%
   }{%
     \YAD@error@firstlastnames@empty{de co-encadrant de these}{#2}{#3}{\comonitor}%
     \YAD@staff[role=comonitor,#1]{#2}{#3}{YAD@supervisors}%
@@ -1054,7 +1105,7 @@
   \YAD@staff[#1]{#2}{#3}{examiners}%
   \ifboolexpr{%
     test {\ifdefstring{\cmdKV@YAD@role}{committeepresident}} or %
-    test {\ifdefstring{\cmdKV@YAD@role}{committeepresidentfem}}%
+    test {\ifdefstring{\cmdKV@YAD@role}{committeepresident-female}}%
   }{%
   }{%
     \ifboolexpr{%
@@ -1074,7 +1125,7 @@
     not bool {YAD@male}%
   }{%
     \YAD@error@firstlastnames@empty{de la presidente du jury}{#2}{#3}{\committeepresident}%
-    \examiner[role=committeepresidentfem,#1]{#2}{#3}%
+    \examiner[role=committeepresident-female,#1]{#2}{#3}%
   }{%
     \YAD@error@firstlastnames@empty{du president du jury}{#2}{#3}{\committeepresident}%
     \examiner[role=committeepresident,#1]{#2}{#3}%
@@ -1164,17 +1215,41 @@
         \ifboolexpr{%
           bool {YAD@hdr} and test {\ifdefstring{\YAD@the@staff}{supervisors-in-committee}}%
         }{%
-          \YAD@translation{\YAD@the@staff-pl-hdr}%
+          \ifboolexpr{%
+            bool {YAD@only@female@\YAD@the@staff}%
+          }{%
+            \YAD@translation{\YAD@the@staff-pl-hdr-female}%
+          }{%
+            \YAD@translation{\YAD@the@staff-pl-hdr}%
+          }
         }{%
-          \YAD@translation{\YAD@the@staff-pl}%
+          \ifboolexpr{%
+            bool {YAD@only@female@\YAD@the@staff}%
+          }{%
+            \YAD@translation{\YAD@the@staff-pl-female}%
+          }{%
+            \YAD@translation{\YAD@the@staff-pl}%
+          }
         }%
       }{%
         \ifboolexpr{%
           bool {YAD@hdr} and test {\ifdefstring{\YAD@the@staff}{supervisors-in-committee}}%
         }{%
-          \YAD@translation{\YAD@the@staff-hdr}%
+          \ifboolexpr{%
+            bool {YAD@only@female@\YAD@the@staff}%
+          }{%
+            \YAD@translation{\YAD@the@staff-hdr-female}%
+          }{%
+            \YAD@translation{\YAD@the@staff-hdr}%
+          }
         }{%
-          \YAD@translation{\YAD@the@staff}%
+          \ifboolexpr{%
+            bool {YAD@only@female@\YAD@the@staff}%
+          }{%
+            \YAD@translation{\YAD@the@staff-female}%
+          }{%
+            \YAD@translation{\YAD@the@staff}%
+          }
         }%
       }%
     }{%
@@ -1499,7 +1574,7 @@
     }%
   }%
 }%
-      \ifbool{YAD@nologo}{%
+\ifbool{YAD@nologo}{%
       }{%
         \csdef{print#2logo}{%
         \@ifstar{%
@@ -1511,31 +1586,40 @@
         }%
       }%
       \csdef{YAD@starnostar@print#2logo}{%
-        \yadsetup{url=,##1}%
-        \renewcommand*\YAD@logo{%
-          \ifthenelse{\equal{\cmdKV@YAD@logo}{}}{%
-            \YAD@reach@file{\YAD@generic@argument@translate{logo#2}}%
+        \yadsetup{url=,nologo=false,##1}%
+        \ifbool{YAD@nologo}{%
+        }{%
+          \ifbool{YAD@logo@before}{%
+            \hspace{\stretch{1}}%
           }{%
-            \YAD@reach@file{%
-              \includegraphics[height=\cmdKV@YAD@logoheight]{\cmdKV@YAD@logo}%
+          }%
+          \renewcommand*\YAD@logo{%
+            \ifthenelse{\equal{\cmdKV@YAD@logo}{}}{%
+              \YAD@reach@file{\YAD@generic@argument@translate{logo#2}}%
+            }{%
+              \YAD@reach@file{%
+                \includegraphics[height=\cmdKV@YAD@logoheight]{\cmdKV@YAD@logo}%
+              }%
             }%
           }%
-        }%
-        \if@tempswa%
-        \else%
-        % \ifbool{YAD@nolink}{%
-        %   \YAD@logo%
-        % }{%
+          \if@tempswa%
+          \else%
+          % \ifbool{YAD@nolink}{%
+          % \YAD@logo%
+          % }{%
           \ifthenelse{\equal{\cmdKV@YAD@url}{}}{%
             % \YAD@href{www.#2.fr}{
-              \YAD@logo%
+            \YAD@logo%
             % }%
           }{%
             \YAD@href{\cmdKV@YAD@url}{\YAD@logo}%
           }%
-        % }%
-        \fi%
-        \setlength\cmdKV@YAD@logoheight{\YAD@default@logoheight}%
+          % }%
+          \fi%
+          \setlength\cmdKV@YAD@logoheight{\YAD@default@logoheight}%
+          \boolfalse{YAD@nologo}
+          \booltrue{YAD@logo@before}%
+        }%
       }%
     }%
   }%
@@ -2068,37 +2152,21 @@
   {%
     \ifdef{\printpreslogo}{%
       \printpreslogo%
-      \booltrue{YAD@logo@before}%
     }{%
     }%
     \ifdef{\printcomuelogo}{%
       \printcomuelogo%
-      \booltrue{YAD@logo@before}%
     }{%
     }%
     \ifdef{\printinstitutelogo}{%
-      \ifbool{YAD@logo@before}{%
-        \hspace{\stretch{1}}%
-      }{%
-      }%
       \printinstitutelogo%
-      \booltrue{YAD@logo@before}%
     }{%
     }%
     \ifdef{\printcoinstitutelogo}{%
-      \ifbool{YAD@logo@before}{%
-        \hspace{\stretch{1}}%
-      }{%
-      }%
       \printcoinstitutelogo%
-      \booltrue{YAD@logo@before}%
     }{%
     }%
     \ifdef{\printcompanylogo}{%
-      \ifbool{YAD@logo@before}{%
-        \hspace{\stretch{1}}%
-      }{%
-      }%
       \printcompanylogo%
     }{%
     }%
@@ -2381,9 +2449,9 @@
 \newcommand*{\printlaboratoryaddress}[1]{%
   \ifundef{#1}{%
     \YAD@reach@file{\YAD@generic@argument@translate{laboratoryaddress}}%
-    \ifbool{YAD@nolaboratoryadress}{%
+    \ifbool{YAD@nolaboratoryaddress}{%
     }{%
-      \YAD@ClassError[nolaboratoryadress]{%
+      \YAD@ClassError[nolaboratoryaddress]{%
         Adresse du laboratoire non specifiee ou vide%
       }{%
         La commande \protect\laboratory\space n'a pas ete utilisee\MessageBreak%
@@ -2499,10 +2567,10 @@
     % \begin{minipage}[c][\YAD@otherboxheight][c]{\YAD@titleboxwidth}
     %   \ifdraft{}{\vspace*{\stretch{.25}}}%
     \begin{center}
-      \YAD@ifemptyorundef{\printinstitute}{%
-        \YAD@generic@argument@translate{institute}%
-        \ifbool{YAD@noinstitute}{%
-        }{%
+      \ifbool{YAD@noinstitute}{%
+      }{%
+        \YAD@ifemptyorundef{\printinstitute}{%
+          \YAD@generic@argument@translate{institute}%
           \YAD@ClassError[noinstitute]{%
             Institut de la these non specifie%
           }{%
@@ -2512,16 +2580,16 @@
             vide\MessageBreak%
             (celui-ci doit etre renseigne).%
           }%
+        }{%
+          \YAD@translation{institute} \textbf{\textsc{\Large\printinstitute}}%
         }%
-      }{%
-        \YAD@translation{institute} \textbf{\textsc{\Large\printinstitute}}%
-      }%
-      \ifundef{\printcoinstitute}{%
-      }{%
-        \ifdraft{}{\vspace*{\stretch{.5}}}%
-        % \vspace*{\stretch{.5}}%
-        \par%
-        \YAD@translation{coinstitute} \textbf{\textsc{\Large\printcoinstitute}}%
+        \ifundef{\printcoinstitute}{%
+        }{%
+          \ifdraft{}{\vspace*{\stretch{.5}}}%
+          % \vspace*{\stretch{.5}}%
+          \par%
+          \YAD@translation{coinstitute} \textbf{\textsc{\Large\printcoinstitute}}%
+        }%
       }%
       \ifundef{\printcompany}{%
       }{%
@@ -2530,14 +2598,14 @@
         \par%
         \YAD@translation{company} \textbf{\textsc{\Large\printcompany}}%
       }%
-      \ifdraft{}{\vspace*{\stretch{1.5}}}%
-      % \vspace*{\stretch{1.5}}%
-      \par%
-      \YAD@translation{doctoralschool}
-      \YAD@ifemptyorundef{\printdoctoralschool}{%
-        \YAD@generic@argument@translate{doctoralschool}%
-        \ifbool{YAD@nodoctoralschool}{%
-        }{%
+      \ifbool{YAD@nodoctoralschool}{%
+      }{%
+        \ifdraft{}{\vspace*{\stretch{1.5}}}%
+        % \vspace*{\stretch{1.5}}%
+        \par%
+        \YAD@translation{doctoralschool}
+        \YAD@ifemptyorundef{\printdoctoralschool}{%
+          \YAD@generic@argument@translate{doctoralschool}%
           \YAD@ClassError[nodoctoralschool]{%
             Ecole doctorale de la these non specifiee%
           }{%
@@ -2547,18 +2615,21 @@
             vide\MessageBreak%
             (celui-ci doit etre renseigne).%
           }%
+        }{%
+          \textbf{\printdoctoralschool}%
         }%
-      }{%
-        \textbf{\printdoctoralschool}%
       }%
-      \ifdraft{}{\vspace*{\stretch{.5}}}%
-      % \vspace*{\stretch{.5}}%
-      \par%
-      \YAD@translation{universitydepartment}
-      \ifdefstring{\YAD@main@laboratory@nonamelink}{true}{%
-        \textbf{\printlaboratory{\YAD@main@laboratory@name}}%
+      \ifbool{YAD@nolaboratory}{%
       }{%
-        \textbf{\printlaboratory[\YAD@main@laboratory@url]{\YAD@main@laboratory@name}}%
+        \ifdraft{}{\vspace*{\stretch{.5}}}%
+        % \vspace*{\stretch{.5}}%
+        \par%
+        \YAD@translation{universitydepartment}
+        \ifdefstring{\YAD@main@laboratory@nonamelink}{true}{%
+          \textbf{\printlaboratory{\YAD@main@laboratory@name}}%
+        }{%
+          \textbf{\printlaboratory[\YAD@main@laboratory@url]{\YAD@main@laboratory@name}}%
+        }%
       }%
       \ifdraft{}{\vspace*{\stretch{1.5}}}%
       % \vspace*{\stretch{1.5}}%
@@ -2585,7 +2656,7 @@
         }{%
           \textbf{\printauthor}%
         }%
-      \ifboolexpr{%
+        \ifboolexpr{%
           bool {YAD@submitted@work}%
           or bool {YAD@submitted@work@star}%
         }{%
@@ -2598,62 +2669,71 @@
           %   \textbf{\printdate}%
           % }%
         }{%
-          \ifdraft{}{\vspace*{\stretch{1}}}%
-          % \vspace*{\stretch{1}}%
-          \par%
-          \YAD@translation{defendedon}
-          \YAD@ifemptyorundef{\printdate}{%
-            \YAD@generic@argument@translate{date}%
+          \ifbool{YAD@nodate}{%
           }{%
-            \textbf{\printdate}%
+            \ifdraft{}{\vspace*{\stretch{1}}}%
+            % \vspace*{\stretch{1}}%
+            \par%
+            \YAD@translation{defendedon}
+            \YAD@ifemptyorundef{\printdate}{%
+              \YAD@generic@argument@translate{date}%
+            }{%
+              \textbf{\printdate}%
+            }%
           }%
         }%
       }%
       \ifYAD@hdr%
       \else%
-      \ifdraft{}{\vspace*{\stretch{1}}}%
-      % \vspace*{\stretch{1}}%
-      \par%
-      \YAD@translation{aim}%
-      \ifundef{\printinstitute}{%
-        \YAD@generic@argument@translate{institute}%
+      \ifbool{YAD@noaim}{%
       }{%
-        \printinstitute*%
-      }%
-      \ifundef{\printcoinstitute}{%
-      }{%
-        \YAD@translation{aimand}%
-        \printcoinstitute*%
+        \ifdraft{}{\vspace*{\stretch{1}}}%
+        % \vspace*{\stretch{1}}%
+        \par%
+        \YAD@translation{aim}%
+        \ifundef{\printinstitute}{%
+          \YAD@generic@argument@translate{institute}%
+        }{%
+          \printinstitute*%
+        }%
+        \ifundef{\printcoinstitute}{%
+        }{%
+          \YAD@translation{aimand}%
+          \printcoinstitute*%
+        }%
       }%
       \fi%
       \ifdraft{}{\vspace*{\stretch{1}}}%
       % \vspace*{\stretch{1}}%
-      \par%
-      \large%
-      \YAD@translation{academicfield}
-      %
-      \YAD@ifemptyorundef{\printacademicfield}{%
-        \YAD@generic@argument@translate{academicfield}%
-        \ifbool{YAD@noacademicfield}{%
-        }{%
-          \YAD@ClassError[noacademicfield]{%
-            Champ disciplinaire de la these non specifie%
-          }{%
-            La commande \protect\academicfield\space n'a pas ete utilisee
-            (celle-ci est requise)\MessageBreak%
-            ou son argument obligatoire est vide (celui-ci doit etre renseigne).%
-          }%
-        }%
+      \ifbool{YAD@noacademicfield}{%
       }{%
-        \textbf{\printacademicfield}%
-      }%
-      \ifundef{\printspeciality}{%
-      }{%
-        \ifdraft{}{\vspace*{\stretch{.5}}}%
-        % \vspace*{\stretch{.5}}%
         \par%
         \large%
-        \YAD@translation{speciality} \textbf{\printspeciality}%
+        \YAD@translation{academicfield}
+        %
+        \YAD@ifemptyorundef{\printacademicfield}{%
+          \YAD@generic@argument@translate{academicfield}%
+          \ifbool{YAD@noacademicfield}{%
+          }{%
+            \YAD@ClassError[noacademicfield]{%
+              Champ disciplinaire de la these non specifie%
+            }{%
+              La commande \protect\academicfield\space n'a pas ete utilisee
+              (celle-ci est requise)\MessageBreak%
+              ou son argument obligatoire est vide (celui-ci doit etre renseigne).%
+            }%
+          }%
+        }{%
+          \textbf{\printacademicfield}%
+        }%
+        \ifundef{\printspeciality}{%
+        }{%
+          \ifdraft{}{\vspace*{\stretch{.5}}}%
+          % \vspace*{\stretch{.5}}%
+          \par%
+          \large%
+          \YAD@translation{speciality} \textbf{\printspeciality}%
+        }%
       }
     \end{center}
   % \end{minipage}%
@@ -3291,7 +3371,7 @@
   \cleardoublepage%
   \egroup%
   \YAD@nolaboratorytrue%
-  \YAD@nolaboratoryadresstrue%
+  \YAD@nolaboratoryaddresstrue%
 }%
 \newcommand{\YAD@abstract@page@rule}[1][black]{\bgroup\color{#1}\noindent\rule[2pt]{\linewidth}{2pt}\egroup}
 \AtEndDocument{%
@@ -3511,11 +3591,19 @@
 \newcommand\YAD@setlinestyle [2]{% #1= unit, #2= numwidth as macro
   \etocsetstyle{#1}
   {\advance\leftskip#2\relax}
-  {\vskip \YAD@verysmallvskip\relax
-    \leavevmode
+  {%
+    \vskip
+    \YAD@verysmallvskip\relax
+    \leavevmode%
     {\interlinepenalty\@M
       \etocifnumbered
-      {\llap{\makebox[#2][l]{\etocnumber}}}{\advance\leftskip-#2\relax}%
+      {%
+        \llap{%
+          \makebox[#2][l]{%
+            \etocnumber%
+          }%
+        }%
+      }{\advance\leftskip-#2\relax}%
       \etocname
       \nobreak\leaders \copy\YAD@leaderbox
       \hfil\makebox[-\parfillskip][r]{\etocpage}%
@@ -3525,17 +3613,29 @@
   {\advance\leftskip-#2\relax}%
 }
 \newcommand\YAD@globalstyle {% encapsule le style pour les global TOCs
-  \etocsettocstyle {\if@twocolumn \@restonecoltrue \onecolumn \else
-    \@restonecolfalse \fi
-    \parindent\z@ \leftskip\z@skip \rightskip \z@skip
+  \etocsettocstyle {%
+    \if@twocolumn
+    \@restonecoltrue
+    \onecolumn
+    \else
+    \@restonecolfalse
+    \fi
+    \parindent\z@
+    \leftskip\z@skip
+    \rightskip\z@skip
     \setbox\YAD@leaderbox\hbox to \YAD@leaderboxwidth{\hss.\hss}%
     \chapter *[\cmdKV@YAD@name]{\noindent\kern\YAD@leftmargin\relax % uses "pt"...
       \cmdKV@YAD@name%
     }%
     \rightskip \YAD@rightmargin\relax
     \parfillskip -\rightskip % or a smaller value if desired
-    \leftskip \YAD@leftmargin \relax } {\if@restonecol \twocolumn
-    \fi\cleardoublepage}%
+    \leftskip \YAD@leftmargin \relax%
+  }{%
+    \if@restonecol
+    \twocolumn
+    \fi
+    \cleardoublepage%
+  }%
   %
   \etocsetstyle{part} {} {\addpenalty {-\@highpenalty}%
     \addvspace \YAD@bigvskip \leavevmode {\large
@@ -3546,7 +3646,9 @@
   %
   \etocsetstyle{chapter} {\advance\leftskip\YAD@numwidthB\relax} {\addpenalty
     {-\@highpenalty }%
-    \vskip \YAD@globalmedvskip\relax \leavevmode {\interlinepenalty\@M \etocifnumbered
+    \vskip \YAD@globalmedvskip\relax
+    \leavevmode%
+    {\interlinepenalty\@M \etocifnumbered
       {\llap{\makebox[\YAD@numwidthB][l]{\bfseries\etocnumber}}}
       {\advance\leftskip-\YAD@numwidthB\relax}%
       \bfseries\etocname
@@ -3578,7 +3680,8 @@
       \large\textbf{\translate{lbl-localtocname}}%
     }%
     \let\addcontentsline\YAD@addcontentsline
-    \parskip \z@skip \vspace{-1.25\baselineskip}% somewhat ad hoc
+    \parskip \z@skip
+    \vspace{\YAD@vspace@before@localtoc@rule}% somewhat ad hoc
     \leftskip 2.25em \rightskip 4.5em \advance\rightskip-\YAD@rightmargin\relax
     \leavevmode\leaders\hrule\@height\p@\hfill\kern\z@\par
     \rightskip 4.5em
@@ -4215,6 +4318,7 @@
 \expression{meta-institute}{institut principal}{institut principal}
 \expression{meta-coinstitute}{institut de cotutelle}{institut de cotutelle}
 \expression{meta-logocoinstitute}{logo de l'institut de cotutelle}{logo de l'institut de cotutelle}
+\expression{meta-logocompany}{logo de l'entreprise}{logo de l'entreprise}
 \expression{meta-doctoralschool}{\'ecole doctorale}{\'ecole doctorale}
 \expression{meta-laboratory}{nom du laboratoire}{nom du laboratoire}
 \expression{meta-logolaboratory}{logo du laboratoire}{logo du laboratoire}
