@@ -4489,7 +4489,7 @@ This work consists of the file  yathesis.dtx
     \ifthenelse{\DTLiseq{\YAD@laboratory@logo}{}}{%
     }{%
       \hspace{\stretch{1}}%
-      \begin{minipage}[t]{.325\linewidth}
+      \adjustbox{right=.325\linewidth}{%
         \def\YAD@logo{%
           \YAD@ifemptyorundef{\YAD@laboratory@logo}{%
             \YAD@reach@file{\YAD@generic@argument@translate{logolaboratory}}%
@@ -4501,20 +4501,19 @@ This work consists of the file  yathesis.dtx
         }%
         \if@tempswa%
         \else%
-        \hspace{\stretch{1}}%
         % \ifbool{YAD@nolink}{%
         %   \YAD@logo%
         % }{%
-          \YAD@ifemptyorundef{\YAD@laboratory@url}{%
-            % \YAD@href{www.laboratory.fr}{%
-              \YAD@logo%
-            % }%
-          }{%
-            \YAD@href{\YAD@laboratory@url}{\YAD@logo}%
-          }%
+        \YAD@ifemptyorundef{\YAD@laboratory@url}{%
+          % \YAD@href{www.laboratory.fr}{%
+          \YAD@logo%
+          % }%
+        }{%
+          \YAD@href{\YAD@laboratory@url}{\YAD@logo}%
+        }%
         % }%
         \fi%
-      \end{minipage}%
+      }%
     }%
     \par%
     \DTLiflastrow{%
