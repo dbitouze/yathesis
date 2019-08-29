@@ -2969,7 +2969,7 @@
   \YAD@ifemptyorundef{\cmdKV@YAD@logoheight}{%
     \DTLnewdbentry{laboratories}{logoheight}{\YAD@default@logoheight}%
   }{%
-    \DTLnewdbentry{laboratories}{logoheight}{\cmdKV@YAD@logoheight}%
+    \DTLnewdbentry{laboratories}{logoheight}{\the\cmdKV@YAD@logoheight}%
   }%
   \YAD@ifemptyorundef{\cmdKV@YAD@url}{%
     \DTLnewdbentry{laboratories}{url}{}%
@@ -3136,7 +3136,7 @@
     \ifthenelse{\DTLiseq{\YAD@laboratory@logo}{}}{%
     }{%
       \hspace{\stretch{1}}%
-      \begin{minipage}[t]{.325\linewidth}
+      \adjustbox{right=.325\linewidth}{%
         \def\YAD@logo{%
           \YAD@ifemptyorundef{\YAD@laboratory@logo}{%
             \YAD@reach@file{\YAD@generic@argument@translate{logolaboratory}}%
@@ -3148,20 +3148,19 @@
         }%
         \if@tempswa%
         \else%
-        \hspace{\stretch{1}}%
         % \ifbool{YAD@nolink}{%
         %   \YAD@logo%
         % }{%
-          \YAD@ifemptyorundef{\YAD@laboratory@url}{%
-            % \YAD@href{www.laboratory.fr}{%
-              \YAD@logo%
-            % }%
-          }{%
-            \YAD@href{\YAD@laboratory@url}{\YAD@logo}%
-          }%
+        \YAD@ifemptyorundef{\YAD@laboratory@url}{%
+          % \YAD@href{www.laboratory.fr}{%
+          \YAD@logo%
+          % }%
+        }{%
+          \YAD@href{\YAD@laboratory@url}{\YAD@logo}%
+        }%
         % }%
         \fi%
-      \end{minipage}%
+      }%
     }%
     \par%
     \DTLiflastrow{%
@@ -4159,8 +4158,14 @@
     \let\YAD@printbibliography@ORI\printbibliography%
     \renewcommand{\printbibliography}[1][]{%
       \booltrue{YAD@printbibliography@used}%
+      \chapter*{\bibname}
+      \begingroup
+      \let\cleardoublepage\relax
       \pagestyle{biblio}%
-      \YAD@printbibliography@ORI[heading=bibintoc,#1]%
+      \YAD@printbibliography@ORI[heading=none,#1]%
+      \endgroup
+      % \pagestyle{biblio}%
+      % \YAD@printbibliography@ORI[heading=bibintoc,#1]%
       \pagestyle{ordinary}%
     }%
   }{%
