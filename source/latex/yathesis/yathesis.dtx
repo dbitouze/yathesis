@@ -6982,18 +6982,12 @@ sub makeglossaries {
   return $return;
 }
 
-$makeindex = 'texindy -L french';
-
-add_cus_dep('idx', 'ind', 0, 'texindy');
-sub texindy{
-    system("texindy -L french \"$_[0].idx\"");
-}
+$makeindex = 'texindy -L french -C utf8';
 
 push @generated_exts, 'acn', 'acr', 'alg', 'bbl', 'bcf', 'fls', 'gl*', 'idx',
 'ind', 'ist', 'sbl*', 'sl*', 'sym*' ;
 
 $clean_ext .= 'synctex.gz* run.xml tex.bak out bbl bcf fdb_latexmk run tdo listing *~ lo* unq mw' ;
-);
 %    \end{macrocode}
 %
 %    \begin{macrocode}
