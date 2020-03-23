@@ -241,11 +241,11 @@ de titre\footnote{Le ou les laboratoires apparaissent en outre sur les pages
 \subsubsection{Définition}
 %
 \begin{docCommand}{comue}{\oarg{précision(s)}\marg{nom de la
-      {\normalfont\ttfamily\acrshort*{comue}}}}
-   \index{caractéristiques de la thèse!liste!comue@\acrshort{comue}}%
-   \indexdef{comue@\acrshort{comue}}%
+      {\normalfont\ttfamily\glsxtrshort*{comue}}}}
+   \index{caractéristiques de la thèse!liste!comue@\glsxtrshort{comue}}%
+   \indexdef{comue@\glsxtrshort{comue}}%
   Cette commande définit la \gls{comue}. Celle-ci ne figure que par
-  l'intermédiaire de ses logo et \acrshort{url} spécifiés au moyen des clés
+  l'intermédiaire de ses logo et \glsxtrshort{url} spécifiés au moyen des clés
   \refKey{logo} et \refKey{url}.
 \end{docCommand}
 %
@@ -274,10 +274,10 @@ de titre\footnote{Le ou les laboratoires apparaissent en outre sur les pages
   \index{caractéristiques de la thèse!liste!entreprise}%
   \indexdef{entreprise}%
   \indexsee{thèse industrielle}{entreprise}%
-  \indexsee{cifre@\acrshort{cifre}}{entreprise}%
+  \indexsee{cifre@\glsxtrshort{cifre}}{entreprise}%
   Cette commande définit l'entreprise ayant (co)financé la thèse.
   Celle-ci ne devrait être employée qu'en cas de thèse industrielle (par
-  exemple dans le cadre d'un dispositif \acrshort{cifre}).
+  exemple dans le cadre d'un dispositif \glsxtrshort{cifre}).
 \end{docCommand}
 %
 \begin{docCommand}[doc description=\mandatory]{doctoralschool}{\oarg{précision(s)}\marg{nom de l'école
@@ -411,16 +411,16 @@ pages de titre, sauf :
   \refKey{nologo} permet de supprimer ce rappel.
 \end{docKey}
 %
-\begin{docKey}{url}{=\meta{{\normalfont\ttfamily\acrshort*{url}} de
+\begin{docKey}{url}{=\meta{{\normalfont\ttfamily\glsxtrshort*{url}} de
       l'institut}}{pas de valeur par défaut, initialement vide}
-  \indexdef{url@\acrshort{url}}%
-  \index{laboratoire!url@\acrshort{url}}%
-  \index{institut!url@\acrshort{url}}%
+  \indexdef{url@\glsxtrshort{url}}%
+  \index{laboratoire!url@\glsxtrshort{url}}%
+  \index{institut!url@\glsxtrshort{url}}%
   \index{lien hypertexte}%
-  Cette option définit l'\acrshort{url} d'un institut. Les noms et éventuels
+  Cette option définit l'\glsxtrshort{url} d'un institut. Les noms et éventuels
   logos des instituts sont alors des liens hypertextes pointant vers cette
-  \acrshort{url}.
-  \begin{dbexample}{\acrshort*{url} d'institut}{}
+  \glsxtrshort{url}.
+  \begin{dbexample}{\glsxtrshort*{url} d'institut}{}
     Si la thèse a été préparée à l'\gls{ulco}, on pourra recourir à :%
     \NoAutoSpacing%
 \begin{preamblecode}[listing
@@ -430,11 +430,11 @@ options={deletekeywords={url},morekeywords={[2]url},deletekeywords={[5]institute
 \end{dbexample}
 %
 \begin{dbwarning}{Caractère \protect\lstinline+\#+ à protéger dans les
-    \acrshortpl*{url} d'instituts et entités}{}
-  \index{url@\acrshort{url}!format}%
-  \index{format!url@\acrshort{url}}%
+    \glsxtrshortpl*{url} d'instituts et entités}{}
+  \index{url@\glsxtrshort{url}!format}%
+  \index{format!url@\glsxtrshort{url}}%
   Au cas (peu probable) où le caractère |#| doive figurer dans ces
-  \acrshortpl{url}, il doit être \enquote{protégé} au moyen d'une
+  \glsxtrshortpl{url}, il doit être \enquote{protégé} au moyen d'une
   contre-oblique le précédant : |\#|.
 \end{dbwarning}
 \end{docKey}
@@ -475,11 +475,11 @@ aux autres, peut disposer d'une page dédiée\pagededieelabo.
   \index{lien hypertexte!suppression}%
   \indexsee{hyperlien}{lien hypertexte}%
 %
-  Cette option a pour effet que, si l'\acrshort{url} du laboratoire a été
+  Cette option a pour effet que, si l'\glsxtrshort{url} du laboratoire a été
   définie au moyen de l'option \refKey{url}, le nom de celui-ci n'est pas un
-  lien hypertexte : seuls l'\acrshort{url} en regard de la mention du site Web
+  lien hypertexte : seuls l'\glsxtrshort{url} en regard de la mention du site Web
   et l'éventuel logo figurant la page dédiée aux laboratoires\pagededieelabo{}
-  sont des liens hypertextes pointant vers cette \acrshort{url}.
+  sont des liens hypertextes pointant vers cette \glsxtrshort{url}.
 \end{docKey}
 %
 \begin{dbexample}{Laboratoire}{}
@@ -718,15 +718,15 @@ corps de métier) des membres du jury parmi celles prédéfinies par la \yatCl{}
 %
 \begin{docKey}[][doc updated=2016-10-30]{associateprofessor}{=\docValue{true}\textbar\docValue{false}}{par défaut
     \docValue{true}, initialement \docValue{false}}
-  \index{corporation!prédéfinie!mcf (non) hdr@\acrshort{mcf} (non)
-    \acrshort{hdrpeople}}%
-  \indexsee{mcf (non) hdr@\acrshort{mcf} (non)
-    \acrshort{hdrpeople}}{corporation}%
+  \index{corporation!prédéfinie!mcf (non) hdr@\glsxtrshort{mcf} (non)
+    \glsxtrshort{hdrpeople}}%
+  \indexsee{mcf (non) hdr@\glsxtrshort{mcf} (non)
+    \glsxtrshort{hdrpeople}}{corporation}%
   \changes{v0.99o}{2016-10-30}{Clés \protect\refAux{mcf} et
     \protect\refAux{mcf*} remplacées par les (et alias des) clés
     \protect\refKey{associateprofessor} et
     \protect\refKey{associateprofessor*}}%
-  \changes*{v0.99o}{2016-10-30}{\acrshort{mcf} désormais traduit en anglais par
+  \changes*{v0.99o}{2016-10-30}{\glsxtrshort{mcf} désormais traduit en anglais par
     \enquote{\foreignlanguage{english}{\translate{associateprofessor}}} (et non
     plus par
     \enquote{Lecturer})\protect\footnote{Cf. \vref{sec-expressions-cles} au cas
@@ -738,30 +738,30 @@ corps de métier) des membres du jury parmi celles prédéfinies par la \yatCl{}
 %
 \begin{docKey}[][doc updated=2016-10-30]{associateprofessor*}{=\docValue{true}\textbar\docValue{false}}{par défaut
     \docValue{true}, initialement \docValue{false}}
-  \index{corporation!prédéfinie!mcf (non) hdr@\acrshort{mcf} (non) \acrshort{hdrpeople}}%
-  \indexsee{mcf (non) hdr@\acrshort{mcf} (non) \acrshort{hdrpeople}}{corporation}%
-  \indexsee{hdr (habilité)@\acrshort{hdrpeople} (habilité)}{corporation}%
+  \index{corporation!prédéfinie!mcf (non) hdr@\glsxtrshort{mcf} (non) \glsxtrshort{hdrpeople}}%
+  \indexsee{mcf (non) hdr@\glsxtrshort{mcf} (non) \glsxtrshort{hdrpeople}}{corporation}%
+  \indexsee{hdr (habilité)@\glsxtrshort{hdrpeople} (habilité)}{corporation}%
   Cette clé permet de spécifier qu'une personne appartient à la corporation des
-  \glspl{mcf} \acrshort{hdrpeople}\footnote{Par souci de compatibilité
+  \glspl{mcf} \glsxtrshort{hdrpeople}\footnote{Par souci de compatibilité
     ascendante, la clé désormais obsolète \refAux{mcf*} est un alias de la clé
     \refKey{associateprofessor*}.}.
 \end{docKey}
 %
 \begin{docKey}{juniorresearcher}{=\docValue{true}\textbar\docValue{false}}{par
     défaut \docValue{true}, initialement \docValue{false}}
-  \index{corporation!prédéfinie!chargé de recherche (non) \acrshort{hdrpeople}}%
-  \indexsee{chargé de recherche (non) \acrshort{hdrpeople}}{corporation}%
+  \index{corporation!prédéfinie!chargé de recherche (non) \glsxtrshort{hdrpeople}}%
+  \indexsee{chargé de recherche (non) \glsxtrshort{hdrpeople}}{corporation}%
   Cette clé permet de spécifier qu'une personne appartient à la corporation des
   \glspl{cr} du \gls{cnrs}.
 \end{docKey}
 %
 \begin{docKey}{juniorresearcher*}{=\docValue{true}\textbar\docValue{false}}{par
     défaut \docValue{true}, initialement \docValue{false}}
-  \index{corporation!prédéfinie!chargé de recherche (non) \acrshort{hdrpeople}}%
-  \indexsee{chargé de recherche (non) \acrshort{hdrpeople}}{corporation}%
-  \indexsee{hdr (habilité)@\acrshort{hdrpeople} (habilité)}{corporation}%
+  \index{corporation!prédéfinie!chargé de recherche (non) \glsxtrshort{hdrpeople}}%
+  \indexsee{chargé de recherche (non) \glsxtrshort{hdrpeople}}{corporation}%
+  \indexsee{hdr (habilité)@\glsxtrshort{hdrpeople} (habilité)}{corporation}%
   Cette clé permet de spécifier qu'une personne appartient à la corporation des
-  \glspl{cr} \acrshort{hdrpeople} du \gls{cnrs}.
+  \glspl{cr} \glsxtrshort{hdrpeople} du \gls{cnrs}.
 \end{docKey}
 %
 \begin{dbexample}{Corporation (prédéfinies)}{}
@@ -856,7 +856,7 @@ veillera à ne pas multiplier celles-ci.
   ou une femme}%
 %
 Par défaut, les directeurs de thèse et membres du jury sont supposés être des
-hommes\footnote{Je promets d'envisager mon adhésion au \acrshort{mlf} pour une
+hommes\footnote{Je promets d'envisager mon adhésion au \glsxtrshort{mlf} pour une
   supposition aussi sexiste !}, si bien qu'un certain nombre de mots clés de la
 \yatCl{} sont de genre masculin (\enquote{directeur}, \enquote{chargé de
   recherche}, etc.). Il est possible de spécifier qu'un directeur de thèse ou

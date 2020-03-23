@@ -13,7 +13,7 @@
 \usepackage{caption}
 \usepackage{listings}
 \usepackage{microtype}
-\usepackage{varioref}
+\usepackage[nospace]{varioref}
 \usepackage[xindy,quiet]{imakeidx}
 \usepackage[autostyle]{csquotes}
 \usepackage[backend=biber,safeinputenc]{biblatex}
@@ -101,7 +101,7 @@
 \newglssymbol{ohm}{\si{\ohm}}{ohm}{unité de résistance électrique}
 \newglssymbol{exists}{\ensuremath{\exists}}{quantificateur existentiel}{}
 \newglssymbol[constanteplanck]{planck}{\ensuremath{h}}{constante de
-  Planck}{\ensuremath{h\approx\SI{6,62606957e-34}{\joule\second}}}
+  Planck}{\ensuremath{h=\SI{6.62607015e-34}{\joule\second}}}
 %
 % Configuration globale de l'apparence des listings informatiques
 \lstset{%
@@ -576,7 +576,7 @@ uniquement sous leur forme abrégée\footnote{Sauf contre-ordre.} :
 %
 Si on examine, dans le fichier\index{\gls{latex}!fichier}
 \fichier{developpementI.tex} du répertoire \fichier{corps}, le code source
-du tableau\vref{tab-passionnant}\index{\gls{latex}!tableau}, on verra l'usage
+du tableau~\vref{tab-passionnant}\index{\gls{latex}!tableau}, on verra l'usage
 de commandes permettant d'obtenir des tableaux d'allure
 professionnelle\footnote{Pour obtenir de tels tableaux sous \LaTeX{}, on
   \href{http://www.tug.org/pracjourn/2007-1/mori/mori.pdf}{trouvera sur
@@ -604,7 +604,7 @@ professionnelle\footnote{Pour obtenir de tels tableaux sous \LaTeX{}, on
 \section{Méthode de travail}
 \label{sec-methode}
 %
-Nous incluons la figure\vref{fig-tigre}\index{\gls{latex}!figure} qui n'est
+Nous incluons la figure~\vref{fig-tigre}\index{\gls{latex}!figure} qui n'est
 pas là pour faire joli, mais bien pour éclairer notre propos.
 \begin{figure}
   \centering
@@ -618,12 +618,11 @@ On note qu'on peut mettre, en argument optionnel de la commande
 permettant de créer la légende, une légende \og courte\fg{} qui sera
 celle qui figurera, par exemple, dans la liste des figures.
 
-On pourra se convaincre, à la lecture des pages~86 à~89 de la
-\href{http://mirrors.ctan.org/graphics/pgf/base/doc/generic/pgf/pgfmanual.pdf}{documentation
-  du package \package{TikZ}}, de ce qu'une figure\index{\gls{latex}!figure}
-n'est pas toujours préférable à un tableau\index{\gls{latex}!tableau}. Plus
-généralement, on pourra lire toute la section~7, intitulée \emph{Guidelines on
-  Graphics} (pages~84 à~90).
+On pourra se convaincre, à la lecture de la section~7.6 \enquote{\emph{Plots and
+    Charts}} de la \href{https://ctan.org/pkg/pgf/doc}{documentation du package
+  \package{TikZ}}, de ce qu'une figure\index{\gls{latex}!figure} n'est pas
+toujours préférable à un tableau\index{\gls{latex}!tableau}. Plus généralement,
+on pourra lire toute la section~7 \enquote{\emph{Guidelines on Graphics}}.
 
 Avec \LaTeX{}\index{\gls{latex}|textbf}, il est extrêmement aisé de créer
 un index\index{\gls{latex}!index}, comme dans les documents les mieux
@@ -681,7 +680,7 @@ Dans ce chapitre, nous concluons l'étude du chaos du rire.
 \chapter{Développement}
 
 Nous pouvons faire référence à des graphiques (très jolis au demeurant), comme
-celui de la figure\vref{sin-x*sin-y}.
+celui de la figure~\vref{sin-x*sin-y}.
 \lipsum[3-10]
 \begin{figure}[ht]
   \centering

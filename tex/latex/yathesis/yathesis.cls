@@ -60,6 +60,7 @@
 \newbool{YAD@valid@month}
 \newbool{YAD@valid@year}
 \newbool{YAD@mainmatter@used}
+\newbool{YAD@backmatter}
 \newbool{YAD@localtocs}%
 \newbool{YAD@nextwithlocaltoc}%
 \newbool{YAD@nonnumbered@chapter}%
@@ -2115,8 +2116,9 @@
         %
 \newcommand*{\YAD@chapter@header}{%
   \ifboolexpr{
-    (test {\ifnumcomp{\value{secnumdepth}}{>}{-1}} or (not bool
-    {YAD@nonnumbered@chapter})) and test {\ifnumcomp{\value{chapter}}{>}{0}}
+    ((test {\ifnumcomp{\value{secnumdepth}}{>}{-1}} or (not bool
+    {YAD@nonnumbered@chapter})) and test {\ifnumcomp{\value{chapter}}{>}{0}}) and
+    (not bool {YAD@backmatter})
   }{%
     \MakeUppercase\chaptername{}\ \thechapter.
   }{%
@@ -2125,8 +2127,9 @@
 }%
 \newcommand*{\YAD@section@header}{%
   \ifboolexpr{
-    (test {\ifnumcomp{\value{secnumdepth}}{>}{0}} or (not bool
-    {YAD@nonnumbered@section})) and test {\ifnumcomp{\value{chapter}}{>}{0}}
+    ((test {\ifnumcomp{\value{secnumdepth}}{>}{0}} or (not bool
+    {YAD@nonnumbered@section})) and test {\ifnumcomp{\value{chapter}}{>}{0}}) and
+    (not bool {YAD@backmatter})%
   }{%
     \thesection.
   }{%
@@ -2322,7 +2325,7 @@
   {}%
   {\thepage}%
   \headrule%
-  \cleardoublepage%
+  % \cleardoublepage%
   \YAD@phantomsection%
   \YAD@bookmarksetup{startatroot}%
   \YAD@setfoot%
@@ -2351,6 +2354,7 @@
 }%
 \xapptocmd{\backmatter}{%
   \pagestyle{backmatter}%
+  \booltrue{YAD@backmatter}%
   \boolfalse{YAD@localtocs}%
 }{}{}%
 \newpagestyle{contents}[]{%
@@ -4145,7 +4149,6 @@
 }%
 \AtEndPreamble{%
   \@ifpackageloaded{biblatex}{%
-    \defbibheading{bibintoc}[\bibname]{\chapter*{#1}}%
     \defbibheading{YAD@localbibs@heading}[\translate{lbl-localbibname}]{%
       \renewcommand\addcontentsline[3]{}%
       \section*{#1}%
@@ -4158,15 +4161,12 @@
     \let\YAD@printbibliography@ORI\printbibliography%
     \renewcommand{\printbibliography}[1][]{%
       \booltrue{YAD@printbibliography@used}%
-      \chapter*{\bibname}
-      \begingroup
-      \let\cleardoublepage\relax
       \pagestyle{biblio}%
+      \chapter*{\bibname}%
+      \begingroup%
+      \let\cleardoublepage\relax%
       \YAD@printbibliography@ORI[heading=none,#1]%
-      \endgroup
-      % \pagestyle{biblio}%
-      % \YAD@printbibliography@ORI[heading=bibintoc,#1]%
-      \pagestyle{ordinary}%
+      \endgroup%
     }%
   }{%
   }%

@@ -6,23 +6,27 @@ $bibtex = 'biber %O %B';
 add_cus_dep('glo', 'gls', 0, 'makeglossaries');
 add_cus_dep('acn', 'acr', 0, 'makeglossaries');
 add_cus_dep('slo', 'sls', 0, 'makeglossaries');
-sub makeglossaries{
-    system( "makeglossaries \"$_[0]\"" );
+sub makeglossaries {
+  my ($base_name, $path) = fileparse( $_[0] );
+  pushd $path;
+  my $return = system "makeglossaries", $base_name;
+  popd;
+  return $return;
 }
 
 add_cus_dep('odx', 'ond', 0, 'texindycommands');
 sub texindycommands{
-    system("texindy -L french -M denisbdoc.xdy -o \"$_[0].ond\" \"$_[0].odx\" ");
+    system("texindy -L french -C utf8 -M denisbdoc.xdy -o \"$_[0].ond\" \"$_[0].odx\" ");
 }
 
 add_cus_dep('gdx', 'gnd', 0, 'texindychanges');
 sub texindychanges{
-    system("texindy -L french -M denisbdoc-chng.xdy -o \"$_[0].gnd\" \"$_[0].gdx\" ");
+    system("texindy -L french -C utf8 -M denisbdoc-chng.xdy -o \"$_[0].gnd\" \"$_[0].gdx\" ");
 }
 
 add_cus_dep('pdx', 'pnd', 0, 'texindyconcepts');
 sub texindyconcepts{
-    system("texindy -L french -M denisbdoc.xdy -o \"$_[0].pnd\" \"$_[0].pdx\" ");
+    system("texindy -L french -C utf8 -M denisbdoc.xdy -o \"$_[0].pnd\" \"$_[0].pdx\" ");
 }
 
 # system("texindy -L french -M denisbdoc.xdy -o \"$_[0].ond\" \"$_[0].odx\" ");

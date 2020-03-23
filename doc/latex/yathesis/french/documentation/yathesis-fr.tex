@@ -1,3 +1,12 @@
+% La compilation de la présente documentation de la classe `yathesis' requiert :
+%
+% - une compilation `pdflatex` complète de `these.tex` situé dans le répertoire
+% `../exemples/specimen/a-plat` avec le package `yathesis-demo` à charger en
+% premier. le plus simple est de lancer `latexmk' comme suit :
+%     latexmk -g -norc -r ./latexmkrc -jobname=these -pdflatex="pdflatex %O '\RequirePackage{etoolbox}\AtEndPreamble{\RequirePackage{yathesis-demo}}\input{%S}'" these.tex
+% - une compilation `pdflatex` complète de `yathesis-fr.tex` comme suit :
+%     latexmk -norc -r ./latexmkrc yathesis-fr
+%
 % Après compilation de la présente documentation, l'impression 2 pages sur 1
 % peut se faire au moyen de :
 % - complètement :
@@ -32,7 +41,7 @@
   \changes{v0.99s}{2018-06-21}{Correction de bug}%
   \changes{v0.99r}{2018-06-02}{Correction de bugs}%
   \changes{v0.99q}{2018-05-04}{Suppression de fichiers inutiles sur le
-    \acrshort*{ctan} (aucun changement dans les fonctionnalités)}%
+    \glsxtrshort*{ctan} (aucun changement dans les fonctionnalités)}%
   \changes{v0.99q}{2018-04-10}{Correction de bugs}%
   \changes{v0.99p}{2016-12-08}{Documentation révisée}%
   \changes{v0.99o}{2016-10-30}{Suppression d'un warning inutile du
@@ -103,7 +112,7 @@
       cas, les pages concernées sont indiquées.
     \end{itemize}
 ]%
-\printbibliography[heading=bibintoc]
+\printbibliography
 \backmatter
 \printglossary[title=Glossaire]\label{glossaire}
 \begingroup

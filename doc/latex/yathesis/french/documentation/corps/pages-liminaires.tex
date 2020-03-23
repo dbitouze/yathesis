@@ -276,14 +276,14 @@ par défaut si elle ne convient pas, on pourra recourir à la commande
   dans le mémoire, d'autres épigraphes.
 \end{dbremark}
 
-\section{Avertissement, remerciements, résumé substantiel, avant-propos, etc.}
+\section{Remerciements, avertissement, résumé substantiel, avant-propos, etc.}
 \index{avertissement}%
 \index{remerciements}%
 \index{résumé}%
 \index{avant-propos}%
 
-La \gls{liminaire} d'un mémoire de thèse peut contenir un avertissement, des
-remerciements, un résumé substantiel en français (cf. \vref{wa-frenchabstract}),
+La \gls{liminaire} d'un mémoire de thèse peut contenir des remerciements, un
+avertissement, un résumé substantiel en français (cf. \vref{wa-frenchabstract}),
 un avant-propos, etc.  à considérer et à composer comme des chapitres
 \enquote{ordinaires}.
 
@@ -313,15 +313,15 @@ page.
   \indexdef{résumé}%
   \index{résumé!en français}%
   \index{résumé!en anglais}%
-  Cet environnement, destiné à recevoir le ou les résumés de la thèse, est
+  Cet environnement, destiné à recevoir le ou les \meta{résumé}s de la thèse, est
   conçu pour être employé une ou deux fois :
   \begin{enumerate}
-  \item sa 1\iere{} occurrence doit contenir le résumé dans la langue
+  \item sa 1\iere{} occurrence doit contenir le \meta{résumé} dans la langue
     principale ;
-  \item sa 2\ieme{} occurrence, si présente, doit contenir le résumé dans la
+  \item sa 2\ieme{} occurrence, si présente, doit contenir le \meta{résumé} dans la
     langue secondaire.
   \end{enumerate}
-  Ces résumés figurent, dans les langues principale et secondaire :
+  Ces \meta{résumé}s figurent, dans les langues principale et secondaire :
   \begin{itemize}
   \item sur la page dédiée au(x) résumé(s) de la thèse produite par la commande
     \refCom{makeabstract} ;
@@ -548,8 +548,12 @@ des acronymes\footnote{Les commandes \docAuxCommand{printglossary} et
 La \yatCl{} redéfinit la commande \refCom{tableofcontents} habituelle de
 création des tables des matières \enquote{globales}\footnote{Par opposition aux
   tables des matières locales\index{table des matières!locale},
-  cf. \vref{sec-localtoc}.} pour permettre de facilement en spécifier la
-profondeur et en modifier le nom.
+  cf. \vref{sec-localtoc}.} pour permettre de facilement
+\begin{itemize}
+\item l'utiliser plusieurs fois dans le mémoire ;
+\item en spécifier la profondeur ;
+\item en modifier le nom.
+\end{itemize}
 
 \begin{docCommand}[doc description=\mandatory]{tableofcontents}{\oarg{options}}
   \indexdef{table des matières}%
@@ -564,7 +568,7 @@ des \meta{options} sous la forme d'une liste \meta{clé}|=|\meta{valeur} dont
 les clés disponibles sont les deux suivantes.
   %
 {%
-  \tcbset{before lower=\vspace*{\baselineskip}\par}
+  \tcbset{before lower=\vspace*{.5\baselineskip}\par}
     %
   \begin{docKey}{depth}{=\docValue{part}\textbar\docValue{chapter}\textbar\docValue{section}\textbar\docValue{subsection}\textbar\docValue{subsubsection}\textbar\docValue{paragraph}\textbar\docValue{subparagraph}}{pas
       de valeur par défaut, initialement \docValue{subsection}}

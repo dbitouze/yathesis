@@ -34,7 +34,7 @@
   \RenewDocumentCommand\chapter{som}{%
     \IfBooleanTF{#1}
     {
-      \ifthenelse{\equal{#3}{Introduction g\IeC {\'e}n\IeC {\'e}rale}}{\cleardoublepage\zlabel{introduction}%
+      \ifthenelse{\equal{#3}{Introduction générale}}{\cleardoublepage\zlabel{introduction}%
       }{%
       }%
       \IfNoValueTF{#2}
@@ -42,7 +42,7 @@
       {\YAD@demo@chapter@ORI*[#2]{#3}}%
     }
     {%
-      \ifthenelse{\equal{#3}{Introduction g\IeC {\'e}n\IeC {\'e}rale}}{\cleardoublepage\zlabel{introduction}%
+      \ifthenelse{\equal{#3}{Introduction générale}}{\cleardoublepage\zlabel{introduction}%
       }{%
       }%
       \ifthenelse{\equal{#3}{Contexte du chaos du rire}}{\cleardoublepage\zlabel{chapter}%

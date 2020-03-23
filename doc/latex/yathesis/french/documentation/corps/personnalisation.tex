@@ -44,7 +44,7 @@ notamment :
     \indexsee{recto}{pagination}%
     \indexsee{verso}{pagination}%
     \docAuxKey{oneside} pour une \gls{pagination} en recto
-    seulement\footnote{Les chapitres commencent alors indifféremment sur une une
+    seulement\footnote{Les chapitres commencent alors indifféremment sur une
       page paire ou impaire\index{page!paire/impaire} (c'est-à-dire sur une page
       de gauche ou de droite\index{page!gauche/droite}).}.
   \end{itemize}
@@ -137,7 +137,7 @@ Par défaut, la numérotation des unités a pour \enquote{niveau de
 profondeur.
 %
 {%
-  \tcbset{before lower=\vspace*{\baselineskip}\par}
+  \tcbset{before lower=\vspace*{.5\baselineskip}\par}
   \begin{docKey}{secnumdepth}{=\docValue{part}\textbar\docValue{chapter}\textbar\docValue{section}\textbar\docValue{subsection}\textbar\docValue{subsubsection}\textbar\docValue{paragraph}\textbar\docValue{subparagraph}}{pas
       de valeur par défaut, initialement \docValue{subsection}}
     \indexdef{profondeur!numérotation des unités}%
@@ -327,7 +327,7 @@ Au moyen de la clé \refKey{version}, la \yatCl{} permet de facilement produire
 différentes versions du document : \enquote{intermédiaire} (par défaut),
 \enquote{à soumettre}, \enquote{finale} et \enquote{brouillon}.
 
-{\tcbset{before lower=\vspace*{\baselineskip}\par}
+{\tcbset{before lower=\vspace*{.5\baselineskip}\par}
   \begin{docKey}{version}{=\docValue{inprogress}\textbar\docValue{inprogress*}\textbar\docValue{submitted}\textbar\docValue{submitted*}\textbar\docValue{final}\textbar\docValue{draft}}{pas
       de valeur par défaut, initialement \docValue{inprogress}}
     \indexdef{version du mémoire}%
@@ -488,14 +488,14 @@ Les documents composés avec la \yatCl{} peuvent avoir deux formats de sortie :
       si le \Package{hyperref} est chargé par l'utilisateur,
       \begin{enumerate}
       \item\label{item-paper-1}%
-        sa commande |\href{|\meta{\normalfont\ttfamily\acrshort*{url}}|}{|\meta{texte}|}| est
+        sa commande |\href{|\meta{\normalfont\ttfamily\glsxtrshort*{url}}|}{|\meta{texte}|}| est
         automatiquement remplacée par :
         \lstset{deletekeywords={url},deletekeywords={[2]url}}%
         \begin{itemize}
-        \item \meta{texte}\lstinline+\footnote{\url{+\meta{\normalfont\ttfamily\acrshort*{url}}|}}|
+        \item \meta{texte}\lstinline+\footnote{\url{+\meta{\normalfont\ttfamily\glsxtrshort*{url}}|}}|
           si elle figure dans le texte ordinaire ;
         \item \meta{texte}
-          \lstinline[deletekeywords={[2]url}]+(\url{+\meta{\normalfont\ttfamily\acrshort*{url}}|})|
+          \lstinline[deletekeywords={[2]url}]+(\url{+\meta{\normalfont\ttfamily\glsxtrshort*{url}}|})|
           si elle figure en note de bas de page ;
         \end{itemize}
       \item les liens hypertextes sont systématiquement matérialisés comme le
@@ -526,12 +526,12 @@ Les documents composés avec la \yatCl{} peuvent avoir deux formats de sortie :
   Du fait des \cref{item-paper-1,item-paper-2} précédents, les mises en page des
   formats \enquote{écran} et \enquote{papier} peuvent être différentes, et il
   pourra être opportun de les comparer, par exemple à l'aide d'un logiciel
-  comparateur de fichiers \acrshort{pdf}. Si on souhaite que les sorties
+  comparateur de fichiers \glsxtrshort{pdf}. Si on souhaite que les sorties
   \enquote{écran} et \enquote{papier} soient absolument identiques, il suffit
   d'imprimer la première ; mais il faut avoir conscience du fait que, dans ce
-  cas, si le mémoire contient des références vers des \acrshort{url} (par
+  cas, si le mémoire contient des références vers des \glsxtrshort{url} (par
   exemple fournies par
-  |\href{|\meta{\normalfont\ttfamily\acrshort*{url}}|}{|\meta{texte}|}|), leurs
+  |\href{|\meta{\normalfont\ttfamily\glsxtrshort*{url}}|}{|\meta{texte}|}|), leurs
   cibles ne figureront nulle part en sortie \enquote{papier}.
 \end{dbwarning}
 
@@ -563,14 +563,14 @@ package\footnote{Par souci de compatibilité ascendante, la clé désormais
 
 \subsection{Habilitations à diriger les recherches}
 \label{sec-hdr}%
-% \index{hdr (habilitation)@\acrshort{hdr} (habilitation)}%
+% \index{hdr (habilitation)@\glsxtrshort{hdr} (habilitation)}%
 
 Grâce à sa clé \refKey{hdr}, la \yatCl{} peut être utilisée pour les
 habilitations à diriger les recherches.
 
 \begin{docKey}{hdr}{=\docValue{true}\textbar\docValue{false}}{par défaut
     \docValue{true}, initialement \docValue{false}}
-  % \indexdef{hdr (habilitation)@\acrshort{hdr} (habilitation)}%
+  % \indexdef{hdr (habilitation)@\glsxtrshort{hdr} (habilitation)}%
   \changes{v0.99f}{2014-07-11}{Nouvelle clé \protect\refKey{hdr} permettant de
     d'utiliser la \yatCl{} pour une habilitation à diriger les recherches}%
   %
@@ -957,7 +957,7 @@ par un \meta{label} permettant de les redéfinir (voire de les définir, cf.
   anglais) désormais vides}%
 \changes*{v0.99u}{2019-03-28}{Les expressions clés \enquote{Directeurs} et
   \enquote{Supervisors} introduisant la liste des directeurs d'une
-  \protect\acrshort*{hdr} désormais remplacées par \enquote{Habilitation
+  \protect\glsxtrshort*{hdr} désormais remplacées par \enquote{Habilitation
     dirig\'ee par} et \enquote{Habilitation supervised by}}%
 %
 \begin{docCommand}{expression}{\marg{label}\marg{en français}\marg{en anglais}}
