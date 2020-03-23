@@ -3540,7 +3540,7 @@ This work consists of the file  yathesis.dtx
 % On demande que la bibliographie apparaisse au plus haut niveau des
 % signets
 %    \begin{macrocode}
-  \cleardoublepage%
+  % \cleardoublepage%
   \YAD@phantomsection%
   \YAD@bookmarksetup{startatroot}%
   \YAD@setfoot%
@@ -6022,12 +6022,9 @@ This work consists of the file  yathesis.dtx
 }%
 %    \end{macrocode}
 %
-% Réglage nécessaire sans quoi le titre courant \textquote{BIBLIOGRAPHIE}
-% apparaît en trop en entête et en pied de page (see \url{http://tex.stackexchange.com/q/89884/18401}).
 %    \begin{macrocode}
 \AtEndPreamble{%
   \@ifpackageloaded{biblatex}{%
-    \defbibheading{bibintoc}[\bibname]{\chapter*{#1}}%
     \defbibheading{YAD@localbibs@heading}[\translate{lbl-localbibname}]{%
       \renewcommand\addcontentsline[3]{}%
       \section*{#1}%
@@ -6050,13 +6047,20 @@ This work consists of the file  yathesis.dtx
     \let\YAD@printbibliography@ORI\printbibliography%
     \renewcommand{\printbibliography}[1][]{%
       \booltrue{YAD@printbibliography@used}%
-% TODO: The "biblio" page style (which starts a new page) should be used except
-% in case of "refsection" \package{biblatex}'s option, otherwise the
-% bibliographies by chapters (that should be considered as sections) don't
-% behave as sections: they start a newpage!
+%    \end{macrocode}
+%
+% Hack aimablement fourni par samcarter
+% (\url{https://texnique.fr/osqa/questions/6977/header-avec-biblatex/6978})
+% qui évite que l'entête de la bibliographie, en dernière page de celle-ci, ne
+% contienne pas seulement \enquote{Bibliographie} mais \enquote{CHAPITRE
+% XXX. Bibliographie}.
+%    \begin{macrocode}
       \pagestyle{biblio}%
-      \YAD@printbibliography@ORI[heading=bibintoc,#1]%
-      \pagestyle{ordinary}%
+      \chapter*{\bibname}%
+      \begingroup%
+      \let\cleardoublepage\relax%
+      \YAD@printbibliography@ORI[heading=none,#1]%
+      \endgroup%
     }%
   }{%
   }%
