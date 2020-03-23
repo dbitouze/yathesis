@@ -448,6 +448,7 @@ This work consists of the file  yathesis.dtx
 \newbool{YAD@valid@month}
 \newbool{YAD@valid@year}
 \newbool{YAD@mainmatter@used}
+\newbool{YAD@backmatter}
 \newbool{YAD@localtocs}%
 \newbool{YAD@nextwithlocaltoc}%
 \newbool{YAD@nonnumbered@chapter}%
@@ -3246,8 +3247,9 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \newcommand*{\YAD@chapter@header}{%
   \ifboolexpr{
-    (test {\ifnumcomp{\value{secnumdepth}}{>}{-1}} or (not bool
-    {YAD@nonnumbered@chapter})) and test {\ifnumcomp{\value{chapter}}{>}{0}}
+    ((test {\ifnumcomp{\value{secnumdepth}}{>}{-1}} or (not bool
+    {YAD@nonnumbered@chapter})) and test {\ifnumcomp{\value{chapter}}{>}{0}}) and
+    (not bool {YAD@backmatter})
   }{%
     \MakeUppercase\chaptername{}\ \thechapter.
   }{%
@@ -3261,8 +3263,9 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \newcommand*{\YAD@section@header}{%
   \ifboolexpr{
-    (test {\ifnumcomp{\value{secnumdepth}}{>}{0}} or (not bool
-    {YAD@nonnumbered@section})) and test {\ifnumcomp{\value{chapter}}{>}{0}}
+    ((test {\ifnumcomp{\value{secnumdepth}}{>}{0}} or (not bool
+    {YAD@nonnumbered@section})) and test {\ifnumcomp{\value{chapter}}{>}{0}}) and
+    (not bool {YAD@backmatter})%
   }{%
     \thesection.
   }{%
@@ -3581,6 +3584,7 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \xapptocmd{\backmatter}{%
   \pagestyle{backmatter}%
+  \booltrue{YAD@backmatter}%
   \boolfalse{YAD@localtocs}%
 }{}{}%
 %    \end{macrocode}
