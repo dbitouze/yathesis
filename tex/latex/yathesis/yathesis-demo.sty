@@ -20,6 +20,7 @@
 \AfterEndPreamble{
   \pretocmd{\tableofcontents@YAD@without@argument}{\cleardoublepage\zlabel{tableofcontents-withoutargument}}{}{}
   \pretocmd{\tableofcontents@YAD@with@argument}{\cleardoublepage\zlabel{tableofcontents-withargument}}{}{}
+  \pretocmd{\YAD@insert@colophon}{\clearpage\zlabel{colophon}}{}{}
   \pretocmd{\maketitle}{\zlabel{fr-title}}{}{}%
   \pretocmd{\makedisclaimer}{\cleardoublepage\zlabel{disclaimer}}{}{}
   \pretocmd{\makekeywords}{\cleardoublepage\zlabel{keywords}}{}{}

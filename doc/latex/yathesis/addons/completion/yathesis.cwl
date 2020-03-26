@@ -1,5 +1,5 @@
 # mode: yathesis.cls
-# denisbitouze, 2016-12-01
+# denisbitouze, 2020-03-26
 #
 #include:class-book
 #include:latex-document
@@ -34,6 +34,7 @@
 #include:fncychap
 #include:titleps
 #include:ifdraft
+#include:colophon
 #include:draftwatermark
 #include:babel
 #include:iflang
@@ -53,6 +54,7 @@ sepcorpaffilfrench=
 sepcorpaffilenglish=
 version=#inprogress,inprogress*,submitted,submitted*,final,draft
 output=#screen,paper,paper*
+colophon=#verso-frontcover,recto-backcover,nowhere
 localtocs
 localtocs/depth=#section,subsection,subsubsection,paragraph,subparagraph
 localbibs
