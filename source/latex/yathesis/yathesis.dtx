@@ -2777,7 +2777,7 @@ This work consists of the file  yathesis.dtx
 \YAD@create@macro[bilingue]{title}
 \YAD@create@macro[bilingue]{subtitle}
 \YAD@create@macro[bilingue]{subject}
-\YAD@create@macro{disclaimer}
+\YAD@create@macro{disclaimertext}
 %    \end{macrocode}
 % Commande définissant le numéro d'ordre de la thèse, tel qu'exigé par certains
 % instituts.
@@ -5793,11 +5793,12 @@ This work consists of the file  yathesis.dtx
 % }%
 % %    \end{macrocode}
 %
-% On définit la valeur, en anglais et en français, de la macro "\disclaimer" de
-% clause de non-responsabilité définie précédemment.
+% On définit la valeur, en anglais et en français, de la macro "\disclaimertext"
+% (anciennement "\disclaimer") de clause de non-responsabilité définie
+% précédemment.
 %
 %    \begin{macrocode}
-\disclaimer{%
+\disclaimertext{%
   \IfLanguageName{french}{%
     \ifundef{\printinstitute}{%
       L'\YAD@generic@argument@translate{institute}
@@ -5827,6 +5828,13 @@ This work consists of the file  yathesis.dtx
 }%
 %    \end{macrocode}
 %
+% Par souci de compatibilité ascendante, on définit la macro "\disclaimer"
+% comme étant un clone de "\disclaimertext".
+%
+%    \begin{macrocode}
+\newcommand{\disclaimer}[1]{\disclaimertext{#1}}
+%    \end{macrocode}
+%
 % \begin{macro}{\makedisclaimer}
 %    \begin{macrocode}
 \csdef{makedisclaimer}{%
@@ -5841,7 +5849,7 @@ This work consists of the file  yathesis.dtx
   \else%
   \vspace*{\stretch{1}}%
   \fi%
-  \printdisclaimer%
+  \printdisclaimertext%
   \if@tempswa%
   \else%
   \vspace*{\stretch{1}}%
