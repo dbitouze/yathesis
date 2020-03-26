@@ -13,9 +13,10 @@
 
 ## Changed
 - `\disclaimer` replaced by (and alias of) `\disclaimertext`.
+- Warnings and error messages now contain (expected) accented characters.
 
 ## Fixed
-- Several bug fixes (among others gh #65).
+- Several bug fixes (among others gh #65 and #67).
 
 
 # [0.99u] - 2019-03-28
