@@ -457,6 +457,7 @@ This work consists of the file  yathesis.dtx
 \newbool{YAD@nonnumbered@subsubsection}%
 \newbool{YAD@nonnumbered@paragraph}%
 \newbool{YAD@nonnumbered@subparagraph}%
+\newbool{YAD@colophon}%
 %
 \newlength{\cmdKV@YAD@logoheight}
 \newlength{\YAD@max@logoheight}
@@ -883,6 +884,17 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 %
 %    \begin{macrocode}
+\def\YAD@colophon@location{verso-frontcover}%
+\yadsetup{%
+  colophon-location/.is choice,%
+  colophon-location/nowhere/.code={\def\YAD@colophon@location{nowhere}},%
+  colophon-location/verso-frontcover/.code={\def\YAD@colophon@location{verso-frontcover}},%
+  colophon-location/recto-backcover/.code={\def\YAD@colophon@location{recto-backcover}},%
+  colophon-location/.initial=verso-frontcover%
+}%
+%    \end{macrocode}
+%
+%    \begin{macrocode}
 \yadsetup{%
   mainlanguage/.store in=\YAD@mainlanguage,%
   secnumdepth/.store in=\YAD@secnumdepth,%
@@ -1047,11 +1059,10 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \RequirePackage{setspace}[2011/12/19]%
 %    \end{macrocode}
-% % Pour régler finement la profondeur de la table des matières et de la
-% % numérotation
-% %    \begin{macrocode}
-% \RequirePackage{tocvsec2}[2014/03/10]%
-% %    \end{macrocode}
+% Pour un colophon
+%    \begin{macrocode}
+\RequirePackage[noclrdblpg,nofullpage,aftertitle=1em]{colophon}[2018/04/01]%
+%    \end{macrocode}
 % Pour faire figurer les table des matières, bibliographie et index
 % dans la table des matières
 %    \begin{macrocode}
@@ -1221,6 +1232,20 @@ This work consists of the file  yathesis.dtx
 %
 %    \begin{macrocode}
 \addto\captionsfrench{\def\tablename{{\scshape Tableau}}}%
+%    \end{macrocode}
+%
+% % On redéfinit l'environnement "colophon" pour pouvoir disposer de la macro
+% % "\colophon" qui va héberger le contenu du colophon.
+% %    \begin{macrocode}
+% \let\YAD@colophon@ORI\colophon
+% \let\colophon\relax
+% \let\YAD@endcolophon@ORI\endcolophon
+% \let\endcolophon\relax
+% %    \end{macrocode}
+% On redéfinit la taille des caractères des titre et texte du colophon.
+%    \begin{macrocode}
+\colophonpreparhook{\normalsize}
+\colophonpretitlehook{\Large}
 %    \end{macrocode}
 %
 % On définit la macro "\YAD@ifemptyorundef" qui teste si le nom passé est celui
@@ -2746,6 +2771,7 @@ This work consists of the file  yathesis.dtx
 \YAD@create@macro[entite]{company}
 \YAD@create@macro[entite]{cocompany}
 \YAD@create@macro[entite]{doctoralschool}
+\YAD@create@macro{colophontext}
 \YAD@create@macro[bilingue]{academicfield}
 \YAD@create@macro[bilingue]{speciality}
 \YAD@create@macro[bilingue]{title}
@@ -3661,7 +3687,6 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \newpagestyle{backcover}[]{%
   \singlespacing%
-  \YAD@clearspread%
   \setlength{\footskip}{35pt}%
   \setfootrule{0pt}%
   \setfoot[%
@@ -4093,6 +4118,13 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \endgroup%
 %    \end{macrocode}
+% On insère le code pour l'éventuel colophon
+%    \begin{macrocode}
+\ifthenelse{\equal{\YAD@colophon@location}{verso-frontcover}}{%
+  \YAD@insert@colophon%
+}{%
+}%
+%    \end{macrocode}
 % Maintenant que la 1\iere{} page de titre (celle de 1\iere{} de couverture)
 % a été créée, le booléen "YAD@cover@page" est faux.
 %    \begin{macrocode}
@@ -4147,6 +4179,28 @@ This work consists of the file  yathesis.dtx
     }%
   }%
 }%
+%    \end{macrocode}
+%
+% Code pour l'éventuel colophon
+%    \begin{macrocode}
+\newcommand{\YAD@insert@colophon}{%
+  \ifthenelse{\equal{\YAD@colophon@location}{nowhere}}{%
+  }{%
+    \ifbool{YAD@colophon}{%
+    }{%
+      \clearpage
+      \vspace*{\stretch{1}}%
+      \begin{minipage}{\linewidth}
+        \begin{colophon}
+          \printcolophontext%
+        \end{colophon}
+      \end{minipage}
+      \vspace*{\stretch{1}}%
+      \newpage
+      \booltrue{YAD@colophon}%
+    }%
+  }%
+}
 %    \end{macrocode}
 %
 % Définition de "\keywords".
@@ -4862,9 +4916,17 @@ This work consists of the file  yathesis.dtx
 % Éléments communs de la page de présentation
 %    \begin{macrocode}
 \newcommand{\makebackcover}{%
-  \YAD@alarm@noabstract%
-  \cleardoublepage%
   \pagestyle{backcover}%
+%    \end{macrocode}
+% On insère le code pour l'éventuel colophon
+%    \begin{macrocode}
+  \ifthenelse{\equal{\YAD@colophon@location}{recto-backcover}}{%
+    \newgeometry{centering,nomarginpar,bottom=1cm,top=1cm,headheight=\YAD@max@logoheight,hmargin=2cm,includeall}%
+    \YAD@insert@colophon%
+    \restoregeometry%
+  }{%
+    \YAD@clearspread%
+  }%
   \YAD@abstract@page%
 }%
 %    \end{macrocode}
@@ -5789,6 +5851,26 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % \end{macro}
 %
+% On définit la valeur, en anglais et en français, de la macro "\colophon" du colophon.
+%
+%    \begin{macrocode}
+\colophontext{%
+  \IfLanguageName{french}{%
+    Mémoire de thèse intitulé \frquote{\printtitle}, écrit par \printauthor{},
+    achevé le \today{}, composé au moyen du système de préparation de document
+    \href{https://fr.wikipedia.org/wiki/LaTeX}{\LaTeX{}} et de la classe
+    \href{https://www.ctan.org/pkg/yathesis}{\textsf{yathesis}} dédiée aux
+    thèses préparées en France.%
+  }{%
+    Doctoral dissertation entitled “\printtitle”, written by \printauthor{},
+    completed on \today{}, typeset with the document preparation system
+    \href{https://en.wikipedia.org/wiki/LaTeX}{\LaTeX{}} and the
+    \href{https://www.ctan.org/pkg/yathesis}{\textsf{yathesis}} class dedicated
+    to theses prepared in France.%
+  }%
+}%
+%    \end{macrocode}
+%
 % % Le contenu de l'environnement "introduction" est collecté dans la macro
 % % "\YAD@introduction" pour tester s'il est vide.
 % % \begin{macro}{\YAD@introduction}
@@ -6514,6 +6596,7 @@ This work consists of the file  yathesis.dtx
 #include:fncychap
 #include:titleps
 #include:ifdraft
+#include:colophon
 #include:draftwatermark
 #include:babel
 #include:iflang
@@ -6533,6 +6616,7 @@ sepcorpaffilfrench=
 sepcorpaffilenglish=
 version=#inprogress,inprogress*,submitted,submitted*,final,draft
 output=#screen,paper,paper*
+colophon=#verso-frontcover,recto-backcover,nowhere
 localtocs
 localtocs/depth=#section,subsection,subsubsection,paragraph,subparagraph
 localbibs
@@ -6899,6 +6983,7 @@ name=
 \AfterEndPreamble{
   \pretocmd{\tableofcontents@YAD@without@argument}{\cleardoublepage\zlabel{tableofcontents-withoutargument}}{}{}
   \pretocmd{\tableofcontents@YAD@with@argument}{\cleardoublepage\zlabel{tableofcontents-withargument}}{}{}
+  \pretocmd{\YAD@insert@colophon}{\clearpage\zlabel{colophon}}{}{}
   \pretocmd{\maketitle}{\zlabel{fr-title}}{}{}%
   \pretocmd{\makedisclaimer}{\cleardoublepage\zlabel{disclaimer}}{}{}
   \pretocmd{\makekeywords}{\cleardoublepage\zlabel{keywords}}{}{}
