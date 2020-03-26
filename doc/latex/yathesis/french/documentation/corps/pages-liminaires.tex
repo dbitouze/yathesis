@@ -48,16 +48,18 @@ La \gls{liminaire} de la thèse comprend :
 La \yatCl{} permet de faire figurer une clause de non-responsabilité, telle
 qu'exigée par certains instituts. Celle-ci apparaît sur une page dédiée et
 a pour contenu par défaut une phrase semblable à\selonlangue{} :
-  \begin{itemize}
-  \item \enquote{L'\meta{institut} n'entend donner aucune
-      approbation ni improbation aux opinions \'emises dans les th\`eses : ces
-      opinions devront \^etre consid\'er\'ees comme propres \`a leurs auteurs.}
-  \item \foreignquote{english}{The \meta{institut} neither endorse
-      nor censure authors' opinions expressed in the theses: these opinions
-      must be considered to be those of their authors.}
-  \end{itemize}
-  où l'\meta{institut} est celui défini par la commande \refCom{institute}
-  \aside*{auquel est adjoint l'éventuel institut de cotutelle}.
+\begin{displayquote}
+  L'\meta{institut} n'entend donner aucune approbation ni improbation aux
+  opinions \'emises dans les th\`eses : ces opinions devront \^etre
+  consid\'er\'ees comme propres \`a leurs auteurs.
+\end{displayquote}
+ou :
+\begin{foreigndisplayquote}{english}
+  The \meta{institut} neither endorse nor censure authors' opinions expressed in
+  the theses: these opinions must be considered to be those of their authors.
+\end{foreigndisplayquote}
+où l'\meta{institut} est celui défini par la commande \refCom{institute}
+\aside*{auquel est adjoint l'éventuel institut de cotutelle}.
 
 La page dédiée à la clause de non-responsabilité est produite par la commande
 \refCom{makedisclaimer}.
@@ -104,12 +106,17 @@ La page dédiée à la clause de non-responsabilité est produite par la command
 
 Pour pallier cet inconvénient, et aussi pour permettre de redéfinir la phrase
 par défaut si elle ne convient pas, on pourra recourir à la commande
-\refCom{disclaimer}.
+\refCom{disclaimertext}\footnote{Par souci de compatibilité ascendante, la
+  commande désormais obsolète \refCom{disclaimer} est un alias de la commande
+  \refCom{disclaimer}.}.
 
-\begin{docCommand}{disclaimer}{\marg{clause}}
+\begin{docCommand}[doc updated=2020-03-26]{disclaimertext}{\marg{clause}}
   \index{clause de non-responsabilité!modification}%
-  Cette commande, à placer avant \refCom{makedisclaimer}, permet de redéfinir
-  le contenu par défaut de la \meta{clause} de non-responsabilité.
+  \changes{v1.0.0}{2020-03-26}{Commande \protect\docAuxCommand{disclaimer} remplacée
+    par (et alias de) la commande \protect\refCom{disclaimertext}}%
+    %
+    Cette commande, à placer avant \refCom{makedisclaimer}, permet de redéfinir
+    le contenu par défaut de la \meta{clause} de non-responsabilité.
 \end{docCommand}
 
 \section{Mots clés}\label{sec-mots-cles}

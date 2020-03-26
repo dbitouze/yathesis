@@ -63,6 +63,17 @@ chargement, dans la liste suivante qui indique leur fonction et le cas échéant
     \docAuxCommand*{tcbset} ;
   \end{description}
 \item[\package+{marvosym} :] accès à des symboles spéciaux ;
+\item[\package+{colophon} :] insertion d'un colophon ;
+  \begin{description}
+  \item[options et commandes par défaut :]\
+    \begin{itemize}
+    \item \docAuxKey{noclrdblpg} ;
+    \item \docAuxKey{nofullpage} ;
+    \item \docAuxKey{aftertitle=1em} ;
+    \item |\colophonpreparhook{\normalsize}| ;
+    \item |\colophonpretitlehook{\Large}| ;
+    \end{itemize}
+  \end{description}
 \item[\package{setspace} :]\index{espace!interligne} gestion de l'espace
   interligne ;
   \begin{description}
@@ -184,11 +195,11 @@ les plus notables sont précisés.
 \item[\package{siunitx} :]\index{nombre}\index{angle}\index{unité!de mesure}
   gestion des nombres, angles et unités ;
   \begin{description}
-  \item[option par défaut :]\
+  \item[options par défaut :]\
     \begin{itemize}
     \item \docAuxKey{detect-all} ;
     \item \docAuxKey{locale}|=|\docValue{FR} ou
-      \docAuxKey{locale}|=|\docValue{UK}%\selonlangue{} ;
+      \docAuxKey{locale}|=|\docValue{UK} ;
     \end{itemize}
   \end{description}
 \item[\package{pgfplots} :]\index{graphique de haute qualité} graphiques plus professionnels,
@@ -225,10 +236,10 @@ les plus notables sont précisés.
     \yatCl{}\protect\footnote{Les utilisateurs qui ont l'usage de ces packages
       doivent donc désormais les charger manuellement (au moyen de la commande
       \protect\docAuxCommand{usepackage}).}.}%
-%
+  %
   liens hypertextes ;
   \begin{description}
-  \item[option par défaut :]\
+  \item[options par défaut :]\
     \begin{itemize}
     \item \docAuxKey{final} ;
     \item \docAuxKey{unicode} ;

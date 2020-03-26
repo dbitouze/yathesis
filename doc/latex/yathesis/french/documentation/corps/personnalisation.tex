@@ -126,54 +126,6 @@ Par défaut, un mémoire créé avec la \yatCl est composé :
 \end{preamblecode}
 \end{dbexample}
 
-\subsection{Profondeur de la numérotation}\label{sec-profondeur-de-la}
-\index{profondeur!numérotation des unités}%
-\index{numérotation!des unités!profondeur}%
-
-Par défaut, la numérotation des unités a pour \enquote{niveau de
-  profondeur} les sous-sections. Autrement dit, seuls les titres des parties
-(éventuelles), chapitres, sections et sous-sections sont numérotés.  L'option
-\refKey{secnumdepth} suivante permet de spécifier un autre niveau de
-profondeur.
-%
-{%
-  \tcbset{before lower=\vspace*{.5\baselineskip}\par}
-  \begin{docKey}{secnumdepth}{=\docValue{part}\textbar\docValue{chapter}\textbar\docValue{section}\textbar\docValue{subsection}\textbar\docValue{subsubsection}\textbar\docValue{paragraph}\textbar\docValue{subparagraph}}{pas
-      de valeur par défaut, initialement \docValue{subsection}}
-    \indexdef{profondeur!numérotation des unités}%
-    \indexdef{numérotation!des unités!profondeur}%
-    Cette clé permet de modifier le \enquote{niveau de profondeur} de la
-    numérotation des unités jusqu'aux, respectivement : parties,
-    chapitres, sections, sous-sections, sous-sous-sections, paragraphes,
-    sous-paragraphes.
-  \end{docKey}
-}
-
-\subsection{Espace interligne}\label{sec-interligne}
-\index{espace!interligne}%
-
-L'interligne du document est par défaut \enquote{simple} mais, au moyen de
-l'option \refKey{space} suivante, il est possible de spécifier un interligne
-\enquote{un et demi} ou \enquote{double}.
-
-\begin{docKey}{space}{=\docValue{single}\textbar\docValue{onehalf}\textbar\docValue{double}}{pas de valeur par défaut,
-    initialement \docValue{single}}
-  \indexdef{espace!interligne}%
-  Cette clé permet de spécifier un interligne \docValue{single} (simple),
-  \docValue{onehalf} (un et demi) ou \docValue{double} (double).
-\end{docKey}
-
-\begin{dbwarning}{Option d'interligne : seulement dans la partie
-    principale}{space-setspace}
-  Contrairement à l'option \refKey{setspace} qui a un effet (semi-)global et
-  prend effet dès le début du document, l'option \refKey{space} ne prend effet
-  qu'à la partie principale du document (cf. \vref{cha-corps}) et se termine
-  avec elle, avant la partie annexe (cf. \vref{cha-annexes}).
-\end{dbwarning}
-
-Si on souhaite changer d'interligne ailleurs dans le mémoire, on recourra aux
-commandes du \Package*{setspace} \aside*{chargé par la \yatCl}.
-
 \subsection{Tables des matières locales automatiques}
 \label{sec-localtoc}%
 \index{table des matières!locale}%
@@ -331,8 +283,8 @@ différentes versions du document : \enquote{intermédiaire} (par défaut),
   \begin{docKey}{version}{=\docValue{inprogress}\textbar\docValue{inprogress*}\textbar\docValue{submitted}\textbar\docValue{submitted*}\textbar\docValue{final}\textbar\docValue{draft}}{pas
       de valeur par défaut, initialement \docValue{inprogress}}
     \indexdef{version du mémoire}%
-    Cette clé permet de spécifier la version du document à produire, au moyen
-    des valeurs suivantes.
+    Cette clé permet, au moyen des valeurs suivantes, de spécifier la version du
+    document à produire.
     \begin{description}
     \item[\docValue{inprogress}.]%
       \indexdef{version du mémoire!intermédiaire}%
@@ -458,6 +410,103 @@ sont à produire qu'exceptionnellement, en toute fin de rédaction. De ce fait :
   initiale \docValue*{inprogress}.
 \end{dbwarning}
 
+\subsection{Colophon}
+\label{sec-coloplhon}
+\index{colophon}%
+\indexsee{achevé d'imprimer}{colophon}%
+
+De manière générale, un colophon (ou achevé d'imprimer) est une note indiquant
+le plus souvent le titre de l'œuvre, son auteur, l'imprimeur et la date
+d'impression. Figurant autrefois à la fin d'un imprimé, il se trouve désormais
+souvent au début.
+
+\changes{v1.0.0}{2020-03-26}{Désormais, colophon automatiquement ajouté au
+  mémoire.}%
+%
+La \yatCl{} insère automatiquement un colophon tel que celui de la
+\vref{fig-colophon}.
+\begin{figure}[htbp]
+  \centering
+  \screenshot{colophon}%
+  \caption{Colophon}
+  \label{fig-colophon}
+\end{figure}
+
+Par défaut, ce colophon se trouve en 2\ieme{} de couverture, est intitulé
+\enquote{Colophon} et a pour contenu une phrase semblable à\selonlangue{} :
+\begin{displayquote}
+  Mémoire de thèse intitulé \frquote{\meta{titre}}, écrit par \meta{auteur},
+  achevé le \meta{date du jour de la compilation}, composé au moyen du système
+  de préparation de document \LaTeX{} et de la \yatCl{} dédiée aux thèses
+  préparées en France.
+\end{displayquote}
+ou :
+\begin{foreigndisplayquote}{english}
+  Doctoral dissertation entitled “\meta{titre}”, written by \meta{auteur},
+  completed on \meta{date du jour de la compilation}, typeset with the document
+  preparation system \LaTeX{} and the \yatCl{} dedicated to theses prepared in
+  France.
+\end{foreigndisplayquote}
+où le \meta{titre} et l'\meta{auteur} sont ceux définis par les commandes
+\refCom{title} et \refCom{author}.
+
+Ce colophon peut être personnalisé au moyen de l'option
+\refKey{colophon-location} et de la commande \refCom{colophontext} suivantes.
+
+{\tcbset{before lower=\vspace*{.5\baselineskip}\par}
+  \begin{docKey}[][doc
+    new=2020-03-26]{colophon-location}{=\docValue{verso-frontcover}\textbar\docValue{recto-backcover}\textbar\docValue{nowhere}}{pas
+      de valeur par défaut, initialement \docValue{verso-frontcover}}
+    %
+    \changes{v1.0.0}{2020-03-26}{Nouvelle option de classe
+      \protect\refKey{colophon-location} permettant de modifier l'emplacement par
+      défaut (en 2\ieme{} de couverture) du colophon ou de le supprimer.}%
+    %
+    Cette clé permet, au moyen des valeurs suivantes, de spécifier l'emplacement
+    du colophon dans le mémoire.
+  \begin{description}
+    \indexdef{colophon!emplacement}%
+  \item[\docValue{verso-frontcover}.]%
+    \indexdef{colophon!emplacement!2\ieme{} de couverture}%
+    Avec cette valeur, le colophon apparaît en 2\ieme{} de couverture,
+    c'est-à-dire au dos :
+    \begin{itemize}
+    \item soit de la 1\iere{} de couverture ;
+    \item soit de la (1\iere{}) page de titre (en l'absence de 1\iere{} de
+      couverture, cf. \refKey{nofrontcover}).
+    \end{itemize}
+  \item[\docValue{recto-backcover}.]%
+    \indexdef{colophon!emplacement!3\ieme{} de couverture}%
+    Avec cette valeur, le colophon apparaît en 3\ieme{} de couverture (sous
+    réserve de 4\ieme{} de couverture, cf. \refCom{makebackcover}).
+  \item[\docValue{nowhere}.]%
+    \indexdef{colophon!suppression}%
+    Avec cette valeur, le colophon ne figure nulle part dans le mémoire.
+  \end{description}
+\end{docKey}
+}
+
+\begin{docCommand}[doc new=2020-03-26]{colophontext}{\marg{texte}}
+  \index{colophon!modification du texte}%
+  \changes{v1.0.0}{2020-03-26}{Nouvelle commande \protect\refCom{colophontext}
+    permettant de modifier le texte par défaut du colophon.}%
+  %
+  Cette commande permet de redéfinir le texte par défaut du colophon.
+\end{docCommand}
+
+La \yatCl{} s'appuie sur le \Package{colophon} pour composer le colophon. De ce
+fait, ce dernier peut être davantage personnalisé au moyen des commandes de ce
+package.
+
+\begin{dbwarning}{Commandes du \Package{colophon} : à utiliser avec
+    discernement}{}
+  Dans le cadre d’un usage de la \yatCl{}, il est fortement déconseillé de
+  recourir aux commandes \docAuxCommand{colophonpagestyle},
+  \docAuxCommand{colophonclrpg}, \docAuxCommand{colophontopspace} et
+  \docAuxCommand{colophonbotspace} du \Package{colophon} : cela risquerait de
+  produire des résultats non souhaités.
+\end{dbwarning}
+
 \subsection{Formats de sortie}
 \label{sec-formats-de-sortie}
 \index{format du mémoire}%
@@ -469,8 +518,8 @@ Les documents composés avec la \yatCl{} peuvent avoir deux formats de sortie :
 \begin{docKey}{output}{=\docValue{screen}\textbar\docValue{paper}\textbar\docValue{paper*}}{pas
     de valeur par défaut, initialement \docValue{screen}}
   \indexdef{format du mémoire}%
-  Cette clé permet de spécifier le format de sortie du document, au moyen des
-  valeurs suivantes.
+  Cette clé permet, au moyen des valeurs suivantes, de spécifier le format de
+  sortie du document.
   \begin{description}
   \item[\docValue{screen}.]%
     \indexdef{format du mémoire!écran}%
@@ -492,7 +541,9 @@ Les documents composés avec la \yatCl{} peuvent avoir deux formats de sortie :
         automatiquement remplacée par :
         \lstset{deletekeywords={url},deletekeywords={[2]url}}%
         \begin{itemize}
-        \item \meta{texte}\lstinline+\footnote{\url{+\meta{\normalfont\ttfamily\glsxtrshort*{url}}|}}|
+        \item
+          \meta{texte}\lstinline+\footnote{\url{+\meta{\normalfont\ttfamily\glsxtrshort*{url}}|}}|
+          %
           si elle figure dans le texte ordinaire ;
         \item \meta{texte}
           \lstinline[deletekeywords={[2]url}]+(\url{+\meta{\normalfont\ttfamily\glsxtrshort*{url}}|})|
@@ -534,6 +585,54 @@ Les documents composés avec la \yatCl{} peuvent avoir deux formats de sortie :
   |\href{|\meta{\normalfont\ttfamily\glsxtrshort*{url}}|}{|\meta{texte}|}|), leurs
   cibles ne figureront nulle part en sortie \enquote{papier}.
 \end{dbwarning}
+
+\subsection{Profondeur de la numérotation}\label{sec-profondeur-de-la}
+\index{profondeur!numérotation des unités}%
+\index{numérotation!des unités!profondeur}%
+
+Par défaut, la numérotation des unités a pour \enquote{niveau de
+  profondeur} les sous-sections. Autrement dit, seuls les titres des parties
+(éventuelles), chapitres, sections et sous-sections sont numérotés.  L'option
+\refKey{secnumdepth} suivante permet de spécifier un autre niveau de
+profondeur.
+%
+{%
+  \tcbset{before lower=\vspace*{.5\baselineskip}\par}
+  \begin{docKey}{secnumdepth}{=\docValue{part}\textbar\docValue{chapter}\textbar\docValue{section}\textbar\docValue{subsection}\textbar\docValue{subsubsection}\textbar\docValue{paragraph}\textbar\docValue{subparagraph}}{pas
+      de valeur par défaut, initialement \docValue{subsection}}
+    \indexdef{profondeur!numérotation des unités}%
+    \indexdef{numérotation!des unités!profondeur}%
+    Cette clé permet de modifier le \enquote{niveau de profondeur} de la
+    numérotation des unités jusqu'aux, respectivement : parties,
+    chapitres, sections, sous-sections, sous-sous-sections, paragraphes,
+    sous-paragraphes.
+  \end{docKey}
+}
+
+\subsection{Espace interligne}\label{sec-interligne}
+\index{espace!interligne}%
+
+L'interligne du document est par défaut \enquote{simple} mais, au moyen de
+l'option \refKey{space} suivante, il est possible de spécifier un interligne
+\enquote{un et demi} ou \enquote{double}.
+
+\begin{docKey}{space}{=\docValue{single}\textbar\docValue{onehalf}\textbar\docValue{double}}{pas de valeur par défaut,
+    initialement \docValue{single}}
+  \indexdef{espace!interligne}%
+  Cette clé permet de spécifier un interligne \docValue{single} (simple),
+  \docValue{onehalf} (un et demi) ou \docValue{double} (double).
+\end{docKey}
+
+\begin{dbwarning}{Option d'interligne : seulement dans la partie
+    principale}{space-setspace}
+  Contrairement à l'option \refKey{setspace} qui a un effet (semi-)global et
+  prend effet dès le début du document, l'option \refKey{space} ne prend effet
+  qu'à la partie principale du document (cf. \vref{cha-corps}) et se termine
+  avec elle, avant la partie annexe (cf. \vref{cha-annexes}).
+\end{dbwarning}
+
+Si on souhaite changer d'interligne ailleurs dans le mémoire, on recourra aux
+commandes du \Package*{setspace} \aside*{chargé par la \yatCl}.
 
 \subsection{Style des têtes de chapitres}\label{sec-style-des-tetes}
 
