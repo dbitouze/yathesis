@@ -1,15 +1,24 @@
 # [Unreleased]
 
+# [1.0.1] - 2020-03-28
+
+## Changed
+- Specimens improved.
+
+## Fixed
+- Bug gh #73.
+
+
 # [1.0.0] - 2020-03-26
 
 ## Added
 - (Partial) CHANGELOG file (following https://keepachangelog.com/en/1.0.0/).
 - Semantic versionning (following https://semver.org/).
 - Colophon automatically added to the thesis, with possibility to:
-    - remove it,
-    - change:
-        - its location from 2nd cover to 3rd one,
-        - its content.
+   - remove it,
+   - change:
+     - its location from 2nd cover to 3rd one,
+     - its content.
 
 ## Changed
 - `\disclaimer` replaced by (and alias of) `\disclaimertext`.
