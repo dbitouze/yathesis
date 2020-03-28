@@ -11,8 +11,8 @@
 %% Released under the LaTeX Project Public License v1.3c or later
 %% See http://www.latex-project.org/lppl.txt
 %% -----------------------------------------------------------------------
-\def\fileversion{v1.0.0}
-\def\filedate{2020/03/26}
+\def\fileversion{v1.0.1}
+\def\filedate{2020/03/28}
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesClass{yathesis}[\filedate\space\fileversion\space Yet another class for writing thesis (DB)]
 \RequirePackage{pgfopts}[2011/06/02]%
@@ -400,6 +400,10 @@
   space/onehalf/.code={\def\YAD@interligne{onehalf}},%
   space/double/.code={\def\YAD@interligne{double}},%
   space/.initial=single%
+}%
+\newcommand{\cmdKV@YAD@numlaboratories}{1}%
+\yadsetup{%
+  numlaboratories/.store in=\cmdKV@YAD@numlaboratories%
 }%
 \def\YAD@colophon@location{verso-frontcover}%
 \yadsetup{%
@@ -813,7 +817,6 @@
 \newcommand*{\YAD@generic@argument@translate}[1]{%
   \YAD@texorpdfstring{\YAD@generic@argument{\translate{meta-#1}}}{<#1>}%
 }%
-\newcommand{\cmdKV@YAD@numlaboratories}{1}%
 \yadsetup{%
   role/.store in=\cmdKV@YAD@role,%
   corporation/.store in=\cmdKV@YAD@corps,%
@@ -831,7 +834,6 @@
   name/.store in=\cmdKV@YAD@name,%
   depth/.store in=\cmdKV@YAD@depth,%
   frametitle/.store in=\cmdKV@YAD@frametitle,%
-  numlaboratories/.store in=\cmdKV@YAD@numlaboratories,%
 }%
 \yadsetup{%
   logoheight/.code={%
@@ -3870,7 +3872,7 @@
       \def\blx@warn@bibempty{}%
       \YAD@printbibliography@ORI[segment=\therefsegment,heading=YAD@localbibs@heading]%
       \let\blx@warn@bibempty\YAD@ORI@blx@warn@bibempty%
-   }{%
+    }{%
     }
     \cleardoublepage%
     \YAD@phantomsection%
