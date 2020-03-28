@@ -881,6 +881,13 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 %
 %    \begin{macrocode}
+\newcommand{\cmdKV@YAD@numlaboratories}{1}%
+\yadsetup{%
+  numlaboratories/.store in=\cmdKV@YAD@numlaboratories%
+}%
+%    \end{macrocode}
+%
+%    \begin{macrocode}
 \def\YAD@colophon@location{verso-frontcover}%
 \yadsetup{%
   colophon-location/.is choice,%
@@ -1672,7 +1679,6 @@ This work consists of the file  yathesis.dtx
 % \meta{valeur} (grâce au package \package{pgfkeys}). La famille est nommée
 % \lstinline|yad| (comme \foreignquote{english}{yet antoher document}).
 %    \begin{macrocode}
-\newcommand{\cmdKV@YAD@numlaboratories}{1}%
 \yadsetup{%
   role/.store in=\cmdKV@YAD@role,%
   corporation/.store in=\cmdKV@YAD@corps,%
@@ -1690,7 +1696,6 @@ This work consists of the file  yathesis.dtx
   name/.store in=\cmdKV@YAD@name,%
   depth/.store in=\cmdKV@YAD@depth,%
   frametitle/.store in=\cmdKV@YAD@frametitle,%
-  numlaboratories/.store in=\cmdKV@YAD@numlaboratories,%
 }%
 %
 \yadsetup{%
