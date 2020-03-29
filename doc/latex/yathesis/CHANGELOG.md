@@ -3,6 +3,7 @@
 # [1.0.1] - 2020-03-28
 
 ## Changed
+- Documentation revised.
 - Specimens improved.
 
 ## Fixed
