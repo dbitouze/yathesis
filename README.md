@@ -21,7 +21,7 @@ Denis Bitouzé
 
 ## Copyright
 
-Copyright 2012-2017 Denis Bitouzé
+Copyright 2012-2020 Denis Bitouzé
 
 ## Licence
 
@@ -30,7 +30,7 @@ Project Public License, either version 1.3 of this license or (at your option)
 any later version.
 
 The latest version of the license is in http://www.latex-project.org/lppl.txt
-and version 1.3 or later is part of all distributions of LaTeX version
+and version 1.3c or later is part of all distributions of LaTeX version
 2003/06/01 or later.
 
 This work has the LPPL maintenance status "maintained".
