@@ -5425,7 +5425,7 @@ This work consists of the file  yathesis.dtx
       \YAD@printbibliography@ORI[segment=\therefsegment,heading=YAD@localbibs@heading]%
       \let\blx@warn@bibempty\YAD@ORI@blx@warn@bibempty%
     }{%
-    }
+    }%
     \cleardoublepage%
     \pagestyle{preliminary}%
     \ifbool{YAD@mainmatter}%
@@ -5486,7 +5486,7 @@ This work consists of the file  yathesis.dtx
     \boolfalse{YAD@nonnumbered@paragraph}%
     \boolfalse{YAD@nonnumbered@subparagraph}%
     \if@mainmatter%
-    \YAD@setsecnumdepth{\YAD@secnumdepth}
+    \YAD@setsecnumdepth{\YAD@secnumdepth}%
     \fi%
     \YAD@tmp@chapter[#1][#2]{#3}%
   }%
@@ -5513,7 +5513,7 @@ This work consists of the file  yathesis.dtx
 % tables des matières.
 % \end{itemize}
 %    \begin{macrocode}
-\LetLtxMacro{\YAD@ORI@section}{\section}
+\LetLtxMacro{\YAD@ORI@section}{\section}%
 \renewcommand\section{%
   \if@mainmatter%
   \ifbool{YAD@nonnumbered@chapter}{%
@@ -5522,7 +5522,7 @@ This work consists of the file  yathesis.dtx
   }%
   \fi%
   \@ifstar{\YAD@starred@section}{\YAD@unstarred@section}%
-}
+}%
 \newcommandtwoopt*{\YAD@tmp@section}[3][][]{%
   \ifthenelse{\isempty{#1}}{%
     \ifthenelse{\isempty{#2}}{%
@@ -5574,7 +5574,7 @@ This work consists of the file  yathesis.dtx
 % "\section".
 % \end{itemize}
 %    \begin{macrocode}
-\LetLtxMacro{\YAD@ORI@subsection}{\subsection}
+\LetLtxMacro{\YAD@ORI@subsection}{\subsection}%
 \renewcommand\subsection{%
   \if@mainmatter%
   \ifbool{YAD@nonnumbered@section}{%
@@ -5583,7 +5583,7 @@ This work consists of the file  yathesis.dtx
   }%
   \fi%
   \@ifstar{\YAD@starred@subsection}{\YAD@unstarred@subsection}%
-}
+}%
 \newcommand*{\YAD@tmp@subsection}[2][]{%
   \ifthenelse{\isempty{#1}}{%
     \YAD@ORI@subsection{#2}%
@@ -5612,7 +5612,7 @@ This work consists of the file  yathesis.dtx
   \YAD@tmp@subsection[#1]{#2}%
 }%
 %
-\LetLtxMacro{\YAD@ORI@subsubsection}{\subsubsection}
+\LetLtxMacro{\YAD@ORI@subsubsection}{\subsubsection}%
 \renewcommand\subsubsection{%
   \if@mainmatter%
   \ifbool{YAD@nonnumbered@subsection}{%
@@ -5621,7 +5621,7 @@ This work consists of the file  yathesis.dtx
   }%
   \fi%
   \@ifstar{\YAD@starred@subsubsection}{\YAD@unstarred@subsubsection}%
-}
+}%
 \newcommand*{\YAD@tmp@subsubsection}[2][]{%
   \ifthenelse{\isempty{#1}}{%
     \YAD@ORI@subsubsection{#2}%
@@ -5648,7 +5648,7 @@ This work consists of the file  yathesis.dtx
   \YAD@tmp@subsubsection[#1]{#2}%
 }%
 %
-\LetLtxMacro{\YAD@ORI@paragraph}{\paragraph}
+\LetLtxMacro{\YAD@ORI@paragraph}{\paragraph}%
 \renewcommand\paragraph{%
   \if@mainmatter%
   \ifbool{YAD@nonnumbered@subsubsection}{%
@@ -5657,7 +5657,7 @@ This work consists of the file  yathesis.dtx
   }%
   \fi%
   \@ifstar{\YAD@starred@paragraph}{\YAD@unstarred@paragraph}%
-}
+}%
 \newcommand*{\YAD@tmp@paragraph}[2][]{%
   \ifthenelse{\isempty{#1}}{%
     \YAD@ORI@paragraph{#2}%
@@ -5682,7 +5682,7 @@ This work consists of the file  yathesis.dtx
   \YAD@tmp@paragraph[#1]{#2}%
 }%
 %
-\LetLtxMacro{\YAD@ORI@subparagraph}{\subparagraph}
+\LetLtxMacro{\YAD@ORI@subparagraph}{\subparagraph}%
 \renewcommand\subparagraph{%
   \if@mainmatter%
   \ifbool{YAD@nonnumbered@paragraph}{%
@@ -5691,7 +5691,7 @@ This work consists of the file  yathesis.dtx
   }%
   \fi%
   \@ifstar{\YAD@starred@subparagraph}{\YAD@unstarred@subparagraph}%
-}
+}%
 \newcommand*{\YAD@tmp@subparagraph}[2][]{%
   \ifthenelse{\isempty{#1}}{%
     \YAD@ORI@subparagraph{#2}%
@@ -6123,7 +6123,7 @@ This work consists of the file  yathesis.dtx
     \defbibheading{YAD@localbibs@heading}[\translate{lbl-localbibname}]{%
       \renewcommand\addcontentsline[3]{}%
       \section*{#1}%
-      \let\addcontentsline\YAD@addcontentsline
+      \let\addcontentsline\YAD@addcontentsline%
     }%
 %    \end{macrocode}
 %
