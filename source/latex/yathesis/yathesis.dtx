@@ -4809,22 +4809,7 @@ This work consists of the file  yathesis.dtx
   \bgroup%
   \addtolength{\footskip}{6pt minus 6pt}%
   \setfootrule{0pt}%
-  \setfoot[][%
-  \ifboolexpr{%
-    bool {YAD@inprogress@work}%
-    or bool {YAD@inprogress@work@star}%
-  }{%
-    \textsc{\translate{lbl-inprogressfoottext} \today}%
-  }{%
-    \ifboolexpr{%
-      bool {YAD@submitted@work@star}%
-    }{%
-      \textsc{\translate{lbl-submittedfoottext} \today}%
-    }{%
-    }%
-  }%
-  ][]{%
-    % \medskip\par%
+  \setfoot[][][]{%
     \YAD@laboratory@abstract@page%
   }{}{}%
   \renewcommand{\YAD@chapter@header}{\abstractname}%
