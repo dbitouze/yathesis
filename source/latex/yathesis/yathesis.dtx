@@ -3403,33 +3403,6 @@ This work consists of the file  yathesis.dtx
   \YAD@setfoot%
 }%
 %    \end{macrocode}
-% Définition du style de page de la partie liminaire
-%    \begin{macrocode}
-\newpagestyle{ordinary}[]{%
-  \sethead[\thepage]%
-  []%
-  [\YAD@chapter@header]%
-  {%
-    \ifthenelse{%
-      \equal{\sectiontitle}{}%
-    }{%
-      \YAD@chapter@header%
-    }{%
-      \YAD@section@header%
-    }%
-  }%
-  {}%
-  {\thepage}%
-  \headrule%
-%    \end{macrocode}
-% Dans la partie liminaire, aucun élément de structuration n'est
-% numéroté et la profondeur de la table des matières est fixée à son
-% niveau par défaut (sous-sections)
-%    \begin{macrocode}
-  \setcounter{secnumdepth}{-10}%
-  \YAD@setfoot%
-}%
-%    \end{macrocode}
 % Définition du style de page de la partie principale
 %    \begin{macrocode}
 \newpagestyle{mainmatter}[]{%
@@ -3498,53 +3471,6 @@ This work consists of the file  yathesis.dtx
   }%
 }%
 %    \end{macrocode}
-% Définition du style de page de la partie annexe
-%    \begin{macrocode}
-\newpagestyle{appendix}[]{%
-  \singlespacing%
-  \sethead[\thepage]%
-  []%
-  [%
-  \ifthenelse{%
-    \value{secnumdepth}>-1
-    \and
-    \value{chapter}>0
-  }{%
-    \MakeUppercase\appendixname{} \thechapter.\
-  }{%
-  }
-  \chaptertitle%
-  ]%
-  {%
-    \ifthenelse{%
-      \equal{\sectiontitle}{}%
-    }{%
-      \ifthenelse{%
-        \value{secnumdepth}>-1
-        \and
-        \value{chapter}>0
-      }{%
-        \MakeUppercase\appendixname{} \thechapter.\
-      }{%
-      }
-      \chaptertitle%
-    }{%
-      \YAD@section@header%
-    }%
-  }%
-  {}%
-  {\thepage}%
-  \headrule%
-%    \end{macrocode}
-% Dans la partie annexe, la numérotation des paragraphes est fixée à
-% son niveau par défaut (sous-sections)
-%    \begin{macrocode}
-  \YAD@phantomsection%
-  \YAD@setsecnumdepth{\YAD@secnumdepth}%
-  \YAD@bookmarksetup{startatroot}%
-  \YAD@setfoot%
-}%
-%    \end{macrocode}
 % Extension de la commande "\appendix" de sorte que les chapitres d'annexe
 % soient correctement nommés.
 % \begin{macro}{\appendix}
@@ -3554,32 +3480,6 @@ This work consists of the file  yathesis.dtx
 }{}{}%
 %    \end{macrocode}
 % \end{macro}
-% Définition du style de page de la partie biblio
-%    \begin{macrocode}
-\newpagestyle{biblio}[]{%
-%    \end{macrocode}
-% Dans la partie biblio, aucun élément de structuration n'est
-% numéroté
-%    \begin{macrocode}
-  \setcounter{secnumdepth}{-10}%
-%    \end{macrocode}
-%    \begin{macrocode}
-  \sethead[\thepage]%
-  []%
-  [\bibname]%
-  {\bibname}%
-  {}%
-  {\thepage}%
-  \headrule%
-%    \end{macrocode}
-% On demande que la bibliographie apparaisse au plus haut niveau des
-% signets
-%    \begin{macrocode}
-  \YAD@phantomsection%
-  \YAD@bookmarksetup{startatroot}%
-  \YAD@setfoot%
-}%
-%    \end{macrocode}
 % Définition du style de page de la partie finale
 %    \begin{macrocode}
 \newpagestyle{backmatter}[]{%
@@ -3620,73 +3520,6 @@ This work consists of the file  yathesis.dtx
 }{}{}%
 %    \end{macrocode}
 % \end{macro}
-% Définition du style de page de la table des matières
-%    \begin{macrocode}
-\newpagestyle{contents}[]{%
-  \cleardoublepage%
-  \YAD@phantomsection%
-  \YAD@bookmarksetup{startatroot}%
-  \singlespacing%
-  \sethead[\thepage]%
-  []%
-  [\cmdKV@YAD@name]%
-  {\cmdKV@YAD@name}%
-  {}%
-  {\thepage}%
-  \headrule%
-%    \end{macrocode}
-% Dans la partie glossaire, aucun élément de structuration n'est
-% numéroté
-%    \begin{macrocode}
-  \setcounter{secnumdepth}{-10}%
-  \YAD@setfoot%
-}%
-%    \end{macrocode}
-% Définition du style de page de la partie glossaire
-%    \begin{macrocode}
-\newpagestyle{glossaire}[]{%
-  \cleardoublepage%
-  \YAD@phantomsection%
-  \YAD@bookmarksetup{startatroot}%
-  \singlespacing%
-  \sethead[\thepage]%
-  []%
-  [\YAD@chapter@header]%
-  {\YAD@chapter@header}%
-  {}%
-  {\thepage}%
-  \headrule%
-%    \end{macrocode}
-% Dans la partie glossaire, aucun élément de structuration n'est
-% numéroté
-%    \begin{macrocode}
-  \setcounter{secnumdepth}{-10}%
-  \YAD@setfoot%
-}%
-%    \end{macrocode}
-% Définition du style de page de la partie index
-%    \begin{macrocode}
-\newpagestyle{index}[]{%
-  \singlespacing%
-  \sethead[\thepage]%
-  []%
-  [\YAD@chapter@header]%
-  {\YAD@chapter@header}%
-  {}%
-  {\thepage}%
-  \headrule%
-%    \end{macrocode}
-% Dans la partie index, aucun élément de structuration n'est
-% numéroté
-%    \begin{macrocode}
-  \setcounter{secnumdepth}{-10}%
-  \cleardoublepage%
-  \YAD@phantomsection%
-  \YAD@setsecnumdepth{\YAD@secnumdepth}%
-  \YAD@bookmarksetup{startatroot}%
-  \YAD@setfoot%
-}%
-%    \end{macrocode}
 % Définition du style de page de la partie \textquote{4\ieme{} de
 % couverture} (\emph{blub} en anglais).
 %    \begin{macrocode}
@@ -4945,9 +4778,6 @@ This work consists of the file  yathesis.dtx
         permettant de préparer des dédicaces, n'a pas été utilisée.%
         }%
         }{%
-%    \end{macrocode}
-% Appel du style de page propre à la partie préliminaire
-%    \begin{macrocode}
         \begin{flushright}
           \itshape%
           \DTLforeach*{dedications}{%
@@ -5015,9 +4845,6 @@ This work consists of the file  yathesis.dtx
     }{%
     }%
   }{%
-%    \end{macrocode}
-% Appel du style de page propre à la partie préliminaire
-%    \begin{macrocode}
     \begin{epigraphs}
       \DTLforeach*{frontepigraphs}{%
         \YAD@epigraphlanguage=epigraphlanguage,%
@@ -5063,36 +4890,6 @@ This work consists of the file  yathesis.dtx
 }%
 %    \end{macrocode}
 % \end{macro}
-%
-% \begin{environment}{epigraphspage}
-% Environnement de la page des épigraphes globales à la thèse
-%    \begin{macrocode}
-\newenvironment{epigraphspage}{%
-%    \end{macrocode}
-% Redéfinition locale de la commande d'épigraphe
-%    \begin{macrocode}
-  \patchcmd{\epigraphs}{\qitemlabel}{\qitemlabel\itemsep=1.5\baselineskip}{}{}
-  \cleardoublepage%
-  \vspace*{\stretch{1}}%
-}{%
-  \vspace*{\stretch{1}}%
-}%
-%    \end{macrocode}
-% Appel du style de page propre à la partie préliminaire du
-% document, notamment début de l'insertion des titres courants (on
-% ajoute le style de page "prepreliminary" avant que l'environnement
-% "epigraphspage" ne débute, de sorte que sa portée ne soit pas
-% limitée à cet environnement).
-%    \begin{macrocode}
-\BeforeBeginEnvironment{epigraphspage}{%
-  \pagestyle{prepreliminary}%
-}%
-\AfterEndEnvironment{epigraphspage}{%
-  \pagestyle{preliminary}%
-}%
-%    \end{macrocode}
-% \end{environment}
-%
 %
 %\section{Commandes et styles pour les tables des matières locales}
 %
