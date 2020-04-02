@@ -5953,6 +5953,13 @@ This work consists of the file  yathesis.dtx
       \YAD@printbibliography@ORI[heading=none,#1]%
     }%
   }{%
+    \BeforeBeginEnvironment{thebibliography}{%
+      \cleardoublepage%
+      \singlespacing%
+    }%
+    \AfterEndEnvironment{thebibliography}{%
+      \let\cleardoublepage\relax%
+    }%
   }%
 }%
 %    \end{macrocode}
