@@ -3311,6 +3311,22 @@ This work consists of the file  yathesis.dtx
     \boolfalse{YAD@localtocs}%
   }%
 %    \end{macrocode}
+%
+% Code de débogage pour localiser les styles de pages appliqués.
+%    \begin{macrocode}
+% \RequirePackage{background}
+% \xapptocmd{\pagestyle}{%
+%   \SetBgContents{#1}
+%   \SetBgScale{2}
+%   \SetBgAngle{0}
+%   \SetBgOpacity{1}
+%   \SetBgColor{blue}
+%   \SetBgPosition{current page.south west}
+%   \SetBgHshift{3cm}
+%   \SetBgVshift{1cm}
+% }{}{}%
+%    \end{macrocode}
+%
 % Définition du style de page des titres
 %    \begin{macrocode}
 \newpagestyle{titles}[]{%
