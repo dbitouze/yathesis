@@ -448,6 +448,7 @@ This work consists of the file  yathesis.dtx
 \newbool{YAD@valid@month}
 \newbool{YAD@valid@year}
 \newbool{YAD@mainmatter@used}
+\newbool{YAD@mainmatter}
 \newbool{YAD@backmatter}
 \newbool{YAD@localtocs}%
 \newbool{YAD@nextwithlocaltoc}%
@@ -3080,7 +3081,6 @@ This work consists of the file  yathesis.dtx
       \cleardoublepage%
       \sethead[\thepage][][\nomname]{\nomname}{}{\thepage}\headrule%
       \YAD@ORI@printnomenclature%
-      \pagestyle{preliminary}%
     }%
   }{%
   }%
@@ -3116,19 +3116,6 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\pagestyle}
-%   Redéfinition permettant d'éviter de devoir ajouter
-%   \lstinline|\cleardoublepage| avant chaque la commande
-%   \lstinline|\pagestyle| fournie par le package \package{titleps}
-%   (cet ajout est pour l'instant nécessaire pour que les entêtes
-%   aux frontières des chapitres non numérotés ne soient pas
-%   erronés).
-%    \begin{macrocode}
-\xpretocmd{\pagestyle}{\cleardoublepage}{}{}%
-% \xapptocmd{\pagestyle}{\YAD@setfoot}{}{}%
-%    \end{macrocode}
-% \end{macro}
-%
 % Redéfinition de la commande "\tableofcontents" de sorte qu'elle admette un
 % argument optionnel permettant d'afficher une table des matières supplémentaire
 % jusqu'à un niveau donné. Cette commande, qui s'appuie sur le \Package{etoc},
@@ -3143,9 +3130,7 @@ This work consists of the file  yathesis.dtx
           \let\YAD@ORI@tableofcontents\tableofcontents%
           \let\YAD@ORI@localtableofcontents\localtableofcontents%
           \renewcommand{\tableofcontents}{%
-            \pagestyle{preliminary}%
             \booltrue{YAD@tableofcontents@used}%
-            \cleardoublepage%
             \YAD@phantomsection%
             % \renewcommand{\contentsname}{\cmdKV@YAD@name}
             \@ifnextchar[{\tableofcontents@YAD@with@argument}{\tableofcontents@YAD@without@argument}%]
@@ -3273,7 +3258,7 @@ This work consists of the file  yathesis.dtx
 % \begin{macro}{\YAD@chapter@header}
 % Définition de titres courants
 %    \begin{macrocode}
-\newcommand*{\YAD@chapter@header}{%
+\DeclareRobustCommand{\YAD@chapter@header}{%
   \ifboolexpr{
     ((test {\ifnumcomp{\value{secnumdepth}}{>}{-1}} or (not bool
     {YAD@nonnumbered@chapter})) and test {\ifnumcomp{\value{chapter}}{>}{0}}) and
@@ -3289,7 +3274,7 @@ This work consists of the file  yathesis.dtx
 %
 % \begin{macro}{\YAD@section@header}
 %    \begin{macrocode}
-\newcommand*{\YAD@section@header}{%
+\DeclareRobustCommand{\YAD@section@header}{%
   \ifboolexpr{
     ((test {\ifnumcomp{\value{secnumdepth}}{>}{0}} or (not bool
     {YAD@nonnumbered@section})) and test {\ifnumcomp{\value{chapter}}{>}{0}}) and
@@ -3330,6 +3315,7 @@ This work consists of the file  yathesis.dtx
 % Définition du style de page des titres
 %    \begin{macrocode}
 \newpagestyle{titles}[]{%
+  \cleardoublepage%
 %    \end{macrocode}
 % Au début du document, donc à partir de sa ou ses pages de titre,
 % aucun élément de structuration n'est numéroté ni ne figure dans la
@@ -3378,19 +3364,21 @@ This work consists of the file  yathesis.dtx
 % géométrie restaurée mais toujours pas de titres courants
 %    \begin{macrocode}
 \newpagestyle{prepreliminary}[]{%
+  \cleardoublepage%
 %    \end{macrocode}
 % Dans la partie pré-préliminaire, aucun élément de structuration n'est
 % numéroté, les titres courants sont absents et la profondeur de la table des
 % matières est fixée à son niveau par défaut (sous-sections)
 %    \begin{macrocode}
   \setcounter{secnumdepth}{-10}%
-  \YAD@setfoot%
+  % \YAD@setfoot%
 }%
 %    \end{macrocode}
 % Définition du style de page de la partie préliminaire: début
 % de l'insertion des titres courants
 %    \begin{macrocode}
 \newpagestyle{preliminary}[]{%
+  \cleardoublepage%
   \sethead[\thepage]%
   []%
   [\YAD@chapter@header]%
@@ -3445,15 +3433,6 @@ This work consists of the file  yathesis.dtx
 % Définition du style de page de la partie principale
 %    \begin{macrocode}
 \newpagestyle{mainmatter}[]{%
-  \ifthenelse{\equal{\YAD@interligne}{single}}{%
-    \singlespacing%
-  }{%
-    \ifthenelse{\equal{\YAD@interligne}{double}}{%
-      \doublespacing%
-    }{%
-      \onehalfspacing%
-    }%
-  }%
   \sethead[\thepage]%
   []%
   [\YAD@chapter@header]%
@@ -3483,11 +3462,21 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \xapptocmd{\mainmatter}{%
   \booltrue{YAD@mainmatter@used}%
+  \booltrue{YAD@mainmatter}%
   \ifbool{YAD@localtocs@classoption}%
   {%
     \booltrue{YAD@localtocs}%
   }{%
-  }
+  }%
+  \ifthenelse{\equal{\YAD@interligne}{single}}{%
+    \singlespacing%
+  }{%
+    \ifthenelse{\equal{\YAD@interligne}{double}}{%
+      \doublespacing%
+    }{%
+      \onehalfspacing%
+    }%
+  }%
   \pagestyle{mainmatter}%
 }{}{}%
 %    \end{macrocode}
@@ -3556,12 +3545,12 @@ This work consists of the file  yathesis.dtx
   \YAD@setfoot%
 }%
 %    \end{macrocode}
-% Extension de la commande "\appendix" de sorte qu'elle applique le style de
-% page "appendix".
+% Extension de la commande "\appendix" de sorte que les chapitres d'annexe
+% soient correctement nommés.
 % \begin{macro}{\appendix}
 %    \begin{macrocode}
 \xapptocmd{\appendix}{%
-  \pagestyle{appendix}%
+  \renewcommand\chaptername{\appendixname}%
 }{}{}%
 %    \end{macrocode}
 % \end{macro}
@@ -3575,11 +3564,10 @@ This work consists of the file  yathesis.dtx
   \setcounter{secnumdepth}{-10}%
 %    \end{macrocode}
 %    \begin{macrocode}
-  \singlespacing%
   \sethead[\thepage]%
   []%
-  [\YAD@chapter@header]%
-  {\YAD@chapter@header}%
+  [\bibname]%
+  {\bibname}%
   {}%
   {\thepage}%
   \headrule%
@@ -3587,7 +3575,6 @@ This work consists of the file  yathesis.dtx
 % On demande que la bibliographie apparaisse au plus haut niveau des
 % signets
 %    \begin{macrocode}
-  % \cleardoublepage%
   \YAD@phantomsection%
   \YAD@bookmarksetup{startatroot}%
   \YAD@setfoot%
@@ -4176,7 +4163,8 @@ This work consists of the file  yathesis.dtx
 }%
 \expandafter\selectlanguage\expandafter{\YAD@mainlanguage}%
 \restoregeometry%
-\pagestyle{preliminary}%
+\cleardoublepage%
+\pagestyle{prepreliminary}%
 }%
 %    \end{macrocode}
 % \end{macro}
@@ -4307,10 +4295,10 @@ This work consists of the file  yathesis.dtx
   \@ifstar{\@tempswatrue\csuse{YAD@starnostar@makekeywords}}{\@tempswafalse\csuse{YAD@starnostar@makekeywords}}%
 }%
 \csdef{YAD@starnostar@makekeywords}{%
-  \cleardoublepage%
 %    \end{macrocode}
 % Appel du style de page propre à la partie préliminaire
 %    \begin{macrocode}
+  \cleardoublepage%
   \pagestyle{prepreliminary}%
   % \YAD@astuce@expressioncle%
   \if@tempswa%
@@ -4341,7 +4329,6 @@ This work consists of the file  yathesis.dtx
   \vspace*{\stretch{1}}%
   \fi
   \expandafter\selectlanguage\expandafter{\YAD@mainlanguage}%
-  \pagestyle{preliminary}%
 }%
 %    \end{macrocode}
 % \end{macro}
@@ -4440,10 +4427,10 @@ This work consists of the file  yathesis.dtx
   \@ifstar{\@tempswatrue\csuse{YAD@starnostar@makelaboratory}}{\@tempswafalse\csuse{YAD@starnostar@makelaboratory}}%
 }%
 \csdef{YAD@starnostar@makelaboratory}{%
-  \cleardoublepage%
 %    \end{macrocode}
 % Appel du style de page propre à la partie préliminaire
 %    \begin{macrocode}
+  \cleardoublepage%
   \pagestyle{prepreliminary}%
 % \YAD@astuce@expressioncle%
   \if@tempswa%
@@ -4607,7 +4594,6 @@ This work consists of the file  yathesis.dtx
     \vspace*{\stretch{1}}%
   }{%
   }%
-  \pagestyle{preliminary}%
 }%
 %    \end{macrocode}
 % \end{macro}
@@ -4811,11 +4797,12 @@ This work consists of the file  yathesis.dtx
 % Page de présentation (résumés)
 %    \begin{macrocode}
 \newcommand{\makeabstract}{%
+  \cleardoublepage%
+  \pagestyle{preliminary}%
   \ifbool{YAD@nomakeabstract}{%
   }{%
     \YAD@alarm@noabstract%
   }%
-  \pagestyle{preliminary}%
   \YAD@phantomsection%
   \addcontentsline{toc}{chapter}{\abstractname}%
   \booltrue{YAD@makeabstract@used}%
@@ -4840,7 +4827,6 @@ This work consists of the file  yathesis.dtx
     % \medskip\par%
     \YAD@laboratory@abstract@page%
   }{}{}%
-  \cleardoublepage%
   \renewcommand{\YAD@chapter@header}{\abstractname}%
   \renewcommand{\YAD@section@header}{\abstractname}%
   \YAD@abstract@page%
@@ -4957,8 +4943,8 @@ This work consists of the file  yathesis.dtx
         \@ifstar{\@tempswatrue\csuse{YAD@starnostar@makededications}}{\@tempswafalse\csuse{YAD@starnostar@makededications}}%
         }%
         \csdef{YAD@starnostar@makededications}{%
-        \pagestyle{prepreliminary}%
         \cleardoublepage%
+        \pagestyle{prepreliminary}%
         \if@tempswa%
         \else%
         \vspace*{\stretch{2}}%
@@ -5023,6 +5009,7 @@ This work consists of the file  yathesis.dtx
 \csdef{YAD@starnostar@makefrontepigraphs}{%
   \patchcmd{\epigraphs}{\qitemlabel}{\qitemlabel\itemsep=1.5\baselineskip}{}{}%
   \cleardoublepage%
+  \pagestyle{prepreliminary}%
   \if@tempswa%
   \else%
   \vspace*{\stretch{2}}%
@@ -5455,6 +5442,17 @@ This work consists of the file  yathesis.dtx
     }{%
     }
     \cleardoublepage%
+    \pagestyle{preliminary}%
+    \ifbool{YAD@mainmatter}%
+    {%
+      \pagestyle{mainmatter}%
+    }{%
+    }%
+    \ifbool{YAD@backmatter}%
+    {%
+      \pagestyle{backmatter}%
+    }{%
+    }%
     \YAD@phantomsection%
     \ifbool{YAD@output@paper}{%
     }{%
@@ -5862,6 +5860,7 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % Appel du style de page propre à la partie préliminaire
 %    \begin{macrocode}
+  \cleardoublepage%
   \pagestyle{prepreliminary}%
   \if@tempswa%
   \else%
@@ -5872,7 +5871,6 @@ This work consists of the file  yathesis.dtx
   \else%
   \vspace*{\stretch{1}}%
   \fi%
-  \pagestyle{preliminary}%
 }%
 %    \end{macrocode}
 % \end{macro}
@@ -6158,6 +6156,7 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
     \let\YAD@printbibliography@ORI\printbibliography%
     \renewcommand{\printbibliography}[1][]{%
+      \singlespacing%
       \booltrue{YAD@printbibliography@used}%
 %    \end{macrocode}
 %
@@ -6167,12 +6166,9 @@ This work consists of the file  yathesis.dtx
 % contienne pas seulement \enquote{Bibliographie} mais \enquote{CHAPITRE
 % XXX. Bibliographie}.
 %    \begin{macrocode}
-      \pagestyle{biblio}%
+% \pagestyle{biblio}%
       \chapter*{\bibname}%
-      \begingroup%
-      \let\cleardoublepage\relax%
       \YAD@printbibliography@ORI[heading=none,#1]%
-      \endgroup%
     }%
   }{%
   }%
