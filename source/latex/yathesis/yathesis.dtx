@@ -5942,13 +5942,12 @@ This work consists of the file  yathesis.dtx
       \booltrue{YAD@printbibliography@used}%
 %    \end{macrocode}
 %
-% Hack aimablement fourni par samcarter
+% Un hack aimablement fourni par samcarter
 % (\url{https://texnique.fr/osqa/questions/6977/header-avec-biblatex/6978})
-% qui évite que l'entête de la bibliographie, en dernière page de celle-ci, ne
-% contienne pas seulement \enquote{Bibliographie} mais \enquote{CHAPITRE
-% XXX. Bibliographie}.
+% a permis d'éviter que l'entête de la bibliographie, en dernière page de
+% celle-ci, ne  contienne pas seulement \enquote{Bibliographie} mais
+% \enquote{CHAPITRE XXX. Bibliographie}.
 %    \begin{macrocode}
-% \pagestyle{biblio}%
       \chapter*{\bibname}%
       \YAD@printbibliography@ORI[heading=none,#1]%
     }%
