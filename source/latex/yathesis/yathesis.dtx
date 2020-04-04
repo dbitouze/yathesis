@@ -6101,6 +6101,26 @@ This work consists of the file  yathesis.dtx
 }%
 %    \end{macrocode}
 %
+% Le code suivant, aimablement fourni par touhami
+% (\url{https://texnique.fr/osqa/questions/8358/packages-glossaries-et-yathesis-pepin-de-forme-plurielle-glspl})
+% perme tque, dans le cas d'un mémoire en anglais (option
+% "mainlanguage=english"), les règles s'appliquant aux glossaires et acronymes
+% soient bien celles de l'anglais (et non du français).
+%    \begin{macrocode}
+\AtEndPreamble{%
+  \@ifpackageloaded{glossaries}{%
+    \IfLanguageName{english}{%
+      \makeatletter
+      \let\glossariescaptionsenglish\undefined
+      \input{glossaries-english.ldf}
+      \makeatother
+    }{%
+    }%
+  }{%
+  }%
+}%
+%    \end{macrocode}
+%
 % \subsection{Fichiers importés par la classe}
 %
 % La \yatcl charge les fichiers de configuration locale et de données
