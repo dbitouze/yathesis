@@ -60,6 +60,7 @@
 \newbool{YAD@valid@month}
 \newbool{YAD@valid@year}
 \newbool{YAD@mainmatter@used}
+\newbool{YAD@mainmatter}
 \newbool{YAD@backmatter}
 \newbool{YAD@localtocs}%
 \newbool{YAD@nextwithlocaltoc}%
@@ -1986,7 +1987,6 @@
       \cleardoublepage%
       \sethead[\thepage][][\nomname]{\nomname}{}{\thepage}\headrule%
       \YAD@ORI@printnomenclature%
-      \pagestyle{preliminary}%
     }%
   }{%
   }%
@@ -2013,14 +2013,11 @@
     \newcommand*{\YAD@setfoot}{}%
   }%
 }%
-\xpretocmd{\pagestyle}{\cleardoublepage}{}{}%
         \AfterEndPreamble{%
           \let\YAD@ORI@tableofcontents\tableofcontents%
           \let\YAD@ORI@localtableofcontents\localtableofcontents%
           \renewcommand{\tableofcontents}{%
-            \pagestyle{preliminary}%
             \booltrue{YAD@tableofcontents@used}%
-            \cleardoublepage%
             \YAD@phantomsection%
             % \renewcommand{\contentsname}{\cmdKV@YAD@name}
             \@ifnextchar[{\tableofcontents@YAD@with@argument}{\tableofcontents@YAD@without@argument}%]
@@ -2129,7 +2126,7 @@
         }
         % \renewcommand{\setcounter}[2]{}%
         %
-\newcommand*{\YAD@chapter@header}{%
+\DeclareRobustCommand{\YAD@chapter@header}{%
   \ifboolexpr{
     ((test {\ifnumcomp{\value{secnumdepth}}{>}{-1}} or (not bool
     {YAD@nonnumbered@chapter})) and test {\ifnumcomp{\value{chapter}}{>}{0}}) and
@@ -2140,7 +2137,7 @@
   }%
   \chaptertitle%
 }%
-\newcommand*{\YAD@section@header}{%
+\DeclareRobustCommand{\YAD@section@header}{%
   \ifboolexpr{
     ((test {\ifnumcomp{\value{secnumdepth}}{>}{0}} or (not bool
     {YAD@nonnumbered@section})) and test {\ifnumcomp{\value{chapter}}{>}{0}}) and
@@ -2195,29 +2192,12 @@
   \setfoot{}{}{}%
 }%
 \newpagestyle{prepreliminary}[]{%
+  \cleardoublepage%
   \setcounter{secnumdepth}{-10}%
-  \YAD@setfoot%
+  % \YAD@setfoot%
 }%
 \newpagestyle{preliminary}[]{%
-  \sethead[\thepage]%
-  []%
-  [\YAD@chapter@header]%
-  {%
-    \ifthenelse{%
-      \equal{\sectiontitle}{}%
-    }{%
-      \YAD@chapter@header%
-    }{%
-      \YAD@section@header%
-    }%
-  }%
-  {}%
-  {\thepage}%
-  \headrule%
-  \setcounter{secnumdepth}{-10}%
-  \YAD@setfoot%
-}%
-\newpagestyle{ordinary}[]{%
+  \cleardoublepage%
   \sethead[\thepage]%
   []%
   [\YAD@chapter@header]%
@@ -2237,15 +2217,6 @@
   \YAD@setfoot%
 }%
 \newpagestyle{mainmatter}[]{%
-  \ifthenelse{\equal{\YAD@interligne}{single}}{%
-    \singlespacing%
-  }{%
-    \ifthenelse{\equal{\YAD@interligne}{double}}{%
-      \doublespacing%
-    }{%
-      \onehalfspacing%
-    }%
-  }%
   \sethead[\thepage]%
   []%
   [\YAD@chapter@header]%
@@ -2266,11 +2237,21 @@
 }%
 \xapptocmd{\mainmatter}{%
   \booltrue{YAD@mainmatter@used}%
+  \booltrue{YAD@mainmatter}%
   \ifbool{YAD@localtocs@classoption}%
   {%
     \booltrue{YAD@localtocs}%
   }{%
-  }
+  }%
+  \ifthenelse{\equal{\YAD@interligne}{single}}{%
+    \singlespacing%
+  }{%
+    \ifthenelse{\equal{\YAD@interligne}{double}}{%
+      \doublespacing%
+    }{%
+      \onehalfspacing%
+    }%
+  }%
   \pagestyle{mainmatter}%
 }{}{}%
 \AtEndDocument{%
@@ -2287,64 +2268,9 @@
     }%
   }%
 }%
-\newpagestyle{appendix}[]{%
-  \singlespacing%
-  \sethead[\thepage]%
-  []%
-  [%
-  \ifthenelse{%
-    \value{secnumdepth}>-1
-    \and
-    \value{chapter}>0
-  }{%
-    \MakeUppercase\appendixname{} \thechapter.\
-  }{%
-  }
-  \chaptertitle%
-  ]%
-  {%
-    \ifthenelse{%
-      \equal{\sectiontitle}{}%
-    }{%
-      \ifthenelse{%
-        \value{secnumdepth}>-1
-        \and
-        \value{chapter}>0
-      }{%
-        \MakeUppercase\appendixname{} \thechapter.\
-      }{%
-      }
-      \chaptertitle%
-    }{%
-      \YAD@section@header%
-    }%
-  }%
-  {}%
-  {\thepage}%
-  \headrule%
-  \YAD@phantomsection%
-  \YAD@setsecnumdepth{\YAD@secnumdepth}%
-  \YAD@bookmarksetup{startatroot}%
-  \YAD@setfoot%
-}%
 \xapptocmd{\appendix}{%
-  \pagestyle{appendix}%
+  \renewcommand\chaptername{\appendixname}%
 }{}{}%
-\newpagestyle{biblio}[]{%
-  \setcounter{secnumdepth}{-10}%
-  \singlespacing%
-  \sethead[\thepage]%
-  []%
-  [\YAD@chapter@header]%
-  {\YAD@chapter@header}%
-  {}%
-  {\thepage}%
-  \headrule%
-  % \cleardoublepage%
-  \YAD@phantomsection%
-  \YAD@bookmarksetup{startatroot}%
-  \YAD@setfoot%
-}%
 \newpagestyle{backmatter}[]{%
   \singlespacing%
   \sethead[\thepage]%
@@ -2372,52 +2298,6 @@
   \booltrue{YAD@backmatter}%
   \boolfalse{YAD@localtocs}%
 }{}{}%
-\newpagestyle{contents}[]{%
-  \cleardoublepage%
-  \YAD@phantomsection%
-  \YAD@bookmarksetup{startatroot}%
-  \singlespacing%
-  \sethead[\thepage]%
-  []%
-  [\cmdKV@YAD@name]%
-  {\cmdKV@YAD@name}%
-  {}%
-  {\thepage}%
-  \headrule%
-  \setcounter{secnumdepth}{-10}%
-  \YAD@setfoot%
-}%
-\newpagestyle{glossaire}[]{%
-  \cleardoublepage%
-  \YAD@phantomsection%
-  \YAD@bookmarksetup{startatroot}%
-  \singlespacing%
-  \sethead[\thepage]%
-  []%
-  [\YAD@chapter@header]%
-  {\YAD@chapter@header}%
-  {}%
-  {\thepage}%
-  \headrule%
-  \setcounter{secnumdepth}{-10}%
-  \YAD@setfoot%
-}%
-\newpagestyle{index}[]{%
-  \singlespacing%
-  \sethead[\thepage]%
-  []%
-  [\YAD@chapter@header]%
-  {\YAD@chapter@header}%
-  {}%
-  {\thepage}%
-  \headrule%
-  \setcounter{secnumdepth}{-10}%
-  \cleardoublepage%
-  \YAD@phantomsection%
-  \YAD@setsecnumdepth{\YAD@secnumdepth}%
-  \YAD@bookmarksetup{startatroot}%
-  \YAD@setfoot%
-}%
 \newpagestyle{backcover}[]{%
   \singlespacing%
   \setlength{\footskip}{35pt}%
@@ -2486,8 +2366,9 @@
   \yadsetup{#1}
   \setlength{\fboxsep}{10pt}%
   \setlength{\YAD@titleboxwidth}{\linewidth-2\fboxsep-2\fboxrule}%
-  \renewcommand*{\do}[1]{%
   \pagestyle{titles}%
+  \renewcommand*{\do}[1]{%
+    \cleardoublepage%
 \begingroup%
 \expandafter\selectlanguage\expandafter{##1}%
   \begin{lrbox}{\YAD@titlebox}
@@ -2835,7 +2716,8 @@
 }%
 \expandafter\selectlanguage\expandafter{\YAD@mainlanguage}%
 \restoregeometry%
-\pagestyle{preliminary}%
+\cleardoublepage%
+\pagestyle{prepreliminary}%
 }%
 \AtEndDocument{%
   \ifboolexpr{%
@@ -2967,7 +2849,6 @@
   \vspace*{\stretch{1}}%
   \fi
   \expandafter\selectlanguage\expandafter{\YAD@mainlanguage}%
-  \pagestyle{preliminary}%
 }%
 \DTLnewdb{laboratories}%
 \newcommand{\laboratory}[3][]{%
@@ -3218,7 +3099,6 @@
     \vspace*{\stretch{1}}%
   }{%
   }%
-  \pagestyle{preliminary}%
 }%
 \csgdef{YAD@abstractname@mainlanguage}{\abstractname}%
 \csgdef{YAD@abstractname@secondarylanguage}{\abstractname}%
@@ -3374,36 +3254,21 @@
   }%
 }%
 \newcommand{\makeabstract}{%
+  \cleardoublepage%
+  \pagestyle{preliminary}%
   \ifbool{YAD@nomakeabstract}{%
   }{%
     \YAD@alarm@noabstract%
   }%
-  \pagestyle{preliminary}%
   \YAD@phantomsection%
   \addcontentsline{toc}{chapter}{\abstractname}%
   \booltrue{YAD@makeabstract@used}%
   \bgroup%
   \addtolength{\footskip}{6pt minus 6pt}%
   \setfootrule{0pt}%
-  \setfoot[][%
-  \ifboolexpr{%
-    bool {YAD@inprogress@work}%
-    or bool {YAD@inprogress@work@star}%
-  }{%
-    \textsc{\translate{lbl-inprogressfoottext} \today}%
-  }{%
-    \ifboolexpr{%
-      bool {YAD@submitted@work@star}%
-    }{%
-      \textsc{\translate{lbl-submittedfoottext} \today}%
-    }{%
-    }%
-  }%
-  ][]{%
-    % \medskip\par%
+  \setfoot[][][]{%
     \YAD@laboratory@abstract@page%
   }{}{}%
-  \cleardoublepage%
   \renewcommand{\YAD@chapter@header}{\abstractname}%
   \renewcommand{\YAD@section@header}{\abstractname}%
   \YAD@abstract@page%
@@ -3485,8 +3350,8 @@
         \@ifstar{\@tempswatrue\csuse{YAD@starnostar@makededications}}{\@tempswafalse\csuse{YAD@starnostar@makededications}}%
         }%
         \csdef{YAD@starnostar@makededications}{%
-        \pagestyle{prepreliminary}%
         \cleardoublepage%
+        \pagestyle{prepreliminary}%
         \if@tempswa%
         \else%
         \vspace*{\stretch{2}}%
@@ -3542,6 +3407,7 @@
 \csdef{YAD@starnostar@makefrontepigraphs}{%
   \patchcmd{\epigraphs}{\qitemlabel}{\qitemlabel\itemsep=1.5\baselineskip}{}{}%
   \cleardoublepage%
+  \pagestyle{prepreliminary}%
   \if@tempswa%
   \else%
   \vspace*{\stretch{2}}%
@@ -3604,19 +3470,6 @@
   \else%
   \vspace*{\stretch{2}}%
   \fi
-}%
-\newenvironment{epigraphspage}{%
-  \patchcmd{\epigraphs}{\qitemlabel}{\qitemlabel\itemsep=1.5\baselineskip}{}{}
-  \cleardoublepage%
-  \vspace*{\stretch{1}}%
-}{%
-  \vspace*{\stretch{1}}%
-}%
-\BeforeBeginEnvironment{epigraphspage}{%
-  \pagestyle{prepreliminary}%
-}%
-\AfterEndEnvironment{epigraphspage}{%
-  \pagestyle{preliminary}%
 }%
 \def\YAD@leftmargin {0pt}
 \def\YAD@rightmargin {2.55em}% like LaTeX’s \@tocrmarg
@@ -3873,8 +3726,19 @@
       \YAD@printbibliography@ORI[segment=\therefsegment,heading=YAD@localbibs@heading]%
       \let\blx@warn@bibempty\YAD@ORI@blx@warn@bibempty%
     }{%
-    }
+    }%
     \cleardoublepage%
+    \pagestyle{preliminary}%
+    \ifbool{YAD@mainmatter}%
+    {%
+      \pagestyle{mainmatter}%
+    }{%
+    }%
+    \ifbool{YAD@backmatter}%
+    {%
+      \pagestyle{backmatter}%
+    }{%
+    }%
     \YAD@phantomsection%
     \ifbool{YAD@output@paper}{%
     }{%
@@ -3917,7 +3781,7 @@
     \boolfalse{YAD@nonnumbered@paragraph}%
     \boolfalse{YAD@nonnumbered@subparagraph}%
     \if@mainmatter%
-    \YAD@setsecnumdepth{\YAD@secnumdepth}
+    \YAD@setsecnumdepth{\YAD@secnumdepth}%
     \fi%
     \YAD@tmp@chapter[#1][#2]{#3}%
   }%
@@ -3933,7 +3797,7 @@
 \xapptocmd{\printglossary}{\renewcommand{\YAD@localtoc}{\YAD@default@localtoc}}{}{}%
 \xpretocmd{\printindex}{\renewcommand{\YAD@localtoc}{}}{}{}%
 \xapptocmd{\printindex}{\renewcommand{\YAD@localtoc}{\YAD@default@localtoc}}{}{}%
-\LetLtxMacro{\YAD@ORI@section}{\section}
+\LetLtxMacro{\YAD@ORI@section}{\section}%
 \renewcommand\section{%
   \if@mainmatter%
   \ifbool{YAD@nonnumbered@chapter}{%
@@ -3942,7 +3806,7 @@
   }%
   \fi%
   \@ifstar{\YAD@starred@section}{\YAD@unstarred@section}%
-}
+}%
 \newcommandtwoopt*{\YAD@tmp@section}[3][][]{%
   \ifthenelse{\isempty{#1}}{%
     \ifthenelse{\isempty{#2}}{%
@@ -3988,7 +3852,7 @@
   \fi%
   \YAD@tmp@section[#1][#2]{#3}%
 }%
-\LetLtxMacro{\YAD@ORI@subsection}{\subsection}
+\LetLtxMacro{\YAD@ORI@subsection}{\subsection}%
 \renewcommand\subsection{%
   \if@mainmatter%
   \ifbool{YAD@nonnumbered@section}{%
@@ -3997,7 +3861,7 @@
   }%
   \fi%
   \@ifstar{\YAD@starred@subsection}{\YAD@unstarred@subsection}%
-}
+}%
 \newcommand*{\YAD@tmp@subsection}[2][]{%
   \ifthenelse{\isempty{#1}}{%
     \YAD@ORI@subsection{#2}%
@@ -4025,7 +3889,7 @@
   \fi%
   \YAD@tmp@subsection[#1]{#2}%
 }%
-\LetLtxMacro{\YAD@ORI@subsubsection}{\subsubsection}
+\LetLtxMacro{\YAD@ORI@subsubsection}{\subsubsection}%
 \renewcommand\subsubsection{%
   \if@mainmatter%
   \ifbool{YAD@nonnumbered@subsection}{%
@@ -4034,7 +3898,7 @@
   }%
   \fi%
   \@ifstar{\YAD@starred@subsubsection}{\YAD@unstarred@subsubsection}%
-}
+}%
 \newcommand*{\YAD@tmp@subsubsection}[2][]{%
   \ifthenelse{\isempty{#1}}{%
     \YAD@ORI@subsubsection{#2}%
@@ -4060,7 +3924,7 @@
   \fi%
   \YAD@tmp@subsubsection[#1]{#2}%
 }%
-\LetLtxMacro{\YAD@ORI@paragraph}{\paragraph}
+\LetLtxMacro{\YAD@ORI@paragraph}{\paragraph}%
 \renewcommand\paragraph{%
   \if@mainmatter%
   \ifbool{YAD@nonnumbered@subsubsection}{%
@@ -4069,7 +3933,7 @@
   }%
   \fi%
   \@ifstar{\YAD@starred@paragraph}{\YAD@unstarred@paragraph}%
-}
+}%
 \newcommand*{\YAD@tmp@paragraph}[2][]{%
   \ifthenelse{\isempty{#1}}{%
     \YAD@ORI@paragraph{#2}%
@@ -4093,7 +3957,7 @@
   \fi%
   \YAD@tmp@paragraph[#1]{#2}%
 }%
-\LetLtxMacro{\YAD@ORI@subparagraph}{\subparagraph}
+\LetLtxMacro{\YAD@ORI@subparagraph}{\subparagraph}%
 \renewcommand\subparagraph{%
   \if@mainmatter%
   \ifbool{YAD@nonnumbered@paragraph}{%
@@ -4102,7 +3966,7 @@
   }%
   \fi%
   \@ifstar{\YAD@starred@subparagraph}{\YAD@unstarred@subparagraph}%
-}
+}%
 \newcommand*{\YAD@tmp@subparagraph}[2][]{%
   \ifthenelse{\isempty{#1}}{%
     \YAD@ORI@subparagraph{#2}%
@@ -4170,6 +4034,7 @@
   \@ifstar{\@tempswatrue\csuse{YAD@starnostar@makedisclaimer}}{\@tempswafalse\csuse{YAD@starnostar@makedisclaimer}}%
 }%
 \csdef{YAD@starnostar@makedisclaimer}{%
+  \cleardoublepage%
   \pagestyle{prepreliminary}%
   \if@tempswa%
   \else%
@@ -4180,7 +4045,6 @@
   \else%
   \vspace*{\stretch{1}}%
   \fi%
-  \pagestyle{preliminary}%
 }%
 \colophontext{%
   \IfLanguageName{french}{%
@@ -4209,7 +4073,7 @@
     \defbibheading{YAD@localbibs@heading}[\translate{lbl-localbibname}]{%
       \renewcommand\addcontentsline[3]{}%
       \section*{#1}%
-      \let\addcontentsline\YAD@addcontentsline
+      \let\addcontentsline\YAD@addcontentsline%
     }%
     \@ifpackageloaded{csquotes}{%
       \SetCiteCommand{\autocite}%
@@ -4217,15 +4081,19 @@
     }%
     \let\YAD@printbibliography@ORI\printbibliography%
     \renewcommand{\printbibliography}[1][]{%
+      \singlespacing%
       \booltrue{YAD@printbibliography@used}%
-      \pagestyle{biblio}%
       \chapter*{\bibname}%
-      \begingroup%
-      \let\cleardoublepage\relax%
       \YAD@printbibliography@ORI[heading=none,#1]%
-      \endgroup%
     }%
   }{%
+    \BeforeBeginEnvironment{thebibliography}{%
+      \cleardoublepage%
+      \singlespacing%
+    }%
+    \AfterEndEnvironment{thebibliography}{%
+      \let\cleardoublepage\relax%
+    }%
   }%
 }%
 \AtEndDocument{%
@@ -4317,6 +4185,18 @@
   }{%
   }%
 }%
+}%
+\AtEndPreamble{%
+  \@ifpackageloaded{glossaries}{%
+    \IfLanguageName{english}{%
+      \makeatletter
+      \let\glossariescaptionsenglish\undefined
+      \input{glossaries-english.ldf}
+      \makeatother
+    }{%
+    }%
+  }{%
+  }%
 }%
 \AtEndPreamble{%
   \ifPDFTeX
