@@ -3315,7 +3315,6 @@ This work consists of the file  yathesis.dtx
 % Définition du style de page des titres
 %    \begin{macrocode}
 \newpagestyle{titles}[]{%
-  \cleardoublepage%
 %    \end{macrocode}
 % Au début du document, donc à partir de sa ou ses pages de titre,
 % aucun élément de structuration n'est numéroté ni ne figure dans la
@@ -3610,11 +3609,15 @@ This work consists of the file  yathesis.dtx
   \yadsetup{#1}
   \setlength{\fboxsep}{10pt}%
   \setlength{\YAD@titleboxwidth}{\linewidth-2\fboxsep-2\fboxrule}%
-  \renewcommand*{\do}[1]{%
-%    \end{macrocode}
 % Appel du style de page propre au(x) titre(s)
 %    \begin{macrocode}
   \pagestyle{titles}%
+%    \end{macrocode}
+  \renewcommand*{\do}[1]{%
+%    \end{macrocode}
+% Chaque nouvelle page de titre commence en page impaire.
+%    \begin{macrocode}
+    \cleardoublepage%
 %    \end{macrocode}
 % On passe dans la langue choisie en option (en français si rien n'est
 % spécifié).
