@@ -5956,11 +5956,10 @@ This work consists of the file  yathesis.dtx
     }%
   }{%
     \BeforeBeginEnvironment{thebibliography}{%
-      \cleardoublepage%
       \singlespacing%
     }%
-    \AfterEndEnvironment{thebibliography}{%
-      \let\cleardoublepage\relax%
+    \AtEndEnvironment{thebibliography}{%
+      \clearpage%
     }%
   }%
 }%
