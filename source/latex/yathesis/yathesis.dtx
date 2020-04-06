@@ -3649,7 +3649,7 @@ This work consists of the file  yathesis.dtx
     }%
     \noindent%
     \begin{minipage}{\linewidth-2\fboxsep-2\fboxrule}
-      \onehalfspacing%
+      % \onehalfspacing%
       \noindent%
       \ifthenelse{\equal{\cmdKV@YAD@frametitle}{none}}{%
       }{%
@@ -3679,8 +3679,10 @@ This work consists of the file  yathesis.dtx
       }%
       \ifundef{\printsubtitle}{%
       }{%
-        \ifdraft{}{\vspace*{\stretch{.15}}}%
-        % \vspace*{\stretch{.15}}%
+        \ifdraft{}{%
+          \vskip0.5em%
+          % \vspace*{\stretch{.15}}%
+        }%
         \par%
         \centering%
         \Large\printsubtitle%
