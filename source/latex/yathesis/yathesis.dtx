@@ -451,6 +451,7 @@ This work consists of the file  yathesis.dtx
 \newbool{YAD@mainmatter}
 \newbool{YAD@backmatter}
 \newbool{YAD@localtocs}%
+\newbool{YAD@localbibs@used}%
 \newbool{YAD@nextwithlocaltoc}%
 \newbool{YAD@nonnumbered@chapter}%
 \newbool{YAD@nonnumbered@section}%
@@ -3276,9 +3277,18 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \DeclareRobustCommand{\YAD@section@header}{%
   \ifboolexpr{
-    ((test {\ifnumcomp{\value{secnumdepth}}{>}{0}} or (not bool
-    {YAD@nonnumbered@section})) and test {\ifnumcomp{\value{chapter}}{>}{0}}) and
-    (not bool {YAD@backmatter})%
+    (
+      (
+        test {\ifnumcomp{\value{secnumdepth}}{>}{0}}
+        or
+        (not bool {YAD@nonnumbered@section})
+      )
+      and
+      test {\ifnumcomp{\value{chapter}}{>}{0}})
+      and
+      (not bool {YAD@backmatter})
+      and
+      (not bool {YAD@localbibs})
   }{%
     \thesection.
   }{%
@@ -3402,6 +3412,36 @@ This work consists of the file  yathesis.dtx
   \YAD@setfoot%
 }%
 %    \end{macrocode}
+% Définition du style de page de la partie préliminaire: début
+% de l'insertion des titres courants
+%    \begin{macrocode}
+\newpagestyle{part-before-chapter}[]{%
+  % \cleardoublepage%
+  \sethead[\thepage]%
+  []%
+  [\YAD@section@header]%
+  {%
+    \YAD@section@header%
+  }%
+  {}%
+  {\thepage}%
+  \headrule%
+%    \end{macrocode}
+% Dans la partie préliminaire, aucun élément de structuration n'est
+% numéroté et la profondeur de la table des matières est fixée à son
+% niveau par défaut (sous-sections)
+%    \begin{macrocode}
+  \booltrue{YAD@nonnumbered@chapter}%
+  \booltrue{YAD@nonnumbered@section}%
+  \booltrue{YAD@nonnumbered@subsection}%
+  \booltrue{YAD@nonnumbered@subsubsection}%
+  \booltrue{YAD@nonnumbered@paragraph}%
+  \booltrue{YAD@nonnumbered@subparagraph}%
+  \YAD@setsecnumdepth{none}%
+  \renewcommand{\sectiontitle}{}%
+  \YAD@setfoot%
+}%
+%    \end{macrocode}
 % Définition du style de page de la partie principale
 %    \begin{macrocode}
 \newpagestyle{mainmatter}[]{%
@@ -3470,15 +3510,59 @@ This work consists of the file  yathesis.dtx
   }%
 }%
 %    \end{macrocode}
-% Extension de la commande "\appendix" de sorte que les chapitres d'annexe
-% soient correctement nommés.
+% Pour que les bibliographies locales apparaissent automatiquement à chaque fin de
+% chapitre, la commande "\chapter" est redéfinie de manière à commencer par
+% l'insertion de la bibliographie locale ("\printlocalbibs") du, donc, chapitre
+% précédent (affichée seulement si celle-ci n'est pas vide). Ceci fonctionne
+% bien, sauf :
+% \begin{itemize}
+% \item pour les chapitres séparés par des commandes intermédiaires ("\part",
+%   "\mainmatter", "\appendix", etc.)
+% \item en fin de document ("\enddocument").
+% \end{itemize}
+% Il est donc nécessaire que ces commandes commencent donc elles-mêmes par
+% l'insertion de la bibliographie locale du chapitre précédent
+% ("\printlocalbibs"), commande assurant que les chapitres suivant
+% (éventuellement) ces commandes ne l'afficheront pas en double.
 % \begin{macro}{\appendix}
 %    \begin{macrocode}
-\xapptocmd{\appendix}{%
+\AtEndPreamble{%
+  \xpretocmd{\part}{%
+    \printlocalbibs{}%
+  }{}{}%
+  \pretocmd{\mainmatter}{%
+    \printlocalbibs{}%
+    \cleardoublepage%
+  }{}{}%
+  \pretocmd{\appendix}{%
+    \printlocalbibs{}%
+    \cleardoublepage%
+  }{}{}%
+  \pretocmd{\backmatter}{%
+    \printlocalbibs{}%
+    \cleardoublepage%
+  }{}{}%
+  \pretocmd{\enddocument}{%
+    \printlocalbibs{}%
+  }{}{}%
+%    \end{macrocode}
+% Pour que les titres courants ne se comportent pas de façon inattendue sur les
+% pages suivant le début d'une partie et précédant son 1\ier{} chapitre, on
+% applique un style de page spécifique.
+%    \begin{macrocode}
+  \apptocmd{\@endpart}{%
+    \pagestyle{part-before-chapter}%
+  }{}{}%
+}%
+%    \end{macrocode}
+% Extension de la commande "\appendix" de sorte que les chapitres d'annexe
+% soient correctement nommés.
+%    \begin{macrocode}
+\apptocmd{\appendix}{%
   \renewcommand\chaptername{\appendixname}%
+  \singlespacing%
 }{}{}%
 %    \end{macrocode}
-% \end{macro}
 % Définition du style de page de la partie finale
 %    \begin{macrocode}
 \newpagestyle{backmatter}[]{%
@@ -4743,6 +4827,8 @@ This work consists of the file  yathesis.dtx
 % Éléments communs de la page de présentation
 %    \begin{macrocode}
 \newcommand{\makebackcover}{%
+  \printlocalbibs{}%
+  \cleardoublepage%
   \pagestyle{backcover}%
 %    \end{macrocode}
 % On insère le code pour l'éventuel colophon
@@ -5201,6 +5287,24 @@ This work consists of the file  yathesis.dtx
 }{}{}%
 %    \end{macrocode}
 % \end{environment}
+%
+% Le code pour l'affichage des bibliographies locales, utilisé à plusieurs
+% endroits, est stocké dans une macro.
+%    \begin{macrocode}
+\newcommand{\printlocalbibs}{%
+  \ifbool{YAD@localbibs}{%
+    \ifbool{YAD@localbibs@used}{%
+    }{%
+      \let\YAD@ORI@blx@warn@bibempty\blx@warn@bibempty%
+      \def\blx@warn@bibempty{}%
+      \YAD@printbibliography@ORI[segment=\therefsegment,heading=YAD@localbibs@heading]%
+      \let\blx@warn@bibempty\YAD@ORI@blx@warn@bibempty%
+      \booltrue{YAD@localbibs@used}%
+    }%
+  }{%
+  }%
+}%
+%    \end{macrocode}
 % On redéfinit la commande "\chapter" de sorte que, dans un chapitre non
 % numéroté ("\chapter*") :
 % \begin{itemize}
@@ -5221,14 +5325,10 @@ This work consists of the file  yathesis.dtx
 \LetLtxMacro{\YAD@ORI@chapter}{\chapter}%
 \AfterPreamble{% delay the redefinition when titlesec has done its own
   \renewcommand\chapter{%
-    \ifbool{YAD@localbibs}{%
-      \let\YAD@ORI@blx@warn@bibempty\blx@warn@bibempty%
-      \def\blx@warn@bibempty{}%
-      \YAD@printbibliography@ORI[segment=\therefsegment,heading=YAD@localbibs@heading]%
-      \let\blx@warn@bibempty\YAD@ORI@blx@warn@bibempty%
-    }{%
-    }%
+    \printlocalbibs{}%
+    \boolfalse{YAD@localbibs@used}%
     \cleardoublepage%
+    \renewcommand{\sectiontitle}{}%
     \pagestyle{preliminary}%
     \ifbool{YAD@mainmatter}%
     {%
@@ -5943,7 +6043,6 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
     \let\YAD@printbibliography@ORI\printbibliography%
     \renewcommand{\printbibliography}[1][]{%
-      \singlespacing%
       \booltrue{YAD@printbibliography@used}%
 %    \end{macrocode}
 %
@@ -5953,8 +6052,10 @@ This work consists of the file  yathesis.dtx
 % celle-ci, ne  contienne pas seulement \enquote{Bibliographie} mais
 % \enquote{CHAPITRE XXX. Bibliographie}.
 %    \begin{macrocode}
+      \singlespace%
       \chapter*{\bibname}%
       \YAD@printbibliography@ORI[heading=none,#1]%
+      \endsinglespace%
     }%
   }{%
     \BeforeBeginEnvironment{thebibliography}{%
