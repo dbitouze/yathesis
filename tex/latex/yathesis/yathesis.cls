@@ -63,6 +63,7 @@
 \newbool{YAD@mainmatter}
 \newbool{YAD@backmatter}
 \newbool{YAD@localtocs}%
+\newbool{YAD@localbibs@used}%
 \newbool{YAD@nextwithlocaltoc}%
 \newbool{YAD@nonnumbered@chapter}%
 \newbool{YAD@nonnumbered@section}%
@@ -2139,9 +2140,18 @@
 }%
 \DeclareRobustCommand{\YAD@section@header}{%
   \ifboolexpr{
-    ((test {\ifnumcomp{\value{secnumdepth}}{>}{0}} or (not bool
-    {YAD@nonnumbered@section})) and test {\ifnumcomp{\value{chapter}}{>}{0}}) and
-    (not bool {YAD@backmatter})%
+    (
+      (
+        test {\ifnumcomp{\value{secnumdepth}}{>}{0}}
+        or
+        (not bool {YAD@nonnumbered@section})
+      )
+      and
+      test {\ifnumcomp{\value{chapter}}{>}{0}})
+      and
+      (not bool {YAD@backmatter})
+      and
+      (not bool {YAD@localbibs})
   }{%
     \thesection.
   }{%
@@ -2216,6 +2226,27 @@
   \setcounter{secnumdepth}{-10}%
   \YAD@setfoot%
 }%
+\newpagestyle{part-before-chapter}[]{%
+  % \cleardoublepage%
+  \sethead[\thepage]%
+  []%
+  [\YAD@section@header]%
+  {%
+    \YAD@section@header%
+  }%
+  {}%
+  {\thepage}%
+  \headrule%
+  \booltrue{YAD@nonnumbered@chapter}%
+  \booltrue{YAD@nonnumbered@section}%
+  \booltrue{YAD@nonnumbered@subsection}%
+  \booltrue{YAD@nonnumbered@subsubsection}%
+  \booltrue{YAD@nonnumbered@paragraph}%
+  \booltrue{YAD@nonnumbered@subparagraph}%
+  \YAD@setsecnumdepth{none}%
+  \renewcommand{\sectiontitle}{}%
+  \YAD@setfoot%
+}%
 \newpagestyle{mainmatter}[]{%
   \sethead[\thepage]%
   []%
@@ -2268,8 +2299,32 @@
     }%
   }%
 }%
-\xapptocmd{\appendix}{%
+\AtEndPreamble{%
+  \xpretocmd{\part}{%
+    \printlocalbibs{}%
+  }{}{}%
+  \pretocmd{\mainmatter}{%
+    \printlocalbibs{}%
+    \cleardoublepage%
+  }{}{}%
+  \pretocmd{\appendix}{%
+    \printlocalbibs{}%
+    \cleardoublepage%
+  }{}{}%
+  \pretocmd{\backmatter}{%
+    \printlocalbibs{}%
+    \cleardoublepage%
+  }{}{}%
+  \pretocmd{\enddocument}{%
+    \printlocalbibs{}%
+  }{}{}%
+  \apptocmd{\@endpart}{%
+    \pagestyle{part-before-chapter}%
+  }{}{}%
+}%
+\apptocmd{\appendix}{%
   \renewcommand\chaptername{\appendixname}%
+  \singlespacing%
 }{}{}%
 \newpagestyle{backmatter}[]{%
   \singlespacing%
@@ -2313,6 +2368,8 @@
   {}%
   \setcounter{secnumdepth}{-10}%
 }%
+\def\YAD@own@pagestyle{}
+\newcommand{\ownpagestyle}[1]{\def\YAD@own@pagestyle{#1}}
 \newcommand*{\printlaboratory}[2][]{%
   \YAD@ifemptyorundef{#2}{%
     \YAD@reach@file{\YAD@generic@argument@translate{laboratory}}%
@@ -2391,7 +2448,7 @@
     }%
     \noindent%
     \begin{minipage}{\linewidth-2\fboxsep-2\fboxrule}
-      \onehalfspacing%
+      % \onehalfspacing%
       \noindent%
       \ifthenelse{\equal{\cmdKV@YAD@frametitle}{none}}{%
       }{%
@@ -2421,8 +2478,10 @@
       }%
       \ifundef{\printsubtitle}{%
       }{%
-        \ifdraft{}{\vspace*{\stretch{.15}}}%
-        % \vspace*{\stretch{.15}}%
+        \ifdraft{}{%
+          \vskip0.5em%
+          % \vspace*{\stretch{.15}}%
+        }%
         \par%
         \centering%
         \Large\printsubtitle%
@@ -3336,6 +3395,8 @@
   }%
 }%
 \newcommand{\makebackcover}{%
+  \printlocalbibs{}%
+  \cleardoublepage%
   \pagestyle{backcover}%
   \ifthenelse{\equal{\YAD@colophon@location}{recto-backcover}}{%
     \newgeometry{centering,nomarginpar,bottom=1cm,top=1cm,headheight=\YAD@max@logoheight,hmargin=2cm,includeall}%
@@ -3717,17 +3778,26 @@
   }{%
   }%
 }{}{}%
-\LetLtxMacro{\YAD@ORI@chapter}{\chapter}%
-\AfterPreamble{% delay the redefinition when titlesec has done its own
-  \renewcommand\chapter{%
-    \ifbool{YAD@localbibs}{%
+\newcommand{\printlocalbibs}{%
+  \ifbool{YAD@localbibs}{%
+    \ifbool{YAD@localbibs@used}{%
+    }{%
       \let\YAD@ORI@blx@warn@bibempty\blx@warn@bibempty%
       \def\blx@warn@bibempty{}%
       \YAD@printbibliography@ORI[segment=\therefsegment,heading=YAD@localbibs@heading]%
       \let\blx@warn@bibempty\YAD@ORI@blx@warn@bibempty%
-    }{%
+      \booltrue{YAD@localbibs@used}%
     }%
+  }{%
+  }%
+}%
+\LetLtxMacro{\YAD@ORI@chapter}{\chapter}%
+\AfterPreamble{% delay the redefinition when titlesec has done its own
+  \renewcommand\chapter{%
+    \printlocalbibs{}%
+    \boolfalse{YAD@localbibs@used}%
     \cleardoublepage%
+    \renewcommand{\sectiontitle}{}%
     \pagestyle{preliminary}%
     \ifbool{YAD@mainmatter}%
     {%
@@ -3738,6 +3808,10 @@
     {%
       \pagestyle{backmatter}%
     }{%
+    }%
+    \ifcsempty{YAD@own@pagestyle}{%
+    }{%
+      \pagestyle{\YAD@own@pagestyle}%
     }%
     \YAD@phantomsection%
     \ifbool{YAD@output@paper}{%
@@ -4081,18 +4155,18 @@
     }%
     \let\YAD@printbibliography@ORI\printbibliography%
     \renewcommand{\printbibliography}[1][]{%
-      \singlespacing%
       \booltrue{YAD@printbibliography@used}%
+      \singlespace%
       \chapter*{\bibname}%
       \YAD@printbibliography@ORI[heading=none,#1]%
+      \endsinglespace%
     }%
   }{%
     \BeforeBeginEnvironment{thebibliography}{%
-      \cleardoublepage%
       \singlespacing%
     }%
-    \AfterEndEnvironment{thebibliography}{%
-      \let\cleardoublepage\relax%
+    \AtEndEnvironment{thebibliography}{%
+      \clearpage%
     }%
   }%
 }%
