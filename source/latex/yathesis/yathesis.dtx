@@ -3117,6 +3117,18 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}{\pagestyle}
+%   Redéfinition permettant d'éviter de devoir ajouter
+%   \lstinline|\cleardoublepage| avant chaque la commande
+%   \lstinline|\pagestyle| fournie par le package \package{titleps}
+%   (cet ajout est pour l'instant nécessaire pour que les entêtes
+%   aux frontières des chapitres non numérotés ne soient pas
+%   erronés).
+%    \begin{macrocode}
+\pretocmd{\pagestyle}{\cleardoublepage}{}{}%
+%    \end{macrocode}
+% \end{macro}
+%
 % Redéfinition de la commande "\tableofcontents" de sorte qu'elle admette un
 % argument optionnel permettant d'afficher une table des matières supplémentaire
 % jusqu'à un niveau donné. Cette commande, qui s'appuie sur le \Package{etoc},
@@ -3132,6 +3144,7 @@ This work consists of the file  yathesis.dtx
           \let\YAD@ORI@localtableofcontents\localtableofcontents%
           \renewcommand{\tableofcontents}{%
             \booltrue{YAD@tableofcontents@used}%
+            \pagestyle{preliminary}%
             \YAD@phantomsection%
             % \renewcommand{\contentsname}{\cmdKV@YAD@name}
             \@ifnextchar[{\tableofcontents@YAD@with@argument}{\tableofcontents@YAD@without@argument}%]
@@ -3144,6 +3157,16 @@ This work consists of the file  yathesis.dtx
             \let\cmdKV@YAD@depth\YAD@tocdepth%
             \let\cmdKV@YAD@name\contentsname%
             \YAD@localstyle % pour les local TOCs qui suivent
+            \ifbool{YAD@mainmatter}%
+            {%
+            \pagestyle{mainmatter}%
+            }{%
+            }%
+            \ifbool{YAD@backmatter}%
+            {%
+              \pagestyle{backmatter}%
+            }{%
+            }%
           }%
           \newcommand\tableofcontents@YAD@with@argument[1][]{%
             \yadsetup{#1}%
@@ -3169,6 +3192,16 @@ This work consists of the file  yathesis.dtx
             \let\cmdKV@YAD@depth\YAD@tocdepth%
             \let\cmdKV@YAD@name\contentsname%
             \YAD@localstyle % pour les local TOCs qui suivent
+            \ifbool{YAD@mainmatter}%
+            {%
+            \pagestyle{mainmatter}%
+            }{%
+            }%
+            \ifbool{YAD@backmatter}%
+            {%
+              \pagestyle{backmatter}%
+            }{%
+            }%
           }%
         }%
 %    \end{macrocode}
@@ -3373,7 +3406,10 @@ This work consists of the file  yathesis.dtx
 % géométrie restaurée mais toujours pas de titres courants
 %    \begin{macrocode}
 \newpagestyle{prepreliminary}[]{%
-  \cleardoublepage%
+  \sethead{}{}{}%
+  \setfoot{}{}{}%
+  \setheadrule{0pt}%
+  \setfootrule{0pt}%
 %    \end{macrocode}
 % Dans la partie pré-préliminaire, aucun élément de structuration n'est
 % numéroté, les titres courants sont absents et la profondeur de la table des
@@ -3387,7 +3423,6 @@ This work consists of the file  yathesis.dtx
 % de l'insertion des titres courants
 %    \begin{macrocode}
 \newpagestyle{preliminary}[]{%
-  \cleardoublepage%
   \sethead[\thepage]%
   []%
   [\YAD@chapter@header]%
@@ -3445,6 +3480,7 @@ This work consists of the file  yathesis.dtx
 \xapptocmd{\mainmatter}{%
   \booltrue{YAD@mainmatter@used}%
   \booltrue{YAD@mainmatter}%
+  \pagestyle{mainmatter}%
   \ifbool{YAD@localtocs@classoption}%
   {%
     \booltrue{YAD@localtocs}%
@@ -3459,7 +3495,6 @@ This work consists of the file  yathesis.dtx
       \onehalfspacing%
     }%
   }%
-  \pagestyle{mainmatter}%
 }{}{}%
 %    \end{macrocode}
 % Vérification, en fin de document, de l'usage de la commande "\mainmatter" et
@@ -3520,10 +3555,10 @@ This work consists of the file  yathesis.dtx
 % Extension de la commande "\appendix" de sorte que les chapitres d'annexe
 % soient correctement nommés.
 %    \begin{macrocode}
-\apptocmd{\appendix}{%
-  \renewcommand\chaptername{\appendixname}%
-  \singlespacing%
-}{}{}%
+  \apptocmd{\appendix}{%
+    \renewcommand\chaptername{\appendixname}%
+    \singlespacing%
+  }{}{}%
 %    \end{macrocode}
 % Définition du style de page de la partie finale
 %    \begin{macrocode}
@@ -4055,8 +4090,7 @@ This work consists of the file  yathesis.dtx
 }%
 \expandafter\selectlanguage\expandafter{\YAD@mainlanguage}%
 \restoregeometry%
-\cleardoublepage%
-\pagestyle{prepreliminary}%
+\pagestyle{preliminary}%
 }%
 %    \end{macrocode}
 % \end{macro}
@@ -4190,7 +4224,6 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % Appel du style de page propre à la partie préliminaire
 %    \begin{macrocode}
-  \cleardoublepage%
   \pagestyle{prepreliminary}%
   % \YAD@astuce@expressioncle%
   \if@tempswa%
@@ -4220,6 +4253,7 @@ This work consists of the file  yathesis.dtx
   \else%
   \vspace*{\stretch{1}}%
   \fi
+  \pagestyle{preliminary}%
   \expandafter\selectlanguage\expandafter{\YAD@mainlanguage}%
 }%
 %    \end{macrocode}
@@ -4322,7 +4356,6 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % Appel du style de page propre à la partie préliminaire
 %    \begin{macrocode}
-  \cleardoublepage%
   \pagestyle{prepreliminary}%
 % \YAD@astuce@expressioncle%
   \if@tempswa%
@@ -4486,6 +4519,7 @@ This work consists of the file  yathesis.dtx
     \vspace*{\stretch{1}}%
   }{%
   }%
+  \pagestyle{preliminary}%
 }%
 %    \end{macrocode}
 % \end{macro}
@@ -4689,16 +4723,14 @@ This work consists of the file  yathesis.dtx
 % Page de présentation (résumés)
 %    \begin{macrocode}
 \newcommand{\makeabstract}{%
-  \cleardoublepage%
   \pagestyle{preliminary}%
+  \bgroup%
   \ifbool{YAD@nomakeabstract}{%
   }{%
     \YAD@alarm@noabstract%
   }%
   \YAD@phantomsection%
   \addcontentsline{toc}{chapter}{\abstractname}%
-  \booltrue{YAD@makeabstract@used}%
-  \bgroup%
   \addtolength{\footskip}{6pt minus 6pt}%
   \setfootrule{0pt}%
   \setfoot[][][]{%
@@ -4717,6 +4749,8 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
   \YAD@nolaboratorytrue%
   \YAD@nolaboratoryaddresstrue%
+%
+  \booltrue{YAD@makeabstract@used}%
 }%
 %    \end{macrocode}
 % \end{macro}
@@ -4798,7 +4832,6 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \newcommand{\makebackcover}{%
   \printlocalbibs{}%
-  \cleardoublepage%
   \pagestyle{backcover}%
 %    \end{macrocode}
 % On insère le code pour l'éventuel colophon
@@ -4822,7 +4855,6 @@ This work consists of the file  yathesis.dtx
         \@ifstar{\@tempswatrue\csuse{YAD@starnostar@makededications}}{\@tempswafalse\csuse{YAD@starnostar@makededications}}%
         }%
         \csdef{YAD@starnostar@makededications}{%
-        \cleardoublepage%
         \pagestyle{prepreliminary}%
         \if@tempswa%
         \else%
@@ -4872,6 +4904,7 @@ This work consists of the file  yathesis.dtx
         \else%
         \vspace*{\stretch{2}}%
         \fi
+        \pagestyle{preliminary}%
         }%
 %    \end{macrocode}
 % \end{macro}
@@ -4884,7 +4917,6 @@ This work consists of the file  yathesis.dtx
 }%
 \csdef{YAD@starnostar@makefrontepigraphs}{%
   \patchcmd{\epigraphs}{\qitemlabel}{\qitemlabel\itemsep=1.5\baselineskip}{}{}%
-  \cleardoublepage%
   \pagestyle{prepreliminary}%
   \if@tempswa%
   \else%
@@ -4948,6 +4980,7 @@ This work consists of the file  yathesis.dtx
   \else%
   \vspace*{\stretch{2}}%
   \fi
+  \pagestyle{preliminary}%
 }%
 %    \end{macrocode}
 % \end{macro}
@@ -5299,17 +5332,6 @@ This work consists of the file  yathesis.dtx
     \boolfalse{YAD@localbibs@used}%
     \cleardoublepage%
     \renewcommand{\sectiontitle}{}%
-    \pagestyle{preliminary}%
-    \ifbool{YAD@mainmatter}%
-    {%
-      \pagestyle{mainmatter}%
-    }{%
-    }%
-    \ifbool{YAD@backmatter}%
-    {%
-      \pagestyle{backmatter}%
-    }{%
-    }%
     \ifcsempty{YAD@own@pagestyle}{%
     }{%
       \pagestyle{\YAD@own@pagestyle}%
@@ -5721,7 +5743,6 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % Appel du style de page propre à la partie préliminaire
 %    \begin{macrocode}
-  \cleardoublepage%
   \pagestyle{prepreliminary}%
   \if@tempswa%
   \else%
@@ -5732,6 +5753,7 @@ This work consists of the file  yathesis.dtx
   \else%
   \vspace*{\stretch{1}}%
   \fi%
+  \pagestyle{preliminary}%
 }%
 %    \end{macrocode}
 % \end{macro}
