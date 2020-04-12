@@ -3412,36 +3412,6 @@ This work consists of the file  yathesis.dtx
   \YAD@setfoot%
 }%
 %    \end{macrocode}
-% Définition du style de page de la partie préliminaire: début
-% de l'insertion des titres courants
-%    \begin{macrocode}
-\newpagestyle{part-before-chapter}[]{%
-  % \cleardoublepage%
-  \sethead[\thepage]%
-  []%
-  [\YAD@section@header]%
-  {%
-    \YAD@section@header%
-  }%
-  {}%
-  {\thepage}%
-  \headrule%
-%    \end{macrocode}
-% Dans la partie préliminaire, aucun élément de structuration n'est
-% numéroté et la profondeur de la table des matières est fixée à son
-% niveau par défaut (sous-sections)
-%    \begin{macrocode}
-  \booltrue{YAD@nonnumbered@chapter}%
-  \booltrue{YAD@nonnumbered@section}%
-  \booltrue{YAD@nonnumbered@subsection}%
-  \booltrue{YAD@nonnumbered@subsubsection}%
-  \booltrue{YAD@nonnumbered@paragraph}%
-  \booltrue{YAD@nonnumbered@subparagraph}%
-  \YAD@setsecnumdepth{none}%
-  \renewcommand{\sectiontitle}{}%
-  \YAD@setfoot%
-}%
-%    \end{macrocode}
 % Définition du style de page de la partie principale
 %    \begin{macrocode}
 \newpagestyle{mainmatter}[]{%
@@ -3545,15 +3515,7 @@ This work consists of the file  yathesis.dtx
   \pretocmd{\enddocument}{%
     \printlocalbibs{}%
   }{}{}%
-%    \end{macrocode}
-% Pour que les titres courants ne se comportent pas de façon inattendue sur les
-% pages suivant le début d'une partie et précédant son 1\ier{} chapitre, on
-% applique un style de page spécifique.
-%    \begin{macrocode}
-  \apptocmd{\@endpart}{%
-    \pagestyle{part-before-chapter}%
-  }{}{}%
-}%
+}
 %    \end{macrocode}
 % Extension de la commande "\appendix" de sorte que les chapitres d'annexe
 % soient correctement nommés.
