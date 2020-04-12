@@ -3624,14 +3624,6 @@ This work consists of the file  yathesis.dtx
 }%
 %    \end{macrocode}
 %
-% Définition d'une macro contenant le nom d'un style de page défini par
-% l'utilisateur que celui-ci pourra utiliser pour contrevenir au style imposé
-% par la classe.
-%    \begin{macrocode}
-\def\YAD@own@pagestyle{}
-\newcommand{\ownpagestyle}[1]{\def\YAD@own@pagestyle{#1}}
-%    \end{macrocode}
-%
 % \begin{macro}{\printlaboratory}
 %    \begin{macrocode}
 \newcommand*{\printlaboratory}[2][]{%
@@ -5332,10 +5324,6 @@ This work consists of the file  yathesis.dtx
     \boolfalse{YAD@localbibs@used}%
     \cleardoublepage%
     \renewcommand{\sectiontitle}{}%
-    \ifcsempty{YAD@own@pagestyle}{%
-    }{%
-      \pagestyle{\YAD@own@pagestyle}%
-    }%
     \YAD@phantomsection%
     \ifbool{YAD@output@paper}{%
     }{%
