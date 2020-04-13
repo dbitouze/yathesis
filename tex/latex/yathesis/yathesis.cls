@@ -11,10 +11,10 @@
 %% Released under the LaTeX Project Public License v1.3c or later
 %% See http://www.latex-project.org/lppl.txt
 %% -----------------------------------------------------------------------
-\def\fileversion{v1.0.1}
-\def\filedate{2020/03/28}
+\def\yathesisfileversion{1.0.2}
+\def\yathesisfiledate{2020-04-13}
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
-\ProvidesClass{yathesis}[\filedate\space\fileversion\space Yet another class for writing thesis (DB)]
+\ProvidesClass{yathesis}[\yathesisfiledate\space v\yathesisfileversion\space Yet another class for writing thesis (DB)]
 \RequirePackage{pgfopts}[2011/06/02]%
 \RequirePackage{etoolbox}[2011/01/03]%
 \RequirePackage{xpatch}[2012/10/02]%
@@ -2014,11 +2014,13 @@
     \newcommand*{\YAD@setfoot}{}%
   }%
 }%
+\pretocmd{\pagestyle}{\cleardoublepage}{}{}%
         \AfterEndPreamble{%
           \let\YAD@ORI@tableofcontents\tableofcontents%
           \let\YAD@ORI@localtableofcontents\localtableofcontents%
           \renewcommand{\tableofcontents}{%
             \booltrue{YAD@tableofcontents@used}%
+            \pagestyle{preliminary}%
             \YAD@phantomsection%
             % \renewcommand{\contentsname}{\cmdKV@YAD@name}
             \@ifnextchar[{\tableofcontents@YAD@with@argument}{\tableofcontents@YAD@without@argument}%]
@@ -2031,6 +2033,16 @@
             \let\cmdKV@YAD@depth\YAD@tocdepth%
             \let\cmdKV@YAD@name\contentsname%
             \YAD@localstyle % pour les local TOCs qui suivent
+            \ifbool{YAD@mainmatter}%
+            {%
+            \pagestyle{mainmatter}%
+            }{%
+            }%
+            \ifbool{YAD@backmatter}%
+            {%
+              \pagestyle{backmatter}%
+            }{%
+            }%
           }%
           \newcommand\tableofcontents@YAD@with@argument[1][]{%
             \yadsetup{#1}%
@@ -2056,6 +2068,16 @@
             \let\cmdKV@YAD@depth\YAD@tocdepth%
             \let\cmdKV@YAD@name\contentsname%
             \YAD@localstyle % pour les local TOCs qui suivent
+            \ifbool{YAD@mainmatter}%
+            {%
+            \pagestyle{mainmatter}%
+            }{%
+            }%
+            \ifbool{YAD@backmatter}%
+            {%
+              \pagestyle{backmatter}%
+            }{%
+            }%
           }%
         }%
         \newcommand{\YAD@setsecnumdepth}[1]{%
@@ -2151,7 +2173,7 @@
       and
       (not bool {YAD@backmatter})
       and
-      (not bool {YAD@localbibs})
+      (not bool {YAD@localbibs@used})
   }{%
     \thesection.
   }{%
@@ -2202,12 +2224,14 @@
   \setfoot{}{}{}%
 }%
 \newpagestyle{prepreliminary}[]{%
-  \cleardoublepage%
+  \sethead{}{}{}%
+  \setfoot{}{}{}%
+  \setheadrule{0pt}%
+  \setfootrule{0pt}%
   \setcounter{secnumdepth}{-10}%
   % \YAD@setfoot%
 }%
 \newpagestyle{preliminary}[]{%
-  \cleardoublepage%
   \sethead[\thepage]%
   []%
   [\YAD@chapter@header]%
@@ -2224,27 +2248,6 @@
   {\thepage}%
   \headrule%
   \setcounter{secnumdepth}{-10}%
-  \YAD@setfoot%
-}%
-\newpagestyle{part-before-chapter}[]{%
-  % \cleardoublepage%
-  \sethead[\thepage]%
-  []%
-  [\YAD@section@header]%
-  {%
-    \YAD@section@header%
-  }%
-  {}%
-  {\thepage}%
-  \headrule%
-  \booltrue{YAD@nonnumbered@chapter}%
-  \booltrue{YAD@nonnumbered@section}%
-  \booltrue{YAD@nonnumbered@subsection}%
-  \booltrue{YAD@nonnumbered@subsubsection}%
-  \booltrue{YAD@nonnumbered@paragraph}%
-  \booltrue{YAD@nonnumbered@subparagraph}%
-  \YAD@setsecnumdepth{none}%
-  \renewcommand{\sectiontitle}{}%
   \YAD@setfoot%
 }%
 \newpagestyle{mainmatter}[]{%
@@ -2269,6 +2272,7 @@
 \xapptocmd{\mainmatter}{%
   \booltrue{YAD@mainmatter@used}%
   \booltrue{YAD@mainmatter}%
+  \pagestyle{mainmatter}%
   \ifbool{YAD@localtocs@classoption}%
   {%
     \booltrue{YAD@localtocs}%
@@ -2283,7 +2287,6 @@
       \onehalfspacing%
     }%
   }%
-  \pagestyle{mainmatter}%
 }{}{}%
 \AtEndDocument{%
   \ifboolexpr{%
@@ -2318,14 +2321,11 @@
   \pretocmd{\enddocument}{%
     \printlocalbibs{}%
   }{}{}%
-  \apptocmd{\@endpart}{%
-    \pagestyle{part-before-chapter}%
+}
+  \apptocmd{\appendix}{%
+    \renewcommand\chaptername{\appendixname}%
+    \singlespacing%
   }{}{}%
-}%
-\apptocmd{\appendix}{%
-  \renewcommand\chaptername{\appendixname}%
-  \singlespacing%
-}{}{}%
 \newpagestyle{backmatter}[]{%
   \singlespacing%
   \sethead[\thepage]%
@@ -2368,8 +2368,6 @@
   {}%
   \setcounter{secnumdepth}{-10}%
 }%
-\def\YAD@own@pagestyle{}
-\newcommand{\ownpagestyle}[1]{\def\YAD@own@pagestyle{#1}}
 \newcommand*{\printlaboratory}[2][]{%
   \YAD@ifemptyorundef{#2}{%
     \YAD@reach@file{\YAD@generic@argument@translate{laboratory}}%
@@ -2775,8 +2773,7 @@
 }%
 \expandafter\selectlanguage\expandafter{\YAD@mainlanguage}%
 \restoregeometry%
-\cleardoublepage%
-\pagestyle{prepreliminary}%
+\pagestyle{preliminary}%
 }%
 \AtEndDocument{%
   \ifboolexpr{%
@@ -2877,7 +2874,6 @@
   \@ifstar{\@tempswatrue\csuse{YAD@starnostar@makekeywords}}{\@tempswafalse\csuse{YAD@starnostar@makekeywords}}%
 }%
 \csdef{YAD@starnostar@makekeywords}{%
-  \cleardoublepage%
   \pagestyle{prepreliminary}%
   % \YAD@astuce@expressioncle%
   \if@tempswa%
@@ -2907,6 +2903,7 @@
   \else%
   \vspace*{\stretch{1}}%
   \fi
+  \pagestyle{preliminary}%
   \expandafter\selectlanguage\expandafter{\YAD@mainlanguage}%
 }%
 \DTLnewdb{laboratories}%
@@ -2995,7 +2992,6 @@
   \@ifstar{\@tempswatrue\csuse{YAD@starnostar@makelaboratory}}{\@tempswafalse\csuse{YAD@starnostar@makelaboratory}}%
 }%
 \csdef{YAD@starnostar@makelaboratory}{%
-  \cleardoublepage%
   \pagestyle{prepreliminary}%
   \if@tempswa%
   \else%
@@ -3158,6 +3154,7 @@
     \vspace*{\stretch{1}}%
   }{%
   }%
+  \pagestyle{preliminary}%
 }%
 \csgdef{YAD@abstractname@mainlanguage}{\abstractname}%
 \csgdef{YAD@abstractname@secondarylanguage}{\abstractname}%
@@ -3313,16 +3310,14 @@
   }%
 }%
 \newcommand{\makeabstract}{%
-  \cleardoublepage%
   \pagestyle{preliminary}%
+  \bgroup%
   \ifbool{YAD@nomakeabstract}{%
   }{%
     \YAD@alarm@noabstract%
   }%
   \YAD@phantomsection%
   \addcontentsline{toc}{chapter}{\abstractname}%
-  \booltrue{YAD@makeabstract@used}%
-  \bgroup%
   \addtolength{\footskip}{6pt minus 6pt}%
   \setfootrule{0pt}%
   \setfoot[][][]{%
@@ -3335,6 +3330,7 @@
   \egroup%
   \YAD@nolaboratorytrue%
   \YAD@nolaboratoryaddresstrue%
+  \booltrue{YAD@makeabstract@used}%
 }%
 \newcommand{\YAD@abstract@page@rule}[1][black]{\bgroup\color{#1}\noindent\rule[2pt]{\linewidth}{2pt}\egroup}
 \AtEndDocument{%
@@ -3396,7 +3392,6 @@
 }%
 \newcommand{\makebackcover}{%
   \printlocalbibs{}%
-  \cleardoublepage%
   \pagestyle{backcover}%
   \ifthenelse{\equal{\YAD@colophon@location}{recto-backcover}}{%
     \newgeometry{centering,nomarginpar,bottom=1cm,top=1cm,headheight=\YAD@max@logoheight,hmargin=2cm,includeall}%
@@ -3411,7 +3406,6 @@
         \@ifstar{\@tempswatrue\csuse{YAD@starnostar@makededications}}{\@tempswafalse\csuse{YAD@starnostar@makededications}}%
         }%
         \csdef{YAD@starnostar@makededications}{%
-        \cleardoublepage%
         \pagestyle{prepreliminary}%
         \if@tempswa%
         \else%
@@ -3461,13 +3455,13 @@
         \else%
         \vspace*{\stretch{2}}%
         \fi
+        \pagestyle{preliminary}%
         }%
 \csdef{makefrontepigraphs}{%
   \@ifstar{\@tempswatrue\csuse{YAD@starnostar@makefrontepigraphs}}{\@tempswafalse\csuse{YAD@starnostar@makefrontepigraphs}}%
 }%
 \csdef{YAD@starnostar@makefrontepigraphs}{%
   \patchcmd{\epigraphs}{\qitemlabel}{\qitemlabel\itemsep=1.5\baselineskip}{}{}%
-  \cleardoublepage%
   \pagestyle{prepreliminary}%
   \if@tempswa%
   \else%
@@ -3531,6 +3525,7 @@
   \else%
   \vspace*{\stretch{2}}%
   \fi
+  \pagestyle{preliminary}%
 }%
 \def\YAD@leftmargin {0pt}
 \def\YAD@rightmargin {2.55em}% like LaTeX’s \@tocrmarg
@@ -3798,21 +3793,6 @@
     \boolfalse{YAD@localbibs@used}%
     \cleardoublepage%
     \renewcommand{\sectiontitle}{}%
-    \pagestyle{preliminary}%
-    \ifbool{YAD@mainmatter}%
-    {%
-      \pagestyle{mainmatter}%
-    }{%
-    }%
-    \ifbool{YAD@backmatter}%
-    {%
-      \pagestyle{backmatter}%
-    }{%
-    }%
-    \ifcsempty{YAD@own@pagestyle}{%
-    }{%
-      \pagestyle{\YAD@own@pagestyle}%
-    }%
     \YAD@phantomsection%
     \ifbool{YAD@output@paper}{%
     }{%
@@ -4108,7 +4088,6 @@
   \@ifstar{\@tempswatrue\csuse{YAD@starnostar@makedisclaimer}}{\@tempswafalse\csuse{YAD@starnostar@makedisclaimer}}%
 }%
 \csdef{YAD@starnostar@makedisclaimer}{%
-  \cleardoublepage%
   \pagestyle{prepreliminary}%
   \if@tempswa%
   \else%
@@ -4119,6 +4098,7 @@
   \else%
   \vspace*{\stretch{1}}%
   \fi%
+  \pagestyle{preliminary}%
 }%
 \colophontext{%
   \IfLanguageName{french}{%
