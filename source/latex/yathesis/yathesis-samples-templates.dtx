@@ -9,9 +9,17 @@
 %</flat-template|these-master>
 %<*these-sample|flat-sample>
 %<<COMMENT
-% Document de classe yathesis, en 12 points, interligne un et demi, et version finale
+% Document :
+% - de classe yathesis ;
+% - en 12 points ;
+% - en version finale ;
+% - dont la partie principale :
+%   - est en interligne un et demi ;
+%   - voit chaque chapitre :
+%     - débuter par sa table des matières locale ;
+%     - finir   par sa bibliographie      locale.
 %COMMENT
-\documentclass[12pt,space=onehalf,version=final]{yathesis}
+\documentclass[12pt,version=final,space=onehalf,localtocs,localbibs]{yathesis}
 %</these-sample|flat-sample>
 %<*these-sample|flat-sample|flat-template|these-master>
 %<<COMMENT
