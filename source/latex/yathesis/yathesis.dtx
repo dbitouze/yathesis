@@ -128,7 +128,7 @@ This work consists of the file  yathesis.dtx
 \def\YAD@treesample{\YAD@examples/\YAD@sample/en-arborescence}
 %</install>
 %<*install>
-\usedir{doc/latex/\YAD@classname/}
+\usedir{doc/latex/\YAD@classname}
 \generate{
   \nopreamble\nopostamble
   \file{README.md}{\from{\jobname.dtx}{readme}}
@@ -265,15 +265,7 @@ This work consists of the file  yathesis.dtx
 \fi
 %</internal>
 % \fi
-% \def\YADnblastversion{1.0.1}
-% \def\YADdatelastversion{\today}
-% \def\fileversion{v\YADnblastversion}
-% \def\filedate{\YADdatelastversion}
 % \iffalse
-%<*class>
-\def\fileversion{v1.0.1}
-\def\filedate{2020/03/28}
-%</class>
 %<*driver>
 \ProvidesFile{yathesis.dtx}
 \RequirePackage{scrlfile}
@@ -6903,6 +6895,9 @@ name=
     }
     {%
       \ifthenelse{\equal{#3}{Introduction générale}}{\cleardoublepage\zlabel{introduction}%
+      }{%
+      }%
+      \ifthenelse{\equal{#3}{Développement}}{\zlabel{localbib}%
       }{%
       }%
       \ifthenelse{\equal{#3}{Contexte du chaos du rire}}{\cleardoublepage\zlabel{chapter}%
