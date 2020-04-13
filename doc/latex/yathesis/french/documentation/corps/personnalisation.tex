@@ -181,9 +181,9 @@ clé \refKey{localtocs/depth}.
 \documentclass[localtocs]{yathesis}
 \end{preamblecode}
 
-  Dans l'exemple précédent, les tables des matières locales vont jusqu'aux
-  sous-sections. Pour qu'elles aillent par exemple jusqu'aux sous-sous-sections,
-  on recourra à :
+  Dans l'exemple précédent (illustré \vref{fig-introduction}), les tables des
+  matières locales vont jusqu'aux sous-sections. Pour qu'elles aillent par
+  exemple jusqu'aux sous-sous-sections, on recourra à :
 \begin{preamblecode}
 \documentclass[localtocs/depth=subsubsection]{yathesis}
 \end{preamblecode}
@@ -262,7 +262,7 @@ intitulée \translateexpression{localtocname}.
 
 \begin{dbexample}{Bibliographies locales automatiques}{}
   \indexex{bibliographie!locale}%
-  Pour que chaque chapitre finisse automatiquement par sa bibliographie locale,
+  Pour que chaque chapitre finisse automatiquement par sa bibliographie locale
   il suffit de passer l'option suivante à la \yatCl{}.
 \begin{preamblecode}
 \documentclass[localbibs]{yathesis}
@@ -271,6 +271,14 @@ intitulée \translateexpression{localtocname}.
 
 Les bibliographies locales sont introduites par une section (non numérotée)
 intitulée \translateexpression{localbibname}.
+
+La \vref{fig-localbib} illustre cette fonctionnalité.
+\begin{figure}[htbp]
+  \centering
+  \screenshot{localbib}
+  \caption{Bibliographie locale}
+  \label{fig-localbib}
+\end{figure}
 
 \subsection{Versions du mémoire}\label{sec-versions}
 \index{version du mémoire}%
@@ -460,7 +468,9 @@ Ce colophon peut être personnalisé au moyen de l'option
     %
     \changes{v1.0.0}{2020-03-26}{Nouvelle option de classe
       \protect\refKey{colophon-location} permettant de modifier l'emplacement par
-      défaut (en 2\ieme{} de couverture) du colophon ou de le supprimer.}%
+      défaut (en 2\ieme{} de couverture) du colophon ou de le
+      supprimer\protect\footnote{Pour retrouver le comportement antérieur (pas
+        de colophon), il suffit de spécifier \protect\lstinline|colophon-location=nowhere|.}.}%
     %
     Cette clé permet, au moyen des valeurs suivantes, de spécifier l'emplacement
     du colophon dans le mémoire.

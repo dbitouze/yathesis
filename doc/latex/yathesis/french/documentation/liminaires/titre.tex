@@ -2,7 +2,7 @@
   Documentation de la classe \texorpdfstring{\yat}{yathesis}%
 }
 %
-\subtitle[\version{1.0.1}]{\version{1.0.1}}
+\subtitle[\version{\yathesisfileversion}]{\version{\yathesisfileversion}}
 %
 \author[denis.bitouze@univ-littoral.fr]{Denis}{Bitouzé}
 %
@@ -12,7 +12,11 @@ typesetting of theses prepared in France]{Classe LaTeX destinée à faciliter la
 %
 \keywords{mémoire, thèse, \texorpdfstring{\LaTeX}{LaTeX}, classe}{dissertation, thesis, \texorpdfstring{\LaTeX}{LaTeX}, class}
 %
-\date{\the\day}{\the\month}{\the\year}%
+\def\mysplit#1-#2-#3-{\def\myyear{#1}\def\mymonth{#2}\def\myday{#3}}
+\def\splitdate#1{\expandafter\mysplit#1-}
+\splitdate{\yathesisfiledate}
+
+\date{\myday}{\mymonth}{\myyear}%
 %
 \maketitle[nofrontcover,frametitle={drop lifted shadow}]
 
