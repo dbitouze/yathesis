@@ -1,5 +1,21 @@
 # [Unreleased]
 
+# [1.0.2] - 2020-04-13
+
+## Changed
+
+- Specimens now highlight the automatic local tocs and local bibs features of
+  the class.
+- Verso of the asbtract page now with empty footer.
+- Completion file for TeXstudio improved and updated.
+
+## Fixed
+- Switches between pages styles robustified.
+- Bug #65 now for bibtex as well.
+- French rules were applied to glossaries and acronyms even in case of
+  `mainlanguage=english`.
+- Subtitles were too close to multiline titles.
+
 # [1.0.1] - 2020-03-28
 
 ## Changed
