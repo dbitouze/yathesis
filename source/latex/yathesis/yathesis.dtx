@@ -23,7 +23,7 @@
 %<*readme>
 -----------------------------------------------------------------------
 
-- `yathesis` --- Yet Another Thesis Class, version 1.0.1
+- `yathesis` --- Yet Another Thesis Class, version 1.0.2
 - E-mail: `denis.bitouze@univ-littoral.fr`
 - Released under the LaTeX Project Public License v1.3c or later. See
   http://www.latex-project.org/lppl.txt
@@ -69,11 +69,15 @@ Typesetting the documentation of the class requires:
   \expandafter\begingroup
 \fi
 %</internal>
+%<*class|install>
+\def\yathesisfileversion{1.0.2}
+\def\yathesisfiledate{2020-04-13}
+%</class|install>
 %<*install>
 \input docstrip.tex
 \Msg{********************************************************}
 \Msg{* Installation}
-\Msg{* Class: yathesis 2020-03-28 v1.0.1}
+\Msg{* Class: yathesis \yathesisfiledate\space v\yathesisfileversion}
 \Msg{* that helps to write thesis following French rules (DB)}
 \Msg{********************************************************}
 \keepsilent
@@ -356,7 +360,7 @@ This work consists of the file  yathesis.dtx
 %
 %    \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
-\ProvidesClass{yathesis}[\filedate\space\fileversion\space Yet another class for writing thesis (DB)]
+\ProvidesClass{yathesis}[\yathesisfiledate\space v\yathesisfileversion\space Yet another class for writing thesis (DB)]
 %    \end{macrocode}
 %
 % Pour pouvoir définir des macros dont les arguments puissent être
