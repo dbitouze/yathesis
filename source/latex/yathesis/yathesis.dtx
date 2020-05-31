@@ -3122,6 +3122,8 @@ This work consists of the file  yathesis.dtx
 %   erronés).
 %    \begin{macrocode}
 \pretocmd{\pagestyle}{\cleardoublepage}{}{}%
+\newtitlemark*{chapter}
+\newtitlemark*{section}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -6033,8 +6035,7 @@ This work consists of the file  yathesis.dtx
 % \enquote{CHAPITRE XXX. Bibliographie}.
 %    \begin{macrocode}
       \singlespace%
-      \chapter*{\bibname}%
-      \YAD@printbibliography@ORI[heading=none,#1]%
+      \YAD@printbibliography@ORI[#1]%
       \endsinglespace%
     }%
   }{%
@@ -6048,6 +6049,18 @@ This work consists of the file  yathesis.dtx
 }%
 %    \end{macrocode}
 % \end{macro}
+%
+% On s'assure que, en fin de document, les \enquote{chapitres} et
+% \enquote{section} sont non numérotés afin d'éviter sur la (ou les ?)
+% dernière(s) page(s) des titres courants incorrects (comportant
+% \enquote{Chapitre XXX. ...} ou \enquote{XXX.XXX} qui ne devraient pas
+% apparaître si le dernier chapitre du document est non numéroté).
+%    \begin{macrocode}
+\AtEndDocument{%
+  \booltrue{YAD@nonnumbered@chapter}%
+  \booltrue{YAD@nonnumbered@section}%
+}
+%    \end{macrocode}
 %
 % Si la commande "\printbibliography" n'a pas été utilisée, une erreur est émise.
 %    \begin{macrocode}
