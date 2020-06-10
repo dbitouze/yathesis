@@ -3274,7 +3274,7 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 %
 % Globalement dans le document, la table des matières et la
-% numérotation des paragraphes vont jusqu'aux sous-sections
+% numérotation des paragraphes vont jusqu'aux sous-sections.
 %    \begin{macrocode}
         \etocsettocdepth{\YAD@tocdepth}%
         \AtBeginDocument{%
@@ -3285,7 +3285,7 @@ This work consists of the file  yathesis.dtx
         %
 %    \end{macrocode}
 %
-% Définition des styles de pages (basées sur le \Package{titleps})
+% Définition des styles de pages (basés sur le \Package{titleps})
 %
 % \begin{macro}{\YAD@chapter@header}
 % Définition de titres courants
@@ -3514,7 +3514,7 @@ This work consists of the file  yathesis.dtx
 }%
 %    \end{macrocode}
 % Pour que les bibliographies locales apparaissent automatiquement à chaque fin de
-% chapitre, la commande "\chapter" est redéfinie de manière à commencer par
+% chapitre, la commande "\chapter" est redéfinie de manière être précédée par
 % l'insertion de la bibliographie locale ("\printlocalbibs") du, donc, chapitre
 % précédent (affichée seulement si celle-ci n'est pas vide). Ceci fonctionne
 % bien, sauf :
@@ -6039,6 +6039,10 @@ This work consists of the file  yathesis.dtx
       \endsinglespace%
     }%
   }{%
+%    \end{macrocode}
+%
+% Si \package{biblatex} non chargé (\package{bibtex} supposé).
+%    \begin{macrocode}
     \BeforeBeginEnvironment{thebibliography}{%
       \singlespacing%
     }%
