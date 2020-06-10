@@ -5290,7 +5290,15 @@ This work consists of the file  yathesis.dtx
     }{%
       \let\YAD@ORI@blx@warn@bibempty\blx@warn@bibempty%
       \def\blx@warn@bibempty{}%
+%    \end{macrocode}
+% Les bibliographies locales sont composées en interligne simple
+%    \begin{macrocode}
+      \bgroup
+      \par%
+      \singlespacing%
       \YAD@printbibliography@ORI[segment=\therefsegment,heading=YAD@localbibs@heading]%
+      \par%
+      \egroup%
       \let\blx@warn@bibempty\YAD@ORI@blx@warn@bibempty%
       \booltrue{YAD@localbibs@used}%
     }%
@@ -6034,9 +6042,12 @@ This work consists of the file  yathesis.dtx
 % celle-ci, ne  contienne pas seulement \enquote{Bibliographie} mais
 % \enquote{CHAPITRE XXX. Bibliographie}.
 %    \begin{macrocode}
-      \singlespace%
+      \bgroup
+      \par%
+      \singlespacing%
       \YAD@printbibliography@ORI[#1]%
-      \endsinglespace%
+      \par%
+      \egroup%
     }%
   }{%
 %    \end{macrocode}
