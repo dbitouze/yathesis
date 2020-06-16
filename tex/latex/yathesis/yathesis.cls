@@ -11,8 +11,8 @@
 %% Released under the LaTeX Project Public License v1.3c or later
 %% See http://www.latex-project.org/lppl.txt
 %% -----------------------------------------------------------------------
-\def\yathesisfileversion{1.0.2}
-\def\yathesisfiledate{2020-04-13}
+\def\yathesisfileversion{1.0.3}
+\def\yathesisfiledate{2020-06-16}
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesClass{yathesis}[\yathesisfiledate\space v\yathesisfileversion\space Yet another class for writing thesis (DB)]
 \RequirePackage{pgfopts}[2011/06/02]%
@@ -384,7 +384,6 @@
       refsegment=chapter,%
       defernumbers=#1%
     }%
-    \AfterEndPreamble{\newrefsegment}%
   }%
 }
 \yadsetup{%
@@ -451,7 +450,6 @@
   setspace/.code={\PassOptionsToPackage{#1}{setspace}},%
   xcolor/.code={\PassOptionsToPackage{#1}{xcolor}},%
   datatool/.code={\PassOptionsToPackage{#1}{datatool}},%
-  titleps/.code={\PassOptionsToPackage{#1}{titleps}},%
   titlesec/.code={\PassOptionsToPackage{#1}{titlesec}},%
   draftwatermark/.code={\PassOptionsToPackage{#1}{draftwatermark}},%
   babel/.code={\PassOptionsToPackage{#1}{babel}},%
@@ -494,7 +492,7 @@
 }{%
   \RequirePackage{fncychap}[2007/07/30]%
 }%
-\RequirePackage[nopatches]{titleps}[2011/12/15]%
+\RequirePackage[pagestyles]{titlesec}[2019/10/16]%
 \RequirePackage{nonumonpart}[2011/04/15]%
 \RequirePackage{xcolor}[2007/01/21]%
 \RequirePackage{datatool}[2014/03/08]%
@@ -2150,31 +2148,14 @@
         % \renewcommand{\setcounter}[2]{}%
         %
 \DeclareRobustCommand{\YAD@chapter@header}{%
-  \ifboolexpr{
-    ((test {\ifnumcomp{\value{secnumdepth}}{>}{-1}} or (not bool
-    {YAD@nonnumbered@chapter})) and test {\ifnumcomp{\value{chapter}}{>}{0}}) and
-    (not bool {YAD@backmatter})
-  }{%
-    \MakeUppercase\chaptername{}\ \thechapter.
+  \ifthechapter{%
+    \MakeUppercase\chaptertitlename\ \thechapter.
   }{%
   }%
   \chaptertitle%
 }%
 \DeclareRobustCommand{\YAD@section@header}{%
-  \ifboolexpr{
-    (
-      (
-        test {\ifnumcomp{\value{secnumdepth}}{>}{0}}
-        or
-        (not bool {YAD@nonnumbered@section})
-      )
-      and
-      test {\ifnumcomp{\value{chapter}}{>}{0}})
-      and
-      (not bool {YAD@backmatter})
-      and
-      (not bool {YAD@localbibs@used})
-  }{%
+  \ifthesection{%
     \thesection.
   }{%
   }%
@@ -2789,6 +2770,7 @@
     }%
   }%
 }%
+\AfterEndPreamble{\pagestyle{preliminary}}%
 \newcommand{\YAD@insert@colophon}{%
   \ifthenelse{\equal{\YAD@colophon@location}{nowhere}}{%
   }{%
@@ -3627,11 +3609,14 @@
     \parindent\z@
     \dimen@ 2.25em % soon to be \leftskip
     \renewcommand\addcontentsline[3]{}%
-    \section *{\kern\dimen@ % \dimen@ works here by sheer luck
-      % \contentsname%
-      % \@mkboth{\MakeUppercase\contentsname}{\MakeUppercase\contentsname}%
-      \large\textbf{\translate{lbl-localtocname}}%
+    \begingroup
+    \titlespacing*{\section}{\dimen@}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
+    \section*{%
+      \large%
+      \translate{lbl-localtocname}%
     }%
+    \endgroup
+    \sectionmark{}%
     \let\addcontentsline\YAD@addcontentsline
     \parskip \z@skip
     \vspace{\YAD@vspace@before@localtoc@rule}% somewhat ad hoc
@@ -3777,11 +3762,19 @@
   \ifbool{YAD@localbibs}{%
     \ifbool{YAD@localbibs@used}{%
     }{%
-      \let\YAD@ORI@blx@warn@bibempty\blx@warn@bibempty%
-      \def\blx@warn@bibempty{}%
-      \YAD@printbibliography@ORI[segment=\therefsegment,heading=YAD@localbibs@heading]%
-      \let\blx@warn@bibempty\YAD@ORI@blx@warn@bibempty%
-      \booltrue{YAD@localbibs@used}%
+      \ifnumcomp{\value{refsegment}}{=}{0}{%
+      }{%
+        \let\YAD@ORI@blx@warn@bibempty\blx@warn@bibempty%
+        \def\blx@warn@bibempty{}%
+        \bgroup
+        \par%
+        \singlespacing%
+        \YAD@printbibliography@ORI[segment=\therefsegment,heading=YAD@localbibs@heading]%
+        \par%
+        \egroup%
+        \let\blx@warn@bibempty\YAD@ORI@blx@warn@bibempty%
+        \booltrue{YAD@localbibs@used}%
+      }%
     }%
   }{%
   }%
@@ -4124,7 +4117,8 @@
 }%
 \AtEndPreamble{%
   \@ifpackageloaded{biblatex}{%
-    \defbibheading{YAD@localbibs@heading}[\translate{lbl-localbibname}]{%
+    \defbibheading{YAD@localbibs@heading}[\translate{lbl-localbibname} % (\therefsegment)
+    ]{%
       \renewcommand\addcontentsline[3]{}%
       \section*{#1}%
       \let\addcontentsline\YAD@addcontentsline%
@@ -4136,10 +4130,13 @@
     \let\YAD@printbibliography@ORI\printbibliography%
     \renewcommand{\printbibliography}[1][]{%
       \booltrue{YAD@printbibliography@used}%
-      \singlespace%
-      \chapter*{\bibname}%
-      \YAD@printbibliography@ORI[heading=none,#1]%
-      \endsinglespace%
+      \bgroup
+      \par%
+      \singlespacing%
+      \YAD@printbibliography@ORI[#1]%
+      \newrefsegment%
+      \endrefsegment%
+      \egroup%
     }%
   }{%
     \BeforeBeginEnvironment{thebibliography}{%
@@ -4150,6 +4147,10 @@
     }%
   }%
 }%
+\AtEndDocument{%
+  \booltrue{YAD@nonnumbered@chapter}%
+  \booltrue{YAD@nonnumbered@section}%
+}
 \AtEndDocument{%
   \ifbool{YAD@printbibliography@used}{%
   }{%
