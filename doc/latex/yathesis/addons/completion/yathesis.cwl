@@ -32,7 +32,7 @@
 #include:setspace
 #include:tcolorbox
 #include:textcase
-#include:titleps
+#include:titlesec
 #include:tocbibind
 #include:translator
 #include:twoopt
@@ -85,7 +85,7 @@ adjustbox
 setspace
 xcolor
 datatool
-titleps
+titlesec
 draftwatermark
 babel
 datetime
