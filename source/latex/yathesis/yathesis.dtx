@@ -278,6 +278,7 @@ This work consists of the file  yathesis.dtx
 \documentclass[english,french]{ltxdoc}
 \usepackage[yad]{denisbdoc}
 \lstMakeShortInline[style=dbtex]"
+%"
 \usepackage[lining]{libertine}
 \renewcommand{\ttdefault}{lmtt}
 \makeatletter
@@ -854,7 +855,6 @@ This work consists of the file  yathesis.dtx
       refsegment=chapter,%
       defernumbers=#1%
     }%
-    \AfterEndPreamble{\newrefsegment}%
   }%
 }
 \yadsetup{%
@@ -1083,7 +1083,7 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % Pour gérer les titres courants (entêtes) et bas de page
 %    \begin{macrocode}
-\RequirePackage[nopatches]{titleps}[2011/12/15]%
+\RequirePackage[pagestyles]{titlesec}[2019/10/16]%
 %    \end{macrocode}
 % Pour supprimer le numéro de page sur la page de titre d'une partie
 %    \begin{macrocode}
@@ -3122,8 +3122,6 @@ This work consists of the file  yathesis.dtx
 %   erronés).
 %    \begin{macrocode}
 \pretocmd{\pagestyle}{\cleardoublepage}{}{}%
-\newtitlemark*{chapter}
-\newtitlemark*{section}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -3291,12 +3289,8 @@ This work consists of the file  yathesis.dtx
 % Définition de titres courants
 %    \begin{macrocode}
 \DeclareRobustCommand{\YAD@chapter@header}{%
-  \ifboolexpr{
-    ((test {\ifnumcomp{\value{secnumdepth}}{>}{-1}} or (not bool
-    {YAD@nonnumbered@chapter})) and test {\ifnumcomp{\value{chapter}}{>}{0}}) and
-    (not bool {YAD@backmatter})
-  }{%
-    \MakeUppercase\chaptername{}\ \thechapter.
+  \ifthechapter{%
+    \MakeUppercase\chaptertitlename\ \thechapter.
   }{%
   }%
   \chaptertitle%
@@ -3307,20 +3301,7 @@ This work consists of the file  yathesis.dtx
 % \begin{macro}{\YAD@section@header}
 %    \begin{macrocode}
 \DeclareRobustCommand{\YAD@section@header}{%
-  \ifboolexpr{
-    (
-      (
-        test {\ifnumcomp{\value{secnumdepth}}{>}{0}}
-        or
-        (not bool {YAD@nonnumbered@section})
-      )
-      and
-      test {\ifnumcomp{\value{chapter}}{>}{0}})
-      and
-      (not bool {YAD@backmatter})
-      and
-      (not bool {YAD@localbibs@used})
-  }{%
+  \ifthesection{%
     \thesection.
   }{%
   }%
@@ -4085,7 +4066,8 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % \end{macro}
 %
-% Si la commande "\maketitle" n'a pas été utilisée, une erreur est émise.
+% Si la commande "\maketitle" n'a pas été utilisée, une erreur est émise (en
+% version finale).
 %    \begin{macrocode}
 \AtEndDocument{%
   \ifboolexpr{%
@@ -4101,6 +4083,11 @@ This work consists of the file  yathesis.dtx
     }%
   }%
 }%
+%    \end{macrocode}
+%
+% Le mémoire est, à son début, automatiquement en style de pages préliminaires.
+%    \begin{macrocode}
+\AfterEndPreamble{\pagestyle{preliminary}}%
 %    \end{macrocode}
 %
 % Code pour l'éventuel colophon
@@ -5107,11 +5094,18 @@ This work consists of the file  yathesis.dtx
 % or local) TOCs. For this, it is enough to \enquote{relax} "\addcontentsline".
 %    \begin{macrocode}
     \renewcommand\addcontentsline[3]{}%
-    \section *{\kern\dimen@ % \dimen@ works here by sheer luck
-      % \contentsname%
-      % \@mkboth{\MakeUppercase\contentsname}{\MakeUppercase\contentsname}%
-      \large\textbf{\translate{lbl-localtocname}}%
+    \begingroup
+    \titlespacing*{\section}{\dimen@}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
+    \section*{%
+      \large%
+      \translate{lbl-localtocname}%
     }%
+    \endgroup
+%    \end{macrocode}
+% We don't want the header contain the title of the previous (dummy) section in case
+% the first \enquote{real} section shows up.
+%    \begin{macrocode}
+    \sectionmark{}%
 %    \end{macrocode}
 % We restore the original behavior of "\addcontentsline".
 %    \begin{macrocode}
@@ -5288,19 +5282,31 @@ This work consists of the file  yathesis.dtx
   \ifbool{YAD@localbibs}{%
     \ifbool{YAD@localbibs@used}{%
     }{%
-      \let\YAD@ORI@blx@warn@bibempty\blx@warn@bibempty%
-      \def\blx@warn@bibempty{}%
+%    \end{macrocode}
+% \end{environment}
+%
+% On n'affiche une bibliographie locale que dans les segments de bibliographie
+% autres que celui numéroté 0 sans quoi la bibliographie globale est suivie
+% d'une bibliographie locale contenant toutes les citations insérées en dehors
+% d'un segment (par exemple en cas de ×\nocite{*}× ou de citation par exemple
+% dans les épigraphes).
+%    \begin{macrocode}
+      \ifnumcomp{\value{refsegment}}{=}{0}{%
+      }{%
+        \let\YAD@ORI@blx@warn@bibempty\blx@warn@bibempty%
+        \def\blx@warn@bibempty{}%
 %    \end{macrocode}
 % Les bibliographies locales sont composées en interligne simple
 %    \begin{macrocode}
-      \bgroup
-      \par%
-      \singlespacing%
-      \YAD@printbibliography@ORI[segment=\therefsegment,heading=YAD@localbibs@heading]%
-      \par%
-      \egroup%
-      \let\blx@warn@bibempty\YAD@ORI@blx@warn@bibempty%
-      \booltrue{YAD@localbibs@used}%
+        \bgroup
+        \par%
+        \singlespacing%
+        \YAD@printbibliography@ORI[segment=\therefsegment,heading=YAD@localbibs@heading]%
+        \par%
+        \egroup%
+        \let\blx@warn@bibempty\YAD@ORI@blx@warn@bibempty%
+        \booltrue{YAD@localbibs@used}%
+      }%
     }%
   }{%
   }%
@@ -6012,7 +6018,8 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \AtEndPreamble{%
   \@ifpackageloaded{biblatex}{%
-    \defbibheading{YAD@localbibs@heading}[\translate{lbl-localbibname}]{%
+    \defbibheading{YAD@localbibs@heading}[\translate{lbl-localbibname} % (\therefsegment)
+    ]{%
       \renewcommand\addcontentsline[3]{}%
       \section*{#1}%
       \let\addcontentsline\YAD@addcontentsline%
@@ -6034,19 +6041,19 @@ This work consists of the file  yathesis.dtx
     \let\YAD@printbibliography@ORI\printbibliography%
     \renewcommand{\printbibliography}[1][]{%
       \booltrue{YAD@printbibliography@used}%
-%    \end{macrocode}
-%
-% Un hack aimablement fourni par samcarter
-% (\url{https://texnique.fr/osqa/questions/6977/header-avec-biblatex/6978})
-% a permis d'éviter que l'entête de la bibliographie, en dernière page de
-% celle-ci, ne  contienne pas seulement \enquote{Bibliographie} mais
-% \enquote{CHAPITRE XXX. Bibliographie}.
-%    \begin{macrocode}
       \bgroup
       \par%
       \singlespacing%
       \YAD@printbibliography@ORI[#1]%
-      \par%
+%    \end{macrocode}
+%
+% On introduit un segment de bibliographie vide sans quoi la bibliographie est
+% suivie de la bibliographie locale du chapitre précédent (quand il en a une),
+% avec en outre un titre courant incorrect sur les pages paires
+% (\enquote{CHAPITRE (ou ANNEXE) XXX. Bibliographie du présent chapitre}).
+%    \begin{macrocode}
+      \newrefsegment%
+      \endrefsegment%
       \egroup%
     }%
   }{%
