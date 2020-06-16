@@ -1,5 +1,17 @@
 # [Unreleased]
 
+# [1.0.3] - 2020-06-16
+
+## Changed
+
+- Documentation revised.
+- Specimens improved.
+- Package `titlesec` used intead of `titleps`: possible (hopefully slight) layout discrepancies.
+
+## Fixed
+- Bug gh #74 (https://git.io/Jf64U).
+- Bug gh #65 (https://git.io/Jf64k), continuation and (?) ending.
+
 # [1.0.2] - 2020-04-13
 
 ## Changed
