@@ -936,6 +936,27 @@ Les mots clés de la thèse sont stipulés au moyen de la commande
     \end{itemize}
   \end{itemize}
 \end{docCommand}
+%
+\begin{dbwarning}{Mots clés par défaut convertis en bas de casse}{}
+  \index{mot clé!casse}%
+  Par défaut, les mots clés sont convertis en bas de casse (minuscules). Cela
+  peut ne pas être souhaité pour tous les mots clés, notamment pour ceux qui
+  sont des noms propres (ou en dérivent). On pourra alors recourir à la commande
+  \refCom{NoCaseChange} suivante.
+\end{dbwarning}
+%
+\begin{docCommand}{NoCaseChange}{\marg{texte}}
+  \index{mot clé!\gls{casse}}%
+  Cette commande préserve la \gls{casse} du \meta{texte} qui lui est passé
+  en argument.
+\end{docCommand}
+
+\begin{dbexample}{Mots clés}{}
+  \indexex{mot clé}%
+\begin{preamblecode}[listing options={deletekeywords={[5]keywords}}]
+\keywords{déterminant, pivot de \NoCaseChange{Gauss}}{determinant, \NoCaseChange{Gaussian} elimination}
+\end{preamblecode}
+\end{dbexample}
 
 %%% Local Variables:
 %%% mode: latex
