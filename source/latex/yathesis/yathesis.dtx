@@ -70,14 +70,14 @@ Typesetting the documentation of the class requires:
 \fi
 %</internal>
 %<*class|install>
-\def\yathesisfileversion{1.0.3}
-\def\yathesisfiledate{2020-06-16}
+\def\yathesisversion{1.0.3}
+\def\yathesisdate{2020-06-16}
 %</class|install>
 %<*install>
 \input docstrip.tex
 \Msg{********************************************************}
 \Msg{* Installation}
-\Msg{* Class: yathesis \yathesisfiledate\space v\yathesisfileversion}
+\Msg{* Class: yathesis \yathesisdate\space v\yathesisversion}
 \Msg{* that helps to write thesis following French rules (DB)}
 \Msg{********************************************************}
 \keepsilent
@@ -361,7 +361,7 @@ This work consists of the file  yathesis.dtx
 %
 %    \begin{macrocode}
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
-\ProvidesClass{yathesis}[\yathesisfiledate\space v\yathesisfileversion\space Yet another class for writing thesis (DB)]
+\ProvidesClass{yathesis}[\yathesisdate\space v\yathesisversion\space Yet another class for writing thesis (DB)]
 %    \end{macrocode}
 %
 % Pour pouvoir définir des macros dont les arguments puissent être
@@ -2183,7 +2183,7 @@ This work consists of the file  yathesis.dtx
             \YAD@translation{\YAD@the@staff-pl-hdr-female}%
           }{%
             \YAD@translation{\YAD@the@staff-pl-hdr}%
-          }
+          }%
         }{%
           \ifboolexpr{%
             bool {YAD@only@female@\YAD@the@staff}%
@@ -2191,7 +2191,7 @@ This work consists of the file  yathesis.dtx
             \YAD@translation{\YAD@the@staff-pl-female}%
           }{%
             \YAD@translation{\YAD@the@staff-pl}%
-          }
+          }%
         }%
       }{%
         \ifboolexpr{%
@@ -2203,7 +2203,7 @@ This work consists of the file  yathesis.dtx
             \YAD@translation{\YAD@the@staff-hdr-female}%
           }{%
             \YAD@translation{\YAD@the@staff-hdr}%
-          }
+          }%
         }{%
           \ifboolexpr{%
             bool {YAD@only@female@\YAD@the@staff}%
@@ -2211,7 +2211,7 @@ This work consists of the file  yathesis.dtx
             \YAD@translation{\YAD@the@staff-female}%
           }{%
             \YAD@translation{\YAD@the@staff}%
-          }
+          }%
         }%
       }%
     }{%
@@ -3201,9 +3201,9 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % \end{macro}
 %
-% On crée la macro "\YAD@setsecnumdepth", analogue à "\@setseccntt@c" du \Package{tocvsec2}, qui fixe
-% la valeur du compteur "secnumdepth" selon l'argument donné sous la forme du
-% nom d'une commande de sectionnement
+% On crée la macro "\YAD@setsecnumdepth", analogue à "\@setseccntt@c" du
+% \Package{tocvsec2}, qui fixe la valeur du compteur "secnumdepth" selon
+% l'argument donné sous la forme du nom d'une commande de sectionnement
 %    \begin{macrocode}
         \newcommand{\YAD@setsecnumdepth}[1]{%
         \newif\if@YAD@knownsect%
