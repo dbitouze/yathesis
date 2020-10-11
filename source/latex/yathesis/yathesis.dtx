@@ -610,7 +610,6 @@ This work consists of the file  yathesis.dtx
     #1/false/.code={%
       \boolfalse{YAD@#1}%
     },
-    #1/.initial=false,
     #1/.default=true,
   }%
   % }{%
@@ -755,7 +754,6 @@ This work consists of the file  yathesis.dtx
     \boolfalse{YAD@submitted@work@star}%
     \booltrue{YAD@final@work}%
   },%
-  version/.initial=final%
 }%
 \yadsetup{version=inprogress}%
 %    \end{macrocode}
@@ -775,8 +773,8 @@ This work consists of the file  yathesis.dtx
     \booltrue{YAD@output@paper@star}%
   },%
   output/screen/.code={},%
-  output/.initial=screen%
 }%
+\yadsetup{output=screen}%
 %    \end{macrocode}
 %
 % On définit la clé de classe "localtocs" qui fait que les titres des chapitres
@@ -874,8 +872,8 @@ This work consists of the file  yathesis.dtx
   space/single/.code={\def\YAD@interligne{single}},%
   space/onehalf/.code={\def\YAD@interligne{onehalf}},%
   space/double/.code={\def\YAD@interligne{double}},%
-  space/.initial=single%
 }%
+\yadsetup{space=single}
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -892,8 +890,8 @@ This work consists of the file  yathesis.dtx
   colophon-location/nowhere/.code={\def\YAD@colophon@location{nowhere}},%
   colophon-location/verso-frontcover/.code={\def\YAD@colophon@location{verso-frontcover}},%
   colophon-location/recto-backcover/.code={\def\YAD@colophon@location{recto-backcover}},%
-  colophon-location/.initial=verso-frontcover%
 }%
+\yadsetup{colophon-location=verso-frontcover}
 %    \end{macrocode}
 %
 %    \begin{macrocode}
