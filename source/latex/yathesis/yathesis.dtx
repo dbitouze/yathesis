@@ -2699,16 +2699,16 @@ This work consists of the file  yathesis.dtx
 }{%
 }%
 \ifthenelse{\equal{#2}{title}}{%
-  \YAD@hypersetup{pdftitle=\YAD@metatitle}%
+  \AtEndPreamble{\YAD@hypersetup{pdftitle=\YAD@metatitle}}%
 }{%
 }%
 \ifundef{\YAD@metasubject}{%
   \ifundef{\YAD@metaacademicfield}{%
   }{%
-    \YAD@hypersetup{pdfsubject=\YAD@metaacademicfield}%
+    \AtEndPreamble{\YAD@hypersetup{pdfsubject=\YAD@metaacademicfield}}%
   }%
 }{%
-  \YAD@hypersetup{pdfsubject=\YAD@metasubject}%
+  \AtEndPreamble{\YAD@hypersetup{pdfsubject=\YAD@metasubject}}%
 }%
 %    \end{macrocode}
 % Création de la commande affichant le résultat de la commande bilingue
@@ -2837,7 +2837,7 @@ This work consists of the file  yathesis.dtx
     }%
   }%
   \YAD@error@firstlastnames@empty{de l'auteur de la thèse}{#2}{#3}{\author}%
-  \YAD@hypersetup{pdfauthor=\YAD@firstname@author{} \YAD@lastname@author}%
+  \AtEndPreamble{\YAD@hypersetup{pdfauthor=\YAD@firstname@author{} \YAD@lastname@author}}%
   \newcommand*\YAD@email@author{%
     #1%
   }%
@@ -4122,9 +4122,9 @@ This work consists of the file  yathesis.dtx
   \ifthenelse{\isempty{#1}}{%
   }{%
     \ifthenelse{\isempty{#2}}{%
-      \YAD@hypersetup{pdfkeywords={#1}}%
+      \AtEndPreamble{\YAD@hypersetup{pdfkeywords={#1}}}%
     }{%
-      \YAD@hypersetup{pdfkeywords={#1} ({#2})}%
+      \AtEndPreamble{\YAD@hypersetup{pdfkeywords={#1} ({#2})}}%
     }%
   }%
 }%
@@ -5760,21 +5760,37 @@ This work consists of the file  yathesis.dtx
 % On définit la valeur, en anglais et en français, de la macro "\colophon" du colophon.
 %
 %    \begin{macrocode}
-\colophontext{%
-  \IfLanguageName{french}{%
-    Mémoire de thèse intitulé \frquote{\printtitle}, écrit par \printauthor{},
-    achevé le \today{}, composé au moyen du système de préparation de document
-    \href{https://fr.wikipedia.org/wiki/LaTeX}{\LaTeX{}} et de la classe
-    \href{https://www.ctan.org/pkg/yathesis}{\textsf{yathesis}} dédiée aux
-    thèses préparées en France.%
-  }{%
-    Doctoral dissertation entitled “\printtitle”, written by \printauthor{},
-    completed on \today{}, typeset with the document preparation system
-    \href{https://en.wikipedia.org/wiki/LaTeX}{\LaTeX{}} and the
-    \href{https://www.ctan.org/pkg/yathesis}{\textsf{yathesis}} class dedicated
-    to theses prepared in France.%
+\AtEndPreamble{%
+  \colophontext{%
+    \IfLanguageName{french}{%
+      Mémoire de thèse intitulé \YAD@ifemptyorundef{\printtitle}{%
+        \YAD@generic@argument@translate{title}%
+      }{%
+        \frquote{\printtitle}%
+      }, écrit par \YAD@ifemptyorundef{\printauthor}{%
+        \YAD@generic@argument@translate{author}%
+      }{%
+        \printauthor%
+      }, achevé le \today{}, composé au moyen du système de préparation de
+      document \YAD@href{https://fr.wikipedia.org/wiki/LaTeX}{\LaTeX{}} et de la
+      classe \YAD@href{https://www.ctan.org/pkg/yathesis}{\textsf{yathesis}}
+      dédiée aux thèses préparées en France.%
+    }{%
+      Doctoral dissertation entitled \YAD@ifemptyorundef{\printtitle}{%
+        \YAD@generic@argument@translate{title}%
+      }{%
+        “\printtitle”%
+      }, written by \YAD@ifemptyorundef{\printauthor}{%
+        \YAD@generic@argument@translate{author}%
+      }{%
+        \printauthor%
+      }, completed on \today{}, typeset with the document preparation system
+      \YAD@href{https://en.wikipedia.org/wiki/LaTeX}{\LaTeX{}} and the
+      \YAD@href{https://www.ctan.org/pkg/yathesis}{\textsf{yathesis}} class
+      dedicated to theses prepared in France.%
+    }%
   }%
-}%
+}
 %    \end{macrocode}
 %
 % % Le contenu de l'environnement "introduction" est collecté dans la macro
