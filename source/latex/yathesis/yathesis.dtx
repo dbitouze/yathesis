@@ -3824,8 +3824,20 @@ This work consists of the file  yathesis.dtx
         \par%
         \YAD@translation{company} \textbf{\textsc{\Large\printcompany}}%
       }%
-      \ifbool{YAD@nodoctoralschool}{%
+      \ifboolexpr{%
+        bool {YAD@nodoctoralschool}%
+        or bool {YAD@hdr}%
       }{%
+      }{%
+        \ifbool{YAD@nodoctoralschool}{%
+        }{%
+          \YAD@ClassWarningNoLine{%
+            Une école doctorale a été spécifiée mais elle ne\MessageBreak%
+            figurera nulle part : les HDR ne sont pas préparées\MessageBreak%
+            sous l'égide d'écoles doctorales (cf. \MessageBreak%
+            https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000298904)
+          }%
+        }%
         \ifdraft{}{\vspace*{\stretch{1.5}}}%
         % \vspace*{\stretch{1.5}}%
         \par%
