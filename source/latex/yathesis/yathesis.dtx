@@ -929,7 +929,7 @@ This work consists of the file  yathesis.dtx
 %
 %    \begin{macrocode}
 \PassOptionsToPackage{a4paper}{geometry}%
-\PassOptionsToPackage{nodayofweek}{datetime}%
+% \PassOptionsToPackage{nodayofweek}{datetime}%
 \PassOptionsToPackage{export}{adjustbox}%
 \PassOptionsToPackage{numbered}{bookmark}%
 % \PassOptionsToPackage{pagestyles}{titlesec}%
@@ -957,7 +957,7 @@ This work consists of the file  yathesis.dtx
   titlesec/.code={\PassOptionsToPackage{#1}{titlesec}},%
   draftwatermark/.code={\PassOptionsToPackage{#1}{draftwatermark}},%
   babel/.code={\PassOptionsToPackage{#1}{babel}},%
-  datetime/.code={\PassOptionsToPackage{#1}{datetime}}%
+  datetime2/.code={\PassOptionsToPackage{useregional,#1}{datetime2}}%
 }%
 %    \end{macrocode}
 %
@@ -1137,7 +1137,7 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % Pour générer les dates (sans affichage du jour de la semaine).
 %    \begin{macrocode}
-\RequirePackage{datetime}[2013/09/10]%
+\RequirePackage[useregional]{datetime2}[2020-03-02]%
 %    \end{macrocode}
 % Pour faire pointer les hyperliens au début des flottants plutôt qu'au
 % début des légendes
@@ -2991,7 +2991,7 @@ This work consists of the file  yathesis.dtx
       and bool {YAD@valid@year}%
     }{%
       \csdef{printdate}{%
-        \formatdate{#1}{#2}{#3}%
+        \DTMdisplaydate{#3}{#2}{#1}{}%
       }%
     }{%
       \csdef{printdate}{%
@@ -3012,7 +3012,7 @@ This work consists of the file  yathesis.dtx
       and bool {YAD@valid@year}%
     }{%
       \csdef{printsubmissiondate}{%
-        \formatdate{#1}{#2}{#3}%
+        \DTMdisplaydate{#3}{#2}{#1}{}%
       }%
     }{%
       \csdef{printsubmissiondate}{%
@@ -6559,7 +6559,7 @@ This work consists of the file  yathesis.dtx
 #include:colophon
 #include:csquotes
 #include:datatool
-#include:datetime
+#include:datetime2
 #include:draftwatermark
 #include:environ
 #include:epigraph
@@ -6638,7 +6638,7 @@ datatool
 titlesec
 draftwatermark
 babel
-datetime
+datetime2
 #endkeyvals
 #
 \yadsetup{%<options%>}#n
