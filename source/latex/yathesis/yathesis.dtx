@@ -1331,6 +1331,13 @@ This work consists of the file  yathesis.dtx
   \tcbuselibrary{skins}%
 %    \end{macrocode}
 %
+% Afin de préserver la compatibilité ascendante, on demande le comportement
+% original du \Package{tcolorbox} en ce qui concerne les espaces verticaux avant
+% et après les boîtes de couleur de ce package.
+%    \begin{macrocode}
+  \tcbsetforeverylayer{autoparskip}
+%    \end{macrocode}
+%
 % Par défaut, les listings sont composés en fonte à châsse fixe
 %    \begin{macrocode}
 % \lstset{basicstyle=\ttfamily}
