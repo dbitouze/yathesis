@@ -96,9 +96,9 @@ Par défaut, un mémoire créé avec la \yatCl est composé :
   \index{langue!supplémentaire}%
   Il est cependant possible de faire usage de langues \emph{supplémentaires},
   autres que le français et l'anglais, en les stipulant en option de
-  \docAuxCommand{documentclass}\footnote{Ces langues doivent être l'une de
-    celles supportées par le \Package{babel}.} et en les employant selon la
-  syntaxe du \Package*{babel}.
+  \docAuxCommand{documentclass}\footnote{Ces langues doivent être supportées par
+    le \Package{babel}.} et en les employant selon la syntaxe du
+  \Package*{babel}.
 \end{dbremark}
 
 \begin{dbexample}{Langue supplémentaire pour thèse
@@ -135,8 +135,8 @@ Par défaut, un mémoire créé avec la \yatCl est composé :
   permettant de faire automatiquement débuter les chapitres par leurs tables des
   matières locales}%
 
-\begin{docKey}[][doc new=2016-10-30]{localtocs}{}{pas de valeur par défaut, pas
-    de valeur initiale}
+\begin{docKey}[][doc new=2016-10-30]{localtocs}{}{par défaut \docValue{true},
+    initialement \docValue{false}}
   \indexdef{table des matières!locale}%
   Cette clé fait automatiquement débuter les chapitres de la partie
   principale\footnote{C'est-à-dire de \refCom{mainmatter} jusqu'à
@@ -229,27 +229,35 @@ intitulée \translateexpression{localtocname}.
   \protect\refKey{localbibs} permettant de faire automatiquement finir les
   chapitres par leurs bibliographies locales}%
 
-\begin{docKey}[][doc new=2016-10-30]{localbibs}{}{pas de valeur par défaut, pas
-    de valeur initiale}
+\begin{docKey}[][doc new=2016-10-30]{localbibs}{}{par défaut \docValue{true},
+    initialement \docValue{false}}
   \indexdef{bibliographie!locale}%
   Cette clé fait automatiquement finir les chapitres (contenant au moins une
-  référence bibliographique) par leurs bibliographies locales.
+  référence bibliographique) par leurs bibliographies locales\footnote{Pour
+    éviter de pénibles occurrences multiples d'un avertissement inutile dans ce
+    cas (à la fois bibliographies par chapitres et bibliographie globale), la
+    commande \docAuxCommand*{BiblatexSplitbibDefernumbersWarningOff} (liée
+    à l'option \docAuxKey*{defernumbers}, cf. ci-après) est alors
+    automatiquement insérée.}.
 \end{docKey}
 
-\begin{docKey}[][doc new=2016-10-30]{localbibs*}{}{pas de valeur par défaut, pas
-    de valeur initiale}
+\begin{docKey}[][doc new=2016-10-30]{localbibs*}{}{par défaut \docValue{true},
+    initialement \docValue{false}}
   \indexdef{bibliographie!locale}%
   Cette clé a le même effet que \refKey{localbibs} sauf que l'option
   \docAuxKey{defernumbers} du \Package*{biblatex} est alors
-  activée\footnote{Cf. la documentation de \package*{biblatex} pour plus de
-    détails sur cette option et éventuellement une discussion sur ses avantages
-    et inconvénients à \url{http://tex.stackexchange.com/q/332431/18401}.}.
+  activée\footnote{\label{defernumbers}Cf. la documentation de
+    \package*{biblatex} pour plus de détails sur l'option
+    \docAuxKey*{defernumbers}, et éventuellement des discussions sur ses
+    avantages et inconvénients
+    à \url{https://tex.stackexchange.com/q/332431/18401} et
+    à \url{https://github.com/plk/biblatex/issues/493}.}.
 \end{docKey}
 
 \begin{dbwarning}{Package \package*{biblatex} nécessaire pour les bibliographies
     locales}{}
   Cette fonctionnalité d'ajout automatique des bibliographies locales en fin de
-  chapitres repose sur le \Package{biblatex} (cf. \vref{sec-refer-bibl}):
+  chapitres repose sur le \Package{biblatex} (cf. \vref{sec-refer-bibl}) :
   \begin{itemize}
   \item donc nécessite, pour la bibliographie de la thèse, le recours à ce
     package \alert{à l'exclusion de tout autre outil de production de
@@ -418,105 +426,6 @@ sont à produire qu'exceptionnellement, en toute fin de rédaction. De ce fait :
   initiale \docValue*{inprogress}.
 \end{dbwarning}
 
-\subsection{Colophon}
-\label{sec-coloplhon}
-\index{colophon}%
-\indexsee{achevé d'imprimer}{colophon}%
-
-De manière générale, un colophon (ou achevé d'imprimer) est une note indiquant
-le plus souvent le titre de l'œuvre, son auteur, l'imprimeur et la date
-d'impression. Figurant autrefois à la fin d'un imprimé, il se trouve désormais
-souvent au début.
-
-\changes{v1.0.0}{2020-03-26}{Désormais, colophon automatiquement ajouté au
-  mémoire.}%
-%
-La \yatCl{} insère automatiquement un colophon tel que celui de la
-\vref{fig-colophon}.
-\begin{figure}[htbp]
-  \centering
-  \screenshot{colophon}%
-  \caption{Colophon}
-  \label{fig-colophon}
-\end{figure}
-
-Par défaut, ce colophon se trouve en 2\ieme{} de couverture, est intitulé
-\enquote{Colophon} et a pour contenu une phrase semblable à\selonlangue{} :
-\begin{displayquote}
-  Mémoire de thèse intitulé \frquote{\meta{titre}}, écrit par \meta{auteur},
-  achevé le \meta{date du jour de la compilation}, composé au moyen du système
-  de préparation de document \LaTeX{} et de la \yatCl{} dédiée aux thèses
-  préparées en France.
-\end{displayquote}
-ou :
-\begin{foreigndisplayquote}{english}
-  Doctoral dissertation entitled “\meta{titre}”, written by \meta{auteur},
-  completed on \meta{date du jour de la compilation}, typeset with the document
-  preparation system \LaTeX{} and the \yatCl{} dedicated to theses prepared in
-  France.
-\end{foreigndisplayquote}
-où le \meta{titre} et l'\meta{auteur} sont ceux définis par les commandes
-\refCom{title} et \refCom{author}.
-
-Ce colophon peut être personnalisé au moyen de l'option
-\refKey{colophon-location} et de la commande \refCom{colophontext} suivantes.
-
-{\tcbset{before lower=\vspace*{.5\baselineskip}\par}
-  \begin{docKey}[][doc
-    new=2020-03-26]{colophon-location}{=\docValue{verso-frontcover}\textbar\docValue{recto-backcover}\textbar\docValue{nowhere}}{pas
-      de valeur par défaut, initialement \docValue{verso-frontcover}}
-    %
-    \changes{v1.0.0}{2020-03-26}{Nouvelle option de classe
-      \protect\refKey{colophon-location} permettant de modifier l'emplacement par
-      défaut (en 2\ieme{} de couverture) du colophon ou de le
-      supprimer\protect\footnote{Pour retrouver le comportement antérieur (pas
-        de colophon), il suffit de spécifier \protect\lstinline|colophon-location=nowhere|.}.}%
-    %
-    Cette clé permet, au moyen des valeurs suivantes, de spécifier l'emplacement
-    du colophon dans le mémoire.
-  \begin{description}
-    \indexdef{colophon!emplacement}%
-  \item[\docValue{verso-frontcover}.]%
-    \indexdef{colophon!emplacement!2\ieme{} de couverture}%
-    Avec cette valeur, le colophon apparaît en 2\ieme{} de couverture,
-    c'est-à-dire au dos :
-    \begin{itemize}
-    \item soit de la 1\iere{} de couverture ;
-    \item soit de la (1\iere{}) page de titre (en l'absence de 1\iere{} de
-      couverture, cf. \refKey{nofrontcover}).
-    \end{itemize}
-  \item[\docValue{recto-backcover}.]%
-    \indexdef{colophon!emplacement!3\ieme{} de couverture}%
-    Avec cette valeur, le colophon apparaît en 3\ieme{} de couverture (sous
-    réserve de 4\ieme{} de couverture, cf. \refCom{makebackcover}).
-  \item[\docValue{nowhere}.]%
-    \indexdef{colophon!suppression}%
-    Avec cette valeur, le colophon ne figure nulle part dans le mémoire.
-  \end{description}
-\end{docKey}
-}
-
-\begin{docCommand}[doc new=2020-03-26]{colophontext}{\marg{texte}}
-  \index{colophon!modification du texte}%
-  \changes{v1.0.0}{2020-03-26}{Nouvelle commande \protect\refCom{colophontext}
-    permettant de modifier le texte par défaut du colophon.}%
-  %
-  Cette commande permet de redéfinir le texte par défaut du colophon.
-\end{docCommand}
-
-La \yatCl{} s'appuie sur le \Package{colophon} pour composer le colophon. De ce
-fait, ce dernier peut être davantage personnalisé au moyen des commandes de ce
-package.
-
-\begin{dbwarning}{Commandes du \Package{colophon} : à utiliser avec
-    discernement}{}
-  Dans le cadre d’un usage de la \yatCl{}, il est fortement déconseillé de
-  recourir aux commandes \docAuxCommand{colophonpagestyle},
-  \docAuxCommand{colophonclrpg}, \docAuxCommand{colophontopspace} et
-  \docAuxCommand{colophonbotspace} du \Package{colophon} : cela risquerait de
-  produire des résultats non souhaités.
-\end{dbwarning}
-
 \subsection{Formats de sortie}
 \label{sec-formats-de-sortie}
 \index{format du mémoire}%
@@ -665,17 +574,116 @@ package\footnote{Par souci de compatibilité ascendante, la clé désormais
     Cette clé permet de spécifier un autre style du \Package{fncychap}.
 
     Le \enquote{style} supplémentaire \docValue{none} permet de désactiver le
-    chargement de \package{fncychap} pour retrouver les têtes de chapitres
-    usuelles de la \Class{book}.
+    chargement de \package{fncychap} pour retrouver comme style des têtes de
+    chapitres celui usuel de la \Class{book}.
   \end{docKey}
 }
+
+\subsection{Colophon}
+\label{sec-coloplhon}
+\index{colophon}%
+\indexsee{achevé d'imprimer}{colophon}%
+
+De manière générale, un colophon (ou achevé d'imprimer) est une note indiquant
+le plus souvent le titre de l'œuvre, son auteur, l'imprimeur et la date
+d'impression. Figurant autrefois à la fin d'un imprimé, il se trouve désormais
+souvent au début.
+
+\changes{v1.0.0}{2020-03-26}{Désormais, colophon automatiquement ajouté au
+  mémoire.}%
+%
+La \yatCl{} insère automatiquement un colophon tel que celui de la
+\vref{fig-colophon}.
+\begin{figure}[htbp]
+  \centering
+  \screenshot{colophon}%
+  \caption{Colophon}
+  \label{fig-colophon}
+\end{figure}
+
+Par défaut, ce colophon se trouve en 2\ieme{} de couverture, est intitulé
+\enquote{Colophon} et a pour contenu une phrase semblable à\selonlangue{} :
+\begin{displayquote}
+  Mémoire de thèse intitulé \frquote{\meta{titre}}, écrit par \meta{auteur},
+  achevé le \meta{date du jour de la compilation}, composé au moyen du système
+  de préparation de document \LaTeX{} et de la \yatCl{} dédiée aux thèses
+  préparées en France.
+\end{displayquote}
+ou :
+\begin{foreigndisplayquote}{english}
+  Doctoral dissertation entitled “\meta{titre}”, written by \meta{auteur},
+  completed on \meta{date du jour de la compilation}, typeset with the document
+  preparation system \LaTeX{} and the \yatCl{} dedicated to theses prepared in
+  France.
+\end{foreigndisplayquote}
+où le \meta{titre} et l'\meta{auteur} sont ceux définis par les commandes
+\refCom{title} et \refCom{author}.
+
+Ce colophon peut être personnalisé au moyen de l'option
+\refKey{colophon-location} et de la commande \refCom{colophontext} suivantes.
+
+{\tcbset{before lower=\vspace*{.5\baselineskip}\par}
+  \begin{docKey}[][doc
+    new=2020-03-26]{colophon-location}{=\docValue{verso-frontcover}\textbar\docValue{recto-backcover}\textbar\docValue{nowhere}}{pas
+      de valeur par défaut, initialement \docValue{verso-frontcover}}
+    %
+    \changes{v1.0.0}{2020-03-26}{Nouvelle option de classe
+      \protect\refKey{colophon-location} permettant de modifier l'emplacement par
+      défaut (en 2\ieme{} de couverture) du colophon ou de le
+      supprimer\protect\footnote{Pour retrouver le comportement antérieur (pas
+        de colophon), il suffit de spécifier \protect\lstinline|colophon-location=nowhere|.}.}%
+    %
+    Cette clé permet, au moyen des valeurs suivantes, de spécifier l'emplacement
+    du colophon dans le mémoire.
+  \begin{description}
+    \indexdef{colophon!emplacement}%
+  \item[\docValue{verso-frontcover}.]%
+    \indexdef{colophon!emplacement!2\ieme{} de couverture}%
+    Avec cette valeur, le colophon apparaît en 2\ieme{} de couverture,
+    c'est-à-dire au dos :
+    \begin{itemize}
+    \item soit de la 1\iere{} de couverture ;
+    \item soit de la (1\iere{}) page de titre (en l'absence de 1\iere{} de
+      couverture, cf. \refKey{nofrontcover}).
+    \end{itemize}
+  \item[\docValue{recto-backcover}.]%
+    \indexdef{colophon!emplacement!3\ieme{} de couverture}%
+    Avec cette valeur, le colophon apparaît en 3\ieme{} de couverture (sous
+    réserve de 4\ieme{} de couverture, cf. \refCom{makebackcover}).
+  \item[\docValue{nowhere}.]%
+    \indexdef{colophon!suppression}%
+    Avec cette valeur, le colophon ne figure nulle part dans le mémoire.
+  \end{description}
+\end{docKey}
+}
+
+\begin{docCommand}[doc new=2020-03-26]{colophontext}{\marg{texte}}
+  \index{colophon!modification du texte}%
+  \changes{v1.0.0}{2020-03-26}{Nouvelle commande \protect\refCom{colophontext}
+    permettant de modifier le texte par défaut du colophon.}%
+  %
+  Cette commande permet de redéfinir le \meta{texte} par défaut du colophon.
+\end{docCommand}
+
+La \yatCl{} s'appuie sur le \Package{colophon} pour composer le colophon. De ce
+fait, ce dernier peut être davantage personnalisé au moyen des commandes de ce
+package.
+
+\begin{dbwarning}{Commandes du \Package{colophon} : à utiliser avec
+    discernement}{}
+  Dans le cadre d’un usage de la \yatCl{}, il est fortement déconseillé de
+  recourir aux commandes \docAuxCommand{colophonpagestyle},
+  \docAuxCommand{colophonclrpg}, \docAuxCommand{colophontopspace} et
+  \docAuxCommand{colophonbotspace} du \Package{colophon} : cela risquerait de
+  produire des résultats non souhaités.
+\end{dbwarning}
 
 \subsection{Habilitations à diriger les recherches}
 \label{sec-hdr}%
 % \index{hdr (habilitation)@\glsxtrshort{hdr} (habilitation)}%
 
 Grâce à sa clé \refKey{hdr}, la \yatCl{} peut être utilisée pour les
-habilitations à diriger les recherches.
+\glspl{hdr}.
 
 \begin{docKey}{hdr}{=\docValue{true}\textbar\docValue{false}}{par défaut
     \docValue{true}, initialement \docValue{false}}
@@ -683,17 +691,26 @@ habilitations à diriger les recherches.
   \changes{v0.99f}{2014-07-11}{Nouvelle clé \protect\refKey{hdr} permettant de
     d'utiliser la \yatCl{} pour une habilitation à diriger les recherches}%
   %
-  Cette clé spécifie que le mémoire est pour une habilitation à diriger les
-  recherches.
+  Cette clé spécifie que le mémoire est pour une \gls{hdr}.
 \end{docKey}
 
-Le seul effet de la clé \refKey{hdr} est d'adapter un certain nombre
-d'expressions clés de la \yatCl{}, en remplaçant par exemple
-\enquote{\foreignlanguage{french}{\translate{thesisdefendedby}}} par
-\enquote{\foreignlanguage{french}{\translate{thesisdefendedby-hdr}}}. Les
-expressions propres aux habilitations à diriger les recherches sont celles dont
-les labels sont suffixés par \enquote{\texttt{-hdr}} dans le
-\vref{tab-expressions-cles}.
+Les seuls effets de la clé \refKey{hdr} sont :
+\begin{itemize}
+\item d'adapter un certain nombre d'expressions clés de la \yatCl{}, en
+  remplaçant par exemple
+  \enquote{\foreignlanguage{french}{\translate{thesisdefendedby}}} par
+  \enquote{\foreignlanguage{french}{\translate{thesisdefendedby-hdr}}}. Les
+  expressions propres aux habilitations à diriger les recherches sont celles
+  dont les labels sont suffixés par \enquote{\texttt{-hdr}} dans le
+  \vref{tab-expressions-cles} ;
+\item de ne pas rendre \enquote{obligatoire} (cf. \vref{sec-comm-oblig}), la
+  spécification de l'école doctorale\footnote{Les \glspl{hdr} ne sont pas
+    préparées sous l'égide d'écoles doctorales (cf.
+    \url{https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000298904}).}
+  (commande \refCom{doctoralschool}) ;
+\item de masquer sur la ou les pages de titre tout ce qui aurait pu être
+  spécifié au moyen de \refCom{doctoralschool}.
+\end{itemize}
 
 \subsection{Expressions séparant corporations et affiliations des membres du jury}
 \label{sec-expr-separ-les}%
@@ -927,11 +944,11 @@ peuvent être passées à leurs options).
   Cette option permet de passer une ou plusieurs \meta{option(s)} au
   \Package{babel}.
 \end{docKey}
-\begin{docKey}{datetime}{=\marg{option(s)}}{pas valeur par défaut,
+\begin{docKey}{datetime2}{=\marg{option(s)}}{pas valeur par défaut,
     initialement \docValue*{nodayofweek}}
-  \index{option!de package chargé par \yatcl!datetime@\package*{datetime}}%
+  \index{option!de package chargé par \yatcl!datetime2@\package*{datetime2}}%
   Cette option permet de passer une ou plusieurs \meta{option(s)} au
-  \Package{datetime}.
+  \Package{datetime2}.
 \end{docKey}
 %
 \changes*{v0.99k}{2014-10-01}{%
@@ -1074,7 +1091,10 @@ par un \meta{label} permettant de les redéfinir (voire de les définir, cf.
 \end{docCommand}
 %
 \bgroup
+\newtoggle{YAD@firstline}
 \renewcommand{\expression}[3]{%
+  \iftoggle{YAD@firstline}{}{\\}%
+  \global\togglefalse{YAD@firstline}%
   \ifthenelse{\isempty{#2}}{%
     \meta{vide}%
   }{%
@@ -1088,7 +1108,6 @@ par un \meta{label} permettant de les redéfinir (voire de les définir, cf.
   }%
   &
   #1%
-  \\%
   % \midrule%
 }
 %

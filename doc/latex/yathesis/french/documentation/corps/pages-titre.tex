@@ -121,8 +121,8 @@ frametitle={"\meta{autre}"}
 \section{Exemple complet de pages de titre}
 \label{sec-exemple-complet}
 
-Avec les données caractéristiques suivantes, la commande
-\refCom{maketitle} produit :
+Avec les données caractéristiques de l'\vref{ex-preparation-production-titre},
+la commande \refCom{maketitle} produit :
 \begin{enumerate}
 \item en langue principale (ici le français),
   \begin{enumerate}
@@ -138,18 +138,7 @@ Avec les données caractéristiques suivantes, la commande
   \vref{fig-maketitle-en}.
 \end{enumerate}
 %
-\begin{dbremark}{Expressions clés émaillant les pages de titres}{}
-  Cet exemple montre que les pages de titres (et, plus généralement, le mémoire
-  de thèse) sont émaillées d'expressions, par exemple :
-  \begin{itemize}
-  \item \translateexpression*{doctoralschool} ;
-  \item \translateexpression*{committeemembers} ;
-  \end{itemize}
-  que la \yatCl{} insère de façon automatique. La \vref{sec-expressions-cles}
-  explique comment, au besoin, redéfinir ces expressions.
-\end{dbremark}
-%
-\begin{dbexample}{Préparation et production des pages de titre}{}
+\begin{dbexample}[float]{Préparation et production des pages de titre}{preparation-production-titre}
 %
   \NoAutoSpacing%
   \preamblesample{preparation-titre}{%
@@ -172,6 +161,17 @@ Avec les données caractéristiques suivantes, la commande
   %
   \bodysample{production-titre}{}{title=Production du titre}
 \end{dbexample}
+%
+\begin{dbremark}{Expressions clés émaillant les pages de titres}{}
+  Cet exemple montre que les pages de titres (et, plus généralement, le mémoire
+  de thèse) sont émaillées d'expressions, par exemple :
+  \begin{itemize}
+  \item \translateexpression*{doctoralschool} ;
+  \item \translateexpression*{committeemembers} ;
+  \end{itemize}
+  que la \yatCl{} insère de façon automatique. La \vref{sec-expressions-cles}
+  explique comment, au besoin, redéfinir ces expressions.
+\end{dbremark}
 
 \begin{landscape}
   \begin{figure}[htb]

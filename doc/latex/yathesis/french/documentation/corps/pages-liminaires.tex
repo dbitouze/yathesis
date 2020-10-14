@@ -410,8 +410,8 @@ page.
 Tout système de gestion de glossaire peut théoriquement être mis en œuvre avec
 la \yatCl. Cependant, celle-ci fournit des fonctionnalités propres au
 \Package{glossaries}\footnote{Dans ses versions à partir de la \texttt{4.0} en
-  date du \formatdate{14}{11}{2013}. Dans cette section, le fonctionnement de
-  ce package est supposé connu du lecteur (sinon, cf. par exemple
+  date du \DTMdate{2013-11-14}. Dans cette section, le fonctionnement de ce
+  package est supposé connu du lecteur (sinon, cf. par exemple
   \cite{en-ligne7}).} :
 \begin{itemize}
 \item une commande \refCom{newglssymbol}, destinée à faciliter la définition de
@@ -496,6 +496,22 @@ la \yatCl. Cependant, celle-ci fournit des fonctionnalités propres au
   Le résultat de ce code est illustré \vref{fig-printsymbols}.
 \end{dbexample}
 
+Dans un mémoire de thèse, les emplacements des listes des termes du glossaire,
+des acronymes\footnote{Les commandes \docAuxCommand{printglossary} et
+  \docAuxCommand{printacronyms} du \Package{glossaries}, produisant les listes
+  des termes du glossaire et des acronymes, sont illustrées
+  \vref{fig-printglossary,fig-printacronyms}.} et des symboles sont \emph{a
+  priori} arbitraires. Il est cependant parfois conseillé de placer :
+\begin{itemize}
+\item si elles sont \emph{communes}, \emph{la} liste résultante en partie finale ;
+\item si elles sont \emph{distinctes} :
+  \begin{enumerate}
+  \item les listes des acronymes et des symboles avant qu'ils soient utilisés
+    pour la première fois donc, \emph{a priori}, avant le ou les résumés ;
+  \item la liste des termes du glossaire en partie finale.
+  \end{enumerate}
+\end{itemize}
+
 % \afterpage{%
 \begin{landscape}
   \begin{figure}[p]
@@ -533,22 +549,6 @@ la \yatCl. Cependant, celle-ci fournit des fonctionnalités propres au
 %     glossaire (cf. \vref{fig-printglossary}).
 %   \end{enumerate}
 % \end{enumerate}
-
-Dans un mémoire de thèse, les emplacements des listes des termes du glossaire,
-des acronymes\footnote{Les commandes \docAuxCommand{printglossary} et
-  \docAuxCommand{printacronyms} du \Package{glossaries}, produisant les listes
-  des termes du glossaire et des acronymes, sont illustrées
-  \vref{fig-printglossary,fig-printacronyms}.} et des symboles sont \emph{a
-  priori} arbitraires. Il est cependant parfois conseillé de placer :
-\begin{itemize}
-\item si elles sont \emph{communes}, \emph{la} liste résultante en partie finale ;
-\item si elles sont \emph{distinctes} :
-  \begin{enumerate}
-  \item les listes des acronymes et des symboles avant qu'ils soient utilisés
-    pour la première fois donc, \emph{a priori}, avant le ou les résumés ;
-  \item la liste des termes du glossaire en partie finale.
-  \end{enumerate}
-\end{itemize}
 
 \section{Sommaire et/ou table des matières}\label{sec-table-des-matieres}
 

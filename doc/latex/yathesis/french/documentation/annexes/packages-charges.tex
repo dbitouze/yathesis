@@ -59,8 +59,19 @@ chargement, dans la liste suivante qui indique leur fonction et le cas échéant
 \item[\package{tcolorbox} :]\index{boîte de couleur} boîtes élaborées en couleurs et encadrées ;
   \begin{description}
   \item[librairie chargée par défaut :] \docValue{skins} ;
-  \item[personnalisation :] commandes propres \docAuxCommand*{tcbuselibrary} et
-    \docAuxCommand*{tcbset} ;
+  \item[personnalisation :]
+    \begin{itemize}
+    \item commandes propres \docAuxCommand*{tcbuselibrary} et
+      \docAuxCommand*{tcbset} ;
+    \item \lstinline+\tcbsetforeverylayer{autoparskip}+ afin de préserver la
+      compatibilité ascendante en conservant les espaces verticaux précédant et
+      suivant les boîtes de couleur qui étaient ceux des versions de ce package
+      antérieures à la version~4.40\footnote{On pourra recourir à
+        %
+\lstinline[{morekeywords=[3]{plus}}]+\\tcbsetforeverylayer\{beforeafter skip balanced=0.5\\baselineskip plus 2pt\}+
+        %
+        pour obtenir les espaces verticaux désormais par défaut de ce package.} ;
+    \end{itemize}
   \end{description}
 \item[\package+{marvosym} :] accès à des symboles spéciaux ;
 \item[\package+{colophon} :] insertion d'un colophon ;
@@ -92,7 +103,7 @@ chargement, dans la liste suivante qui indique leur fonction et le cas échéant
 \item[\package{titlesec} :] %
   \changes*{v1.0.3}{2020-06-16}{Gestion des titres courants désormais assurée
     par le \Package{titlesec} (et plus par \package{titleps}, ce qui peut
-    conduire à des mises en page différentes)}%
+    conduire à des mises en page légèrement différentes)}%
   gestion des styles de pages ;
   \begin{description}
     % \item[option par défaut :] \docAuxKey{pagestyles} ;
@@ -135,9 +146,15 @@ chargement, dans la liste suivante qui indique leur fonction et le cas échéant
 \item[\package{etoc} :] tables des matières complètement personnalisables ;
 \item[\package*+{iflang} :] test de la langue en cours ;
 \item[\package*+{translator} :] traduction d'expressions ;
-\item[\package+{datetime} :] gestion des dates ;
+\item[\package+{datetime2} :] \changes*{v1.0.4}{2020-10-14}{Gestion des dates
+    désormais assurée par le \Package{datetime2} (et plus par
+    \package{datetime})\protect\footnote{En cas d'usage des fonctionnalités du
+      \Package{datetime} dans son mémoire de thèse, consulter la documentation
+      de \package{datetime2}, section~10 (\enquote{Migrating from datetime})
+      pour migrer du 1\ier{} au 2\ieme{}.}.}%
+  gestion des dates ;
   \begin{description}
-  \item[personnalisation :] option \refKey{datetime} de la \yatCl ;
+  \item[personnalisation :] option \refKey{datetime2} de la \yatCl ;
   \end{description}
 \item[\package{hypcap} :] liens hypertextes pointant au début des
   flottants%\ifscreenoutput ;

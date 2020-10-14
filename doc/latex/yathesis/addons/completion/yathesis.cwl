@@ -9,7 +9,7 @@
 #include:colophon
 #include:csquotes
 #include:datatool
-#include:datetime
+#include:datetime2
 #include:draftwatermark
 #include:environ
 #include:epigraph
@@ -88,7 +88,7 @@ datatool
 titlesec
 draftwatermark
 babel
-datetime
+datetime2
 #endkeyvals
 #
 \yadsetup{%<options%>}#n

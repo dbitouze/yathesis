@@ -29,11 +29,14 @@
 \lstset{%
   alsolanguage=[glossaries]TeX,%
   alsolanguage=[hyperref]TeX,%
+  alsolanguage=[tcolorbox]TeX,%
 }
 %
 \makeindex[title=Index des concepts,extout=pdx,extin=pnd,columnseprule]
 %
 \AtEndPreamble{%
+  \changes{v1.0.4}{2020-10-14}{Documentation révisée}%
+  \changes{v1.0.4}{2020-10-14}{Correction de bugs}%
   \changes{v1.0.3}{2020-06-16}{Documentation révisée}%
   \changes{v1.0.3}{2020-06-16}{Correction de bugs}%
   \changes{v1.0.2}{2020-04-13}{Documentation révisée}%
@@ -129,7 +132,7 @@
 \tcblistof[\chapter*]{dbwarninglist}{Table des avertissements}%
 \tcblistof[\chapter*]{dbremarklist}{Table des remarques}%
 \tcblistof[\chapter*]{dbexamplelist}{Table des exemples}%
-\tcblistof[\chapter*]{dbfaqlist}{Table des questions}
+\tcblistof[{\chapter*[Table des questions]}]{dbfaqlist}{Table des questions fréquemment posées}
 %
 \cleardoublepage
 \phantomsection
