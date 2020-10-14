@@ -11,10 +11,10 @@
 %% Released under the LaTeX Project Public License v1.3c or later
 %% See http://www.latex-project.org/lppl.txt
 %% -----------------------------------------------------------------------
-\def\yathesisfileversion{1.0.3}
-\def\yathesisfiledate{2020-06-16}
+\def\yathesisversion{1.0.4}
+\def\yathesisdate{2020-10-14}
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
-\ProvidesClass{yathesis}[\yathesisfiledate\space v\yathesisfileversion\space Yet another class for writing thesis (DB)]
+\ProvidesClass{yathesis}[\yathesisdate\space v\yathesisversion\space Yet another class for writing thesis (DB)]
 \RequirePackage{pgfopts}[2011/06/02]%
 \RequirePackage{etoolbox}[2011/01/03]%
 \RequirePackage{xpatch}[2012/10/02]%
@@ -184,7 +184,6 @@
     #1/false/.code={%
       \boolfalse{YAD@#1}%
     },
-    #1/.initial=false,
     #1/.default=true,
   }%
   % }{%
@@ -306,7 +305,6 @@
     \boolfalse{YAD@submitted@work@star}%
     \booltrue{YAD@final@work}%
   },%
-  version/.initial=final%
 }%
 \yadsetup{version=inprogress}%
 \yadsetup{%
@@ -317,8 +315,8 @@
     \booltrue{YAD@output@paper@star}%
   },%
   output/screen/.code={},%
-  output/.initial=screen%
 }%
+\yadsetup{output=screen}%
 \def\YAD@localtocsdepth{\YAD@tocdepth}%
 \yadsetup{%
   localtocs/.is family,%
@@ -392,6 +390,7 @@
   },%
   localbibs/.code={%
     \YAD@localbibs@common@code{false}%
+    \AtEndPreamble{\BiblatexSplitbibDefernumbersWarningOff}%
   }%
 }
 \def\YAD@interligne{single}%
@@ -400,8 +399,8 @@
   space/single/.code={\def\YAD@interligne{single}},%
   space/onehalf/.code={\def\YAD@interligne{onehalf}},%
   space/double/.code={\def\YAD@interligne{double}},%
-  space/.initial=single%
 }%
+\yadsetup{space=single}
 \newcommand{\cmdKV@YAD@numlaboratories}{1}%
 \yadsetup{%
   numlaboratories/.store in=\cmdKV@YAD@numlaboratories%
@@ -412,8 +411,8 @@
   colophon-location/nowhere/.code={\def\YAD@colophon@location{nowhere}},%
   colophon-location/verso-frontcover/.code={\def\YAD@colophon@location{verso-frontcover}},%
   colophon-location/recto-backcover/.code={\def\YAD@colophon@location{recto-backcover}},%
-  colophon-location/.initial=verso-frontcover%
 }%
+\yadsetup{colophon-location=verso-frontcover}
 \yadsetup{%
   mainlanguage/.store in=\YAD@mainlanguage,%
   secnumdepth/.store in=\YAD@secnumdepth,%
@@ -431,7 +430,6 @@
   chap-style=PetersLenny,%
 }%
 \PassOptionsToPackage{a4paper}{geometry}%
-\PassOptionsToPackage{nodayofweek}{datetime}%
 \PassOptionsToPackage{export}{adjustbox}%
 \PassOptionsToPackage{numbered}{bookmark}%
 \PassOptionsToPackage{%
@@ -453,7 +451,7 @@
   titlesec/.code={\PassOptionsToPackage{#1}{titlesec}},%
   draftwatermark/.code={\PassOptionsToPackage{#1}{draftwatermark}},%
   babel/.code={\PassOptionsToPackage{#1}{babel}},%
-  datetime/.code={\PassOptionsToPackage{#1}{datetime}}%
+  datetime2/.code={\PassOptionsToPackage{useregional,#1}{datetime2}}%
 }%
 \yadsetup{%
   .unknown/.code ={\expandafter\PassOptionsToClass\expandafter{\pgfkeyscurrentname}{book}}%
@@ -511,7 +509,7 @@
 \RequirePackage{etoc}[2016/09/29]%
 \RequirePackage{iflang}[2007/11/11]%
 \RequirePackage{translator}[2010/06/12]%
-\RequirePackage{datetime}[2013/09/10]%
+\RequirePackage[useregional]{datetime2}[2020-03-02]%
 \AtEndPreamble{%
   \@ifpackageloaded{hyperref}{%
     \RequirePackage[all]{hypcap}[2011/02/16]%
@@ -629,6 +627,7 @@
   }%
 }%
   \tcbuselibrary{skins}%
+  \tcbsetforeverylayer{autoparskip}
 \def\YAD@clearspread{\clearpage\if@twoside \ifodd\c@page
   \hbox{}\newpage\if@twocolumn\hbox{}\newpage\fi\fi\fi}
 \renewenvironment{titlepage}
@@ -1236,7 +1235,7 @@
             \YAD@translation{\YAD@the@staff-pl-hdr-female}%
           }{%
             \YAD@translation{\YAD@the@staff-pl-hdr}%
-          }
+          }%
         }{%
           \ifboolexpr{%
             bool {YAD@only@female@\YAD@the@staff}%
@@ -1244,7 +1243,7 @@
             \YAD@translation{\YAD@the@staff-pl-female}%
           }{%
             \YAD@translation{\YAD@the@staff-pl}%
-          }
+          }%
         }%
       }{%
         \ifboolexpr{%
@@ -1256,7 +1255,7 @@
             \YAD@translation{\YAD@the@staff-hdr-female}%
           }{%
             \YAD@translation{\YAD@the@staff-hdr}%
-          }
+          }%
         }{%
           \ifboolexpr{%
             bool {YAD@only@female@\YAD@the@staff}%
@@ -1264,7 +1263,7 @@
             \YAD@translation{\YAD@the@staff-female}%
           }{%
             \YAD@translation{\YAD@the@staff}%
-          }
+          }%
         }%
       }%
     }{%
@@ -1665,16 +1664,16 @@
 }{%
 }%
 \ifthenelse{\equal{#2}{title}}{%
-  \YAD@hypersetup{pdftitle=\YAD@metatitle}%
+  \AtEndPreamble{\YAD@hypersetup{pdftitle=\YAD@metatitle}}%
 }{%
 }%
 \ifundef{\YAD@metasubject}{%
   \ifundef{\YAD@metaacademicfield}{%
   }{%
-    \YAD@hypersetup{pdfsubject=\YAD@metaacademicfield}%
+    \AtEndPreamble{\YAD@hypersetup{pdfsubject=\YAD@metaacademicfield}}%
   }%
 }{%
-  \YAD@hypersetup{pdfsubject=\YAD@metasubject}%
+  \AtEndPreamble{\YAD@hypersetup{pdfsubject=\YAD@metasubject}}%
 }%
 \csdef{print#2}{%
         \YAD@reach@file{%
@@ -1779,7 +1778,7 @@
     }%
   }%
   \YAD@error@firstlastnames@empty{de l'auteur de la thèse}{#2}{#3}{\author}%
-  \YAD@hypersetup{pdfauthor=\YAD@firstname@author{} \YAD@lastname@author}%
+  \AtEndPreamble{\YAD@hypersetup{pdfauthor=\YAD@firstname@author{} \YAD@lastname@author}}%
   \newcommand*\YAD@email@author{%
     #1%
   }%
@@ -1925,7 +1924,7 @@
       and bool {YAD@valid@year}%
     }{%
       \csdef{printdate}{%
-        \formatdate{#1}{#2}{#3}%
+        \DTMdisplaydate{#3}{#2}{#1}{}%
       }%
     }{%
       \csdef{printdate}{%
@@ -1941,7 +1940,7 @@
       and bool {YAD@valid@year}%
     }{%
       \csdef{printsubmissiondate}{%
-        \formatdate{#1}{#2}{#3}%
+        \DTMdisplaydate{#3}{#2}{#1}{}%
       }%
     }{%
       \csdef{printsubmissiondate}{%
@@ -2535,7 +2534,10 @@
         \par%
         \YAD@translation{company} \textbf{\textsc{\Large\printcompany}}%
       }%
-      \ifbool{YAD@nodoctoralschool}{%
+      \ifboolexpr{%
+        bool {YAD@nodoctoralschool}%
+        or bool {YAD@hdr}%
+      }{%
       }{%
         \ifdraft{}{\vspace*{\stretch{1.5}}}%
         % \vspace*{\stretch{1.5}}%
@@ -2555,6 +2557,18 @@
         }{%
           \textbf{\printdoctoralschool}%
         }%
+      }%
+      \ifbool{YAD@hdr}{%
+        \YAD@ifemptyorundef{\printdoctoralschool}{%
+        }{%
+          \YAD@ClassWarningNoLine{%
+            Une école doctorale a été spécifiée mais elle ne\MessageBreak%
+            figurera nulle part : les HDR ne sont pas préparées\MessageBreak%
+            sous l'égide d'écoles doctorales (cf. \MessageBreak%
+            https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000298904)%
+          }%
+        }%
+      }{%
       }%
       \ifbool{YAD@nolaboratory}{%
       }{%
@@ -2671,7 +2685,7 @@
           \large%
           \YAD@translation{speciality} \textbf{\printspeciality}%
         }%
-      }
+      }%
     \end{center}
   % \end{minipage}%
   \vspace*{\stretch{1}}%
@@ -2796,9 +2810,9 @@
   \ifthenelse{\isempty{#1}}{%
   }{%
     \ifthenelse{\isempty{#2}}{%
-      \YAD@hypersetup{pdfkeywords={#1}}%
+      \AtEndPreamble{\YAD@hypersetup{pdfkeywords={#1}}}%
     }{%
-      \YAD@hypersetup{pdfkeywords={#1} ({#2})}%
+      \AtEndPreamble{\YAD@hypersetup{pdfkeywords={#1} ({#2})}}%
     }%
   }%
 }%
@@ -4093,21 +4107,37 @@
   \fi%
   \pagestyle{preliminary}%
 }%
-\colophontext{%
-  \IfLanguageName{french}{%
-    Mémoire de thèse intitulé \frquote{\printtitle}, écrit par \printauthor{},
-    achevé le \today{}, composé au moyen du système de préparation de document
-    \href{https://fr.wikipedia.org/wiki/LaTeX}{\LaTeX{}} et de la classe
-    \href{https://www.ctan.org/pkg/yathesis}{\textsf{yathesis}} dédiée aux
-    thèses préparées en France.%
-  }{%
-    Doctoral dissertation entitled “\printtitle”, written by \printauthor{},
-    completed on \today{}, typeset with the document preparation system
-    \href{https://en.wikipedia.org/wiki/LaTeX}{\LaTeX{}} and the
-    \href{https://www.ctan.org/pkg/yathesis}{\textsf{yathesis}} class dedicated
-    to theses prepared in France.%
+\AtEndPreamble{%
+  \colophontext{%
+    \IfLanguageName{french}{%
+      Mémoire de thèse intitulé \YAD@ifemptyorundef{\printtitle}{%
+        \YAD@generic@argument@translate{title}%
+      }{%
+        \frquote{\printtitle}%
+      }, écrit par \YAD@ifemptyorundef{\printauthor}{%
+        \YAD@generic@argument@translate{author}%
+      }{%
+        \printauthor%
+      }, achevé le \today{}, composé au moyen du système de préparation de
+      document \YAD@href{https://fr.wikipedia.org/wiki/LaTeX}{\LaTeX{}} et de la
+      classe \YAD@href{https://www.ctan.org/pkg/yathesis}{\textsf{yathesis}}
+      dédiée aux thèses préparées en France.%
+    }{%
+      Doctoral dissertation entitled \YAD@ifemptyorundef{\printtitle}{%
+        \YAD@generic@argument@translate{title}%
+      }{%
+        “\printtitle”%
+      }, written by \YAD@ifemptyorundef{\printauthor}{%
+        \YAD@generic@argument@translate{author}%
+      }{%
+        \printauthor%
+      }, completed on \today{}, typeset with the document preparation system
+      \YAD@href{https://en.wikipedia.org/wiki/LaTeX}{\LaTeX{}} and the
+      \YAD@href{https://www.ctan.org/pkg/yathesis}{\textsf{yathesis}} class
+      dedicated to theses prepared in France.%
+    }%
   }%
-}%
+}
 \AtBeginDocument{%
   \ifthenelse{\equal{\YAD@mainlanguage}{french}}{%
     \YAD@hypersetup{pdflang=fr}%
