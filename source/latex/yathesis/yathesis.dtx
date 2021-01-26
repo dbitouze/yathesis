@@ -364,6 +364,11 @@ This work consists of the file  yathesis.dtx
 \ProvidesClass{yathesis}[\yathesisdate\space v\yathesisversion\space Yet another class for writing thesis (DB)]
 %    \end{macrocode}
 %
+% Pour pouvoir disposer d'autant de \enquote{flots} d'écriture dans
+% des fichiers annexes que nécessaire.
+%    \begin{macrocode}
+\RequirePackage{morewrites}%
+%    \end{macrocode}
 % Pour pouvoir définir des macros dont les arguments puissent être
 % spécifiés sous la forme "clé="\meta{valeur}, tant en argument de
 % "\documentclass" que de macros et environnements de la classe.
@@ -378,17 +383,6 @@ This work consists of the file  yathesis.dtx
 % commandes à argument(s) optionnel
 %    \begin{macrocode}
 \RequirePackage{xpatch}[2012/10/02]%
-%    \end{macrocode}
-% Pour pouvoir disposer d'autant de \enquote{flots} d'écriture dans
-% des fichiers annexes que nécessaire. Il est chargé en fin de préambule sans
-% quoi la compilation s'arrête longuement à la ligne :
-% \folder{/usr/local/texlive/.../texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg}
-% (problème rapporté à l'auteur du package) ou à la ligne :
-% \folder{/usr/local/texlive/.../texmf-dist/tex/latex/floatrow/fr-longtable.sty}.
-%    \begin{macrocode}
-\AtEndPreamble{%
-  \RequirePackage{morewrites}%
-}%
 %    \end{macrocode}
 % Pour pouvoir patcher des commandes à argument(s) optionnel(s)
 %    \begin{macrocode}
