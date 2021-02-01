@@ -55,7 +55,7 @@ Typesetting the documentation of the class requires:
   with `yathesis-demo` package load at first place. If `latexmk` is available,
   it is easier to run:
 
-      latexmk -g -norc -r ./latexmkrc  -jobname=these -pdflatex="pdflatex %O '\RequirePackage{etoolbox}\AtEndPreamble{\RequirePackage{yathesis-demo}}\input{%S}'" these.tex
+      latexmk -g -norc -r ./latexmkrc  -jobname=these -pdflatex="pdflatex %O '\AddToHook{begindocument/before}{\RequirePackage{yathesis-demo}}\input{%S}'" these.tex
 
 - to compile `yathesis-fr.tex` to be found in the
   `.../doc/latex/yathesis/french/documentation` directory as follows:
@@ -823,13 +823,13 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \newcommand\YAD@localbibs@common@code[1]{%
   \booltrue{YAD@localbibs}%
-  \AtEndPreamble{%
+  \AddToHook{env/document/before}[YAD/loadcsquotesbiblatex]{%
+    \@ifpackageloaded{csquotes}{%
+    }{%
+      \RequirePackage{csquotes}%
+    }%
     \@ifpackageloaded{biblatex}{%
     }{%
-      \@ifpackageloaded{csquotes}{%
-      }{%
-        \RequirePackage{csquotes}%
-      }%
       \YAD@ClassWarningNoLine{%
         L'ajout automatique des bibliographies locales en fin\MessageBreak%
         de chapitres fourni par l'option de classe\MessageBreak%
@@ -848,6 +848,7 @@ This work consists of the file  yathesis.dtx
       defernumbers=#1%
     }%
   }%
+  \DeclareHookRule{env/document/before}{YAD/loadcsquotesbiblatex}{before}{hyperref}%
 }
 \yadsetup{%
   localbibs*/.code={%
@@ -855,7 +856,7 @@ This work consists of the file  yathesis.dtx
   },%
   localbibs/.code={%
     \YAD@localbibs@common@code{false}%
-    \AtEndPreamble{\BiblatexSplitbibDefernumbersWarningOff}%
+    \AddToHook{begindocument/before}{\BiblatexSplitbibDefernumbersWarningOff}%
   }%
 }
 %    \end{macrocode}
@@ -1136,17 +1137,9 @@ This work consists of the file  yathesis.dtx
 % Pour faire pointer les hyperliens au début des flottants plutôt qu'au
 % début des légendes
 %    \begin{macrocode}
-\AtEndPreamble{%
+\AddToHook{begindocument/before}{%
   \@ifpackageloaded{hyperref}{%
     \RequirePackage[all]{hypcap}[2011/02/16]%
-  }{%
-  }%
-}%
-%    \end{macrocode}
-% Pour la gestion des signets
-%    \begin{macrocode}
-\AtEndPreamble{%
-  \@ifpackageloaded{hyperref}{%
     \RequirePackage[numbered]{bookmark}[2011/12/02]%
   }{%
   }%
@@ -1161,7 +1154,7 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \newlength{\YAD@vspace@before@localtoc@rule}
 \setlength{\YAD@vspace@before@localtoc@rule}{-1.25\baselineskip}
-\AtEndPreamble{%
+\AddToHook{begindocument/before}{%
   \@ifpackageloaded{parskip}{%
     \@ifpackagelater{parskip}{2.0a}{%
       \setlength{\YAD@vspace@before@localtoc@rule}{-.775\baselineskip}%
@@ -1177,7 +1170,7 @@ This work consists of the file  yathesis.dtx
 % "\nolinkurl" du \Package{hyperref} mais sur lesquelles on a plus de
 % contrôle.
 %    \begin{macrocode}
-\AtEndPreamble{%
+\AddToHook{begindocument/before}{%
   \@ifpackageloaded{hyperref}{%
     \newcommand{\YAD@href}[3][]{\href[#1]{#2}{#3}}%
     \newcommand{\YAD@hypersetup}[1]{\hypersetup{#1}}%
@@ -1430,7 +1423,7 @@ This work consists of the file  yathesis.dtx
 % fonte courante et adoption des conventions typographiques
 % françaises, notamment la virgule en guise de séparateur décimal).
 %    \begin{macrocode}
-\AtEndPreamble{%
+\AddToHook{begindocument/before}{%
   \@ifpackageloaded{siunitx}{%
     \sisetup{detect-all}%
     \ifthenelse{\equal{\YAD@mainlanguage}{french}}{%
@@ -1489,7 +1482,7 @@ This work consists of the file  yathesis.dtx
 % ordinaire ou elle-même en note de bas de page.
 %    \begin{macrocode}
 \ifbool{YAD@output@paper}{%
-  \AtEndPreamble{%
+  \AddToHook{begindocument/before}{%
     \@ifpackageloaded{hyperref}{%
       \YAD@hypersetup{colorlinks=false}%
       \renewcommand{\YAD@href}[3][]{#3}%
@@ -1629,7 +1622,7 @@ This work consists of the file  yathesis.dtx
 %   anglais.
 %    \begin{macrocode}
 \newcommand{\YAD@expression}[3]{%
-  \AtBeginDocument{%
+  \AddToHook{begindocument}{%
     \deftranslation[to=French]{lbl-#1}{#2}%
     \deftranslation[to=English]{lbl-#1}{#3}%
     \deftranslation[to=French]{#1}{#2}%
@@ -2700,16 +2693,16 @@ This work consists of the file  yathesis.dtx
 }{%
 }%
 \ifthenelse{\equal{#2}{title}}{%
-  \AtEndPreamble{\YAD@hypersetup{pdftitle=\YAD@metatitle}}%
+  \AddToHook{begindocument/before}{\YAD@hypersetup{pdftitle=\YAD@metatitle}}%
 }{%
 }%
 \ifundef{\YAD@metasubject}{%
   \ifundef{\YAD@metaacademicfield}{%
   }{%
-    \AtEndPreamble{\YAD@hypersetup{pdfsubject=\YAD@metaacademicfield}}%
+    \AddToHook{begindocument/before}{\YAD@hypersetup{pdfsubject=\YAD@metaacademicfield}}%
   }%
 }{%
-  \AtEndPreamble{\YAD@hypersetup{pdfsubject=\YAD@metasubject}}%
+  \AddToHook{begindocument/before}{\YAD@hypersetup{pdfsubject=\YAD@metasubject}}%
 }%
 %    \end{macrocode}
 % Création de la commande affichant le résultat de la commande bilingue
@@ -2838,7 +2831,7 @@ This work consists of the file  yathesis.dtx
     }%
   }%
   \YAD@error@firstlastnames@empty{de l'auteur de la thèse}{#2}{#3}{\author}%
-  \AtEndPreamble{\YAD@hypersetup{pdfauthor=\YAD@firstname@author{} \YAD@lastname@author}}%
+  \AddToHook{begindocument/before}{\YAD@hypersetup{pdfauthor=\YAD@firstname@author{} \YAD@lastname@author}}%
   \newcommand*\YAD@email@author{%
     #1%
   }%
@@ -3025,7 +3018,7 @@ This work consists of the file  yathesis.dtx
 % \end{macro}
 %
 %    \begin{macrocode}
-\AtEndDocument{%
+\AddToHook{enddocument}{%
   \YAD@ifemptyorundef{\printdate}{%
     \ifbool{YAD@nodate}{%
     }{%
@@ -3070,7 +3063,7 @@ This work consists of the file  yathesis.dtx
 % Réglage nécessaire sans quoi le titre courant de la nomenclature (si
 % le \Package{nomencl} est chargé) n'apparaît pas
 %    \begin{macrocode}
-\AtEndPreamble{%
+\AddToHook{begindocument/before}{%
   \@ifpackageloaded{nomencl}{%
     \let\YAD@ORI@printnomenclature\printnomenclature%
     \renewcommand{\printnomenclature}{%
@@ -3274,9 +3267,9 @@ This work consists of the file  yathesis.dtx
 % numérotation des paragraphes vont jusqu'aux sous-sections.
 %    \begin{macrocode}
         \etocsettocdepth{\YAD@tocdepth}%
-        \AtBeginDocument{%
-        % \yadsetup{#1}%
-        \YAD@setsecnumdepth{\YAD@secnumdepth}%
+        \AddToHook{begindocument}{%
+          % \yadsetup{#1}%
+          \YAD@setsecnumdepth{\YAD@secnumdepth}%
         }
         % \renewcommand{\setcounter}[2]{}%
         %
@@ -3312,7 +3305,7 @@ This work consists of the file  yathesis.dtx
 % Par défaut, au début du document rien n'est numéroté et les chapitres ne
 % débutent pas par des tables des matières locales. 
 %    \begin{macrocode}
-  \AtBeginDocument{%
+  \AddToHook{begindocument}{%
     \setcounter{secnumdepth}{-10}%
     \frontmatter%
     \boolfalse{YAD@localtocs}%
@@ -3479,7 +3472,7 @@ This work consists of the file  yathesis.dtx
 % Vérification, en fin de document, de l'usage de la commande "\mainmatter" et
 % émission d'une erreur si ça n'est pas le cas.
 %    \begin{macrocode}
-\AtEndDocument{%
+\AddToHook{enddocument}{%
   \ifboolexpr{%
     bool {YAD@mainmatter@used}%
   }{%
@@ -3510,7 +3503,7 @@ This work consists of the file  yathesis.dtx
 % (éventuellement) ces commandes ne l'afficheront pas en double.
 % \begin{macro}{\appendix}
 %    \begin{macrocode}
-\AtEndPreamble{%
+\AddToHook{begindocument/before}{%
   \xpretocmd{\part}{%
     \printlocalbibs{}%
   }{}{}%
@@ -4092,7 +4085,7 @@ This work consists of the file  yathesis.dtx
 % Si la commande "\maketitle" n'a pas été utilisée, une erreur est émise (en
 % version finale).
 %    \begin{macrocode}
-\AtEndDocument{%
+\AddToHook{enddocument}{%
   \ifboolexpr{%
     bool {YAD@maketitle@used}%
     or bool {YAD@nomaketitle}%
@@ -4147,9 +4140,9 @@ This work consists of the file  yathesis.dtx
   \ifthenelse{\isempty{#1}}{%
   }{%
     \ifthenelse{\isempty{#2}}{%
-      \AtEndPreamble{\YAD@hypersetup{pdfkeywords={#1}}}%
+      \AddToHook{begindocument/before}{\YAD@hypersetup{pdfkeywords={#1}}}%
     }{%
-      \AtEndPreamble{\YAD@hypersetup{pdfkeywords={#1} ({#2})}}%
+      \AddToHook{begindocument/before}{\YAD@hypersetup{pdfkeywords={#1} ({#2})}}%
     }%
   }%
 }%
@@ -4177,7 +4170,7 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % Émission d'une erreur si les mots clés sont vides ou non spécifiés.
 %    \begin{macrocode}
-\AtEndDocument{%
+\AddToHook{enddocument}{%
   \notbool{YAD@keywords@used}{%
     \ifbool{YAD@nokeywords}{%
     }{%
@@ -4765,7 +4758,7 @@ This work consists of the file  yathesis.dtx
 %
 % Si la commande "\makeabstract" n'a pas été utilisée, une erreur est émise.
 %    \begin{macrocode}
-\AtEndDocument{%
+\AddToHook{enddocument}{%
   \ifbool{YAD@makeabstract@used}{%
   }{%
     \ifbool{YAD@nomakeabstract}{%
@@ -5687,7 +5680,7 @@ This work consists of the file  yathesis.dtx
 % \YAD@create@chapter{frenchabstract}%
 % %
 % \xapptocmd{\frenchabstract}{\booltrue{YAD@frenchabstract@used}}{}{}
-% \AtEndDocument{%
+% \AddToHook{enddocument}{%
 %   \ifbool{YAD@frenchabstract@used}{%
 %     \ifthenelse{\equal{\YAD@mainlanguage}{french}}{%
 %       \YAD@ClassWarningNoLine{%
@@ -5785,7 +5778,7 @@ This work consists of the file  yathesis.dtx
 % On définit la valeur, en anglais et en français, de la macro "\colophon" du colophon.
 %
 %    \begin{macrocode}
-\AtEndPreamble{%
+\AddToHook{begindocument/before}{%
   \colophontext{%
     \IfLanguageName{french}{%
       Mémoire de thèse intitulé \YAD@ifemptyorundef{\printtitle}{%
@@ -5905,7 +5898,7 @@ This work consists of the file  yathesis.dtx
 % % Si l'environnement "introduction" n'a pas été utilisé, une erreur est émise
 % % (car la commande "mainmatter" n'aura alors pas été insérée).
 % %    \begin{macrocode}
-% \AtEndDocument{%
+% \AddToHook{enddocument}{%
 %   \ifbool{YAD@introduction@used}{%
 %     \ifbool{YAD@introduction@empty}{%
 %       \YAD@ClassWarningNoLine{%
@@ -6022,7 +6015,7 @@ This work consists of the file  yathesis.dtx
 % % Si l'environnement "conclusion" n'a pas été utilisé, une erreur est émise
 % % (car la commande "appendix" n'aura alors pas été insérée).
 % %    \begin{macrocode}
-% \AtEndDocument{%
+% \AddToHook{enddocument}{%
 %   \ifbool{YAD@conclusion@used}{%
 %     \ifbool{YAD@conclusion@empty}{%
 %       \YAD@ClassWarningNoLine{%
@@ -6046,7 +6039,7 @@ This work consists of the file  yathesis.dtx
 %
 % On fixe la métadonnée de la langue.
 %    \begin{macrocode}
-\AtBeginDocument{%
+\AddToHook{begindocument}{%
   \ifthenelse{\equal{\YAD@mainlanguage}{french}}{%
     \YAD@hypersetup{pdflang=fr}%
   }{%
@@ -6056,7 +6049,7 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 %
 %    \begin{macrocode}
-\AtEndPreamble{%
+\AddToHook{begindocument/before}{%
   \@ifpackageloaded{biblatex}{%
     \defbibheading{YAD@localbibs@heading}[\translate{lbl-localbibname} % (\therefsegment)
     ]{%
@@ -6104,7 +6097,7 @@ This work consists of the file  yathesis.dtx
     \BeforeBeginEnvironment{thebibliography}{%
       \singlespacing%
     }%
-    \AtEndEnvironment{thebibliography}{%
+    \AddToHook{env/thebibliography/end}{%
       \clearpage%
     }%
   }%
@@ -6118,7 +6111,7 @@ This work consists of the file  yathesis.dtx
 % \enquote{Chapitre XXX. ...} ou \enquote{XXX.XXX} qui ne devraient pas
 % apparaître si le dernier chapitre du document est non numéroté).
 %    \begin{macrocode}
-\AtEndDocument{%
+\AddToHook{enddocument}{%
   \booltrue{YAD@nonnumbered@chapter}%
   \booltrue{YAD@nonnumbered@section}%
 }
@@ -6126,7 +6119,7 @@ This work consists of the file  yathesis.dtx
 %
 % Si la commande "\printbibliography" n'a pas été utilisée, une erreur est émise.
 %    \begin{macrocode}
-\AtEndDocument{%
+\AddToHook{enddocument}{%
   \ifbool{YAD@printbibliography@used}{%
   }{%
     \ifbool{YAD@noprintbibliography}{%
@@ -6249,7 +6242,7 @@ This work consists of the file  yathesis.dtx
 % \Package{glossaries} l'est, sans quoi les signets des glossaires
 % et objets assimilés ne sont pas correctement traduits.
 %    \begin{macrocode}
-\AtEndPreamble{%
+\AddToHook{begindocument/before}{%
   \@ifpackageloaded{glossaries}{%
     \RequirePackage{glossaries-babel}%
   }{%
@@ -6263,11 +6256,11 @@ This work consists of the file  yathesis.dtx
 %
 % Le code suivant, aimablement fourni par touhami
 % (\url{https://texnique.fr/osqa/questions/8358/packages-glossaries-et-yathesis-pepin-de-forme-plurielle-glspl})
-% perme tque, dans le cas d'un mémoire en anglais (option
+% permet que, dans le cas d'un mémoire en anglais (option
 % "mainlanguage=english"), les règles s'appliquant aux glossaires et acronymes
 % soient bien celles de l'anglais (et non du français).
 %    \begin{macrocode}
-\AtEndPreamble{%
+\AddToHook{begindocument/before}{%
   \@ifpackageloaded{glossaries}{%
     \IfLanguageName{english}{%
       \makeatletter
@@ -6287,7 +6280,7 @@ This work consists of the file  yathesis.dtx
 % caractéristiques du document, situés dans le répertoire de configuration.
 %
 %    \begin{macrocode}
-\AtEndPreamble{%
+\AddToHook{begindocument/before}{%
   \ifPDFTeX
   \shorthandon{;:!?}%
   \fi
@@ -6311,7 +6304,7 @@ This work consists of the file  yathesis.dtx
 % \subsubsection{Données caractéristiques du document}
 %
 %    \begin{macrocode}
-\AtEndPreamble{%
+\AddToHook{begindocument/before}{%
   \ifPDFTeX
   \shorthandon{;:!?}%
   \fi
@@ -6339,7 +6332,7 @@ This work consists of the file  yathesis.dtx
 % % \subsubsection{Macros}
 % %
 % %    \begin{macrocode}
-% \AtEndPreamble{%
+% \AddToHook{begindocument/before}{%
 %   \ifPDFTeX
 %   \shorthandon{;:!?}%
 %   \fi
@@ -6365,7 +6358,7 @@ This work consists of the file  yathesis.dtx
 %
 % Si la commande "\tableofcontents" n'a pas été utilisée, une erreur est émise.
 %    \begin{macrocode}
-\AtEndDocument{%
+\AddToHook{enddocument}{%
   \ifbool{YAD@tableofcontents@used}{%
   }{%
     \ifbool{YAD@notableofcontents}{%
