@@ -819,7 +819,7 @@ This work consists of the file  yathesis.dtx
 %
 % On définit la clé de classe "localbibs" qui fait que les chapitres
 % contenant des références bibliographiques sont automatiquement terminées par
-% leurs bibliographies locales. 
+% leurs bibliographies locales.
 %    \begin{macrocode}
 \newcommand\YAD@localbibs@common@code[1]{%
   \booltrue{YAD@localbibs}%
@@ -836,7 +836,7 @@ This work consists of the file  yathesis.dtx
         `localbibs' repose sur le package `biblatex'\MessageBreak%
         que vous n'avez pas chargé.\MessageBreak%
         La classe `yathesis' va le faire pour vous mais\MessageBreak%
-        le recours a ce package pour la bibliographie sera\MessageBreak%
+        le recours à ce package pour la bibliographie sera\MessageBreak%
         alors necessaire et exclura tout autre outil\MessageBreak%
         de production de la bibliographie\MessageBreak%
         (notamment `BibTeX')%
@@ -1135,7 +1135,7 @@ This work consists of the file  yathesis.dtx
 \RequirePackage[useregional]{datetime2}[2020-03-02]%
 %    \end{macrocode}
 % Pour faire pointer les hyperliens au début des flottants plutôt qu'au
-% début des légendes
+% début des légendes et pour la gestion des signets.
 %    \begin{macrocode}
 \AddToHook{begindocument/before}{%
   \@ifpackageloaded{hyperref}{%
@@ -1215,7 +1215,7 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 %
 % On change l'appellation des tableaux flottants tels que traduits par le
-% module \package{frenchb} du \Package{babel} de \enquote{Table} à \enquote{Tableau}.
+% module \package{babel-french} du \Package{babel} de \enquote{Table} à \enquote{Tableau}.
 %
 %    \begin{macrocode}
 \addto\captionsfrench{\def\tablename{{\scshape Tableau}}}%
@@ -1297,10 +1297,6 @@ This work consists of the file  yathesis.dtx
   }{%
   }%
 }%
-% \AtEndDocument{%
-%   \immediate\closeout\YAD@file%
-% }%
-% \InputIfFileExists{\jobname.yad}{}{}%
 %    \end{macrocode}
 %
 %    \begin{macrocode}
@@ -7046,8 +7042,7 @@ $clean_ext .= 'synctex.gz* run.xml tex.bak out bbl bcf fdb_latexmk run tdo listi
 \endinput
 
 %%% Local Variables:
-%%% mode: tex
-%%% eval: (doctex-mode)
+%%% mode: doctex
 %%% ispell-local-dictionary: "francais"
 %%% TeX-command-default: "TeX"
 %%% TeX-master: t
