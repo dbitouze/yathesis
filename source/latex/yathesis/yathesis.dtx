@@ -962,6 +962,25 @@ This work consists of the file  yathesis.dtx
 }%
 %    \end{macrocode}
 %
+%
+% Pour éviter certains comportements inattendus, on précise la langue
+% principale au moyen de l'option "main" du \Package{babel}. Mais, comme
+% celle-ci n'est apparue que récemment, on n'y recourt que si la version du
+% package est assez récente.
+%    \begin{macrocode}
+\@ifpackagelater{babel}{2013/04/15}{%
+  \PassOptionsToPackage{main=\YAD@mainlanguage}{babel}%
+}{%
+  \YAD@ClassWarningNoLine{%
+    La version de `babel' utilisée est obsolète.\MessageBreak%
+    La classe `yathesis' va essayer de faire son possible\MessageBreak%
+    mais il est possible qu'elle produise des resultats\MessageBreak%
+    non prévus. Il est conseillé de mettre à jour sa\MessageBreak%
+    distribution TeX%
+  }%
+}%
+%    \end{macrocode}
+%
 % \section{Process of Options}
 %
 %    \begin{macrocode}
@@ -1115,7 +1134,7 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % Pour gérer les langues.
 %    \begin{macrocode}
-\RequirePackage{babel}[2014/03/24]
+\RequirePackage[\YAD@secondarylanguage,main=\YAD@mainlanguage]{babel}[2014/03/24]
 %    \end{macrocode}
 % Pour pouvoir afficher un sommaire c-à-d une table des matières réduite
 %    \begin{macrocode}
@@ -1191,26 +1210,6 @@ This work consists of the file  yathesis.dtx
   }{%
     \newcommand{\YAD@bookmarksetup}[1]{}%
   }%
-}%
-%    \end{macrocode}
-%
-% Pour éviter certains comportements inattendus, on précise la langue
-% principale au moyen de l'option "main" du \Package{babel}. Mais, comme
-% celle-ci n'est apparue que récemment, on n'y recourt que si la version du
-% package est assez récente.
-%    \begin{macrocode}
-\@ifpackagelater{babel}{2013/04/15}{%
-  \PassOptionsToPackage{main=\YAD@mainlanguage}{babel}%
-}{%
-  % \AtEndPreamble{%
-  \YAD@ClassWarningNoLine{%
-    La version de `babel' utilisée est obsolète.\MessageBreak%
-    La classe `yathesis' va essayer de faire son possible\MessageBreak%
-    mais il est possible qu'elle produise des resultats\MessageBreak%
-    non prévus. Il est conseillé de mettre à jour sa\MessageBreak%
-    distribution TeX%
-  }%
-  % }%
 }%
 %    \end{macrocode}
 %
