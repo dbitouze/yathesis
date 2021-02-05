@@ -11,16 +11,14 @@
 %% Released under the LaTeX Project Public License v1.3c or later
 %% See http://www.latex-project.org/lppl.txt
 %% -----------------------------------------------------------------------
-\def\yathesisversion{1.0.4}
-\def\yathesisdate{2020-10-14}
+\def\yathesisversion{1.0.5}
+\def\yathesisdate{2021-02-05}
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesClass{yathesis}[\yathesisdate\space v\yathesisversion\space Yet another class for writing thesis (DB)]
+\RequirePackage{morewrites}%
 \RequirePackage{pgfopts}[2011/06/02]%
 \RequirePackage{etoolbox}[2011/01/03]%
 \RequirePackage{xpatch}[2012/10/02]%
-\AtEndPreamble{%
-  \RequirePackage{morewrites}%
-}%
 \RequirePackage{filehook}[2011/10/12]%
 \RequirePackage{hopatch}[2012/05/28]%
 \RequirePackage{letltxmacro}[2010/09/02]%
@@ -358,20 +356,20 @@
 }%
 \newcommand\YAD@localbibs@common@code[1]{%
   \booltrue{YAD@localbibs}%
-  \AtEndPreamble{%
+  \AddToHook{env/document/before}[YAD/loadcsquotesbiblatex]{%
+    \@ifpackageloaded{csquotes}{%
+    }{%
+      \RequirePackage{csquotes}%
+    }%
     \@ifpackageloaded{biblatex}{%
     }{%
-      \@ifpackageloaded{csquotes}{%
-      }{%
-        \RequirePackage{csquotes}%
-      }%
       \YAD@ClassWarningNoLine{%
         L'ajout automatique des bibliographies locales en fin\MessageBreak%
         de chapitres fourni par l'option de classe\MessageBreak%
         `localbibs' repose sur le package `biblatex'\MessageBreak%
         que vous n'avez pas chargé.\MessageBreak%
         La classe `yathesis' va le faire pour vous mais\MessageBreak%
-        le recours a ce package pour la bibliographie sera\MessageBreak%
+        le recours à ce package pour la bibliographie sera\MessageBreak%
         alors necessaire et exclura tout autre outil\MessageBreak%
         de production de la bibliographie\MessageBreak%
         (notamment `BibTeX')%
@@ -383,6 +381,7 @@
       defernumbers=#1%
     }%
   }%
+  \DeclareHookRule{env/document/before}{YAD/loadcsquotesbiblatex}{before}{hyperref}%
 }
 \yadsetup{%
   localbibs*/.code={%
@@ -390,7 +389,7 @@
   },%
   localbibs/.code={%
     \YAD@localbibs@common@code{false}%
-    \AtEndPreamble{\BiblatexSplitbibDefernumbersWarningOff}%
+    \AddToHook{begindocument/before}{\BiblatexSplitbibDefernumbersWarningOff}%
   }%
 }
 \def\YAD@interligne{single}%
@@ -456,6 +455,17 @@
 \yadsetup{%
   .unknown/.code ={\expandafter\PassOptionsToClass\expandafter{\pgfkeyscurrentname}{book}}%
 }%
+\@ifpackagelater{babel}{2013/04/15}{%
+  \PassOptionsToPackage{main=\YAD@mainlanguage}{babel}%
+}{%
+  \YAD@ClassWarningNoLine{%
+    La version de `babel' utilisée est obsolète.\MessageBreak%
+    La classe `yathesis' va essayer de faire son possible\MessageBreak%
+    mais il est possible qu'elle produise des resultats\MessageBreak%
+    non prévus. Il est conseillé de mettre à jour sa\MessageBreak%
+    distribution TeX%
+  }%
+}%
 \ProcessPgfOptions{/yad}%
 \ifthenelse{\equal{\YAD@mainlanguage}{english}}{%
   \def\YAD@secondarylanguage{french}%
@@ -505,26 +515,21 @@
   }{%
   }%
 }%
-\RequirePackage{babel}[2014/03/24]
+\RequirePackage[\YAD@secondarylanguage,main=\YAD@mainlanguage]{babel}[2014/03/24]
 \RequirePackage{etoc}[2016/09/29]%
 \RequirePackage{iflang}[2007/11/11]%
 \RequirePackage{translator}[2010/06/12]%
 \RequirePackage[useregional]{datetime2}[2020-03-02]%
-\AtEndPreamble{%
+\AddToHook{begindocument/before}{%
   \@ifpackageloaded{hyperref}{%
     \RequirePackage[all]{hypcap}[2011/02/16]%
-  }{%
-  }%
-}%
-\AtEndPreamble{%
-  \@ifpackageloaded{hyperref}{%
     \RequirePackage[numbered]{bookmark}[2011/12/02]%
   }{%
   }%
 }%
 \newlength{\YAD@vspace@before@localtoc@rule}
 \setlength{\YAD@vspace@before@localtoc@rule}{-1.25\baselineskip}
-\AtEndPreamble{%
+\AddToHook{begindocument/before}{%
   \@ifpackageloaded{parskip}{%
     \@ifpackagelater{parskip}{2.0a}{%
       \setlength{\YAD@vspace@before@localtoc@rule}{-.775\baselineskip}%
@@ -533,7 +538,7 @@
   }{%
   }%
 }
-\AtEndPreamble{%
+\AddToHook{begindocument/before}{%
   \@ifpackageloaded{hyperref}{%
     \newcommand{\YAD@href}[3][]{\href[#1]{#2}{#3}}%
     \newcommand{\YAD@hypersetup}[1]{\hypersetup{#1}}%
@@ -554,19 +559,6 @@
   }{%
     \newcommand{\YAD@bookmarksetup}[1]{}%
   }%
-}%
-\@ifpackagelater{babel}{2013/04/15}{%
-  \PassOptionsToPackage{main=\YAD@mainlanguage}{babel}%
-}{%
-  % \AtEndPreamble{%
-  \YAD@ClassWarningNoLine{%
-    La version de `babel' utilisée est obsolète.\MessageBreak%
-    La classe `yathesis' va essayer de faire son possible\MessageBreak%
-    mais il est possible qu'elle produise des resultats\MessageBreak%
-    non prévus. Il est conseillé de mettre à jour sa\MessageBreak%
-    distribution TeX%
-  }%
-  % }%
 }%
 \addto\captionsfrench{\def\tablename{{\scshape Tableau}}}%
 \colophonpreparhook{\normalsize}
@@ -646,7 +638,7 @@
 \newcommand*{\YAD@configuration@file}{thesis.cfg}
 \newcommand*{\YAD@characteristics@file}{characteristics.tex}
 \newcommand*{\YAD@translations@file}{yathesis-translations.tex}
-\AtEndPreamble{%
+\AddToHook{begindocument/before}{%
   \@ifpackageloaded{siunitx}{%
     \sisetup{detect-all}%
     \ifthenelse{\equal{\YAD@mainlanguage}{french}}{%
@@ -682,7 +674,7 @@
   }%
 }%
 \ifbool{YAD@output@paper}{%
-  \AtEndPreamble{%
+  \AddToHook{begindocument/before}{%
     \@ifpackageloaded{hyperref}{%
       \YAD@hypersetup{colorlinks=false}%
       \renewcommand{\YAD@href}[3][]{#3}%
@@ -783,7 +775,7 @@
   }%
 }%
 \newcommand{\YAD@expression}[3]{%
-  \AtBeginDocument{%
+  \AddToHook{begindocument}{%
     \deftranslation[to=French]{lbl-#1}{#2}%
     \deftranslation[to=English]{lbl-#1}{#3}%
     \deftranslation[to=French]{#1}{#2}%
@@ -1664,16 +1656,16 @@
 }{%
 }%
 \ifthenelse{\equal{#2}{title}}{%
-  \AtEndPreamble{\YAD@hypersetup{pdftitle=\YAD@metatitle}}%
+  \AddToHook{begindocument/before}{\YAD@hypersetup{pdftitle=\YAD@metatitle}}%
 }{%
 }%
 \ifundef{\YAD@metasubject}{%
   \ifundef{\YAD@metaacademicfield}{%
   }{%
-    \AtEndPreamble{\YAD@hypersetup{pdfsubject=\YAD@metaacademicfield}}%
+    \AddToHook{begindocument/before}{\YAD@hypersetup{pdfsubject=\YAD@metaacademicfield}}%
   }%
 }{%
-  \AtEndPreamble{\YAD@hypersetup{pdfsubject=\YAD@metasubject}}%
+  \AddToHook{begindocument/before}{\YAD@hypersetup{pdfsubject=\YAD@metasubject}}%
 }%
 \csdef{print#2}{%
         \YAD@reach@file{%
@@ -1778,7 +1770,7 @@
     }%
   }%
   \YAD@error@firstlastnames@empty{de l'auteur de la thèse}{#2}{#3}{\author}%
-  \AtEndPreamble{\YAD@hypersetup{pdfauthor=\YAD@firstname@author{} \YAD@lastname@author}}%
+  \AddToHook{begindocument/before}{\YAD@hypersetup{pdfauthor=\YAD@firstname@author{} \YAD@lastname@author}}%
   \newcommand*\YAD@email@author{%
     #1%
   }%
@@ -1948,7 +1940,7 @@
       }%
     }%
 }%
-\AtEndDocument{%
+\AddToHook{enddocument}{%
   \YAD@ifemptyorundef{\printdate}{%
     \ifbool{YAD@nodate}{%
     }{%
@@ -1978,7 +1970,7 @@
   \DTLnewdbentry{frontepigraphs}{epigraph}{#2}%
   \DTLnewdbentry{frontepigraphs}{epigraphauthor}{#3}%
 }%
-\AtEndPreamble{%
+\AddToHook{begindocument/before}{%
   \@ifpackageloaded{nomencl}{%
     \let\YAD@ORI@printnomenclature\printnomenclature%
     \renewcommand{\printnomenclature}{%
@@ -2140,9 +2132,9 @@
         \fi%
         }
         \etocsettocdepth{\YAD@tocdepth}%
-        \AtBeginDocument{%
-        % \yadsetup{#1}%
-        \YAD@setsecnumdepth{\YAD@secnumdepth}%
+        \AddToHook{begindocument}{%
+          % \yadsetup{#1}%
+          \YAD@setsecnumdepth{\YAD@secnumdepth}%
         }
         % \renewcommand{\setcounter}[2]{}%
         %
@@ -2160,7 +2152,7 @@
   }%
   \sectiontitle%
 }%
-  \AtBeginDocument{%
+  \AddToHook{begindocument}{%
     \setcounter{secnumdepth}{-10}%
     \frontmatter%
     \boolfalse{YAD@localtocs}%
@@ -2268,7 +2260,7 @@
     }%
   }%
 }{}{}%
-\AtEndDocument{%
+\AddToHook{enddocument}{%
   \ifboolexpr{%
     bool {YAD@mainmatter@used}%
   }{%
@@ -2282,7 +2274,7 @@
     }%
   }%
 }%
-\AtEndPreamble{%
+\AddToHook{begindocument/before}{%
   \xpretocmd{\part}{%
     \printlocalbibs{}%
   }{}{}%
@@ -2770,7 +2762,7 @@
 \restoregeometry%
 \pagestyle{preliminary}%
 }%
-\AtEndDocument{%
+\AddToHook{enddocument}{%
   \ifboolexpr{%
     bool {YAD@maketitle@used}%
     or bool {YAD@nomaketitle}%
@@ -2793,6 +2785,7 @@
       \clearpage
       \vspace*{\stretch{1}}%
       \begin{minipage}{\linewidth}
+        \expandafter\selectlanguage\expandafter{\YAD@mainlanguage}%
         \begin{colophon}
           \printcolophontext%
         \end{colophon}
@@ -2810,9 +2803,9 @@
   \ifthenelse{\isempty{#1}}{%
   }{%
     \ifthenelse{\isempty{#2}}{%
-      \AtEndPreamble{\YAD@hypersetup{pdfkeywords={#1}}}%
+      \AddToHook{begindocument/before}{\YAD@hypersetup{pdfkeywords={#1}}}%
     }{%
-      \AtEndPreamble{\YAD@hypersetup{pdfkeywords={#1} ({#2})}}%
+      \AddToHook{begindocument/before}{\YAD@hypersetup{pdfkeywords={#1} ({#2})}}%
     }%
   }%
 }%
@@ -2831,7 +2824,7 @@
     }%
   }%
 }%
-\AtEndDocument{%
+\AddToHook{enddocument}{%
   \notbool{YAD@keywords@used}{%
     \ifbool{YAD@nokeywords}{%
     }{%
@@ -3329,7 +3322,7 @@
   \booltrue{YAD@makeabstract@used}%
 }%
 \newcommand{\YAD@abstract@page@rule}[1][black]{\bgroup\color{#1}\noindent\rule[2pt]{\linewidth}{2pt}\egroup}
-\AtEndDocument{%
+\AddToHook{enddocument}{%
   \ifbool{YAD@makeabstract@used}{%
   }{%
     \ifbool{YAD@nomakeabstract}{%
@@ -4107,7 +4100,7 @@
   \fi%
   \pagestyle{preliminary}%
 }%
-\AtEndPreamble{%
+\AddToHook{begindocument/before}{%
   \colophontext{%
     \IfLanguageName{french}{%
       Mémoire de thèse intitulé \YAD@ifemptyorundef{\printtitle}{%
@@ -4120,7 +4113,7 @@
         \printauthor%
       }, achevé le \today{}, composé au moyen du système de préparation de
       document \YAD@href{https://fr.wikipedia.org/wiki/LaTeX}{\LaTeX{}} et de la
-      classe \YAD@href{https://www.ctan.org/pkg/yathesis}{\textsf{yathesis}}
+      classe \YAD@href{https://ctan.org/pkg/yathesis}{\textsf{yathesis}}
       dédiée aux thèses préparées en France.%
     }{%
       Doctoral dissertation entitled \YAD@ifemptyorundef{\printtitle}{%
@@ -4133,19 +4126,19 @@
         \printauthor%
       }, completed on \today{}, typeset with the document preparation system
       \YAD@href{https://en.wikipedia.org/wiki/LaTeX}{\LaTeX{}} and the
-      \YAD@href{https://www.ctan.org/pkg/yathesis}{\textsf{yathesis}} class
+      \YAD@href{https://ctan.org/pkg/yathesis}{\textsf{yathesis}} class
       dedicated to theses prepared in France.%
     }%
   }%
 }
-\AtBeginDocument{%
+\AddToHook{begindocument}{%
   \ifthenelse{\equal{\YAD@mainlanguage}{french}}{%
     \YAD@hypersetup{pdflang=fr}%
   }{%
     \YAD@hypersetup{pdflang=en}%
   }%
 }%
-\AtEndPreamble{%
+\AddToHook{begindocument/before}{%
   \@ifpackageloaded{biblatex}{%
     \defbibheading{YAD@localbibs@heading}[\translate{lbl-localbibname} % (\therefsegment)
     ]{%
@@ -4172,16 +4165,16 @@
     \BeforeBeginEnvironment{thebibliography}{%
       \singlespacing%
     }%
-    \AtEndEnvironment{thebibliography}{%
+    \AddToHook{env/thebibliography/end}{%
       \clearpage%
     }%
   }%
 }%
-\AtEndDocument{%
+\AddToHook{enddocument}{%
   \booltrue{YAD@nonnumbered@chapter}%
   \booltrue{YAD@nonnumbered@section}%
 }
-\AtEndDocument{%
+\AddToHook{enddocument}{%
   \ifbool{YAD@printbibliography@used}{%
   }{%
     \ifbool{YAD@noprintbibliography}{%
@@ -4264,14 +4257,14 @@
     \printglossary[type=symbols,style=yadsymbolstyle,#1]%
   }%
 }%
-\AtEndPreamble{%
+\AddToHook{begindocument/before}{%
   \@ifpackageloaded{glossaries}{%
     \RequirePackage{glossaries-babel}%
   }{%
   }%
 }%
 }%
-\AtEndPreamble{%
+\AddToHook{begindocument/before}{%
   \@ifpackageloaded{glossaries}{%
     \IfLanguageName{english}{%
       \makeatletter
@@ -4283,7 +4276,7 @@
   }{%
   }%
 }%
-\AtEndPreamble{%
+\AddToHook{begindocument/before}{%
   \ifPDFTeX
   \shorthandon{;:!?}%
   \fi
@@ -4302,7 +4295,7 @@
   \shorthandoff{;:!?}%
   \fi
 }%
-\AtEndPreamble{%
+\AddToHook{begindocument/before}{%
   \ifPDFTeX
   \shorthandon{;:!?}%
   \fi
@@ -4325,7 +4318,7 @@
   \shorthandoff{;:!?}%
   \fi
 }%
-\AtEndDocument{%
+\AddToHook{enddocument}{%
   \ifbool{YAD@tableofcontents@used}{%
   }{%
     \ifbool{YAD@notableofcontents}{%
