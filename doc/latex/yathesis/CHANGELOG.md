@@ -1,5 +1,15 @@
 # [Unreleased]
 
+# [1.0.5] - 2021-02-05
+
+## Changed
+- The class now relies on the new LaTeX core hooks.
+- Documentation revised.
+
+## Fixed
+- Setting the main language was not taken into account by some packages
+  (e.g. `csquotes`).
+
 # [1.0.4] - 2020-10-14
 
 ## Changed

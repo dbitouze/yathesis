@@ -1,6 +1,6 @@
 -----------------------------------------------------------------------
 
-- `yathesis` --- Yet Another Thesis Class, version 1.0.4
+- `yathesis` --- Yet Another Thesis Class, version 1.0.5
 - E-mail: `denis.bitouze@univ-littoral.fr`
 - Released under the LaTeX Project Public License v1.3c or later. See
   http://www.latex-project.org/lppl.txt
@@ -32,7 +32,7 @@ Typesetting the documentation of the class requires:
   with `yathesis-demo` package load at first place. If `latexmk` is available,
   it is easier to run:
 
-      latexmk -g -norc -r ./latexmkrc  -jobname=these -pdflatex="pdflatex %O '\RequirePackage{etoolbox}\AtEndPreamble{\RequirePackage{yathesis-demo}}\input{%S}'" these.tex
+      latexmk -g -norc -r ./latexmkrc  -jobname=these -pdflatex="pdflatex %O '\AddToHook{begindocument/before}{\RequirePackage{yathesis-demo}}\input{%S}'" these.tex
 
 - to compile `yathesis-fr.tex` to be found in the
   `.../doc/latex/yathesis/french/documentation` directory as follows:
