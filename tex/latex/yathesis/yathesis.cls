@@ -52,6 +52,7 @@
 \newbool{YAD@two@titles}
 \newbool{YAD@cover@page}
 \newbool{YAD@supervisor@specified}
+\newbool{YAD@committeepresident@specified}
 \newbool{YAD@symbols@isolated}
 \newbool{YAD@logo@before}
 \newbool{YAD@valid@day}
@@ -487,6 +488,7 @@
 \RequirePackage{environ}[2013/04/01]%
 \RequirePackage{adjustbox}[2012/05/21]%
 \RequirePackage{array}[2008/09/09]%
+\RequirePackage{tabularx}[2020/01/15]%
 \RequirePackage{xstring}[2013/10/13]%
 \RequirePackage{textcase}[2004/10/07]%
 \RequirePackage{iftex}[2013/04/04]%
@@ -1125,6 +1127,7 @@
   }%
 }%
 \newcommand*{\committeepresident}[3][]{%
+  \booltrue{YAD@committeepresident@specified}
   \yadsetup{#1}%
   \ifboolexpr{%
     bool {YAD@female} or %
@@ -1308,7 +1311,9 @@
         }%
       }%
     }%
+  \ifbool{YAD@committeepresident@specified}{%
     &
+    % Fonction
     \YAD@reach@file{%
       \ifthenelse{\DTLiseq{\YAD@committeemember@role}{}}{%
         \ifdraft{%
@@ -1322,9 +1327,11 @@
         }%
       }%
     }%
-    \DTLiflastrow{%
-      \\[.15cm]
-    }{%
+  }{%
+  }%
+  \DTLiflastrow{%
+    \\[.15cm]
+  }{%
       \\
     }%
   }%
@@ -1403,8 +1410,16 @@
   }%
 \newcommand*{\YAD@committee@tabular}{%
   \small%
-  \begin{tabular}[t]{>{\itshape}llp{5cm}l}
-    \multicolumn{4}{@{}l}{\bfseries\YAD@translation{committeemembers}}%
+  \ifbool{YAD@committeepresident@specified}{%
+    \begin{tabularx}{\textwidth}[t]{>{\itshape}llXl}
+  }{%
+    \begin{tabularx}{\textwidth}[t]{>{\itshape}llX}
+  }%
+    \ifbool{YAD@committeepresident@specified}{%
+      \multicolumn{4}{@{}l}{\bfseries\YAD@translation{committeemembers}}%
+    }{%
+      \multicolumn{3}{@{}l}{\bfseries\YAD@translation{committeemembers}}%
+    }%
     \\[.25cm]
     \DTLforeach*{YAD@staffs}{%
       \YAD@the@staff=YAD@the@staff%
@@ -1412,7 +1427,7 @@
       %
       \YAD@display@staff{\YAD@the@staff}%
     }%
-  \end{tabular}%
+  \end{tabularx}%
 }%
 \DeclareRobustCommand*\YAD@meta{\YAD@generic@argument}%
 \newcommand*\YAD@logo{}%
@@ -2695,7 +2710,7 @@
     \vspace*{\stretch{2}}%
   \end{center}
   \noindent%
-  \begin{minipage}[c][\YAD@otherboxheight][c]{\YAD@titleboxwidth}
+  \begin{minipage}[c][\YAD@otherboxheight][c]{\textwidth}
     \YAD@supervisors@tabular%
     \par%
     \ifboolexpr{%

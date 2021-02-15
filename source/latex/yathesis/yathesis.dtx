@@ -433,6 +433,7 @@ This work consists of the file  yathesis.dtx
 \newbool{YAD@two@titles}
 \newbool{YAD@cover@page}
 \newbool{YAD@supervisor@specified}
+\newbool{YAD@committeepresident@specified}
 \newbool{YAD@symbols@isolated}
 \newbool{YAD@logo@before}
 \newbool{YAD@valid@day}
@@ -1044,6 +1045,10 @@ This work consists of the file  yathesis.dtx
 % Pour disposer d'outils pour les tableaux
 %    \begin{macrocode}
 \RequirePackage{array}[2008/09/09]%
+%    \end{macrocode}
+% Pour des tableaux de largeur déterminée
+%    \begin{macrocode}
+\RequirePackage{tabularx}[2020/01/15]%
 %    \end{macrocode}
 % Pour effectuer des manipulations sur des chaîne de caractères
 %    \begin{macrocode}
@@ -2062,6 +2067,7 @@ This work consists of the file  yathesis.dtx
 % \begin{macro}{\committeepresident}
 %    \begin{macrocode}
 \newcommand*{\committeepresident}[3][]{%
+  \booltrue{YAD@committeepresident@specified}
   \yadsetup{#1}%
   \ifboolexpr{%
     bool {YAD@female} or %
@@ -2260,8 +2266,9 @@ This work consists of the file  yathesis.dtx
         }%
       }%
     }%
+  \ifbool{YAD@committeepresident@specified}{%
     &
-% Fonction
+    % Fonction
     \YAD@reach@file{%
       \ifthenelse{\DTLiseq{\YAD@committeemember@role}{}}{%
         \ifdraft{%
@@ -2275,9 +2282,11 @@ This work consists of the file  yathesis.dtx
         }%
       }%
     }%
-    \DTLiflastrow{%
-      \\[.15cm]
-    }{%
+  }{%
+  }%
+  \DTLiflastrow{%
+    \\[.15cm]
+  }{%
       \\
     }%
   }%
@@ -2358,8 +2367,16 @@ This work consists of the file  yathesis.dtx
 %
 \newcommand*{\YAD@committee@tabular}{%
   \small%
-  \begin{tabular}[t]{>{\itshape}llp{5cm}l}
-    \multicolumn{4}{@{}l}{\bfseries\YAD@translation{committeemembers}}%
+  \ifbool{YAD@committeepresident@specified}{%
+    \begin{tabularx}{\textwidth}[t]{>{\itshape}llXl}
+  }{%
+    \begin{tabularx}{\textwidth}[t]{>{\itshape}llX}
+  }%
+    \ifbool{YAD@committeepresident@specified}{%
+      \multicolumn{4}{@{}l}{\bfseries\YAD@translation{committeemembers}}%
+    }{%
+      \multicolumn{3}{@{}l}{\bfseries\YAD@translation{committeemembers}}%
+    }%
     \\[.25cm]
     \DTLforeach*{YAD@staffs}{%
       \YAD@the@staff=YAD@the@staff%
@@ -2367,7 +2384,7 @@ This work consists of the file  yathesis.dtx
       %
       \YAD@display@staff{\YAD@the@staff}%
     }%
-  \end{tabular}%
+  \end{tabularx}%
 }%
 %    \end{macrocode}
 %
@@ -3993,7 +4010,7 @@ This work consists of the file  yathesis.dtx
 % Affichage des directeurs de thèse et du jury
 %    \begin{macrocode}
   \noindent%
-  \begin{minipage}[c][\YAD@otherboxheight][c]{\YAD@titleboxwidth}
+  \begin{minipage}[c][\YAD@otherboxheight][c]{\textwidth}
     \YAD@supervisors@tabular%
     \par%
     \ifboolexpr{%
