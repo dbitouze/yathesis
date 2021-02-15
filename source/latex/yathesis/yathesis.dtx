@@ -2368,9 +2368,9 @@ This work consists of the file  yathesis.dtx
 \newcommand*{\YAD@committee@tabular}{%
   \small%
   \ifbool{YAD@committeepresident@specified}{%
-    \begin{tabularx}{\textwidth}[t]{>{\itshape}llXl}
+    \begin{tabularx}{\textwidth}[t]{>{\itshape}ll>{\raggedright\arraybackslash}Xl}
   }{%
-    \begin{tabularx}{\textwidth}[t]{>{\itshape}llX}
+    \begin{tabularx}{\textwidth}[t]{>{\itshape}ll>{\raggedright\arraybackslash}X}
   }%
     \ifbool{YAD@committeepresident@specified}{%
       \multicolumn{4}{@{}l}{\bfseries\YAD@translation{committeemembers}}%
