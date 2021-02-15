@@ -2296,11 +2296,10 @@ This work consists of the file  yathesis.dtx
   \small%
   \DTLifdbempty{YAD@staffs}{}{%
     \ifthenelse{\DTLrowcount{YAD@supervisors}>1}{%
-      \newcolumntype{u}{>{\itshape}lll}%
+      \begin{tabular}[t]{>{\itshape}lll}
     }{%
-      \newcolumntype{u}{>{\itshape}l@{ }ll}%
+      \begin{tabular}[t]{>{\itshape}l@{ }ll}
     }%
-    \begin{tabular}[t]{u}
       \DTLforeach*{YAD@supervisors}{%
           \YAD@committeemember@lastname=lastname,%
           \YAD@committeemember@firstname=firstname,%
