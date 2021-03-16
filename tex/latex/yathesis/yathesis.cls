@@ -1340,11 +1340,10 @@
   \small%
   \DTLifdbempty{YAD@staffs}{}{%
     \ifthenelse{\DTLrowcount{YAD@supervisors}>1}{%
-      \newcolumntype{u}{>{\itshape}lll}%
+      \begin{tabular}[t]{>{\itshape}lll}
     }{%
-      \newcolumntype{u}{>{\itshape}l@{ }ll}%
+      \begin{tabular}[t]{>{\itshape}l@{ }ll}
     }%
-    \begin{tabular}[t]{u}
       \DTLforeach*{YAD@supervisors}{%
           \YAD@committeemember@lastname=lastname,%
           \YAD@committeemember@firstname=firstname,%
@@ -1411,9 +1410,9 @@
 \newcommand*{\YAD@committee@tabular}{%
   \small%
   \ifbool{YAD@committeepresident@specified}{%
-    \begin{tabularx}{\textwidth}[t]{>{\itshape}llXl}
+    \begin{tabularx}{\textwidth}[t]{>{\itshape}ll>{\raggedright\arraybackslash}Xl}
   }{%
-    \begin{tabularx}{\textwidth}[t]{>{\itshape}llX}
+    \begin{tabularx}{\textwidth}[t]{>{\itshape}ll>{\raggedright\arraybackslash}X}
   }%
     \ifbool{YAD@committeepresident@specified}{%
       \multicolumn{4}{@{}l}{\bfseries\YAD@translation{committeemembers}}%
