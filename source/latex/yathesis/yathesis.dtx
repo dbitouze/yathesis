@@ -5123,11 +5123,19 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
     \renewcommand\addcontentsline[3]{}%
     \begingroup
-    \titlespacing*{\section}{\dimen@}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
-    \section*{%
-      \large%
-      \translate{lbl-localtocname}%
-    }%
+%    \end{macrocode}
+% In order to avoid the issue
+% \url|https://github.com/dbitouze/yathesis/issues/81|, we don't rely on an
+% unumbered section anymore and instead simulate it.
+%    \begin{macrocode}
+    \vspace{3.5ex plus 1ex minus .2ex}%
+      \noindent\hspace{\dimen@}%
+      {%
+        \normalfont\large\bfseries%
+        \translate{lbl-localtocname}%
+      }
+    \vspace{2.3ex plus .2ex}%
+    \par%
     \endgroup
 %    \end{macrocode}
 % We don't want the header contain the title of the previous (dummy) section in case
@@ -5186,6 +5194,13 @@ This work consists of the file  yathesis.dtx
   \YAD@setlinestyle {paragraph}{\YAD@numwidthF}%
   \YAD@setlinestyle {subparagraph}{\YAD@numwidthG}%
 }
+%    \end{macrocode}
+% Because we don't rely anymore on an unumbered section for the local ToCs, any
+% ×\label× added after a ×\chapter× refers to the \package{etoc}'s counter
+% ×etoc@tocid× attached to the local ToCs and, in case \package{etoc} is used,
+% we have to tell ×\autoref× to refer to the underlying chapter instead.
+%    \begin{macrocode}
+\newcommand*{\etoc@tocidautorefname}{\MakeLowercase{\chaptername}}%
 %    \end{macrocode}
 %
 %    \begin{macrocode}
