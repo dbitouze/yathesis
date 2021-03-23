@@ -40,10 +40,10 @@ saisies, au choix :
   \item soit dans son corps ;
     \begin{dbwarning}{Caractéristiques de la thèse à saisir \emph{avant}
         \protect\refCom*{maketitle}}{avant-maketitle}
-    Si les caractéristiques de la thèse sont saisies dans le corps du fichier
-    (maître) de la thèse, elles doivent nécessairement l'être \emph{avant} la
-    commande \refCom{maketitle}.
-  \end{dbwarning}
+      Si les caractéristiques de la thèse sont saisies dans le corps du fichier
+      (maître) de la thèse, elles doivent nécessairement l'être \emph{avant} la
+      commande \refCom{maketitle}.
+    \end{dbwarning}
   \end{enumerate}
 \item[dans un fichier dédié]
   \index{fichier!des caractéristiques de la thèse}%
@@ -522,6 +522,9 @@ url=http://lmpa.univ-littoral.fr/
 
 \subsection{Directeur(s) de thèse et membres du jury}\label{sec-jury}
 
+\changes{v1.0.6}{2021-03-23}{Le tableau listant les membres du jury occupe
+  désormais toute la largeur de l'empagement}
+
 Les directeur(s) et membres du jury de la thèse sont définis et précisés au
 moyen des commandes et options listés dans cette section. Ils figurent
 automatiquement sur la ou les pages de titre\footnote{En versions \enquote{à
@@ -600,6 +603,10 @@ pour désigner celles qui ne sont pas membres du jury.%
   \index{membre du jury!rapporteur}%
   Cette commande définit un rapporteur de la thèse.
 \end{docCommand}
+
+\changes{v1.0.6}{2021-03-23}{En l'absence de spécification d'un président du
+  jury, le tableau des membres de ce jury est désormais composé sur 3 et non
+  4 colonnes}
 
 \begin{docCommand}{committeepresident}{\oarg{précision(s)}\marg{prénom}\marg{nom}}
   \index{caractéristiques de la thèse!liste!président du jury}%
@@ -847,6 +854,13 @@ figurer tant de précisions et, ne serait-ce que pour des raisons de place, on
 veillera à ne pas multiplier celles-ci.
 \end{dbexample}
 
+\begin{dbwarning}{Préposition inadaptée}{}
+  En cas de problème de préposition inadaptée, par exemple
+  \enquote{\glsxtrshort{mcf} \glsxtrshort{hdr} au Sorbonne Université} au lieu
+  de \enquote{\glsxtrshort{mcf} \glsxtrshort{hdr} à Sorbonne Université}, on se
+  référera à la \vref{sec-expr-separ-les}.
+\end{dbwarning}
+%
 \paragraph{Homme/femme}
 \label{sec-hommefemme}%
 \index{caractéristiques de la thèse!liste!homme}%

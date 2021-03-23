@@ -130,20 +130,32 @@ Par défaut, un mémoire créé avec la \yatCl est composé :
 \label{sec-localtoc}%
 \index{table des matières!locale}%
 
-%
+\subsubsection{Génération}
+\label{sec:generation}
+
 \changes{v0.99o}{2016-10-30}{Nouvelle option de classe \protect\refKey{localtocs}
-  permettant de faire automatiquement débuter les chapitres par leurs tables des
-  matières locales}%
+  permettant de faire automatiquement débuter les chapitres par leurs \gls{tdml}}%
+
+\changes{v1.0.6}{2021-03-23}{La correction du bug
+  \href{https://github.com/dbitouze/yathesis/issues/81}{81} a nécessité de
+  remplacer une section non numérotée par une émulation de celle-ci ; cela peut
+  entraîner de légères variations de mise en page}
 
 \begin{docKey}[][doc new=2016-10-30]{localtocs}{}{par défaut \docValue{true},
     initialement \docValue{false}}
   \indexdef{table des matières!locale}%
   Cette clé fait automatiquement débuter les chapitres de la partie
   principale\footnote{C'est-à-dire de \refCom{mainmatter} jusqu'à
-    \refCom{backmatter}.} par leurs tables des matières locales.
+    \refCom{backmatter}.} par leurs \gls{tdml}.
 \end{docKey}
 
-Par défaut, les tables des matières locales générées grâce à la clé
+Ces \gls{tdml} sont introduites par une (émulation de) section
+non numérotée, intitulée \translateexpression{localtocname}.
+
+\subsubsection{Profondeur}
+\label{sec:profondeur}
+
+Par défaut, les \gls{tdml} générées grâce à la clé
 \refKey{localtocs} ont comme \enquote{niveau de profondeur} les
 sous-sections\footnote{Ce niveau est donc par défaut identique à celui des
   \hyperref[sec-table-des-matieres]{tables des matières
@@ -160,65 +172,90 @@ clé \refKey{localtocs/depth}.
     Cette clé :
     \begin{enumerate}
     \item actionne la clé \refKey{localtocs} ;
-    \item modifie le \enquote{niveau de profondeur} des tables des matières
-      locales, respectivement jusqu'aux : sections, sous-sections,
-      sous-sous-sections, paragraphes, sous-paragraphes\footnote{La clé
-        \refKey{localtocs/depth} ne peut pas prendre comme valeurs
-        \docValue{part} ou \docValue{chapter} puisque les tables des matières
-        \emph{locales aux chapitres} ne peuvent être de \enquote{niveau de
-          profondeur} \emph{supérieur ou égal} aux chapitres.}.
+    \item modifie le \enquote{niveau de profondeur} des \gls{tdml},
+      respectivement jusqu'aux : sections, sous-sections, sous-sous-sections,
+      paragraphes, sous-paragraphes\footnote{La clé \refKey{localtocs/depth} ne
+        peut pas prendre comme valeurs \docValue{part} ou \docValue{chapter}
+        puisque les \gls{tdm} \emph{locales aux chapitres} ne peuvent
+        être de \enquote{niveau de profondeur} \emph{supérieur ou égal} aux
+        chapitres.}.
     \end{enumerate}
 
 \end{docKey}
 }
 
-\begin{dbexample}{Tables des matières locales automatiques}{}
+\begin{dbexample}{\gls{tdml} automatiques}{}
   \indexex{table des matières!locale}%
   Pour que chaque chapitre de la partie principale du mémoire débute
-  automatiquement par sa table des matières locale, il suffit de passer l'option
-  suivante à la \yatCl{}.
+  automatiquement par sa \gls{tdml}, il suffit de passer l'option suivante à la
+  \yatCl{}.
 \begin{preamblecode}
 \documentclass[localtocs]{yathesis}
 \end{preamblecode}
 
-  Dans l'exemple précédent (illustré \vref{fig-introduction}), les tables des
-  matières locales vont jusqu'aux sous-sections. Pour qu'elles aillent par
-  exemple jusqu'aux sous-sous-sections, on recourra à :
+  Dans l'exemple précédent (illustré \vref{fig-introduction}), les \gls{tdml}
+  vont jusqu'aux sous-sections. Pour qu'elles aillent par exemple jusqu'aux
+  sous-sous-sections, on recourra à :
 \begin{preamblecode}
 \documentclass[localtocs/depth=subsubsection]{yathesis}
 \end{preamblecode}
 \end{dbexample}
 
 La \yatCl{} fournit aussi des commandes permettant d'activer ou de désactiver
-semi-globalement ou localement l'insertion automatique de tables des matières
-locales et ce, indépendamment du recours à l'option \refKey{localtocs}.
+semi-globalement ou localement l'insertion automatique de \gls{tdml} et ce,
+indépendamment du recours à l'option \refKey{localtocs}.
 
 \begin{docCommand}[doc new=2016-10-30]{startlocaltocs}{}
   \index{table des matières!locale}%
   Cette commande est une bascule \emph{activant} jusqu'à nouvel ordre
-  l'insertion automatique de tables des matières locales.
+  l'insertion automatique de \gls{tdml}.
 \end{docCommand}
 
 \begin{docCommand}[doc new=2016-10-30]{stoplocaltocs}{}
   \index{table des matières!locale}%
   Cette commande est une bascule \emph{désactivant} jusqu'à nouvel ordre
-  l'insertion automatique de tables des matières locales.
+  l'insertion automatique de \gls{tdml}.
 \end{docCommand}
 
 \begin{docCommand}[doc new=2016-10-30]{nextwithlocaltoc}{}
   \index{table des matières!locale}%
   Cette commande \emph{active}, pour le \emph{chapitre suivant seulement},
-  l'insertion automatique de tables des matières locales.
+  l'insertion automatique de \gls{tdml}.
 \end{docCommand}
 
 \begin{docCommand}[doc new=2016-10-30]{nextwithoutlocaltoc}{}
   \index{table des matières!locale}%
   Cette commande \emph{désactive}, pour le \emph{chapitre suivant seulement},
-  l'insertion automatique de tables des matières locales.
+  l'insertion automatique de \gls{tdml}.
 \end{docCommand}
 
-Les tables des matières locales sont introduites par une section (non numérotée)
-intitulée \translateexpression{localtocname}.
+\subsubsection{Texte introductif}
+\label{sec:texte-introductif}
+
+\changes{v1.06}{2021-03-23}{Nouvelle commande \refCom{leadchapter} permettant,
+  pour chaque chapitre, de spécifier un texte inséré entre sa tête et son
+  éventuelle \gls{tdml} automatique.}%
+
+Les chapitres voient leurs têtes automatiquement et immédiatement suivies par
+leur éventuelle \gls{tdml}. La commande \refCom{leadchapter} suivante offre la
+possibilité d'insérer entre les deux un texte introductif\footnote{À voir comme
+  une sorte de
+  \href{https://fr.wikipedia.org/wiki/Chapeau_(presse)}{\enquote{chapeau}} de chapitre.}.
+
+\begin{docCommand}[doc new=2021-03-23]{leadchapter}{\marg{texte}}
+  \indexsee{chapeau}{table des matières!locale!texte introductif}%
+  \index{table des matières!locale!texte introductif}%
+  Cette commande permet, pour chaque chapitre, de spécifier un \meta{texte}
+  (introductif) inséré (automatiquement) entre sa tête et son éventuelle
+  \gls{tdml} automatique.
+\end{docCommand}
+
+\begin{dbwarning}{Commande \protect\refCom*{leadchapter} à insérer (juste)
+    avant le chapitre souhaité}{}
+  La commande \refCom{leadchapter} peut être employée autant de fois que
+  souhaité. Chacune de ses occurrences doit être insérée (de préférence juste)
+  avant le chapitre souhaité.
+\end{dbwarning}
 
 \subsection{Bibliographies locales automatiques}
 \label{sec-localbibs}%
