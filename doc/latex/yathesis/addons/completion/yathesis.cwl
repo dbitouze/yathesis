@@ -1,6 +1,7 @@
 # mode: yathesis.cls
-# denisbitouze, 2020-04-05
+# denisbitouze, 2021-03-23
 #
+#include:class-book
 #include:adjustbox
 #include:array
 #include:babel
@@ -30,6 +31,7 @@
 #include:nonumonpart
 #include:pgfopts
 #include:setspace
+#include:tabularx
 #include:tcolorbox
 #include:textcase
 #include:titlesec
@@ -259,6 +261,7 @@ frametitle=#shadowbox,ovalbox,none,fbox
 #
 # Preliminary part
 #
+\colophontext{texte%text}#n*
 \disclaimer{clause%text}#n
 \makedisclaimer#n
 \makedisclaimer*#n
@@ -373,6 +376,7 @@ name=
 \stoplocaltocs
 \nextwithlocaltoc
 \nextwithoutlocaltoc
+\leadchapter{texte%text}
 #
 # Customization
 #

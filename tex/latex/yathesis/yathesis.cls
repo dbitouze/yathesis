@@ -11,8 +11,8 @@
 %% Released under the LaTeX Project Public License v1.3c or later
 %% See http://www.latex-project.org/lppl.txt
 %% -----------------------------------------------------------------------
-\def\yathesisversion{1.0.5}
-\def\yathesisdate{2021-02-05}
+\def\yathesisversion{1.0.6}
+\def\yathesisdate{2021-03-23}
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesClass{yathesis}[\yathesisdate\space v\yathesisversion\space Yet another class for writing thesis (DB)]
 \RequirePackage{morewrites}%
@@ -3639,11 +3639,6 @@
       }
     \vspace{2.3ex plus .2ex}%
     \par%
-    % \titlespacing*{\section}{\dimen@}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
-    % \section*{%
-    %   \large%
-    %   \translate{lbl-localtocname}%
-    % }%
     \endgroup
     \sectionmark{}%
     \let\addcontentsline\YAD@addcontentsline
@@ -3735,6 +3730,9 @@
 \newcommand*\YAD@computelocalnumwidths [1][0.5em]{%
   \YAD@computenumwidths@ {local}{#1}%
 }
+\newcommand{\leadchapter}[1]{%
+  \def\YAD@leadchapter{#1}%
+}
 \etocchecksemptiness
 \newcommand{\YAD@default@localtoc}{%
   \ifbool{YAD@localtocs}%
@@ -3774,8 +3772,13 @@
   \booltrue{YAD@nextwithlocaltoc}%
 }
 \apptocmd{\@makechapterhead}{%
+      \YAD@ifemptyorundef{\YAD@leadchapter}{%
+      }{%
+      \YAD@leadchapter%
+      \let\YAD@leadchapter\relax
+      }
   \ifbool{YAD@localtocs}%
-  {%
+   {%
     \YAD@localtoc%
     \renewcommand{\YAD@localtoc}{\YAD@default@localtoc}%
     \ifbool{YAD@nextwithlocaltoc}%
