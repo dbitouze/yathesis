@@ -136,16 +136,16 @@ Par défaut, un mémoire créé avec la \yatCl est composé :
 \changes{v0.99o}{2016-10-30}{Nouvelle option de classe \protect\refKey{localtocs}
   permettant de faire automatiquement débuter les chapitres par leurs \gls{tdml}}%
 
-\changes{v1.0.6}{2021-03-23}{La correction du bug
+\changes*{v1.0.6}{2021-03-23}{La correction du bug
   \href{https://github.com/dbitouze/yathesis/issues/81}{81} a nécessité de
-  remplacer une section non numérotée par une émulation de celle-ci ; cela peut
-  entraîner de légères variations de mise en page}
+  remplacer une section non numérotée par une émulation de
+  celle-ci}
 
 \begin{docKey}[][doc new=2016-10-30]{localtocs}{}{par défaut \docValue{true},
     initialement \docValue{false}}
   \indexdef{table des matières!locale}%
   Cette clé fait automatiquement débuter les chapitres de la partie
-  principale\footnote{C'est-à-dire de \refCom{mainmatter} jusqu'à
+  principale\footnote{C'est-à-dire entre \refCom{mainmatter} et
     \refCom{backmatter}.} par leurs \gls{tdml}.
 \end{docKey}
 
@@ -232,9 +232,9 @@ indépendamment du recours à l'option \refKey{localtocs}.
 \subsubsection{Texte introductif}
 \label{sec:texte-introductif}
 
-\changes{v1.06}{2021-03-23}{Nouvelle commande \refCom{leadchapter} permettant,
-  pour chaque chapitre, de spécifier un texte inséré entre sa tête et son
-  éventuelle \gls{tdml} automatique.}%
+\changes{v1.06}{2021-03-23}{Nouvelle commande \protect\refCom{leadchapter}
+  permettant, pour chaque chapitre, de spécifier un texte inséré entre sa tête
+  et son éventuelle \gls{tdml} automatique.}%
 
 Les chapitres voient leurs têtes automatiquement et immédiatement suivies par
 leur éventuelle \gls{tdml}. La commande \refCom{leadchapter} suivante offre la
@@ -243,7 +243,7 @@ possibilité d'insérer entre les deux un texte introductif\footnote{À voir com
   \href{https://fr.wikipedia.org/wiki/Chapeau_(presse)}{\enquote{chapeau}} de chapitre.}.
 
 \begin{docCommand}[doc new=2021-03-23]{leadchapter}{\marg{texte}}
-  \indexsee{chapeau}{table des matières!locale!texte introductif}%
+  % \indexsee{chapeau}{texte introductif}%
   \index{table des matières!locale!texte introductif}%
   Cette commande permet, pour chaque chapitre, de spécifier un \meta{texte}
   (introductif) inséré (automatiquement) entre sa tête et son éventuelle
