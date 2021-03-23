@@ -1,5 +1,21 @@
 # [Unreleased]
 
+# [1.0.6] - 2021-03-23
+
+## Added
+- Command allowing, for each chapter, to specify a text inserted between its
+  head and its possible automatic local table of contents (issue gh #82,
+  https://git.io/JYeVe).
+
+## Changed
+- Table listing the members of the committee:
+  - with \textwidth as width,
+  - with  3 and not 4 columns in case president is not specified.
+- Documentation revised.
+
+## Fixed
+- Bug gh #81 (https://git.io/JYeVY).
+
 # [1.0.5] - 2021-02-05
 
 ## Changed
