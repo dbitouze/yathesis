@@ -3631,11 +3631,19 @@
     \dimen@ 2.25em % soon to be \leftskip
     \renewcommand\addcontentsline[3]{}%
     \begingroup
-    \titlespacing*{\section}{\dimen@}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
-    \section*{%
-      \large%
-      \translate{lbl-localtocname}%
-    }%
+    \vspace{3.5ex plus 1ex minus .2ex}%
+      \noindent\hspace{\dimen@}%
+      {%
+        \normalfont\large\bfseries%
+        \translate{lbl-localtocname}%
+      }
+    \vspace{2.3ex plus .2ex}%
+    \par%
+    % \titlespacing*{\section}{\dimen@}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
+    % \section*{%
+    %   \large%
+    %   \translate{lbl-localtocname}%
+    % }%
     \endgroup
     \sectionmark{}%
     \let\addcontentsline\YAD@addcontentsline
@@ -3680,6 +3688,7 @@
   \YAD@setlinestyle {paragraph}{\YAD@numwidthF}%
   \YAD@setlinestyle {subparagraph}{\YAD@numwidthG}%
 }
+\newcommand*{\etoc@tocidautorefname}{\MakeLowercase{\chaptername}}%
 \newcommand*\YAD@computenumwidths@ [2] {% #1 pour `etoc' ou `local', #2=pour le
                                 % \kern
   \begingroup
