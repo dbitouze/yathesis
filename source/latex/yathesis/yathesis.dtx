@@ -5256,6 +5256,16 @@ This work consists of the file  yathesis.dtx
 %
 % \section{Machinerie pour les tables des matières locales}
 %
+% On fournit une commande permettant de définir un \enquote{chapeau} qui sera
+% inséré entre les têtes de chapitres et leurs éventuelles tables des matières
+% automatiques.
+%
+%    \begin{macrocode}
+\newcommand{\leadchapter}[1]{%
+  \def\YAD@leadchapter{#1}%
+}
+%    \end{macrocode}
+%
 % Les tables des matières locales ne sont pas imprimées si elles sont vides.
 %    \begin{macrocode}
 \etocchecksemptiness
@@ -5301,8 +5311,13 @@ This work consists of the file  yathesis.dtx
   \booltrue{YAD@nextwithlocaltoc}%
 }
 \apptocmd{\@makechapterhead}{%
+      \YAD@ifemptyorundef{\YAD@leadchapter}{%
+      }{%
+      \YAD@leadchapter%
+      \let\YAD@leadchapter\relax
+      }
   \ifbool{YAD@localtocs}%
-  {%
+   {%
     \YAD@localtoc%
     \renewcommand{\YAD@localtoc}{\YAD@default@localtoc}%
     \ifbool{YAD@nextwithlocaltoc}%
