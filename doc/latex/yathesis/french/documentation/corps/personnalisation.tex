@@ -305,6 +305,14 @@ possibilité d'insérer entre les deux un texte introductif\footnote{À voir com
   \end{itemize}
 \end{dbwarning}
 
+\begin{dbwarning}{\docAuxCommand{includeonly} inopérante en cas de
+    bibliographies locales}{}
+  Pour des raisons techniques, la commande \docAuxCommand{includeonly} est
+  inopérante lorsque l'option \refKey{localbibs} est utilisée. Le seul moyen de
+  temporairement ne compiler que certains fichiers inclus est alors de
+  temporairement commenter l'inclusion des autres.
+\end{dbwarning}
+
 \begin{dbexample}{Bibliographies locales automatiques}{}
   \indexex{bibliographie!locale}%
   Pour que chaque chapitre finisse automatiquement par sa bibliographie locale
