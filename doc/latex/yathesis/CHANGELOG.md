@@ -1,5 +1,28 @@
 # [Unreleased]
 
+# [1.0.8] - 2021-07-13
+
+## Fixed
+- Bug gh #85 (https://git.io/JCTjv).
+- Bug gh #84 (https://git.io/JCTpu).
+- Bug gh #83 (https://git.io/JYfz8).
+
+## Changed
+- The fix of #85 above renders ineffective the `\includeonly` command when the
+  option `\localbibs` is used. This is an incompatible change but only for
+  a command that is used only temporarily, so we don't increment the major
+  version number.
+- Again expose `\listoflistings` in the samples.
+
+# [1.0.7] - 2021-03-24
+
+## Removed
+- Useless and confusing file in the samples removed (no functional changes).
+
+## Changed
+- Don't expose `\listoflistings` in the samples (bug gh #83,
+  https://git.io/JYfz8).
+
 # [1.0.6] - 2021-03-23
 
 ## Added
