@@ -1145,6 +1145,11 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \RequirePackage{etoc}[2016/09/29]%
 %    \end{macrocode}
+% The following command is a workaround provided by the \Package{etoc} in order
+% to fix the issue \url|https://github.com/dbitouze/yathesis/issues/83| (see below).
+%    \begin{macrocode}
+\etockeeporiginaltableofcontents
+%    \end{macrocode}
 % Pour tester la langue en cours
 %    \begin{macrocode}
 \RequirePackage{iflang}[2007/11/11]%
@@ -3140,6 +3145,7 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
         \AfterEndPreamble{%
           \let\YAD@ORI@tableofcontents\tableofcontents%
+          \let\YAD@ORI@etoctableofcontents\etoctableofcontents%
           \let\YAD@ORI@localtableofcontents\localtableofcontents%
           \renewcommand{\tableofcontents}{%
             \booltrue{YAD@tableofcontents@used}%
@@ -5247,7 +5253,7 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 %    \begin{macrocode}
 \newcommand*\YAD@computenumwidths [1][0.5em]{%
-  \YAD@computenumwidths@ {}{#1}%
+  \YAD@computenumwidths@ {etoc}{#1}%
 }
 \newcommand*\YAD@computelocalnumwidths [1][0.5em]{%
   \YAD@computenumwidths@ {local}{#1}%
@@ -5689,7 +5695,18 @@ This work consists of the file  yathesis.dtx
     }%
   }{%
   }%
-}%
+%    \end{macrocode}
+% In case the \Package{listings} is loaded, we hack the "\lstlistoflistings"
+% command in order to fix the issue \url|https://github.com/dbitouze/yathesis/issues/83|.
+%    \begin{macrocode}
+      \@ifpackageloaded{listings}{%
+      \lst@UserCommand\lstlistoflistings{\bgroup
+      \let\contentsname\lstlistlistingname
+      \let\lst@temp\@starttoc \def\@starttoc##1{\lst@temp{lol}}%
+      \YAD@ORI@tableofcontents \egroup}
+      }{%
+      }%
+    }%
 %    \end{macrocode}
 % Les parties sont par défaut numérotées.
 %    \begin{macrocode}
