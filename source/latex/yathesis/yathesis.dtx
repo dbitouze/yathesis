@@ -5376,6 +5376,30 @@ This work consists of the file  yathesis.dtx
   }%
 }%
 %    \end{macrocode}
+% Dans le cas où l'option "localbibs" est demandée, on redéfinit
+% "\include" en "\input" pour éviter le "\clearpage" émis juste avant
+% l'inclusion du fichier, sans quoi une bibliographie locale automatiquement
+% ajoutée avant le chapitre suivant, si ce dernier l'est via "\include", subit
+% un changement de page avant d'être affichée. La commande "\includeonly"
+% est alors inopérante et on le signale (mais ce signalement n'apparaît pas si
+% cette commande est utilisée avant "\documentclass").
+%    \begin{macrocode}
+      \AddToHook{begindocument/before}{%
+      \ifbool{YAD@localbibs}{%
+      \let\include\input%
+      \if@partsw
+      \ClassWarningNoLine{yathesis}{%
+      Commande \string\includeonly\space inopérante lorsque l'option\MessageBreak
+      `localbibs' est utilisée. Le seul moyen de\MessageBreak
+      temporairement ne compiler que certains fichiers\MessageBreak
+      inclus est alors de temporairement commenter\MessageBreak
+      l'inclusion des autres%
+      }%
+      \fi
+      }{%
+      }
+      }
+%    \end{macrocode}
 % On redéfinit la commande "\chapter" de sorte que, dans un chapitre non
 % numéroté ("\chapter*") :
 % \begin{itemize}
