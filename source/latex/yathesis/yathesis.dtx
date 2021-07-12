@@ -807,7 +807,7 @@ This work consists of the file  yathesis.dtx
         La valeur (`#1') passée à la cle\MessageBreak%
          `localtocs/depth'\MessageBreak%
         en option de classe n'est pas un des niveaux de\MessageBreak%
-        sectionnement acceptes :\MessageBreak%
+        sectionnement acceptés :\MessageBreak%
         `section', `subsection',`subsubsection',\MessageBreak%
         `paragraph', `subparagraph'.\MessageBreak%
         Le niveau `\YAD@tocdepth' va être utilisé à la place%
@@ -838,7 +838,7 @@ This work consists of the file  yathesis.dtx
         que vous n'avez pas chargé.\MessageBreak%
         La classe `yathesis' va le faire pour vous mais\MessageBreak%
         le recours à ce package pour la bibliographie sera\MessageBreak%
-        alors necessaire et exclura tout autre outil\MessageBreak%
+        alors nécessaire et exclura tout autre outil\MessageBreak%
         de production de la bibliographie\MessageBreak%
         (notamment `BibTeX')%
       }%
@@ -975,7 +975,7 @@ This work consists of the file  yathesis.dtx
   \YAD@ClassWarningNoLine{%
     La version de `babel' utilisée est obsolète.\MessageBreak%
     La classe `yathesis' va essayer de faire son possible\MessageBreak%
-    mais il est possible qu'elle produise des resultats\MessageBreak%
+    mais il se peut qu'elle produise des resultats\MessageBreak%
     non prévus. Il est conseillé de mettre à jour sa\MessageBreak%
     distribution TeX%
   }%
@@ -1443,7 +1443,7 @@ This work consists of the file  yathesis.dtx
 %
 % \begin{macro}{\YAD@reach@file}
 % Macro offrant la possibilité de cliquer sur un hyperlien pour ouvrir
-% les fichier permettant de modifier les mots et expressions clés du
+% les fichiers permettant de modifier les mots et expressions clés du
 % canevas de thèse et les données de la thèse
 %    \begin{macrocode}
 \definecolor{YAD@configuration@file@color}{rgb}{0.5,0,0.5}%
@@ -1913,7 +1913,7 @@ This work consists of the file  yathesis.dtx
 \newcommand{\YAD@error@firstlastnames@empty}[4]{%
   \ifthenelse{\isempty{#2}}{%
     \YAD@ClassError{%
-      Prénom #1 non specifié%
+      Prénom #1 non spécifié%
     }{%
       Le 1er argument obligatoire de la commande \string#4\MessageBreak%
       est vide (celui-ci doit être renseigné).%
@@ -1922,7 +1922,7 @@ This work consists of the file  yathesis.dtx
   }%
   \ifthenelse{\isempty{#3}}{%
     \YAD@ClassError{%
-      Nom #1 non specifié%
+      Nom #1 non spécifié%
     }{%
       Le 2e argument obligatoire de la commande \string#4\MessageBreak%
       est vide (celui-ci doit être renseigné).%
@@ -2913,7 +2913,7 @@ This work consists of the file  yathesis.dtx
       }{%
         La commande \string#4{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
         n'a pas été correctement saisie car le\MessageBreak%
-        jour (`\YAD@daydate') n'est pas valide :\MessageBreak%
+        numéro de jour (`\YAD@daydate') n'est pas valide :\MessageBreak%
         ce doit être un nombre entier entre 1 et 31.%
       }%
     }{%
@@ -2930,7 +2930,7 @@ This work consists of the file  yathesis.dtx
         }{%
           La commande \string#4{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
           n'a pas été correctement saisie car le\MessageBreak%
-          numero de jour (`\YAD@daydate') n'est pas valide :\MessageBreak%
+          numéro de jour (`\YAD@daydate') n'est pas valide :\MessageBreak%
           ce doit être un nombre entier entre 1 et 31.%
         }%
       }{%
@@ -2946,9 +2946,9 @@ This work consists of the file  yathesis.dtx
       }{%
         La commande \string#4{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
         n'a pas été correctement saisie car le\MessageBreak%
-        mois (`\YAD@monthdate') n'est pas valide :\MessageBreak%
+        numéro de mois (`\YAD@monthdate') n'est pas valide :\MessageBreak%
         ce doit être un nombre entier entre\MessageBreak%
-        1 (janvier) et 12 (decembre).%
+        1 (janvier) et 12 (décembre).%
       }%
     }{%
       \IfDecimal{\YAD@monthdate}{%
@@ -2964,9 +2964,9 @@ This work consists of the file  yathesis.dtx
         }{%
           La commande \string#4{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
           n'a pas été correctement saisie car le\MessageBreak%
-          numero de mois (`\YAD@monthdate') n'est pas valide :\MessageBreak%
+          numéro de mois (`\YAD@monthdate') n'est pas valide :\MessageBreak%
           ce doit être un nombre entier entre\MessageBreak%
-          1 (janvier) et 12 (decembre).%
+          1 (janvier) et 12 (décembre).%
         }%
       }{%
         \global\booltrue{YAD@valid@month}%
@@ -3044,7 +3044,7 @@ This work consists of the file  yathesis.dtx
       }{%
       }{%
         \YAD@ClassError[nodate]{%
-          Date de soutenance non specifiée%
+          Date de soutenance non spécifiée%
         }{%
           La commande \protect\date\space n'a pas été utilisée\MessageBreak%
           (celle-ci est requise).%
@@ -3621,7 +3621,7 @@ This work consists of the file  yathesis.dtx
     \ifbool{YAD@nolaboratory}{%
     }{%
       \YAD@ClassError[nolaboratory]{%
-        Nom du laboratoire de la thèse non specifié ou vide%
+        Nom du laboratoire de la thèse non spécifié ou vide%
       }{%
         La commande \protect\laboratory\space n'a pas été utilisée\MessageBreak%
         (celle-ci est requise) ou son 1er argument est vide\MessageBreak%
@@ -3657,7 +3657,7 @@ This work consists of the file  yathesis.dtx
     \ifbool{YAD@nolaboratoryaddress}{%
     }{%
       \YAD@ClassError[nolaboratoryaddress]{%
-        Adresse du laboratoire non specifiée ou vide%
+        Adresse du laboratoire non spécifiée ou vide%
       }{%
         La commande \protect\laboratory\space n'a pas été utilisée\MessageBreak%
         (celle-ci est requise) ou son 2e argument est vide\MessageBreak%
@@ -3737,7 +3737,7 @@ This work consists of the file  yathesis.dtx
         \ifbool{YAD@notitle}{%
         }{%
           \YAD@ClassError[notitle]{%
-            Titre de la thèse non specifié%
+            Titre de la thèse non spécifié%
           }{%
             La commande \protect\title\space n'a pas été utilisée\MessageBreak%
             (celle-ci est requise) ou son argument obligatoire est vide\MessageBreak%
@@ -3809,7 +3809,7 @@ This work consists of the file  yathesis.dtx
         \YAD@ifemptyorundef{\printinstitute}{%
           \YAD@generic@argument@translate{institute}%
           \YAD@ClassError[noinstitute]{%
-            Institut de la thèse non specifié%
+            Institut de la thèse non spécifié%
           }{%
             La commande \protect\institute\space n'a pas été
             utilisée\MessageBreak%
@@ -3847,7 +3847,7 @@ This work consists of the file  yathesis.dtx
         \YAD@ifemptyorundef{\printdoctoralschool}{%
           \YAD@generic@argument@translate{doctoralschool}%
           \YAD@ClassError[nodoctoralschool]{%
-            École doctorale de la thèse non specifiée%
+            École doctorale de la thèse non spécifiée%
           }{%
             la commande \protect\doctoralschool\space n'a pas été
             utilisée\MessageBreak%
@@ -3905,7 +3905,7 @@ This work consists of the file  yathesis.dtx
           \ifbool{YAD@noauthor}{%
           }{%
             \YAD@ClassError[noauthor]{%
-              Auteur de la thèse non specifié%
+              Auteur de la thèse non spécifié%
             }{%
               La commande \protect\author\space n'a pas été utilisée (celle-ci
               est requise)\MessageBreak%
@@ -3976,7 +3976,7 @@ This work consists of the file  yathesis.dtx
           \ifbool{YAD@noacademicfield}{%
           }{%
             \YAD@ClassError[noacademicfield]{%
-              Champ disciplinaire de la thèse non specifié%
+              Champ disciplinaire de la thèse non spécifié%
             }{%
               La commande \protect\academicfield\space n'a pas été utilisée
               (celle-ci est requise)\MessageBreak%
@@ -4040,7 +4040,7 @@ This work consists of the file  yathesis.dtx
     \ifbool{YAD@nosupervisor}{%
     }{%
       \YAD@ClassError*[nosupervisor]{%
-        Directeur de thèse non specifié%
+        Directeur de thèse non spécifié%
       }{%
         La commande \protect\supervisor\space n'a pas été utilisée\MessageBreak%
         (celle-ci est requise) ou ses arguments obligatoires sont
@@ -4201,21 +4201,21 @@ This work consists of the file  yathesis.dtx
   }{%
     \ifdefempty{\YAD@mainkeywords}{%
       \YAD@ClassError[nokeywords]{%
-        Mots clés dans la langue principale non specifiés%
+        Mots clés dans la langue principale non spécifiés%
       }{%
         Les mots clés dans la langue principale\MessageBreak%
         (1er argument de la commande \protect\keywords) n'ont\MessageBreak%
-        pas été specifiés. Ceux-ci sont requis.%
+        pas été spécifiés. Ceux-ci sont requis.%
       }%
     }{%
       \csdef{YAD@metakeywords}{\YAD@mainkeywords} }%
     \ifdefempty{\YAD@secondarykeywords}{%
       \YAD@ClassError[nokeywords]{%
-        Mots clés dans la langue secondaire non specifiés%
+        Mots clés dans la langue secondaire non spécifiés%
       }{%
         Les mots clés dans la langue secondaire\MessageBreak%
         (2e argument de la commande \protect\keywords) n'ont\MessageBreak%
-        pas été specifiés. Ceux-ci sont requis.%
+        pas été spécifiés. Ceux-ci sont requis.%
       }%
     }{%
       \csdef{YAD@metakeywords}{\YAD@mainkeywords (\YAD@secondarykeywords)}%
@@ -4802,7 +4802,7 @@ This work consists of the file  yathesis.dtx
         }{%
           La 1re occurrence de l'environnement `abstract' a été
           utilisée\MessageBreak%
-          avec un contenu vide.  Un contenu non vide est requis.%
+          avec un contenu vide. Un contenu non vide est requis.%
         }%
       }{%
         \YAD@ClassError[noabstract]{%
@@ -4821,7 +4821,7 @@ This work consists of the file  yathesis.dtx
       }{%
         La 2e occurrence de l'environnement `abstract' a été
         utilisée\MessageBreak%
-        avec un contenu vide.  Un contenu non vide est requis.%
+        avec un contenu vide. Un contenu non vide est requis.%
       }%
     }{%
     }%
@@ -4960,7 +4960,7 @@ This work consists of the file  yathesis.dtx
             \YAD@generic@argument@translate{epigraph}%
           }%
           \YAD@ClassError{%
-            Epigraphe vide%
+            Épigraphe vide%
           }{%
             L'argument obligatoire d'une commande \protect\frontepigraph\space
             est vide\MessageBreak%
