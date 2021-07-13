@@ -11,8 +11,8 @@
 %% Released under the LaTeX Project Public License v1.3c or later
 %% See http://www.latex-project.org/lppl.txt
 %% -----------------------------------------------------------------------
-\def\yathesisversion{1.0.6}
-\def\yathesisdate{2021-03-23}
+\def\yathesisversion{1.0.8}
+\def\yathesisdate{2021-07-13}
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesClass{yathesis}[\yathesisdate\space v\yathesisversion\space Yet another class for writing thesis (DB)]
 \RequirePackage{morewrites}%
@@ -346,7 +346,7 @@
         La valeur (`#1') passée à la cle\MessageBreak%
          `localtocs/depth'\MessageBreak%
         en option de classe n'est pas un des niveaux de\MessageBreak%
-        sectionnement acceptes :\MessageBreak%
+        sectionnement acceptés :\MessageBreak%
         `section', `subsection',`subsubsection',\MessageBreak%
         `paragraph', `subparagraph'.\MessageBreak%
         Le niveau `\YAD@tocdepth' va être utilisé à la place%
@@ -371,7 +371,7 @@
         que vous n'avez pas chargé.\MessageBreak%
         La classe `yathesis' va le faire pour vous mais\MessageBreak%
         le recours à ce package pour la bibliographie sera\MessageBreak%
-        alors necessaire et exclura tout autre outil\MessageBreak%
+        alors nécessaire et exclura tout autre outil\MessageBreak%
         de production de la bibliographie\MessageBreak%
         (notamment `BibTeX')%
       }%
@@ -462,7 +462,7 @@
   \YAD@ClassWarningNoLine{%
     La version de `babel' utilisée est obsolète.\MessageBreak%
     La classe `yathesis' va essayer de faire son possible\MessageBreak%
-    mais il est possible qu'elle produise des resultats\MessageBreak%
+    mais il se peut qu'elle produise des resultats\MessageBreak%
     non prévus. Il est conseillé de mettre à jour sa\MessageBreak%
     distribution TeX%
   }%
@@ -519,6 +519,7 @@
 }%
 \RequirePackage[\YAD@secondarylanguage,main=\YAD@mainlanguage]{babel}[2014/03/24]
 \RequirePackage{etoc}[2016/09/29]%
+\ifdefined\etockeeporiginaltableofcontents\etockeeporiginaltableofcontents\fi
 \RequirePackage{iflang}[2007/11/11]%
 \RequirePackage{translator}[2010/06/12]%
 \RequirePackage[useregional]{datetime2}[2020-03-02]%
@@ -1008,7 +1009,7 @@
 \newcommand{\YAD@error@firstlastnames@empty}[4]{%
   \ifthenelse{\isempty{#2}}{%
     \YAD@ClassError{%
-      Prénom #1 non specifié%
+      Prénom #1 non spécifié%
     }{%
       Le 1er argument obligatoire de la commande \string#4\MessageBreak%
       est vide (celui-ci doit être renseigné).%
@@ -1017,7 +1018,7 @@
   }%
   \ifthenelse{\isempty{#3}}{%
     \YAD@ClassError{%
-      Nom #1 non specifié%
+      Nom #1 non spécifié%
     }{%
       Le 2e argument obligatoire de la commande \string#4\MessageBreak%
       est vide (celui-ci doit être renseigné).%
@@ -1846,7 +1847,7 @@
       }{%
         La commande \string#4{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
         n'a pas été correctement saisie car le\MessageBreak%
-        jour (`\YAD@daydate') n'est pas valide :\MessageBreak%
+        numéro de jour (`\YAD@daydate') n'est pas valide :\MessageBreak%
         ce doit être un nombre entier entre 1 et 31.%
       }%
     }{%
@@ -1863,7 +1864,7 @@
         }{%
           La commande \string#4{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
           n'a pas été correctement saisie car le\MessageBreak%
-          numero de jour (`\YAD@daydate') n'est pas valide :\MessageBreak%
+          numéro de jour (`\YAD@daydate') n'est pas valide :\MessageBreak%
           ce doit être un nombre entier entre 1 et 31.%
         }%
       }{%
@@ -1879,9 +1880,9 @@
       }{%
         La commande \string#4{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
         n'a pas été correctement saisie car le\MessageBreak%
-        mois (`\YAD@monthdate') n'est pas valide :\MessageBreak%
+        numéro de mois (`\YAD@monthdate') n'est pas valide :\MessageBreak%
         ce doit être un nombre entier entre\MessageBreak%
-        1 (janvier) et 12 (decembre).%
+        1 (janvier) et 12 (décembre).%
       }%
     }{%
       \IfDecimal{\YAD@monthdate}{%
@@ -1897,9 +1898,9 @@
         }{%
           La commande \string#4{\YAD@daydate}{\YAD@monthdate}{\YAD@yeardate}\space\MessageBreak%
           n'a pas été correctement saisie car le\MessageBreak%
-          numero de mois (`\YAD@monthdate') n'est pas valide :\MessageBreak%
+          numéro de mois (`\YAD@monthdate') n'est pas valide :\MessageBreak%
           ce doit être un nombre entier entre\MessageBreak%
-          1 (janvier) et 12 (decembre).%
+          1 (janvier) et 12 (décembre).%
         }%
       }{%
         \global\booltrue{YAD@valid@month}%
@@ -1964,7 +1965,7 @@
       }{%
       }{%
         \YAD@ClassError[nodate]{%
-          Date de soutenance non specifiée%
+          Date de soutenance non spécifiée%
         }{%
           La commande \protect\date\space n'a pas été utilisée\MessageBreak%
           (celle-ci est requise).%
@@ -2020,6 +2021,7 @@
 \pretocmd{\pagestyle}{\cleardoublepage}{}{}%
         \AfterEndPreamble{%
           \let\YAD@ORI@tableofcontents\tableofcontents%
+          \let\YAD@ORI@etoctableofcontents\etoctableofcontents%
           \let\YAD@ORI@localtableofcontents\localtableofcontents%
           \renewcommand{\tableofcontents}{%
             \booltrue{YAD@tableofcontents@used}%
@@ -2360,7 +2362,7 @@
     \ifbool{YAD@nolaboratory}{%
     }{%
       \YAD@ClassError[nolaboratory]{%
-        Nom du laboratoire de la thèse non specifié ou vide%
+        Nom du laboratoire de la thèse non spécifié ou vide%
       }{%
         La commande \protect\laboratory\space n'a pas été utilisée\MessageBreak%
         (celle-ci est requise) ou son 1er argument est vide\MessageBreak%
@@ -2391,7 +2393,7 @@
     \ifbool{YAD@nolaboratoryaddress}{%
     }{%
       \YAD@ClassError[nolaboratoryaddress]{%
-        Adresse du laboratoire non specifiée ou vide%
+        Adresse du laboratoire non spécifiée ou vide%
       }{%
         La commande \protect\laboratory\space n'a pas été utilisée\MessageBreak%
         (celle-ci est requise) ou son 2e argument est vide\MessageBreak%
@@ -2450,7 +2452,7 @@
         \ifbool{YAD@notitle}{%
         }{%
           \YAD@ClassError[notitle]{%
-            Titre de la thèse non specifié%
+            Titre de la thèse non spécifié%
           }{%
             La commande \protect\title\space n'a pas été utilisée\MessageBreak%
             (celle-ci est requise) ou son argument obligatoire est vide\MessageBreak%
@@ -2514,7 +2516,7 @@
         \YAD@ifemptyorundef{\printinstitute}{%
           \YAD@generic@argument@translate{institute}%
           \YAD@ClassError[noinstitute]{%
-            Institut de la thèse non specifié%
+            Institut de la thèse non spécifié%
           }{%
             La commande \protect\institute\space n'a pas été
             utilisée\MessageBreak%
@@ -2552,7 +2554,7 @@
         \YAD@ifemptyorundef{\printdoctoralschool}{%
           \YAD@generic@argument@translate{doctoralschool}%
           \YAD@ClassError[nodoctoralschool]{%
-            École doctorale de la thèse non specifiée%
+            École doctorale de la thèse non spécifiée%
           }{%
             la commande \protect\doctoralschool\space n'a pas été
             utilisée\MessageBreak%
@@ -2602,7 +2604,7 @@
           \ifbool{YAD@noauthor}{%
           }{%
             \YAD@ClassError[noauthor]{%
-              Auteur de la thèse non specifié%
+              Auteur de la thèse non spécifié%
             }{%
               La commande \protect\author\space n'a pas été utilisée (celle-ci
               est requise)\MessageBreak%
@@ -2673,7 +2675,7 @@
           \ifbool{YAD@noacademicfield}{%
           }{%
             \YAD@ClassError[noacademicfield]{%
-              Champ disciplinaire de la thèse non specifié%
+              Champ disciplinaire de la thèse non spécifié%
             }{%
               La commande \protect\academicfield\space n'a pas été utilisée
               (celle-ci est requise)\MessageBreak%
@@ -2734,7 +2736,7 @@
     \ifbool{YAD@nosupervisor}{%
     }{%
       \YAD@ClassError*[nosupervisor]{%
-        Directeur de thèse non specifié%
+        Directeur de thèse non spécifié%
       }{%
         La commande \protect\supervisor\space n'a pas été utilisée\MessageBreak%
         (celle-ci est requise) ou ses arguments obligatoires sont
@@ -2852,21 +2854,21 @@
   }{%
     \ifdefempty{\YAD@mainkeywords}{%
       \YAD@ClassError[nokeywords]{%
-        Mots clés dans la langue principale non specifiés%
+        Mots clés dans la langue principale non spécifiés%
       }{%
         Les mots clés dans la langue principale\MessageBreak%
         (1er argument de la commande \protect\keywords) n'ont\MessageBreak%
-        pas été specifiés. Ceux-ci sont requis.%
+        pas été spécifiés. Ceux-ci sont requis.%
       }%
     }{%
       \csdef{YAD@metakeywords}{\YAD@mainkeywords} }%
     \ifdefempty{\YAD@secondarykeywords}{%
       \YAD@ClassError[nokeywords]{%
-        Mots clés dans la langue secondaire non specifiés%
+        Mots clés dans la langue secondaire non spécifiés%
       }{%
         Les mots clés dans la langue secondaire\MessageBreak%
         (2e argument de la commande \protect\keywords) n'ont\MessageBreak%
-        pas été specifiés. Ceux-ci sont requis.%
+        pas été spécifiés. Ceux-ci sont requis.%
       }%
     }{%
       \csdef{YAD@metakeywords}{\YAD@mainkeywords (\YAD@secondarykeywords)}%
@@ -3359,7 +3361,7 @@
         }{%
           La 1re occurrence de l'environnement `abstract' a été
           utilisée\MessageBreak%
-          avec un contenu vide.  Un contenu non vide est requis.%
+          avec un contenu vide. Un contenu non vide est requis.%
         }%
       }{%
         \YAD@ClassError[noabstract]{%
@@ -3378,7 +3380,7 @@
       }{%
         La 2e occurrence de l'environnement `abstract' a été
         utilisée\MessageBreak%
-        avec un contenu vide.  Un contenu non vide est requis.%
+        avec un contenu vide. Un contenu non vide est requis.%
       }%
     }{%
     }%
@@ -3497,7 +3499,7 @@
             \YAD@generic@argument@translate{epigraph}%
           }%
           \YAD@ClassError{%
-            Epigraphe vide%
+            Épigraphe vide%
           }{%
             L'argument obligatoire d'une commande \protect\frontepigraph\space
             est vide\MessageBreak%
@@ -3725,7 +3727,7 @@
   \endgroup
 }%
 \newcommand*\YAD@computenumwidths [1][0.5em]{%
-  \YAD@computenumwidths@ {}{#1}%
+  \YAD@computenumwidths@ {etoc}{#1}%
 }
 \newcommand*\YAD@computelocalnumwidths [1][0.5em]{%
   \YAD@computenumwidths@ {local}{#1}%
@@ -3812,6 +3814,21 @@
   }{%
   }%
 }%
+      \AddToHook{begindocument/before}{%
+      \ifbool{YAD@localbibs}{%
+      \let\include\input%
+      \if@partsw
+      \ClassWarningNoLine{yathesis}{%
+      Commande \string\includeonly\space inopérante lorsque l'option\MessageBreak
+      `localbibs' est utilisée. Le seul moyen de\MessageBreak
+      temporairement ne compiler que certains fichiers\MessageBreak
+      inclus est alors de temporairement commenter\MessageBreak
+      l'inclusion des autres%
+      }%
+      \fi
+      }{%
+      }
+      }
 \LetLtxMacro{\YAD@ORI@chapter}{\chapter}%
 \AfterPreamble{% delay the redefinition when titlesec has done its own
   \renewcommand\chapter{%
@@ -4079,7 +4096,14 @@
     }%
   }{%
   }%
-}%
+      \@ifpackageloaded{listings}{%
+      \lst@UserCommand\lstlistoflistings{\bgroup
+      \let\contentsname\lstlistlistingname
+      \let\lst@temp\@starttoc \def\@starttoc##1{\lst@temp{lol}}%
+      \YAD@ORI@tableofcontents \egroup}
+      }{%
+      }%
+    }%
 \xpretocmd{\part}{\YAD@setsecnumdepth{\YAD@secnumdepth}}{}{}%
 \disclaimertext{%
   \IfLanguageName{french}{%
