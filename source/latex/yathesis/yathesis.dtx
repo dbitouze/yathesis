@@ -1148,7 +1148,7 @@ This work consists of the file  yathesis.dtx
 % The following command is a workaround provided by the \Package{etoc} in order
 % to fix the issue \url|https://github.com/dbitouze/yathesis/issues/83| (see below).
 %    \begin{macrocode}
-\etockeeporiginaltableofcontents
+\ifdefined\etockeeporiginaltableofcontents\etockeeporiginaltableofcontents\fi
 %    \end{macrocode}
 % Pour tester la langue en cours
 %    \begin{macrocode}
