@@ -20,4 +20,4 @@ $makeindex = 'texindy -L french';
 push @generated_exts, 'acn', 'acr', 'alg', 'bbl', 'bcf', 'fls', 'gl*', 'idx',
 'ind', 'ist', 'sbl*', 'sl*', 'sym*' ;
 
-$clean_ext .= 'synctex.gz* run.xml tex.bak out bbl bcf fdb_latexmk run tdo listing *~ lo* unq mw' ;
+$clean_ext .= 'synctex.gz* run.xml tex.bak out bbl bcf fdb_latexmk run tdo listing *~ lo* unq mw xdy' ;
