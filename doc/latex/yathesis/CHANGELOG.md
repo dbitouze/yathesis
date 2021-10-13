@@ -1,5 +1,12 @@
 # [Unreleased]
 
+# [1.0.9] - 2021-10-13
+
+## Fixed
+- Bug gh #90 (https://git.io/JKO3L).
+- Bug gh #87 (https://git.io/JKO3Z).
+- Bug gh #86 (https://git.io/JKO3W).
+
 # [1.0.8] - 2021-07-13
 
 ## Fixed
@@ -96,7 +103,6 @@
 ## Fixed
 - Bug gh #73.
 
-
 # [1.0.0] - 2020-03-26
 
 ## Added
@@ -114,7 +120,6 @@
 
 ## Fixed
 - Several bug fixes (among others gh #65 and #67).
-
 
 # [0.99u] - 2019-03-28
 
@@ -140,42 +145,35 @@
 ## Fixed
 - Several bug fixes (among others gh #43).
 
-
 # [0.99t] - 2018-07-09
 
 ## Fixed
 - Several bug fixes.
-
 
 # [0.99s] - 2018-06-22
 
 ## Fixed
 - Several bug fixes (among others gh #58 and #60).
 
-
 # [0.99s] - 2018-06-21
 
 ## Fixed
 - Several bug fixes (among others gh #59).
-
 
 # [0.99r] - 2018-06-02
 
 ## Fixed
 - Several bug fixes.
 
-
 # [0.99q] - 2018-05-04
 
 ## Removed
 - Useless files on CTAN (no functional changes).
 
-
 # [0.99q] - 2018-04-10
 
 ## Fixed
 - Several bug fixes (among others gh #57).
-
 
 # [0.99p] - 2016-12-08
 
@@ -187,7 +185,6 @@
 
 ## Changed
 - Documentation revised and extended.
-
 
 # [0.99o] - 2016-10-30
 
@@ -206,13 +203,11 @@
 ## Fixed
 - Several bug fixes.
 
-
 # [0.99n] - 2016-06-11
 
 ## Changed
 - Documentation revised and extended.
 - Reorganization and change of names of specimens and templates.
-
 
 # [0.99m] - 2016-05-22
 
@@ -221,11 +216,9 @@
 - Specimens and templates included in the PDF of the documentation as `.zip`
   archive.
 
-
 ## Changed
 - Documentation revised and extended.
 - Reorganization and change of names of specimens and templates.
-
 
 # [0.99l] - 2014-10-23
 
@@ -247,7 +240,6 @@
 
 ## Fixed
 - Several bug fixes.
-
 
 # [0.99j] - 2014-07-18
 

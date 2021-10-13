@@ -11,8 +11,8 @@
 %% Released under the LaTeX Project Public License v1.3c or later
 %% See http://www.latex-project.org/lppl.txt
 %% -----------------------------------------------------------------------
-\def\yathesisversion{1.0.8}
-\def\yathesisdate{2021-07-13}
+\def\yathesisversion{1.0.9}
+\def\yathesisdate{2021-10-13}
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesClass{yathesis}[\yathesisdate\space v\yathesisversion\space Yet another class for writing thesis (DB)]
 \RequirePackage{morewrites}%
@@ -958,9 +958,9 @@
   }{%
   }%
   %
-  % \ifthenelse{\equal{\cmdKV@YAD@corporation}{}}{%
+  % \YAD@ifemptyorundef{\cmdKV@YAD@corporation}{%
   % }{%
-  %   \ifthenelse{\equal{\cmdKV@YAD@corps}{}}{%
+  %   \YAD@ifemptyorundef{\cmdKV@YAD@corps}{%
   %     \yadsetup{#1,corps=\cmdKV@YAD@corporation}%
   %   }{%
   %   }%
@@ -1304,7 +1304,7 @@
         \ifthenelse{\DTLiseq{\YAD@committeemember@corps}{}}{%
           \YAD@committeemember@affiliation%
         }{%
-          \ifthenelse{\equal{\YAD@committeemember@sepcorpaffil}{}}{%
+          \YAD@ifemptyorundef{\YAD@committeemember@sepcorpaffil}{%
             \YAD@if@starts@with@vowel{\YAD@committeemember@affiliation}{\YAD@al}{\YAD@au}\YAD@committeemember@affiliation%
           }{%
             \YAD@committeemember@sepcorpaffil\YAD@committeemember@affiliation%
@@ -1525,7 +1525,7 @@
   }%
   % \boolfalse{YAD@nolink}%
   \yadsetup{##1}%
-  \ifthenelse{\equal{\cmdKV@YAD@url}{}}{%
+  \YAD@ifemptyorundef{\cmdKV@YAD@url}{%
     \ifdraft{%
       \YAD@reach@file{%
         \YAD@texte%
@@ -1553,7 +1553,7 @@
 }%
       \csdef{print#2address}{%
         \yadsetup{##1}%
-        \ifthenelse{\equal{\cmdKV@YAD@address}{}}{%
+        \YAD@ifemptyorundef{\cmdKV@YAD@address}{%
           \YAD@reach@file{\YAD@generic@argument@translate{address#2}}%
         }{%
           \YAD@reach@file{\cmdKV@YAD@address}%
@@ -1562,7 +1562,7 @@
       }%
       \csdef{print#2telephone}{%
         \yadsetup{##1}%
-        \ifthenelse{\equal{\cmdKV@YAD@telephone}{}}{%
+        \YAD@ifemptyorundef{\cmdKV@YAD@telephone}{%
           \YAD@reach@file{\YAD@generic@argument@translate{telephone#2}}%
         }{%
           \YAD@reach@file{\cmdKV@YAD@telephone}%
@@ -1571,7 +1571,7 @@
       }%
       \csdef{print#2fax}{%
         \yadsetup{##1}%
-        \ifthenelse{\equal{\cmdKV@YAD@fax}{}}{%
+        \YAD@ifemptyorundef{\cmdKV@YAD@fax}{%
           \YAD@reach@file{\YAD@generic@argument@translate{fax#2}}%
         }{%
           \YAD@reach@file{\cmdKV@YAD@fax}%
@@ -1580,7 +1580,7 @@
       }%
 \csdef{print#2email}{%
   \YAD@reach@file{%
-    \ifthenelse{\equal{\cmdKV@YAD@email}{}}{%
+    \YAD@ifemptyorundef{\cmdKV@YAD@email}{%
       % \ifbool{YAD@nolink}{%
       %   \YAD@generic@argument@translate{#2email}%
       % }{%
@@ -1615,11 +1615,12 @@
           }{%
           }%
           \renewcommand*\YAD@logo{%
-            \ifthenelse{\equal{\cmdKV@YAD@logo}{}}{%
+            \YAD@ifemptyorundef{\cmdKV@YAD@logo}{%
               \YAD@reach@file{\YAD@generic@argument@translate{logo#2}}%
             }{%
               \YAD@reach@file{%
                 \includegraphics[height=\cmdKV@YAD@logoheight]{\cmdKV@YAD@logo}%
+                \renewcommand*\cmdKV@YAD@logo{}%
               }%
             }%
           }%
@@ -1628,7 +1629,7 @@
           % \ifbool{YAD@nolink}{%
           % \YAD@logo%
           % }{%
-          \ifthenelse{\equal{\cmdKV@YAD@url}{}}{%
+          \YAD@ifemptyorundef{\cmdKV@YAD@url}{%
             % \YAD@href{www.#2.fr}{
             \YAD@logo%
             % }%
@@ -1638,7 +1639,7 @@
           % }%
           \fi%
           \setlength\cmdKV@YAD@logoheight{\YAD@default@logoheight}%
-          \boolfalse{YAD@nologo}
+          \boolfalse{YAD@nologo}%
           \booltrue{YAD@logo@before}%
         }%
       }%
@@ -3912,7 +3913,11 @@
       \let\YAD@ORI@sectionmark\sectionmark%
       \renewcommand\sectionmark[1]{}%
       \YAD@ORI@section{#3}%
-      \YAD@ORI@sectionmark{#2}%
+      \ifbool{YAD@nonnumbered@section}{%
+        \YAD@ORI@sectionmark{#2}%
+      }{%
+        \YAD@ORI@sectionmark{\thesection. #2}%
+      }%
       \let\sectionmark\YAD@ORI@sectionmark%
     }%
   }{%
@@ -3922,7 +3927,11 @@
       \let\YAD@ORI@sectionmark\sectionmark%
       \renewcommand\sectionmark[1]{}%
       \YAD@ORI@section[#1]{#3}%
-      \YAD@ORI@sectionmark{#2}%
+      \ifbool{YAD@nonnumbered@section}{%
+        \YAD@ORI@sectionmark{#2}%
+      }{%
+        \YAD@ORI@sectionmark{\thesection. #2}%
+      }%
       \let\sectionmark\YAD@ORI@sectionmark%
     }%
   }%
