@@ -3140,7 +3140,7 @@ This work consists of the file  yathesis.dtx
 % est exprimée en les même termes que le \Package{tocvsec2} (désormais non
 % chargé). On lui applique le style de page propre à la partie liminaire du
 % document, notamment début de la prise en compte des chapitres et sections
-% (numérotés ou pas) dans la table des matières. 
+% (numérotés ou pas) dans la table des matières.
 %
 % \begin{macro}{\tableofcontents}
 %    \begin{macrocode}
@@ -3321,7 +3321,7 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % \end{macro}
 % Par défaut, au début du document rien n'est numéroté et les chapitres ne
-% débutent pas par des tables des matières locales. 
+% débutent pas par des tables des matières locales.
 %    \begin{macrocode}
   \AddToHook{begindocument}{%
     \setcounter{secnumdepth}{-10}%
@@ -5002,7 +5002,7 @@ This work consists of the file  yathesis.dtx
 % Les commandes et styles suivants, ainsi que toute la machinerie permettant de
 % faire débuter les chapitres par leurs tables des matières locales s'appuient
 % sur le \pkg{etoc} de Jean-François Burnol (qui a aimablement fourni le code
-% suivant). 
+% suivant).
 %    \begin{macrocode}
 % it will be easy to globally shift the TOC horizontally if needed
 \def\YAD@leftmargin {0pt}
@@ -5084,14 +5084,14 @@ This work consists of the file  yathesis.dtx
     \fi
     \cleardoublepage%
   }%
-  % 
+  %
   \etocsetstyle{part} {} {\addpenalty {-\@highpenalty}%
     \addvspace \YAD@bigvskip \leavevmode {\large
       \bfseries % use a group to limit font change
       \interlinepenalty\@M \etocifnumbered{\etocnumber\hspace{1em}}{}%
       \etocname \nobreak\hfil\makebox[-\parfillskip][r]{\etocpage}}\par
     \nobreak } {} {}
-  % 
+  %
   \etocsetstyle{chapter} {\advance\leftskip\YAD@numwidthB\relax} {\addpenalty
     {-\@highpenalty }%
     \vskip \YAD@globalmedvskip\relax
@@ -5102,7 +5102,7 @@ This work consists of the file  yathesis.dtx
       \bfseries\etocname
       \nobreak\hfil\makebox[-\parfillskip][r]{\etocpage}\par }%
     \penalty \@highpenalty } {} {\advance\leftskip-\YAD@numwidthB\relax}
-  % 
+  %
   \YAD@setlinestyle {section}{\YAD@numwidthC}%
   \YAD@setlinestyle {subsection}{\YAD@numwidthD}%
   \YAD@setlinestyle {subsubsection}{\YAD@numwidthE}%
@@ -5171,7 +5171,7 @@ This work consists of the file  yathesis.dtx
     \leavevmode\leaders\hrule\@height\p@\hfill\kern\z@\par
     \bigskip \if@restonecol \twocolumn \fi
   }
-  % % 
+  % %
   \etocsetstyle{section} {%
     \advance\leftskip\YAD@numwidthC\relax%
   } {%
@@ -5195,7 +5195,7 @@ This work consists of the file  yathesis.dtx
   {} {%
     \advance\leftskip-\YAD@numwidthC\relax%
   }
-  % % 
+  % %
   \YAD@setlinestyle {subsection}{\YAD@numwidthD}%
   \YAD@setlinestyle {subsubsection}{\YAD@numwidthE}%
   \YAD@setlinestyle {paragraph}{\YAD@numwidthF}%
@@ -5212,7 +5212,7 @@ This work consists of the file  yathesis.dtx
 %
 %    \begin{macrocode}
 \newcommand*\YAD@computenumwidths@ [2] {% #1 pour `etoc' ou `local', #2=pour le
-                                % \kern 
+                                % \kern
   \begingroup
   \def\YAD@numwidthB {0pt}%
   \def\YAD@numwidthC {0pt}%
@@ -5239,7 +5239,7 @@ This work consists of the file  yathesis.dtx
   \etocsetstyle{subparagraph}{}
   {\setbox0\hbox{\etocthenumber\kern#2}}
   {\ifdim\wd0>\YAD@numwidthG\edef\YAD@numwidthG{\the\wd0}\fi}{}%
-  % 
+  %
   \etocsettocstyle{}
   {\global\let\YAD@numwidthB\YAD@numwidthB
     \global\let\YAD@numwidthC\YAD@numwidthC
