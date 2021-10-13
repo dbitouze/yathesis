@@ -1852,9 +1852,9 @@ This work consists of the file  yathesis.dtx
 % On fait en sorte que la clé "corporation", obsolète et remplacée par la clé
 % "corps",  soit un alias de ce dernier.
 %    \begin{macrocode}
-  % \ifthenelse{\equal{\cmdKV@YAD@corporation}{}}{%
+  % \YAD@ifemptyorundef{\cmdKV@YAD@corporation}{%
   % }{%
-  %   \ifthenelse{\equal{\cmdKV@YAD@corps}{}}{%
+  %   \YAD@ifemptyorundef{\cmdKV@YAD@corps}{%
   %     \yadsetup{#1,corps=\cmdKV@YAD@corporation}%
   %   }{%
   %   }%
@@ -2263,7 +2263,7 @@ This work consists of the file  yathesis.dtx
         \ifthenelse{\DTLiseq{\YAD@committeemember@corps}{}}{%
           \YAD@committeemember@affiliation%
         }{%
-          \ifthenelse{\equal{\YAD@committeemember@sepcorpaffil}{}}{%
+          \YAD@ifemptyorundef{\YAD@committeemember@sepcorpaffil}{%
             \YAD@if@starts@with@vowel{\YAD@committeemember@affiliation}{\YAD@al}{\YAD@au}\YAD@committeemember@affiliation%
           }{%
             \YAD@committeemember@sepcorpaffil\YAD@committeemember@affiliation%
@@ -2530,7 +2530,7 @@ This work consists of the file  yathesis.dtx
   }%
   % \boolfalse{YAD@nolink}%
   \yadsetup{##1}%
-  \ifthenelse{\equal{\cmdKV@YAD@url}{}}{%
+  \YAD@ifemptyorundef{\cmdKV@YAD@url}{%
     \ifdraft{%
       \YAD@reach@file{%
         \YAD@texte%
@@ -2561,7 +2561,7 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
       \csdef{print#2address}{%
         \yadsetup{##1}%
-        \ifthenelse{\equal{\cmdKV@YAD@address}{}}{%
+        \YAD@ifemptyorundef{\cmdKV@YAD@address}{%
           \YAD@reach@file{\YAD@generic@argument@translate{address#2}}%
         }{%
           \YAD@reach@file{\cmdKV@YAD@address}%
@@ -2573,7 +2573,7 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
       \csdef{print#2telephone}{%
         \yadsetup{##1}%
-        \ifthenelse{\equal{\cmdKV@YAD@telephone}{}}{%
+        \YAD@ifemptyorundef{\cmdKV@YAD@telephone}{%
           \YAD@reach@file{\YAD@generic@argument@translate{telephone#2}}%
         }{%
           \YAD@reach@file{\cmdKV@YAD@telephone}%
@@ -2585,7 +2585,7 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
       \csdef{print#2fax}{%
         \yadsetup{##1}%
-        \ifthenelse{\equal{\cmdKV@YAD@fax}{}}{%
+        \YAD@ifemptyorundef{\cmdKV@YAD@fax}{%
           \YAD@reach@file{\YAD@generic@argument@translate{fax#2}}%
         }{%
           \YAD@reach@file{\cmdKV@YAD@fax}%
@@ -2598,7 +2598,7 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \csdef{print#2email}{%
   \YAD@reach@file{%
-    \ifthenelse{\equal{\cmdKV@YAD@email}{}}{%
+    \YAD@ifemptyorundef{\cmdKV@YAD@email}{%
       % \ifbool{YAD@nolink}{%
       %   \YAD@generic@argument@translate{#2email}%
       % }{%
@@ -2647,7 +2647,7 @@ This work consists of the file  yathesis.dtx
           }{%
           }%
           \renewcommand*\YAD@logo{%
-            \ifthenelse{\equal{\cmdKV@YAD@logo}{}}{%
+            \YAD@ifemptyorundef{\cmdKV@YAD@logo}{%
               \YAD@reach@file{\YAD@generic@argument@translate{logo#2}}%
             }{%
               \YAD@reach@file{%
@@ -2661,7 +2661,7 @@ This work consists of the file  yathesis.dtx
           % \ifbool{YAD@nolink}{%
           % \YAD@logo%
           % }{%
-          \ifthenelse{\equal{\cmdKV@YAD@url}{}}{%
+          \YAD@ifemptyorundef{\cmdKV@YAD@url}{%
             % \YAD@href{www.#2.fr}{
             \YAD@logo%
             % }%
