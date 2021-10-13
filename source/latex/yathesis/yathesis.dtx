@@ -5518,7 +5518,11 @@ This work consists of the file  yathesis.dtx
       \let\YAD@ORI@sectionmark\sectionmark%
       \renewcommand\sectionmark[1]{}%
       \YAD@ORI@section{#3}%
-      \YAD@ORI@sectionmark{#2}%
+      \ifbool{YAD@nonnumbered@section}{%
+        \YAD@ORI@sectionmark{#2}%
+      }{%
+        \YAD@ORI@sectionmark{\thesection. #2}%
+      }%
       \let\sectionmark\YAD@ORI@sectionmark%
     }%
   }{%
@@ -5528,7 +5532,11 @@ This work consists of the file  yathesis.dtx
       \let\YAD@ORI@sectionmark\sectionmark%
       \renewcommand\sectionmark[1]{}%
       \YAD@ORI@section[#1]{#3}%
-      \YAD@ORI@sectionmark{#2}%
+      \ifbool{YAD@nonnumbered@section}{%
+        \YAD@ORI@sectionmark{#2}%
+      }{%
+        \YAD@ORI@sectionmark{\thesection. #2}%
+      }%
       \let\sectionmark\YAD@ORI@sectionmark%
     }%
   }%
