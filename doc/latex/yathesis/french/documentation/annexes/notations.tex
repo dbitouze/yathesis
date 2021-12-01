@@ -112,7 +112,7 @@ Naturellement, tout élément non \enquote{obligatoire} est réputé optionnel.
 Les exemples qui illustrent la présente documentation sont constitués de codes
 sources et, le cas échéant, des \enquote{copies d'écran} correspondantes.
 Ceux-ci proviennent le plus souvent du spécimen de document composé avec la
-\yatCl, fourni avec l'ensemble de la classe
+\yatCl{}, fourni avec l'ensemble de la classe
 (cf. \vref{sec-specimen-arborescence}).
 
 Ces codes sources figurent dans des cadres de couleur bleu :
@@ -215,20 +215,20 @@ syntaxe suivante :
 \end{docKey*}
 
 Illustrons ceci au moyen de la clé \refKey{nofrontcover} qui peut être passée en
-option de la \yatCl. C'est une clé booléenne valant par défaut \docValue*{true}
+option de la \yatCl{}. C'est une clé booléenne valant par défaut \docValue*{true}
 et initialement \docValue*{false}, c'est-à-dire :
 \begin{enumerate}
-\item \docValue*{true} si l'utilisateur l'emploie en option de la \yatCl mais
+\item \docValue*{true} si l'utilisateur l'emploie en option de la \yatCl{} mais
   sans lui passer de valeur :
 \begin{preamblecode}
 \documentclass[nofrontcover,"\meta{autres options}"]{yathesis}
 \end{preamblecode}
-\item \docValue*{false} si l'utilisateur ne l'emploie pas en option de la \yatCl :
+\item \docValue*{false} si l'utilisateur ne l'emploie pas en option de la \yatCl{} :
 \begin{preamblecode}
 \documentclass["\meta{toutes options sauf \refKey*{nofrontcover}}"]{yathesis}
 \end{preamblecode}
 \item la valeur \docValue*{true} ou \docValue*{false} que l'utilisateur lui
-  passe le cas échéant en option de la \yatCl :
+  passe le cas échéant en option de la \yatCl{} :
 \begin{preamblecode}
 \documentclass[nofrontcover=true,"\meta{autres options}"]{yathesis}
 \end{preamblecode}

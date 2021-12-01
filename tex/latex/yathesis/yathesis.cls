@@ -11,8 +11,8 @@
 %% Released under the LaTeX Project Public License v1.3c or later
 %% See http://www.latex-project.org/lppl.txt
 %% -----------------------------------------------------------------------
-\def\yathesisversion{1.0.9}
-\def\yathesisdate{2021-10-13}
+\def\yathesisversion{1.0.10}
+\def\yathesisdate{2021-12-01}
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesClass{yathesis}[\yathesisdate\space v\yathesisversion\space Yet another class for writing thesis (DB)]
 \RequirePackage{morewrites}%
@@ -1721,20 +1721,20 @@
   }{%
   }%
 }%
-\YAD@create@macro[entite]{pres}
-\YAD@create@macro[entite]{comue}
-\YAD@create@macro[entite]{institute}
-\YAD@create@macro[entite]{coinstitute}
-\YAD@create@macro[entite]{company}
-\YAD@create@macro[entite]{cocompany}
-\YAD@create@macro[entite]{doctoralschool}
-\YAD@create@macro{colophontext}
-\YAD@create@macro[bilingue]{academicfield}
-\YAD@create@macro[bilingue]{speciality}
-\YAD@create@macro[bilingue]{title}
-\YAD@create@macro[bilingue]{subtitle}
-\YAD@create@macro[bilingue]{subject}
-\YAD@create@macro{disclaimertext}
+\YAD@create@macro[entite]{pres}%
+\YAD@create@macro[entite]{comue}%
+\YAD@create@macro[entite]{institute}%
+\YAD@create@macro[entite]{coinstitute}%
+\YAD@create@macro[entite]{company}%
+\YAD@create@macro[entite]{cocompany}%
+\YAD@create@macro[entite]{doctoralschool}%
+\YAD@create@macro{colophontext}%
+\YAD@create@macro[bilingue]{academicfield}%
+\YAD@create@macro[bilingue]{speciality}%
+\YAD@create@macro[bilingue]{title}%
+\YAD@create@macro[bilingue]{subtitle}%
+\YAD@create@macro[bilingue]{subject}%
+\YAD@create@macro{disclaimertext}%
 \newcommand{\ordernumber}{%
   \@ifnextchar[{%
     \YAD@ordernumber@with@argument%
@@ -2067,7 +2067,7 @@
             }%
             \YAD@globalstyle
             \etocsetnexttocdepth{\cmdKV@YAD@depth}%
-            \YAD@computenumwidths\relax% note: a effet global
+            \YAD@computenumwidths\relax% note: à effet global
             \etocsetnexttocdepth{\cmdKV@YAD@depth}% on doit le répéter, car c'est un truc à un coup seulement
             \etoctableofcontents%
             \etocsettocdepth{\YAD@tocdepth}%
@@ -2148,13 +2148,13 @@
         }%
         \fi%
         }
-        \etocsettocdepth{\YAD@tocdepth}%
-        \AddToHook{begindocument}{%
-          % \yadsetup{#1}%
-          \YAD@setsecnumdepth{\YAD@secnumdepth}%
-        }
-        % \renewcommand{\setcounter}[2]{}%
-        %
+      \etocsettocdepth{\YAD@tocdepth}%
+      \AddToHook{begindocument}{%
+        % \yadsetup{#1}%
+      \YAD@setsecnumdepth{\YAD@secnumdepth}%
+      }
+      % \renewcommand{\setcounter}[2]{}%
+      %
 \DeclareRobustCommand{\YAD@chapter@header}{%
   \ifthechapter{%
     \MakeUppercase\chaptertitlename\ \thechapter.
@@ -2178,9 +2178,25 @@
   % \settocdepth{none}%
   \setcounter{secnumdepth}{-10}%
   \ifdraft{%
-    \newgeometry{centering,nomarginpar,bottom=1cm,top=1cm,headheight=\YAD@max@logoheight,margin=0.5cm,tmargin=\YAD@max@logoheight+1cm}%
+      \newgeometry{
+      centering,
+      nomarginpar,
+      bottom=1cm,
+      top=1cm,
+      headheight=\YAD@max@logoheight,
+      margin=0.5cm,
+      tmargin=\YAD@max@logoheight+1cm
+      }%
   }{%
-    \newgeometry{centering,nomarginpar,bottom=1cm,top=1cm,headheight=\YAD@max@logoheight,hmargin=2cm,includeall}%
+      \newgeometry{
+      centering,
+      nomarginpar,
+      bottom=1cm,
+      top=1cm,
+      headheight=\YAD@max@logoheight,
+      hmargin=2cm,
+      includeall
+      }%
   }%
   \sethead[]%
   []%
@@ -2407,7 +2423,7 @@
 }%
 \renewcommand{\maketitle}[1][]{%
   \booltrue{YAD@maketitle@used}%
-  \yadsetup{#1}
+  \yadsetup{#1}%
   \setlength{\fboxsep}{10pt}%
   \setlength{\YAD@titleboxwidth}{\linewidth-2\fboxsep-2\fboxrule}%
   \pagestyle{titles}%
@@ -2434,6 +2450,7 @@
       \begin{tcolorbox}
     }%
     \noindent%
+    \centering%
     \begin{minipage}{\linewidth-2\fboxsep-2\fboxrule}
       % \onehalfspacing%
       \noindent%
@@ -3408,64 +3425,72 @@
   }%
   \YAD@abstract@page%
 }%
-        \csdef{makededications}{%
-        \@ifstar{\@tempswatrue\csuse{YAD@starnostar@makededications}}{\@tempswafalse\csuse{YAD@starnostar@makededications}}%
-        }%
-        \csdef{YAD@starnostar@makededications}{%
-        \pagestyle{prepreliminary}%
-        \if@tempswa%
-        \else%
-        \vspace*{\stretch{2}}%
-        \fi%
-        \DTLifdbempty{dedications}{%
-        \YAD@generic@argument@translate{dedications}%
-        \YAD@ClassError{%
-        \protect\makededications\space utilisée/\protect\dedication\space non
-        utilisée%
+      \csdef{makededications}{%
+        \@ifstar{%
+          \@tempswatrue\csuse{YAD@starnostar@makededications}%
         }{%
-        La commande \protect\makededications\space a été utilisée mais la
-        commande \protect\dedication,\MessageBreak%
-        permettant de préparer des dédicaces, n'a pas été utilisée.%
+          \@tempswafalse\csuse{YAD@starnostar@makededications}%
         }%
+      }%
+      \csdef{YAD@starnostar@makededications}{%
+      \pagestyle{prepreliminary}%
+      \if@tempswa%
+      \else%
+      \vspace*{\stretch{2}}%
+      \fi%
+      \DTLifdbempty{dedications}{%
+      \YAD@generic@argument@translate{dedications}%
+      \YAD@ClassError{%
+      \protect\makededications\space utilisée/\protect\dedication\space non
+      utilisée%
+      }{%
+      La commande \protect\makededications\space a été utilisée mais la
+      commande \protect\dedication,\MessageBreak%
+      permettant de préparer des dédicaces, n'a pas été utilisée.%
+      }%
+      }{%
+      \begin{flushright}
+        \itshape%
+        \DTLforeach*{dedications}{%
+          \YAD@dedication=dedication%
         }{%
-        \begin{flushright}
-          \itshape%
-          \DTLforeach*{dedications}{%
-            \YAD@dedication=dedication%
+          \YAD@ifemptyorundef{\YAD@dedication}{%
+            \YAD@generic@argument@translate{dedication}%
+            \YAD@ClassError{%
+              Dédicace vide%
+            }{%
+              L'argument obligatoire d'une commande \protect\dedication\space est
+              vide\MessageBreak%
+              (celui-ci doit être renseigné).%
+            }%
           }{%
-            \YAD@ifemptyorundef{\YAD@dedication}{%
-              \YAD@generic@argument@translate{dedication}%
-              \YAD@ClassError{%
-                Dédicace vide%
-              }{%
-                L'argument obligatoire d'une commande \protect\dedication\space est
-                vide\MessageBreak%
-                (celui-ci doit être renseigné).%
-              }%
-            }{%
-              \YAD@dedication%
-            }%
-            \par%
-            \DTLiflastrow{%
-            }{%
-              \if@tempswa%
-              \vspace*{\baselineskip}%
-              \else%
-              \vspace*{\stretch{1}}%
-              \fi
-            }%
+            \YAD@dedication%
           }%
-        \end{flushright}
+          \par%
+          \DTLiflastrow{%
+          }{%
+            \if@tempswa%
+            \vspace*{\baselineskip}%
+            \else%
+            \vspace*{\stretch{1}}%
+            \fi
+          }%
         }%
-        \if@tempswa%
-        \else%
-        \vspace*{\stretch{2}}%
-        \fi
-        \pagestyle{preliminary}%
+      \end{flushright}
+      }%
+      \if@tempswa%
+      \else%
+      \vspace*{\stretch{2}}%
+      \fi
+      \pagestyle{preliminary}%
+      }%
+      \csdef{makefrontepigraphs}{%
+        \@ifstar{%
+          \@tempswatrue\csuse{YAD@starnostar@makefrontepigraphs}%
+        }{%
+          \@tempswafalse\csuse{YAD@starnostar@makefrontepigraphs}%
         }%
-\csdef{makefrontepigraphs}{%
-  \@ifstar{\@tempswatrue\csuse{YAD@starnostar@makefrontepigraphs}}{\@tempswafalse\csuse{YAD@starnostar@makefrontepigraphs}}%
-}%
+      }%
 \csdef{YAD@starnostar@makefrontepigraphs}{%
   \patchcmd{\epigraphs}{\qitemlabel}{\qitemlabel\itemsep=1.5\baselineskip}{}{}%
   \pagestyle{prepreliminary}%
@@ -3533,6 +3558,7 @@
   \fi
   \pagestyle{preliminary}%
 }%
+      %
 \def\YAD@leftmargin {0pt}
 \def\YAD@rightmargin {2.55em}% like LaTeX’s \@tocrmarg
 \newbox\YAD@leaderbox
@@ -3583,11 +3609,11 @@
     \leftskip\z@skip
     \rightskip\z@skip
     \setbox\YAD@leaderbox\hbox to \YAD@leaderboxwidth{\hss.\hss}%
-    \chapter *[\cmdKV@YAD@name]{\noindent\kern\YAD@leftmargin\relax % uses "pt"...
+    \chapter *[\cmdKV@YAD@name]{\noindent\kern\YAD@leftmargin\relax % utilise "pt"...
       \cmdKV@YAD@name%
     }%
     \rightskip \YAD@rightmargin\relax
-    \parfillskip -\rightskip % or a smaller value if desired
+    \parfillskip -\rightskip % ou une valeur plus petite si désiré
     \leftskip \YAD@leftmargin \relax%
   }{%
     \if@restonecol
@@ -3598,7 +3624,7 @@
   %
   \etocsetstyle{part} {} {\addpenalty {-\@highpenalty}%
     \addvspace \YAD@bigvskip \leavevmode {\large
-      \bfseries % use a group to limit font change
+      \bfseries % utilisation d'un groupe pour limiter le changement de police
       \interlinepenalty\@M \etocifnumbered{\etocnumber\hspace{1em}}{}%
       \etocname \nobreak\hfil\makebox[-\parfillskip][r]{\etocpage}}\par
     \nobreak } {} {}
@@ -3687,8 +3713,7 @@
   \YAD@setlinestyle {subparagraph}{\YAD@numwidthG}%
 }
 \newcommand*{\etoc@tocidautorefname}{\MakeLowercase{\chaptername}}%
-\newcommand*\YAD@computenumwidths@ [2] {% #1 pour `etoc' ou `local', #2=pour le
-                                % \kern
+\newcommand*\YAD@computenumwidths@ [2] {% #1 pour `etoc' ou `local', #2=pour le \kern
   \begingroup
   \def\YAD@numwidthB {0pt}%
   \def\YAD@numwidthC {0pt}%

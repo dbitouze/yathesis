@@ -5,28 +5,28 @@
 % \begin{enumerate}
 % \item options de classe ;
 % \item options de préambule ;
-% \item commandes (et options de commandes) de la \yatCl;
-% \item packages chargés par la \yatCl ;
+% \item commandes (et options de commandes) de la \yatCl{};
+% \item packages chargés par la \yatCl{} ;
 % \item packages chargés manuellement.
 % \end{enumerate}
 
 \section{Options de classe}\label{options-classe}
-\index{option!de \yatcl|(}
+\index{option!de \yatcl{}|(}
 
-Les \meta{options} de classe de la \yatCl sont à passer selon la syntaxe
+Les \meta{options} de classe de la \yatCl{} sont à passer selon la syntaxe
 usuelle :
 \begin{preamblecode}
 \documentclass["\meta{options}"]{yathesis}
 \end{preamblecode}
 % Tester et documenter la commande |\yasetup|.
 
-% La \yatCl accepte, en sus des options qui lui sont propres, celles de la
+% La \yatCl{} accepte, en sus des options qui lui sont propres, celles de la
 % \Class{book} sur laquelle est elle basée.
 
 \subsection{Options de la classe \textsf{book}}\label{sec-options-usuelles-de}
 \index{option!de la \Class{book}}
 
-Parmi les \meta{options} de \yatcl figurent celles de la \Class{book},
+Parmi les \meta{options} de \yatcl{} figurent celles de la \Class{book},
 notamment :
 \begin{itemize}
 \item\index{taille des caractères}%
@@ -51,12 +51,12 @@ notamment :
 \end{itemize}
 \begin{dbwarning}{Options usuelles de la \Class{book} : à utiliser avec
     discernement}{}
-  Dans le cadre d'un usage de la \yatCl, il est \emph{fortement} déconseillé de
+  Dans le cadre d'un usage de la \yatCl{}, il est \emph{fortement} déconseillé de
   recourir à d'autres options usuelles de la \Class{book} que celles
   ci-dessus : cela risquerait de produire des résultats non souhaités.
 \end{dbwarning}
 
-% \subsection{Options de la \yatCl}\label{sec-options-yatCl}
+% \subsection{Options de la \yatCl{}}\label{sec-options-yatCl{}}
 %
 % Les \meta{options} discutées dans cette section, propres à la \yatCl{},
 % permettent de contrôler les grandes lignes du document.
@@ -69,7 +69,7 @@ notamment :
 \indexsee{français}{langue}%
 \indexsee{anglais}{langue}%
 
-Par défaut, un mémoire créé avec la \yatCl est composé :
+Par défaut, un mémoire créé avec la \yatCl{} est composé :
 \begin{itemize}
 \item en français comme langue principale;
 \item en anglais comme langue secondaire\footnote{Utilisée ponctuellement pour
@@ -88,7 +88,7 @@ Par défaut, un mémoire créé avec la \yatCl est composé :
 
 \begin{dbwarning}{Langues principales et secondaires prises en charge}{}
   Les seules langues \emph{principale} et \emph{secondaire} prises en charge
-  par la \yatCl sont le français (\docValue{french}) et l'anglais
+  par la \yatCl{} sont le français (\docValue{french}) et l'anglais
   (\docValue{english}).
 \end{dbwarning}
 
@@ -444,7 +444,7 @@ différentes versions du document : \enquote{intermédiaire} (par défaut),
             thèse\footnote{Cf. \vref{sec-lieu-de-saisie}.} où il est possible de
             les (re)définir (cf. \vref{sec-expressions-cles});
           \item\label{item-expression} les expressions fournies par la
-            \yatCl\footnote{\enquote{Thèse présentée par},
+            \yatCl{}\footnote{\enquote{Thèse présentée par},
               \foreignquote{english}{In order to become Doctor from},
               \foreignquote{english}{draft}, \enquote{Version intermédiaire en
                 date du}, etc. insérées de façon automatique sur certaines pages
@@ -598,7 +598,7 @@ l'option \refKey{space} suivante, il est possible de spécifier un interligne
 \end{dbwarning}
 
 Si on souhaite changer d'interligne ailleurs dans le mémoire, on recourra aux
-commandes du \Package*{setspace} \aside*{chargé par la \yatCl}.
+commandes du \Package*{setspace} \aside*{chargé par la \yatCl{}}.
 
 \subsection{Style des têtes de chapitres}\label{sec-style-des-tetes}
 
@@ -896,14 +896,14 @@ de laboratoires parmi ceux définis au moyen de la commande \refCom{laboratory}.
 Pour gagner de la place sur les pages concernées, la composition des noms et
 adresses des laboratoires est un peu condensée si \meta{nombre} dépasse $1$.
 
-\section{Options à passer aux packages chargés par la \yatCl}
+\section{Options à passer aux packages chargés par la \yatCl{}}
 \label{sec-options-passer-aux}%
-\index{option!de package chargé par \yatcl}%
+\index{option!de package chargé par \yatcl{}}%
 
 \changes{v0.99g}{2014-07-13}{Possibilité de passer des options aux packages
   chargés par \yat{}}%
 %
-Pour plusieurs de ses fonctionnalités, la \yatCl s'appuie sur des packages
+Pour plusieurs de ses fonctionnalités, la \yatCl{} s'appuie sur des packages
 (listés \vref{sec-packages-charges-par}) qu'elle charge automatiquement. Aussi
 son comportement par défaut et sa personnalisation sont-ils également gouvernés
 par le comportement par défaut et la personnalisation de ces packages.
@@ -939,19 +939,19 @@ peuvent être passées à leurs options).
 
 \begin{docKey}{graphicx}{=\marg{option(s)}}{pas valeur par défaut,
     initialement vide}
-  \index{option!de package chargé par \yatcl!graphicx@\package*{graphicx}}%
+  \index{option!de package chargé par \yatcl{}!graphicx@\package*{graphicx}}%
   Cette option permet de passer une ou plusieurs \meta{option(s)} au
   \Package{graphicx}.
 \end{docKey}
 \begin{docKey}{adjustbox}{=\marg{option(s)}}{pas valeur par défaut,
     initialement \docValue*{export}}
-  \index{option!de package chargé par \yatcl!adjustbox@\package*{adjustbox}}%
+  \index{option!de package chargé par \yatcl{}!adjustbox@\package*{adjustbox}}%
   Cette option permet de passer une ou plusieurs \meta{option(s)} au
   \Package{adjustbox}.
 \end{docKey}
 \begin{docKey}{setspace}{=\marg{option(s)}}{pas valeur par défaut,
     initialement vide}
-  \index{option!de package chargé par \yatcl!setspace@\package*{setspace}}%
+  \index{option!de package chargé par \yatcl{}!setspace@\package*{setspace}}%
   Cette option permet de passer une ou plusieurs \meta{option(s)} au
   \Package{setspace}.
 
@@ -962,38 +962,38 @@ peuvent être passées à leurs options).
 \end{docKey}
 \begin{docKey}{xcolor}{=\marg{option(s)}}{pas valeur par défaut,
     initialement vide}
-  \index{option!de package chargé par \yatcl!xcolor@\package*{xcolor}}%
+  \index{option!de package chargé par \yatcl{}!xcolor@\package*{xcolor}}%
   Cette option permet de passer une ou plusieurs \meta{option(s)} au
   \Package{xcolor}.
 \end{docKey}
 \begin{docKey}{datatool}{=\marg{option(s)}}{pas valeur par défaut,
     initialement vide}
-  \index{option!de package chargé par \yatcl!datatool@\package*{datatool}}%
+  \index{option!de package chargé par \yatcl{}!datatool@\package*{datatool}}%
   Cette option permet de passer une ou plusieurs \meta{option(s)} au
   \Package{datatool}.
 \end{docKey}
 \begin{docKey}{titlesec}{=\marg{option(s)}}{pas valeur par défaut, initialement
     vide}
-  \index{option!de package chargé par \yatcl!titlesec@\package*{titlesec}}%
+  \index{option!de package chargé par \yatcl{}!titlesec@\package*{titlesec}}%
   Cette option permet de passer une ou plusieurs \meta{option(s)} au
   \Package{titlesec}.
 \end{docKey}
 \begin{docKey}{draftwatermark}{=\marg{option(s)}}{pas valeur par défaut,
     initialement vide}
   \index{option!de package chargé par
-    \yatcl!draftwatermark@\package*{draftwatermark}}%
+    \yatcl{}!draftwatermark@\package*{draftwatermark}}%
   Cette option permet de passer une ou plusieurs \meta{option(s)} au
   \Package{draftwatermark}.
 \end{docKey}
 \begin{docKey}{babel}{=\marg{option(s)}}{pas valeur par défaut,
     initialement vide}
-  \index{option!de package chargé par \yatcl!babel@\package*{babel}}%
+  \index{option!de package chargé par \yatcl{}!babel@\package*{babel}}%
   Cette option permet de passer une ou plusieurs \meta{option(s)} au
   \Package{babel}.
 \end{docKey}
 \begin{docKey}{datetime2}{=\marg{option(s)}}{pas valeur par défaut,
     initialement \docValue*{nodayofweek}}
-  \index{option!de package chargé par \yatcl!datetime2@\package*{datetime2}}%
+  \index{option!de package chargé par \yatcl{}!datetime2@\package*{datetime2}}%
   Cette option permet de passer une ou plusieurs \meta{option(s)} au
   \Package{datetime2}.
 \end{docKey}
@@ -1013,7 +1013,7 @@ peuvent être passées à leurs options).
 % \section{Options de préambule}
 % \label{sec-options-de-preambule}
 %
-% Pour des raisons techniques, les options de la \yatCl listées à la
+% Pour des raisons techniques, les options de la \yatCl{} listées à la
 % \vref{options-classe}, ne peuvent être passées qu'en argument optionnel de
 % \docAuxCommand{documentclass}. Les options de la présente section peuvent être
 % passées indifféremment :
@@ -1023,7 +1023,7 @@ peuvent être passées à leurs options).
 % \end{itemize}
 %
 % \begin{docCommand}{yadsetup}{\marg{options}}
-%   Cette commande permet de spécifier certaines \meta{options} de la \yatCl.
+%   Cette commande permet de spécifier certaines \meta{options} de la \yatCl{}.
 % \end{docCommand}
 %
 % \subsection{Profondeur de la numérotation}\label{sec-profondeur-de-la}
@@ -1072,11 +1072,11 @@ peuvent être passées à leurs options).
 % \end{dbwarning}
 %
 % Si on souhaite changer d'interligne ailleurs dans le mémoire, on recourra aux
-% commandes du \Package*{setspace} \aside*{chargé par la \yatCl}.
+% commandes du \Package*{setspace} \aside*{chargé par la \yatCl{}}.
 
-\section{Commandes et options de commandes de la \yatCl}
+\section{Commandes et options de commandes de la \yatCl{}}
 \index{commandes de personnalisation!lieu de spécification}%
-\index{option!de \yatcl!lieu de spécification}%
+\index{option!de \yatcl{}!lieu de spécification}%
 
 \begin{dbremark}{Lieu des commandes de personnalisation}{configurationfile}
   Les commandes de personnalisation listées dans cette section (et donc propres
@@ -1085,13 +1085,13 @@ peuvent être passées à leurs options).
   \begin{itemize}
   \item soit directement dans le (préambule du) fichier (maître) de la thèse ;
   \item%
-    \index{fichier!de configuration de \yatcl}%
+    \index{fichier!de configuration de \yatcl{}}%
     \index{dossier!de configuration}%
     soit dans un fichier (prévu à cet effet) à nommer \file{\configurationfile}
     et à placer dans un sous-dossier (prévu à cet effet) à nommer
     \folder{\configurationdirectory}\footnote{Ces fichier et sous-dossier sont
       à créer au besoin mais le canevas de thèse \enquote{en arborescence} livré
-      avec la \yatCl, décrit \vref{sec-canevas-arborescence}, les fournit.}.
+      avec la \yatCl{}, décrit \vref{sec-canevas-arborescence}, les fournit.}.
   \end{itemize}
 \end{dbremark}
 
@@ -1107,16 +1107,16 @@ peuvent être passées à leurs options).
   thèse}\label{sec-expressions-cles}%
 \index{expression!(re)définition}%
 
-Un mémoire de thèse composé avec la \yatCl est émaillé d'expressions insérées
+Un mémoire de thèse composé avec la \yatCl{} est émaillé d'expressions insérées
 de façon automatique sur certaines pages (titre, mots clés, laboratoire,
-résumés, etc.). Que ces expressions soient définies par la \yatCl ou bien
+résumés, etc.). Que ces expressions soient définies par la \yatCl{} ou bien
 standard, il est possible de les redéfinir.
 
 \subsubsection{Expressions définies par la classe}
 \label{sec-expr-defin-par}%
 \index{expression!redéfinition}%
 
-Les expressions \meta{en français} et \meta{en anglais} définies par la \yatCl
+Les expressions \meta{en français} et \meta{en anglais} définies par la \yatCl{}
 sont listées\footnote{Et classées par ordre alphabétique des expressions
   \meta{en français}.} dans le \vref{tab-expressions-cles} et y sont identifiées
 par un \meta{label} permettant de les redéfinir (voire de les définir, cf.
@@ -1338,7 +1338,7 @@ La clé \refKey{role} suivante permet de spécifier de \emph{nouveaux} rôles
   \vref{tab-expressions-cles} ou à définir au moyen de la commande
   \refCom{expression}.
 \end{docKey}
-\index{option!de \yatcl|)}
+\index{option!de \yatcl{}|)}
 
 \section{Packages chargés manuellement}
 \label{sec-options-de-classes}

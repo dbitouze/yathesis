@@ -1,5 +1,16 @@
 # [Unreleased]
 
+# [1.0.10] - 2021-12-01
+
+## Added
+- (Far to perfect) Documentation of the code available as a PDF file.
+
+## Changed
+- Complete reworked of the `.dtx` source file in order to provide the documented code as a PDF file.
+
+## Fixed
+- Bug gh #91 (https://git.io/JMrK8).
+
 # [1.0.9] - 2021-10-13
 
 ## Fixed
