@@ -62,6 +62,140 @@ Typesetting the documentation of the class requires:
 
       latexmk -norc -r ./latexmkrc yathesis-fr
 %</readme>
+%<*ctanomat>
+% This is a description file for ctan-o-mat.
+% It manages uploads of a package to
+% CTAN -- the Comprehensive TeX Archive Network.
+%
+% The syntax is roughly oriented towards (La)TeX.
+% Two form of the macros are used. The simple macros take one argument
+% in braces. Here the argument may not contain embedded macros.
+%
+% The second form uses an environment enclosed in \begin{}/\end{}.
+% In the long text fields logo macros can be used.
+%
+% You should enter your values between the begin and the end of the
+% named type.
+% -------------------------------------------------------------------------
+% This field contains the CTAN id of the package.
+% The value is optional.
+% The value is restricted to 32 characters.
+\pkg{yathesis}
+% -------------------------------------------------------------------------
+% This field contains the version of the package.
+% The value is optional.
+% The value is restricted to 32 characters.
+\version{1.0.11 2021-12-01}
+% -------------------------------------------------------------------------
+% This field contains the name of the author(s).
+% The value is optional.
+% The value is restricted to 128 characters.
+\author{Denis Bitouzé}
+% -------------------------------------------------------------------------
+% This field contains the email address of the uploader.
+% The value is an email address.
+% The value is restricted to 255 characters.
+\email{denis.bitouze@univ-littoral.fr}
+% -------------------------------------------------------------------------
+% This field contains the name of the uploader.
+% The value is restricted to 255 characters.
+\uploader{Denis Bitouzé}
+% -------------------------------------------------------------------------
+% This field contains the directory on CTAN.
+% The value is optional.
+% The value is restricted to 255 characters.
+\ctanPath{/macros/latex/contrib/yathesis}
+% -------------------------------------------------------------------------
+% This field contains the license.
+% The value is optional.
+% The value is restricted to 2048 characters.
+% Multiple values are allowed.
+\license{lppl1.3c}
+% -------------------------------------------------------------------------
+% This field contains the URL of the home page.
+% The value is optional.
+% The value is a URL.
+% The value is restricted to 255 characters.
+% Multiple values are allowed.
+\home{}
+% -------------------------------------------------------------------------
+% This field contains the URL of the bug tracker.
+% The value is optional.
+% The value is a URL.
+% The value is restricted to 255 characters.
+% Multiple values are allowed.
+\bugtracker{https://github.com/dbitouze/yathesis/issues/}
+% -------------------------------------------------------------------------
+% This field contains the support channel.
+% The value is optional.
+% The value is a URL.
+% The value is restricted to 255 characters.
+% Multiple values are allowed.
+\support{}
+% -------------------------------------------------------------------------
+% This field contains the version management.
+% The value is optional.
+% The value is a URL.
+% The value is restricted to 255 characters.
+% Multiple values are allowed.
+\repository{https://github.com/dbitouze/yathesis/}
+% -------------------------------------------------------------------------
+% This field contains the developer's channel.
+% The value is optional.
+% The value is a URL.
+% The value is restricted to 255 characters.
+% Multiple values are allowed.
+\development{}
+% -------------------------------------------------------------------------
+% This field contains the update indicator; true for update.
+% The value is optional.
+% The value is restricted to 8 characters.
+\update{true}
+% -------------------------------------------------------------------------
+% This field contains the topics id.
+% The value is optional.
+% The value is restricted to 1024 characters.
+% Multiple values are allowed.
+\topic{}
+% -------------------------------------------------------------------------
+% This field contains the text for the mail announcement.
+% The value is optional.
+% The value is restricted to 8192 characters.
+\begin{announcement}
+\end{announcement}
+% -------------------------------------------------------------------------
+% This field contains the one-liner for the package.
+% The value is optional.
+% The value is restricted to 128 characters.
+\summary{A LaTeX class for writing a thesis following French rules}
+% -------------------------------------------------------------------------
+% This field contains the descriptive abstract for the package.
+% The value is optional.
+% The value is restricted to 4096 characters.
+\begin{description}
+The purpose of yathesis is to facilitate the typesetting of theses prepared in France, whatever the disciplines and institutes. It implements most notably recommendations from the Ministry of Higher Education and Research, and this transparently to the user. It has also been designed to (optionally) take advantage of powerful tools available in LaTeX, including packages:
+
+- [`biblatex`](https://www.ctan.org/pkg/biblatex) for the bibliography;
+- [`glossaries`](https://www.ctan.org/pkg/glossaries) for the glossary, list of acronyms and symbols list.
+
+The `yathesis` class, based on the book class, aims to be both simple to use and, to some extent, (easily) customizable.
+
+`yathesis` comes with templates and samples in the `doc/latex/yathesis/french/exemples/` directory in the distribution. They can also be tested on Overleaf ([template](www.overleaf.com/latex/templates/template-of-a-thesis-written-with-yathesis-class/nhtmtthnqwtd) and [specimen](www.overleaf.com/latex/examples/sample-of-a-thesis-written-with-yathesis-class/nbcfvfqgnjfq)).
+
+Note: The “ya” in the package name stands for “yet another”.
+\end{description}
+% -------------------------------------------------------------------------
+% This field contains the note to the CTAN upload managers.
+% The value is optional.
+% The value is restricted to 2048 characters.
+\begin{note}
+\end{note}
+% -------------------------------------------------------------------------
+% This field contains the archive file.
+% The value is the file name of the archive to be uploaded.
+% It may have a relative or absolute directory.
+\file{../dtx-forge/yathesis.zip}
+%</ctanomat>
 %<*changelog>
 # [Unreleased]
 
@@ -407,6 +541,11 @@ This work consists of the file  yathesis.dtx
 \def\YAD@treesample{\YAD@examples/\YAD@sample/en-arborescence}
 %</install>
 %<*install>
+\usedir{.}
+\generate{
+  \nopreamble\nopostamble
+  \file{\YAD@classname.pkg}{\from{\jobname.dtx}{ctanomat}}
+}%
 \usedir{doc/latex/\YAD@classname}
 \generate{
   \nopreamble\nopostamble
@@ -551,9 +690,6 @@ This work consists of the file  yathesis.dtx
 % \iffalse
 %<*driver>
 \ProvidesFile{yathesis.dtx}
-% \RequirePackage{scrlfile}
-% \ReplaceClass{article}{report}
-% \BeforePackage{doc}{\let\oldmaketitle\maketitle}
 \documentclass[full,english,french,draft]{l3doc}
 \usepackage[a4paper,inner=5cm,landscape]{geometry}
 \usepackage[lining]{libertine}
@@ -659,7 +795,9 @@ This work consists of the file  yathesis.dtx
 % Pour pouvoir disposer d'autant de \enquote{flots} d'écriture dans
 % des fichiers annexes que nécessaire.
 %    \begin{macrocode}
-\RequirePackage{morewrites}%
+\ExplSyntaxOn
+\sys_if_engine_pdftex:T {\RequirePackage{morewrites}}
+\ExplSyntaxOff
 %    \end{macrocode}
 % Pour pouvoir définir des macros dont les arguments puissent être
 % spécifiés sous la forme ×clé=×\meta{valeur}, tant en argument de
