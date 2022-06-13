@@ -121,7 +121,7 @@ problème (cf. également l'\vref{wa-packages-a-ne-pas-charger}).
 \end{dbfaq}
 
 (Cette question ne concerne pas directement la \yatCl{}.) Il suffit
-d'insérer, en préambule du fichier (maître) de la thèse, la ligne :
+d'insérer, en préambule du fichier (parent) de la thèse, la ligne :
 \begin{preamblecode}[title=Par exemple dans le \File{\configurationfile}]
 \DeclareTextCommand{\nobreakspace}{T1}{\leavevmode\nobreak\ }
 \end{preamblecode}
@@ -232,7 +232,7 @@ où \meta{autre niveau} est l'une des valeurs possibles de la clé \refKey{depth
   notamment) débordent dans la marge de droite. Comment l'éviter ?
 \end{dbfaq}
 
-Il suffit d'insérer, en préambule du fichier (maître) de la thèse, les lignes :
+Il suffit d'insérer, en préambule du fichier (parent) de la thèse, les lignes :
 \begin{preamblecode}[title=Par exemple dans le \File{\configurationfile}]
 \makeatletter
 \renewcommand*\@pnumwidth{"\meta{distance}"}
@@ -303,7 +303,7 @@ est dû aux caractères actifs du module \package*+{babel-french} du
 \item les caractéristiques du document (cf. \vref{cha-caract-du-docum}), il
   suffit de les saisir\footnote{Cf. \vref{sec-lieu-de-saisie}.} :
   \begin{itemize}
-  \item soit dans le \emph{corps} du fichier (maître) de la thèse\footnote{Mais
+  \item soit dans le \emph{corps} du fichier (parent) de la thèse\footnote{Mais
       cf. alors \vref{wa-avant-maketitle}.} (et donc \emph{pas} dans son
     \emph{préambule}) ;
   \item soit dans le \File{\characteristicsfile} prévu à cet effet ;
@@ -359,7 +359,7 @@ méta-données des fichiers \glsxtrshort{pdf} produits par \hologo{pdfLaTeX},
   %
 Pour pallier cela, il devrait suffire\footnote{Plus de précisions à l'adresse
   \url{https://facile.cines.fr/\#latex}.} d'insérer en introduction du fichier
-(maître) \file{.tex}, avant même la déclaration \docAuxCommand{documentclass} :
+(parent) \file{.tex}, avant même la déclaration \docAuxCommand{documentclass} :
 \begin{preamblecode}
 \pdfobjcompresslevel 0
 \end{preamblecode}

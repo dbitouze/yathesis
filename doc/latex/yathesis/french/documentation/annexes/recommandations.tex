@@ -71,27 +71,27 @@ on peut recourir, non pas à \lstinline[deletekeywords={[5]institute}]|\institut
   pour redéfinir ces expressions.
 \end{dbremark}
 
-\section{Scission du mémoire en fichiers maître et esclaves}
+\section{Scission du mémoire en fichiers parent et enfants}
 \label{sec-repart-du-memo}
-\index{fichier!maître}
-\index{fichier!esclave}
+\index{fichier!parent}
+\index{fichier!enfant}
 
-La scission du mémoire de thèse en différents fichiers maître et esclaves,
+La scission du mémoire de thèse en différents fichiers parent et enfants,
 hautement recommandée, suppose de :
 \begin{enumerate}
-\item créer un fichier \enquote{maître}\footnote{Dans les spécimens et canevas
+\item créer un fichier \enquote{parent}\footnote{Dans les spécimens et canevas
     de thèse fournis avec la classe, décrits \vref{cha-specimen-canevas}, le
-    fichier maître est nommé \file{\thesismasterfile.tex}.};
+    fichier parent est nommé \file{\thesismasterfile.tex}.};
 \item stocker le contenu des chapitres, chacun dans un fichier
-  \enquote{esclave}
+  \enquote{enfant}
   % \footnote{Dans les spécimens et canevas de thèse fournis avec la
   % classe, décrit \vref{cha-specimen-canevas}, l'inclusion des fichiers
-  % esclaves, situés dans le \Folder{\dossiercorps}, est gérée dans
+  % enfants, situés dans le \Folder{\dossiercorps}, est gérée dans
   % le \File{\fichiercorps} situé dans le même répertoire que le
-  % fichier maître.}
+  % fichier parent.}
   et d'inclure ceux-ci au moyen de la commande
-  standard |\include|\marg{fichier esclave}, le nom du \meta{fichier
-    esclave} devant le cas échéant être précédé du chemin qui y
+  standard |\include|\marg{fichier enfant}, le nom du \meta{fichier
+    enfant} devant le cas échéant être précédé du chemin qui y
   conduit.
 \end{enumerate}
 %
@@ -112,10 +112,10 @@ Les \vref{ex-sans-parties,ex-avec-parties} illustrent l'usage de
 ces commandes pour la partie \enquote{corps} de la thèse et ce, dans l'hypothèse
 où les fichiers de chapitres de la thèse sont tous placés dans un
 sous-répertoire, nommé \folder{corps}, situé au même niveau que le fichier
-maître\footnote{C'est-à-dire à la racine du répertoire contenant le fichier
-  maître.}.
+parent\footnote{C'est-à-dire à la racine du répertoire contenant le fichier
+  parent.}.
 \begin{dbexample}{Structure d'une thèse en une seule partie}{sans-parties}
-  \indexex{fichier!esclave}
+  \indexex{fichier!enfant}
 \begin{bodycode}
 \include{corps/"\meta{introduction}"}
 \include{corps/"\meta{premier chapitre}"}
@@ -127,7 +127,7 @@ maître\footnote{C'est-à-dire à la racine du répertoire contenant le fichier
 %
 \begin{dbexample}{Structure d'une thèse en deux parties}{avec-parties}
   % \lstset{keywordstyle=[3]\color{texcs}}%
-  \indexex{fichier!esclave}
+  \indexex{fichier!enfant}
 \begin{bodycode}[listing options={deletekeywords={[3]part},deletekeywords={[2]corps}}]
 \include{corps/"\meta{introduction générale}"}
 %
