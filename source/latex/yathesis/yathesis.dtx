@@ -1480,10 +1480,6 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \RequirePackage{xstring}[2013/10/13]%
 %    \end{macrocode}
-% Pour facilement changer la casse
-%    \begin{macrocode}
-\RequirePackage{textcase}[2004/10/07]%
-%    \end{macrocode}
 % Pour tester le moteur employé
 %    \begin{macrocode}
 \RequirePackage{iftex}[2013/04/04]%
@@ -4620,13 +4616,13 @@ This work consists of the file  yathesis.dtx
     \YAD@ifemptyorundef{\YAD@mainkeywords}{%
       \YAD@generic@argument@translate{keywords}%
     }{%
-      \MakeTextLowercase{\YAD@mainkeywords}%
+      \MakeLowercase{\YAD@mainkeywords}%
     }%
   }{%
     \YAD@ifemptyorundef{\YAD@secondarykeywords}{%
       \YAD@generic@argument@translate{keywords}%
     }{%
-      \MakeTextLowercase{\YAD@secondarykeywords}%
+      \MakeLowercase{\YAD@secondarykeywords}%
     }%
   }%
 }%
