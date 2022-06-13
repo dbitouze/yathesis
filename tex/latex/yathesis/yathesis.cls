@@ -12,10 +12,12 @@
 %% See http://www.latex-project.org/lppl.txt
 %% -----------------------------------------------------------------------
 \def\yathesisversion{1.0.10}
-\def\yathesisdate{2021-12-01}
+\def\yathesisdate{2022-06-13}
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesClass{yathesis}[\yathesisdate\space v\yathesisversion\space Yet another class for writing thesis (DB)]
-\RequirePackage{morewrites}%
+\ExplSyntaxOn
+\sys_if_engine_pdftex:T {\RequirePackage{morewrites}}
+\ExplSyntaxOff
 \RequirePackage{pgfopts}[2011/06/02]%
 \RequirePackage{etoolbox}[2011/01/03]%
 \RequirePackage{xpatch}[2012/10/02]%
@@ -490,7 +492,6 @@
 \RequirePackage{array}[2008/09/09]%
 \RequirePackage{tabularx}[2020/01/15]%
 \RequirePackage{xstring}[2013/10/13]%
-\RequirePackage{textcase}[2004/10/07]%
 \RequirePackage{iftex}[2013/04/04]%
 \RequirePackage{epigraph}[2009/09/02]%
 \RequirePackage{tcolorbox}[2014/03/31]%
@@ -2848,13 +2849,13 @@
     \YAD@ifemptyorundef{\YAD@mainkeywords}{%
       \YAD@generic@argument@translate{keywords}%
     }{%
-      \MakeTextLowercase{\YAD@mainkeywords}%
+      \MakeLowercase{\YAD@mainkeywords}%
     }%
   }{%
     \YAD@ifemptyorundef{\YAD@secondarykeywords}{%
       \YAD@generic@argument@translate{keywords}%
     }{%
-      \MakeTextLowercase{\YAD@secondarykeywords}%
+      \MakeLowercase{\YAD@secondarykeywords}%
     }%
   }%
 }%

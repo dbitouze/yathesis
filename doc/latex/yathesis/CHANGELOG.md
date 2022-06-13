@@ -1,6 +1,6 @@
 # [Unreleased]
 
-# [1.0.10] - 2021-12-01
+# [1.0.10] - 2022-06-13
 
 ## Added
 - (Far to perfect) Documentation of the code available as a PDF file.
@@ -10,6 +10,7 @@
 
 ## Fixed
 - Bug gh #91 (https://git.io/JMrK8).
+- Bug gh #92 (https://github.com/dbitouze/yathesis/issues/92).
 
 # [1.0.9] - 2021-10-13
 
