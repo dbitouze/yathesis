@@ -21,8 +21,6 @@
 \RequirePackage{pgfopts}[2011/06/02]%
 \RequirePackage{etoolbox}[2011/01/03]%
 \RequirePackage{xpatch}[2012/10/02]%
-\RequirePackage{filehook}[2011/10/12]%
-\RequirePackage{hopatch}[2012/05/28]%
 \RequirePackage{letltxmacro}[2010/09/02]%
 \RequirePackage{twoopt}[1999/04/12]%
 \RequirePackage{xifthen}[2009/04/17]%
@@ -4273,7 +4271,7 @@
     }%
   }%
 }%
-\hopatch@AfterPackage{glossaries}{%
+\AddToHook{package/glossaries/after}
   \ifbool{YAD@output@paper}{%
     \ifbool{YAD@output@paper@star}{%
     }{%
