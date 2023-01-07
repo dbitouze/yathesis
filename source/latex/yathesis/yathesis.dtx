@@ -1,6 +1,6 @@
 % \iffalse meta-comment
 %
-% Copyright (C) 2012-2023 by Denis Bitouz'e <denis.bitouze@univ-littoral.fr>
+% Copyright (C) 2012-2022 by Denis Bitouz'e <denis.bitouze@univ-littoral.fr>
 % -------------------------------------------------------------------------------
 % This work may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License, either version 1.3c
@@ -814,6 +814,11 @@ This work consists of the file  yathesis.dtx
 % commandes à argument(s) optionnel
 %    \begin{macrocode}
 \RequirePackage{xpatch}[2012/10/02]%
+%    \end{macrocode}
+% Pour pouvoir patcher des commandes à argument(s) optionnel(s)
+%    \begin{macrocode}
+\RequirePackage{filehook}[2011/10/12]%
+\RequirePackage{hopatch}[2012/05/28]%
 %    \end{macrocode}
 % Assignation ×\let× pour macros à arguments optionnels améliorée
 %    \begin{macrocode}
@@ -6677,7 +6682,7 @@ This work consists of the file  yathesis.dtx
 % réglages s'il est chargé et notamment pour lui adjoindre une liste
 % de symboles.
 %    \begin{macrocode}
-\AddToHook{package/glossaries/after}
+\hopatch@AfterPackage{glossaries}{%
 %    \end{macrocode}
 % Si on est en sortie ×output=paper× (et pas en sortie ×output=paper*×), on
 % supprime la barre de navigation des glossaires qui ne sert que par ses liens
@@ -7086,9 +7091,11 @@ This work consists of the file  yathesis.dtx
 #include:epigraph
 #include:etoc
 #include:etoolbox
+#include:filehook
 #include:fncychap
 #include:geometry
 #include:graphicx
+#include:hopatch
 #include:hypcap
 #include:ifdraft
 #include:iflang
