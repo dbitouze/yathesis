@@ -1220,7 +1220,7 @@ This work consists of the file  yathesis.dtx
       \def\YAD@localtocsdepth{#1}%
     }%
     \ifboolexpr{%
-      test {\@ifundefined {Etoc@\YAD@localtocsdepth @@}}
+      test {\etocunknownlevelTF {\YAD@localtocsdepth}}
       or %
       test {\ifstrequal{#1}{part}}
       or %
@@ -1562,6 +1562,7 @@ This work consists of the file  yathesis.dtx
 % Pour pouvoir afficher un sommaire c-à-d une table des matières réduite
 %    \begin{macrocode}
 \RequirePackage{etoc}[2016/09/29]%
+\providecommand*\etocunknownlevelTF[1]{\@ifundefined{Etoc@#1@@}}%
 %    \end{macrocode}
 % La commande suivante est une solution de contournement fournie par le paquet
 % etoc afin de résoudre le problème
@@ -3595,7 +3596,7 @@ This work consists of the file  yathesis.dtx
           }%
           \newcommand\tableofcontents@YAD@with@argument[1][]{%
             \yadsetup{#1}%
-            \@ifundefined {Etoc@\cmdKV@YAD@depth @@}
+            \etocunknownlevelTF {\cmdKV@YAD@depth}
             {%
               \YAD@ClassWarningNoLine{%
                 La valeur (`\cmdKV@YAD@depth') passée à la clé `depth'\MessageBreak%
@@ -5735,13 +5736,13 @@ This work consists of the file  yathesis.dtx
   {%
     \bgroup
     \YAD@localstyle%
-    \@ifundefined {Etoc@\YAD@localtocsdepth @@}
+    \etocunknownlevelTF {\YAD@localtocsdepth}
     {%
     }{%
       \etocsetnexttocdepth{\YAD@localtocsdepth}%
     }
     \YAD@computelocalnumwidths\relax%
-    \@ifundefined {Etoc@\YAD@localtocsdepth @@}
+    \etocunknownlevelTF {\YAD@localtocsdepth}
     {%
     }{%
       \etocsetnexttocdepth{\YAD@localtocsdepth}%
