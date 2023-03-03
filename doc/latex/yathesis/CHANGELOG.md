@@ -1,5 +1,13 @@
 # [Unreleased]
 
+# [1.0.11] - 2023-02-24
+
+## Changed
+- Some internals for future releases of `etoc` (thanks to Jean-François Burnol).
+
+## Fixed
+- Typos in the documentation (thanks to kitanokuma).
+
 # [1.0.10] - 2022-06-13
 
 ## Added

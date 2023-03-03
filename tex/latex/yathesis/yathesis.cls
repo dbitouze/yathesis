@@ -11,8 +11,8 @@
 %% Released under the LaTeX Project Public License v1.3c or later
 %% See http://www.latex-project.org/lppl.txt
 %% -----------------------------------------------------------------------
-\def\yathesisversion{1.0.10}
-\def\yathesisdate{2022-06-13}
+\def\yathesisversion{1.0.11}
+\def\yathesisdate{2023-02-24}
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesClass{yathesis}[\yathesisdate\space v\yathesisversion\space Yet another class for writing thesis (DB)]
 \ExplSyntaxOn
@@ -336,7 +336,7 @@
       \def\YAD@localtocsdepth{#1}%
     }%
     \ifboolexpr{%
-      test {\@ifundefined {Etoc@\YAD@localtocsdepth @@}}
+      test {\etocifunknownlevelTF {\YAD@localtocsdepth}}
       or %
       test {\ifstrequal{#1}{part}}
       or %
@@ -518,6 +518,7 @@
 }%
 \RequirePackage[\YAD@secondarylanguage,main=\YAD@mainlanguage]{babel}[2014/03/24]
 \RequirePackage{etoc}[2016/09/29]%
+\providecommand*\etocifunknownlevelTF[1]{\@ifundefined{Etoc@#1@@}}%
 \ifdefined\etockeeporiginaltableofcontents\etockeeporiginaltableofcontents\fi
 \RequirePackage{iflang}[2007/11/11]%
 \RequirePackage{translator}[2010/06/12]%
@@ -2051,7 +2052,7 @@
           }%
           \newcommand\tableofcontents@YAD@with@argument[1][]{%
             \yadsetup{#1}%
-            \@ifundefined {Etoc@\cmdKV@YAD@depth @@}
+            \etocifunknownlevelTF {\cmdKV@YAD@depth}
             {%
               \YAD@ClassWarningNoLine{%
                 La valeur (`\cmdKV@YAD@depth') passée à la clé `depth'\MessageBreak%
@@ -3766,13 +3767,13 @@
   {%
     \bgroup
     \YAD@localstyle%
-    \@ifundefined {Etoc@\YAD@localtocsdepth @@}
+    \etocifunknownlevelTF {\YAD@localtocsdepth}
     {%
     }{%
       \etocsetnexttocdepth{\YAD@localtocsdepth}%
     }
     \YAD@computelocalnumwidths\relax%
-    \@ifundefined {Etoc@\YAD@localtocsdepth @@}
+    \etocifunknownlevelTF {\YAD@localtocsdepth}
     {%
     }{%
       \etocsetnexttocdepth{\YAD@localtocsdepth}%
@@ -4271,7 +4272,7 @@
     }%
   }%
 }%
-\AddToHook{package/glossaries/after}
+\AddToHook{package/glossaries/after}{%
   \ifbool{YAD@output@paper}{%
     \ifbool{YAD@output@paper@star}{%
     }{%
