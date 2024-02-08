@@ -710,6 +710,12 @@ Ce colophon peut être personnalisé au moyen de l'option
     permettant de modifier le texte par défaut du colophon.}%
   %
   Cette commande permet de redéfinir le \meta{texte} par défaut du colophon.
+
+  \begin{dbwarning}{Commande \protect\refCom{colophontext} : dans le corps du
+      et document avant \protect\refCom{maketitle}}{}
+    Pour qu'elle soit opérationnelle, la commande \refCom{colophontext} doit
+    être employée entre \lstinline+\begin{document}+ et \refCom{maketitle}.
+  \end{dbwarning}
 \end{docCommand}
 
 La \yatCl{} s'appuie sur le \Package{colophon} pour composer le colophon. De ce
