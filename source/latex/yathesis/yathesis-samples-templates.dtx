@@ -245,15 +245,15 @@
 %<<COMMENT
 % Macro pour mettre en forme les noms de fichiers
 %COMMENT
-\newcommand{\fichier}[1]{\texttt{#1}}
+\NewDocumentCommand{\fichier}{ m }{\texttt{#1}}
 %<<COMMENT
 % Macro pour mettre en forme les noms de packages LaTeX
 %COMMENT
-\newcommand{\package}[1]{\textsf{#1}}
+\NewDocumentCommand{\package}{ m }{\textsf{#1}}
 %<<COMMENT
 % Macro pour mettre en forme des locutions étrangères
 %COMMENT
-\newcommand{\locution}[1]{\emph{#1}}
+\NewDocumentCommand{\locution}{ m }{\emph{#1}}
 %</flat-sample|macros-sample>
 %<*these-sample|flat-sample>
 %<<COMMENT
