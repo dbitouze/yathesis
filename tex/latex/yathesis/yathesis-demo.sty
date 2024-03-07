@@ -74,8 +74,12 @@
   }
   \xpretocmd{\conclusion}{\cleardoublepage\zlabel{conclusion}}{}{}
   \xpretocmd{\conclusion*}{\cleardoublepage\zlabel{conclusion}}{}{}
-  \xpretocmd{\printbibliography}{\cleardoublepage\zlabel{printbibliography}}{}{}
-  \xpretocmd{\printindex}{\cleardoublepage\zlabel{printindex}}{}{}
+  \ifcsdef{printbibliography}{%
+    \xpretocmd{\printbibliography}{\cleardoublepage\zlabel{printbibliography}}{}{}
+    }{}
+  \ifcsdef{printindex}{%
+    \xpretocmd{\printindex}{\cleardoublepage\zlabel{printindex}}{}{}
+  }{}
   \xapptocmd{\makebackcover}{\zlabel{makebackcover}}{}{}
   \let\include\input
 }

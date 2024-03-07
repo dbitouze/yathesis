@@ -2041,7 +2041,7 @@
             \YAD@localstyle % pour les local TOCs qui suivent
             \ifbool{YAD@mainmatter}%
             {%
-            \pagestyle{mainmatter}%
+              \pagestyle{mainmatter}%
             }{%
             }%
             \ifbool{YAD@backmatter}%
@@ -2076,7 +2076,7 @@
             \YAD@localstyle % pour les local TOCs qui suivent
             \ifbool{YAD@mainmatter}%
             {%
-            \pagestyle{mainmatter}%
+              \pagestyle{mainmatter}%
             }{%
             }%
             \ifbool{YAD@backmatter}%
@@ -3914,12 +3914,18 @@
 \xapptocmd{\listoftables}{\renewcommand{\YAD@localtoc}{\YAD@default@localtoc}}{}{}%
 \xpretocmd{\listoffigures}{\renewcommand{\YAD@localtoc}{}}{}{}%
 \xapptocmd{\listoffigures}{\renewcommand{\YAD@localtoc}{\YAD@default@localtoc}}{}{}%
-\xpretocmd{\printbibliography}{\renewcommand{\YAD@localtoc}{}}{}{}%
-\xapptocmd{\printbibliography}{\renewcommand{\YAD@localtoc}{\YAD@default@localtoc}}{}{}%
-\xpretocmd{\printglossary}{\renewcommand{\YAD@localtoc}{}}{}{}%
-\xapptocmd{\printglossary}{\renewcommand{\YAD@localtoc}{\YAD@default@localtoc}}{}{}%
-\xpretocmd{\printindex}{\renewcommand{\YAD@localtoc}{}}{}{}%
-\xapptocmd{\printindex}{\renewcommand{\YAD@localtoc}{\YAD@default@localtoc}}{}{}%
+\ifcsdef{printbibliography}{%
+  \xpretocmd{\printbibliography}{\renewcommand{\YAD@localtoc}{}}{}{}%
+  \xapptocmd{\printbibliography}{\renewcommand{\YAD@localtoc}{\YAD@default@localtoc}}{}{}%
+  }{}%
+\ifcsdef{printglossary}{%
+  \xpretocmd{\printglossary}{\renewcommand{\YAD@localtoc}{}}{}{}%
+  \xapptocmd{\printglossary}{\renewcommand{\YAD@localtoc}{\YAD@default@localtoc}}{}{}%
+  }{}%
+\ifcsdef{printindex}{%
+  \xpretocmd{\printindex}{\renewcommand{\YAD@localtoc}{}}{}{}%
+  \xapptocmd{\printindex}{\renewcommand{\YAD@localtoc}{\YAD@default@localtoc}}{}{}%
+}{}%
 \LetLtxMacro{\YAD@ORI@section}{\section}%
 \renewcommand\section{%
   \if@mainmatter%
