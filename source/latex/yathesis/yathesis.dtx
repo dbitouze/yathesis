@@ -5944,12 +5944,18 @@ This work consists of the file  yathesis.dtx
 \xapptocmd{\listoftables}{\renewcommand{\YAD@localtoc}{\YAD@default@localtoc}}{}{}%
 \xpretocmd{\listoffigures}{\renewcommand{\YAD@localtoc}{}}{}{}%
 \xapptocmd{\listoffigures}{\renewcommand{\YAD@localtoc}{\YAD@default@localtoc}}{}{}%
-\xpretocmd{\printbibliography}{\renewcommand{\YAD@localtoc}{}}{}{}%
-\xapptocmd{\printbibliography}{\renewcommand{\YAD@localtoc}{\YAD@default@localtoc}}{}{}%
-\xpretocmd{\printglossary}{\renewcommand{\YAD@localtoc}{}}{}{}%
-\xapptocmd{\printglossary}{\renewcommand{\YAD@localtoc}{\YAD@default@localtoc}}{}{}%
-\xpretocmd{\printindex}{\renewcommand{\YAD@localtoc}{}}{}{}%
-\xapptocmd{\printindex}{\renewcommand{\YAD@localtoc}{\YAD@default@localtoc}}{}{}%
+\ifcsdef{printbibliography}{%
+  \xpretocmd{\printbibliography}{\renewcommand{\YAD@localtoc}{}}{}{}%
+  \xapptocmd{\printbibliography}{\renewcommand{\YAD@localtoc}{\YAD@default@localtoc}}{}{}%
+  }{}%
+\ifcsdef{printglossary}{%
+  \xpretocmd{\printglossary}{\renewcommand{\YAD@localtoc}{}}{}{}%
+  \xapptocmd{\printglossary}{\renewcommand{\YAD@localtoc}{\YAD@default@localtoc}}{}{}%
+  }{}%
+\ifcsdef{printindex}{%
+  \xpretocmd{\printindex}{\renewcommand{\YAD@localtoc}{}}{}{}%
+  \xapptocmd{\printindex}{\renewcommand{\YAD@localtoc}{\YAD@default@localtoc}}{}{}%
+}{}%
 %    \end{macrocode}
 % On redéfinit la commande ×\section× de sorte que, comme la commande
 % ×\chapter×, elle dispose d'un argument optionnel supplémentaire permettant de
@@ -7439,8 +7445,12 @@ style=#yadsymbolstyle,⟨autre⟩
   }
   \xpretocmd{\conclusion}{\cleardoublepage\zlabel{conclusion}}{}{}
   \xpretocmd{\conclusion*}{\cleardoublepage\zlabel{conclusion}}{}{}
-  \xpretocmd{\printbibliography}{\cleardoublepage\zlabel{printbibliography}}{}{}
-  \xpretocmd{\printindex}{\cleardoublepage\zlabel{printindex}}{}{}
+  \ifcsdef{printbibliography}{%
+    \xpretocmd{\printbibliography}{\cleardoublepage\zlabel{printbibliography}}{}{}
+    }{}
+  \ifcsdef{printindex}{%
+    \xpretocmd{\printindex}{\cleardoublepage\zlabel{printindex}}{}{}
+  }{}
   \xapptocmd{\makebackcover}{\zlabel{makebackcover}}{}{}
   \let\include\input
 }
