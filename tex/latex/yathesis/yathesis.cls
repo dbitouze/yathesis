@@ -11,8 +11,8 @@
 %% Released under the LaTeX Project Public License v1.3c or later
 %% See http://www.latex-project.org/lppl.txt
 %% -----------------------------------------------------------------------
-\def\yathesisversion{1.0.11}
-\def\yathesisdate{2023-02-24}
+\def\yathesisversion{1.0.12}
+\def\yathesisdate{2024-03-07}
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesClass{yathesis}[\yathesisdate\space v\yathesisversion\space Yet another class for writing thesis (DB)]
 \ExplSyntaxOn

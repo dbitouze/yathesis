@@ -1,5 +1,11 @@
 # [Unreleased]
 
+# [1.0.12] - 2024-03-07
+
+## Changed
+- Documentation improved
+- Code more robust
+
 # [1.0.11] - 2023-02-24
 
 ## Changed
