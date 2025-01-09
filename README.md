@@ -21,7 +21,7 @@ Denis Bitouzé
 
 ## Copyright
 
-Copyright 2012-2021 Denis Bitouzé
+Copyright 2012-2025 Denis Bitouzé
 
 ## Licence
 
