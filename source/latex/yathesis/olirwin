@@ -6294,10 +6294,12 @@ This work consists of the file  yathesis.dtx
     leurs auteurs.%
   }{%
     The \printinstitute{}
-    %
-    \ifundef{\printcoinstitute}{}{and the \printcoinstitute{}}
-    %
-    neither endorse nor censure authors' opinions expressed in the theses:
+    \ifundef{\printcoinstitute}{%
+      neither endorses nor censures
+    }{%
+      and the \printcoinstitute{} neither endorse nor censure
+    }%
+    the authors' opinions expressed in the thesis:
     these opinions must be considered to be those of their authors.%
   }%
 }%
