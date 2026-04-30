@@ -713,7 +713,7 @@ This work consists of the file  yathesis.dtx
 \makeatletter
 \@ifpackageloaded{glossaries-extra}{%
 }{%
-  \usepackage[shortcuts=abother,toc=false,xindy,hyperfirst=false]{glossaries-extra}%
+  \usepackage[xindy,toc=false,shortcuts=abother,hyperfirst=false]{glossaries-extra}%
   \makeglossaries
   \setglossarystyle{indexhypergroup}
   \setabbreviationstyle{long-short-sc}
@@ -1396,25 +1396,6 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \yadsetup{%
   .unknown/.code ={\expandafter\PassOptionsToClass\expandafter{\pgfkeyscurrentname}{book}}%
-}%
-%    \end{macrocode}
-%
-%
-% Pour éviter certains comportements inattendus, on précise la langue
-% principale au moyen de l'option ×main× du \Package{babel}. Mais, comme
-% celle-ci n'est apparue que récemment, on n'y recourt que si la version du
-% package est assez récente.
-%    \begin{macrocode}
-\@ifpackagelater{babel}{2013/04/15}{%
-  \PassOptionsToPackage{main=\YAD@mainlanguage}{babel}%
-}{%
-  \YAD@ClassWarningNoLine{%
-    La version de `babel' utilisée est obsolète.\MessageBreak%
-    La classe `yathesis' va essayer de faire son possible\MessageBreak%
-    mais il se peut qu'elle produise des resultats\MessageBreak%
-    non prévus. Il est conseillé de mettre à jour sa\MessageBreak%
-    distribution TeX%
-  }%
 }%
 %    \end{macrocode}
 %
