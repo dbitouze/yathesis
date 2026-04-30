@@ -4,7 +4,7 @@
 \section{Packages chargés par la classe}\label{sec-packages-charges-par}
 \index{package!chargé par \yatcl{}}
 
-On a vu \vref{sec-options-passer-aux} que, pour plusieurs de ses
+On a vu \zvref{sec-options-passer-aux} que, pour plusieurs de ses
 fonctionnalités\index{fonctionnalité}, la \yatCl{} s'appuie sur des packages
 qu'elle charge automatiquement. Ceux-ci sont répertoriés, selon leur ordre de
 chargement, dans la liste suivante qui indique leur fonction et le cas échéant :
@@ -22,8 +22,6 @@ chargement, dans la liste suivante qui indique leur fonction et le cas échéant
   \meta{clé}|=|\meta{valeur} ;
 \item[\package*+{etoolbox} :] outils de programmation ;
 \item[\package*+{xpatch} :] extension du package précédent ;
-\item[\package*+{morewrites} :] accès à autant de \enquote{flots} d'écriture
-  (dans des fichiers annexes) que nécessaire ;
 \item[\package*+{filehook} :] \enquote{hameçons} (\foreignquote{english}{hooks})
   pour fichiers importés ;
 \item[\package*+{hopatch} :] emballage de \enquote{hameçons} pour packages et
@@ -113,7 +111,7 @@ chargement, dans la liste suivante qui indique leur fonction et le cas échéant
   %   \begin{itemize}
   %     \item sa personnalisation au moyen de l'option \refKey{titlesec}
   %     désactive l'effet du \Package{fncychap}
-  %     (cf. \vref{sec-chapitres-numerotes}) et
+  %     (cf. \zvref{sec-chapitres-numerotes}) et
   %     de l'option \refKey{fncychap} ;
   %     \item l'emploi de certaines de ses commandes peut éventuellement
   %     conduire à des incompatibilités avec la \yatCl{} ;
@@ -163,8 +161,6 @@ chargement, dans la liste suivante qui indique leur fonction et le cas échéant
   \begin{description}
   \item[personnalisation :] commande propre \docAuxCommand*{bookmarksetup} ;
   \end{description}
-\item[\package*+{glossaries-babel} :] traduction d'expressions propres aux
-  glossaires\footnote{Chargé seulement si le \Package{glossaries} l'est.}.
 \end{description}
 
 \begin{dbremark}{Disposer d'une distribution \TeX{} à jour est fortement
@@ -200,7 +196,7 @@ fontes\index{fonte}\indexsee{police}{fonte} PostScript tels que
 \package*{lmodern}, \package*{kpfonts}, \package*{fourier}, \package*{libertine},
 etc. \aside*{presque indispensables si on utilise \hologo{LaTeX} ou
   \hologo{pdfLaTeX}}. Des exemples de préambules complets figurent
-\vref{cha-specimen-canevas}.
+\zvref{cha-specimen-canevas}.
 
 En outre, lorsqu'ils sont chargés manuellement par l'utilisateur, certains des
 packages suivants se voient fixés par la \yatCl{} des options ou réglages dont
@@ -268,7 +264,7 @@ les plus notables sont précisés.
     \item |pdfpagelayout=TwoPageRight| ;
     \end{itemize}
   \end{description}
-\item[\package{glossaries} :]\index{glossaire}\index{acronyme}\index{symbole!liste
+\item[\package{glossaries-extra} :]\index{glossaire}\index{acronyme}\index{symbole!liste
     de ---s} gestion puissante des glossaires, acronymes et liste de symboles ;
 \item[\package{cleveref} :]\index{référence croisée!intelligente} gestion
   intelligente des références croisées.

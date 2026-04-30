@@ -26,7 +26,7 @@
 \usepackage[autostyle]{csquotes}
 \usepackage[safeinputenc]{biblatex}
 \usepackage{hyperref}
-\usepackage[xindy,acronyms,symbols]{glossaries}
+\usepackage[shortcuts=abother,xindy,abbreviations,symbols]{glossaries-extra}
 %
 % Génération de l'index
 \makeindex
@@ -41,7 +41,7 @@
 % (Facultatif) Configuration des styles du glossaire et de la liste d'acronymes
 % (à n'utiliser que si le package « glossaries » est chargé)
 \setglossarystyle{indexhypergroup}
-\setacronymstyle{long-sc-short}
+\setabbreviationstyle{long-short-sc}
 %
 % Entrées du glossaire, des acronymes et des symboles
 % Glossaire
@@ -65,51 +65,51 @@
   siècles inclus%
 }
 % Acronymes
-\newacronym{pres}{pres}{Pôle de Recherche et d'Enseignement
+\newabbr{pres}{pres}{Pôle de Recherche et d'Enseignement
   Supérieur}
-\newacronym{comue}{comue}{Communauté d'universités et établissements}
-\newacronym{ulco}{ulco}{Université du Littoral Côte d'Opale}
-\newacronym{edspi}{edspi}{École Doctorale Sciences Pour
+\newabbr{comue}{comue}{Communauté d'universités et établissements}
+\newabbr{ulco}{ulco}{Université du Littoral Côte d'Opale}
+\newabbr{edspi}{edspi}{École Doctorale Sciences Pour
   l'Ingénieur}
-\newacronym{lmpa}{lmpa}{Laboratoire de Mathématiques Pures et
+\newabbr{lmpa}{lmpa}{Laboratoire de Mathématiques Pures et
   Appliquées Joseph Liouville}
-\newacronym{laser}{laser}{Light Amplification by Stimulated Emission
+\newabbr{laser}{laser}{Light Amplification by Stimulated Emission
   of Radiation soit \enquote{amplification de la lumière par
     émission stimulée de rayonnement}}
-\newacronym{irm}{irm}{Imagerie par Résonance Magnétique}
-\newacronym{rmn}{rmn}{Résonance Magnétique Nucléaire}
-\newacronym{ascii}{ascii}{American Standard Code for Information Interchange}
-\newacronym{bios}{bios}{Basic Input Output System}
-\newacronym{ctan}{ctan}{Comprehensive \TeX{} Archive Network}
-\newacronym{dvd}{dvd}{Digital Video Disc}
-\newacronym{erp}{erp}{Enterprise Resource Planning}
-\newacronym{faq}{faq}{Frequently Asked Questions, traduit en français par
+\newabbr{irm}{irm}{Imagerie par Résonance Magnétique}
+\newabbr{rmn}{rmn}{Résonance Magnétique Nucléaire}
+\newabbr{ascii}{ascii}{American Standard Code for Information Interchange}
+\newabbr{bios}{bios}{Basic Input Output System}
+\newabbr{ctan}{ctan}{Comprehensive \TeX{} Archive Network}
+\newabbr{dvd}{dvd}{Digital Video Disc}
+\newabbr{erp}{erp}{Enterprise Resource Planning}
+\newabbr{faq}{faq}{Frequently Asked Questions, traduit en français par
   \enquote{Foire Aux Questions}}
-\newacronym{gnu}{gnu}{GNU's Not Unix (acronyme récursif)}
-\newacronym{http}{http}{Hypertext Transfer Protocol}
-\newacronym{ip}{ip}{Internet Protocol}
-\newacronym{jpeg}{jpeg}{Joint Photographic Experts Group}
-\newacronym{kdm}{kdm}{KDE Display Manager}
-\newacronym{lug}{lug}{Linux Users Group}
-\newacronym{mac}{mac}{Medium Access Control}
-\newacronym{nfs}{nfs}{Network File System}
-\newacronym{ocr}{ocr}{Optical Character Recognition}
-\newacronym{p2p}{p2p}{Peer to Peer}
-\newacronym{ram}{ram}{Random Access Memory}
-\newacronym{radar}{radar}{RAdio Detection And Ranging}
-\newacronym{svg}{svg}{Scalable Vector Graphics}
-\newacronym{tft}{tft}{Thin-Film Transistor}
-\newacronym{utf-8}{utf-8}{Unicode Transformation Format 8 bits}
-\newacronym{vga}{vga}{Video Graphics Array}
-\newacronym{wpa}{wpa}{Wi-Fi Protected Access}
-\newacronym{xhtml}{xhtml}{Extensible HyperText Markup Language}
-\newacronym{fsf}{fsf}{Free Software Foundation}
-\newacronym{gui}{gui}{Graphical User Interface}
+\newabbr{gnu}{gnu}{GNU's Not Unix (acronyme récursif)}
+\newabbr{http}{http}{Hypertext Transfer Protocol}
+\newabbr{ip}{ip}{Internet Protocol}
+\newabbr{jpeg}{jpeg}{Joint Photographic Experts Group}
+\newabbr{kdm}{kdm}{KDE Display Manager}
+\newabbr{lug}{lug}{Linux Users Group}
+\newabbr{mac}{mac}{Medium Access Control}
+\newabbr{nfs}{nfs}{Network File System}
+\newabbr{ocr}{ocr}{Optical Character Recognition}
+\newabbr{p2p}{p2p}{Peer to Peer}
+\newabbr{ram}{ram}{Random Access Memory}
+\newabbr{radar}{radar}{RAdio Detection And Ranging}
+\newabbr{svg}{svg}{Scalable Vector Graphics}
+\newabbr{tft}{tft}{Thin-Film Transistor}
+\newabbr{utf-8}{utf-8}{Unicode Transformation Format 8 bits}
+\newabbr{vga}{vga}{Video Graphics Array}
+\newabbr{wpa}{wpa}{Wi-Fi Protected Access}
+\newabbr{xhtml}{xhtml}{Extensible HyperText Markup Language}
+\newabbr{fsf}{fsf}{Free Software Foundation}
+\newabbr{gui}{gui}{Graphical User Interface}
 % Symboles
-\newglssymbol{ohm}{\si{\ohm}}{ohm}{unité de résistance électrique}
+\newglssymbol{ohm}{\unit{\ohm}}{ohm}{unité de résistance électrique}
 \newglssymbol{exists}{\ensuremath{\exists}}{quantificateur existentiel}{}
 \newglssymbol[constanteplanck]{planck}{\ensuremath{h}}{constante de
-  Planck}{\ensuremath{h=\SI{6.62607015e-34}{\joule\second}}}
+  Planck}{\ensuremath{h=\qty{6.62607015e-34}{\joule\second}}}
 %
 % Configuration globale de l'apparence des listings informatiques
 \lstset{%
@@ -197,14 +197,14 @@
 \comue[logo=comue]{ComUE Lille Nord de France}
 %
 % Nom (argument obligatoire) de l'institut (principal en cas de cotutelle)
-\institute[logo=ulco,url=http://www.univ-littoral.fr/]{ULCO}
+\institute[logo=ulco,url=https://www.univ-littoral.fr/]{ULCO}
 %
 % (Facultatif) En cas de cotutelle (normalement, seulement dans le cas de
 % cotutelle internationale), nom (argument obligatoire) du second institut
-\coinstitute[logo=paris13,url=http://www.univ-paris13.fr/]{Université de Paris~13}
+\coinstitute[logo=paris13,url=https://www.univ-paris13.fr/]{Université de Paris~13}
 %
 % (Facultatif) Nom (argument obligatoire) de l'école doctorale
-\doctoralschool[url=http://edspi.univ-lille1.fr/]{ED Régionale SPI 72}
+\doctoralschool[url=https://edmadis.univ-lille.fr/]{ED MADIS 31}
 %
 % Nom (1er argument obligatoire) et adresse (2e argument obligatoire) du
 % laboratoire (ou de l'unité) où la thèse a été préparée, à utiliser /autant de
@@ -316,7 +316,7 @@ url=https://lmpa.univ-littoral.fr/
 Thèse hilarante, comme le gaz du même nom !
 %
 % (Facultatif) Liste des acronymes
-\printacronyms
+\printabbreviations
 %
 % (Facultatif) Liste des symboles
 \printsymbols
@@ -586,7 +586,7 @@ Si on examine, dans le fichier\index{\gls{latex}!fichier}
 du tableau~\vref{tab-passionnant}\index{\gls{latex}!tableau}, on verra l'usage
 de commandes permettant d'obtenir des tableaux d'allure
 professionnelle\footnote{Pour obtenir de tels tableaux sous \LaTeX{}, on
-  \href{http://www.tug.org/pracjourn/2007-1/mori/mori.pdf}{trouvera sur
+  \href{https://www.tug.org/pracjourn/2007-1/mori/mori.pdf}{trouvera sur
     Internet} comment procéder.}.
 %
 \begin{table}[ht]
@@ -818,3 +818,4 @@ int factorielle(int n)
 \makebackcover
 %
 \end{document}
+

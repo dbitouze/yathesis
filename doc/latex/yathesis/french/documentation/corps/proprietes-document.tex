@@ -53,7 +53,7 @@ saisies, au choix :
   \folder{\configurationdirectory}. Ces fichier et sous-dossier \aside{tous
     deux prévus à cet effet} sont à créer au besoin mais ils sont fournis par le
   canevas de thèse \enquote{en arborescence} livré avec la classe, décrit
-  \vref{sec-canevas-arborescence}.
+  \zvref{sec-canevas-arborescence}.
   \begin{dbwarning}{Fichier de caractéristiques à ne pas importer manuellement}{}
     Le \File{\characteristicsfile} est \emph{automatiquement} importé par la
     \yatCl{} et il doit donc \emph{ne pas} être explicitement importé : on
@@ -78,8 +78,8 @@ Les commandes suivantes permettent de stipuler les auteur, titre et éventuel
 sous-titre, champ disciplinaire, spécialité, date et sujet de la thèse. Toutes
 ces données, sauf le sujet, figureront automatiquement sur les pages de
 titre\footnote{En outre, les titres et éventuels sous-titres figureront sur les
-  pages de résumé (cf. \vref{sec-abstract}) et de 4\ieme{} de couverture (cf.
-  \vref{sec-quatr-de-couv}).}.
+  pages de résumé (cf. \zvref{sec-abstract}) et de 4\ieme{} de couverture (cf.
+  \zvref{sec-quatr-de-couv}).}.
 %
 \begin{docCommand}[doc description=\mandatory]{author}{\oarg{adresse
       courriel}\marg{prénom}\marg{nom}}%
@@ -164,7 +164,7 @@ titre\footnote{En outre, les titres et éventuels sous-titres figureront sur les
   ces commandes admet un argument optionnel permettant de stipuler la donnée
   correspondante \emph{dans la langue secondaire} de la thèse \aside*{par
     défaut l'anglais\footnote{Les langues principale et secondaire de la thèse
-      sont détaillées \vref{sec-langues}.}}.
+      sont détaillées \zvref{sec-langues}.}}.
 
   Dès lors qu'une au moins des ces commandes est employée avec son argument
   optionnel, la commande \refCom{maketitle}, qui produit les pages de titre
@@ -187,8 +187,8 @@ titre\footnote{En outre, les titres et éventuels sous-titres figureront sur les
   %
   Cette commande définit la date de la soumission du mémoire (qui ne figure
   qu'en version \enquote{à soumettre}, cf. option \docValue{submitted*}
-  \vref{sec-versions}). Ses arguments sont soumis aux mêmes contraintes que ceux
-  de la commande \refCom{date} (cf. \vref{wa-format-date}).
+  \zvref{sec-versions}). Ses arguments sont soumis aux mêmes contraintes que ceux
+  de la commande \refCom{date} (cf. \zvref{wa-format-date}).
 \end{docCommand}
 %
 \begin{dbwarning}{Format des jour, mois et année des dates de
@@ -285,7 +285,7 @@ de titre\footnote{Le ou les laboratoires apparaissent en outre sur les pages
   \index{caractéristiques de la thèse!liste!école doctorale}%
   \indexdef{école doctorale}%
   Cette commande définit l'école doctorale\footnote{Pour une \glsxtrshort{hdr},
-    cet élément n'est pas \enquote{obligatoire} (cf. \vref{sec-comm-oblig}).}.
+    cet élément n'est pas \enquote{obligatoire} (cf. \zvref{sec-comm-oblig}).}.
 \end{docCommand}
 %
 \begin{docCommand}[doc description=\mandatory]{laboratory}{\oarg{précision(s)}\marg{nom}\marg{adresse}}
@@ -333,11 +333,11 @@ de titre\footnote{Le ou les laboratoires apparaissent en outre sur les pages
   \item sur les pages de titre, le seul laboratoire affiché est le
     laboratoire principal ;
   \item sur les pages de résumés et de 4\ieme{} de couverture
-    (cf. \vref{sec-abstract,sec-quatr-de-couv}), par défaut seul le laboratoire
+    (cf. \zvref{sec-abstract,sec-quatr-de-couv}), par défaut seul le laboratoire
     principal est affiché (mais un nombre arbitraire de laboratoires peut être
     affiché grâce à la clé \refKey{numlaboratories}) ;
   \item sur la page \aside{facultative} qui leur est dédiée
-    (cf. \vref{sec-laboratoires}), tous les laboratoires stipulés sont
+    (cf. \zvref{sec-laboratoires}), tous les laboratoires stipulés sont
     affichés.
   \end{itemize}
 \end{dbremark}
@@ -383,11 +383,11 @@ pages de titre, sauf :
     défaut, initialement \docValue*{1.5cm}}
   \indexdef{logo!taille}%
   \indexdef{taille!logo}%
-  Par défaut, tous les logos ont une même hauteur de \SI{1.5}{\cm}
+  Par défaut, tous les logos ont une même hauteur de \qty{1.5}{\cm}
   mais la clé \refKey{logoheight} permet de spécifier une hauteur
   différente.
   \begin{dbexample}{Hauteur du logo d'institut}{}
-    La commande de l'\vref{ex-logoinst} aurait ainsi pu contenir :
+    La commande de l'\zvref{ex-logoinst} aurait ainsi pu contenir :
 \begin{preamblecode}[listing options={deletekeywords={[5]institute}}]
 \institute[logoheight=1cm,logo=images/ulco]{ULCO}
 \end{preamblecode}
@@ -517,7 +517,7 @@ url=https://lmpa.univ-littoral.fr/
   intérêt à ne pas les saisir tels quel comme on l'a fait jusqu'ici
   (\lstinline[deletekeywords={[5]institute}]|\institute{ULCO}| ou
   |\laboratory{LMPA}|) mais à recourir aux fonctionnalités du
-  \Package{glossaries}. L'\vref{acronymes} donne un aperçu de la procédure.
+  \Package{glossaries-extra}. L'\zvref{acronymes} donne un aperçu de la procédure.
 \end{dbremark}
 
 \subsection{Directeur(s) de thèse et membres du jury}\label{sec-jury}
@@ -737,7 +737,7 @@ corps de métier) des membres du jury parmi celles prédéfinies par la \yatCl{}
   \changes*{v0.99o}{2016-10-30}{\glsxtrshort{mcf} désormais traduit en anglais par
     \enquote{\foreignlanguage{english}{\translate{associateprofessor}}} (et non
     plus par
-    \enquote{Lecturer})\protect\footnote{Cf. \vref{sec-expressions-cles} au cas
+    \enquote{Lecturer})\protect\footnote{Cf. \zvref{sec-expressions-cles} au cas
       où l'ancienne expression soit préférée.}}%
   Cette clé permet de spécifier qu'une personne appartient à la corporation des
   \glspl{mcf}\footnote{Par souci de compatibilité ascendante, la clé désormais
@@ -791,7 +791,7 @@ corps de métier) des membres du jury parmi celles prédéfinies par la \yatCl{}
 \begin{dbremark}{Corporation non prédéfinies}{}
   \index{corporation!non prédéfinie}%
   Il est possible de spécifier d'autres corporations que celles prédéfinies
-  ci-dessus. La \vref{sec-nouveaux-corps} explique comment procéder.
+  ci-dessus. La \zvref{sec-nouveaux-corps} explique comment procéder.
 \end{dbremark}
 %
 % \begin{docKey}{distinction}{=\meta{distinction}}{pas de valeur par
@@ -824,9 +824,9 @@ corps de métier) des membres du jury parmi celles prédéfinies par la \yatCl{}
   \index{directeur de thèse!affiliation}%
   \index{membre du jury!affiliation}%
   Cette clé définit l'\meta{institut}%
-  \footnote{La \vref{rq-acronymes} s'applique également ici : plutôt que
+  \footnote{La \zvref{rq-acronymes} s'applique également ici : plutôt que
     spécifié tel quel, l'acronyme d'un \meta{institut} peut être géré par le
-    \Package{glossaries}.}  auquel est affilié un membre du jury.
+    \Package{glossaries-extra}.}  auquel est affilié un membre du jury.
 \end{docKey}
 \begin{dbexample}{Institut d'affiliation}{}
 \begin{preamblecode}[listing options={deletekeywords={[5]supervisor}}]
@@ -849,7 +849,7 @@ corps de métier) des membres du jury parmi celles prédéfinies par la \yatCl{}
 \referee[affiliation={ULCO, CNRS}]{René}{Descartes}
 \end{preamblecode}
 On notera la paire d'accolades, nécessaire conformément
-à l'\vref{wa-virgule}. De façon générale, il n'est pas indispensable de faire
+à l'\zvref{wa-virgule}. De façon générale, il n'est pas indispensable de faire
 figurer tant de précisions et, ne serait-ce que pour des raisons de place, on
 veillera à ne pas multiplier celles-ci.
 \end{dbexample}
@@ -858,7 +858,7 @@ veillera à ne pas multiplier celles-ci.
   En cas de problème de préposition inadaptée, par exemple
   \enquote{\glsxtrshort{mcf} \glsxtrshort{hdr} au Sorbonne Université} au lieu
   de \enquote{\glsxtrshort{mcf} \glsxtrshort{hdr} à Sorbonne Université}, on se
-  référera à la \vref{sec-expr-separ-les}.
+  référera à la \zvref{sec-expr-separ-les}.
 \end{dbwarning}
 %
 \paragraph{Homme/femme}

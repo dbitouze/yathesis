@@ -12,7 +12,7 @@ Ce chapitre est une \gls{faq} \aside{autrement dit une liste des questions
 \end{dbfaq}
 
 En cas de problème d'utilisation\footnote{À ne pas confondre avec un bogue ou
-  une fonctionnalité manquante, cf. \vref{faq-bogues}.} :
+  une fonctionnalité manquante, cf. \zvref{faq-bogues}.} :
 \begin{enumerate}
 \item commencer par chercher s'il n'a pas déjà été signalé (et surtout
   solutionné) en consultant par exemple la liste des questions concernant la
@@ -49,14 +49,14 @@ En cas de problème d'utilisation\footnote{À ne pas confondre avec un bogue ou
 \begin{enumerate}
 \item Pour un dysfonctionnement\footnote{À ne pas confondre avec un
     \enquote{simple} problème d'utilisation,
-    cf. \vref{faq-probleme-utilisation}.}  ou une amélioration :
+    cf. \zvref{faq-probleme-utilisation}.}  ou une amélioration :
   \begin{enumerate}
   \item avant de le signaler ou de la suggérer, s'assurer qu'ils n'ont pas déjà
     été répertoriés :
     \begin{enumerate}
     \item en consultant la liste de ceux qui le sont déjà\issues ;
     \item en lisant la suite du présent chapitre ;
-    \item en lisant l'\vref{cha-incomp-conn} ;
+    \item en lisant l'\zvref{cha-incomp-conn} ;
       % des dysfonctionnements déjà répertoriés à l'adresse
       % \url{https://github.com/dbitouze/yathesis/issues?q=is%3Aopen+is%3Aissue+label%3Abug} ;
     \end{enumerate}
@@ -93,7 +93,7 @@ En cas de problème d'utilisation\footnote{À ne pas confondre avec un bogue ou
     is available.}. Est-ce grave, docteur ?
 \end{dbfaq}
 
-Ça peut être grave. Cf. \vref{rq-packages-anciens} pour plus de précisions.
+Ça peut être grave. Cf. \zvref{rq-packages-anciens} pour plus de précisions.
 
 \section{Erreurs}
 \label{sec-erreurs}%
@@ -109,9 +109,9 @@ En cas de problème d'utilisation\footnote{À ne pas confondre avec un bogue ou
 Cette erreur est probablement due au fait que le \meta{package} a été
 manuellement chargé au moyen de la commande
 |\usepackage[...]{|\meta{package}|}|, alors que la \yatCl{} le charge déjà
-automatiquement (cf. l'\vref{sec-packages-charges-par} pour la liste des
+automatiquement (cf. l'\zvref{sec-packages-charges-par} pour la liste des
 packages automatiquement chargés). Supprimer cette commande devrait résoudre le
-problème (cf. également l'\vref{wa-packages-a-ne-pas-charger}).
+problème (cf. également l'\zvref{wa-packages-a-ne-pas-charger}).
 
 \begin{dbfaq}{Comment éviter l'erreur \enquote{Command
       \protect\docAuxCommand*{nobreakspace} unavailable in encoding T1} ?}{}
@@ -154,7 +154,7 @@ apparence complètement personnalisée, mais ce n'est pas encore implémenté.  
 attendant que ça le soit, il faut composer cette page soi-même :
 \begin{itemize}
 \item soit en y resaisissant manuellement toutes les caractéristiques
-  nécessaires définies au \vref{cha-caract-du-docum} ;
+  nécessaires définies au \zvref{cha-caract-du-docum} ;
 \item soit, mieux, en se rendant sur le site
   \href{https://texnique.fr/osqa/tags/yathesis/}{\TeX{}nique} pour :
   \begin{itemize}
@@ -177,8 +177,8 @@ attendant que ça le soit, il faut composer cette page soi-même :
 La \yatCl{} fait d'elle-même figurer les glossaire, listes d'acronymes et de
 symboles à la fois dans la table des matières et dans les signets. Pour régler
 le problème, il devrait donc suffire de \emph{ne pas} explicitement demander que
-ce soit le cas, en \emph{ne} recourant \emph{ni} à l'option \docAuxKey*{toc},
-\emph{ni} à la commande \docAuxCommand*{glstoctrue} du \Package{glossaries}.
+ce soit le cas, en \emph{ne} recourant \emph{pas} à l'option \docAuxKey*{toc} du
+\Package{glossaries-extra}.
 
 \begin{dbfaq}{Comment faire en sorte que, dans la table des matières, seuls
     les numéros de page soient des liens hypertextes ?}{}
@@ -282,7 +282,7 @@ courants]{\texorpdfstring{\Glsentryplural{titrecourant}}{Titres courants}}
 
 Il suffit de recourir à l'argument optionnel supplémentaire des commandes
 \refCom{chapter} et \refCom{section} fourni par la \yatCl{}
-(cf. \vref{sec-intit-altern}).
+(cf. \zvref{sec-intit-altern}).
 
 \subsection{Divers}
 \label{sec-divers}
@@ -300,11 +300,11 @@ Il suffit de recourir à l'argument optionnel supplémentaire des commandes
 est dû aux caractères actifs du module \package*+{babel-french} du
 \Package{babel}. Si ces éléments concernent :
 \begin{enumerate}
-\item les caractéristiques du document (cf. \vref{cha-caract-du-docum}), il
-  suffit de les saisir\footnote{Cf. \vref{sec-lieu-de-saisie}.} :
+\item les caractéristiques du document (cf. \zvref{cha-caract-du-docum}), il
+  suffit de les saisir\footnote{Cf. \zvref{sec-lieu-de-saisie}.} :
   \begin{itemize}
   \item soit dans le \emph{corps} du fichier (parent) de la thèse\footnote{Mais
-      cf. alors \vref{wa-avant-maketitle}.} (et donc \emph{pas} dans son
+      cf. alors \zvref{wa-avant-maketitle}.} (et donc \emph{pas} dans son
     \emph{préambule}) ;
   \item soit dans le \File{\characteristicsfile} prévu à cet effet ;
   \item soit entre |\shorthandon{;:!?}| et |\shorthandoff{;:!?}| si on tient
@@ -315,7 +315,7 @@ est dû aux caractères actifs du module \package*+{babel-french} du
   \docAuxCommand{loadglsentries} :
   \begin{itemize}
   \item soit dans le \File{\configurationfile}
-    (cf. \vref{rq-configurationfile}) ;
+    (cf. \zvref{rq-configurationfile}) ;
   \item soit entre |\shorthandon{;:!?}| et |\shorthandoff{;:!?}|. Cette solution
     peut être préférée à la précédente pour ne pas perdre les fonctionnalités de
     complétion pour les labels des termes de glossaire fournies par certains
@@ -338,7 +338,7 @@ est dû aux caractères actifs du module \package*+{babel-french} du
 
 La profondeur de numérotation d'un document composé avec la \yatCl{} est
 à spécifier au moyen de l'option de classe
-\refKey{secnumdepth}. Cf. \vref{sec-profondeur-de-la} pour plus de précisions.
+\refKey{secnumdepth}. Cf. \zvref{sec-profondeur-de-la} pour plus de précisions.
 
 \section{Validation}
 \label{sec-validation}

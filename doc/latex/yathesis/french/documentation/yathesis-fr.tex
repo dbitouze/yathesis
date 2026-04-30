@@ -25,9 +25,11 @@
 \usepackage[yad]{denisbdoc}
 \usepackage{dirtree}
 \usepackage[lining]{libertine}
+\usepackage{zref-clever}
+\usepackage{zref-vario}
 %
 \lstset{%
-  alsolanguage=[glossaries]TeX,%
+  alsolanguage=[glossaries-extra]TeX,%
   alsolanguage=[hyperref]TeX,%
   alsolanguage=[tcolorbox]TeX,%
 }
@@ -35,6 +37,8 @@
 \makeindex[title=Index des concepts,extout=pdx,extin=pnd,columnseprule]
 %
 \AtEndPreamble{%
+  \changes{v1.0.12}{2024-03-07}{Documentation améliorée}%
+  \changes{v1.0.12}{2024-03-07}{Code plus robuste}%
   \changes{v1.0.11}{2023-02-24}{Modifications transparentes pour l'utilisateur final}%
   \changes{v1.0.10}{2022-06-13}{Correction de bugs}%
   \changes{v1.0.9}{2021-10-13}{Correction de bugs}%
@@ -70,7 +74,7 @@
   \changes{v0.99n}{2016-06-11}{Documentation révisée}%
   \changes{v0.99m}{2016-05-22}{Documentation révisée}%
   \changes{v0.99m}{2016-05-22}{Documentation compilable au moyen de
-    \hologo{pdfLaTeX}}%
+    pdfLaTeX}%
   \changes{v0.99l}{2014-10-23}{Documentation révisée}%
   \changes{v0.99k}{2014-10-01}{Documentation révisée}%
   \changes{v0.99k}{2014-10-01}{Corrections de bugs}%
@@ -156,7 +160,7 @@
   \item clé ;
   \item valeur de clé ;
   \end{itemize}
-  des entrées (selon la convention précisée \vref{sec-comm-envir-cles}).%
+  des entrées (selon la convention précisée \zvref{sec-comm-envir-cles}).%
 }%
 \renewcommand{\indexname}{Index des commandes}
 \printindex[\jobname-commands]

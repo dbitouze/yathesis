@@ -24,3 +24,4 @@ void print_heure(void)
   if (secondes > 1) printf("s");
   printf("\n");
 }
+

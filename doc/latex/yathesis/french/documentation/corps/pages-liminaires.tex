@@ -81,7 +81,7 @@ La page dédiée à la clause de non-responsabilité est produite par la command
   \NoAutoSpacing%
   %
   \bodysample{production-clause}{}{}%
-  Le résultat de ce code est illustré \vref{fig-disclaimerpage}.
+  Le résultat de ce code est illustré \zvref{fig-disclaimerpage}.
 \end{dbexample}
 
 \begin{figure}[htbp]
@@ -137,7 +137,7 @@ par défaut si elle ne convient pas, on pourra recourir à la commande
 
 \begin{dbexample}{Préparation et production de la page dédiée aux mots clés}{}
   \indexex{mot clé}%
-  Les codes suivants produisent la page illustrée \vref{fig-makekeywords}.
+  Les codes suivants produisent la page illustrée \zvref{fig-makekeywords}.
   \preamblesample{preparation-mots-cles}{%
     deletekeywords={[1]{keywords}},
     deletekeywords={[5]{keywords}}%
@@ -174,7 +174,7 @@ par défaut si elle ne convient pas, on pourra recourir à la commande
 
 \begin{dbexample}{Préparation et production de la page dédiée au(x) laboratoire(s)}{}
   \indexex{laboratoire}%
-  Les codes suivants produisent la page illustrée \vref{fig-makelaboratory}.
+  Les codes suivants produisent la page illustrée \zvref{fig-makelaboratory}.
   \NoAutoSpacing%
   \preamblesample{preparation-laboratoire}{%
     deletekeywords={url},%
@@ -219,7 +219,7 @@ par défaut si elle ne convient pas, on pourra recourir à la commande
   \preamblesample{preparation-dedicaces}{}{title=Préparation}
   %
   \bodysample{production-dedicaces}{}{title=Production}
-  Le résultat de ce code est illustré \vref{fig-dedicationspage}.
+  Le résultat de ce code est illustré \zvref{fig-dedicationspage}.
 \end{dbexample}
 
 \begin{figure}[htbp]
@@ -242,7 +242,7 @@ par défaut si elle ne convient pas, on pourra recourir à la commande
   spécifier en argument optionnel%
   \footnote{Si cette \meta{langue} est autre que le français ou l'anglais, elle
     doit être explicitement chargée en option de la commande
-    \docAuxCommand{documentclass} (cf.  \vref{rq-languessupplementaires}).}.
+    \docAuxCommand{documentclass} (cf.  \zvref{rq-languessupplementaires}).}.
 \end{docCommand}
 
 \begin{docCommand}{makefrontepigraphs}{}
@@ -263,7 +263,7 @@ par défaut si elle ne convient pas, on pourra recourir à la commande
     liminaires}{}
   \indexex{épigraphe}%
   \NoAutoSpacing%
-  Les codes suivants produisent la page illustrée \vref{fig-epigraphspage}.
+  Les codes suivants produisent la page illustrée \zvref{fig-epigraphspage}.
   \preamblesample{preparation-epigraphes}{}{title=Préparation}
   %
   \bodysample{production-epigraphes}{}{title=Production}
@@ -290,7 +290,7 @@ par défaut si elle ne convient pas, on pourra recourir à la commande
 \index{avant-propos}%
 
 La \gls{liminaire} d'un mémoire de thèse peut contenir des remerciements, un
-avertissement, un résumé substantiel en français (cf. \vref{wa-frenchabstract}),
+avertissement, un résumé substantiel en français (cf. \zvref{wa-frenchabstract}),
 un avant-propos, etc.  à considérer et à composer comme des chapitres
 \enquote{ordinaires}.
 
@@ -307,7 +307,7 @@ un avant-propos, etc.  à considérer et à composer comme des chapitres
 %  \protect\gls{liminaire}}{titrecourant}%
 %  Les chapitres \enquote{ordinaires} sont pourvus de \glspl{titrecourant}
 %  si (et seulement si) ils figurent après la page dédiée aux résumés
-%  (cf. \vref{sec-abstract}).
+%  (cf. \zvref{sec-abstract}).
 %\end{dbremark}
 
 \section{Résumés succincts en français et en anglais}\label{sec-abstract}
@@ -364,7 +364,7 @@ page.
 
 \begin{dbexample}{Préparation et production de la page dédiée aux résumés}{}
   \indexex{résumé}%
-  Les codes suivants produisent la page illustrée \vref{fig-resumes-succincts}.
+  Les codes suivants produisent la page illustrée \zvref{fig-resumes-succincts}.
   \preamblesample{preparation-resumes}{}{title=Préparation des résumés}
   \bodysample{production-resumes}{}{title=Production des résumés}
   %
@@ -409,7 +409,7 @@ page.
 
 Tout système de gestion de glossaire peut théoriquement être mis en œuvre avec
 la \yatCl{}. Cependant, celle-ci fournit des fonctionnalités propres au
-\Package{glossaries}\footnote{Dans ses versions à partir de la \texttt{4.0} en
+\Package{glossaries-extra}\footnote{Dans ses versions à partir de la \texttt{4.0} en
   date du \DTMdate{2013-11-14}. Dans cette section, le fonctionnement de ce
   package est supposé connu du lecteur (sinon, cf. par exemple
   \cite{en-ligne7}).} :
@@ -421,8 +421,8 @@ la \yatCl{}. Cependant, celle-ci fournit des fonctionnalités propres au
   \Package*{nomencl}).
 \end{itemize}
 
-\begin{dbwarning}{Package \package{glossaries} non chargé par défaut}{}
-  Le \Package{glossaries} \emph{n'étant pas} chargé par la \yatCl{}, on veillera
+\begin{dbwarning}{Package \package{glossaries-extra} non chargé par défaut}{}
+  Le \Package{glossaries-extra} \emph{n'étant pas} chargé par la \yatCl{}, on veillera
   à le charger manuellement si on souhaite l'utiliser.
 \end{dbwarning}
 
@@ -433,11 +433,11 @@ la \yatCl{}. Cependant, celle-ci fournit des fonctionnalités propres au
 %   \begin{itemize}
 %   \item \docAuxCommand{printglossary} et \docAuxCommand{printglossaries} qui
 %     produisent la liste des termes du ou des glossaires\termesdefinisutilises{}
-%     (cf. \vref{fig-printglossary}) ;
-%   \item \docAuxCommand{printacronyms}\footnote{L'usage de la commande
-%       \docAuxCommand{printacronyms} nécessite que l'option \docAuxKey{acronyms}
-%       soit passée au \Package{glossaries}.} qui produit la liste des
-%     acronymes\termesdefinisutilises{} (cf. \vref{fig-printacronyms}) ;
+%     (cf. \zvref{fig-printglossary}) ;
+%   \item \docAuxCommand{printabbreviations}\footnote{L'usage de la commande
+%       \docAuxCommand{printabbreviations} nécessite que l'option \docAuxKey{acronyms}
+%       soit passée au \Package{glossaries-extra}.} qui produit la liste des
+%     acronymes\termesdefinisutilises{} (cf. \zvref{fig-printabbreviations}) ;
 %   \end{itemize}
 % \item les commande et style propres \refCom{newglssymbol}, et
 %   \docValue{yadsymbolstyle}, précisés ci-dessous, sont définis.
@@ -467,12 +467,12 @@ la \yatCl{}. Cependant, celle-ci fournit des fonctionnalités propres au
 \begin{dbwarning}{Option \texttt{symbols} nécessitée par la commande
     \protect\refCom*{newglssymbol}}{}
   L'usage de la commande \refCom{newglssymbol} nécessite que l'option
-  \docAuxKey{symbols} soit passée au \Package{glossaries}.
+  \docAuxKey{symbols} soit passée au \Package{glossaries-extra}.
 \end{dbwarning}
 
 \begin{docCommand}{printsymbols}{\oarg{options}}
   \index{symbole!liste de ---s}%
-  Cette commande, fournie par le \Package{glossaries}, produit la liste des
+  Cette commande, fournie par le \Package{glossaries-extra}, produit la liste des
   symboles saisis au moyen de (par exemple) la commande
   \refCom{newglssymbol}. Mais elle a été légèrement redéfinie, sa clé
   \refKey{style} ayant pour valeur par défaut \docValue{yadsymbolstyle} (et non
@@ -482,7 +482,7 @@ la \yatCl{}. Cependant, celle-ci fournit des fonctionnalités propres au
     Cette clé permet de spécifier le style appliqué à la liste des
     symboles. Tout \meta{style} spécifié, autre que \docValue{yadsymbolstyle},
     doit être l'un de ceux acceptés par la clé \refKey{style} du
-    \Package{glossaries}.
+    \Package{glossaries-extra}.
   \end{docKey}
 \end{docCommand}
 
@@ -493,14 +493,14 @@ la \yatCl{}. Cependant, celle-ci fournit des fonctionnalités propres au
   Le code suivant produit la liste de ces symboles \aside*{composée avec le
     style \docValue{yadsymbolstyle}}.
   \bodysample{production-symboles}{}{title=Production}%
-  Le résultat de ce code est illustré \vref{fig-printsymbols}.
+  Le résultat de ce code est illustré \zvref{fig-printsymbols}.
 \end{dbexample}
 
 Dans un mémoire de thèse, les emplacements des listes des termes du glossaire,
 des acronymes\footnote{Les commandes \docAuxCommand{printglossary} et
-  \docAuxCommand{printacronyms} du \Package{glossaries}, produisant les listes
+  \docAuxCommand{printabbreviations} du \Package{glossaries-extra}, produisant les listes
   des termes du glossaire et des acronymes, sont illustrées
-  \vref{fig-printglossary,fig-printacronyms}.} et des symboles sont \emph{a
+  \zvref{fig-printglossary,fig-printabbreviations}.} et des symboles sont \emph{a
   priori} arbitraires. Il est cependant parfois conseillé de placer :
 \begin{itemize}
 \item si elles sont \emph{communes}, \emph{la} liste résultante en partie finale ;
@@ -518,9 +518,9 @@ des acronymes\footnote{Les commandes \docAuxCommand{printglossary} et
     \centering
     \begin{subfigure}[b]{.45\linewidth}
       \centering
-      \screenshot[1]{printacronyms}
+      \screenshot[1]{printabbreviations}
       \caption{Acronymes}
-      \label{fig-printacronyms}
+      \label{fig-printabbreviations}
     \end{subfigure}%
     \hspace{\stretch{1}}%
     \begin{subfigure}[b]{.45\linewidth}
@@ -530,7 +530,7 @@ des acronymes\footnote{Les commandes \docAuxCommand{printglossary} et
       \label{fig-printsymbols}
     \end{subfigure}%
     \caption{Listes des acronymes et des symboles}
-    \label{fig-printacronyms-printsymbols}
+    \label{fig-printabbreviations-printsymbols}
   \end{figure}
 \end{landscape}
 % }
@@ -538,15 +538,15 @@ des acronymes\footnote{Les commandes \docAuxCommand{printglossary} et
 % Si on souhaite faire figurer :
 % \begin{enumerate}
 % \item une liste \emph{commune} des acronymes et des termes du glossaire, on
-%   chargera \package{glossaries} \emph{sans} l'option |acronym| et on recourra à
+%   chargera \package{glossaries-extra} \emph{sans} l'option |acronym| et on recourra à
 %   la commande \docAuxCommand{printglossary} ;
-% \item deux listes \emph{distinctes}, on chargera \package{glossaries}
+% \item deux listes \emph{distinctes}, on chargera \package{glossaries-extra}
 %   \emph{avec} l'option |acronym|. et on recourra à la commande
 %   \begin{enumerate}
-%   \item \refCom{printacronyms} pour celle des acronymes (cf.
-%     \vref{fig-acronymes}) ;
+%   \item \refCom{printabbreviations} pour celle des acronymes (cf.
+%     \zvref{fig-acronymes}) ;
 %   \item\label{item:1} \docAuxCommand{printglossary} pour celle des termes du
-%     glossaire (cf. \vref{fig-printglossary}).
+%     glossaire (cf. \zvref{fig-printglossary}).
 %   \end{enumerate}
 % \end{enumerate}
 
@@ -555,7 +555,7 @@ des acronymes\footnote{Les commandes \docAuxCommand{printglossary} et
 La \yatCl{} redéfinit la commande \refCom{tableofcontents} habituelle de
 création des tables des matières \enquote{globales}\footnote{Par opposition aux
   tables des matières locales\index{table des matières!locale},
-  cf. \vref{sec-localtoc}.} pour permettre de facilement
+  cf. \zvref{sec-localtoc}.} pour permettre de facilement
 \begin{itemize}
 \item l'utiliser plusieurs fois dans le mémoire ;
 \item en spécifier la profondeur ;
@@ -630,7 +630,7 @@ les clés disponibles sont les deux suivantes.
   %
   \bodysample{table-des-matieres}{}{}
   %
-  La \vref{fig-tableofcontentsto-tableofcontents} illustre ce code.
+  La \zvref{fig-tableofcontentsto-tableofcontents} illustre ce code.
 \end{dbexample}
 
 \afterpage{%
