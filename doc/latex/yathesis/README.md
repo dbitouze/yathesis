@@ -1,9 +1,9 @@
 -----------------------------------------------------------------------
 
-- `yathesis` --- Yet Another Thesis Class, version 1.0.12
+- `yathesis` --- Yet Another Thesis Class, version 1.0.13
 - E-mail: `denis.bitouze@univ-littoral.fr`
 - Released under the LaTeX Project Public License v1.3c or later. See
-  http://www.latex-project.org/lppl.txt
+  https://www.latex-project.org/lppl.txt
 
 -----------------------------------------------------------------------
 

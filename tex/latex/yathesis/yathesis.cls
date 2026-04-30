@@ -9,10 +9,10 @@
 %% yathesis --- Yet Another Thesis Class
 %% E-mail: denis.bitouze@univ-littoral.fr
 %% Released under the LaTeX Project Public License v1.3c or later
-%% See http://www.latex-project.org/lppl.txt
+%% See https://www.latex-project.org/lppl.txt
 %% -----------------------------------------------------------------------
-\def\yathesisversion{1.0.12}
-\def\yathesisdate{2024-03-07}
+\def\yathesisversion{1.0.13}
+\def\yathesisdate{2026-04-29}
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesClass{yathesis}[\yathesisdate\space v\yathesisversion\space Yet another class for writing thesis (DB)]
 \ExplSyntaxOn
@@ -456,17 +456,6 @@
 \yadsetup{%
   .unknown/.code ={\expandafter\PassOptionsToClass\expandafter{\pgfkeyscurrentname}{book}}%
 }%
-\@ifpackagelater{babel}{2013/04/15}{%
-  \PassOptionsToPackage{main=\YAD@mainlanguage}{babel}%
-}{%
-  \YAD@ClassWarningNoLine{%
-    La version de `babel' utilisée est obsolète.\MessageBreak%
-    La classe `yathesis' va essayer de faire son possible\MessageBreak%
-    mais il se peut qu'elle produise des resultats\MessageBreak%
-    non prévus. Il est conseillé de mettre à jour sa\MessageBreak%
-    distribution TeX%
-  }%
-}%
 \ProcessPgfOptions{/yad}%
 \ifthenelse{\equal{\YAD@mainlanguage}{english}}{%
   \def\YAD@secondarylanguage{french}%
@@ -516,7 +505,7 @@
   }{%
   }%
 }%
-\RequirePackage[\YAD@secondarylanguage,main=\YAD@mainlanguage]{babel}[2014/03/24]
+\RequirePackage[\YAD@secondarylanguage,\YAD@mainlanguage]{babel}[2014/03/24]
 \RequirePackage{etoc}[2016/09/29]%
 \providecommand*\etocifunknownlevelTF[1]{\@ifundefined{Etoc@#1@@}}%
 \ifdefined\etockeeporiginaltableofcontents\etockeeporiginaltableofcontents\fi
@@ -4166,10 +4155,12 @@
     leurs auteurs.%
   }{%
     The \printinstitute{}
-    %
-    \ifundef{\printcoinstitute}{}{and the \printcoinstitute{}}
-    %
-    neither endorse nor censure authors' opinions expressed in the theses:
+    \ifundef{\printcoinstitute}{%
+      neither endorses nor censures
+    }{%
+      and the \printcoinstitute{} neither endorse nor censure
+    }%
+    the authors' opinions expressed in the thesis:
     these opinions must be considered to be those of their authors.%
   }%
 }%
@@ -4278,24 +4269,24 @@
     }%
   }%
 }%
-\AddToHook{package/glossaries/after}{%
-  \ifbool{YAD@output@paper}{%
-    \ifbool{YAD@output@paper@star}{%
-    }{%
-      \renewcommand{\glsnavigation}{}%
-    }%
+\AddToHook{package/glossaries-extra/after}{%
+\ifbool{YAD@output@paper}{%
+  \ifbool{YAD@output@paper@star}{%
   }{%
+    \renewcommand{\glsnavigation}{}%
   }%
-  \newcommand{\newglssymbol}[5][]{%
-    \@ifpackageloaded{glossaries}{%
-      \ifthenelse{\isempty{#1}}{%
-        \newglossaryentry{#2}{%
-          type=symbols,%
-          symbol={#3},%
-          name={#4},%
-          description={#5},%
-          sort={#2}%
-        }%
+}{%
+}%
+\newcommand{\newglssymbol}[5][]{%
+  \@ifpackageloaded{glossaries-extra}{%
+\ifthenelse{\isempty{#1}}{%
+  \newglossaryentry{#2}{%
+    type=symbols,%
+    symbol={#3},%
+    name={#4},%
+    description={#5},%
+    sort={#2}%
+  }%
 }{%
   \newglossaryentry{#2}{%
     type=symbols,%
@@ -4307,11 +4298,11 @@
 }%
 }{%
   \ClassError{yathesis}{}{%
-    Commande \protect\newglssymbol\space utilisée sans que 'glossaries' soit
+    Commande \protect\newglssymbol\space utilisée sans que 'glossaries-extra' soit
     chargé%
   }{%
     La commande \protect\newglssymbol ne peut être\MessageBreak%
-    utilisée que si le package 'glossaries' est chargé%
+    utilisée que si le package 'glossaries-extra' est chargé%
   }%
 }%
 }%
@@ -4328,9 +4319,9 @@
   \renewcommand*{\glossentry}[2]{%
   \item[\textmd{\glossentrysymbol{##1}}]
     \glstarget{##1}{\glossentryname{##1}}% the entry name
-    \ifthenelse{\equal{\glossentrydesc{##1}}{}}{%
+    \ifthenelse{\equal{\glsentrydesc{##1}}{}}{%
     }{%
-      \space (\glossentrydesc{##1})% the description
+      \space (\glsentrydesc{##1})% the description
     }%
     \hfill ##2% the number list in square brackets
   }%
@@ -4347,22 +4338,10 @@
     \printglossary[type=symbols,style=yadsymbolstyle,#1]%
   }%
 }%
-\AddToHook{begindocument/before}{%
-  \@ifpackageloaded{glossaries}{%
-    \RequirePackage{glossaries-babel}%
-  }{%
-  }%
-}%
 }%
 \AddToHook{begindocument/before}{%
-  \@ifpackageloaded{glossaries}{%
-    \IfLanguageName{english}{%
-      \makeatletter
-      \let\glossariescaptionsenglish\undefined
-      \input{glossaries-english.ldf}
-      \makeatother
-    }{%
-    }%
+  \@ifpackageloaded{glossaries-extra}{%
+    \glstocfalse
   }{%
   }%
 }%
@@ -4472,7 +4451,7 @@
 %% conditions of the LaTeX Project Public License, either version 1.3c
 %% of this license or (at your option) any later version.
 %% The latest version of this license is in
-%%   http://www.latex-project.org/lppl.txt
+%%   https://www.latex-project.org/lppl.txt
 %% and version 1.3c or later is part of all distributions of LaTeX
 %% version 2005/12/01 or later.
 %% 

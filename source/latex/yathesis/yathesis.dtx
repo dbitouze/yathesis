@@ -1,6 +1,6 @@
 % \iffalse meta-comment
 %
-% Copyright (C) 2012-2024 by Denis Bitouz'e <denis.bitouze@univ-littoral.fr>
+% Copyright (C) 2012-2026 by Denis Bitouz'e <denis.bitouze@univ-littoral.fr>
 % -------------------------------------------------------------------------------
 % This work may be distributed and/or modified under the
 % conditions of the LaTeX Project Public License, either version 1.3c
@@ -23,7 +23,7 @@
 %<*readme>
 -----------------------------------------------------------------------
 
-- `yathesis` --- Yet Another Thesis Class, version 1.0.12
+- `yathesis` --- Yet Another Thesis Class, version 1.0.13
 - E-mail: `denis.bitouze@univ-littoral.fr`
 - Released under the LaTeX Project Public License v1.3c or later. See
   https://www.latex-project.org/lppl.txt
@@ -85,7 +85,7 @@ Typesetting the documentation of the class requires:
 % This field contains the version of the package.
 % The value is optional.
 % The value is restricted to 32 characters.
-\version{1.0.12 2024-03-07}
+\version{1.0.13 2026-04-29}
 % -------------------------------------------------------------------------
 % This field contains the name of the author(s).
 % The value is optional.
@@ -176,7 +176,7 @@ Typesetting the documentation of the class requires:
 The purpose of yathesis is to facilitate the typesetting of theses prepared in France, whatever the disciplines and institutes. It implements most notably recommendations from the Ministry of Higher Education and Research, and this transparently to the user. It has also been designed to (optionally) take advantage of powerful tools available in LaTeX, including packages:
 
 - [`biblatex`](https://www.ctan.org/pkg/biblatex) for the bibliography;
-- [`glossaries`](https://www.ctan.org/pkg/glossaries) for the glossary, list of acronyms and symbols list.
+- [`glossaries-extra`](https://www.ctan.org/pkg/glossaries-extra) for the glossary, list of acronyms and symbols list.
 
 The `yathesis` class, based on the book class, aims to be both simple to use and, to some extent, (easily) customizable.
 
@@ -494,8 +494,8 @@ Note: The “ya” in the package name stands for “yet another”.
 \fi
 %</internal>
 %<*class|install>
-\def\yathesisversion{1.0.12}
-\def\yathesisdate{2024-03-07}
+\def\yathesisversion{1.0.13}
+\def\yathesisdate{2026-04-29}
 %</class|install>
 %<*install>
 \input l3docstrip.tex
@@ -711,12 +711,12 @@ This work consists of the file  yathesis.dtx
 \setmonofont[Scale=0.85]{GoMono}
 \usepackage[yad]{denisbdoc}
 \makeatletter
-\@ifpackageloaded{glossaries}{%
+\@ifpackageloaded{glossaries-extra}{%
 }{%
-  \usepackage[xindy,toc,hyperfirst=false]{glossaries}%
+  \usepackage[xindy,toc=false,shortcuts=abother,hyperfirst=false]{glossaries-extra}%
   \makeglossaries
   \setglossarystyle{indexhypergroup}
-  \setacronymstyle{long-sc-short}
+  \setabbreviationstyle{long-short-sc}
 }
 \makeatother
 \addbibresource{yathesis.bib}
@@ -762,8 +762,8 @@ This work consists of the file  yathesis.dtx
 %
 % \DoNotIndex{\addbibresource,\biolinumKeyGlyph,\DeclareRobustCommand,\ClassWarning,\DescribeOption,\DescribeShortCut,\ifcase,\ifnum,\ifthenelse,\option,\pagestyle}
 %
-% \def\yathesisversion{1.0.12}
-% \def\yathesisdate{2024-03-07}
+% \def\yathesisversion{1.0.13}
+% \def\yathesisdate{2026-04-29}
 %
 % \title{\textsf{yathesis} : classe \LaTeX{} pour la rédaction de thèses\\
 % selon les (des) règles en vigueur en France\thanks{Ce fichier décrit la version
@@ -1400,24 +1400,6 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 %
 %
-% Pour éviter certains comportements inattendus, on précise la langue
-% principale au moyen de l'option ×main× du \Package{babel}. Mais, comme
-% celle-ci n'est apparue que récemment, on n'y recourt que si la version du
-% package est assez récente.
-%    \begin{macrocode}
-\@ifpackagelater{babel}{2013/04/15}{%
-  \PassOptionsToPackage{main=\YAD@mainlanguage}{babel}%
-}{%
-  \YAD@ClassWarningNoLine{%
-    La version de `babel' utilisée est obsolète.\MessageBreak%
-    La classe `yathesis' va essayer de faire son possible\MessageBreak%
-    mais il se peut qu'elle produise des resultats\MessageBreak%
-    non prévus. Il est conseillé de mettre à jour sa\MessageBreak%
-    distribution TeX%
-  }%
-}%
-%    \end{macrocode}
-%
 % \section{Traitement des options}
 %
 %    \begin{macrocode}
@@ -1571,7 +1553,7 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % Pour gérer les langues.
 %    \begin{macrocode}
-\RequirePackage[\YAD@secondarylanguage,main=\YAD@mainlanguage]{babel}[2014/03/24]
+\RequirePackage[\YAD@secondarylanguage,\YAD@mainlanguage]{babel}[2014/03/24]
 %    \end{macrocode}
 % Pour pouvoir afficher un sommaire c-à-d une table des matières réduite
 %    \begin{macrocode}
@@ -6696,42 +6678,42 @@ This work consists of the file  yathesis.dtx
 }%
 %    \end{macrocode}
 %
-% Patch du \Package{glossaries}, pour lui appliquer certains
+% Patch du \Package{glossaries-extra}, pour lui appliquer certains
 % réglages s'il est chargé et notamment pour lui adjoindre une liste
 % de symboles.
 %    \begin{macrocode}
-\AddToHook{package/glossaries/after}{%
+\AddToHook{package/glossaries-extra/after}{%
 %    \end{macrocode}
 % Si on est en sortie ×output=paper× (et pas en sortie ×output=paper*×), on
 % supprime la barre de navigation des glossaires qui ne sert que par ses liens
 % hypertextes et donc \emph{a priori} pas en version imprimée.
 %    \begin{macrocode}
-  \ifbool{YAD@output@paper}{%
-    \ifbool{YAD@output@paper@star}{%
-    }{%
-      \renewcommand{\glsnavigation}{}%
-    }%
+\ifbool{YAD@output@paper}{%
+  \ifbool{YAD@output@paper@star}{%
   }{%
+    \renewcommand{\glsnavigation}{}%
   }%
+}{%
+}%
 %    \end{macrocode}
 % Création d'une commande ×\newglssymbol× pour définir des symboles,
-% dans l'esprit de ×\newacronym× (×\newsymbol× ne peut pas être
+% dans l'esprit de ×\newabbr× (×\newsymbol× ne peut pas être
 % employée car elle existe déjà dans le \Package{amsfonts})
 %    \begin{macrocode}
-  \newcommand{\newglssymbol}[5][]{%
-    \@ifpackageloaded{glossaries}{%
+\newcommand{\newglssymbol}[5][]{%
+  \@ifpackageloaded{glossaries-extra}{%
 %    \end{macrocode}
 % Le tri du symbole dans la liste des symboles se fait par défaut
 % sur la clé...
 %    \begin{macrocode}
-      \ifthenelse{\isempty{#1}}{%
-        \newglossaryentry{#2}{%
-          type=symbols,%
-          symbol={#3},%
-          name={#4},%
-          description={#5},%
-          sort={#2}%
-        }%
+\ifthenelse{\isempty{#1}}{%
+  \newglossaryentry{#2}{%
+    type=symbols,%
+    symbol={#3},%
+    name={#4},%
+    description={#5},%
+    sort={#2}%
+  }%
 %    \end{macrocode}
 % ... mais peut être forcé par l'argument optionnel de ×\newglssymbol×
 %    \begin{macrocode}
@@ -6746,11 +6728,11 @@ This work consists of the file  yathesis.dtx
 }%
 }{%
   \ClassError{yathesis}{}{%
-    Commande \protect\newglssymbol\space utilisée sans que 'glossaries' soit
+    Commande \protect\newglssymbol\space utilisée sans que 'glossaries-extra' soit
     chargé%
   }{%
     La commande \protect\newglssymbol ne peut être\MessageBreak%
-    utilisée que si le package 'glossaries' est chargé%
+    utilisée que si le package 'glossaries-extra' est chargé%
   }%
 }%
 }%
@@ -6771,9 +6753,9 @@ This work consists of the file  yathesis.dtx
   \renewcommand*{\glossentry}[2]{%
   \item[\textmd{\glossentrysymbol{##1}}]
     \glstarget{##1}{\glossentryname{##1}}% the entry name
-    \ifthenelse{\equal{\glossentrydesc{##1}}{}}{%
+    \ifthenelse{\equal{\glsentrydesc{##1}}{}}{%
     }{%
-      \space (\glossentrydesc{##1})% the description
+      \space (\glsentrydesc{##1})% the description
     }%
     \hfill ##2% the number list in square brackets
   }%
@@ -6799,18 +6781,7 @@ This work consists of the file  yathesis.dtx
 }%
 %    \end{macrocode}
 % \end{macro}
-% On force le chargement du \Package{glossaries-babel} si le
-% \Package{glossaries} l'est, sans quoi les signets des glossaires
-% et objets assimilés ne sont pas correctement traduits.
-%    \begin{macrocode}
-\AddToHook{begindocument/before}{%
-  \@ifpackageloaded{glossaries}{%
-    \RequirePackage{glossaries-babel}%
-  }{%
-  }%
-}%
-%    \end{macrocode}
-% On termine le patch du \Package{glossaries}.
+% On termine le patch du \Package{glossaries-extra}.
 %    \begin{macrocode}
 }%
 %    \end{macrocode}
@@ -6822,14 +6793,8 @@ This work consists of the file  yathesis.dtx
 % soient bien celles de l'anglais (et non du français).
 %    \begin{macrocode}
 \AddToHook{begindocument/before}{%
-  \@ifpackageloaded{glossaries}{%
-    \IfLanguageName{english}{%
-      \makeatletter
-      \let\glossariescaptionsenglish\undefined
-      \input{glossaries-english.ldf}
-      \makeatother
-    }{%
-    }%
+  \@ifpackageloaded{glossaries-extra}{%
+    \glstocfalse
   }{%
   }%
 }%
@@ -7447,7 +7412,7 @@ style=#yadsymbolstyle,⟨autre⟩
       }%
       \YAD@printglossary@ORI[{#1}]%
     }
-    \xpretocmd{\printacronyms}{\cleardoublepage\zlabel{printacronyms}}{}{}
+    \xpretocmd{\printabbreviations}{\cleardoublepage\zlabel{printabbreviations}}{}{}
     \xpretocmd{\printsymbols}{\cleardoublepage\zlabel{printsymbols}}{}{}
   }{%
   }
