@@ -466,9 +466,9 @@
 }{%
 }%
 \ifthenelse{\equal{\@classoptionslist}{}}{%
-  \edef\@classoptionslist{\YAD@secondarylanguage,\YAD@mainlanguage}%
+  \edef\@classoptionslist{\YAD@mainlanguage}%
 }{%
-  \edef\@classoptionslist{\YAD@secondarylanguage,\YAD@mainlanguage,\@classoptionslist}%
+  \edef\@classoptionslist{\YAD@mainlanguage,\@classoptionslist}%
 }%
 \LoadClass{book}%
 \RequirePackage{xkeyval}%
@@ -485,7 +485,6 @@
 \RequirePackage{marvosym}[2011/07/20]%
 \RequirePackage{setspace}[2011/12/19]%
 \RequirePackage[noclrdblpg,nofullpage,aftertitle=1em]{colophon}[2018/04/01]%
-\RequirePackage{tocbibind}[2010/10/13]%
 \ifthenelse{\equal{\YAD@fncychapstyle}{none}}{%
 }{%
   \RequirePackage{fncychap}[2007/07/30]%
@@ -505,7 +504,7 @@
   }{%
   }%
 }%
-\RequirePackage[\YAD@secondarylanguage,\YAD@mainlanguage]{babel}[2014/03/24]
+\RequirePackage[\YAD@secondarylanguage,main=\YAD@mainlanguage]{babel}[2014/03/24]
 \RequirePackage{etoc}[2016/09/29]%
 \providecommand*\etocifunknownlevelTF[1]{\@ifundefined{Etoc@#1@@}}%
 \ifdefined\etockeeporiginaltableofcontents\etockeeporiginaltableofcontents\fi
@@ -4118,13 +4117,6 @@
     \xpatchcmd{\float@listhead}{\chapter}{\YAD@ORI@chapter}{}{}%
   }{%
   }%
-  \@ifpackageloaded{tocbibind}{%
-    \renewcommand{\toc@chapter}[1]{%
-      \chapter*{#1}\prw@mkboth{#1}%
-      % \addcontentsline{toc}{chapter}{#1}% < Suppression par rapport à l'original
-    }%
-  }{%
-  }%
       \@ifpackageloaded{listings}{%
       \lst@UserCommand\lstlistoflistings{\bgroup
       \let\contentsname\lstlistlistingname
@@ -4270,23 +4262,23 @@
   }%
 }%
 \AddToHook{package/glossaries-extra/after}{%
-\ifbool{YAD@output@paper}{%
-  \ifbool{YAD@output@paper@star}{%
+  \ifbool{YAD@output@paper}{%
+    \ifbool{YAD@output@paper@star}{%
+    }{%
+      \renewcommand{\glsnavigation}{}%
+    }%
   }{%
-    \renewcommand{\glsnavigation}{}%
   }%
-}{%
-}%
-\newcommand{\newglssymbol}[5][]{%
-  \@ifpackageloaded{glossaries-extra}{%
-\ifthenelse{\isempty{#1}}{%
-  \newglossaryentry{#2}{%
-    type=symbols,%
-    symbol={#3},%
-    name={#4},%
-    description={#5},%
-    sort={#2}%
-  }%
+  \newcommand{\newglssymbol}[5][]{%
+    \@ifpackageloaded{glossaries-extra}{%
+      \ifthenelse{\isempty{#1}}{%
+        \newglossaryentry{#2}{%
+          type=symbols,%
+          symbol={#3},%
+          name={#4},%
+          description={#5},%
+          sort={#2}%
+        }%
 }{%
   \newglossaryentry{#2}{%
     type=symbols,%
@@ -4341,7 +4333,7 @@
 }%
 \AddToHook{begindocument/before}{%
   \@ifpackageloaded{glossaries-extra}{%
-    \glstocfalse
+    \setupglossaries{toc=false}
   }{%
   }%
 }%
