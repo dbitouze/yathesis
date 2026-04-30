@@ -515,7 +515,7 @@ See https://www.latex-project.org/lppl.txt
 -----------------------------------------------------------------------
 \endpreamble
 \postamble
-% Copyright (C) 2012-2024 by Denis Bitouzé <denis.bitouze@univ-littoral.fr>
+% Copyright (C) 2012-2026 by Denis Bitouzé <denis.bitouze@univ-littoral.fr>
 ----------------------------------------------------------------------------------
 This work may be distributed and/or modified under the
 conditions of the LaTeX Project Public License, either version 1.3c
@@ -1399,7 +1399,6 @@ This work consists of the file  yathesis.dtx
 }%
 %    \end{macrocode}
 %
-%
 % \section{Traitement des options}
 %
 %    \begin{macrocode}
@@ -1416,9 +1415,9 @@ This work consists of the file  yathesis.dtx
 }{%
 }%
 \ifthenelse{\equal{\@classoptionslist}{}}{%
-  \edef\@classoptionslist{\YAD@secondarylanguage,\YAD@mainlanguage}%
+  \edef\@classoptionslist{\YAD@mainlanguage}%
 }{%
-  \edef\@classoptionslist{\YAD@secondarylanguage,\YAD@mainlanguage,\@classoptionslist}%
+  \edef\@classoptionslist{\YAD@mainlanguage,\@classoptionslist}%
 }%
 %    \end{macrocode}
 %
@@ -1496,11 +1495,6 @@ This work consists of the file  yathesis.dtx
 %    \begin{macrocode}
 \RequirePackage[noclrdblpg,nofullpage,aftertitle=1em]{colophon}[2018/04/01]%
 %    \end{macrocode}
-% Pour faire figurer les table des matières, bibliographie et index
-% dans la table des matières
-%    \begin{macrocode}
-\RequirePackage{tocbibind}[2010/10/13]%
-%    \end{macrocode}
 % Pour déboguer
 %    \begin{macrocode}
 % \RequirePackage{trace}%
@@ -1553,7 +1547,7 @@ This work consists of the file  yathesis.dtx
 %    \end{macrocode}
 % Pour gérer les langues.
 %    \begin{macrocode}
-\RequirePackage[\YAD@secondarylanguage,\YAD@mainlanguage]{babel}[2014/03/24]
+\RequirePackage[\YAD@secondarylanguage,main=\YAD@mainlanguage]{babel}[2014/03/24]
 %    \end{macrocode}
 % Pour pouvoir afficher un sommaire c-à-d une table des matières réduite
 %    \begin{macrocode}
@@ -6167,17 +6161,6 @@ This work consists of the file  yathesis.dtx
   }{%
   }%
 %    \end{macrocode}
-% On doit modifier la commande ×\toc@chapter× du \Package{tocbibind} sans quoi
-% les éléments qu'il ajoute apparaissent en double.
-%    \begin{macrocode}
-  \@ifpackageloaded{tocbibind}{%
-    \renewcommand{\toc@chapter}[1]{%
-      \chapter*{#1}\prw@mkboth{#1}%
-      % \addcontentsline{toc}{chapter}{#1}% < Suppression par rapport à l'original
-    }%
-  }{%
-  }%
-%    \end{macrocode}
 % Dans le cas où le \Package{listings} est chargé, nous \enquote{hackons} la
 % commande ×\lstlistoflistings× afin de résoudre le problème
 % \url{https://github.com/dbitouze/yathesis/issues/83}.
@@ -6688,32 +6671,32 @@ This work consists of the file  yathesis.dtx
 % supprime la barre de navigation des glossaires qui ne sert que par ses liens
 % hypertextes et donc \emph{a priori} pas en version imprimée.
 %    \begin{macrocode}
-\ifbool{YAD@output@paper}{%
-  \ifbool{YAD@output@paper@star}{%
+  \ifbool{YAD@output@paper}{%
+    \ifbool{YAD@output@paper@star}{%
+    }{%
+      \renewcommand{\glsnavigation}{}%
+    }%
   }{%
-    \renewcommand{\glsnavigation}{}%
   }%
-}{%
-}%
 %    \end{macrocode}
 % Création d'une commande ×\newglssymbol× pour définir des symboles,
 % dans l'esprit de ×\newabbr× (×\newsymbol× ne peut pas être
 % employée car elle existe déjà dans le \Package{amsfonts})
 %    \begin{macrocode}
-\newcommand{\newglssymbol}[5][]{%
-  \@ifpackageloaded{glossaries-extra}{%
+  \newcommand{\newglssymbol}[5][]{%
+    \@ifpackageloaded{glossaries-extra}{%
 %    \end{macrocode}
 % Le tri du symbole dans la liste des symboles se fait par défaut
 % sur la clé...
 %    \begin{macrocode}
-\ifthenelse{\isempty{#1}}{%
-  \newglossaryentry{#2}{%
-    type=symbols,%
-    symbol={#3},%
-    name={#4},%
-    description={#5},%
-    sort={#2}%
-  }%
+      \ifthenelse{\isempty{#1}}{%
+        \newglossaryentry{#2}{%
+          type=symbols,%
+          symbol={#3},%
+          name={#4},%
+          description={#5},%
+          sort={#2}%
+        }%
 %    \end{macrocode}
 % ... mais peut être forcé par l'argument optionnel de ×\newglssymbol×
 %    \begin{macrocode}
@@ -6786,15 +6769,14 @@ This work consists of the file  yathesis.dtx
 }%
 %    \end{macrocode}
 %
-% Le code suivant,
-% (\href{https://texnique.fr/osqa/questions/8358/packages-glossaries-et-yathesis-pepin-de-forme-plurielle-glspl}{aimablement
-% fourni par touhami}) permet que, dans le cas d'un mémoire en anglais (option
-% ×mainlanguage=english×), les règles s'appliquant aux glossaires et acronymes
-% soient bien celles de l'anglais (et non du français).
+% Par défaut, le \Package{glossaries-extra} fait figurer les éléments de
+% glossaire dans la table des matières ce qui, dans le cas de la
+% \Class{yathesis}, les ferait apparaître en double. Nous nous prémunissons de
+% cela en demandant à ce que ça ne soit pas le cas.
 %    \begin{macrocode}
 \AddToHook{begindocument/before}{%
   \@ifpackageloaded{glossaries-extra}{%
-    \glstocfalse
+    \setupglossaries{toc=false}
   }{%
   }%
 }%
@@ -7091,7 +7073,6 @@ This work consists of the file  yathesis.dtx
 #include:tcolorbox
 #include:textcase
 #include:titlesec
-#include:tocbibind
 #include:translator
 #include:twoopt
 #include:xcolor
