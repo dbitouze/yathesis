@@ -24,7 +24,7 @@ une conclusion \enquote{ordinaires}.
   Il est vivement recommandé de scinder le mémoire de thèse,
   notamment son corps, en fichiers parent et enfants (ces derniers
   correspondants chacun à un chapitre). La procédure
-  pour ce faire, standard, est rappelée \vref{sec-repart-du-memo}.
+  pour ce faire, standard, est rappelée \zvref{sec-repart-du-memo}.
 \end{dbremark}
 
 \section{Initialisation de la partie principale}
@@ -39,7 +39,7 @@ une conclusion \enquote{ordinaires}.
 La \yatCl{} modifie les commandes usuelles de structuration
 (\docAuxCommand{chapter}, \docAuxCommand{section}, \docAuxCommand{subsection},
 etc.)  en ce qui concerne les trois aspects suivants (examinés aux
-\vref{sec-chap-non-numer,sec-intit-altern,sec-chapitres-numerotes}) :
+\zvref{sec-chap-non-numer,sec-intit-altern,sec-chapitres-numerotes}) :
 \begin{description}
 \item[titres alternatifs des chapitres et sections :] il est possible de
   différencier celui figurant en \gls{tdm} de celui figurant en
@@ -64,7 +64,7 @@ etc.)  en ce qui concerne les trois aspects suivants (examinés aux
 
 Avec la \yatCl{}, les entêtes de la plupart des pages contiennent le titre du
 chapitre et le titre de l'éventuelle section en cours
-(cf. \vref{cha-pagination}).
+(cf. \zvref{cha-pagination}).
 %
 Ce titre est par défaut celui stipulé en argument obligatoire des commandes
 respectivement \docAuxCommand{chapter} et \docAuxCommand{section}, et figure
@@ -90,7 +90,7 @@ celui en \gls{tdm}\signet{}.
 La nouvelle syntaxe indiquée ci-dessous, commune aux commandes \refCom{chapter}
 et \refCom{section},
 % n'est indiquée ci-dessous que pour \refCom{chapter} mais
-est précisée et synthétisée au \vref{tab-commande-chapter-section}.
+est précisée et synthétisée au \zvref{tab-commande-chapter-section}.
 
 \begin{docCommand}[doc new=2016-12-08]{chapter}{\oarg{alt. en {\normalfont\ttfamily\glsxtrshort*{tdm}}}\oarg{alt. en entête}\marg{titre}}
   \indexdef{chapitre!titre alternatif}%
@@ -110,7 +110,7 @@ est précisée et synthétisée au \vref{tab-commande-chapter-section}.
   \item alternatif en \gls{tdm}\signet{} est \meta{alt. en {\normalfont\ttfamily\glsxtrshort*{tdm}}} ;
   \item alternatif en entête est \meta{alt. en entête}.
   \end{itemize}
-  % Son usage précis est synthétisé au \vref{tab-commande-chapter-section}.
+  % Son usage précis est synthétisé au \zvref{tab-commande-chapter-section}.
 \end{docCommand}
 %
 \begin{table}[htb]
@@ -130,7 +130,7 @@ est précisée et synthétisée au \vref{tab-commande-chapter-section}.
   Les commandes \docAuxCommand{chapter*} et \docAuxCommand{section*}, permettant
   de créer des chapitres et sections non numérotés, partagent la syntaxe des
   commandes \docAuxCommand{chapter} et \docAuxCommand{section} synthétisée au
-  \vref{tab-commande-chapter-section} : elles admettent donc elles aussi deux
+  \zvref{tab-commande-chapter-section} : elles admettent donc elles aussi deux
   arguments optionnels permettant de différencier les titres alternatifs
   en \gls{tdm}\signet{} et en entête.
 \end{dbremark}
@@ -203,9 +203,9 @@ simplifier l'usage.
 \begin{dbexample}{Introduction}{}
   \indexex{chapitre!non numéroté}%
   \indexex{unité!du mémoire!non numérotée}%
-  Le code suivant produit la \vref{fig-introduction} illustrant une introduction
+  Le code suivant produit la \zvref{fig-introduction} illustrant une introduction
   (générale) non numérotée\footnote{Et, au passage, une table des matières
-    locale. Plus de détails \vref{sec-localtoc}.}. On constate que, bien que
+    locale. Plus de détails \zvref{sec-localtoc}.}. On constate que, bien que
   seule la commande \docAuxCommand{chapter} figure sous sa forme étoilée, aucun
   élément de structuration de ce chapitre n'est numéroté.
   %
@@ -228,8 +228,8 @@ simplifier l'usage.
 
 Les chapitres numérotés de la thèse, introduits par la version non étoilée de la
 commande \docAuxCommand{chapter}, voient leurs têtes composées par défaut avec
-le style |PetersLenny| du \Package{fncychap} (cf. \vref{fig-chapitre}). La
-\vref{sec-style-des-tetes} explique comment ceci peut être modifié.
+le style |PetersLenny| du \Package{fncychap} (cf. \zvref{fig-chapitre}). La
+\zvref{sec-style-des-tetes} explique comment ceci peut être modifié.
 
 \begin{figure}[ht]
   \centering
@@ -254,7 +254,7 @@ remplaçant fortement conseillé de \hologo{BibTeX}\footnote{Dans cette section,
 \begin{docCommand}[doc description=\mandatory]{printbibliography}{\oarg{options}}
   Cette commande, fournie par \package{biblatex}, produit la liste des
   références bibliographiques saisies selon la syntaxe de ce package (cf.
-  \vref{fig-printbibliography}). Mais elle a été légèrement redéfinie de sorte
+  \zvref{fig-printbibliography}). Mais elle a été légèrement redéfinie de sorte
   que la bibliographie figure automatiquement dans les sommaire, table des
   matières et signets du document.
 \end{docCommand}
@@ -272,7 +272,7 @@ remplaçant fortement conseillé de \hologo{BibTeX}\footnote{Dans cette section,
   Le \Package{biblatex} \emph{n'étant pas} chargé par la \yatCl{}, on veillera
   à le charger manuellement si on souhaite l'utiliser, notamment si on souhaite
   bénéficier de l'ajout automatique de bibliographies locales en fin de
-  chapitres (cf. \vref{sec-localbibs}).
+  chapitres (cf. \zvref{sec-localbibs}).
 \end{dbwarning}
 
 %%% Local Variables:

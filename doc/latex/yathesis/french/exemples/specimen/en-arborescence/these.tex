@@ -26,7 +26,7 @@
 \usepackage[autostyle]{csquotes}
 \usepackage[safeinputenc]{biblatex}
 \usepackage{hyperref}
-\usepackage[xindy,acronyms,symbols]{glossaries}
+\usepackage[shortcuts=abother,xindy,abbreviations,symbols]{glossaries-extra}
 %
 % Génération de l'index
 \makeindex
@@ -41,7 +41,7 @@
 % (Facultatif) Configuration des styles du glossaire et de la liste d'acronymes
 % (à n'utiliser que si le package « glossaries » est chargé)
 \setglossarystyle{indexhypergroup}
-\setacronymstyle{long-sc-short}
+\setabbreviationstyle{long-short-sc}
 %
 % (Facultatif) Spécification de la ou des ressources terminologiques
 \loadglsentries{auxiliaires/glossaire}
@@ -111,7 +111,7 @@
 \include{liminaires/avertissement}
 %
 % (Facultatif) Liste des acronymes
-\printacronyms
+\printabbreviations
 %
 % (Facultatif) Liste des symboles
 \printsymbols
@@ -204,3 +204,4 @@
 \makebackcover
 %
 \end{document}
+
