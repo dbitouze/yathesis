@@ -9,7 +9,7 @@
 %% yathesis --- Yet Another Thesis Class
 %% E-mail: denis.bitouze@univ-littoral.fr
 %% Released under the LaTeX Project Public License v1.3c or later
-%% See http://www.latex-project.org/lppl.txt
+%% See https://www.latex-project.org/lppl.txt
 %% -----------------------------------------------------------------------
 \def\yathesisversion{1.0.13}
 \def\yathesisdate{2026-04-29}
@@ -4158,10 +4158,12 @@
     leurs auteurs.%
   }{%
     The \printinstitute{}
-    %
-    \ifundef{\printcoinstitute}{}{and the \printcoinstitute{}}
-    %
-    neither endorse nor censure authors' opinions expressed in the theses:
+    \ifundef{\printcoinstitute}{%
+      neither endorses nor censures
+    }{%
+      and the \printcoinstitute{} neither endorse nor censure
+    }%
+    the authors' opinions expressed in the thesis:
     these opinions must be considered to be those of their authors.%
   }%
 }%
@@ -4452,7 +4454,7 @@
 %% conditions of the LaTeX Project Public License, either version 1.3c
 %% of this license or (at your option) any later version.
 %% The latest version of this license is in
-%%   http://www.latex-project.org/lppl.txt
+%%   https://www.latex-project.org/lppl.txt
 %% and version 1.3c or later is part of all distributions of LaTeX
 %% version 2005/12/01 or later.
 %% 
