@@ -713,7 +713,7 @@ This work consists of the file  yathesis.dtx
 \makeatletter
 \@ifpackageloaded{glossaries-extra}{%
 }{%
-  \usepackage[shortcuts=abother,xindy,hyperfirst=false,toc=false]{glossaries-extra}%
+  \usepackage[shortcuts=abother,toc=false,xindy,hyperfirst=false]{glossaries-extra}%
   \makeglossaries
   \setglossarystyle{indexhypergroup}
   \setabbreviationstyle{long-short-sc}
@@ -7092,7 +7092,6 @@ This work consists of the file  yathesis.dtx
 #include:tcolorbox
 #include:textcase
 #include:titlesec
-#include:tocbibind
 #include:translator
 #include:twoopt
 #include:xcolor
