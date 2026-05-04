@@ -1,5 +1,17 @@
 # [Unreleased]
 
+# [1.0.13] - 2026-05-04
+
+## Added
+- “Guide du doctorant”
+
+## Changed
+- Adapt and switch from glossaries to glossaries-extra
+- Minor tweaks
+
+## Fixed
+- Typos in disclaimer text (thanks to olirwin)
+
 # [1.0.12] - 2024-03-07
 
 ## Changed

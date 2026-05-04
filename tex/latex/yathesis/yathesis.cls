@@ -12,7 +12,7 @@
 %% See https://www.latex-project.org/lppl.txt
 %% -----------------------------------------------------------------------
 \def\yathesisversion{1.0.13}
-\def\yathesisdate{2026-04-29}
+\def\yathesisdate{2026-05-04}
 \NeedsTeXFormat{LaTeX2e}[1999/12/01]
 \ProvidesClass{yathesis}[\yathesisdate\space v\yathesisversion\space Yet another class for writing thesis (DB)]
 \ExplSyntaxOn
